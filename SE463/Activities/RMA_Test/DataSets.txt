@@ -1,0 +1,55 @@
+Data set 1: 5 milliseconds
+1 50 50
+1 50 50
+1 50 50 
+1 50 50
+1 50 50
+
+Data set 2: 2 milliseconds
+3 4 4
+2 8 8
+
+Data set 3: 3 milliseconds
+45 135 135 
+50 150 150
+80 360 360
+
+Data set 4: 3 milliseconds
+1 3 3
+1 3 3
+1 3 3
+
+Data set 5: 5 milliseconds
+1 5 5
+1 5 5
+1 5 5
+1 5 5
+1 5 5
+
+Data set 6: 4 milliseconds
+1 6 6 
+1 6 6
+2 6 6
+2 6 6
+
+Data set 7: 4 milliseconds
+1 7 7
+1 7 7
+2 7 7
+2 7 7
+
+Data set 8: 4 milliseconds
+1 8 8
+1 8 8
+2 8 8
+2 8 8
+
+Data set 9: 3 milliseconds
+1 4 4
+2 5 5
+7 20 20
+
+Data set 10: 3 milliseconds
+1 100
+1 100
+98 100
