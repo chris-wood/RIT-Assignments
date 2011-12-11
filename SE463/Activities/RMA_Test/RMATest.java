@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * This is the main class that implements the logic of all
@@ -9,7 +11,6 @@ import java.util.Scanner;
  */
 public class RMATest
 {
-
 	/* Fixed upper bound for the first schedule test */
 	final private double MAX_UPPER_BOUND = 1.0;
 	
@@ -110,15 +111,80 @@ public class RMATest
 	 * @param index
 	 * @return
 	 */
-	public boolean incrementalTest(ArrayList<Task> tasks, int i)
+	public boolean incrementalTest(ArrayList<Task> tasks, int failIndex)
 	{
-		boolean result = true;
+		boolean result = false;
+		TreeMap<Integer, ArrayList<Integer>> schedulePoints = new TreeMap<Integer, ArrayList<Integer>>();
 		
-		// Compute the indices needed for the calculation
-		int j = i;
-		int k = i;
+		// 1. calculate all schedule points
+		// 2. construct inequalities for all schedule points
+		// 3. check to see if one is satisfiable (if so, pass)
 		
-		// 
+		// Determine task with the maximum period
+		int maxPeriod = 0;
+		for (int index = 0; index <= failIndex; index++)
+		{
+			if (tasks.get(index).getPeriod() > maxPeriod)
+			{
+				maxPeriod = tasks.get(index).getPeriod();
+			}
+		}
+		
+		// Determine schedule points for these tasks based on this lowest frequency task
+		for (int index = 0; index <= failIndex; index++)
+		{
+			// Create the list of schedule points for this task
+			ArrayList<Integer> points = new ArrayList<Integer>();
+			
+			// Compute all integer multiples of this task's period that are 
+			// less than the maximum period for the subset of tasks
+			int pointMult = 1;
+			while (pointMult * tasks.get(index).getPeriod() <= maxPeriod)
+			{
+				points.add(tasks.get(index).getPeriod() * pointMult);
+			}
+			
+			// Save this task's list of schedule points
+			schedulePoints.put(index, points);
+		}
+		
+		// Construct the scheduling inequalities (recursive approach)
+		for (Integer base : schedulePoints.keySet())
+		{
+			for (int pointMult = 0; pointMult < schedulePoints.get(base).size(); pointMult++)
+			{
+				result = checkInequality(schedulePoints, base, pointMult);
+				if (result == true)
+				{
+					System.out.println("one inequality satisfied!");
+					break;
+				}
+			}
+			
+			// Break out of the parent loop
+			if (result == true)
+			{
+				break;
+			}
+		}
+		
+		return result;
+	}
+	
+	public boolean checkInequality(TreeMap<Integer, ArrayList<Integer>> points, int pointBase, int listOffset)
+	{
+		boolean result = false;
+		int rhs = points.get(pointBase).get(listOffset);
+		
+		// The map that stores integer multiples of tasks when checking the inequalities
+		TreeMap<Integer, Integer> multMap = new TreeMap<Integer, Integer>();
+		for (Integer base : points.keySet())
+		{
+			multMap.put(base, 1); // give each task a multiplicity of 1 to start
+		}
+		
+		// Compute all possible combinations of the tasks such that they are all less than the RHS
+		
 		
 		return result;
 	}
