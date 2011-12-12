@@ -19,6 +19,13 @@ using namespace std;
 // Useful constants and definitions
 #define RATIO_UPPER_BOUND (1)
 
+// Store task data information
+typedef struct
+{
+	int computeTime;
+	int periodTime;
+} TaskData;
+
 /**
  * The first schedule test that simply checks to see if the 
  * utilization ratio sum is less than or equal to 1. 
@@ -54,15 +61,12 @@ inline bool testTwo(float sum, int numTasks)
  * allow each task at a specific instance in time to meet
  * its required deadline. 
  *
- * This test is represented mathematically by the following expression:
+ * @param numTasks - the number of tasks for this test.
+ * @param taskList - list of task data for each task.
  *
- * TODO: insert the expression from the paper here.
- *
- * TODO: update parameters here.
- * @param sum - the accumulated utilization ratio sum.
  * @return true if the test passed, false otherwise.
  */
-bool testThree(int numTasks, vector<int> computeList, vector<int> periodList)
+bool testThree(int numTasks, vector<TaskData> taskList)
 {
 	float taskSum = 0.0;
 	vector<bool> validList;
@@ -78,15 +82,15 @@ bool testThree(int numTasks, vector<int> computeList, vector<int> periodList)
 		for(int k = 1; k <= i; k++)
 		{
 			// Calculate the l index
-			for (int l = 1; l <= floor((float)periodList[i] / (float)periodList[k]); l++)
+			for (int l = 1; l <= floor((float)taskList[i].periodTime / (float)taskList[k].periodTime); l++)
 			{
 				// Continue on with the j index to compute the desired sum.
 				taskSum = 0.0;
 				for(int j = 1; j <= i; j++)
 				{
 					// This is the main calculation.
-					taskSum += (((float)computeList[j] / (float)(l * periodList[k])) * 
-								ceil((float)(l * periodList[k]) / (float)periodList[j]));
+					taskSum += (((float)taskList[j].computeTime / (float)(l * taskList[k].periodTime)) * 
+								ceil((float)(l * taskList[k].periodTime) / (float)taskList[j].periodTime));
 				}
 			
 				// Check to see if the sum is less than the upper bound, as desired.
@@ -121,8 +125,7 @@ int main(int argc, char *argv[])
 	int ct = false;
 	int pt = false;
 	float utilSum = 0.0;
-	vector<int> computeList;
-	vector<int> periodList;
+	vector<TaskData> taskList;
 	
 	// Retrieve the number of tasks
 	cout << "Enter the number of tasks (n > 0): ";
@@ -135,8 +138,6 @@ int main(int argc, char *argv[])
 		<< endl << "\tCOMPUTE PERIOD" << endl;
 	
 	// Push back some dummy data to help with test three.
-	computeList.push_back(0);
-	periodList.push_back(0);
 	for (int counter = 0; counter < numTasks; counter++)
 	{
 		// Read in a task tuple
@@ -150,16 +151,38 @@ int main(int argc, char *argv[])
 		utilSum += ((float)ct / (float)pt);
 		
 		// Store the resulting times in the two appropriate lists
-		computeList.push_back(ct);
-		periodList.push_back(pt);
+		TaskData data;
+		data.computeTime = ct;
+		data.periodTime = pt;
+		taskList.push_back(data);
 	}
+	
+	// Sort the tasks based on their period time (bubble sort)
+	for (int i = 0; i < taskList.size(); i++)
+	{
+		for (int j = 0; j < taskList.size() - 1; j++)
+		{
+			if (taskList[j].periodTime > taskList[j + 1].periodTime)
+			{
+				TaskData temp = taskList[j + 1];
+				taskList[j + 1] = taskList[j];
+				taskList[j] = temp;
+			}
+		}
+	}
+	
+	// Insert a dummy value at the start of the list
+	TaskData dummy;
+	dummy.periodTime = 0;
+	dummy.computeTime = 0;
+	taskList.insert(taskList.begin(), dummy);
 	
 	// The first two tests are trivial, so run them first
 	cout << "---------------------------------" << endl;
 	cout << "Test results (0 - fail, 1 - pass)" << endl;
 	cout << "TEST 1: " << testOne(utilSum) << endl;
 	cout << "TEST 2: " << testTwo(utilSum, numTasks) << endl;
-	cout << "Test 3: " << testThree(numTasks, computeList, periodList) << endl;
+	cout << "Test 3: " << testThree(numTasks, taskList) << endl;
 	cout << "---------------------------------" << endl;
 	
 	// Terminate gracefully.
