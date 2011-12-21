@@ -22,7 +22,7 @@ public class TS_Stack implements IStack
 	 * 
 	 * ---STACK STATE---
 	 */
-	final private ArrayList<String> stack;
+	final private ArrayList<String> stack; // GuardedBy("this")
 
 	/**
 	 * The lower bound on the stack size that is used
@@ -100,12 +100,12 @@ public class TS_Stack implements IStack
 		}
 		
 		// Now pop an element off the stack.
-		String result = stack.remove(stack.size() - 1);
-		System.out.println("Thread " + Thread.currentThread().getName() + " pops " + result);
+		String topString = stack.remove(stack.size() - 1);
+		System.out.println("Thread " + Thread.currentThread().getName() + " pops " + topString);
 		
 		// Notify all threads waiting in push.
 		notifyAll();
 		
-		return result;
+		return topString;
 	}
 }
