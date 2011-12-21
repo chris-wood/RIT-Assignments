@@ -19,21 +19,10 @@ public class BipartiteTest
 
 		if (visited.contains(vertex))
 		{
-			// Try to visit neighboring nodes
-			for (int i = 0; i < size; i++)
-			{	
-				// Only check neigbors that have been visited
-				if (matrix[vertex][i] == 1)
-				{	
-					if (depthMap.containsKey(i))
-					{
-						// If the parity doesn't line up, assume odd cycle 
-						if (Math.abs(depthMap.get(i) - depthMap.get(parentVertex)) % 2 == 1)
-						{
-							return false;
-						}
-					}
-				}
+			// Check the parity of the current depth against the visited depth
+			if (Math.abs(depth - depthMap.get(vertex)) % 2 == 1)
+			{
+				bipartite = false;
 			}
 		}
 		else
@@ -43,7 +32,7 @@ public class BipartiteTest
 
 			for (int i = 0; i < size; i++)
 			{
-				// Continue BFS on neighbors
+				// Continue DSF on neighbors
 				if (matrix[vertex][i] == 1)
 				{
 					// Go deeper into the stack
