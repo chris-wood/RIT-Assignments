@@ -22,13 +22,17 @@
 \section{Bipartite Test Algorithm}
 {\bf Input}: The adjacency matrix for a graph, $G$. \\ \\
 {\bf Output}: Boolean value indicating whether or not $G$ is bipartite. \\ \\
-{\bf Description}: The idea of the algorithm is to perform a breadth-first-search (BFS) on the input graph $G$ in order to visit every vertex in search of an odd cycle. The BFS can be applied recursively on the tree by selecting an initial start vertex, $v_{0}$, which is set to the current vertex, and then iteratively visiting each of the neighbors of the current vertex until all vertices have been visited. At each vertex, the depth of the BFS traversal is assigned to the vertex in such a way so that $v_{0}$ would receive a label of $0$. Using these visited labels, if at any point during the BFS a vertex is visited more than once, the labels of the immediate predecessor vertices of the already-visited vertex are compared for even and odd parity. If the parity of these two vertices matches, then the cycle that has been detected is even length, and the BFS traversal continues. If the parity of these two vertices does not match then an odd cycle has been detected, and the algorithm terminates and returns false. Once all vertices in $V(G)$ have been visited and no odd cycle has been detected, the algorithm terminates and returns true. 
+{\bf Description}: The idea of the algorithm is to perform a depth-first-search (DFS) on the input graph $G$ in order to visit every vertex in search of an odd cycle. The DFS can be applied recursively on the tree by selecting an initial start vertex, $v_{0}$, which is set to the current vertex, and then recursively visiting each of the neighbors of the current vertex until all vertices have been visited. At each vertex, the depth of the DFS traversal is assigned to the vertex in such a way so that $v_{0}$ would receive a label of $0$. Using these visited labels, if at any point during the DFS a vertex is visited more than once, the even/odd parity of the current DFS depth and the already-visited vertex label is compared. If this parity is even then the cycle must be even as well, and so the current DFS recursive path is stopped and the traversal continues as normal. If this parity is odd then the cycle is odd, at which point the algorithm terminates and returns false. Once all vertices in $V(G)$ have been visited and no odd cycle has been detected, the algorithm terminates and returns true. If there are no further traversal paths and yet all vertices in $V(G)$ have not been visited (indication of at least one isolated vertex), then the algorithm terminates and returns false.
 
 \section{Theorem}
 Applying the BTA algorithm on a given graph $G$ will indicate whether or not $G$ is bipartite.
 
 \subsection{Proof}
-TODO: walk through algorithm
+Let $G$ be a graph on $n$ vertices. If $G$ is disconnected then performing a DFS on $G$ will not cover all of the vertices $V(G)$, which means that there exists at least one isolated vertex and therefore the graph cannot be bipartite. 
+
+If $G$ is connected, then performing a DFS on $G$ will cover all vertices in $V(G)$. Furthermore, if performing a DFS on $G$ does not yield any vertices that are visited more than once then $G$ must be a tree, and therefore is also bipartite. 
+
+If $G$ is connected and performing a DFS on $G$ yields a vertex that has been visited once already in the DFS traversal then a cycle has been detected. TODO
 
 % That's all folks
 \end{document}
