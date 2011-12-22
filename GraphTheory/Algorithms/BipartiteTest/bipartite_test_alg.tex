@@ -32,7 +32,15 @@ Let $G$ be a graph on $n$ vertices. If $G$ is disconnected then performing a DFS
 
 If $G$ is connected, then performing a DFS on $G$ will cover all vertices in $V(G)$. Furthermore, if performing a DFS on $G$ does not yield any vertices that are visited more than once then $G$ must be a tree, and therefore is also bipartite. 
 
-If $G$ is connected and performing a DFS on $G$ yields a vertex that has been visited once already in the DFS traversal then a cycle has been detected. TODO
+If $G$ is connected and performing a DFS on $G$ yields a vertex that has been visited once already in the DFS traversal then a cycle has been detected. This is because the DFS traversal recursively builds a single path, and if a vertex is repeated in a path with $n > 2$ vertices then that path must be a cycle. The length of this cycle can be determined by examining the even/odd numerical difference between the visited vertex label and the current DFS traversal depth, of which there are two possibilities outlined below. \\ 
+
+{\bf Case 1} - Even difference\\
+asd  
+
+TODO \\
+
+{\bf Case 2} - Odd difference \\
+asd
 
 % That's all folks
 \end{document}
