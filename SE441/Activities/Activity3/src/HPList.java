@@ -43,43 +43,29 @@ public class HPList
 	 */
 	public void insert(String s)
 	{
-		Node cur = head;
-		cur.lock.lock();
-		cur.next.lock.lock();
+		// Preemptive check to see if the node already exists in the list
+		if (find(s, false))
+		{
+			return;
+		}
+		
+		// Grab a lock on the head node to start the safe traversal
+		Node currentNode = head;
+		currentNode.lock.lock();
 		try
 		{
-			if (cur.next.value == "") 
+			// Find the correct spot in the list to insert the new node
+			while (!isBeforeInsertLocation(currentNode, s))
 			{
-				Node newNode = new Node(s, cur.next);
-				cur.next = newNode;
+				currentNode = advance(currentNode);
 			}
-			else
-			{
-				while (cur.next.value != "") 
-				{
-					if (s.compareTo(cur.next.value) < 0) 
-					{
-						Node newNode = new Node(s, cur.next);
-						cur.next = newNode;
-						cur.lock.unlock();
-						cur.nextChanged.signalAll();
-						cur.next.lock.unlock();
-						return;
-					} 
-					else if (s.compareTo(cur.next.value) == 0) 
-					{
-						cur.lock.unlock();
-						cur.next.lock.unlock();
-						return;
-					}
-					else 
-					{
-						cur.lock.unlock();
-						cur = cur.next;
-						cur.next.lock.lock();
-					}
-				}
-			}
+			
+			// Insert the new node at this position
+			currentNode.next.lock.lock();
+			Node newNode = new Node(s, currentNode.next);
+			currentNode.next = newNode;
+			newNode.next.lock.unlock();
+			currentNode.nextChanged.signalAll();
 		}
 		catch (Exception e)
 		{
@@ -87,8 +73,7 @@ public class HPList
 		}
 		finally
 		{
-			cur.lock.unlock();
-			cur.next.lock.unlock();
+			currentNode.lock.unlock();
 		}
 	}
 
@@ -100,58 +85,36 @@ public class HPList
 	public boolean find(String s, boolean block) 
 	{
 		boolean found = false;
-		Node cur = head;
+		Node currentNode = head;
 		
-		// Acquire locks to the first two elements in the list in order
-		// to begin the list traversal
-		cur.lock.lock();
-		cur.next.lock.lock();
+		// Grab a lock on the head node to begin the traversal
+		currentNode.lock.lock();
 		try
 		{
-			// Traverse the list until we find the element we are looking for
-			// or reach the spot where it should be located
-			while(cur.next.value.compareTo(s) < 0) 
+			// Traverse the list until we find the location where the 
+			// specified node should be
+			while(!isBeforeInsertLocation(currentNode, s)) 
 			{
-				cur.lock.unlock();
-				cur = cur.next;
-				cur.next.lock.lock();
+				currentNode = advance(currentNode);
 			}
 	
-			if (cur.next.value.equals("") && !block) 
+			if (currentNode.next.value.isEmpty() && !block) 
 			{
 				return false;
 			} 
-			else if (cur.next.value.equals(s)) 
+			else if (currentNode.next.value.equals(s)) 
 			{
 				return true;
 			} 
 			else if (block) 
 			{
-				while(cur.next.value.compareTo(s) != 0) 
+				while(currentNode.next.value.compareTo(s) != 0) 
 				{
-					if(cur.next.value.compareTo(s) < 0) 
+					currentNode.nextChanged.await();
+					
+					while (!isBeforeInsertLocation(currentNode, s))
 					{
-						cur.lock.unlock();
-						cur = cur.next;
-						cur.next.lock.lock();
-					}
-					else
-					{
-						// Release the locks and await on a change signal
-						cur.lock.unlock();
-						cur.next.lock.unlock();
-						try 
-						{
-							cur.nextChanged.await();
-						}
-						catch (InterruptedException e) 
-						{
-							e.printStackTrace();
-						}
-						
-						// Re-acquire the lock to perform another check
-						cur.lock.lock();
-						cur.next.lock.lock();
+						currentNode = advance(currentNode);
 					}
 				}
 				return true;
@@ -163,10 +126,25 @@ public class HPList
 		}
 		finally
 		{
-			cur.lock.unlock();
-			cur.next.lock.unlock();
+			currentNode.lock.unlock();
 		}
 		
 		return found;
 	}
+	
+	private Node advance(Node currentNode)
+	{
+		Node nextNode = currentNode.next;
+		nextNode.lock.lock();
+		currentNode.lock.unlock();
+		return nextNode;
+	}
+	
+	private boolean isBeforeInsertLocation(Node currentNode, String s)
+	{
+		System.out.println("current node value = " + currentNode.value);
+		System.out.println("current next node value = " + currentNode.next.value);
+    	return !(currentNode.next.value.compareTo(s) < 0 ) || 
+    			currentNode.next.value.isEmpty();
+    }
 }

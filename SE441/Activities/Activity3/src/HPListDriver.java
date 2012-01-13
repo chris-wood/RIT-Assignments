@@ -1,60 +1,87 @@
 import java.util.ArrayList;
-import java.util.List;
-
-public class HPListDriver 
-{
-	class Client extends Thread
-	{
-		private HPList list;
-		private int count;
-		private int id; 
-		
-		public Client(int id, HPList list, int count)
-		{
-			this.list = list;
-			this.id = id;
-			this.count = count;
-		}
-		
-		public void run()
-		{
-			for (int i = 0; i < count; i++)
-			{
-				// TODO: insert and remove from the list right here
-			}
-		}
-	}
-	
-	private List<Client> clientList = new ArrayList<Client>();
-	private HPList list;
-	private int numClients;
-	
-	public HPListDriver(int numClients)
-	{
-		// create HPLlist
-		list = new HPList();
-		this.numClients = numClients;
-		
-		for (int i = 0; i < numClients; i++)
-		{
-			clientList.add(new Client(i, list, NUM_ENTRIES));
-		}
-	}
-	
-	public void runTest()
-	{
-		for (int i = 0; i < numClients; i++)
-		{
-			System.out.println("starting!");
-			clientList.get(i).start();
-		}
-	}
-	
-	private static final int NUM_ENTRIES = 20;
-	
-	public static void main(String[] args)
-	{
-		HPListDriver driver = new HPListDriver(5);
-		driver.runTest();
-	}
+import java.util.List; 
+ 
+public class HPListDriver {
+ 
+    private final static int NUM_WORKERS = 20;
+     
+     
+    static class Inserter extends Thread {
+         
+        private int id;
+        private HPList list;
+        private String s;
+         
+        public Inserter( int id, HPList list, String s ){
+            super( "Inserter " + id );
+            this.id = id;
+            this.list = list;
+            this.s = s;
+        }
+         
+        @Override
+        public void run(){
+            list.insert( s );
+            System.out.println( "Inserter " + id + " inserted " + s );
+        }
+         
+    }
+     
+     
+    static class Finder extends Thread {
+         
+        private int id;
+        private HPList list;
+        private String s;
+         
+        public Finder( int id, HPList list, String s ){
+            super( "Finder " + id );
+            this.id = id;
+            this.list = list;
+            this.s = s;
+        }
+         
+        @Override
+        public void run(){
+            list.find( s, true );
+            System.out.println( "Finder " + id + " found " + s );
+        }
+         
+    }
+     
+     
+    /**
+     * @param args
+     */
+    public static void main(String[] args) throws Exception {
+         
+        HPList list = new HPList();
+         
+        List<Inserter> inserters = new ArrayList<Inserter>();
+        List<Finder> finders = new ArrayList<Finder>();
+         
+        for( int i = 0; i < NUM_WORKERS; i++ ){
+             
+            String s = "" + (char) (i + 65);
+             
+            finders.add( new Finder( i, list, s ) );
+            finders.get( i ).start();
+             
+            inserters.add( new Inserter( i, list, s ) );
+            inserters.get( i ).start();
+             
+        }
+         
+        for( Inserter i : inserters ){
+            i.join();
+        }
+         
+        for( Finder f : finders ){
+            f.join();
+        }
+         
+        System.out.println( list );
+         
+    }
+ 
 }
