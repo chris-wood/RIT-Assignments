@@ -4,9 +4,18 @@ import java.util.concurrent.locks.*;
  * High performance, thread safe, singly linked list of Strings. The list
  * comprises Nodes, and as few nodes as possible are locked by any thread so as
  * to permit the greatest possible concurrency.
+ * 
+ * @author Thomas Yearke
+ * @author Stephen Yingling
+ * @author Kyle Mullins 
+ * @author Christopher Wood
  */
 public class HPList 
 {
+	/**
+	 * Private inner class that wraps the data held by a single
+	 * node in the HPList.
+	 */
 	class Node 
 	{
 		final String value; // String in this node; a null string ("") is a
@@ -16,6 +25,13 @@ public class HPList
 		final Condition nextChanged; // Signaled when the next link for this
 										// node changes.
 
+		/**
+		 * Constructor for a Node that initializes this node's value
+		 * and the reference to its successor node in the list.
+		 * 
+		 * @param value - String value for this node.
+		 * @param next - Successor of this node in the list.
+		 */
 		Node(String value, Node next) 
 		{
 			this.value = value;
@@ -81,6 +97,12 @@ public class HPList
 	 * Returns true if String s is in the HPList, otherwise returns false. If
 	 * block is true, will wait until s is inserted and unconditionally return
 	 * true.
+	 * 
+	 * @param s - String value that is being searched for.
+	 * @param block - Boolean flag indicating if the calling thread
+	 *                should wait indefinitely until a node with the 
+	 *                value s is inserted into the list at the correct 
+	 *                position.
 	 */
 	public boolean find(String s, boolean block) 
 	{
@@ -98,6 +120,9 @@ public class HPList
 				currentNode = advance(currentNode);
 			}
 	
+			// Check to see where we are in the list and 
+			// determine what to do next based on the value
+			// for block.
 			if (currentNode.next.value.isEmpty() && !block) 
 			{
 				return false;
@@ -110,8 +135,10 @@ public class HPList
 			{
 				while(currentNode.next.value.compareTo(s) != 0) 
 				{
+					// Wait until the next node changes, at which point
+					// we traverse farther into the list until we are
+					// at the appropriate spot to check again.
 					currentNode.nextChanged.await();
-					
 					while (!isBeforeInsertLocation(currentNode, s))
 					{
 						currentNode = advance(currentNode);
@@ -132,6 +159,13 @@ public class HPList
 		return found;
 	}
 	
+	/**
+	 * Helper method to perform the hand-over-hand locking traversal
+	 * necessary to proceed further into the list.
+	 * 
+	 * @param currentNode - the node currently locked in the list.
+	 * @return the new current node (currentNode's successor).
+	 */
 	private Node advance(Node currentNode)
 	{
 		Node nextNode = currentNode.next;
@@ -140,11 +174,18 @@ public class HPList
 		return nextNode;
 	}
 	
+	/**
+	 * Helper method to determine if we are at the position in
+	 * the list where we can insert the desired string s.
+	 * 
+	 * @param currentNode - the current node pointer in the list.
+	 * @param s - string that we are looking to insert into the list.
+	 * @return true if we can insert a string at this next position,
+	 *         false otherwise.
+	 */
 	private boolean isBeforeInsertLocation(Node currentNode, String s)
 	{
-		System.out.println("current node value = " + currentNode.value);
-		System.out.println("current next node value = " + currentNode.next.value);
-    	return !(currentNode.next.value.compareTo(s) < 0 ) || 
-    			currentNode.next.value.isEmpty();
+    	return currentNode.next.value.isEmpty() || 
+    			(currentNode.next.value.compareTo(s) >= 0);
     }
 }

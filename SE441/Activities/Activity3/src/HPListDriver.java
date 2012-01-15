@@ -5,7 +5,6 @@ public class HPListDriver {
  
     private final static int NUM_WORKERS = 20;
      
-     
     static class Inserter extends Thread {
          
         private int id;
