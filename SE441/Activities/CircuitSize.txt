@@ -1,0 +1,14 @@
+Length of each side: 
+
+107.507 feet
+
+Derivation: 
+
+1Gb = 2^30 bits = (2^15)(2^15) bits
+
+If 1 core has a size of 1mm, we compute the length of a side of 
+the square as follows:
+
+Side length(mm) = (2^15) * 1mm = 2^15mm
+Side length(ft) = (2^15mm) * 0.003281ft = 107.507ft
+
