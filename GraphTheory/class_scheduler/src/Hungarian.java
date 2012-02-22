@@ -7,7 +7,9 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Hungarian {
+public class Hungarian 
+{
+	
 	double[][] matrix;
 	int[] rCov;
 	int[] cCov;
@@ -16,6 +18,7 @@ public class Hungarian {
 	int cols;
 	int dim;
 	int solutions;
+	
 	Random rand = new Random();
 	static int FORBIDDEN_VALUE = 9999;
 
@@ -24,6 +27,7 @@ public class Hungarian {
 		this.rows = rows;
 		this.cols = columns;
 		dim = Math.max(rows, columns);
+		
 		// solutions = Math.min(rows,columns);
 		solutions = dim;
 		matrix = new double[dim][dim];
@@ -36,32 +40,42 @@ public class Hungarian {
 	/**
 	 * converts x,y to one dimension
 	 */
-	public int two2one(int x, int y) {
+	public int two2one(int x, int y) 
+	{
 		return (x * dim) + y;
 	}
 
-	public int one2col(int n) {
+	public int one2col(int n) 
+	{
 		return (n % dim);
 	}
 
-	public int one2row(int n) {
+	public int one2row(int n) 
+	{
 		return (int) (n / dim);
 	}
 
 	// step 0 transform the matrix from maximization to minimization
-	public void max2min() {
-
+	public void max2min() 
+	{
 		double maxVal = Double.MIN_VALUE;
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
+		for (int i = 0; i < rows; i++) 
+		{
+			for (int j = 0; j < cols; j++) 
+			{
 				if (matrix[i][j] > maxVal)
+				{
 					maxVal = matrix[i][j];
+				}
 			}
 		}
 		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < cols; j++) {
+		{
+			for (int j = 0; j < cols; j++) 
+			{
 				matrix[i][j] = maxVal - matrix[i][j];
 			}
+		}
 
 		// System.out.println ("after max2min");
 		// printIt();
@@ -69,60 +83,79 @@ public class Hungarian {
 
 	// step1 find the minimum in each row and subtract it
 
-	public void rowMin() {
-
-		for (int i = 0; i < dim; i++) {
+	public void rowMin() 
+	{
+		for (int i = 0; i < dim; i++) 
+		{
 			double minVal = matrix[i][0];
-			for (int j = 1; j < dim; j++) {
+			for (int j = 1; j < dim; j++) 
+			{
 				if (minVal > matrix[i][j])
+				{
 					minVal = matrix[i][j];
+				}
 			}
 			for (int j = 0; j < dim; j++)
+			{
 				matrix[i][j] -= minVal;
+			}
 		}
 		// printIt();
 		// printStars();
 	}
 
-	public void colMin() {
-
-		for (int j = 0; j < dim; j++) {
+	public void colMin() 
+	{
+		for (int j = 0; j < dim; j++) 
+		{
 			double minVal = matrix[0][j];
-			for (int i = 1; i < dim; i++) {
+			for (int i = 1; i < dim; i++) 
+			{
 				if (minVal > matrix[i][j])
 					minVal = matrix[i][j];
 			}
 			for (int i = 0; i < dim; i++)
+			{
 				matrix[i][j] -= minVal;
+			}
 		}
 		// printIt();
 		// printStars();
 	}
 
-	public void printStars() {
-
-		for (int i = 0; i < dim; i++) {
+	public void printStars() 
+	{
+		for (int i = 0; i < dim; i++) 
+		{
 			for (int j = 0; j < dim; j++)
+			{
 				System.out.print(stars[i][j] + " ");
+			}
 			System.out.println(rCov[i]);
 		}
 		for (int j = 0; j < dim; j++)
+		{
 			System.out.print(cCov[j] + " ");
+		}
 		System.out.println();
 	}
 
 	// step2 star the zeros
 
-	public void starZeros() {
-
+	public void starZeros() 
+	{
 		for (int i = 0; i < dim; i++)
-			for (int j = 0; j < dim; j++) {
-				if (matrix[i][j] == 0 && cCov[j] == 0 && rCov[i] == 0) {
+		{
+			for (int j = 0; j < dim; j++) 
+			{
+				if (matrix[i][j] == 0 && cCov[j] == 0 && rCov[i] == 0) 
+				{
 					stars[i][j] = 1;
 					cCov[j] = 1;
 					rCov[i] = 1;
 				}
 			}
+		}
 		clearCovers();
 		// printIt();
 		// printStars();
@@ -131,8 +164,8 @@ public class Hungarian {
 	/**
 	 * step 3 -- check for solutions
 	 */
-	public int coveredColumns() {
-
+	public int coveredColumns() 
+	{
 		int k = 0;
 		for (int i = 0; i < dim; i++)
 			for (int j = 0; j < dim; j++) {
@@ -502,10 +535,11 @@ public class Hungarian {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 		// Check the command line arguments
 		if (args.length != 1) {
-			System.err.println("usage: java CKLabel file");
+			System.err.println("usage: java Hungarian file");
 			return;
 		}
 
@@ -528,10 +562,7 @@ public class Hungarian {
 			
 			// TODO: the matrix is the cost matrix, not the adjacency matrix
 
-			// Run the property checkers here
-			// TreeChecker checker = new TreeChecker(matrix, dimensions);
-			// System.out.println(checker.testForSubdividedP3());
-			// System.out.println(checker.testMajorP3());
+			// Run the Hungarian algorithm here
 		} catch (IndexOutOfBoundsException ex1) {
 			System.err.println("Error parsing adjacency matrix file.");
 			ex1.printStackTrace();
