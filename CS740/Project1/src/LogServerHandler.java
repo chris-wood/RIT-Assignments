@@ -57,7 +57,8 @@ public class LogServerHandler extends Thread
 		// Create the socket I/O streams
 		try 
 		{
-			clientIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			clientIn = new BufferedReader(new 
+					InputStreamReader(socket.getInputStream()));
 			clientOut = new DataOutputStream(socket.getOutputStream());
 			setup = true;
 		}
@@ -78,7 +79,7 @@ public class LogServerHandler extends Thread
 		try 
 		{
 			// Handle the requests from this client appropriately
-			while (setup && (socket.isConnected()))
+			while (setup && socket.isConnected())
 			{
 				// Read in the incoming request
 				String request = clientIn.readLine();
@@ -129,7 +130,7 @@ public class LogServerHandler extends Thread
 		// Generate a random ticket and insert into the message map
 		UUID ticket = UUID.randomUUID();
 		server.getMessages().put(ticket.toString(), new ArrayList<String>());
-		server.addDebugMessage("Issuing New Ticket: " + ticket.toString());
+		server.appendDebugMessage("Issuing New Ticket: " + ticket.toString());
 		
 		// Try to send the ticket to the client
 		try 
@@ -157,9 +158,9 @@ public class LogServerHandler extends Thread
 		server.getMessages().get(data[0]).add(data[1]);
 		
 		// Add the request information to the debug and log files
-		server.addDebugMessage("Received 1");
-		server.addDebugMessage(request);
-		server.addLogMessage(data[0], data[1]);
+		server.appendDebugMessage("Received 1");
+		server.appendDebugMessage(request);
+		server.appendLogMessage(data[0], data[1]);
 	}
 	
 	/**
@@ -172,7 +173,7 @@ public class LogServerHandler extends Thread
 	{
 		if (server.getMessages().containsKey(request))
 		{
-			server.addDebugMessage("Releasing Ticket: " + request);
+			server.appendDebugMessage("Releasing Ticket: " + request);
 			server.getMessages().remove(request);
 		}
 	}
@@ -192,12 +193,12 @@ public class LogServerHandler extends Thread
 		try 
 		{
 			// Send the size first, followed by the messages
-			server.addDebugMessage("Delivering messages for: " + request);
+			server.appendDebugMessage("Delivering messages for: " + request);
 			clientOut.writeBytes(count + "\n");
-			server.addDebugMessage("Delivering " + count + " to user");
+			server.appendDebugMessage("Delivering " + count + " to user");
 			for (int i = 0; i < count; i++)
 			{
-				server.addDebugMessage("Displaying message: " + messages.get(i));
+				server.appendDebugMessage("Displaying message: " + messages.get(i));
 				clientOut.writeBytes(messages.get(i) + "\n");
 			}
 			clientOut.flush();

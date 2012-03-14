@@ -91,6 +91,5 @@ public interface ILogClient
 	 * @param ticket the ticket to be released
 	 */
 	public void releaseTicket( String ticket );
-	
 } // ILogService
 

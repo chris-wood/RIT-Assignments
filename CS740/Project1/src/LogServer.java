@@ -83,7 +83,7 @@ public class LogServer extends Thread
 	    {
 	    	// Attempt to bind to the port number
 	    	ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
-	    	this.addDebugMessage("Starting server on port: " + PORT_NUMBER);
+	    	this.appendDebugMessage("Starting server on port: " + PORT_NUMBER);
 			
 			// Continuously spawn new handler threads for each incoming client
 	    	while (!serverSocket.isClosed() && serverSocket.isBound())
@@ -113,9 +113,10 @@ public class LogServer extends Thread
 	 * @param ticket - the ticket that is used to log this message.
 	 * @param message - the message to add to the file
 	 */
-	public synchronized void addLogMessage(String ticket, String message)
+	public synchronized void appendLogMessage(String ticket, String message)
 	{
-		try {
+		try 
+		{
 			// Create the output stream and write the data
 			PrintWriter out = new PrintWriter(new 
 					BufferedOutputStream(new FileOutputStream(LOG_NAME, true)));
@@ -136,9 +137,10 @@ public class LogServer extends Thread
 	 * 
 	 * @param message - the string to add to the file
 	 */
-	public synchronized void addDebugMessage(String message)
+	public synchronized void appendDebugMessage(String message)
 	{
-		try {
+		try 
+		{
 			// Create the output stream and write the data
 			PrintWriter out = new PrintWriter(new 
 					BufferedOutputStream(new FileOutputStream(DEBUG_NAME, true)));
@@ -161,7 +163,7 @@ public class LogServer extends Thread
 	 */
 	public static void main(String[] args)
 	{
-		LogServer server = CreateLogServer();
+		LogServer server = LogServer.CreateLogServer();
 		server.start();
 	}
 }

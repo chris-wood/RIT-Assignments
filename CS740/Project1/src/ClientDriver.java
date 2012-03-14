@@ -7,7 +7,7 @@ public class ClientDriver {
 	public static void main(String[] args) {
 		LogClient ls = new LogClient();
 		try {
-			ls.open("localhost", 6007);
+			ls.open("viking.cs.rit.edu", 6007);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
