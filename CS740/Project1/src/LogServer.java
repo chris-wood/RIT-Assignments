@@ -31,7 +31,7 @@ public class LogServer extends Thread
 	}
 	
 	public Map<String, List<String>> getMessages()
-	{
+	{	
 		return logMessages;
 	}
 	
@@ -70,6 +70,16 @@ public class LogServer extends Thread
 				}
 	    	}
 	    }
+	}
+	
+	public synchronized void addLogMessage()
+	{
+		// TODO
+	}
+	
+	public synchronized void addDebugMessage()
+	{
+		// TODO
 	}
 	
 	public static void main(String[] args)
