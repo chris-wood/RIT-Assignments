@@ -7,7 +7,7 @@ public class ClientDriver {
 	public static void main(String[] args) {
 		LogClient ls = new LogClient();
 		try {
-			ls.open("129.21.36.126", 6007);
+			ls.open("localhost", 6007);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -22,6 +22,7 @@ public class ClientDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("adding entries now...");
 		ls.addEntry(ticket, "Message 1");
 		ls.addEntry(ticket, "Message 2");
 		ls.addEntry(ticket, "Message 3");
