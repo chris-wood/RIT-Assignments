@@ -53,23 +53,22 @@ public class LogServer extends Thread
 			e.printStackTrace();
 		}
 	    
-	    if (serverSocket.isBound())
-	    {
-	    	while (!serverSocket.isClosed())
-	    	{
-	    		try 
-	    		{
-					clientSocket = serverSocket.accept();
-					System.out.println("Accepted a new client!");
-					LogServerHandler handler = new LogServerHandler(this, clientSocket);
-		    		handler.start();
-				} 
-	    		catch (IOException e) 
-	    		{
-					e.printStackTrace();
-				}
-	    	}
-	    }
+	    // Continuously spawn new handler threads for each incoming client
+    	while (!serverSocket.isClosed() && serverSocket.isBound())
+    	{
+    		try 
+    		{
+				clientSocket = serverSocket.accept();
+				System.out.println("Accepted a new client!");
+				LogServerHandler handler = new LogServerHandler(this, clientSocket);
+	    		handler.start();
+	    		// TODO: make static constructor method as before!
+			} 
+    		catch (IOException e) 
+    		{
+				e.printStackTrace();
+			}
+    	}
 	}
 	
 	public synchronized void addLogMessage()
@@ -84,7 +83,6 @@ public class LogServer extends Thread
 	
 	public static void main(String[] args)
 	{
-		LogServer server = new LogServer();
-		server.start();
+		LogServer server = CreateLogServer();
 	}
 }
