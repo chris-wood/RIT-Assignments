@@ -1,88 +1,167 @@
+/*
+ * LogServerHandler.java
+ * 
+ * Version: 3/14/12
+ */
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+/**
+ * This class represents the main server thread for the log server
+ * that handles incoming client connections by spawning handler threads
+ * that service them appropriately (and concurrently).
+ *  
+ * @author Christopher Wood (caw4567@rit.edu)
+ */
 public class LogServer extends Thread 
 {
-	// log variable names - have private const default names 
+	/**
+	 * The main port number for this server 
+	 */
 	private static final int PORT_NUMBER = 6007;
 	
+	/**
+	 * The main message map for this server
+	 */
 	private Map<String, List<String>> logMessages;
 	
+	/**
+	 * Log and debug file name constants
+	 */
+	private static final String LOG_NAME = "LogServer.log";
+	private static final String DEBUG_NAME = "LogServer.debug";
+	
+	/**
+	 * Private constructor that creates the message map and initializes 
+	 * the debug and log files for the server
+	 */
 	private LogServer()
 	{
-		// set up log file names
+		// Create the message map
 		logMessages = new ConcurrentHashMap<String, List<String>>();
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Public factory method to create and return new log server instances 
+	 * to ensure that each one is safely constructed.
+	 * @return a new LogServer instance.
 	 */
 	public static LogServer CreateLogServer()
 	{
 		LogServer server = new LogServer();
-		server.start();
 		return server;
 	}
 	
+	/**
+	 * Retrieve the message map for this server.
+	 * 
+	 * @return message map
+	 */
 	public Map<String, List<String>> getMessages()
 	{	
 		return logMessages;
 	}
 	
 	/**
-	 * 
+	 * The main run method that binds the server socket to the correct port
+	 * and starts listening for incoming client connections and spawning
+	 * handler threads to service them.
 	 */
 	public void run()
 	{
-		Socket clientSocket = null;
-	    ServerSocket serverSocket = null;
-		
-	    // Attempt to bind to the port number
 	    try 
 	    {
-			serverSocket = new ServerSocket(PORT_NUMBER);
+	    	// Attempt to bind to the port number
+	    	ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
+	    	this.addDebugMessage("Starting server on port: " + PORT_NUMBER);
+			
+			// Continuously spawn new handler threads for each incoming client
+	    	while (!serverSocket.isClosed() && serverSocket.isBound())
+	    	{
+	    		try 
+	    		{
+	    			Socket clientSocket = serverSocket.accept();
+					System.out.println("Accepted a new client!");
+					LogServerHandler handler = new LogServerHandler(this, clientSocket);
+		    		handler.start();
+				} 
+	    		catch (IOException e) 
+	    		{
+					e.printStackTrace();
+				}
+	    	}
 		} 
 	    catch (IOException e) 
 	    {
 			e.printStackTrace();
 		}
-	    
-	    // Continuously spawn new handler threads for each incoming client
-    	while (!serverSocket.isClosed() && serverSocket.isBound())
-    	{
-    		try 
-    		{
-				clientSocket = serverSocket.accept();
-				System.out.println("Accepted a new client!");
-				LogServerHandler handler = new LogServerHandler(this, clientSocket);
-	    		handler.start();
-	    		// TODO: make static constructor method as before!
-			} 
-    		catch (IOException e) 
-    		{
-				e.printStackTrace();
-			}
-    	}
 	}
 	
-	public synchronized void addLogMessage()
+	/**
+	 * Add the specified message to the log file.
+	 * 
+	 * @param ticket - the ticket that is used to log this message.
+	 * @param message - the message to add to the file
+	 */
+	public synchronized void addLogMessage(String ticket, String message)
 	{
-		// TODO
+		try {
+			// Create the output stream and write the data
+			PrintWriter out = new PrintWriter(new 
+					BufferedOutputStream(new FileOutputStream(LOG_NAME, true)));
+			out.println(ticket + " - " + message);
+			
+			// Flush and close the stream
+			out.flush();
+			out.close();
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
-	public synchronized void addDebugMessage()
+	/**
+	 * Add the specified string to the debug file.
+	 * 
+	 * @param message - the string to add to the file
+	 */
+	public synchronized void addDebugMessage(String message)
 	{
-		// TODO
+		try {
+			// Create the output stream and write the data
+			PrintWriter out = new PrintWriter(new 
+					BufferedOutputStream(new FileOutputStream(DEBUG_NAME, true)));
+			out.println(message);
+			
+			// Flush and close the stream
+			out.flush();
+			out.close();
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
+	/**
+	 * Main entry point that constructs and starts a new LogServer thread.
+	 * 
+	 * @param args - command line arguments.
+	 */
 	public static void main(String[] args)
 	{
 		LogServer server = CreateLogServer();
+		server.start();
 	}
 }

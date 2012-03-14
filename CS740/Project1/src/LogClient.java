@@ -1,3 +1,9 @@
+/*
+ * LogClient.java
+ * 
+ * Version: 3/14/12
+ */
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,11 +13,25 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogClient implements ILogClient {
-
-	private Socket clientSocket;
-	private DataOutputStream serverOut;
-	private BufferedReader serverIn;
+/**
+ * This class is responsible for implementing the functionality
+ * defined by the ILogClient interface, and can be used by clients
+ * to interact with the log server.
+ * 
+ * @author Christopher Wood (caw4567@rit.edu)
+ */
+public class LogClient implements ILogClient 
+{
+	/**
+	 * The single server communication socket used by this client 
+	 */
+	private Socket clientSocket = null;
+	
+	/**
+	 * The I/O streams drawn from the client socket used for communication
+	 */
+	private DataOutputStream serverOut = null;
+	private BufferedReader serverIn = null;
 
 	/**
 	 * Open a connection with a log server.
@@ -27,28 +47,35 @@ public class LogClient implements ILogClient {
 	 *             if a connection cannot be established
 	 */
 	public void open(String host, int port) throws UnknownHostException,
-			IOException {
+			IOException 
+	{
 		System.out.println("Connecting to " + host + ":" + port);
 		clientSocket = new Socket(host, port);
 		serverOut = new DataOutputStream(clientSocket.getOutputStream());
-		serverIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		serverIn = new BufferedReader(new 
+				InputStreamReader(clientSocket.getInputStream()));
 	}
 
 	/**
 	 * Close the connection with the server
 	 */
-	public void close() {
-		try {
+	public void close() 
+	{
+		try 
+		{
+			// Close the I/O streams, followed by the socket itself
 			serverOut.close();
 			serverIn.close();
 			clientSocket.close();
+			
+			// Set the objects to null to avoid misuse
 			clientSocket = null;
 			serverOut = null;
 			serverIn = null;
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
-		} finally {
-			// cleaner way?
 		}
 	}
 
@@ -59,10 +86,11 @@ public class LogClient implements ILogClient {
 	 *
 	 * @throws IOException if an I/O error occurs
 	 */
-	public String newTicket() throws IOException {
+	public String newTicket() throws IOException 
+	{
 		String ticket = "";
 
-		// Query the server for a new ticket
+		// Query the server for a new ticket if the socket is open
 		serverOut.writeBytes(TKT + "\n");
 		ticket = serverIn.readLine();
 
@@ -77,10 +105,12 @@ public class LogClient implements ILogClient {
 	 */
 	public void addEntry(String ticket, String message) 
 	{
-		// TODO: should this method throw an exception or swallow it? 
-		try {
+		try 
+		{
 			serverOut.writeBytes(LOG + ticket + ":" + message + "\n");
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
 	}
@@ -95,28 +125,27 @@ public class LogClient implements ILogClient {
 	 *
 	 * @throws IOException if an I/O error occurs
 	 */
-	public List<String> getEntries(String ticket) throws IOException {
+	public List<String> getEntries(String ticket) throws IOException 
+	{
 		List<String> entries = new ArrayList<String>();
 		
-		// Ask for the entries for this ticket
+		// Query for the entries for this ticket
 		serverOut.writeBytes(GET + ticket + "\n");
 		String response = serverIn.readLine();
 		
 		// Attempt to parse the count variable to control iteration
-		int count;
 		try 
 		{
-			count = Integer.parseInt(response);
+			// Determine the number of messages and then read them
+			int count = Integer.parseInt(response);
+			for (int i = 0; i < count; i++)
+			{
+				entries.add(serverIn.readLine());
+			}
 		}
 		catch (NumberFormatException e)
 		{
-			count = 0;
-		}
-		
-		// Now read the rest of the data
-		for (int i = 0; i < count; i++)
-		{
-			entries.add(serverIn.readLine());
+			e.printStackTrace();
 		}
 		
 		return entries;
@@ -128,11 +157,16 @@ public class LogClient implements ILogClient {
 	 *
 	 * @param ticket the ticket to be released
 	 */
-	public void releaseTicket(String ticket) {
-		try {
+	public void releaseTicket(String ticket) 
+	{
+		try 
+		{
 			serverOut.writeBytes(REL + ticket + "\n");
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
 	}
-}
+} // LogClient
+

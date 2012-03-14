@@ -1,20 +1,7 @@
 /*
- * LogService.java
- *
- * Version:
- *    $Id: LogService.java,v 1.3 2005/12/05 13:03:25 ptt Exp $
- *
- * Revisions:
- *    $Log: LogService.java,v $
- *    Revision 1.3  2005/12/05 13:03:25  ptt
- *    Added open/close methods to LogService interface
- *
- *    Revision 1.2  2005/11/29 18:15:14  ptt
- *    updated for java 1.5
- *
- *    Revision 1.1  2005/11/23 20:25:50  ptt
- *    Initial Check in
- *
+ * LogClient.java
+ * 
+ * Version: 3/14/12
  */
 
 import java.io.IOException;
@@ -25,6 +12,7 @@ import java.net.UnknownHostException;
  * The API for the log service.
  *
  * @author Paul Tymann (ptt@cs.rit.edu)
+ * @contributor Christopher Wood (caw4567@rit.edu)
  */
 public interface ILogClient 
 {

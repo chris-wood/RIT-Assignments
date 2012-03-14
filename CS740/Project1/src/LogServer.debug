@@ -1,0 +1,26 @@
+Starting server on port: 6007
+Issuing New Ticket: cd4f5d06-edf1-49ae-824e-595415c59208
+Received 1
+cd4f5d06-edf1-49ae-824e-595415c59208:Message 1
+Received 1
+cd4f5d06-edf1-49ae-824e-595415c59208:Message 2
+Received 1
+cd4f5d06-edf1-49ae-824e-595415c59208:Message 3
+Received 1
+cd4f5d06-edf1-49ae-824e-595415c59208:Message 4
+Received 1
+cd4f5d06-edf1-49ae-824e-595415c59208:Message 5
+Received 1
+cd4f5d06-edf1-49ae-824e-595415c59208:Message 6
+Received 1
+cd4f5d06-edf1-49ae-824e-595415c59208:Message 7
+Delivering messages for: cd4f5d06-edf1-49ae-824e-595415c59208
+Delivering 7 to user
+Displaying message: Message 1
+Displaying message: Message 2
+Displaying message: Message 3
+Displaying message: Message 4
+Displaying message: Message 5
+Displaying message: Message 6
+Displaying message: Message 7
+Releasing Ticket: cd4f5d06-edf1-49ae-824e-595415c59208
