@@ -47,7 +47,7 @@ public interface ILogClient
 	 * @throws UnknownHostException if the hostname is invalid
 	 * @throws IOException if a connection cannot be established
 	 */
-	public void open( String host, int port ) 
+	public void open(String host, int port) 
 		throws UnknownHostException, IOException;
 	
 	/**
@@ -70,7 +70,7 @@ public interface ILogClient
 	 * @param ticket the ticket of the log to be written to
 	 * @param message the message to be written to the log
 	 */
-	public void addEntry( String ticket, String message );
+	public void addEntry(String ticket, String message);
 	
 	/**
 	 * Get a list of all the entries that have been written to the log
@@ -82,7 +82,7 @@ public interface ILogClient
 	 *
 	 * @throws IOException if an I/O error occurs
 	 */
-	public List<String> getEntries( String ticket ) throws IOException;
+	public List<String> getEntries(String ticket) throws IOException;
 	
 	/**
 	 * Release the specified ticket.  The entries associated with the
@@ -90,6 +90,6 @@ public interface ILogClient
 	 *
 	 * @param ticket the ticket to be released
 	 */
-	public void releaseTicket( String ticket );
+	public void releaseTicket(String ticket);
 } // ILogService
 

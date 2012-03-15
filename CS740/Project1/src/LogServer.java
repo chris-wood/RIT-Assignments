@@ -5,7 +5,6 @@
  */
 
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -47,7 +46,6 @@ public class LogServer extends Thread
 	 */
 	private LogServer()
 	{
-		// Create the message map
 		logMessages = new ConcurrentHashMap<String, List<String>>();
 	}
 	
@@ -91,7 +89,6 @@ public class LogServer extends Thread
 	    		try 
 	    		{
 	    			Socket clientSocket = serverSocket.accept();
-					System.out.println("Accepted a new client!");
 					LogServerHandler handler = new LogServerHandler(this, clientSocket);
 		    		handler.start();
 				} 

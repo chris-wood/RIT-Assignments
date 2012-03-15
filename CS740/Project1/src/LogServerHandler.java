@@ -24,18 +24,18 @@ public class LogServerHandler extends Thread
 	/**
 	 * The socket used to connect to the client
 	 */
-	private Socket socket;
+	private Socket socket = null;
 
 	/**
 	 * The single, shared log server that contains the messages in memory
 	 */
-	private LogServer server;
+	private LogServer server = null;
 	
 	/**
 	 * The I/O streams used to communicate with the client
 	 */
-	private BufferedReader clientIn;
-	private DataOutputStream clientOut;
+	private BufferedReader clientIn = null;
+	private DataOutputStream clientOut = null;
 	
 	/**
 	 * Boolean status flag that indicates proper setup of the client I/O streams
@@ -60,7 +60,6 @@ public class LogServerHandler extends Thread
 			clientIn = new BufferedReader(new 
 					InputStreamReader(socket.getInputStream()));
 			clientOut = new DataOutputStream(socket.getOutputStream());
-			setup = true;
 		}
 		catch (IOException e) 
 		{
@@ -79,7 +78,7 @@ public class LogServerHandler extends Thread
 		try 
 		{
 			// Handle the requests from this client appropriately
-			while (setup && socket.isConnected())
+			while (isIOReady())
 			{
 				// Read in the incoming request
 				String request = clientIn.readLine();
@@ -207,5 +206,25 @@ public class LogServerHandler extends Thread
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Private helper method that ensures the client is used configured
+	 * properly (socket is connected and streams are open) before trying
+	 * to communicate with the server.
+	 * 
+	 * @return true if the client is I/O ready, false otherwise
+	 */
+	private boolean isIOReady()
+	{
+		// Only return true if all objects are initialized and the connection is established
+		if (socket != null && clientOut != null && clientIn != null)
+		{
+			if (socket.isConnected())
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

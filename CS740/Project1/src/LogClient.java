@@ -49,7 +49,6 @@ public class LogClient implements ILogClient
 	public void open(String host, int port) throws UnknownHostException,
 			IOException 
 	{
-		System.out.println("Connecting to " + host + ":" + port);
 		clientSocket = new Socket(host, port);
 		serverOut = new DataOutputStream(clientSocket.getOutputStream());
 		serverIn = new BufferedReader(new 
@@ -63,15 +62,13 @@ public class LogClient implements ILogClient
 	{
 		try 
 		{
-			// Close the I/O streams, followed by the socket itself
+			// Close the streams and null out the references to avoid misuse
 			serverOut.close();
 			serverIn.close();
 			clientSocket.close();
-			
-			// Set the objects to null to avoid misuse
-			clientSocket = null;
 			serverOut = null;
 			serverIn = null;
+			clientSocket = null;
 		} 
 		catch (IOException e) 
 		{
@@ -90,9 +87,12 @@ public class LogClient implements ILogClient
 	{
 		String ticket = "";
 
-		// Query the server for a new ticket if the socket is open
-		serverOut.writeBytes(TKT + "\n");
-		ticket = serverIn.readLine();
+		if (isIOReady())
+		{
+			// Query the server for a new ticket if the socket is open
+			serverOut.writeBytes(TKT + "\n");
+			ticket = serverIn.readLine();
+		}
 
 		return ticket;
 	}
@@ -107,7 +107,10 @@ public class LogClient implements ILogClient
 	{
 		try 
 		{
-			serverOut.writeBytes(LOG + ticket + ":" + message + "\n");
+			if (isIOReady())
+			{
+				serverOut.writeBytes(LOG + ticket + ":" + message + "\n");
+			}
 		} 
 		catch (IOException e) 
 		{
@@ -129,23 +132,25 @@ public class LogClient implements ILogClient
 	{
 		List<String> entries = new ArrayList<String>();
 		
-		// Query for the entries for this ticket
-		serverOut.writeBytes(GET + ticket + "\n");
-		String response = serverIn.readLine();
-		
-		// Attempt to parse the count variable to control iteration
-		try 
+		if (isIOReady())
 		{
-			// Determine the number of messages and then read them
-			int count = Integer.parseInt(response);
-			for (int i = 0; i < count; i++)
+			// Query for the entries for this ticket
+			serverOut.writeBytes(GET + ticket + "\n");
+			String response = serverIn.readLine();
+			
+			try 
 			{
-				entries.add(serverIn.readLine());
+				// Determine the number of messages and then read them 1-by-1
+				int count = Integer.parseInt(response);
+				for (int i = 0; i < count; i++)
+				{
+					entries.add(serverIn.readLine());
+				}
 			}
-		}
-		catch (NumberFormatException e)
-		{
-			e.printStackTrace();
+			catch (NumberFormatException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		
 		return entries;
@@ -161,12 +166,35 @@ public class LogClient implements ILogClient
 	{
 		try 
 		{
-			serverOut.writeBytes(REL + ticket + "\n");
+			if (isIOReady())
+			{
+				serverOut.writeBytes(REL + ticket + "\n");
+			}
 		} 
 		catch (IOException e) 
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Private helper method that ensures the client is used configured
+	 * properly (socket is connected and streams are open) before trying
+	 * to communicate with the server.
+	 * 
+	 * @return true if the client is I/O ready, false otherwise
+	 */
+	private boolean isIOReady()
+	{
+		// Only return true if all objects are initialized and the connection is established
+		if (clientSocket != null && serverOut != null && serverIn != null)
+		{
+			if (clientSocket.isConnected())
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 } // LogClient
 
