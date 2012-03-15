@@ -81,7 +81,7 @@ public class LogServer extends Thread
 	    {
 	    	// Attempt to bind to the port number
 	    	ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
-	    	this.appendDebugMessage("Starting server on port: " + PORT_NUMBER);
+	    	appendDebugMessage("Starting server on port: " + PORT_NUMBER);
 			
 			// Continuously spawn new handler threads for each incoming client
 	    	while (!serverSocket.isClosed() && serverSocket.isBound())
@@ -163,4 +163,5 @@ public class LogServer extends Thread
 		LogServer server = LogServer.CreateLogServer();
 		server.start();
 	}
-}
+} // LogServer
+

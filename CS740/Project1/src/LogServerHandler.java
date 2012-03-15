@@ -38,11 +38,6 @@ public class LogServerHandler extends Thread
 	private DataOutputStream clientOut = null;
 	
 	/**
-	 * Boolean status flag that indicates proper setup of the client I/O streams
-	 */
-	private boolean setup;
-	
-	/**
 	 * Create a new LogServerHandler for the specified server object
 	 * and client socket.
 	 * 
@@ -63,7 +58,6 @@ public class LogServerHandler extends Thread
 		}
 		catch (IOException e) 
 		{
-			setup = false;
 			e.printStackTrace();
 		}
 	}
@@ -188,7 +182,6 @@ public class LogServerHandler extends Thread
 		List<String> messages = server.getMessages().get(request);
 		int count = messages.size();
 		
-		// Send the ticket to the client
 		try 
 		{
 			// Send the size first, followed by the messages
@@ -227,4 +220,5 @@ public class LogServerHandler extends Thread
 		}
 		return false;
 	}
-}
+} // LogServerHandler
+
