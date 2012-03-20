@@ -1,167 +1,200 @@
 /*
- * LogServerHandler.java
+ * LogClient.java
  * 
  * Version: 3/14/12
  */
 
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
+import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * This class represents the main server thread for the log server
- * that handles incoming client connections by spawning handler threads
- * that service them appropriately (and concurrently).
- *  
+ * This class is responsible for implementing the functionality
+ * defined by the ILogClient interface, and can be used by clients
+ * to interact with the log server.
+ * 
  * @author Christopher Wood (caw4567@rit.edu)
  */
-public class LogServer extends Thread 
+public class LogServer implements ILogServer 
 {
 	/**
-	 * The main port number for this server 
+	 * The single server communication socket used by this client 
 	 */
-	private static final int PORT_NUMBER = 6007;
+	private Socket clientSocket = null;
 	
 	/**
-	 * The main message map for this server
+	 * The I/O streams drawn from the client socket used for communication
 	 */
-	private Map<String, List<String>> logMessages;
-	
+	private DataOutputStream serverOut = null;
+	private BufferedReader serverIn = null;
+
 	/**
-	 * Log and debug file name constants
-	 */
-	private static final String LOG_NAME = "LogServer.log";
-	private static final String DEBUG_NAME = "LogServer.debug";
-	
-	/**
-	 * Private constructor that creates the message map and initializes 
-	 * the debug and log files for the server
-	 */
-	private LogServer()
-	{
-		logMessages = new ConcurrentHashMap<String, List<String>>();
-	}
-	
-	/**
-	 * Public factory method to create and return new log server instances 
-	 * to ensure that each one is safely constructed.
-	 * @return a new LogServer instance.
-	 */
-	public static LogServer CreateLogServer()
-	{
-		LogServer server = new LogServer();
-		return server;
-	}
-	
-	/**
-	 * Retrieve the message map for this server.
+	 * Open a connection with a log server.
 	 * 
-	 * @return message map
+	 * @param host
+	 *            name of the host to connect to
+	 * @param port
+	 *            the port the server is listening on
+	 * 
+	 * @throws UnknownHostException
+	 *             if the hostname is invalid
+	 * @throws IOException
+	 *             if a connection cannot be established
 	 */
-	public Map<String, List<String>> getMessages()
-	{	
-		return logMessages;
-	}
-	
-	/**
-	 * The main run method that binds the server socket to the correct port
-	 * and starts listening for incoming client connections and spawning
-	 * handler threads to service them.
-	 */
-	public void run()
+	public void open(String host, int port) throws UnknownHostException,
+			IOException 
 	{
-	    try 
-	    {
-	    	// Attempt to bind to the port number
-	    	ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
-	    	appendDebugMessage("Starting server on port: " + PORT_NUMBER);
+		clientSocket = new Socket(host, port);
+		serverOut = new DataOutputStream(clientSocket.getOutputStream());
+		serverIn = new BufferedReader(new 
+				InputStreamReader(clientSocket.getInputStream()));
+	}
+
+	/**
+	 * Close the connection with the server
+	 */
+	public void close() 
+	{
+		try 
+		{
+			// Close the streams and null out the references to avoid misuse
+			serverOut.close();
+			serverIn.close();
+			clientSocket.close();
+			serverOut = null;
+			serverIn = null;
+			clientSocket = null;
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Obtain a new ticket.
+	 *
+	 * @return the ticket returned by the server
+	 *
+	 * @throws IOException if an I/O error occurs
+	 */
+	public String newTicket() throws IOException 
+	{
+		String ticket = "";
+
+		if (isIOReady())
+		{
+			// Query the server for a new ticket if the socket is open
+			serverOut.writeBytes(TKT + "\n");
+			ticket = serverIn.readLine();
+		}
+
+		return ticket;
+	}
+
+	/**
+	 * Add an entry to the log identified by the specified ticket
+	 *
+	 * @param ticket the ticket of the log to be written to
+	 * @param message the message to be written to the log
+	 */
+	public void addEntry(String ticket, String message) 
+	{
+		try 
+		{
+			if (isIOReady())
+			{
+				serverOut.writeBytes(LOG + ticket + ":" + message + "\n");
+			}
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Get a list of all the entries that have been written to the log
+	 * identified by the given ticket.
+	 *
+	 * @param ticket the ticket that identifies the log
+	 *
+	 * @return a list containing all of the entries written to the log
+	 *
+	 * @throws IOException if an I/O error occurs
+	 */
+	public List<String> getEntries(String ticket) throws IOException 
+	{
+		List<String> entries = new ArrayList<String>();
+		
+		if (isIOReady())
+		{
+			// Query for the entries for this ticket
+			serverOut.writeBytes(GET + ticket + "\n");
+			String response = serverIn.readLine();
 			
-			// Continuously spawn new handler threads for each incoming client
-	    	while (!serverSocket.isClosed() && serverSocket.isBound())
-	    	{
-	    		try 
-	    		{
-	    			Socket clientSocket = serverSocket.accept();
-					LogServerHandler handler = new LogServerHandler(this, clientSocket);
-		    		handler.start();
-				} 
-	    		catch (IOException e) 
-	    		{
-					e.printStackTrace();
+			try 
+			{
+				// Determine the number of messages and then read them 1-by-1
+				int count = Integer.parseInt(response);
+				for (int i = 0; i < count; i++)
+				{
+					entries.add(serverIn.readLine());
 				}
-	    	}
-		} 
-	    catch (IOException e) 
-	    {
-			e.printStackTrace();
+			}
+			catch (NumberFormatException e)
+			{
+				e.printStackTrace();
+			}
 		}
+		
+		return entries;
 	}
-	
+
 	/**
-	 * Add the specified message to the log file.
-	 * 
-	 * @param ticket - the ticket that is used to log this message.
-	 * @param message - the message to add to the file
+	 * Release the specified ticket.  The entries associated with the
+	 * ticket will no longer be available
+	 *
+	 * @param ticket the ticket to be released
 	 */
-	public synchronized void appendLogMessage(String ticket, String message)
+	public void releaseTicket(String ticket) 
 	{
 		try 
 		{
-			// Create the output stream and write the data
-			PrintWriter out = new PrintWriter(new 
-					BufferedOutputStream(new FileOutputStream(LOG_NAME, true)));
-			out.println(ticket + " - " + message);
-			
-			// Flush and close the stream
-			out.flush();
-			out.close();
+			if (isIOReady())
+			{
+				serverOut.writeBytes(REL + ticket + "\n");
+			}
 		} 
-		catch (FileNotFoundException e) 
+		catch (IOException e) 
 		{
 			e.printStackTrace();
 		}
 	}
 	
 	/**
-	 * Add the specified string to the debug file.
+	 * Private helper method that ensures the client is used configured
+	 * properly (socket is connected and streams are open) before trying
+	 * to communicate with the server.
 	 * 
-	 * @param message - the string to add to the file
+	 * @return true if the client is I/O ready, false otherwise
 	 */
-	public synchronized void appendDebugMessage(String message)
+	private boolean isIOReady()
 	{
-		try 
+		// Only return true if all objects are initialized and the connection is established
+		if (clientSocket != null && serverOut != null && serverIn != null)
 		{
-			// Create the output stream and write the data
-			PrintWriter out = new PrintWriter(new 
-					BufferedOutputStream(new FileOutputStream(DEBUG_NAME, true)));
-			out.println(message);
-			
-			// Flush and close the stream
-			out.flush();
-			out.close();
-		} 
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
+			if (clientSocket.isConnected())
+			{
+				return true;
+			}
 		}
+		return false;
 	}
-	
-	/**
-	 * Main entry point that constructs and starts a new LogServer thread.
-	 * 
-	 * @param args - command line arguments.
-	 */
-	public static void main(String[] args)
-	{
-		LogServer server = LogServer.CreateLogServer();
-		server.start();
-	}
-} // LogServer
+} // LogClient
 

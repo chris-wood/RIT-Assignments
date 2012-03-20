@@ -14,7 +14,7 @@ import java.net.UnknownHostException;
  * @author Paul Tymann (ptt@cs.rit.edu)
  * @contributor Christopher Wood (caw4567@rit.edu)
  */
-public interface ILogClient 
+public interface ILogServer 
 {
 	// Message types
 	

@@ -3,9 +3,9 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClientDriver {
+public class Driver {
 	public static void main(String[] args) {
-		LogClient ls = new LogClient();
+		LogServer ls = new LogServer();
 		try {
 			ls.open("localhost", 6007);
 		} catch (UnknownHostException e) {
