@@ -16,7 +16,15 @@ import java.net.UnknownHostException;
  */
 public interface ILogServer 
 {
-	// Message types
+	/**
+	 * The termination part of a payload.
+	 */
+	public static final String MSG_END = "\n";
+	
+	/**
+	 * The divider between tickets and payload data.
+	 */
+	public static final String MSG_DIVIDER = ":";
 	
 	/**
 	 * A request for a new ticket.
@@ -37,7 +45,7 @@ public interface ILogServer
 	 * Get the messages in a log.
 	 */
 	public static final char GET = '3';
-
+	
 	/**
 	 * Open a connection with a log server.
 	 * 

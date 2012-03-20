@@ -127,11 +127,13 @@ public class HostLogServerHandler extends Thread
 		// Try to send the ticket to the client
 		try 
 		{
-			clientOut.writeBytes(ticket.toString() + "\n");
+			clientOut.writeBytes(ticket.toString() + ILogServer.MSG_END);
 			clientOut.flush();
 		} 
 		catch (IOException e) 
 		{
+			server.appendDebugMessage("Error when generating a ticket: " 
+					+ e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -144,15 +146,23 @@ public class HostLogServerHandler extends Thread
 	 */
 	private void handleLogMessage(String request)
 	{
-		String data[] = request.split(":"); // MAGIC NUMBER
+		String data[] = request.split(ILogServer.MSG_DIVIDER); 
 		
 		// Add the message to the server message map for the appropriate ticket
-		server.getMessages().get(data[0]).add(data[1]);
-		
-		// Add the request information to the debug and log files
-		server.appendDebugMessage("Received 1");
-		server.appendDebugMessage(request);
-		server.appendLogMessage(data[0], data[1]);
+		if (server.getMessages().containsKey(data[0]))
+		{
+			server.getMessages().get(data[0]).add(data[1]);
+			
+			// Add the request information to the debug and log files
+			server.appendDebugMessage("Received 1");
+			server.appendDebugMessage(request);
+			server.appendLogMessage(data[0], data[1]);
+		}
+		else
+		{
+			server.appendDebugMessage("Received 1");
+			server.appendDebugMessage("Ticket (" + data[0] + ") not found in memory.");
+		}
 	}
 	
 	/**
@@ -168,6 +178,10 @@ public class HostLogServerHandler extends Thread
 			server.appendDebugMessage("Releasing Ticket: " + request);
 			server.getMessages().remove(request);
 		}
+		else
+		{
+			server.appendDebugMessage("Ticket (" + request + ") not found in memory.");
+		}
 	}
 	
 	/**
@@ -179,23 +193,33 @@ public class HostLogServerHandler extends Thread
 	private void handleGetMessages(String request)
 	{
 		List<String> messages = server.getMessages().get(request);
-		int count = messages.size();
 		
 		try 
 		{
+			// Try to get the size of the messages (if such a list exists)
+			int count = messages.size();
+			
 			// Send the size first, followed by the messages
 			server.appendDebugMessage("Delivering messages for: " + request);
-			clientOut.writeBytes(count + "\n");
+			clientOut.writeBytes(count + ILogServer.MSG_END);
 			server.appendDebugMessage("Delivering " + count + " to user");
 			for (int i = 0; i < count; i++)
 			{
 				server.appendDebugMessage("Displaying message: " + messages.get(i));
-				clientOut.writeBytes(messages.get(i) + "\n");
+				clientOut.writeBytes(messages.get(i) + ILogServer.MSG_END);
 			}
 			clientOut.flush();
 		} 
 		catch (IOException e) 
 		{
+			server.appendDebugMessage("Error when retrieving messages: " 
+					+ e.getMessage());
+			e.printStackTrace();
+		}
+		catch (NullPointerException e)
+		{
+			server.appendDebugMessage("Error when retrieving messages: " 
+					+ e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -209,7 +233,8 @@ public class HostLogServerHandler extends Thread
 	 */
 	private boolean isIOReady()
 	{
-		// Only return true if all objects are initialized and the connection is established
+		// Only return true if all objects are initialized and the
+		// connection is established
 		if (socket != null && clientOut != null && clientIn != null)
 		{
 			if (socket.isConnected())

@@ -90,7 +90,7 @@ public class LogServer implements ILogServer
 		if (isIOReady())
 		{
 			// Query the server for a new ticket if the socket is open
-			serverOut.writeBytes(TKT + "\n");
+			serverOut.writeBytes(ILogServer.TKT + ILogServer.MSG_END);
 			ticket = serverIn.readLine();
 		}
 
@@ -109,7 +109,8 @@ public class LogServer implements ILogServer
 		{
 			if (isIOReady())
 			{
-				serverOut.writeBytes(LOG + ticket + ":" + message + "\n");
+				serverOut.writeBytes(ILogServer.LOG + ticket + ILogServer.MSG_DIVIDER 
+						+ message + ILogServer.MSG_END);
 			}
 		} 
 		catch (IOException e) 
@@ -135,7 +136,7 @@ public class LogServer implements ILogServer
 		if (isIOReady())
 		{
 			// Query for the entries for this ticket
-			serverOut.writeBytes(GET + ticket + "\n");
+			serverOut.writeBytes(ILogServer.GET + ticket + ILogServer.MSG_END);
 			String response = serverIn.readLine();
 			
 			try 
@@ -168,7 +169,7 @@ public class LogServer implements ILogServer
 		{
 			if (isIOReady())
 			{
-				serverOut.writeBytes(REL + ticket + "\n");
+				serverOut.writeBytes(ILogServer.REL + ticket + ILogServer.MSG_END);
 			}
 		} 
 		catch (IOException e) 
