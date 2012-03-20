@@ -49,9 +49,9 @@ public class HostLogServerHandler extends Thread
 		this.server = server;
 		this.socket = socket;
 		
-		// Create the socket I/O streams
 		try 
 		{
+			// Create the socket I/O streams
 			clientIn = new BufferedReader(new 
 					InputStreamReader(socket.getInputStream()));
 			clientOut = new DataOutputStream(socket.getOutputStream());
@@ -219,5 +219,5 @@ public class HostLogServerHandler extends Thread
 		}
 		return false;
 	}
-} // LogServerHandler
+} // HostLogServerHandler
 

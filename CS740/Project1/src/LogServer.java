@@ -196,5 +196,5 @@ public class LogServer implements ILogServer
 		}
 		return false;
 	}
-} // LogClient
+} // LogServer
 

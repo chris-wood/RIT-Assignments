@@ -163,5 +163,5 @@ public class HostLogServer extends Thread
 		HostLogServer server = HostLogServer.CreateLogServer();
 		server.start();
 	}
-} // LogServer
+} // HostLogServer
 
