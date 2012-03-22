@@ -1,5 +1,5 @@
 /*
- * ITFTPClient.java
+ * ITFTPclient.java
  * 
  * Version: 3/20/12
  */
@@ -9,7 +9,8 @@
  * 
  * @author Christopher Wood (caw4567@rit.edu)
  */
-public interface ITFTPClient 
+public interface ITFTPclient 
 {
-	// TODO - define the appropriate methods
+	// TODO - define the appropriate methods for the protocol messages
+	// reader then simply uses them
 }

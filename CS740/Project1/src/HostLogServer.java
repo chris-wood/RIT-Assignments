@@ -138,12 +138,13 @@ public class HostLogServer extends Thread
 	{
 		try 
 		{
-			// Create the output stream and write the data
+			// Send to stdout first
+			System.out.println(message);
+			
+			// Then send to the debug file
 			PrintWriter out = new PrintWriter(new 
 					BufferedOutputStream(new FileOutputStream(DEBUG_NAME, true)));
 			out.println(message);
-			
-			// Flush and close the stream
 			out.flush();
 			out.close();
 		} 
