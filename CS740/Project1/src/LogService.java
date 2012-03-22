@@ -14,7 +14,7 @@ import java.net.UnknownHostException;
  * @author Paul Tymann (ptt@cs.rit.edu)
  * @contributor Christopher Wood (caw4567@rit.edu)
  */
-public interface ILogServer 
+public interface LogService 
 {
 	/**
 	 * The termination part of a payload.
@@ -99,5 +99,5 @@ public interface ILogServer
 	 * @param ticket the ticket to be released
 	 */
 	public void releaseTicket(String ticket);
-} // ILogServer
+} // LogService
 

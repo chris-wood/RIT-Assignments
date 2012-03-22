@@ -18,9 +18,11 @@ import java.util.List;
  * defined by the ILogClient interface, and can be used by clients
  * to interact with the log server.
  * 
+ * TODO: data type assumptions
+ * 
  * @author Christopher Wood (caw4567@rit.edu)
  */
-public class LogServer implements ILogServer 
+public class LogServer implements LogService 
 {
 	/**
 	 * The single server communication socket used by this client 
@@ -90,7 +92,7 @@ public class LogServer implements ILogServer
 		if (isIOReady())
 		{
 			// Query the server for a new ticket if the socket is open
-			serverOut.writeBytes(ILogServer.TKT + ILogServer.MSG_END);
+			serverOut.writeBytes(LogService.TKT + LogService.MSG_END);
 			ticket = serverIn.readLine();
 		}
 
@@ -109,8 +111,8 @@ public class LogServer implements ILogServer
 		{
 			if (isIOReady())
 			{
-				serverOut.writeBytes(ILogServer.LOG + ticket + ILogServer.MSG_DIVIDER 
-						+ message + ILogServer.MSG_END);
+				serverOut.writeBytes(LogService.LOG + ticket + LogService.MSG_DIVIDER 
+						+ message + LogService.MSG_END);
 			}
 		} 
 		catch (IOException e) 
@@ -136,7 +138,7 @@ public class LogServer implements ILogServer
 		if (isIOReady())
 		{
 			// Query for the entries for this ticket
-			serverOut.writeBytes(ILogServer.GET + ticket + ILogServer.MSG_END);
+			serverOut.writeBytes(LogService.GET + ticket + LogService.MSG_END);
 			String response = serverIn.readLine();
 			
 			try 
@@ -169,7 +171,7 @@ public class LogServer implements ILogServer
 		{
 			if (isIOReady())
 			{
-				serverOut.writeBytes(ILogServer.REL + ticket + ILogServer.MSG_END);
+				serverOut.writeBytes(LogService.REL + ticket + LogService.MSG_END);
 			}
 		} 
 		catch (IOException e) 
