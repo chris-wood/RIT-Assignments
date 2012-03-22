@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Driver {
 	public static void main(String[] args) {
-		LogServer ls = new LogServer();
+		LogService ls = new LogService();
 		try {
 			ls.open("viking.cs.rit.edu", 6007);
 			//Socket socket = new Socket("viking.cs.rit.edu", 6007);

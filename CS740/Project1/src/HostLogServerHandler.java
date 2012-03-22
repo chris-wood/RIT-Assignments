@@ -1,5 +1,5 @@
 /*
- * LogServerHandler.java
+ * HostLogServerHandler.java
  * 
  * Version: 3/14/12
  */
@@ -83,16 +83,16 @@ public class HostLogServerHandler extends Thread
 				{
 					switch (request.charAt(0))
 					{
-						case LogService.TKT:
+						case ILogService.TKT:
 							handleNewTicket();
 							break;
-						case LogService.LOG:
+						case ILogService.LOG:
 							handleLogMessage(request.substring(1));
 							break;
-						case LogService.REL:
+						case ILogService.REL:
 							handleReleaseTicket(request.substring(1));
 							break;
-						case LogService.GET:
+						case ILogService.GET:
 							handleGetMessages(request.substring(1));
 							break;
 					}
@@ -128,7 +128,7 @@ public class HostLogServerHandler extends Thread
 		// Try to send the ticket to the client
 		try 
 		{
-			clientOut.writeBytes(ticket.toString() + LogService.MSG_END);
+			clientOut.writeBytes(ticket.toString() + ILogService.MSG_END);
 			clientOut.flush();
 		} 
 		catch (IOException e) 
@@ -147,7 +147,7 @@ public class HostLogServerHandler extends Thread
 	 */
 	private void handleLogMessage(String request)
 	{
-		String data[] = request.split(LogService.MSG_DIVIDER); 
+		String data[] = request.split(ILogService.MSG_DIVIDER); 
 		
 		// Add the message to the server message map for the appropriate ticket
 		server.appendDebugMessage("Received 1");
@@ -201,12 +201,12 @@ public class HostLogServerHandler extends Thread
 			
 			// Send the size first, followed by the messages
 			server.appendDebugMessage("Delivering messages for: " + request);
-			clientOut.writeBytes(count + LogService.MSG_END);
+			clientOut.writeBytes(count + ILogService.MSG_END);
 			server.appendDebugMessage("Delivering " + count + " to user");
 			for (int i = 0; i < count; i++)
 			{
 				server.appendDebugMessage("Displaying message: " + messages.get(i));
-				clientOut.writeBytes(messages.get(i) + LogService.MSG_END);
+				clientOut.writeBytes(messages.get(i) + ILogService.MSG_END);
 			}
 			clientOut.flush();
 		} 

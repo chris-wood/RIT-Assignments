@@ -1,5 +1,5 @@
 /*
- * LogServerHandler.java
+ * HostLogServer.java
  * 
  * Version: 3/14/12
  */
