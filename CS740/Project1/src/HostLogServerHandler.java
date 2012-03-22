@@ -71,7 +71,6 @@ public class HostLogServerHandler extends Thread
 	{
 		try 
 		{
-			// Handle the requests from this client appropriately
 			while (isIOReady())
 			{
 				// Read in the incoming request
@@ -149,18 +148,17 @@ public class HostLogServerHandler extends Thread
 		String data[] = request.split(ILogServer.MSG_DIVIDER); 
 		
 		// Add the message to the server message map for the appropriate ticket
+		server.appendDebugMessage("Received 1");
 		if (server.getMessages().containsKey(data[0]))
 		{
 			server.getMessages().get(data[0]).add(data[1]);
 			
 			// Add the request information to the debug and log files
-			server.appendDebugMessage("Received 1");
 			server.appendDebugMessage(request);
 			server.appendLogMessage(data[0], data[1]);
 		}
 		else
 		{
-			server.appendDebugMessage("Received 1");
 			server.appendDebugMessage("Ticket (" + data[0] + ") not found in memory.");
 		}
 	}
