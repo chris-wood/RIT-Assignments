@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Driver {
 	public static void main(String[] args) {
-		LogService ls = new LogService();
+		LogServer ls = new LogServer();
 		try {
-			ls.open("viking.cs.rit.edu", 6007);
+			ls.open("queeg.cs.rit.edu", 6007);
 			//Socket socket = new Socket("viking.cs.rit.edu", 6007);
 			
 		} catch (UnknownHostException e) {
