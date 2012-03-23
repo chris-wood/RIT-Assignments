@@ -79,9 +79,12 @@ By definition, we know that $f(2;a,b) = f(1;b, a + b) = (a+b)$. Further, by defi
 Assume that $f(k;a,b) = f(k-1;a,b)+ f(k-2;a,b)$ for some $k \in \mathbb{N}$ such that $3 \leq k < n$. We now show that $f(n;a,b) = f(n - 1;a,b)+ f(n - 2;a,b)$. This result is described below.
 
 \begin{eqnarray*}
-f(n;a,b) & = & f(n-1;b,a+b) \\
-& = & f(n-1;b, a+b)
+f(n;a,b) & = & f(n-1;b,a+b) \text{ (by definition)}\\
+& = & f(n-2;b, a+b) + f(n-3;b,a+b) \text{ (by induction)}\\ 
+& = & f(n-1;a,b) + f(n-2;a,b) \text{ (by definition of $f$)}
 \end{eqnarray*}
+
+Thus, $f(n;a,b) = f(n - 1;a,b)+ f(n - 2;a,b)$, as desired.
 
 \end{sol}
 
