@@ -1,0 +1,75 @@
+\documentclass[11pt]{article}
+
+\usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype,
+	    graphicx, verbatim, listings, color, fancybox}
+\usepackage[pdftex]{hyperref}
+%\usepackage[margin=1in]{geometry}
+\usepackage{cawsty}
+\usepackage{fullpage}
+\usepackage{pseudocode}
+
+\newcommand{\basiseq}{
+\begin{bmatrixr}{2}
+    I & \vec{0}\\
+    A & -B
+  \end{bmatrixr}
+  \begin{bmatrixr}{1}
+    U\\ 1
+  \end{bmatrixr}
+  =
+  \begin{bmatrixr}{1}
+    U\\ \vec{0}
+  \end{bmatrixr}
+}
+
+\newcommand{\sbasiseq}{
+\big[\begin{smallmatrix}
+    I & \vec{0}\\
+    A & -B
+  \end{smallmatrix}\big]
+  \big[\begin{smallmatrix}
+    U \\ 1
+  \end{smallmatrix}\big]
+  =\big[
+  \begin{smallmatrix}
+    U \\ \vec{0}
+  \end{smallmatrix}\big]
+}
+
+%\setlength{\parindent}{0pt}
+
+\linespread{1.2}
+
+\begin{document}
+\arltitle{}{}
+\begin{prob}{Becky's Vroom Vroom Dilemma} Let $C_{1}$ and $C_{2}$ be two cars travelling on the highway. If both cars are moving at an equivalent constant velocity and are at a distance of $d$ apart, is it possible for the separation between $C_{1}$ and $C_{2}$ to ever change from $d$?
+\begin{equation*}\basiseq\end{equation*}
+\end{prob}
+\begin{sol} 
+
+Let $v_{1}$ and $v_{2}$ be the velocity of cars $C_{1}$ and $C_{2}$, respectively, and $d_{0,1}$ and $d_{0,2}$ initial displacement scalar values for $C_{1}$ and $C_{2}$ at time $t = 0$. The distance of both cars can be modeled using the following equation,
+
+\begin{equation*}
+d_{i}(t) = (v_{i}t) + d_{0,i},
+\end{equation*}
+
+where $i$ is the index of the car $C_{1}$ or $C_{2}$. Since the initial separation between the cars is $d$, and by treating the initial displacement value as $0$, we know $d_{0,1} = 0$ and $d_{0,2} = d$. Also, we know that the cars are travelling at the same velocity $v$, so $v_{1} = v_{2} = v$. Therefore, we know the following:
+
+\begin{equation*}
+d_{1}(t) = v_{1}t + d_{0,1} = v_{1}t = vt
+\end{equation*}
+\begin{equation*}
+d_{2}(t) = v_{2}t + d_{0,2} = v_{2}t + d = vt + d
+\end{equation*}
+
+If we anaylze $d_{1}$ and $d_{2}$ as $t \to \infty$, we can determine the separation of the cars. However, notice that the difference between $d_{1}$ and $d_{2}$ will always correspond to the difference between $C_{1}$ and $C_{2}$ at time $t$. We now compute the difference as follows:
+
+\begin{equation*}
+d_{2}(t) - d_{1}(t) = (vt + d) - vt = d
+\end{equation*}
+
+Therefore, since $d_{2}(t) - d_{1}(t) = d$ is indepdent of time, we know that the difference will always equal $d$ for all instances of time. Thus, the separation between the cars will never change.
+
+\end{sol}
+
+\end{document}

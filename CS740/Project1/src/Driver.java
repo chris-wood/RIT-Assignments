@@ -8,7 +8,7 @@ public class Driver {
 	public static void main(String[] args) {
 		LogServer ls = new LogServer();
 		try {
-			ls.open("queeg.cs.rit.edu", 6007);
+			ls.open("viking.cs.rit.edu", 6007);
 			//Socket socket = new Socket("viking.cs.rit.edu", 6007);
 			
 		} catch (UnknownHostException e) {
@@ -44,5 +44,15 @@ public class Driver {
 			System.out.println(entries.get(i));
 		}
 		ls.releaseTicket(ticket);
+		System.out.println("going again!");
+		try {
+			entries = ls.getEntries(ticket);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < entries.size(); i++) {
+			System.out.println(entries.get(i));
+		}
 	}
 }

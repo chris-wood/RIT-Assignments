@@ -52,6 +52,7 @@ public class HostLogServer extends Thread
 	/**
 	 * Public factory method to create and return new log server instances 
 	 * to ensure that each one is safely constructed.
+	 * 
 	 * @return a new LogServer instance.
 	 */
 	public static HostLogServer CreateLogServer()
@@ -130,7 +131,7 @@ public class HostLogServer extends Thread
 	}
 	
 	/**
-	 * Add the specified string to the debug file.
+	 * Add the specified string to stdout and the debug file.
 	 * 
 	 * @param message - the string to add to the file
 	 */

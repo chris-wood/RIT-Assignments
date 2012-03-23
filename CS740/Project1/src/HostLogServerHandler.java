@@ -15,9 +15,14 @@ import java.util.UUID;
 
 /**
  * This class represents an active thread that is responsible
- * for servicing a single client to the log server.
+ * for servicing a single client to the log server. It maintains
+ * its own active socket connection with a client and continuously
+ * reads in data, processes it, and responds appropriately until
+ * the client closes the connection. It also drives the log process
+ * for the server.
  * 
- * TODO: data type assumptions
+ * It is assumed that all data sent to and from the client
+ * consists of ASCII strings terminated by \n characters.
  * 
  * @author Christopher Wood (caw4567@rit.edu)
  */
@@ -84,7 +89,7 @@ public class HostLogServerHandler extends Thread
 					switch (request.charAt(0))
 					{
 						case LogService.TKT:
-							handleNewTicket();
+							handleNewTicket(request.substring(1));
 							break;
 						case LogService.LOG:
 							handleLogMessage(request.substring(1));
@@ -117,25 +122,32 @@ public class HostLogServerHandler extends Thread
 	/**
 	 * Handle a new ticket request by generating a random UUID, inserting into
 	 * the parent server message map, and then returning this ticket to the client.
+	 * 
+	 * @param payload - the remaining message contents (should be empty!)
 	 */
-	private void handleNewTicket()
+	private void handleNewTicket(String payload)
 	{
-		// Generate a random ticket and insert into the message map
-		UUID ticket = UUID.randomUUID();
-		server.getMessages().put(ticket.toString(), new ArrayList<String>());
-		server.appendDebugMessage("Issuing New Ticket: " + ticket.toString());
-		
-		// Try to send the ticket to the client
-		try 
+		// Only handle this message if the payload length is 0
+		// (this message is a single byte)
+		if (payload.length() == 0)
 		{
-			clientOut.writeBytes(ticket.toString() + LogService.MSG_END);
-			clientOut.flush();
-		} 
-		catch (IOException e) 
-		{
-			server.appendDebugMessage("Error when generating a ticket: " 
-					+ e.getMessage());
-			e.printStackTrace();
+			// Generate a random ticket and insert into the message map
+			UUID ticket = UUID.randomUUID();
+			server.getMessages().put(ticket.toString(), new ArrayList<String>());
+			server.appendDebugMessage("Issuing New Ticket: " + ticket.toString());
+			
+			// Try to send the ticket to the client
+			try 
+			{
+				clientOut.writeBytes(ticket.toString() + LogService.MSG_END);
+				clientOut.flush();
+			} 
+			catch (IOException e) 
+			{
+				server.appendDebugMessage("Error when generating a ticket: " 
+						+ e.getMessage());
+				e.printStackTrace();
+			}
 		}
 	}
 	

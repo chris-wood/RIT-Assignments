@@ -16,9 +16,11 @@ import java.util.List;
 /**
  * This class is responsible for implementing the functionality
  * defined by the ILogClient interface, and can be used by clients
- * to interact with the log server.
+ * to interact with the log server using the operations
+ * defined by the protocol interface.
  * 
- * TODO: data type assumptions
+ * It is assumed that all data sent to and from the server
+ * consists of ASCII strings terminated by \n characters.
  * 
  * @author Christopher Wood (caw4567@rit.edu)
  */
