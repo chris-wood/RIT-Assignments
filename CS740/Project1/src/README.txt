@@ -34,4 +34,10 @@ Testing:
   I tested my client code against his server, and my server against his
   client code. This was done because we used different implementation languages
   and we wanted to make sure we conformed to the protocol exactly correctly.
+  
+  I have also included a test driver for the client LogServer (Driver.java) that
+  mimics the functionality of the test driver provided to us. I felt it was appropriate
+  to submit this to show that the client performs as expected using the same
+  code that was provided to us.
+  
    
