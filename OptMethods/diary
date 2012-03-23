@@ -1,0 +1,19 @@
+octave:2> A = [1, 0; 0, 1]
+A =
+
+   1   0
+   0   1
+
+octave:3> B = 2 * A
+B =
+
+   2   0
+   0   2
+
+octave:4> B
+B =
+
+   2   0
+   0   2
+
+octave:5> diary off

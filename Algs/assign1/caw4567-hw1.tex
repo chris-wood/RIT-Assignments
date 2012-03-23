@@ -1,0 +1,134 @@
+\documentclass[11pt]{article}
+
+\usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype,
+	    graphicx, verbatim, listings, color, fancybox}
+\usepackage[pdftex]{hyperref}
+%\usepackage[margin=1in]{geometry}
+\usepackage{cawsty}
+\usepackage{fullpage}
+\usepackage{pseudocode}
+\usepackage{verbatim}
+
+%\setlength{\parindent}{0pt}
+
+\linespread{1.2}
+
+\begin{document}
+\arltitle{4005-800 Algorithms}{Homework 1}
+\begin{prob}{1}
+\end{prob}
+\begin{sol} 
+TODO: explain reasoning here...
+
+\begin{eqnarray*}
+2^{2^{n+1}} \\
+2^{2^{n}} \\ 
+(n+1)! \\
+n! \\
+TODO: continue
+\end{eqnarray*}
+\end{sol}
+
+\begin{prob}{2-a}
+Using the definition of $O$, prove that $n = O(n^{2})$.
+\end{prob}
+\begin{sol} 
+If $n \geq 1$, then $n^{2} \geq n$. Further, $0^{2} \geq 0$. Therefore, $n^{2} \geq n$ for any $n \in \mathbb{N}$. Thus, $cn^{2} \geq n$ when $n \geq 0$ and $c \geq 1$. Finally, by definition, this means that $n \in O(n^{2})$, or simply $n = O(n^{2})$.
+\end{sol}
+
+\begin{prob}{2-b}
+Using the definition of $O$, prove that $n^{k} = O(n^{k'})$ if $k \leq k'$.
+\end{prob}
+\begin{sol} 
+
+If $k \leq k'$, then it follows that $n^{k} \leq n^{k'}$ for any $n \in \mathbb{N}$. Thus, for constants $c \geq 1$, it is true that $n^{k} \leq n^{k'} \leq cn^{k'}$, or simply $n^{k} \leq cn^{k'}$, for all $n \geq 0$. Therefore, by definition, this means that $n^{k} \in O(n^{k'})$, or simply $n^{k} = O(n^{k'})$.
+
+\end{sol}
+
+\begin{prob}{3}
+Write a function $fib$ that implements the recurrence relation for the Fibonacci numbers. What is the smallest $n$ such that you notice $fib$ running slowly?
+\end{prob}
+\begin{sol} 
+The source code for the $fib$ routine (written in Python) is listed below. It is also included in the electronic submission.
+
+\begin{lstlisting}
+def fib(n):
+	if (n == 0):
+		return 0
+	elif (n == 1):
+		return 1
+	else:
+		return (fib(n - 1) + fib(n - 2))
+\end{lstlisting}
+
+The smalest value of $n$ that starts to yields long execution times is $n = 32$.
+
+TODO: explain the time complexity of this guy by solving with second order nonlinear homogeneous equations!
+\end{sol}
+
+\begin{prob}{4-a}
+Prove using the strong form of mathematical induction that for any $n \in \mathbb{N}$ if $n > 1$ then $f(n;a,b)$ = $f(n-1;a,b) + f(n-2;a,b)$.
+\end{prob}
+\begin{sol} 
+Based on the defintion for $f$ and the problem constraints, we need only consider $n = 2$ as the base case for induction since it is the first valid value of $n$ for which $f$ is true. \\
+
+\textbf{Base ($n = 2$)} \\
+By definition, we know that $f(2;a,b) = f(1;b, a + b) = (a+b)$. Further, by definition we know that $f(1;a,b)+ f(0;a,b) = b + a = (a + b)$. Thus, $f(2;a,b) = f(1;a,b)+ f(0;a,b)$, as desired.
+
+\textbf{Induction ($n > 2$)} \\
+Assume that $f(k;a,b) = f(k-1;a,b)+ f(k-2;a,b)$ for some $k \in \mathbb{N}$ such that $3 \leq k < n$. We now show that $f(n;a,b) = f(n - 1;a,b)+ f(n - 2;a,b)$. This result is described below.
+
+\begin{eqnarray*}
+f(n;a,b) & = & f(n-1;b,a+b) \\
+& = & f(n-1;b, a+b)
+\end{eqnarray*}
+
+\end{sol}
+
+\begin{prob}{4-b}
+Prove using the strong form of mathematical induction that for any $n \in \mathbb{N}$, $F_{n} = f(n;0,1)$.
+\end{prob}
+\begin{sol} 
+Based on the results from the previous problem, $f(n)$ can depend on both $f(n-1)$ and $f(n-2)$. Therefore, we have two base cases to cover, as shown below. \\
+
+\textbf{Base ($n = 0$)} \\
+By definition, $F_{0} = 0$, and $f(0;0,1) = 0$. Thus, $F_{0} = f(0;0,1)$.
+
+\textbf{Base ($n = 1$)} \\
+By definition, $F_{1} = 1$, and $f(1;0,1) = 1$. Thus, $F_{1} = f(1;0,1)$.
+
+\textbf{Induction ($n > 1$)} \\
+Assume that $F_{k} = f(k;0,1)$ for some $k \in \mathbb{N}$ such that $2 \leq k < n$. We now show that $F_{n} = f(n;0,1)$. This result is described below.
+
+\begin{eqnarray*}
+F_{n} & = & F_{n - 1} + F_{n - 2} \text{ (by definition)} \\
+& = & f(n - 1;0,1) + f(n-2;0,1) \text{ (by induction)} \\
+& = & f(n;0,1) \text{ (by definition from problem 4-a)}
+\end{eqnarray*}
+
+Thus, $F_{n} = f(n;0,1)$, as desired.
+
+\end{sol}
+
+\begin{prob}{5}
+Write a function $fibIt$ that implements $f$. Does $fibIt$ also run slowly on the value of $n$ that you found made $fib$ run slowly?
+\end{prob}
+\begin{sol} 
+The source code for the $fibIt$ routine (written in Python) is listed below. It is also included in the electronic submission.
+
+\begin{lstlisting}
+def fibIt(n, a, b):
+	if (n == 0):
+		return a
+	elif (n == 1):
+		return b
+	else:
+		return fibIt(n - 1, b, a + b)
+\end{lstlisting}
+\end{sol}
+
+Based on empirical observations, $fibIt$ \textbf{does not} run slowly on the same value of $n$ that made $fib$ run slowly. In fact, $fibIt$ will execute in a reasonable amount of time up to the point where the size of the recursive call stack is too large for the system to maintain in memory. 
+
+TODO: explain why (why oh why is this the case? - put it in a complexity class?)
+
+\end{document}

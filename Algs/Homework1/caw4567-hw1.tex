@@ -8,179 +8,65 @@
 \usepackage{fullpage}
 \usepackage{pseudocode}
 
-\newcommand{\basiseq}{
-\begin{bmatrixr}{2}
-    I & \vec{0}\\
-    A & -B
-  \end{bmatrixr}
-  \begin{bmatrixr}{1}
-    U\\ 1
-  \end{bmatrixr}
-  =
-  \begin{bmatrixr}{1}
-    U\\ \vec{0}
-  \end{bmatrixr}
-}
-
-\newcommand{\sbasiseq}{
-\big[\begin{smallmatrix}
-    I & \vec{0}\\
-    A & -B
-  \end{smallmatrix}\big]
-  \big[\begin{smallmatrix}
-    U \\ 1
-  \end{smallmatrix}\big]
-  =\big[
-  \begin{smallmatrix}
-    U \\ \vec{0}
-  \end{smallmatrix}\big]
-}
-
 %\setlength{\parindent}{0pt}
 
 \linespread{1.2}
 
 \begin{document}
 \arltitle{4005-800 Algorithms}{Homework 1}
-\begin{prob}{8.1}Give a complete proof of Lemma 8.1: $U$ solves $AU=B$ if and only if $U$ solves
-\begin{equation*}\basiseq\end{equation*}
+\begin{prob}{1}
 \end{prob}
-\begin{sol} Let $A$ be an $m$ by $n$ matrix and $B=[b_1\;b_2\ldots b_m]^T$
-  \begin{enumalph}
-    \item {\it Claim:} If $U=[u_1\; u_2 \ldots u_n]^T$ such that $AU=B$, then $\sbasiseq$\\
-      {\it Proof:} Since $AU=B$, we know that
-      \begin{align*}
-        a_{11}u_1+a_{12}u_2&+\dots+a_{1n}u_n = b_1\\
-        a_{21}u_1+a_{22}u_2&+\dots+a_{2n}u_n = b_2\\
-        &\quad\vdots\\
-        a_{m1}u_1+a_{m2}u_2&+\dots+a_{mn}u_n = b_m
-      \end{align*}
-      The first $n$ rows of $\big[\begin{smallmatrix}I & \vec{0}\\A & -B\end{smallmatrix}\big]$ make up $[\;I\;\;\vec{0}\;]$ and clearly,
-      \begin{equation*}
-        \begin{bmatrixr}{2}
-          I & \vec{0}
-        \end{bmatrixr}
-        \begin{bmatrixr}{1}
-          U\\ 1
-        \end{bmatrixr}
-        = U.
-      \end{equation*}
-      The last $m$ rows make up $[\;A\;\;-B\;]$, so
-      \begin{align*}
-        \begin{bmatrixr}{2}
-          A & -B
-        \end{bmatrixr}
-        \begin{bmatrixr}{1}
-          U\\ 1
-        \end{bmatrixr}
-        &=
-        \begin{bmatrix}
-          (a_{11}u_1+a_{12}u_2+\dots+a_{1n}u_n) - b_1\\
-          (a_{21}u_1+a_{22}u_2+\dots+a_{2n}u_n) - b_2\\
-          \vdots\\
-          (a_{m1}u_1+a_{m2}u_2+\dots+a_{mn}u_n) - b_m
-        \end{bmatrix}\\
-        &=\begin{bmatrix}b_1 - b_1\\b_2 - b_2\\\vdots\\b_m - b_m\end{bmatrix}\\
-        &= \vec{0}
-      \end{align*}
-      Therefore, $\sbasiseq$.
-    \item {\it Claim:} If $U=[u_1\; u_2 \ldots u_n]^T$ such that $\sbasiseq$, then $AU=B$. \\
-      {\it Proof:} Very similar to part (a), but in reverse.
-  \end{enumalph}
+\begin{sol} 
+TODO: explain reasoning here...
+
+\begin{eqnarray*}
+2^{2^{n+1}} \\
+2^{2^{n}} \\ 
+(n+1)! \\
+n! \\
+TODO: continue
+\end{eqnarray*}
 \end{sol}
 
-\begin{prob}{8.2}
-  Which of the following are in the lattice $\mathcal{L}=\laspan_\bbZ(B)$ where
-  \begin{equation*}
-    B=\begin{bmatrixr}{2}1 &-2\\3 &1\end{bmatrixr}
-  \end{equation*}
+\begin{prob}{2-a}
+Using the definition of $O$, prove that $n = O(n^{2})$.
 \end{prob}
-\begin{sol} Let $\vec{b_1}=[1,3]$ and $\vec{b_2}=[-2,1]$ (the columns of $B$). The following vectors are in $\mathcal{L}$
-  \begin{itemize}
-    \item $5\vec{b_1}+3\vec{b_2}=[-1,18] \implies [-1,18]\in\mathcal{L}$
-    \item $4\vec{b_1}=[4,12] \implies [4,12]\in\mathcal{L}$
-    \item $3\vec{b_1}+\vec{b_2}=[1,10] \implies [1,10]\in\mathcal{L}$
-    \item $-3\vec{b_1}+2\vec{b_2}=[1,-11] \implies [1,-11]\in\mathcal{L}$
-  \end{itemize}
+\begin{sol} 
+If $n \geq 1$, then $n^{2} \geq n$. Further, $0^{2} \geq 0$. Therefore, $n^{2} \geq n$ for any $n \in \mathbb{N}$. Thus, $cn^{2} \geq n$ when $n \geq 0$ and $c \geq 1$. Finally, by definition, this means that $n \in O(n^{2})$, or simply $n = O(n^{2})$.
 \end{sol}
 
-\begin{prob}{8.3} Compute $\mathsf{wt}(M)$ and $\mathsf{vol}({\mathcal{L}})$ with $M=\big[\begin{smallmatrix}1&-2\\3&1\end{smallmatrix}\big]$
-and verify Hadamard's inequality for this lattice.\end{prob}
+\begin{prob}{2-b}
+Using the definition of $O$, prove that $n^{k} = O(n^{k'})$ if $k \leq k'$.
+\end{prob}
+\begin{sol} 
 
-\begin{sol} We first apply {\sc Gram-Schmidt} to $M$. Since there's only two vectors ($\vec{b_1}$ and $\vec{b_2}$), we know $\vec{b_1^*}=\vec{b_1}$ and we only need to compute $\vec{b_2^*}$
-  \begin{equation*}
-    \vec{b_2^*}=\vec{b_2}-\frac{\vec{b_1}\cdot\vec{b_2}}{\vec{b_1}\cdot\vec{b_1}}\vec{b_1}=
-    \begin{bmatrixr}{1}-2\\1\end{bmatrixr}-\frac{1}{10}\begin{bmatrixr}{1}1\\3\end{bmatrixr}=\begin{bmatrixr}{1}-\frac{21}{10}\\\tfrac{7}{10}\end{bmatrixr}
-  \end{equation*}
-  We can then compute $\mathsf{wt}(M)$ and $\mathsf{vol}({\mathcal{L}})$
-  \begin{align*}
-    \mathsf{wt}(M) &= \norm{\vec{b_1}} \cdot \norm{\vec{b_2}} \\
-      &= \sqrt{10}\cdot\sqrt{5}\\
-      &= 5\sqrt{2}\\&\\
-    \mathsf{vol}({\mathcal{L}}) &= \norm{\vec{b_1^*}} \cdot \norm{\vec{b_2^*}} \\
-      &= \sqrt{10}\cdot \sqrt{\frac{21^2+7^2}{10^2}}\\
-      &= 7
-  \end{align*}
-  Since $\sqrt{2}\approx 1.4142 > 7/5=1.4$, we know that $\mathsf{wt}(M)>\mathsf{vol}(\mathcal{L})$, which agrees with {\it Hadamard's inequality}.
-\end{sol}
+If $k \leq k'$, then we know that $n^{k} \leq n^{k'}$. Furthermore, dividing each term in this inequality by $n^{k}$ yields the following new inequality,
 
-\begin{prob}{8.5}Using the Gram-Schmidt algorithm, work out the orthogonal basis for the lattice spanned by
 \begin{equation*}
-  M=\begin{bmatrixr}{3}1&1&2\\1&0&1\\1&1&0\end{bmatrixr}
+1 \leq n^{k' - k},
 \end{equation*}
-\end{prob}
-\begin{sol} Let $\vec{b_1}=[1,1,1]$, $\vec{b_2}=[1,0,1]$ and $\vec{b_3}=[2,1,0]$. Then $\vec{b_1^*}=\vec{b_1}$,
-  \begin{align*}
-    \vec{b_2^*} &= \vec{b_2}-\frac{\vec{b_1^*}\cdot \vec{b_2}}{\vec{b_1^*} \cdot \vec{b_1^*}}\vec{b_1^*}\\
-      &= [1,0,1] - \tfrac{2}{3}[1,1,1]\\
-      &= [\tfrac{1}{3}, -\tfrac{2}{3}, \tfrac{1}{3}]\\&\\
-    \vec{b_3^*} &= \vec{b_3}-\frac{\vec{b_1^*}\cdot \vec{b_3}}{\vec{b_1^*} \cdot \vec{b_1^*}}\vec{b_1^*} - \frac{\vec{b_2^*}\cdot \vec{b_3}}{\vec{b_2^*} \cdot \vec{b_2^*}}\vec{b_2^*}\\
-      &= [2,1,0] - \tfrac{3}{3}[1,1,1] - 0[\tfrac{1}{3}, -\tfrac{2}{3}, \tfrac{1}{3}]\\
-      &= [1,0,-1]
-  \end{align*}
-  We can now compute $\mathsf{wt}(M)=\norm{\vec{b_1}}\cdot\norm{\vec{b_2}}\cdot\norm{\vec{b_3}}=\sqrt{30}$ and $\mathsf{vol}({\mathcal{L}})=\norm{\vec{b_1^*}}\cdot\norm{\vec{b_2^*}}\cdot\norm{\vec{b_3^*}}=2$. Clearly, $\mathsf{wt}(M)>\mathsf{vol}(\mathcal{L})$.
+
+where $n^{k' - k} \geq 1$ because $k \leq k'$.
+
 \end{sol}
 
-\begin{prob}{8.6}
-  Consider the matrix
-  \begin{equation*}
-    M=\begin{bmatrixr}{4}
-    0 & 2 & 3 & 1 \\
-    1 & 0 & -1 & 5\\
-    2 & -2 & 2 & 0\\
-    2 & 2 & 0 & -2
-    \end{bmatrixr}
-  \end{equation*}
-  (a) Show that $M$ is a reduced matrix (b) Verify the inequalities of a reduced matrix hold for $M$
+\begin{prob}{3}
+Write a function $fib$ that implements the recurrence relation for the Fibonacci numbers. What is the smallest $n$ such that you notice $fib$ running slowly?
 \end{prob}
-\begin{sol} We let $\vec{b_1}=[0,1,2,2]$, $\vec{b_2}=[2,0,-2,2]$, $\vec{b_3}=[3,-1,2,0]$ and $\vec{b_4}=[1,5,0,-2]$. We then run {\sc GramSchmidt}$(\vec{b_1},\vec{b_2},\vec{b_3},\vec{b_4})$ and obtain $\vec{b_1^*}=[0,1,2,2]$, $\vec{b_2^*}=[2,0,-2,2]$, $\vec{b_3^*}=[2.6667,-1.3333,1.6667,-1]$ and $\vec{b_4^*}=[1.7544,4.6784,-0.2924,-2.0468]$.
-  \begin{enumalph}
-    \item In order to show that $M$ is a reduced basis, we first need all $|\alpha_{i,j}|<\tfrac{1}{2}$ for all $i<j$. These values can be represented as an upper triangular matrix with all zeros in the diagonal:
-      \begin{equation*}
-        \alpha = \begin{bmatrixr}{4}
-          & 0 & 0.3333 & 0.1111\\
-          & & 0.1667 & -0.1667\\
-          & & & -0.1579 \\
-          0 & & &
-        \end{bmatrixr}
-      \end{equation*}
-      Clearly, the absolute value of the six appropriate entries of $\alpha$ are all less than $\tfrac{1}{2}$.
-    
-      Next, we need to show that for all $j=1,2,\dots,n-1$,
-      \begin{equation*}
-        \norm{\vec{b_{j+1}^*} + \alpha_{j,j+1}\vec{b_j^*}}^2 \geq \tfrac{3}{4}\norm{\vec{b_j^*}}^2
-      \end{equation*}
-      \begin{align*}
-        j=1,&  &\norm{\vec{b_{2}^*} + \alpha_{1,2}\vec{b_1^*}}^2=12,\;\;\tfrac{3}{4}\norm{\vec{b_1^*}}^2&=\tfrac{3}{4}\cdot9\\
-        j=2,&  &\norm{\vec{b_{3}^*} + \alpha_{2,3}\vec{b_2^*}}^2=13,\;\;\tfrac{3}{4}\norm{\vec{b_2^*}}^2&=\tfrac{3}{4}\cdot12\\
-        j=3,&  &\norm{\vec{b_{4}^*} + \alpha_{3,4}\vec{b_3^*}}^2=29.556,\;\;\tfrac{3}{4}\norm{\vec{b_3^*}}^2&=\tfrac{3}{4}\cdot12.6679
-      \end{align*}
-    \item Next we need to show the following two results:
-      \begin{enumerate}
-        \item $\norm{\vec{b_1}}\leq 2^{(n-1)/4}\mathsf{vol}({\mathcal{L}})^{1/n}$
-        \item $\mathsf{wt}(M) \leq 2^{n(n-1)/4}\mathsf{vol}({\mathcal{L}})$
-      \end{enumerate} We compute $\mathsf{wt}(M)=\sqrt{9\cdot12\cdot14\cdot30}\approx212.9789$ and $\mathsf{vol}({\mathcal{L}})\approx199.9999$. Then $\norm{\vec{b_1}}=3$ and $2^{3/4}\mathsf{vol}({\mathcal{L}})^{1/4}=6.3246$ which implies (1) is true. We compute $2^{3}\mathsf{vol}({\mathcal{L}})=1599.9996$ which shows (2) to be true.
-  \end{enumalph}
+\begin{sol} 
+30...
+\end{sol}
+
+\begin{prob}{4}
+\end{prob}
+\begin{sol} 
+
+\end{sol}
+
+\begin{prob}{5}
+\end{prob}
+\begin{sol} 
+
 \end{sol}
 
 \end{document}
