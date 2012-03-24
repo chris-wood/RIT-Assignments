@@ -10,7 +10,7 @@
  * @author Christopher Wood (caw4567@rit.edu)
  */
 public class TFTPreader 
-{
+{	
 	/**
 	 * The main entry point into the program.
 	 * 
@@ -43,3 +43,4 @@ public class TFTPreader
 		System.err.println("Usage: java TFTPreader [netascii|octet] tftp-host file");
 	}
 }
+
