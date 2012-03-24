@@ -60,7 +60,7 @@ The following table classifies the provided functions into equivalence class bas
 Using the definition of $O$, prove that $n = O(n^{2})$.
 \end{prob}
 \begin{sol} 
-If $n \geq 1$, then $n^{2} \geq n$. Further, $0^{2} \geq 0$. Therefore, $n^{2} \geq n$ for any $n \in \mathbb{N}$. Thus, $cn^{2} \geq n$ when $n \geq 0$ and $c \geq 1$. Finally, by definition, this means that $n \in O(n^{2})$, or simply $n = O(n^{2})$.
+If $n \geq 1$, then $n^{2} \geq n$. Further, $0^{2} \geq 0$. Therefore, $n^{2} \geq n$ for any $n \in \mathbb{N}$. Thus, $cn^{2} \geq n$ when $n \geq 0$ and $c \geq 1$. By definition, this means that $n \in O(n^{2})$, or simply $n = O(n^{2})$.
 \end{sol}
 
 \begin{prob}{2-b}
@@ -90,7 +90,7 @@ def fib(n):
 
 The smalest value of $n$ that starts to yields long execution times is $n = 32$.
 
-TODO: explain the time complexity of this guy by solving with second order nonlinear homogeneous equations!
+%TODO: explain the time complexity of this guy by solving with second order nonlinear homogeneous equations!
 \end{sol}
 
 \begin{prob}{4-a}
@@ -159,6 +159,6 @@ def fibIt(n, a, b):
 
 Based on empirical observations, $fibIt$ \textbf{does not} run slowly on the same value of $n$ that made $fib$ run slowly. In fact, $fibIt$ will execute in a reasonable amount of time up to the point where the size of the recursive call stack is too large for the system to maintain in memory. 
 
-TODO: explain why (why oh why is this the case? - put it in a complexity class?)
+%TODO: explain why (why oh why is this the case? - put it in a complexity class?)
 
 \end{document}
