@@ -37,34 +37,58 @@ Peanuts & 0.55 & 0.45 \\
 
 From this information we can determine the following properties of the problem: \\
 
-\textbf{Design variables:}\\
-\begin{eqnarray*}
-x = \text{ the number of pounds of mixed nut type} A \\
-y = \text{ the number of pounds of mixed nut type} B
-\end{eqnarray*}
+\textbf{Design variables:} \\ 
+The problem centers around the amount of mixed nuts in terms of pounds, so we can define the design variables as the number of pounds of each type of mixed nut that are used to create the new mixed nut. More formally, we have the following: \\ \\
+%\begin{eqnarray*}
+$x$ = the number of pounds of mixed nut type $A$ \\
+$y$ = the number of pounds of mixed nut type $B$ \\
+%\end{eqnarray*}
 
-\textbf{Constraints:} \\
+\textbf{Constraints:}  \\
+Since the new nut type is required to have at least 4 pounds of almonds, 5 pounds of cashew nuts, and 6 pounds of walnuts, with no constraint on the number of pounds of peanuts, we can define the following size constraints using the $x$ and $y$ variables previously mentioned. 
 \begin{eqnarray*}
 0.2x + 0.1y \geq 4 \\
 0.1x + 0.2y \geq 5 \\
-0.15x + 0.25y \geq 6
+0.15x + 0.25y \geq 6 \\
+x \geq 0 \\
+y \geq 0 
 \end{eqnarray*}
 
-\textbf{Cost function:}
+\textbf{Cost function:} \\
+Finally, since the cost of the mixed nuts used to create the new mixed nut is given in terms of \$ per unit pound, we can formalize the cost function as a linear function of the number of pounds $x$ and $y$, as shown below:
 \begin{eqnarray*}
 f(x,y) = 2.5x + 3y
 \end{eqnarray*}
 
-TODO: convert into standard form now... (equality with constraints, etc..)
+\textbf{Standard form:} \\
+Now, putting this linear programming problem into standard matrix form, we have the following definition, noting that all instances of $o$ are slack variables introduced to transform inequality constraints into equality constraints.  \\
+
+Minimize 
+\begin{eqnarray*}
+f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+\end{eqnarray*}
+with constraints 
+\begin{eqnarray*}
+\textbf{aX} = \textbf{b} \\
+\textbf{X} \geq 0
+\end{eqnarray*}
+where
+\begin{eqnarray*}
+\textbf{X} = \begin{bmatrix}x \\y\\o' \\ o'' \\ o''' \end{bmatrix}, 
+\textbf{c} = \begin{bmatrix}2.5 \\3.0\\ 0 \\ 0 \\ 0 \end{bmatrix}, 
+\textbf{b} = \begin{bmatrix}4 \\5\\6\\ \end{bmatrix}, 
+\textbf{a} = \begin{bmatrix}0.2 \ \  0.1\ \ -1 \ \ 0\ \ 0\\0.1 \ \ 0.2\ \ 0\ \ -1\ \ 0\\ 0.15 \  \ 0.25\ \ 0\ \ 0\ \ -1 \\\end{bmatrix}\\
+\end{eqnarray*}
 \end{sol}
 
 \begin{prob}{2}
 \end{prob}
 \begin{sol} 
 
-Based on the problem description, we can identify the following properties of the problem: \\
+Based on the problem description, we can minimize the cost of shipping by describing the cost function in terms of the number of items that are shipped along each route. Therefore, we have the following definitions for the problem. \\
 
 \textbf{Design variables:}\\ 
+The cost of shipping is directly related to the number of items shipped along each route. Hence, the design variables should collectively represent all of these numbers, as shown below: \\ \\
 %\begin{eqnarray*}
 $x_{1,1}$ = \#resources between New York to Seattle\\
 $x_{1,2}$ = \#resources between New York to Houston\\
@@ -74,7 +98,8 @@ $x_{2,2}$ = \#resources between Los Angeles to Houston \\
 $x_{2,3}$ = \#resources between Los Angeles to Detroit \\
 %\end{eqnarray*}
 
-\textbf{Constraints:} 
+\textbf{Constraints:} \\
+Since each source city has a fixed amount of items to ship we must limit the number of items that leave these cities. Also, Seattle, Houston, and Detroit only need 2, 3, and 1 sets of construction equipment, respectively, so we can place these equality constraints on the number of items that are shipped to these cities. Altogether, these constraints can be formally specified as follows: 
 \begin{eqnarray*}
 x_{1,1} + x_{1,2} + x_{1,3} \leq 3 \\
 x_{2,1} + x_{2,2} + x_{2,3} \leq 3 \\
@@ -83,27 +108,53 @@ x_{1,2} + x_{2,2} = 3 \\
 x_{1,3} + x_{2,3} = 1 
 \end{eqnarray*}
 
-\textbf{Cost function:}
+\textbf{Cost function:} \\
+Finally, since we seek to minimize the shipping cost, we simply add up the number of items sent along each routine to find the total cost (and subsequently, the objective function), as follows:
 \begin{eqnarray*}
 f(x_{1,1},x_{1,2},x_{1,3},x_{2,1},x_{2,2},x_{2,3}) = 4x_{1,1} + 3x_{1,2} + x_{1,3} + 2x_{2,1} + 7x_{2,2} + 5x_{2,3}
 \end{eqnarray*}
 
-TODO: convert into standard form now... (equality with constraints, etc..)
+\textbf{Standard form:} \\
+Now, putting this linear programming problem into standard matrix form, we have the following definition, noting that all instances of $o$ are slack variables introduced to transform inequality constraints into equality constraints. \\
+
+Minimize 
+\begin{eqnarray*}
+f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+\end{eqnarray*}
+with constraints 
+\begin{eqnarray*}
+\textbf{aX} = \textbf{b} \\
+\textbf{X} \geq 0
+\end{eqnarray*}
+where
+\begin{eqnarray*}
+\textbf{X} = \begin{bmatrix}x_{1,1} \\x_{1,2}\\x_{1,3} \\ x_{2,1} \\ x_{2,2} \\x_{2,3} \\ o' \\ o'' \end{bmatrix}, 
+\textbf{c} = \begin{bmatrix}4 \\3\\ 1 \\ 2 \\ 7 \\ 5 \\0 \\ 0 \end{bmatrix}, 
+\textbf{b} = \begin{bmatrix}3 \\3\\2\\3\\1 \end{bmatrix}, 
+\textbf{a} = 
+\begin{bmatrix} 
+1 \ \ 1 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \ \ 1 \ \ 1 \\
+0 \ \ 0 \ \ 0 \ \ 1 \ \ 1 \ \ 1 \ \ 1 \ \ 1 \\
+1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \ \ 0 \\
+0 \ \ 1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \\
+0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \\
+\end{bmatrix}\\
+\end{eqnarray*}
 
 \end{sol}
 
 \begin{prob}{3}
 \end{prob}
 \begin{sol} 
-This problem can be classified as an optimal control problem with 9 total states (including an initial state where no money has been invested yet). Thus, the problem can be formulated with the following parameters:\\
+This problem can be classified as an optimal control problem with 9 total states (including an initial state where no money has been invested yet). Thus, the problem can be formulated with the following parameters.\\
 
-\textbf{Design variables:}\\
+\textbf{Design variables:}\\ \\
 %\begin{eqnarray*}
-$i$ = current state of the problem (state) \\
-$X_{i,j}$ = amount of money invested in CD type $j$ at state $i$ (control) \\
-$y_{i,a}$ = amount of money available for investment at state $i$ (state) \\
-$y_{i,c}$ = amount of money accumulated thus far at state $i$ (state) \\
+$X_{i,j}$ = amount of money invested in CD type $j$ at state $i$ \\
 %\end{eqnarray*}
+\textbf{State variables:} \\ \\
+$y_{i,a}$ = amount of money available for investment at state $i$ \\
+$y_{i,c}$ = amount of money accumulated thus far at state $i$ \\
 
 \textbf{Constraints:} 
 \begin{eqnarray*}
@@ -114,9 +165,24 @@ x_{i,1} + x_{i,2} + x_{i,3} + x_{1,4} \leq y_{i,a}
 
 \textbf{Cost function:}
 \begin{eqnarray*}
-f(X) = \sum_{i=0}^{8} y_{i,c} = 0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4}
+f(\textbf{$X_{i,j}$}) = \sum_{i=0}^{8} y_{i,c} = \sum_{i=0}^{8}(0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4})
 \end{eqnarray*}
 
+\textbf{Standard form:} \\
+Now, putting this linear programming problem into standard scalar form yields the following definition.  \\
+
+Minimize 
+\begin{eqnarray*}
+f(\textbf{$X_{i,j}$}) = \sum_{i=0}^{8} y_{i,c} = \sum_{i=0}^{8}(0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4})
+\end{eqnarray*}
+with constraints 
+\begin{eqnarray*}
+X_{i,1} + X_{i,2} + X_{i,3} + X_{i,4} + X_{i,5} = y_{i,a} \\
+y_{0,a} = 50000 \\
+y_{i,a} - y_{i, a'} =  0\\
+\textbf{$X_{i,j}$} \geq 0 
+\end{eqnarray*}
+Noting that $y_{i,a'}$ and $X_{i,5}$ are slack variables introduced to transform inequality constraints into equality constraints. 
 \end{sol}
 
 \end{document}
