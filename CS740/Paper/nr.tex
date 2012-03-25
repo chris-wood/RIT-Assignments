@@ -38,6 +38,45 @@ by researchers in the field.
 % http://iie.fing.edu.uy/investigacion/grupos/artes/publicaciones/casas_drcn09.pdf
 
 \section{Introduction}
-TODO
 
+Military and civilian communications have seen two common trends in rencent years: an 
+increase in network-oriented operations and an increase in high-risk threats to
+such networks \cite{Bernard_networkrobustness}. These operational efforts place
+high reliance on the underlying network infrastructure for communication, so it is vital
+that this communication medium is protected against emerging attacks that focus on
+specific nodes in the network or communication lines that join nodes together. In this context
+the type of network attacks are irrelevant; the focus is more aligned with the optimal topology
+of networks and technological aids that can be utilized to help handle any changes in this topology. 
+
+This focus can be seen by a significant increase in research oriented around robust network design that provides high throughput and connectivitiy among all nodes in the network, especially when specific nodes are intentionally or unintentionally deleted from the network. Subsequently, the robustness of such networks can be viewed as a qualitative or quantitative measure of the network's resilience to such topology changes.
+
+The problem of designing such networks has lent itself as a useful application of both graph theory and percolation theory. Graph theory has been applied to mathematically analyze the robustness of networks represented as undirected graphs based on their levels of vertex and edge connectivity. Similarly, percolation theory has been applied to study the behavior of connected clusters in undirected network graphs. 
+
+This paper will focus on recent research efforts centered around both of these branches of 
+mathematical theory and their application to network design. It will also present practical methods of
+network engineering that have been employed to help networks deal with topology changes dynamically.
+Lastly, it will discuss avenues for future research and open problems that have been posed by 
+researchers in the field.
+
+\section{Network Connectivity}
+
+It is natural to model any communication network as an undirected graph $G$, which has a fixed 
+set of vertices $V(G)$ and edges $E(G)$ that connect such vertices. The topology of a network
+can thus be visualized graphically using elements from these two sets. For the remainder of this paper,
+we use the term vertex as a synonom for node and edge as a synonom for link. As an example of a graph representing a network, consider a completely connected network with $n$ nodes in which every node can directly communicate with every other 
+node can be seen as $K_{n}$, the complete graph on $n$ vertices. In such a network, every node $v$ can
+communicate with exactly $n-1$ other nodes, which means that its degree $deg(v) = n-1$. 
+
+In order to discuss the connectivity of networks, it is necessary to define the connectivity of such
+graphs in terms of both the vertices and edges. TODO: pull definitions from graph theory textbook
+
+TODO: finish definitions above
+
+TODO: continue with the idea of optimal connectivity among nodes
+
+% Here is the bibliography
+\bibliographystyle{plain}
+\bibliography{nr}
+
+% That's all folks
 \end{document}
