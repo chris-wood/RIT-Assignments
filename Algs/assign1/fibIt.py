@@ -12,12 +12,12 @@ import sys
 # Fixed fib value for when cmd line arguments are not provided
 UPPER_BOUND = 32
 
-'''
-This is the fibIt routine that computes the value of
-	the recurrence relation defined in the first
-	homework assignment.
-'''
 def fibIt(n, a, b):
+	""" Compute the nth value of the recurrence relation, f.
+		
+		This implementation follows the recurrence relation
+		described in the homework assignment exactly.
+	"""
 	if (n == 0):
 		return a
 	elif (n == 1):
@@ -25,10 +25,11 @@ def fibIt(n, a, b):
 	else:
 		return fibIt(n - 1, b, a + b)
 
-'''
-	This is the main routine that reads in the command
-	line arguments to run the fib function.
-'''
+""" Run the fibIt function.
+	
+	If the user enters a valid input, run it on that
+	number, else run it with a pre-defined constant.
+"""
 if (len(sys.argv) > 1):
 	print str(fibIt(int(sys.argv[1]), 0, 1))
 else:

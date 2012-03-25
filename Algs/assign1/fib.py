@@ -12,12 +12,12 @@ import sys
 # Fixed fib value for when cmd line arguments are not provided
 UPPER_BOUND = 32
 
-'''
-This is the fib routine that computes the nth Fibonacci
-	number using the recurrence relation defined in the 
-	homework assignment.
-'''
 def fib(n):
+	""" Return the nth Fibonacci number.
+		
+		This algorithm follows the recurrence relation
+		defined in the homework assignment.
+	"""
 	if (n == 0):
 		return 0
 	elif (n == 1):
@@ -25,10 +25,11 @@ def fib(n):
 	else:
 		return (fib(n - 1) + fib(n - 2))
 
-'''
-This is the main routine that reads in the command
-	line arguments to run the fib function.
-'''
+""" Run the fib function.
+	
+	If the user enters a valid input, run it on that
+	number, else run it with a pre-defined constant.
+"""
 if (len(sys.argv) > 1):
 	print str(fib(int(sys.argv[1])))
 else:
