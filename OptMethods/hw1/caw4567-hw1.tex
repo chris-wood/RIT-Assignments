@@ -145,22 +145,30 @@ where
 
 \begin{prob}{3}
 \end{prob}
-\begin{sol} 
+
+\begin{sol}
+TODO
+\end{sol}
+
+\begin{comment}
+\begin{sol}
+
 This problem can be classified as an optimal control problem with 9 total states (including an initial state where no money has been invested yet). Thus, the problem can be formulated with the following parameters.\\
 
-\textbf{Design variables:}\\ \\
+\textbf{Design variables:}\\ 
 %\begin{eqnarray*}
-$X_{i,j}$ = amount of money invested in CD type $j$ at state $i$ \\
+$\textbf{X}_{i,j}$ = amount of money invested in CD type $j$ at state $i$ \\ \\
 %\end{eqnarray*}
-\textbf{State variables:} \\ \\
+\textbf{State variables:} \\ 
 $y_{i,a}$ = amount of money available for investment at state $i$ \\
 $y_{i,c}$ = amount of money accumulated thus far at state $i$ \\
 
 \textbf{Constraints:} 
 \begin{eqnarray*}
 y_{0,a} = 50000 \\
+y_{0,c} = 0 \\
 y_{i,a} \geq 0 \\
-x_{i,1} + x_{i,2} + x_{i,3} + x_{1,4} \leq y_{i,a}
+X_{i,1} + X_{i,2} + X_{i,3} + X_{1,4} \leq y_{i,a}
 \end{eqnarray*}
 
 \textbf{Cost function:}
@@ -168,21 +176,23 @@ x_{i,1} + x_{i,2} + x_{i,3} + x_{1,4} \leq y_{i,a}
 f(\textbf{$X_{i,j}$}) = \sum_{i=0}^{8} y_{i,c} = \sum_{i=0}^{8}(0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4})
 \end{eqnarray*}
 
-\textbf{Standard form:} \\
+\textbf{Standard form:} \\ 
 Now, putting this linear programming problem into standard scalar form yields the following definition.  \\
 
 Minimize 
 \begin{eqnarray*}
-f(\textbf{$X_{i,j}$}) = \sum_{i=0}^{8} y_{i,c} = \sum_{i=0}^{8}(0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4})
+f(\textbf{$X_{i,j}$}) = -\sum_{i=0}^{8} y_{i,c} = -(\sum_{i=0}^{8}(0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4}))
 \end{eqnarray*}
 with constraints 
 \begin{eqnarray*}
 X_{i,1} + X_{i,2} + X_{i,3} + X_{i,4} + X_{i,5} = y_{i,a} \\
 y_{0,a} = 50000 \\
+y_{0,c} = 0 \\
 y_{i,a} - y_{i, a'} =  0\\
 \textbf{$X_{i,j}$} \geq 0 
 \end{eqnarray*}
 Noting that $y_{i,a'}$ and $X_{i,5}$ are slack variables introduced to transform inequality constraints into equality constraints. 
 \end{sol}
+\end{comment}
 
 \end{document}

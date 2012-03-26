@@ -3,7 +3,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Arrays;
 
 /*
  * TFTPclient.java
@@ -23,11 +22,10 @@ public class TFTPclient implements ITFTPclient
 	private int port;
 	
 	@Override
-	public void open(String host, int port) throws UnknownHostException,
+	public void open(String host, int port, int timeout) throws UnknownHostException,
 			IOException {
 		clientSocket = new DatagramSocket();
-		clientSocket.setSoTimeout(2000); // TODO: fix the magic number
-		System.out.println("clientSocket connection? " + clientSocket.isConnected());
+		clientSocket.setSoTimeout(timeout);
 		this.host = host;
 		this.port = port;
 	}
@@ -43,8 +41,9 @@ public class TFTPclient implements ITFTPclient
 	}
 	
 	@Override
-	public byte[] request(Opcode code, String fileName, TransferMode mode)
+	public void sendMessage(TFTPmessage message)
 	{
+		/*
 		// Create the byte array message content
 		byte[] codeBuffer = opcodeToByteArray(code);
 		char[] fileBuffer = fileName.toCharArray();
@@ -59,8 +58,7 @@ public class TFTPclient implements ITFTPclient
 		int offset = 0;
 		for (int i = 0; i < codeBuffer.length; i++)
 		{
-			System.out.println(codeBuffer[i]);
-			rawData[offset++] = codeBuffer[i]; 
+			rawData[offset++] = codeBuffer[i];
 		}
 		for (int i = 0; i < fileBuffer.length; i++)
 		{
@@ -71,15 +69,9 @@ public class TFTPclient implements ITFTPclient
 		{
 			rawData[offset++] = (byte)modeBuffer[i]; 
 		}
-		rawData[offset++] = MESSAGE_PAD;;
+		rawData[offset++] = MESSAGE_PAD;
 		
-		System.out.print("here we go: ");
-		for (int i = 0; i < rawData.length; i++)
-		{
-			System.out.print(rawData[i] + " " );
-		}
-		
-		// Create the UDP packet here
+		// Create and send the UDP packet  
 		InetAddress IPAddress = null;
 		try {
 			IPAddress = InetAddress.getByName(host);
@@ -88,17 +80,29 @@ public class TFTPclient implements ITFTPclient
 			e.printStackTrace();
 		}
 		DatagramPacket packet = new DatagramPacket(rawData, rawData.length, IPAddress, port);
+		System.out.print("Data sent: ");
+		for (int i = 0; i < rawData.length; i++)
+		{
+			System.out.print(rawData[i] + " ");
+		}
+		System.out.println();
 		try {
 			clientSocket.send(packet);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
+	}
+
+	@Override
+	public TFTPmessage getMessage() throws TimeoutException 
+	{
+		return null;	
+		/*
 		// Now try to receive (just debugging the connection status now)
-		System.out.println("asdads!");
-		System.out.println("receiving...");
-		byte[] receiveData = new byte[1024];
+		int messageSize = ITFTPmessage.MESSAGE_SIZE;
+		byte[] receiveData = new byte[messageSize];
 		DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 	    try {
 			clientSocket.receive(receivePacket);
@@ -106,41 +110,24 @@ public class TFTPclient implements ITFTPclient
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    System.out.println("well at least it worked...");
+	    System.out.print("Data received: ");
 	    for (int i = 0; i < receiveData.length; i++)
 		{
 			System.out.print(receiveData[i] + " " );
 		}
+	    
+	    int index = 0;
+	    for (index = OPCODE_SIZE + BLOCK_NUMBER_SIZE; index < receiveData.length; index++)
+	    {
+	    	if (receiveData[index] == 0)
+	    	{
+	    		break;
+	    	}
+	    }
 		
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void sendData(byte[] data) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void sendAck(int blockNumber) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public byte[] getMessage(long timeout) throws TimeoutException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	private byte[] opcodeToByteArray(Opcode code)
-	{
-		byte[] data = new byte[OPCODE_SIZE];
-		for (int i = 0; i < data.length; i++)
-		{
-			data[i] = (byte)(code.getValue() >> (8 * (data.length - (i + 1))));
-		}
-		return data;
+	    // TODO: change this plz...
+		return Arrays.copyOfRange(receiveData, 4, index);
+		*/
 	}
 }

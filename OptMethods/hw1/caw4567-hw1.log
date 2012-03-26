@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  24 MAR 2012 19:22
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  26 MAR 2012 15:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -611,46 +611,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--119
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 148--150
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 151--158
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 151--158
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 151--158
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 171--173
-
- []
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 188.
-[5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 188.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 198.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 198.
  (./caw4567-hw1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 188.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 188.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 198.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 198.
 Package rerunfilecheck Info: File `caw4567-hw1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 188.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 198.
  ) 
 Here is how much of TeX's memory you used:
- 9625 strings out of 493633
- 143150 string characters out of 3143378
- 277913 words of memory out of 3000000
- 12729 multiletter control sequences out of 15000+200000
- 13019 words of font info for 66 fonts, out of 3000000 for 9000
+ 9608 strings out of 493633
+ 142913 string characters out of 3143378
+ 275913 words of memory out of 3000000
+ 12718 multiletter control sequences out of 15000+200000
+ 12217 words of font info for 61 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  33i,12n,51p,408b,384s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
@@ -662,13 +638,12 @@ usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
 r/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
 local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loc
 al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loca
-l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/
-texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/te
-xlive/2011/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on caw4567-hw1.pdf (5 pages, 116451 bytes).
+l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/
+texlive/2011/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+Output written on caw4567-hw1.pdf (4 pages, 104376 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
- 14337 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 66 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
+ 5 named destinations out of 1000 (max. 500000)
+ 13825 words of extra memory for PDF output out of 14400 (max. 10000000)
 
