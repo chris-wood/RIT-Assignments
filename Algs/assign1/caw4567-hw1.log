@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  24 MAR 2012 17:48
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  27 MAR 2012 10:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -544,19 +544,15 @@ LaTeX Info: Redefining \nameref on input line 19.
 \@outlinefile=\write4
 \openout4 = `caw4567-hw1.out'.
 
+LaTeX Font Info:    Try loading font information for U+msa on input line 25.
 
-Underfull \hbox (badness 10000) in paragraph at lines 25--26
-
- []
-
-LaTeX Font Info:    Try loading font information for U+msa on input line 27.
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
 (/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 27.
+LaTeX Font Info:    Try loading font information for U+msb on input line 25.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -564,11 +560,16 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 (/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 27.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 25.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
+Underfull \hbox (badness 10000) in paragraph at lines 25--26
+
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 27--57
 
  []
@@ -602,13 +603,13 @@ Package rerunfilecheck Info: File `caw4567-hw1.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 164.
  ) 
 Here is how much of TeX's memory you used:
- 9713 strings out of 493633
- 144020 string characters out of 3143378
+ 9711 strings out of 493633
+ 144006 string characters out of 3143378
  301939 words of memory out of 3000000
  12808 multiletter control sequences out of 15000+200000
- 12381 words of font info for 62 fonts, out of 3000000 for 9000
+ 12330 words of font info for 61 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 33i,16n,51p,339b,1707s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,16n,51p,426b,1707s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><
 /usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
@@ -623,7 +624,7 @@ live/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texli
 ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
 /2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
 2011/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on caw4567-hw1.pdf (4 pages, 148286 bytes).
+Output written on caw4567-hw1.pdf (4 pages, 149069 bytes).
 PDF statistics:
  101 PDF objects out of 1000 (max. 8388607)
  80 compressed objects within 1 object stream

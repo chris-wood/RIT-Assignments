@@ -22,11 +22,11 @@
 \end{prob}
 \begin{sol} 
 
-The following table classifies the provided functions into equivalence class based on their order of growth in descending order.  \\
+The following table ranks the provided functions based on their order of growth in descending order and groups asymptotically tight functions $f(n)$ and $g(n)$ together in an equivalence class if and only if $f(n) = \Theta(g(n))$. \\
 
 \begin{tabular}{|l|l|}
 	\hline
-	\textbf{Class} & \textbf{Functions} \\
+	\textbf{Rank} & \textbf{Functions} \\
 	\hline 
 	1 & $2^{2^{n+1}}$ \\
 	2 & $2^{2^{n}}$ \\
@@ -157,7 +157,7 @@ def fibIt(n, a, b):
 \end{lstlisting}
 \end{sol}
 
-Based on empirical observations, $fibIt$ \textbf{does not} run slowly on the same value of $n$ that made $fib$ run slowly. In fact, $fibIt$ will execute in a reasonable amount of time up to the point where the size of the recursive call stack is too large for the system to maintain in memory. 
+Based on empirical observations, $fibIt$ \textbf{does not} run slowly on the same value of $n$ that made $fib$ run slowly. In fact, $fibIt$ will execute in a reasonable amount of time up to the point where the size of the recursive call stack is too large for the system to maintain in memory, at which point the Python interpreter throws a run-time exception and exits abormally.
 
 %TODO: explain why (why oh why is this the case? - put it in a complexity class?)
 
