@@ -9,10 +9,13 @@
 # For command line arguments
 import sys
 
-# This is the smallest n that made the previous fib function
-# run slowly - it does not have the same impact on fibIt.
-# In fact, I could not reach such a slow upper bound without 
-# exhausting the recursive call stack.
+# Question 1-5: Does fibIt also run slowly on the value of 
+# n that you found made fib run slowly?
+#
+# Answer: No, fibIt does not run slowly on the same value
+# of n (31) that made fib run slowly. In fact, I could not
+# reach such a slow upper bound without exhausting
+# the recursive call stack.
 UPPER_BOUND = 31
 
 def fibIt(n, a, b):

@@ -18,84 +18,67 @@
 \end{prob}
 \begin{sol} 
 
-The information provided about the mixed nuts, their content percentage, and cost can be displayed in tabular form as follows: \\
-
-\begin{center}
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Nut} & \textbf{Type A (\%)} & \textbf{Type B (\%)} \\
-\hline
-Almonds & 0.20 & 0.10 \\
-Cashew nuts & 0.10 & 0.20 \\
-Walnuts & 0.15 & 0.25 \\
-Peanuts & 0.55 & 0.45 \\
-\hline
-\textbf{Cost} & \$2.50 & \$3.00 \\
-\hline
-\end{tabular}  \\
-\end{center}
-
-From this information we can determine the following properties of the problem: \\
-
 \textbf{Design variables:} \\ 
-The problem centers around the amount of mixed nuts in terms of pounds, so we can define the design variables as the number of pounds of each type of mixed nut that are used to create the new mixed nut. More formally, we have the following: \\ \\
+The problem centers around the amount of mixed nuts in terms of pounds, especially since the cost of each mixed nut is given in terms of \$/pound. Therefore, we can define the design variables as the number of pounds of each type of mixed nut that are used to create the new mixed nut. More formally, we have the following: \\ \\
 %\begin{eqnarray*}
-$x$ = the number of pounds of mixed nut type $A$ \\
-$y$ = the number of pounds of mixed nut type $B$ \\
+$x_{1}$ = the number of pounds of mixed nut type $A$ \\
+$x_{2}$ = the number of pounds of mixed nut type $B$ \\
 %\end{eqnarray*}
 
 \textbf{Constraints:}  \\
-Since the new nut type is required to have at least 4 pounds of almonds, 5 pounds of cashew nuts, and 6 pounds of walnuts, with no constraint on the number of pounds of peanuts, we can define the following size constraints using the $x$ and $y$ variables previously mentioned. 
+Since the new nut type is required to have at least 4 pounds of almonds, 5 pounds of cashew nuts, and 6 pounds of walnuts, with no constraint on the number of pounds of peanuts, we can define the following size constraints using the $x_{1}$ and $x_{2}$ variables previously mentioned. 
 \begin{eqnarray*}
-0.2x + 0.1y \geq 4 \\
-0.1x + 0.2y \geq 5 \\
-0.15x + 0.25y \geq 6 \\
-x \geq 0 \\
-y \geq 0 
+0.2x_{1} + 0.1x_{2} \geq 4 \\
+0.1x_{1} + 0.2x_{2} \geq 5 \\
+0.15x_{1} + 0.25x_{2} \geq 6 
 \end{eqnarray*}
 
 \textbf{Cost function:} \\
-Finally, since the cost of the mixed nuts used to create the new mixed nut is given in terms of \$ per unit pound, we can formalize the cost function as a linear function of the number of pounds $x$ and $y$, as shown below:
+Finally, since the cost of the mixed nuts used to create the new mixed nut is given in terms of \$/pound, we can formalize the cost function as a linear function of the number of pounds $x_{1}$ and $x_{2}$, as shown below:
 \begin{eqnarray*}
-f(x,y) = 2.5x + 3y
+f(x_{1},x_{2}) = 2.5x_{1} + 3x_{2}
 \end{eqnarray*}
 
 \textbf{Standard form:} \\
-Now, putting this linear programming problem into standard matrix form, we have the following definition, noting that all instances of $o$ are slack variables introduced to transform inequality constraints into equality constraints.  \\
+Now, putting this linear programming problem into standard scalar form, we have the following definition.  \\
 
 Minimize 
 \begin{eqnarray*}
-f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+%f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+f(x_{1}, x_{2}) = 2.5x_{1} + 3x_{2}
 \end{eqnarray*}
 with constraints 
 \begin{eqnarray*}
-\textbf{aX} = \textbf{b} \\
-\textbf{X} \geq 0
+%\textbf{aX} = \textbf{b} \\
+%\textbf{X} \geq 0
+0.2x_{1} + 0.1x_{2} - x_{3} = 4 \\
+0.1x_{1} + 0.2x_{2} - x_{4} = 5 \\
+0.15x_{1} + 0.25x_{2} - x_{5} = 6 \\
+x_{1}, x_{2}, x_{3}, x_{4}, x_{5} \geq 0 
 \end{eqnarray*}
-where
-\begin{eqnarray*}
-\textbf{X} = \begin{bmatrix}x \\y\\o' \\ o'' \\ o''' \end{bmatrix}, 
-\textbf{c} = \begin{bmatrix}2.5 \\3.0\\ 0 \\ 0 \\ 0 \end{bmatrix}, 
-\textbf{b} = \begin{bmatrix}4 \\5\\6\\ \end{bmatrix}, 
-\textbf{a} = \begin{bmatrix}0.2 \ \  0.1\ \ -1 \ \ 0\ \ 0\\0.1 \ \ 0.2\ \ 0\ \ -1\ \ 0\\ 0.15 \  \ 0.25\ \ 0\ \ 0\ \ -1 \\\end{bmatrix}\\
-\end{eqnarray*}
+%where
+%\begin{eqnarray*}
+%\textbf{X} = \begin{bmatrix}x \\y\\o' \\ o'' \\ o''' \end{bmatrix}, 
+%\textbf{c} = \begin{bmatrix}2.5 \\3.0\\ 0 \\ 0 \\ 0 \end{bmatrix}, 
+%\textbf{b} = \begin{bmatrix}4 \\5\\6\\ \end{bmatrix}, 
+%\textbf{a} = \begin{bmatrix}0.2 \ \  0.1\ \ -1 \ \ 0\ \ 0\\0.1 \ \ 0.2\ \ 0\ \ -1\ \ 0\\ 0.15 \  \ 0.25\ \ 0\ \ %0\ \ -1 \\\end{bmatrix}\\
+%\end{eqnarray*}
+where $x_{3}$, $x_{4}$, and $x_{5}$ are slack variables introduced to translate constraint inequalities to equalities.
 \end{sol}
 
 \begin{prob}{2}
 \end{prob}
 \begin{sol} 
 
-Based on the problem description, we can minimize the cost of shipping by describing the cost function in terms of the number of items that are shipped along each route. Therefore, we have the following definitions for the problem. \\
-
 \textbf{Design variables:}\\ 
 The cost of shipping is directly related to the number of items shipped along each route. Hence, the design variables should collectively represent all of these numbers, as shown below: \\ \\
 %\begin{eqnarray*}
-$x_{1,1}$ = \#resources between New York to Seattle\\
-$x_{1,2}$ = \#resources between New York to Houston\\
-$x_{1,3}$ = \#resources between New York to Detroit \\
-$x_{2,1}$ = \#resources between Los Angeles to Seattle \\
-$x_{2,2}$ = \#resources between Los Angeles to Houston \\
-$x_{2,3}$ = \#resources between Los Angeles to Detroit \\
+$x_{1,1}$ = \#resources from New York to Seattle\\
+$x_{1,2}$ = \#resources from New York to Houston\\
+$x_{1,3}$ = \#resources from New York to Detroit \\
+$x_{2,1}$ = \#resources from Los Angeles to Seattle \\
+$x_{2,2}$ = \#resources from Los Angeles to Houston \\
+$x_{2,3}$ = \#resources from Los Angeles to Detroit \\
 %\end{eqnarray*}
 
 \textbf{Constraints:} \\
@@ -115,39 +98,84 @@ f(x_{1,1},x_{1,2},x_{1,3},x_{2,1},x_{2,2},x_{2,3}) = 4x_{1,1} + 3x_{1,2} + x_{1,
 \end{eqnarray*}
 
 \textbf{Standard form:} \\
-Now, putting this linear programming problem into standard matrix form, we have the following definition, noting that all instances of $o$ are slack variables introduced to transform inequality constraints into equality constraints. \\
+Now, putting this linear programming problem into standard scalar form, we have the following definition. \\
 
 Minimize 
 \begin{eqnarray*}
-f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+%f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+f(x_{1,1},x_{1,2},x_{1,3},x_{2,1},x_{2,2},x_{2,3}) = 4x_{1,1} + 3x_{1,2} + x_{1,3} + 2x_{2,1} + 7x_{2,2} + 5x_{2,3}
 \end{eqnarray*}
 with constraints 
 \begin{eqnarray*}
-\textbf{aX} = \textbf{b} \\
-\textbf{X} \geq 0
+%\textbf{aX} = \textbf{b} \\
+%\textbf{X} \geq 0
+x_{1,1} + x_{1,2} + x_{1,3} + x_{3} = 3 \\
+x_{2,1} + x_{2,2} + x_{2,3} + x_{4} = 3 \\
+x_{1,1} + x_{2,1} = 2 \\
+x_{1,2} + x_{2,2} = 3 \\
+x_{1,3} + x_{2,3} = 1 \\
+x_{1,1}, x_{1,2}, x_{1,3}, x_{2,1}, x_{2,2}, x_{2,3}, x_{3}, x_{4} \geq 0 
 \end{eqnarray*}
-where
-\begin{eqnarray*}
-\textbf{X} = \begin{bmatrix}x_{1,1} \\x_{1,2}\\x_{1,3} \\ x_{2,1} \\ x_{2,2} \\x_{2,3} \\ o' \\ o'' \end{bmatrix}, 
-\textbf{c} = \begin{bmatrix}4 \\3\\ 1 \\ 2 \\ 7 \\ 5 \\0 \\ 0 \end{bmatrix}, 
-\textbf{b} = \begin{bmatrix}3 \\3\\2\\3\\1 \end{bmatrix}, 
-\textbf{a} = 
-\begin{bmatrix} 
-1 \ \ 1 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \ \ 1 \ \ 1 \\
-0 \ \ 0 \ \ 0 \ \ 1 \ \ 1 \ \ 1 \ \ 1 \ \ 1 \\
-1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \ \ 0 \\
-0 \ \ 1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \\
-0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \\
-\end{bmatrix}\\
-\end{eqnarray*}
-
+%where
+%\begin{eqnarray*}
+%\textbf{X} = \begin{bmatrix}x_{1,1} \\x_{1,2}\\x_{1,3} \\ x_{2,1} \\ x_{2,2} \\x_{2,3} \\ o' \\ o'' %\end{bmatrix}, 
+%\textbf{c} = \begin{bmatrix}4 \\3\\ 1 \\ 2 \\ 7 \\ 5 \\0 \\ 0 \end{bmatrix}, 
+%\textbf{b} = \begin{bmatrix}3 \\3\\2\\3\\1 \end{bmatrix}, 
+%\textbf{a} = 
+%\begin{bmatrix} 
+%1 \ \ 1 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \ \ 1 \ \ 1 \\
+%0 \ \ 0 \ \ 0 \ \ 1 \ \ 1 \ \ 1 \ \ 1 \ \ 1 \\
+%1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \ \ 0 \\
+%0 \ \ 1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \\
+%0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \\
+%\end{bmatrix}\\
+% \end{eqnarray*}
+where $x_{3}$ and $x_{4}$ are slack variables introduced to transform constraint inequalities into equalities.
 \end{sol}
 
 \begin{prob}{3}
 \end{prob}
 
 \begin{sol}
-TODO
+
+\textbf{Design variables:} \\ 
+Since we are given a fixed amount of money to invest into four different cerficiates of deposits (CDs) in order to yield the maximum return at the end of the fourth year, we can define the design variables as the amount of money invested in each certificate of deposit, as described below.\\ \\ 
+%\begin{eqnarray*}
+$x_{1}$ = amount of money invested in CD type $1$ \\
+$x_{2}$ = amount of money invested in CD type $2$ \\
+$x_{3}$ = amount of money invested in CD type $3$ \\
+$x_{4}$ = amount of money invested in CD type $4$ \\
+%\end{eqnarray*}
+
+\textbf{Constraints:}  \\
+The only constraint on our problem is the amount of money we are allowed to invest at the beginning ($\$50,000$) before we start accumulating interest. Therefore, we have the following:
+\begin{eqnarray*}
+x_{1} + x_{2} + x_{3} + x_{4} \leq 50000
+\end{eqnarray*}
+
+\textbf{Cost function:} \\
+Now that each investment is accumulating revenue after every maturity, we can use the standard compound interest equation ($FV = PV(1+i)^{n}$) to represent the amount of revenue earned by each investment at the end of the fourth year. Then, if we sum together these values, we attain our cost function that can be maximized. This is shown below.
+\begin{eqnarray*}
+%f(x_{1},x_{2}) = 2.5x_{1} + 3x_{2}
+f(x_{1}, x_{2}, x_{3}, x_{4}) = x_{1}(1.05)^{8} + x_{2}(1.07)^{4} + x_{3}(1.1)^{2} + x_{4}(1.15)
+\end{eqnarray*}
+
+\textbf{Standard form:} \\
+Now, putting this linear programming problem into standard scalar form, we have the following definition, noting that all instances of $s$ are slack variables introduced to transform inequality constraints into equality constraints.  \\
+
+Minimize 
+\begin{eqnarray*}
+%f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+f'(x_{1}, x_{2}, x_{3}, x_{4}) = -f(x_{1}, x_{2}, x_{3}, x_{4}) = -(1.05)^{8}x_{1} -(1.07)^{4}x_{2} -(1.1)^{2}x_{3} -1.15x_{4}
+\end{eqnarray*}
+with constraints 
+\begin{eqnarray*}
+%\textbf{aX} = \textbf{b} \\
+%\textbf{X} \geq 0
+x_{1} + x_{2} + x_{3} + x_{4} + x_{5} = 50000 \\
+x_{1}, x_{2}, x_{3}, x_{4}, x_{5} \geq 0 
+\end{eqnarray*}
+where $x_{5}$ is a slack variable introduced to translate the constraint inequality to an equality.
 \end{sol}
 
 \begin{comment}

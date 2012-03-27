@@ -9,7 +9,11 @@
 # For command line arguments
 import sys
 
-# This is the smallest n that appears to make fib run slowly (n = 32).
+# Question 1-3: What is the smallest n such that you notice fib
+# running slowly?
+#
+# Answer: The smallest n that appears to make fib run slowly 
+# is n = 31.
 UPPER_BOUND = 31
 
 def fib(n):

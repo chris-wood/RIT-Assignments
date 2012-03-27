@@ -1,0 +1,3558 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    161689,       3548]
+NotebookOptionsPosition[    159339,       3468]
+NotebookOutlinePosition[    159750,       3486]
+CellTagsIndexPosition[    159707,       3483]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+limit as n goes to infinity of (2^2^(n+1)) / (2^2^n))\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.541859771463072*^9, 3.541859786300449*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "limit as n goes to infinity of (2^2^(n+1)) / (2^2^n))", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[2^2^(n + 1)/2^2^n, n -> Infinity]"}], 
+       
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SuperscriptBox["2", 
+                   SuperscriptBox["2", 
+                    RowBox[{"n", "+", "1"}]]], 
+                  SuperscriptBox["2", 
+                   SuperscriptBox["2", "n"]]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {
+    XMLElement["warnings", {"count" -> "1"}, {
+      XMLElement[
+      "delimiters", {
+       "text" -> "An attempt was made to fix mismatched delimiters"}, {}]}]}, 
+   Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "3.628", 
+    "parsetiming" -> "1.202", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa43171a0i6a8b8a7g5dgi00000fieg0272h5a110f", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "2", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa43181a0i6a8b8a7g5dgi00000cg4bhe27e1ei5i0&s=2", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 13, 56, 31.322557`8.248432188932847}, "Line" -> 
+    24, "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "limit as n goes to infinity of (2^2^(n+1)) / (2^2^n))"}, 
+   
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$}, {Typeset`aux1$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {83., 89.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.54185979175954*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+lim n -> inf of (2^2^n)/((n+1)!)\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.541859829222337*^9, 3.541859851159173*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n -> inf of (2^2^n)/((n+1)!)", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[2^2^n/(n + 1)!, n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SuperscriptBox["2", 
+                   SuperscriptBox["2", "n"]], 
+                  RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"n", "+", "1"}], ")"}], "!"}]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement["info", {"text" -> "n! is the factorial function"}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://reference.wolfram.com/mathematica/ref/Factorial.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/GammaBetaErf/Factorial", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/Factorial.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"n", "!"}], FontFamily -> "Bitstream Charter", 
+                   Bold, 14, StripOnInput -> False], 
+                  "\"is the factorial function\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Series expansion at n=\[Infinity]", "scanner" -> 
+     "Series", "id" -> "SeriesExpansionAtX=x0", "position" -> "200", "error" -> 
+     "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Series[2^2^n/(1 + n)!, {n, Infinity, 5}]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            RowBox[{
+              SuperscriptBox["2", 
+               SuperscriptBox["2", "n"]], " ", 
+              RowBox[{"(", 
+                InterpretationBox[
+                 RowBox[{
+                   FractionBox[
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"3", "/", "2"}]], 
+                    SqrtBox[
+                    RowBox[{"2", " ", "\[Pi]"}]]], "-", 
+                   FractionBox[
+                    RowBox[{"13", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"5", "/", "2"}]]}], 
+                    RowBox[{"12", " ", 
+                    SqrtBox[
+                    RowBox[{"2", " ", "\[Pi]"}]]}]], "+", 
+                   FractionBox[
+                    RowBox[{"313", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"7", "/", "2"}]]}], 
+                    RowBox[{"288", " ", 
+                    SqrtBox[
+                    RowBox[{"2", " ", "\[Pi]"}]]}]], "-", 
+                   FractionBox[
+                    RowBox[{"56201", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"9", "/", "2"}]]}], 
+                    RowBox[{"51840", " ", 
+                    SqrtBox[
+                    RowBox[{"2", " ", "\[Pi]"}]]}]], "+", 
+                   InterpretationBox[
+                    RowBox[{"O", "(", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"11", "/", "2"}]], ")"}], 
+                    SeriesData[$CellContext`n, 
+                    DirectedInfinity[1], {}, 3, 11, 2], Editable -> False]}], 
+                 
+                 SeriesData[$CellContext`n, 
+                  DirectedInfinity[
+                  1], {(2 Pi)^Rational[-1, 2], 0, 
+                   Rational[-13, 12] (2 Pi)^Rational[-1, 2], 0, 
+                   Rational[313, 288] (2 Pi)^Rational[-1, 2], 0, 
+                   Rational[-56201, 51840] (2 Pi)^Rational[-1, 2]}, 3, 11, 2],
+                  Editable -> False], ")"}], " ", 
+              RowBox[{"exp", "(", 
+                InterpretationBox[
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}], "+", "1"}], ")"}], " ", 
+                    "n"}], "+", 
+                   InterpretationBox[
+                    RowBox[{"O", "(", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], "6"], ")"}], 
+                    SeriesData[$CellContext`n, 
+                    DirectedInfinity[1], {}, -1, 6, 1], Editable -> False]}], 
+                 
+                 SeriesData[$CellContext`n, 
+                  DirectedInfinity[1], {1 + Log[$CellContext`n^(-1)]}, -1, 6, 
+                  1], Editable -> False], ")"}]}], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement["dataformats", {}, {"plaintext,minput,moutput"}]}], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More terms", "input" -> 
+         "SeriesExpansionAtX=x0__More terms"}, {}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement["info", {"text" -> "log(x) is the natural logarithm"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Log.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ElementaryFunctions/Log", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/NaturalLogarithm.html", 
+           "text" -> "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"log", "(", "x", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the natural logarithm\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`aux2$$ = {
+   True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "2", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "1.032", 
+    "parsetiming" -> "0.471", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa51351a0i6a33a912h3gg00002chc0g9bbh244a7h", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "41", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa51361a0i6a33a912h3gg00001ga7ehefaahf3ife&s=41", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 13, 57, 32.845515`8.26905105619279}, "Line" -> 25,
+     "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1, 2}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n -> inf of (2^2^n)/((n+1)!)"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$}, {Typeset`aux1$$, Typeset`aux2$$}, 
+        Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, Typeset`q$$, 
+        Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+        Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+        Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {121., 127.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$, Typeset`pod2$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.541859852950965*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["lim n -> inf (n+1)! / n!", "WolframAlphaLong",
+ CellChangeTimes->{{3.541859855316679*^9, 3.5418598647915916`*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n -> inf (n+1)! / n!", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[(n + 1)!/n!, n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"n", "+", "1"}], ")"}], "!"}], 
+                  RowBox[{"n", "!"}]]}], "\[LongEqual]", "\[Infinity]"}], 
+             HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement["info", {"text" -> "n! is the factorial function"}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://reference.wolfram.com/mathematica/ref/Factorial.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/GammaBetaErf/Factorial", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/Factorial.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"n", "!"}], FontFamily -> "Bitstream Charter", 
+                   Bold, 14, StripOnInput -> False], 
+                  "\"is the factorial function\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, Typeset`pod5$$, 
+   Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, Typeset`pod9$$, 
+   Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, Typeset`pod13$$, 
+   Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, Typeset`pod17$$, 
+   Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, Typeset`pod21$$, 
+   Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, Typeset`pod25$$, 
+   Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, Typeset`pod29$$, 
+   Typeset`pod30$$, Typeset`pod31$$, Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`aux3$$ = {True, False, {False}, True}, Typeset`aux4$$ = {
+   True, False, {False}, True}, Typeset`aux5$$ = {True, False, {False}, True},
+    Typeset`aux6$$ = {True, False, {False}, True}, Typeset`aux7$$ = {
+   True, False, {False}, True}, Typeset`aux8$$ = {True, False, {False}, True},
+    Typeset`aux9$$ = {True, False, {False}, True}, Typeset`aux10$$ = {
+   True, False, {False}, True}, Typeset`aux11$$ = {
+   True, False, {False}, True}, Typeset`aux12$$ = {
+   True, False, {False}, True}, Typeset`aux13$$ = {
+   True, False, {False}, True}, Typeset`aux14$$ = {
+   True, False, {False}, True}, Typeset`aux15$$ = {
+   True, False, {False}, True}, Typeset`aux16$$ = {
+   True, False, {False}, True}, Typeset`aux17$$ = {
+   True, False, {False}, True}, Typeset`aux18$$ = {
+   True, False, {False}, True}, Typeset`aux19$$ = {
+   True, False, {False}, True}, Typeset`aux20$$ = {
+   True, False, {False}, True}, Typeset`aux21$$ = {
+   True, False, {False}, True}, Typeset`aux22$$ = {
+   True, False, {False}, True}, Typeset`aux23$$ = {
+   True, False, {False}, True}, Typeset`aux24$$ = {
+   True, False, {False}, True}, Typeset`aux25$$ = {
+   True, False, {False}, True}, Typeset`aux26$$ = {
+   True, False, {False}, True}, Typeset`aux27$$ = {
+   True, False, {False}, True}, Typeset`aux28$$ = {
+   True, False, {False}, True}, Typeset`aux29$$ = {
+   True, False, {False}, True}, Typeset`aux30$$ = {
+   True, False, {False}, True}, Typeset`aux31$$ = {
+   True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, 
+   Typeset`queryinfo$$ = {{
+    "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+     "", "timedout" -> "Series", "timedoutpods" -> "", "timing" -> "1.167", 
+     "parsetiming" -> "0.4", "parsetimedout" -> "false", "recalculate" -> 
+     "http://www4b.wolframalpha.com/api/v2/recalc.jsp?id=\
+MSPa58711a0i68i17f097cc3000032dcd7cc925iica4&s=8", "id" -> 
+     "MSPa58721a0i68i17f097cc3000054ae8897bg3e697c", "host" -> 
+     "http://www4b.wolframalpha.com", "server" -> "8", "related" -> 
+     "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa58731a0i68i17f097cc300003869hbaeia0a7ae5&s=8", "version" -> "2.5"}, {
+    "success" -> "true", "error" -> "false", "numpods" -> "0", "datatypes" -> 
+     "", "timedout" -> "Series", "timedoutpods" -> "", "timing" -> "1.762", 
+     "parsetiming" -> "0.", "parsetimedout" -> "false", "recalculate" -> "", 
+     "id" -> "", "host" -> "http://www4b.wolframalpha.com", "server" -> "8", 
+     "related" -> "", "version" -> "2.5"}}, Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 13, 57, 46.452225`8.419581497571164}, "Line" -> 
+    26, "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1}, 
+   Typeset`failedpods$$ = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+    17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31}, 
+   Typeset`chosen$$ = {}, Typeset`open$$ = False, Typeset`newq$$ = 
+   "lim n -> inf (n+1)! / n!"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+         Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+         Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+         Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+         Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+         Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+         Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+         Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+         Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+         Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+         Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+         Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+         Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+         Typeset`aux29$$, Typeset`aux30$$, Typeset`aux31$$}, Typeset`chosen$$,
+         Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {61., 67.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], AlphaIntegration`DoAsyncInitialization[
+       Hold[{
+        2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+          Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+          Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+          Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+          Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+          Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+          Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+          Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$}, {
+         Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+          Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+          Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+          Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+          Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+          Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+          Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+          Typeset`aux29$$, Typeset`aux30$$, Typeset`aux31$$}, 
+         Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, Typeset`q$$, 
+         Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+         Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+         Typeset`newq$$, 
+         "http://www4b.wolframalpha.com/api/v2/recalc.jsp?id=\
+MSPa58711a0i68i17f097cc3000032dcd7cc925iica4&s=8", Typeset`asyncpods$$}]]; 
+     Typeset`asyncpods$$ = {}; Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.541859866555056*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["lim n->inf n! / e^n", "WolframAlphaLong",
+ CellChangeTimes->{{3.541859868049469*^9, 3.541859877614635*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf n! / e^n", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[n!/E^n, n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  RowBox[{"n", "!"}], 
+                  SuperscriptBox["\[ExponentialE]", "n"]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement["info", {"text" -> "n! is the factorial function"}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://reference.wolfram.com/mathematica/ref/Factorial.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/GammaBetaErf/Factorial", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/Factorial.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"n", "!"}], FontFamily -> "Bitstream Charter", 
+                   Bold, 14, StripOnInput -> False], 
+                  "\"is the factorial function\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Series expansion at n=\[Infinity]", "scanner" -> 
+     "Series", "id" -> "SeriesExpansionAtX=x0", "position" -> "200", "error" -> 
+     "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Series[n!/E^n, {n, Infinity, 5}]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            RowBox[{
+              RowBox[{"(", 
+                InterpretationBox[
+                 RowBox[{
+                   RowBox[{
+                    SqrtBox[
+                    RowBox[{"2", " ", "\[Pi]"}]], " ", 
+                    SqrtBox["n"]}], "+", 
+                   RowBox[{
+                    FractionBox["1", "6"], " ", 
+                    SqrtBox[
+                    FractionBox["\[Pi]", "2"]], " ", 
+                    SqrtBox[
+                    FractionBox["1", "n"]]}], "+", 
+                   RowBox[{
+                    FractionBox["1", "144"], " ", 
+                    SqrtBox[
+                    FractionBox["\[Pi]", "2"]], " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"3", "/", "2"}]]}], "-", 
+                   FractionBox[
+                    RowBox[{"139", " ", 
+                    SqrtBox[
+                    FractionBox["\[Pi]", "2"]], " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"5", "/", "2"}]]}], "25920"], "-", 
+                   FractionBox[
+                    RowBox[{"571", " ", 
+                    SqrtBox[
+                    FractionBox["\[Pi]", "2"]], " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"7", "/", "2"}]]}], "1244160"], "+", 
+                   FractionBox[
+                    RowBox[{"163879", " ", 
+                    SqrtBox[
+                    FractionBox["\[Pi]", "2"]], " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"9", "/", "2"}]]}], "104509440"], "+", 
+                   InterpretationBox[
+                    RowBox[{"O", "(", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                    RowBox[{"11", "/", "2"}]], ")"}], 
+                    SeriesData[$CellContext`n, 
+                    DirectedInfinity[1], {}, -1, 11, 2], Editable -> False]}], 
+                 SeriesData[$CellContext`n, 
+                  DirectedInfinity[
+                  1], {(2 Pi)^Rational[1, 2], 0, 
+                   Rational[1, 6] (Rational[1, 2] Pi)^Rational[1, 2], 0, 
+                   Rational[1, 144] (Rational[1, 2] Pi)^Rational[1, 2], 0, 
+                   Rational[-139, 25920] (Rational[1, 2] Pi)^Rational[1, 2], 
+                   0, Rational[-571, 1244160] (Rational[1, 2] Pi)^
+                    Rational[1, 2], 0, 
+                   Rational[163879, 104509440] (Rational[1, 2] Pi)^
+                    Rational[1, 2]}, -1, 11, 2], Editable -> False], ")"}], 
+              " ", 
+              RowBox[{"exp", "(", 
+                InterpretationBox[
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], "-", "2"}], ")"}], " ", 
+                    "n"}], "+", 
+                   InterpretationBox[
+                    RowBox[{"O", "(", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], "6"], ")"}], 
+                    SeriesData[$CellContext`n, 
+                    DirectedInfinity[1], {}, -1, 6, 1], Editable -> False]}], 
+                 
+                 SeriesData[$CellContext`n, 
+                  DirectedInfinity[1], {-2 - Log[$CellContext`n^(-1)]}, -1, 6,
+                   1], Editable -> False], ")"}]}], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement["dataformats", {}, {"plaintext,minput,moutput"}]}], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More terms", "input" -> 
+         "SeriesExpansionAtX=x0__More terms"}, {}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement["info", {"text" -> "log(x) is the natural logarithm"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Log.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ElementaryFunctions/Log", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/NaturalLogarithm.html", 
+           "text" -> "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"log", "(", "x", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the natural logarithm\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`aux2$$ = {
+   True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "2", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "1.032", 
+    "parsetiming" -> "0.45", "parsetimedout" -> "false", "recalculate" -> "", 
+    "id" -> "MSPa94321a0i682964d52a0i0000357dcgh932cgieh2", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "44", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa94331a0i682964d52a0i000058f0a3806bga3240&s=44", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 13, 58, 0.287554`6.211294402359027}, "Line" -> 27,
+     "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1, 2}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf n! / e^n"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$}, {Typeset`aux1$$, Typeset`aux2$$}, 
+        Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, Typeset`q$$, 
+        Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+        Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+        Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {152., 158.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$, Typeset`pod2$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.5418598803715963`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["lim n->inf e^n / (n*2^n)", "WolframAlphaLong",
+ CellChangeTimes->{{3.5418598822372017`*^9, 3.54185990633523*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf e^n / (n*2^n)", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[E^n/(n 2^n), n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SuperscriptBox["\[ExponentialE]", "n"], 
+                  RowBox[{"n", " ", 
+                    SuperscriptBox["2", "n"]}]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "0.81", 
+    "parsetiming" -> "0.509", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa66401a0i66h2a8a9i7bh00002b129adafbg05hg7", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "59", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa66411a0i66h2a8a9i7bh0000414g68a31f8h8072&s=59", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 13, 58, 27.711408`8.195233574380294}, "Line" -> 
+    29, "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf e^n / (n*2^n)"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$}, {Typeset`aux1$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {52., 57.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.541859907718603*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["lim n->inf (n*2^n) / 2^n", "WolframAlphaLong",
+ CellChangeTimes->{{3.541859913328657*^9, 3.541859921632408*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf (n*2^n) / 2^n", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[(n 2^n)/2^n, n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  RowBox[{"n", " ", 
+                    SuperscriptBox["2", "n"]}], 
+                  SuperscriptBox["2", "n"]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Series expansion at n=\[Infinity]", "scanner" -> 
+     "Series", "id" -> "SeriesExpansionAtX=x0", "position" -> "200", "error" -> 
+     "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Series[n, {n, Infinity, 5}]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             InterpretationBox[
+              RowBox[{"n", "+", 
+                InterpretationBox[
+                 RowBox[{"O", "(", 
+                   SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], "6"], ")"}], 
+                 SeriesData[$CellContext`n, 
+                  DirectedInfinity[1], {}, -1, 6, 1], Editable -> False]}], 
+              SeriesData[$CellContext`n, 
+               DirectedInfinity[1], {1}, -1, 6, 1], Editable -> False], 
+             Identity], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More terms", "input" -> 
+         "SeriesExpansionAtX=x0__More terms"}, {}]}]}], Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`asyncpods$$ = {}, Typeset`nonpods$$ = {}, Typeset`initdone$$ = 
+   True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "2", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "0.787", 
+    "parsetiming" -> "0.493", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa72081a0i688858f4ch6a00001a3idg8e209egbhe", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "43", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa72091a0i688858f4ch6a000055g0e7bb555hga1f&s=43", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 13, 58, 43.452795`8.390592694097434}, "Line" -> 
+    30, "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1, 2}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf (n*2^n) / 2^n"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$}, {Typeset`aux1$$, Typeset`aux2$$}, 
+        Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, Typeset`q$$, 
+        Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+        Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+        Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {90., 96.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$, Typeset`pod2$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.54185992351184*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["lim n->inf (2^n) / (3/2)^n", "WolframAlphaLong",
+ CellChangeTimes->{{3.541859925280212*^9, 3.5418599375754433`*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf (2^n) / (3/2)^n", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[2^n/(3/2)^n, n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SuperscriptBox["2", "n"], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    FractionBox["3", "2"], ")"}], "n"]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "0.713", 
+    "parsetiming" -> "0.452", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa3471a0i6d341g80gaf40000152bi7035f74265e", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "40", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa3481a0i6d341g80gaf4000019g0g1eb6896ei0f&s=40", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 13, 59, 0.825301`6.66918736049518}, "Line" -> 31, 
+    "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf (2^n) / (3/2)^n"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$}, {Typeset`aux1$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {57., 63.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.5418599408698874`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+lim n->inf (3/2)^n / (n^(log(log(n))))\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.5418599423030643`*^9, 3.54185996158626*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf (3/2)^n / (n^(log(log(n))))", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {"Limit[(3/2)^n/n^Log[Log[n]], n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    FractionBox["3", "2"], ")"}], "n"], 
+                  SuperscriptBox["n", 
+                   RowBox[{"log", "(", 
+                    RowBox[{"log", "(", "n", ")"}], ")"}]]]}], "\[LongEqual]",
+                "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement["info", {"text" -> "log(x) is the natural logarithm"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Log.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ElementaryFunctions/Log", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/NaturalLogarithm.html", 
+           "text" -> "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"log", "(", "x", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the natural logarithm\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {
+    XMLElement["assumptions", {"count" -> "1"}, {
+      XMLElement[
+      "assumption", {
+       "type" -> "Function", "word" -> "log", "template" -> 
+        "Assuming \"${word}\" is ${desc1}. Use ${desc2} instead", "count" -> 
+        "2"}, {
+        XMLElement[
+        "value", {
+         "name" -> "Log", "desc" -> "the natural logarithm", "input" -> 
+          "*FunClash.log-_*Log.Log10-"}, {}], 
+        XMLElement[
+        "value", {
+         "name" -> "Log10", "desc" -> "the base 10 logarithm", "input" -> 
+          "*FunClash.log-_*Log10.Log-"}, {}]}]}]}, Typeset`initdone$$ = True, 
+   Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "1.024", 
+    "parsetiming" -> "0.708", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa67881a0i674big0050i4000033fhbh3240dd77d6", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "45", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa67891a0i674big0050i40000300i7fg4g83cib7d&s=45", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 13, 59, 23.647626`8.126362531053465}, "Line" -> 
+    32, "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf (3/2)^n / (n^(log(log(n))))"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$}, {Typeset`aux1$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {93., 99.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.54185996370396*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+lim n->inf (n^(log(log(n))) / (log(n))!\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.541859977314389*^9, 3.54185998912136*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf (n^(log(log(n))) / (log(n))!", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {"Limit[n^Log[Log[n]]/Log[n]!, n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SuperscriptBox["n", 
+                   RowBox[{"log", "(", 
+                    RowBox[{"log", "(", "n", ")"}], ")"}]], 
+                  RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "!"}]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}], 
+     XMLElement["infos", {"count" -> "2"}, {
+       XMLElement["info", {"text" -> "log(x) is the natural logarithm"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Log.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ElementaryFunctions/Log", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/NaturalLogarithm.html", 
+           "text" -> "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"log", "(", "x", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the natural logarithm\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}], 
+       XMLElement["info", {"text" -> "n! is the factorial function"}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://reference.wolfram.com/mathematica/ref/Factorial.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/GammaBetaErf/Factorial", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/Factorial.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"n", "!"}], FontFamily -> "Bitstream Charter", 
+                   Bold, 14, StripOnInput -> False], 
+                  "\"is the factorial function\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Series expansion at n=\[Infinity]", "scanner" -> 
+     "Series", "id" -> "SeriesExpansionAtX=x0", "position" -> "200", "error" -> 
+     "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {"Series[n^Log[Log[n]]/Log[n]!, {n, Infinity, 5}]"}], 
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            RowBox[{
+              RowBox[{"(", 
+                InterpretationBox[
+                 RowBox[{
+                   FractionBox["1", 
+                    SqrtBox[
+                    RowBox[{"2", " ", "\[Pi]"}]]], "+", 
+                   InterpretationBox[
+                    RowBox[{"O", "(", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], "6"], ")"}], 
+                    SeriesData[$CellContext`n, 
+                    DirectedInfinity[1], {}, 0, 6, 1], Editable -> False]}], 
+                 SeriesData[$CellContext`n, 
+                  DirectedInfinity[1], {(2 Pi)^Rational[-1, 2]}, 0, 6, 1], 
+                 Editable -> False], ")"}], " ", 
+              RowBox[{"exp", "(", 
+                InterpretationBox[
+                 RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"-", 
+                    RowBox[{"log", "(", 
+                    RowBox[{"-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}]}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}], "-", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FractionBox["1", "2"], "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}]}], "-", 
+                    FractionBox["1", 
+                    RowBox[{"12", " ", 
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}]}]], "+", 
+                    FractionBox["1", 
+                    RowBox[{"360", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "3"]}]], "-", 
+                    FractionBox["1", 
+                    RowBox[{"1260", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "5"]}]], "+", 
+                    FractionBox["1", 
+                    RowBox[{"1680", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "7"]}]], "-", 
+                    FractionBox["1", 
+                    RowBox[{"1188", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "9"]}]], "+", 
+                    FractionBox["691", 
+                    RowBox[{"360360", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "11"]}]], "+", 
+                    "1"}], ")"}], "+", 
+                   InterpretationBox[
+                    RowBox[{"O", "(", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], "6"], ")"}], 
+                    SeriesData[$CellContext`n, 
+                    DirectedInfinity[1], {}, 0, 6, 1], Editable -> False]}], 
+                 SeriesData[$CellContext`n, 
+                  DirectedInfinity[1], {
+                  1 + Rational[
+                    691, 360360] (1 - Log[$CellContext`n^(-1)])^(-11) + 
+                   Rational[-1, 1188] (1 - Log[$CellContext`n^(-1)])^(-9) + 
+                   Rational[1, 1680] (1 - Log[$CellContext`n^(-1)])^(-7) + 
+                   Rational[-1, 1260] (1 - Log[$CellContext`n^(-1)])^(-5) + 
+                   Rational[1, 360] (1 - Log[$CellContext`n^(-1)])^(-3) + 
+                   Rational[-1, 12]/(1 - Log[$CellContext`n^(-1)]) - 
+                   Log[$CellContext`n^(-1)] - (Rational[1, 2] - 
+                    Log[$CellContext`n^(-1)]) 
+                   Log[1 - Log[$CellContext`n^(-1)]] - 
+                   Log[$CellContext`n^(-1)] Log[-Log[$CellContext`n^(-1)]]}, 
+                  0, 6, 1], Editable -> False], ")"}]}], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement["dataformats", {}, {"plaintext,minput,moutput"}]}], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More terms", "input" -> 
+         "SeriesExpansionAtX=x0__More terms"}, {}]}]}], Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`asyncpods$$ = {}, Typeset`nonpods$$ = {
+    XMLElement["assumptions", {"count" -> "1"}, {
+      XMLElement[
+      "assumption", {
+       "type" -> "Function", "word" -> "log", "template" -> 
+        "Assuming \"${word}\" is ${desc1}. Use ${desc2} instead", "count" -> 
+        "2"}, {
+        XMLElement[
+        "value", {
+         "name" -> "Log", "desc" -> "the natural logarithm", "input" -> 
+          "*FunClash.log-_*Log.Log10-"}, {}], 
+        XMLElement[
+        "value", {
+         "name" -> "Log10", "desc" -> "the base 10 logarithm", "input" -> 
+          "*FunClash.log-_*Log10.Log-"}, {}]}]}], 
+    XMLElement["warnings", {"count" -> "1"}, {
+      XMLElement[
+      "delimiters", {
+       "text" -> "An attempt was made to fix mismatched delimiters"}, {}]}]}, 
+   Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "2", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "2.347", 
+    "parsetiming" -> "1.171", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa28071a0i6b48eih1d45500002f06585fhf62345b", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "35", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa28081a0i6b48eih1d45500004c03f340fi6f1c8h&s=35", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 13, 59, 52.13503`8.469704602759375}, "Line" -> 33,
+     "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1, 2}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf (n^(log(log(n))) / (log(n))!"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$}, {Typeset`aux1$$, Typeset`aux2$$}, 
+        Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, Typeset`q$$, 
+        Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+        Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+        Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {257., 263.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$, Typeset`pod2$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.541859992222114*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["lim n->inf (log(n)!) / n^3", "WolframAlphaLong",
+ CellChangeTimes->{{3.541859995105585*^9, 3.5418600186196413`*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf (log(n)!) / n^3", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[Log[n]!/n^3, n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "!"}], 
+                  SuperscriptBox["n", "3"]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}], 
+     XMLElement["infos", {"count" -> "2"}, {
+       XMLElement["info", {"text" -> "log(x) is the natural logarithm"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Log.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ElementaryFunctions/Log", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/NaturalLogarithm.html", 
+           "text" -> "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"log", "(", "x", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the natural logarithm\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}], 
+       XMLElement["info", {"text" -> "n! is the factorial function"}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://reference.wolfram.com/mathematica/ref/Factorial.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/GammaBetaErf/Factorial", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/Factorial.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"n", "!"}], FontFamily -> "Bitstream Charter", 
+                   Bold, 14, StripOnInput -> False], 
+                  "\"is the factorial function\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Series expansion at n=\[Infinity]", "scanner" -> 
+     "Series", "id" -> "SeriesExpansionAtX=x0", "position" -> "200", "error" -> 
+     "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Series[Log[n]!/n^3, {n, Infinity, 5}]"}], 
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            RowBox[{
+              RowBox[{"(", 
+                InterpretationBox[
+                 RowBox[{
+                   FractionBox[
+                    SqrtBox[
+                    RowBox[{"2", " ", "\[Pi]"}]], 
+                    SuperscriptBox["n", "3"]], "+", 
+                   InterpretationBox[
+                    RowBox[{"O", "(", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], "6"], ")"}], 
+                    SeriesData[$CellContext`n, 
+                    DirectedInfinity[1], {}, 3, 6, 1], Editable -> False]}], 
+                 SeriesData[$CellContext`n, 
+                  DirectedInfinity[1], {(2 Pi)^Rational[1, 2]}, 3, 6, 1], 
+                 Editable -> False], ")"}], " ", 
+              RowBox[{"exp", "(", 
+                InterpretationBox[
+                 RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}], "+", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    FractionBox["1", "2"], "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}]}], "+", 
+                    FractionBox["1", 
+                    RowBox[{"12", " ", 
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}]}]], "-", 
+                    FractionBox["1", 
+                    RowBox[{"360", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "3"]}]], "+", 
+                    FractionBox["1", 
+                    RowBox[{"1260", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "5"]}]], "-", 
+                    FractionBox["1", 
+                    RowBox[{"1680", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "7"]}]], "+", 
+                    FractionBox["1", 
+                    RowBox[{"1188", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "9"]}]], "-", 
+                    FractionBox["691", 
+                    RowBox[{"360360", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"1", "-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}], "11"]}]], "-", 
+                    "1"}], ")"}], "+", 
+                   InterpretationBox[
+                    RowBox[{"O", "(", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], "6"], ")"}], 
+                    SeriesData[$CellContext`n, 
+                    DirectedInfinity[1], {}, 0, 6, 1], Editable -> False]}], 
+                 SeriesData[$CellContext`n, 
+                  DirectedInfinity[
+                  1], {-1 + 
+                   Rational[-691, 360360] (1 - 
+                    Log[$CellContext`n^(-1)])^(-11) + 
+                   Rational[1, 1188] (1 - Log[$CellContext`n^(-1)])^(-9) + 
+                   Rational[-1, 1680] (1 - Log[$CellContext`n^(-1)])^(-7) + 
+                   Rational[1, 1260] (1 - Log[$CellContext`n^(-1)])^(-5) + 
+                   Rational[-1, 360] (1 - Log[$CellContext`n^(-1)])^(-3) + 
+                   Rational[1, 12]/(1 - Log[$CellContext`n^(-1)]) + 
+                   Log[$CellContext`n^(-1)] + (Rational[1, 2] - 
+                    Log[$CellContext`n^(-1)]) 
+                    Log[1 - Log[$CellContext`n^(-1)]]}, 0, 6, 1], Editable -> 
+                 False], ")"}]}], TraditionalForm]], "Output"]}], 
+       XMLElement["dataformats", {}, {"plaintext,minput,moutput"}]}], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More terms", "input" -> 
+         "SeriesExpansionAtX=x0__More terms"}, {}]}]}], Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`asyncpods$$ = {}, Typeset`nonpods$$ = {
+    XMLElement["assumptions", {"count" -> "1"}, {
+      XMLElement[
+      "assumption", {
+       "type" -> "Function", "word" -> "log", "template" -> 
+        "Assuming \"${word}\" is ${desc1}. Use ${desc2} instead", "count" -> 
+        "2"}, {
+        XMLElement[
+        "value", {
+         "name" -> "Log", "desc" -> "the natural logarithm", "input" -> 
+          "*FunClash.log-_*Log.Log10-"}, {}], 
+        XMLElement[
+        "value", {
+         "name" -> "Log10", "desc" -> "the base 10 logarithm", "input" -> 
+          "*FunClash.log-_*Log10.Log-"}, {}]}]}]}, Typeset`initdone$$ = True, 
+   Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "2", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "1.533", 
+    "parsetiming" -> "0.475", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa14901a0i6c2d3ieedidh00003fcigbbbhe3b5egf", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "59", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa14911a0i6c2d3ieedidh00004e33abb9654cg30c&s=59", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 14, 0, 22.984153`8.114003487147215}, "Line" -> 34,
+     "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1, 2}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf (log(n)!) / n^3"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$}, {Typeset`aux1$$, Typeset`aux2$$}, 
+        Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, Typeset`q$$, 
+        Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+        Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+        Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {204., 209.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$, Typeset`pod2$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.5418600230743523`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["lim n->inf n^2 / (log(n!))", "WolframAlphaLong",
+ CellChangeTimes->{{3.541860089250287*^9, 3.541860106493306*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf n^2 / (log(n!))", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[n^2/Log[n!], n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SuperscriptBox["n", "2"], 
+                  RowBox[{"log", "(", 
+                    RowBox[{"n", "!"}], ")"}]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}], 
+     XMLElement["infos", {"count" -> "2"}, {
+       XMLElement["info", {"text" -> "n! is the factorial function"}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://reference.wolfram.com/mathematica/ref/Factorial.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/GammaBetaErf/Factorial", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/Factorial.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"n", "!"}], FontFamily -> "Bitstream Charter", 
+                   Bold, 14, StripOnInput -> False], 
+                  "\"is the factorial function\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}], 
+       XMLElement["info", {"text" -> "log(x) is the natural logarithm"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Log.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ElementaryFunctions/Log", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/NaturalLogarithm.html", 
+           "text" -> "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"log", "(", "x", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the natural logarithm\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Series expansion at n=\[Infinity]", "scanner" -> 
+     "Series", "id" -> "SeriesExpansionAtX=x0", "position" -> "200", "error" -> 
+     "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Series[n^2/Log[n!], {n, Infinity, 5}]"}], 
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            InterpretationBox[
+             RowBox[{
+               FractionBox["n", 
+                RowBox[{
+                  RowBox[{"log", "(", "n", ")"}], "-", "1"}]], "+", 
+               FractionBox[
+                RowBox[{
+                  RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}], "-", 
+                  RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}]}], 
+                RowBox[{"2", " ", 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                   "2"]}]], "+", 
+               FractionBox[
+                RowBox[{
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"4", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "2"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"4", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "2"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"2", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "2"]}]], "-", 
+                  FractionBox["1", 
+                   RowBox[{"12", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}]}]]}], 
+                RowBox[{"n", " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}]}]], "+", 
+               FractionBox[
+                RowBox[{
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"8", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"8", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"3", " ", 
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"8", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"3", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"8", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"12", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "2"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"12", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "2"]}]]}], 
+                RowBox[{
+                  SuperscriptBox["n", "2"], " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}]}]], "+", 
+               FractionBox[
+                RowBox[{
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "4"], "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"16", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "4"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"16", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"4", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"4", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"16", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"3", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"8", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"16", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"8", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "+", 
+                  FractionBox["1", 
+                   RowBox[{"360", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}]}]], "+", 
+                  FractionBox["1", 
+                   RowBox[{"144", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "2"]}]]}], 
+                RowBox[{
+                  SuperscriptBox["n", "3"], " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}]}]], "+", 
+               FractionBox[
+                RowBox[{
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "5"], "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"32", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "5"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"32", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "4"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"32", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "4"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"32", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"24", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"24", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"8", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"8", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"16", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"16", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"360", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "2"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"96", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"360", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "2"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"96", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]]}], 
+                RowBox[{
+                  SuperscriptBox["n", "4"], " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}]}]], "+", 
+               FractionBox[
+                RowBox[{
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "6"], "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"64", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "6"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "6"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"64", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "6"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"3", " ", 
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "5"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"32", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "6"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"3", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "5"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"32", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "6"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "4"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"192", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "4"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}]}], 
+                   RowBox[{"192", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"16", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "6"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"48", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "3"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"48", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"480", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"96", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "-", 
+                  FractionBox[
+                   RowBox[{"5", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"32", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "5"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"480", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "+", 
+                  FractionBox[
+                   RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], 
+                   RowBox[{"96", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"15", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "4"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"64", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "6"]}]], "+", 
+                  FractionBox[
+                   RowBox[{"15", " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "4"], "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{
+                    SuperscriptBox["log", "2"], "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"64", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "6"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"240", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]], "-", 
+                  FractionBox[
+                   RowBox[{
+                    RowBox[{"log", "(", 
+                    RowBox[{"2", " ", "\[Pi]"}], ")"}], " ", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], 
+                   RowBox[{"48", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "4"]}]], "-", 
+                  FractionBox["1", 
+                   RowBox[{"1260", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}]}]], "-", 
+                  FractionBox["1", 
+                   RowBox[{"2160", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "2"]}]], "-", 
+                  FractionBox["1", 
+                   RowBox[{"1728", " ", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}], 
+                    "3"]}]]}], 
+                RowBox[{
+                  SuperscriptBox["n", "5"], " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"log", "(", "n", ")"}], "-", "1"}], ")"}]}]], "+", 
+               InterpretationBox[
+                RowBox[{"O", "(", 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], 
+                   RowBox[{"11", "/", "2"}]], ")"}], 
+                SeriesData[Global`n, 
+                 DirectedInfinity[1], {}, -2, 11, 2], Editable -> False]}], 
+             SeriesData[Global`n, 
+              DirectedInfinity[
+              1], {(-1 + Log[Global`n])^(-1), 0, 
+               Rational[1, 2] (-1 + Log[Global`n])^(-2) (Log[Global`n^(-1)] - 
+                Log[2 Pi]), 
+               0, (-1 + Log[Global`n])^(-1) (
+                Rational[1, 4] Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-2) + 
+                Rational[-1, 12]/(-1 + Log[Global`n]) + 
+                Rational[-1, 2] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-2) 
+                 Log[2 Pi] + 
+                Rational[1, 4] (-1 + Log[Global`n])^(-2) Log[2 Pi]^2), 
+               0, (-1 + Log[Global`n])^(-1) (
+                Rational[1, 8] Log[Global`n^(-1)]^3 (-1 + Log[Global`n])^(-3) + 
+                Rational[-1, 12] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-2) + 
+                Rational[-3, 8] 
+                 Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-3) Log[2 Pi] + 
+                Rational[1, 12] (-1 + Log[Global`n])^(-2) Log[2 Pi] + 
+                Rational[3, 8] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-3) 
+                 Log[2 Pi]^2 + 
+                Rational[-1, 8] (-1 + Log[Global`n])^(-3) Log[2 Pi]^3), 
+               0, (-1 + Log[Global`n])^(-1) (
+                Rational[1, 16] 
+                 Log[Global`n^(-1)]^4 (-1 + Log[Global`n])^(-4) + 
+                Rational[-1, 16] 
+                 Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-3) + 
+                Rational[1, 144] (-1 + Log[Global`n])^(-2) + 
+                Rational[1, 360]/(-1 + Log[Global`n]) + 
+                Rational[-1, 4] 
+                 Log[Global`n^(-1)]^3 (-1 + Log[Global`n])^(-4) Log[2 Pi] + 
+                Rational[1, 8] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-3) 
+                 Log[2 Pi] + 
+                Rational[3, 8] Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-4) 
+                 Log[2 Pi]^2 + 
+                Rational[-1, 16] (-1 + Log[Global`n])^(-3) Log[2 Pi]^2 + 
+                Rational[-1, 4] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-4) 
+                 Log[2 Pi]^3 + 
+                Rational[1, 16] (-1 + Log[Global`n])^(-4) Log[2 Pi]^4), 
+               0, (-1 + Log[Global`n])^(-1) (
+                Rational[1, 32] 
+                 Log[Global`n^(-1)]^5 (-1 + Log[Global`n])^(-5) + 
+                Rational[-1, 24] 
+                 Log[Global`n^(-1)]^3 (-1 + Log[Global`n])^(-4) + 
+                Rational[1, 96] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-3) + 
+                Rational[1, 360] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-2) + 
+                Rational[-5, 32] 
+                 Log[Global`n^(-1)]^4 (-1 + Log[Global`n])^(-5) Log[2 Pi] + 
+                Rational[1, 8] Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-4) 
+                 Log[2 Pi] + 
+                Rational[-1, 96] (-1 + Log[Global`n])^(-3) Log[2 Pi] + 
+                Rational[-1, 360] (-1 + Log[Global`n])^(-2) Log[2 Pi] + 
+                Rational[5, 16] 
+                 Log[Global`n^(-1)]^3 (-1 + Log[Global`n])^(-5) Log[2 Pi]^2 + 
+                Rational[-1, 8] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-4) 
+                 Log[2 Pi]^2 + 
+                Rational[-5, 16] 
+                 Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-5) Log[2 Pi]^3 + 
+                Rational[1, 24] (-1 + Log[Global`n])^(-4) Log[2 Pi]^3 + 
+                Rational[5, 32] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-5) 
+                 Log[2 Pi]^4 + 
+                Rational[-1, 32] (-1 + Log[Global`n])^(-5) Log[2 Pi]^5), 
+               0, (-1 + Log[Global`n])^(-1) (
+                Rational[1, 64] 
+                 Log[Global`n^(-1)]^6 (-1 + Log[Global`n])^(-6) + 
+                Rational[-5, 192] 
+                 Log[Global`n^(-1)]^4 (-1 + Log[Global`n])^(-5) + 
+                Rational[1, 96] 
+                 Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-4) + 
+                Rational[-1, 1728] (-1 + Log[Global`n])^(-3) + 
+                Rational[1, 480] 
+                 Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-3) + 
+                Rational[-1, 2160] (-1 + Log[Global`n])^(-2) + 
+                Rational[-1, 1260]/(-1 + Log[Global`n]) + 
+                Rational[-3, 32] 
+                 Log[Global`n^(-1)]^5 (-1 + Log[Global`n])^(-6) Log[2 Pi] + 
+                Rational[5, 48] 
+                 Log[Global`n^(-1)]^3 (-1 + Log[Global`n])^(-5) Log[2 Pi] + 
+                Rational[-1, 48] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-4) 
+                 Log[2 Pi] + 
+                Rational[-1, 240] 
+                 Log[Global`n^(-1)] (-1 + Log[Global`n])^(-3) Log[2 Pi] + 
+                Rational[15, 64] 
+                 Log[Global`n^(-1)]^4 (-1 + Log[Global`n])^(-6) Log[2 Pi]^2 + 
+                Rational[-5, 32] 
+                 Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-5) Log[2 Pi]^2 + 
+                Rational[1, 96] (-1 + Log[Global`n])^(-4) Log[2 Pi]^2 + 
+                Rational[1, 480] (-1 + Log[Global`n])^(-3) Log[2 Pi]^2 + 
+                Rational[-5, 16] 
+                 Log[Global`n^(-1)]^3 (-1 + Log[Global`n])^(-6) Log[2 Pi]^3 + 
+                Rational[5, 48] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-5) 
+                 Log[2 Pi]^3 + 
+                Rational[15, 64] 
+                 Log[Global`n^(-1)]^2 (-1 + Log[Global`n])^(-6) Log[2 Pi]^4 + 
+                Rational[-5, 192] (-1 + Log[Global`n])^(-5) Log[2 Pi]^4 + 
+                Rational[-3, 32] Log[Global`n^(-1)] (-1 + Log[Global`n])^(-6) 
+                 Log[2 Pi]^5 + 
+                Rational[1, 64] (-1 + Log[Global`n])^(-6) Log[2 Pi]^6)}, -2, 
+              11, 2], Editable -> False], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More terms", "input" -> 
+         "SeriesExpansionAtX=x0__More terms"}, {}]}]}], Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`asyncpods$$ = {}, Typeset`nonpods$$ = {
+    XMLElement["assumptions", {"count" -> "1"}, {
+      XMLElement[
+      "assumption", {
+       "type" -> "Function", "word" -> "log", "template" -> 
+        "Assuming \"${word}\" is ${desc1}. Use ${desc2} instead", "count" -> 
+        "2"}, {
+        XMLElement[
+        "value", {
+         "name" -> "Log", "desc" -> "the natural logarithm", "input" -> 
+          "*FunClash.log-_*Log.Log10-"}, {}], 
+        XMLElement[
+        "value", {
+         "name" -> "Log10", "desc" -> "the base 10 logarithm", "input" -> 
+          "*FunClash.log-_*Log10.Log-"}, {}]}]}]}, Typeset`initdone$$ = True, 
+   Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "2", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "2.25", 
+    "parsetiming" -> "0.476", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa13781a0i6ca6ag8cf0be0000490818ebad28dbc5", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "38", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa13791a0i6ca6ag8cf0be0000181i6ddgda60g676&s=38", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 14, 1, 49.562607`8.447729118049862}, "Line" -> 35,
+     "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1, 2}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf n^2 / (log(n!))"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$}, {Typeset`aux1$$, Typeset`aux2$$}, 
+        Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, Typeset`q$$, 
+        Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+        Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+        Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {496., 502.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$, Typeset`pod2$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.541860109651167*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+lim n->inf (n^2) / (4^log base 2 of (n))\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.5418600977447243`*^9, 3.541860162106*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf (n^2) / (4^log base 2 of (n))", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[n^2/4^Log2[n], n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SuperscriptBox["n", "2"], 
+                  SuperscriptBox["4", 
+                   RowBox[{
+                    InterpretationBox[
+                    SubscriptBox["log", "2"], Log2, AutoDelete -> True], "(", 
+                    "n", ")"}]]]}], "\[LongEqual]", "1"}], HoldForm], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "0.873", 
+    "parsetiming" -> "0.58", "parsetimedout" -> "false", "recalculate" -> "", 
+    "id" -> "MSPa21581a0i6bb2250h36e200004c83ia6d87a950b3", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "10", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa21591a0i6bb2250h36e200000iee51f73dd262a2&s=10", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 14, 2, 43.434284`8.390407644136749}, "Line" -> 37,
+     "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf (n^2) / (4^log base 2 of (n))"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$}, {Typeset`aux1$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {54., 59.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.5418601634416237`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+lim n->inf (n log base 2 of (n)) / n\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.541860178930828*^9, 3.5418601910889683`*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "lim n->inf (n log base 2 of (n)) / n", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[(n Log2[n])/n, n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  RowBox[{"n", " ", 
+                    RowBox[{
+                    InterpretationBox[
+                    SubscriptBox["log", "2"], Log2, AutoDelete -> True], "(", 
+                    "n", ")"}]}], "n"]}], "\[LongEqual]", "\[Infinity]"}], 
+             HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "0.861", 
+    "parsetiming" -> "0.593", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa29741a0i6b1f6c15834h00002cc1i99fahecaa00", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "9", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa29751a0i6b1f6c15834h00001afa334ic1ah9512&s=9", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 14, 3, 17.191858`7.987897799868853}, "Line" -> 38,
+     "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf (n log base 2 of (n)) / n"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$}, {Typeset`aux1$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {52., 57.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.54186019719827*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+lim n->inf n / ((sqrt(2))^(log base 2 of (n))\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.541860202434434*^9, 3.541860234784017*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "lim n->inf n / ((sqrt(2))^(log base 2 of (n))", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Limit[n/Sqrt[2]^Log2[n], n -> Infinity]"}], 
+       
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox["n", 
+                  SuperscriptBox[
+                   SqrtBox["2"], 
+                   RowBox[{
+                    InterpretationBox[
+                    SubscriptBox["log", "2"], Log2, AutoDelete -> True], "(", 
+                    "n", ")"}]]]}], "\[LongEqual]", "\[Infinity]"}], 
+             HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {
+    XMLElement["warnings", {"count" -> "1"}, {
+      XMLElement[
+      "delimiters", {
+       "text" -> "An attempt was made to fix mismatched delimiters"}, {}]}]}, 
+   Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "1.325", 
+    "parsetiming" -> "1.095", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa43821a0i6a5ha6ga279100004f71b1g9feg23d66", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "49", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa43831a0i6a5ha6ga279100004a5529ib5b5633h6&s=49", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 14, 3, 59.775965`8.52910156899364}, "Line" -> 39, 
+    "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "lim n->inf n / ((sqrt(2))^(log base 2 of (n))"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$}, {Typeset`aux1$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {80., 86.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.541860239815968*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+lim n->inf ((sqrt(2))^(log base 2 of (n)) / (2^(sqrt(2 * log base 2 of (n)))\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.5418602440212307`*^9, 3.54186026827909*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "lim n->inf ((sqrt(2))^(log base 2 of (n)) / (2^(sqrt(2 * log base 2 of \
+(n)))", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "Limit[Sqrt[2]^Log2[n]/2^Sqrt[2 Log2[n]], n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SuperscriptBox[
+                   SqrtBox["2"], 
+                   RowBox[{
+                    InterpretationBox[
+                    SubscriptBox["log", "2"], Log2, AutoDelete -> True], "(", 
+                    "n", ")"}]], 
+                  SuperscriptBox["2", 
+                   SqrtBox[
+                    RowBox[{"2", " ", 
+                    RowBox[{
+                    InterpretationBox[
+                    SubscriptBox["log", "2"], Log2, AutoDelete -> True], "(", 
+                    "n", ")"}]}]]]]}], "\[LongEqual]", "\[Infinity]"}], 
+             HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {
+    XMLElement["warnings", {"count" -> "1"}, {
+      XMLElement[
+      "delimiters", {
+       "text" -> "An attempt was made to fix mismatched delimiters"}, {}]}]}, 
+   Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "2.194", 
+    "parsetiming" -> "1.718", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa24171a0i6ba02fdaa7a700001eb4hida7d33dc5c", "host" -> 
+    "http://www4b.wolframalpha.com", "server" -> "21", "related" -> 
+    "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa24181a0i6ba02fdaa7a7000044i8619fh3dfd6fi&s=21", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 14, 4, 31.350375`8.248817720750347}, "Line" -> 40,
+     "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = 
+   "lim n->inf ((sqrt(2))^(log base 2 of (n)) / (2^(sqrt(2 * log base 2 of \
+(n)))"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$}, {Typeset`aux1$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {85., 91.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.541860271399437*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+lim n->inf (log base 2 of (n))^(1/2) / (log(log(n))\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.541860279726913*^9, 3.541860303328631*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "lim n->inf (log base 2 of (n))^(1/2) / (log(log(n))", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Limit", "scanner" -> "Limit", "id" -> "Limit", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {"Limit[Log2[n]^(1/2)/Log[Log[n]], n -> Infinity]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 UnderscriptBox["lim", 
+                  RowBox[{"n", "\[Rule]", "\[Infinity]"}]], "\[ThinSpace]", 
+                 FractionBox[
+                  SqrtBox[
+                   RowBox[{
+                    InterpretationBox[
+                    SubscriptBox["log", "2"], Log2, AutoDelete -> True], "(", 
+                    "n", ")"}]], 
+                  RowBox[{"log", "(", 
+                    RowBox[{"log", "(", "n", ")"}], ")"}]]}], "\[LongEqual]", 
+               "\[Infinity]"}], HoldForm], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> "Limit__Show steps"}, {}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement["info", {"text" -> "log(x) is the natural logarithm"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Log.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ElementaryFunctions/Log", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/NaturalLogarithm.html", 
+           "text" -> "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"log", "(", "x", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the natural logarithm\""}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", "\" \""}], "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Series expansion at n=\[Infinity]", "scanner" -> 
+     "Series", "id" -> "SeriesExpansionAtX=x0", "position" -> "200", "error" -> 
+     "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "Series[Sqrt[Log[n]]/(Sqrt[Log[2]] Log[Log[n]]), {n, Infinity, 5}]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             InterpretationBox[
+              RowBox[{
+                FractionBox[
+                 SqrtBox[
+                  RowBox[{"-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}]], 
+                 RowBox[{
+                   SqrtBox[
+                    RowBox[{"log", "(", "2", ")"}]], " ", 
+                   RowBox[{"log", "(", 
+                    RowBox[{"-", 
+                    RowBox[{"log", "(", 
+                    FractionBox["1", "n"], ")"}]}], ")"}]}]], "+", 
+                InterpretationBox[
+                 RowBox[{"O", "(", 
+                   SuperscriptBox[
+                    RowBox[{"(", 
+                    FractionBox["1", "n"], ")"}], "6"], ")"}], 
+                 SeriesData[Global`n, 
+                  DirectedInfinity[1], {}, 0, 6, 1], Editable -> False]}], 
+              SeriesData[Global`n, 
+               DirectedInfinity[1], {
+               Log[2]^Rational[-1, 2] (-Log[Global`n^(-1)])^Rational[1, 2]/
+                Log[-Log[Global`n^(-1)]]}, 0, 6, 1], Editable -> False], 
+             Identity], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More terms", "input" -> 
+         "SeriesExpansionAtX=x0__More terms"}, {}]}]}], Typeset`pod3$$, 
+   Typeset`pod4$$, Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, 
+   Typeset`pod8$$, Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, 
+   Typeset`pod12$$, Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, 
+   Typeset`pod16$$, Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, 
+   Typeset`pod20$$, Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, 
+   Typeset`pod24$$, Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, 
+   Typeset`pod28$$, Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$, 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`aux2$$ = {
+   True, False, {False}, True}, Typeset`aux3$$ = {True, False, {False}, True},
+    Typeset`aux4$$ = {True, False, {False}, True}, Typeset`aux5$$ = {
+   True, False, {False}, True}, Typeset`aux6$$ = {True, False, {False}, True},
+    Typeset`aux7$$ = {True, False, {False}, True}, Typeset`aux8$$ = {
+   True, False, {False}, True}, Typeset`aux9$$ = {True, False, {False}, True},
+    Typeset`aux10$$ = {True, False, {False}, True}, Typeset`aux11$$ = {
+   True, False, {False}, True}, Typeset`aux12$$ = {
+   True, False, {False}, True}, Typeset`aux13$$ = {
+   True, False, {False}, True}, Typeset`aux14$$ = {
+   True, False, {False}, True}, Typeset`aux15$$ = {
+   True, False, {False}, True}, Typeset`aux16$$ = {
+   True, False, {False}, True}, Typeset`aux17$$ = {
+   True, False, {False}, True}, Typeset`aux18$$ = {
+   True, False, {False}, True}, Typeset`aux19$$ = {
+   True, False, {False}, True}, Typeset`aux20$$ = {
+   True, False, {False}, True}, Typeset`aux21$$ = {
+   True, False, {False}, True}, Typeset`aux22$$ = {
+   True, False, {False}, True}, Typeset`aux23$$ = {
+   True, False, {False}, True}, Typeset`aux24$$ = {
+   True, False, {False}, True}, Typeset`aux25$$ = {
+   True, False, {False}, True}, Typeset`aux26$$ = {
+   True, False, {False}, True}, Typeset`aux27$$ = {
+   True, False, {False}, True}, Typeset`aux28$$ = {
+   True, False, {False}, True}, Typeset`aux29$$ = {
+   True, False, {False}, True}, Typeset`aux30$$ = {
+   True, False, {False}, True}, Typeset`aux31$$ = {
+   True, False, {False}, True}, Typeset`asyncpods$$ = {}, Typeset`nonpods$$ = {
+    XMLElement["assumptions", {"count" -> "1"}, {
+      XMLElement[
+      "assumption", {
+       "type" -> "Function", "word" -> "log", "template" -> 
+        "Assuming \"${word}\" is ${desc1}. Use ${desc2} instead", "count" -> 
+        "2"}, {
+        XMLElement[
+        "value", {
+         "name" -> "Log", "desc" -> "the natural logarithm", "input" -> 
+          "*FunClash.log-_*Log.Log10-"}, {}], 
+        XMLElement[
+        "value", {
+         "name" -> "Log10", "desc" -> "the base 10 logarithm", "input" -> 
+          "*FunClash.log-_*Log10.Log-"}, {}]}]}], 
+    XMLElement["warnings", {"count" -> "1"}, {
+      XMLElement[
+      "delimiters", {
+       "text" -> "An attempt was made to fix mismatched delimiters"}, {}]}]}, 
+   Typeset`initdone$$ = True, 
+   Typeset`queryinfo$$ = {{
+    "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+     "", "timedout" -> "Series", "timedoutpods" -> "", "timing" -> "2.296", 
+     "parsetiming" -> "1.511", "parsetimedout" -> "false", "recalculate" -> 
+     "http://www4b.wolframalpha.com/api/v2/recalc.jsp?id=\
+MSPa3421a0i6dc1a2a49i59000037a9bd96g6gdi3b6&s=48", "id" -> 
+     "MSPa3431a0i6dc1a2a49i5900003g8a1ie0hc216hf1", "host" -> 
+     "http://www4b.wolframalpha.com", "server" -> "48", "related" -> 
+     "http://www4b.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa3441a0i6dc1a2a49i5900002707gfaa3hbb73i6&s=48", "version" -> "2.5"}, {
+    "success" -> "true", "error" -> "false", "numpods" -> "1", "datatypes" -> 
+     "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "1.526", 
+     "parsetiming" -> "0.", "parsetimedout" -> "false", "recalculate" -> "", 
+     "id" -> "", "host" -> "http://www4b.wolframalpha.com", "server" -> "48", 
+     "related" -> "", "version" -> "2.5"}}, Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 3, 27, 14, 5, 7.326427`7.617467213937877}, "Line" -> 41, 
+    "SessionID" -> 23207995606180470734}, Typeset`showpods$$ = {1, 2}, 
+   Typeset`failedpods$$ = {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 
+   17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31}, 
+   Typeset`chosen$$ = {}, Typeset`open$$ = False, Typeset`newq$$ = 
+   "lim n->inf (log base 2 of (n))^(1/2) / (log(log(n))"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+         Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+         Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+         Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+         Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+         Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+         Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+         Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+         Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+         Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+         Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+         Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+         Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+         Typeset`aux29$$, Typeset`aux30$$, Typeset`aux31$$}, Typeset`chosen$$,
+         Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {181., 187.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], AlphaIntegration`DoAsyncInitialization[
+       Hold[{
+        2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+          Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+          Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+          Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+          Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+          Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+          Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+          Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$}, {
+         Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+          Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+          Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+          Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+          Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+          Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+          Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+          Typeset`aux29$$, Typeset`aux30$$, Typeset`aux31$$}, 
+         Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, Typeset`q$$, 
+         Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+         Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+         Typeset`newq$$, 
+         "http://www4b.wolframalpha.com/api/v2/recalc.jsp?id=\
+MSPa3421a0i6dc1a2a49i59000037a9bd96g6gdi3b6&s=48", Typeset`asyncpods$$}]]; 
+     Typeset`asyncpods$$ = {}; Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.5418603074333763`*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.541860315883747*^9, 3.541860321033304*^9}}]
+},
+WindowSize->{740, 756},
+WindowMargins->{{60, Automatic}, {Automatic, 24}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 155, 3, 37, "WolframAlphaLong"],
+Cell[737, 27, 4092, 86, 182, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4866, 118, 134, 3, 37, "WolframAlphaLong"],
+Cell[5003, 123, 11485, 248, 258, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16525, 376, 120, 1, 37, "WolframAlphaLong"],
+Cell[16648, 379, 10874, 196, 138, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27559, 580, 113, 1, 37, "WolframAlphaLong"],
+Cell[27675, 583, 11867, 254, 320, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39579, 842, 119, 1, 37, "WolframAlphaLong"],
+Cell[39701, 845, 3783, 77, 119, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[43521, 927, 118, 1, 37, "WolframAlphaLong"],
+Cell[43642, 930, 5233, 110, 196, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48912, 1045, 122, 1, 37, "WolframAlphaLong"],
+Cell[49037, 1048, 3810, 78, 130, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[52884, 1131, 141, 3, 37, "WolframAlphaLong"],
+Cell[53028, 1136, 6264, 133, 202, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59329, 1274, 140, 3, 37, "WolframAlphaLong"],
+Cell[59472, 1279, 13785, 296, 530, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[73294, 1580, 122, 1, 37, "WolframAlphaLong"],
+Cell[73419, 1583, 13093, 280, 423, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[86549, 1868, 120, 1, 37, "WolframAlphaLong"],
+Cell[86672, 1871, 41389, 935, 1008, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[128098, 2811, 141, 3, 37, "WolframAlphaLong"],
+Cell[128242, 2816, 3924, 80, 123, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[132203, 2901, 140, 3, 37, "WolframAlphaLong"],
+Cell[132346, 2906, 3883, 79, 119, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[136266, 2990, 147, 3, 37, "WolframAlphaLong"],
+Cell[136416, 2995, 4111, 86, 176, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[140564, 3086, 179, 3, 37, "WolframAlphaLong"],
+Cell[140746, 3091, 4492, 97, 186, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[145275, 3193, 153, 3, 37, "WolframAlphaLong"],
+Cell[145431, 3198, 13797, 264, 378, "Print"]
+}, Open  ]],
+Cell[159243, 3465, 92, 1, 27, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -43,34 +43,6 @@ public class TFTPclient implements ITFTPclient
 	@Override
 	public void sendMessage(TFTPmessage message)
 	{
-		/*
-		// Create the byte array message content
-		byte[] codeBuffer = opcodeToByteArray(code);
-		char[] fileBuffer = fileName.toCharArray();
-		char[] modeBuffer = mode.getValue().toCharArray();
-		
-		// Create a dynamically sized byte buffer
-		int messageSize = codeBuffer.length + fileBuffer.length 
-				+ modeBuffer.length + 2;
-		byte[] rawData = new byte[messageSize];
-		
-		// Fill the byte array with the message contents
-		int offset = 0;
-		for (int i = 0; i < codeBuffer.length; i++)
-		{
-			rawData[offset++] = codeBuffer[i];
-		}
-		for (int i = 0; i < fileBuffer.length; i++)
-		{
-			rawData[offset++] = (byte)fileBuffer[i]; 
-		}
-		rawData[offset++] = MESSAGE_PAD;;
-		for (int i = 0; i < modeBuffer.length; i++)
-		{
-			rawData[offset++] = (byte)modeBuffer[i]; 
-		}
-		rawData[offset++] = MESSAGE_PAD;
-		
 		// Create and send the UDP packet  
 		InetAddress IPAddress = null;
 		try {
@@ -79,55 +51,75 @@ public class TFTPclient implements ITFTPclient
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DatagramPacket packet = new DatagramPacket(rawData, rawData.length, IPAddress, port);
-		System.out.print("Data sent: ");
-		for (int i = 0; i < rawData.length; i++)
-		{
-			System.out.print(rawData[i] + " ");
-		}
-		System.out.println();
+		DatagramPacket packet = new DatagramPacket(message.rawData(), message.rawData().length, IPAddress, port);
 		try {
 			clientSocket.send(packet);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
 	}
 
 	@Override
-	public TFTPmessage getMessage() throws TimeoutException 
+	public TFTPmessage getMessage() throws TimeoutException, MalformedMessageException 
 	{
-		return null;	
-		/*
-		// Now try to receive (just debugging the connection status now)
-		int messageSize = ITFTPmessage.MESSAGE_SIZE;
+		// Build a buffer to store the UDP message contents
+		int messageSize = TFTPmessage.MESSAGE_SIZE;
 		byte[] receiveData = new byte[messageSize];
 		DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-	    try {
+		
+	    try 
+	    {
+	    	// Try to receive a UDP packet
 			clientSocket.receive(receivePacket);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} 
+	    catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
+	    
+	    // debug
 	    System.out.print("Data received: ");
 	    for (int i = 0; i < receiveData.length; i++)
 		{
 			System.out.print(receiveData[i] + " " );
 		}
 	    
-	    int index = 0;
-	    for (index = OPCODE_SIZE + BLOCK_NUMBER_SIZE; index < receiveData.length; index++)
-	    {
-	    	if (receiveData[index] == 0)
-	    	{
-	    		break;
-	    	}
-	    }
+	    TFTPmessage message = buildMessage(receiveData);
+	    return message;
+	}
+	
+	private TFTPmessage buildMessage(byte[] data) throws MalformedMessageException
+	{
+		TFTPmessage message = null;
 		
-		// TODO Auto-generated method stub
-	    // TODO: change this plz...
-		return Arrays.copyOfRange(receiveData, 4, index);
-		*/
+		try
+		{
+			TFTPmessage.Opcode opcode = TFTPmessage.codes[(int)data[1]];
+			
+			// Create the appropriate packet
+			switch (opcode)
+			{
+				case ACK:
+					// TODO
+					break;
+				case DATA:
+					// TODO
+					break;
+				case ERROR:
+					// TODO
+					break;
+				default:
+					System.err.println("Invalid message type encounterd.");
+					throw new MalformedMessageException(host);
+			}
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			e.printStackTrace();
+			throw new MalformedMessageException(host);
+		}
+		
+		return message;
 	}
 }

@@ -22,5 +22,5 @@ public interface ITFTPclient
 	
 	public void sendMessage(TFTPmessage message);
 	
-	public TFTPmessage getMessage() throws TimeoutException;
+	public TFTPmessage getMessage() throws TimeoutException, MalformedMessageException;
 }

@@ -42,11 +42,17 @@ public class TFTPreader
 				e.printStackTrace();
 			}
 			//client.request(ITFTPclient.Opcode.RRQ, "testing123", ITFTPclient.TransferMode.NETASCII);
+			client.sendMessage(new RequestMessage("testing123", TFTPmessage.Opcode.RRQ, TFTPmessage.TransferMode.NETASCII));
 			try {
-				client.getMessage();
-			} catch (TimeoutException e) {
+				try {
+					TFTPmessage result = client.getMessage();
+				} catch (MalformedMessageException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (TimeoutException e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
 			// 1. verify valid machine/server name (else print another error - add error printing as a private static method)
 			// 2. connect to the TFTP server

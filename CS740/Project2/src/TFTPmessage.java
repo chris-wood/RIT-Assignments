@@ -10,13 +10,14 @@ public abstract class TFTPmessage
 	 * This enumeration defines the different opcodes (message types)
 	 * supported by the TFTP protocol.
 	 */
-	public static enum Opcode 
+	public static enum Opcode
 	{
 		RRQ(1), 
 		WRQ(2), 
 		DATA(3), 
 		ACK(4), 
-		ERROR(5);
+		ERROR(5),
+		INVALID(6);
 		
 		/**
 		 * The value associated with this opcode
@@ -32,6 +33,12 @@ public abstract class TFTPmessage
 		{
 			this.value = value;
 		}
+		
+		// TODO
+		private Opcode(byte value)
+		{
+			this.value = (int)value;
+		}
 
 		/**
 		 * Retrieve the opcode value.
@@ -43,6 +50,8 @@ public abstract class TFTPmessage
 			return value;
 		}
 	};
+	
+	public static final Opcode[] codes = {Opcode.RRQ, Opcode.WRQ, Opcode.DATA, Opcode.ACK, Opcode.ERROR};
 	
 	/**
 	 * This enumeration defines the different transfer modes supported
