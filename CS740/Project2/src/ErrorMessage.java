@@ -9,9 +9,14 @@ public class ErrorMessage extends TFTPmessage
 		errorNumber = number;
 		errorMessage = message;
 	}
+	
+	public ErrorMessage(byte[] packet)
+	{
+		// TODO
+	}
 
 	@Override
-	public byte[] buildMessageData() {
+	public byte[] rawData() {
 		// TODO Auto-generated method stub
 		return null;
 	}

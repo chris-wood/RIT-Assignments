@@ -9,13 +9,13 @@
 # For command line arguments
 import sys
 
-# Fixed fib value for when cmd line arguments are not provided
-UPPER_BOUND = 32
+# This is the smallest n that appears to make fib run slowly (n = 32).
+UPPER_BOUND = 31
 
 def fib(n):
 	""" Return the nth Fibonacci number.
 		
-		This algorithm follows the recurrence relation
+		This function follows the recurrence relation
 		defined in the homework assignment.
 	"""
 	if (n == 0):

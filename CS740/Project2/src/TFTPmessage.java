@@ -90,18 +90,22 @@ public abstract class TFTPmessage
 	
 	public static final int MESSAGE_SIZE = DATA_BLOCK_SIZE + OPCODE_SIZE + BLOCK_NUMBER_SIZE + 2; // at most 2 zeroes for padding
 	
-	public abstract byte[] buildMessageData();
+	public abstract byte[] rawData();
 	
-	public static byte[] opcodeToByteArray(Opcode code)
+	/**
+	 * TODO
+	 * 	
+	 * @param code
+	 * 
+	 * @return
+	 */
+	public byte[] intToByteArray(int val, int size)
 	{
-		/*
-		byte[] data = new byte[OPCODE_SIZE];
+		byte[] data = new byte[size];
 		for (int i = 0; i < data.length; i++)
 		{
-			data[i] = (byte)(code.getValue() >> (8 * (data.length - (i + 1))));
+			data[i] = (byte)(val >> (8 * (data.length - (i + 1))));
 		}
 		return data;
-		*/
-		return null;
 	}
 }

@@ -9,14 +9,17 @@
 # For command line arguments
 import sys
 
-# Fixed fib value for when cmd line arguments are not provided
-UPPER_BOUND = 32
+# This is the smallest n that made the previous fib function
+# run slowly - it does not have the same impact on fibIt.
+# In fact, I could not reach such a slow upper bound without 
+# exhausting the recursive call stack.
+UPPER_BOUND = 31
 
 def fibIt(n, a, b):
 	""" Compute the nth value of the recurrence relation, f.
 		
-		This implementation follows the recurrence relation
-		described in the homework assignment exactly.
+		This function follows the recurrence relation
+		described in the homework assignment.
 	"""
 	if (n == 0):
 		return a

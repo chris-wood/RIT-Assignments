@@ -9,9 +9,15 @@ public class DataMessage extends TFTPmessage
 		blockNumber = number;
 		this.data = data;
 	}
+	
+	public DataMessage(byte[] packet)
+	{
+		// TODO
+	}
 
 	@Override
-	public byte[] buildMessageData() {
+	public byte[] rawData() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
