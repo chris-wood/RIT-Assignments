@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  27 MAR 2012 16:25
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  27 MAR 2012 17:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -622,13 +622,13 @@ Package rerunfilecheck Info: File `caw4567-hw1.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 226.
  ) 
 Here is how much of TeX's memory you used:
- 9602 strings out of 493633
- 142833 string characters out of 3143378
+ 9604 strings out of 493633
+ 142849 string characters out of 3143378
  273913 words of memory out of 3000000
  12714 multiletter control sequences out of 15000+200000
- 11596 words of font info for 59 fonts, out of 3000000 for 9000
+ 11647 words of font info for 60 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 33i,6n,51p,408b,378s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,6n,51p,377b,378s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -639,7 +639,7 @@ sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
 cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loc
 al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local
 /texlive/2011/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on caw4567-hw1.pdf (4 pages, 97277 bytes).
+Output written on caw4567-hw1.pdf (4 pages, 97100 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  46 compressed objects within 1 object stream
