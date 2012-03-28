@@ -16,8 +16,7 @@ public abstract class TFTPmessage
 		WRQ(2), 
 		DATA(3), 
 		ACK(4), 
-		ERROR(5),
-		INVALID(6);
+		ERROR(5);
 		
 		/**
 		 * The value associated with this opcode
@@ -94,8 +93,10 @@ public abstract class TFTPmessage
 	public static final int DATA_BLOCK_SIZE = 512;
 	
 	public static final int OPCODE_SIZE = 2;
+	public static final int OPCODE_INDEX = 0;
 	
 	public static final int BLOCK_NUMBER_SIZE = 2;
+	public static final int BLOCK_NUMBER_INDEX = 2;
 	
 	public static final int MESSAGE_SIZE = DATA_BLOCK_SIZE + OPCODE_SIZE + BLOCK_NUMBER_SIZE + 2; // at most 2 zeroes for padding
 	

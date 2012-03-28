@@ -10,7 +10,7 @@ public class ErrorMessage extends TFTPmessage
 		errorMessage = message;
 	}
 	
-	public ErrorMessage(byte[] packet)
+	public ErrorMessage(byte[] packet, int size)
 	{
 		// TODO
 	}

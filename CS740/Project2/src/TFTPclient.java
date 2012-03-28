@@ -84,30 +84,36 @@ public class TFTPclient implements ITFTPclient
 		{
 			System.out.print(receiveData[i] + " " );
 		}
+	    System.out.println("");
 	    
-	    TFTPmessage message = buildMessage(receiveData);
+	    TFTPmessage message = buildMessage(receivePacket);
 	    return message;
 	}
 	
-	private TFTPmessage buildMessage(byte[] data) throws MalformedMessageException
+	private TFTPmessage buildMessage(DatagramPacket packet) throws MalformedMessageException
 	{
 		TFTPmessage message = null;
 		
 		try
 		{
-			TFTPmessage.Opcode opcode = TFTPmessage.codes[(int)data[1]];
+			System.out.println("TELL ME ALL THE THOINGS");
+			TFTPmessage.Opcode opcode = TFTPmessage.codes[(int)packet.getData()[1] - 1];
 			
 			// Create the appropriate packet
 			switch (opcode)
 			{
 				case ACK:
 					// TODO
+					System.out.println("got this!asdasd");
+					message = new AckMessage(packet.getData());
 					break;
 				case DATA:
-					// TODO
+					System.out.println("got this!");
+					message = new DataMessage(packet.getData(), packet.getLength());
 					break;
 				case ERROR:
 					// TODO
+					message = new ErrorMessage(packet.getData(), packet.getLength());
 					break;
 				default:
 					System.err.println("Invalid message type encounterd.");
