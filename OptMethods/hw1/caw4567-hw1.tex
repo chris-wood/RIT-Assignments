@@ -130,7 +130,6 @@ x_{1,1}, x_{1,2}, x_{1,3}, x_{2,1}, x_{2,2}, x_{2,3} \geq 0
 %0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \\
 %\end{bmatrix}\\
 % \end{eqnarray*}
-where $x_{3}$ and $x_{4}$ are slack variables introduced to transform constraint inequalities into equalities.
 \end{sol}
 
 \begin{prob}{3}
@@ -159,6 +158,7 @@ Now that each investment is accumulating revenue after every maturity, we can us
 %f(x_{1},x_{2}) = 2.5x_{1} + 3x_{2}
 f(x_{1}, x_{2}, x_{3}, x_{4}) = x_{1}(1.05)^{8} + x_{2}(1.07)^{4} + x_{3}(1.1)^{2} + x_{4}(1.15)
 \end{eqnarray*}
+Note that we could subtract the sum $\sum_{i=1}^{2}\sum_{j=1}^{3}x_{i,j}$ from this cost function to reflect only the amount of money that was gained in profit (that is, excluding our initial investment), but this would simply be a difference of a scalar that would not change the solution itself. Therefore, for simplicity, we keep this scalar value off the cost function.
 
 \textbf{Standard form:} \\
 Now, putting this linear programming problem into standard scalar form, we have the following definition, noting that all instances of $s$ are slack variables introduced to transform inequality constraints into equality constraints.  \\
