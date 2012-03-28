@@ -1,0 +1,226 @@
+\documentclass[11pt]{article}
+
+\usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype,
+	    graphicx, verbatim, listings, color, fancybox}
+\usepackage[pdftex]{hyperref}
+%\usepackage[margin=1in]{geometry}
+\usepackage{cawsty}
+\usepackage{fullpage}
+\usepackage{pseudocode}
+
+%\setlength{\parindent}{0pt}
+
+\linespread{1.2}
+
+\begin{document}
+\arltitle{4040-849 Optimization Methods}{Written Assignment 1}
+\begin{prob}{1}
+\end{prob}
+\begin{sol} 
+
+\textbf{Design variables:} \\ 
+The problem centers around the amount of mixed nuts in terms of pounds, especially since the cost of each mixed nut is given in terms of \$/pound. Therefore, we can define the design variables as the number of pounds of each type of mixed nut that are used to create the new mixed nut. More formally, we have the following: \\ \\
+%\begin{eqnarray*}
+$x_{1}$ = the number of pounds of mixed nut type $A$ \\
+$x_{2}$ = the number of pounds of mixed nut type $B$ \\
+%\end{eqnarray*}
+
+\textbf{Constraints:}  \\
+Since the new nut type is required to have at least 4 pounds of almonds, 5 pounds of cashew nuts, and 6 pounds of walnuts, with no constraint on the number of pounds of peanuts, we can define the following size constraints using the $x_{1}$ and $x_{2}$ variables previously mentioned. 
+\begin{eqnarray*}
+0.2x_{1} + 0.1x_{2} \geq 4 \\
+0.1x_{1} + 0.2x_{2} \geq 5 \\
+0.15x_{1} + 0.25x_{2} \geq 6 
+\end{eqnarray*}
+
+\textbf{Cost function:} \\
+Finally, since the cost of the mixed nuts used to create the new mixed nut is given in terms of \$/pound, we can formalize the cost function as a linear function of the number of pounds $x_{1}$ and $x_{2}$, as shown below:
+\begin{eqnarray*}
+f(x_{1},x_{2}) = 2.5x_{1} + 3x_{2}
+\end{eqnarray*}
+
+\textbf{Standard form:} \\
+Now, putting this linear programming problem into standard scalar form, we have the following definition.  \\
+
+Minimize 
+\begin{eqnarray*}
+%f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+f(x_{1}, x_{2}) = 2.5x_{1} + 3x_{2}
+\end{eqnarray*}
+with constraints 
+\begin{eqnarray*}
+%\textbf{aX} = \textbf{b} \\
+%\textbf{X} \geq 0
+0.2x_{1} + 0.1x_{2} - x_{3} = 4 \\
+0.1x_{1} + 0.2x_{2} - x_{4} = 5 \\
+0.15x_{1} + 0.25x_{2} - x_{5} = 6 \\
+x_{1}, x_{2}, x_{3}, x_{4}, x_{5} \geq 0 
+\end{eqnarray*}
+%where
+%\begin{eqnarray*}
+%\textbf{X} = \begin{bmatrix}x \\y\\o' \\ o'' \\ o''' \end{bmatrix}, 
+%\textbf{c} = \begin{bmatrix}2.5 \\3.0\\ 0 \\ 0 \\ 0 \end{bmatrix}, 
+%\textbf{b} = \begin{bmatrix}4 \\5\\6\\ \end{bmatrix}, 
+%\textbf{a} = \begin{bmatrix}0.2 \ \  0.1\ \ -1 \ \ 0\ \ 0\\0.1 \ \ 0.2\ \ 0\ \ -1\ \ 0\\ 0.15 \  \ 0.25\ \ 0\ \ %0\ \ -1 \\\end{bmatrix}\\
+%\end{eqnarray*}
+where $x_{3}$, $x_{4}$, and $x_{5}$ are slack variables introduced to translate constraint inequalities to equalities.
+\end{sol}
+
+\begin{prob}{2}
+\end{prob}
+\begin{sol} 
+
+\textbf{Design variables:}\\ 
+The cost of shipping is directly related to the number of items shipped along each route. Hence, the design variables should collectively represent all of these numbers, as shown below: \\ \\
+%\begin{eqnarray*}
+$x_{1,1}$ = \#resources from New York to Seattle\\
+$x_{1,2}$ = \#resources from New York to Houston\\
+$x_{1,3}$ = \#resources from New York to Detroit \\
+$x_{2,1}$ = \#resources from Los Angeles to Seattle \\
+$x_{2,2}$ = \#resources from Los Angeles to Houston \\
+$x_{2,3}$ = \#resources from Los Angeles to Detroit \\
+%\end{eqnarray*}
+
+\textbf{Constraints:} \\
+Since there are $6$ equipment sets among the source cities and $6$ equipment sets needed by the destination cities, we can form the following constraints on the number of sets transferred across each route as follows:
+\begin{eqnarray*}
+x_{1,1} + x_{1,2} + x_{1,3} = 3 \\
+x_{2,1} + x_{2,2} + x_{2,3} = 3 \\
+x_{1,1} + x_{2,1} = 2 \\
+x_{1,2} + x_{2,2} = 3 \\
+x_{1,3} + x_{2,3} = 1 
+\end{eqnarray*}
+
+\textbf{Cost function:} \\
+Finally, since we seek to minimize the shipping cost, we simply add up the number of items sent along each routine to find the total cost (and subsequently, the objective function), as follows:
+\begin{eqnarray*}
+f(x_{1,1},x_{1,2},x_{1,3},x_{2,1},x_{2,2},x_{2,3}) = 4x_{1,1} + 3x_{1,2} + x_{1,3} + 2x_{2,1} + 7x_{2,2} + 5x_{2,3}
+\end{eqnarray*}
+
+\textbf{Standard form:} \\
+Now, putting this linear programming problem into standard scalar form, we have the following definition. \\
+
+Minimize 
+\begin{eqnarray*}
+%f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+f(x_{1,1},x_{1,2},x_{1,3},x_{2,1},x_{2,2},x_{2,3}) = 4x_{1,1} + 3x_{1,2} + x_{1,3} + 2x_{2,1} + 7x_{2,2} + 5x_{2,3}
+\end{eqnarray*}
+with constraints 
+\begin{eqnarray*}
+%\textbf{aX} = \textbf{b} \\
+%\textbf{X} \geq 0
+x_{1,1} + x_{1,2} + x_{1,3} = 3 \\
+x_{2,1} + x_{2,2} + x_{2,3} = 3 \\
+x_{1,1} + x_{2,1} = 2 \\
+x_{1,2} + x_{2,2} = 3 \\
+x_{1,3} + x_{2,3} = 1 \\
+x_{1,1}, x_{1,2}, x_{1,3}, x_{2,1}, x_{2,2}, x_{2,3} \geq 0 
+\end{eqnarray*}
+%where
+%\begin{eqnarray*}
+%\textbf{X} = \begin{bmatrix}x_{1,1} \\x_{1,2}\\x_{1,3} \\ x_{2,1} \\ x_{2,2} \\x_{2,3} \\ o' \\ o'' %\end{bmatrix}, 
+%\textbf{c} = \begin{bmatrix}4 \\3\\ 1 \\ 2 \\ 7 \\ 5 \\0 \\ 0 \end{bmatrix}, 
+%\textbf{b} = \begin{bmatrix}3 \\3\\2\\3\\1 \end{bmatrix}, 
+%\textbf{a} = 
+%\begin{bmatrix} 
+%1 \ \ 1 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \ \ 1 \ \ 1 \\
+%0 \ \ 0 \ \ 0 \ \ 1 \ \ 1 \ \ 1 \ \ 1 \ \ 1 \\
+%1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \ \ 0 \\
+%0 \ \ 1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 0 \\
+%0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \ \ 1 \ \ 0 \ \ 0 \\
+%\end{bmatrix}\\
+% \end{eqnarray*}
+where $x_{3}$ and $x_{4}$ are slack variables introduced to transform constraint inequalities into equalities.
+\end{sol}
+
+\begin{prob}{3}
+\end{prob}
+
+\begin{sol}
+
+\textbf{Design variables:} \\ 
+Since we are given a fixed amount of money to invest into four different cerficiates of deposits (CDs) in order to yield the maximum return at the end of the fourth year, we can define the design variables as the amount of money invested in each certificate of deposit, as described below.\\ \\ 
+%\begin{eqnarray*}
+$x_{1}$ = amount of money invested in CD type $1$ \\
+$x_{2}$ = amount of money invested in CD type $2$ \\
+$x_{3}$ = amount of money invested in CD type $3$ \\
+$x_{4}$ = amount of money invested in CD type $4$ \\
+%\end{eqnarray*}
+
+\textbf{Constraints:}  \\
+The only constraint on our problem is the amount of money we are allowed to invest at the beginning ($\$50,000$) before we start accumulating interest. Therefore, we have the following:
+\begin{eqnarray*}
+x_{1} + x_{2} + x_{3} + x_{4} \leq 50000
+\end{eqnarray*}
+
+\textbf{Cost function:} \\
+Now that each investment is accumulating revenue after every maturity, we can use the standard compound interest equation ($FV = PV(1+i)^{n}$) to represent the amount of revenue earned by each investment at the end of the fourth year. Then, if we sum together these values, we attain our cost function that can be maximized. This is shown below.
+\begin{eqnarray*}
+%f(x_{1},x_{2}) = 2.5x_{1} + 3x_{2}
+f(x_{1}, x_{2}, x_{3}, x_{4}) = x_{1}(1.05)^{8} + x_{2}(1.07)^{4} + x_{3}(1.1)^{2} + x_{4}(1.15)
+\end{eqnarray*}
+
+\textbf{Standard form:} \\
+Now, putting this linear programming problem into standard scalar form, we have the following definition, noting that all instances of $s$ are slack variables introduced to transform inequality constraints into equality constraints.  \\
+
+Minimize 
+\begin{eqnarray*}
+%f(\textbf{X}) = \textbf{c}^{T}\textbf{X}
+f'(x_{1}, x_{2}, x_{3}, x_{4}) = -f(x_{1}, x_{2}, x_{3}, x_{4}) = -(1.05)^{8}x_{1} -(1.07)^{4}x_{2} -(1.1)^{2}x_{3} -1.15x_{4}
+\end{eqnarray*}
+with constraints 
+\begin{eqnarray*}
+%\textbf{aX} = \textbf{b} \\
+%\textbf{X} \geq 0
+x_{1} + x_{2} + x_{3} + x_{4} + x_{5} = 50000 \\
+x_{1}, x_{2}, x_{3}, x_{4}, x_{5} \geq 0 
+\end{eqnarray*}
+where $x_{5}$ is a slack variable introduced to translate the constraint inequality to an equality.
+\end{sol}
+
+\begin{comment}
+\begin{sol}
+
+This problem can be classified as an optimal control problem with 9 total states (including an initial state where no money has been invested yet). Thus, the problem can be formulated with the following parameters.\\
+
+\textbf{Design variables:}\\ 
+%\begin{eqnarray*}
+$\textbf{X}_{i,j}$ = amount of money invested in CD type $j$ at state $i$ \\ \\
+%\end{eqnarray*}
+\textbf{State variables:} \\ 
+$y_{i,a}$ = amount of money available for investment at state $i$ \\
+$y_{i,c}$ = amount of money accumulated thus far at state $i$ \\
+
+\textbf{Constraints:} 
+\begin{eqnarray*}
+y_{0,a} = 50000 \\
+y_{0,c} = 0 \\
+y_{i,a} \geq 0 \\
+X_{i,1} + X_{i,2} + X_{i,3} + X_{1,4} \leq y_{i,a}
+\end{eqnarray*}
+
+\textbf{Cost function:}
+\begin{eqnarray*}
+f(\textbf{$X_{i,j}$}) = \sum_{i=0}^{8} y_{i,c} = \sum_{i=0}^{8}(0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4})
+\end{eqnarray*}
+
+\textbf{Standard form:} \\ 
+Now, putting this linear programming problem into standard scalar form yields the following definition.  \\
+
+Minimize 
+\begin{eqnarray*}
+f(\textbf{$X_{i,j}$}) = -\sum_{i=0}^{8} y_{i,c} = -(\sum_{i=0}^{8}(0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4}))
+\end{eqnarray*}
+with constraints 
+\begin{eqnarray*}
+X_{i,1} + X_{i,2} + X_{i,3} + X_{i,4} + X_{i,5} = y_{i,a} \\
+y_{0,a} = 50000 \\
+y_{0,c} = 0 \\
+y_{i,a} - y_{i, a'} =  0\\
+\textbf{$X_{i,j}$} \geq 0 
+\end{eqnarray*}
+Noting that $y_{i,a'}$ and $X_{i,5}$ are slack variables introduced to transform inequality constraints into equality constraints. 
+\end{sol}
+\end{comment}
+
+\end{document}

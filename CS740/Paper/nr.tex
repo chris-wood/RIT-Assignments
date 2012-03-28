@@ -1,15 +1,19 @@
-\documentclass[10pt,a4paper,onecolumn]{article}
-\usepackage[latin1]{inputenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{makeidx}
-\usepackage{graphicx}
-\author{Christopher A. Wood}
-\title{Trends in Network Robustness Research}
-\date{\today}
+\documentclass[11pt]{article}
+
+\usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype,
+	    graphicx, verbatim, listings, color, fancybox}
+\usepackage[pdftex]{hyperref}
+%\usepackage[margin=1in]{geometry}
+\usepackage{cawsty}
+\usepackage{fullpage}
+\usepackage{pseudocode}
+
+%\setlength{\parindent}{0pt}
+
+\linespread{1.2}
+
 \begin{document}
-\maketitle
+\arltitle{Trends in Network Robustness Research}{4005-700 Data Communication and Networks I}
 
 \begin{abstract}
 Due to the growing pervasiveness of civilian and 
@@ -58,13 +62,13 @@ network engineering that have been employed to help networks deal with topology 
 Lastly, it will discuss avenues for future research and open problems that have been posed by 
 researchers in the field.
 
-\section{Network Connectivity}
+\section{Definitions}
 
-It is natural to model any communication network as an undirected graph $G$, which has a fixed 
-set of vertices $V(G)$ and edges $E(G)$ that connect such vertices. The topology of a network
+It is natural to model a communication network as an undirected graph $G$, which has a fixed 
+set of vertices $V(G)$ and edges $E(G)$ that represent physical connections between such vertices. The topology of a network
 can thus be visualized graphically using elements from these two sets. For the remainder of this paper,
-we use the term vertex as a synonom for node and edge as a synonom for link. As an example of a graph representing a network, consider a completely connected network with $n$ nodes in which every node can directly communicate with every other 
-node can be seen as $K_{n}$, the complete graph on $n$ vertices. In such a network, every node $v$ can
+we use the term vertex as a synonom for node and edge as a synonom for communication link. As an example of a graph representing a network, consider a completely connected network with $n$ nodes in which every node can directly communicate with every other 
+node can be seen as $K_{n}$, the complete graph on $n$ vertices (that is, $|V(G)|$ $= n$). In such a network, every node $v$ can
 communicate with exactly $n-1$ other nodes, which means that its degree $deg(v) = n-1$. 
 
 In order to discuss the connectivity of networks, it is necessary to define the connectivity of such
@@ -73,6 +77,36 @@ graphs in terms of both the vertices and edges. TODO: pull definitions from grap
 TODO: finish definitions above
 
 TODO: continue with the idea of optimal connectivity among nodes
+
+\section{Network Robustness}
+%http://arxiv.org/pdf/1203.2982v1.pdf
+
+Many different measures for network robustness have been proposed in recent years. All of which tend
+to use the notion of densely connected components in the corresponding graph. In this section we present
+a two unique instances of such measurements, one of which is based entirely on node topology and the other that is based on both nodes and their respective edges, and summarize their accuracy when applied to real networks.
+
+\subsection{Node-based Measurement}
+A natural way to think of network robustness is from the perspective of individual nodes, since they are 
+usually the primary targets in malicious or non-malicious network attacks. Using this idea, (AUTHOR NAME) 
+defined a concise equation for calculating the robustness of a network based on the size of connected
+components in the corresponding graph. Mathematically, this can be defined as follows (CITE 24 HERE):
+
+\begin{eqnarray*}
+%TODO: verify that this is correct
+R_{n} = \frac{1}{n}\sum_{q=\frac{1}{n}}^{1}S(q)
+\end{eqnarray*}
+
+TODO: get details from this paper
+
+\subsection{Node- and Link-based Measurement}
+%TODO: http://arxiv.org/pdf/1203.2982v1.pdf
+
+\section{Network Traffic Load}
+%TODO: discuss the link load
+%TODO: discuss incidents that indicate this importance
+
+\subsection{Dynamic Load Balancing}
+%TODO: discuss this technique, with pictures? and examples?
 
 % Here is the bibliography
 \bibliographystyle{plain}
