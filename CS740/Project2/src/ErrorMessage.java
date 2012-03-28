@@ -16,7 +16,8 @@ public class ErrorMessage extends TFTPmessage
 	}
 
 	@Override
-	public byte[] rawData() {
+	public byte[] rawData() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -41,27 +41,31 @@ public class TFTPclient implements ITFTPclient
 	}
 	
 	@Override
-	public void sendMessage(TFTPmessage message)
+	public void sendMessage(TFTPmessage message) throws IOException, 
+		UnknownHostException
 	{
 		// Create and send the UDP packet  
 		InetAddress IPAddress = null;
-		try {
-			IPAddress = InetAddress.getByName(host);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		IPAddress = InetAddress.getByName(host);
+		
+		// Send the message to the server
+		byte[] data = message.rawData();
+		
+		// debug
+		System.out.print("Sending: ");
+		for (int i = 0; i < data.length; i++)
+		{
+			System.out.print(data[i] + " ");
 		}
-		DatagramPacket packet = new DatagramPacket(message.rawData(), message.rawData().length, IPAddress, port);
-		try {
-			clientSocket.send(packet);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println();
+		
+		DatagramPacket packet = new DatagramPacket(data, data.length, IPAddress, port);
+		clientSocket.send(packet);
 	}
 
 	@Override
-	public TFTPmessage getMessage() throws TimeoutException, MalformedMessageException 
+	public TFTPmessage getMessage() throws TimeoutException, 
+		MalformedMessageException 
 	{
 		// Build a buffer to store the UDP message contents
 		int messageSize = TFTPmessage.MESSAGE_SIZE;

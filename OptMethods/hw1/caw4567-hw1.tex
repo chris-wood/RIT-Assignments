@@ -63,7 +63,7 @@ x_{1}, x_{2}, x_{3}, x_{4}, x_{5} \geq 0
 %\textbf{b} = \begin{bmatrix}4 \\5\\6\\ \end{bmatrix}, 
 %\textbf{a} = \begin{bmatrix}0.2 \ \  0.1\ \ -1 \ \ 0\ \ 0\\0.1 \ \ 0.2\ \ 0\ \ -1\ \ 0\\ 0.15 \  \ 0.25\ \ 0\ \ %0\ \ -1 \\\end{bmatrix}\\
 %\end{eqnarray*}
-where $x_{3}$, $x_{4}$, and $x_{5}$ are slack variables introduced to translate constraint inequalities to equalities.
+where $x_{3}$, $x_{4}$, and $x_{5}$ are slack (surplus) variables introduced to translate constraint inequalities to equalities.
 \end{sol}
 
 \begin{prob}{2}
@@ -158,10 +158,10 @@ Now that each investment is accumulating revenue after every maturity, we can us
 %f(x_{1},x_{2}) = 2.5x_{1} + 3x_{2}
 f(x_{1}, x_{2}, x_{3}, x_{4}) = x_{1}(1.05)^{8} + x_{2}(1.07)^{4} + x_{3}(1.1)^{2} + x_{4}(1.15)
 \end{eqnarray*}
-Note that we could subtract the sum $\sum_{i=1}^{2}\sum_{j=1}^{3}x_{i,j}$ from this cost function to reflect only the amount of money that was gained in profit (that is, excluding our initial investment), but this would simply be a difference of a scalar that would not change the solution itself. Therefore, for simplicity, we keep this scalar value off the cost function.
+Note that we could subtract the sum $\sum_{i=1}^{2}\sum_{j=1}^{3}x_{i,j}$ from this cost function to reflect only the amount of money that was gained in profit (that is, excluding our initial investment), but this would simply be a difference of a scalar that would not change the solution itself. Therefore, for simplicity, we keep this scalar value off the cost function. \\
 
 \textbf{Standard form:} \\
-Now, putting this linear programming problem into standard scalar form, we have the following definition, noting that all instances of $s$ are slack variables introduced to transform inequality constraints into equality constraints.  \\
+Now, putting this linear programming problem into standard scalar form, we have the following definition.  \\
 
 Minimize 
 \begin{eqnarray*}
@@ -175,52 +175,7 @@ with constraints
 x_{1} + x_{2} + x_{3} + x_{4} + x_{5} = 50000 \\
 x_{1}, x_{2}, x_{3}, x_{4}, x_{5} \geq 0 
 \end{eqnarray*}
-where $x_{5}$ is a slack variable introduced to translate the constraint inequality to an equality.
+where $x_{5}$ is a slack (surplus) variable introduced to translate the constraint inequality to an equality.
 \end{sol}
-
-\begin{comment}
-\begin{sol}
-
-This problem can be classified as an optimal control problem with 9 total states (including an initial state where no money has been invested yet). Thus, the problem can be formulated with the following parameters.\\
-
-\textbf{Design variables:}\\ 
-%\begin{eqnarray*}
-$\textbf{X}_{i,j}$ = amount of money invested in CD type $j$ at state $i$ \\ \\
-%\end{eqnarray*}
-\textbf{State variables:} \\ 
-$y_{i,a}$ = amount of money available for investment at state $i$ \\
-$y_{i,c}$ = amount of money accumulated thus far at state $i$ \\
-
-\textbf{Constraints:} 
-\begin{eqnarray*}
-y_{0,a} = 50000 \\
-y_{0,c} = 0 \\
-y_{i,a} \geq 0 \\
-X_{i,1} + X_{i,2} + X_{i,3} + X_{1,4} \leq y_{i,a}
-\end{eqnarray*}
-
-\textbf{Cost function:}
-\begin{eqnarray*}
-f(\textbf{$X_{i,j}$}) = \sum_{i=0}^{8} y_{i,c} = \sum_{i=0}^{8}(0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4})
-\end{eqnarray*}
-
-\textbf{Standard form:} \\ 
-Now, putting this linear programming problem into standard scalar form yields the following definition.  \\
-
-Minimize 
-\begin{eqnarray*}
-f(\textbf{$X_{i,j}$}) = -\sum_{i=0}^{8} y_{i,c} = -(\sum_{i=0}^{8}(0.05X_{i-1,1} + 0.07X_{i-2,2} + 0.1X_{i-4,3} + 0.15X_{i-8,4}))
-\end{eqnarray*}
-with constraints 
-\begin{eqnarray*}
-X_{i,1} + X_{i,2} + X_{i,3} + X_{i,4} + X_{i,5} = y_{i,a} \\
-y_{0,a} = 50000 \\
-y_{0,c} = 0 \\
-y_{i,a} - y_{i, a'} =  0\\
-\textbf{$X_{i,j}$} \geq 0 
-\end{eqnarray*}
-Noting that $y_{i,a'}$ and $X_{i,5}$ are slack variables introduced to transform inequality constraints into equality constraints. 
-\end{sol}
-\end{comment}
 
 \end{document}

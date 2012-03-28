@@ -1,6 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /*
@@ -19,9 +24,7 @@ public class TFTPreader
 	private static final int DEFAULT_TIMEOUT = 2000;
 	private static final int DEFAULT_PORT = 69;
 	
-	private Map<Integer, byte[]> dataBlocks = new HashMap<Integer, byte[]>();
-	
-	public boolean appendData(DataMessage message)
+	public boolean appendData(Map<Integer, byte[]> dataBlocks, DataMessage message)
 	{
 		boolean result = false;
 		if (!dataBlocks.containsKey(message.blockNumber))
@@ -35,19 +38,24 @@ public class TFTPreader
 	public void readFile(TFTPmessage.TransferMode mode, String host, String fileName)
 	{
 		TFTPclient client = new TFTPclient();
-		try {
-			client.open(host, DEFAULT_PORT, DEFAULT_TIMEOUT);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//client.request(ITFTPclient.Opcode.RRQ, "testing123", ITFTPclient.TransferMode.NETASCII);
-		client.sendMessage(new RequestMessage("testing123", TFTPmessage.Opcode.RRQ, TFTPmessage.TransferMode.NETASCII));
+		Map<Integer, byte[]> dataBlocks = new HashMap<Integer, byte[]>();
 		try 
 		{
+			client.open(host, DEFAULT_PORT, DEFAULT_TIMEOUT);
+		} 
+		catch (UnknownHostException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		// Send a request for a new file to the client
+		try 
+		{
+			client.sendMessage(new RequestMessage(fileName, TFTPmessage.Opcode.RRQ, TFTPmessage.TransferMode.NETASCII));
 			try 
 			{
 				// Continue reading data until we reach a non-full block
@@ -57,26 +65,80 @@ public class TFTPreader
 					TFTPmessage result = client.getMessage();
 					if (result instanceof DataMessage)
 					{
-						DataMessage data = (DataMessage)result;
-						if (appendData(data) && data.size < TFTPmessage.DATA_BLOCK_SIZE)
+						DataMessage msg = (DataMessage)result;
+						
+						// Attempt to append the message, which will succeed if 
+						// we have not seen this block number yet
+						if (appendData(dataBlocks, msg))
 						{
-							transferComplete = true;
+							// Determine if we should ask for more data or 
+							// end the file transfer.
+							if (msg.size < TFTPmessage.DATA_BLOCK_SIZE)
+							{
+								transferComplete = true;
+							}
+							else
+							{
+								System.out.println("Sending ack for block " + msg.blockNumber);
+								client.sendMessage(new AckMessage(msg.blockNumber));
+							}
 						}
 					}
+					else if (result instanceof ErrorMessage)
+					{
+						System.err.println("OH NO");
+						// TODO
+						return;
+					}
 				}
+				
+				System.out.println("Transfer complete.");
+				writeFile(fileName, dataBlocks);
 			} 
 			catch (MalformedMessageException e) 
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} catch (TimeoutException e1) {
-			// TODO Auto-generated catch block
+		} 
+		catch (TimeoutException e1) 
+		{
 			e1.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 		// 1. verify valid machine/server name (else print another error - add error printing as a private static method)
 		// 2. connect to the TFTP server
 		// 3. transfer the file using the protocol specified
+	}
+	
+	private void writeFile(String file, Map<Integer, byte[]> data)
+	{
+		try 
+		{
+			// Create (overwrite, if already present) the new file
+			FileOutputStream fos = new FileOutputStream(file, false);
+			
+			// Iterate across the entire data set and write the bytes
+			System.out.println("here we go...");
+			for (int i = 1; i <= data.size(); i++)
+			{
+				fos.write(data.get(i));
+			}
+			
+			// Flush and close the stream to finish
+			fos.flush();
+			fos.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -90,11 +152,11 @@ public class TFTPreader
 	public static void main(String[] args)
 	{
 		// Verify that the correct number of parameters was provided
-		/*if (args.length != 3)
+		if (args.length != 3)
 		{
 			displayUsage();
 		}
-		else*/
+		else
 		{
 			//readFile("glados.cs.rit.edu", 69, "testing123");
 			TFTPreader reader = new TFTPreader();
@@ -106,7 +168,7 @@ public class TFTPreader
 			//    do the read...
 			//}
 			
-			reader.readFile(TFTPmessage.TransferMode.NETASCII, "glados.cs.rit.edu", "testing123");
+			reader.readFile(TFTPmessage.TransferMode.NETASCII, "glados.cs.rit.edu", "test1.txt");
 		}
 	}
 	

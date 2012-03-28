@@ -15,10 +15,11 @@ public class DataMessage extends TFTPmessage
 	{
 		this.size = size;
 		blockNumber = (int)(packet[BLOCK_NUMBER_INDEX] << 8 | packet[BLOCK_NUMBER_INDEX + 1]);
+		System.out.println("blockNumber = " + blockNumber);
+		
 		data = new byte[size - (OPCODE_SIZE + BLOCK_NUMBER_SIZE)];
 		for (int i = OPCODE_SIZE + BLOCK_NUMBER_SIZE, index = 0; i < size; i++, index++)
 		{
-			System.out.println("lolol: " + packet[i]);
 			data[index] = packet[i];
 		}
 	}
