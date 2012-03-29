@@ -5,6 +5,7 @@
  */
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 /**
@@ -16,37 +17,53 @@ import java.net.UnknownHostException;
 public interface ITFTPclient 
 {	
 	/**
-	 * TODO
+	 * Open a connection to the host TFTP server to begin a file
+	 * read or write operation.
 	 * 
-	 * @param host
-	 * @param port
-	 * @param timeout
-	 * @throws UnknownHostException
-	 * @throws IOException
+	 * @precondition - server connection not already established.
+	 * @postcondition - server connection open and established.
+	 * 
+	 * @param host - name of the host server.
+	 * @param timeout - timeout value associated with socket transmissions.
+	 * 
+	 * @throws UnknownHostException - when the specified host does not exist.
+	 * @throws IOException - when an I/O error occurs during socket transmission.
 	 */
-	public void open(String host, int port, int timeout) throws UnknownHostException,
+	public void open(String host, int timeout) throws UnknownHostException,
 		IOException;
 	
 	/**
-	 * TODO
+	 * Close the connection to the host TFTP server.
+	 * 
+	 * @precondition - server connection established.
+	 * @postcondition - server connection terminated.
 	 */
 	public void close();
 	
 	/**
-	 * TODO
+	 * Send a generic TFTP message to the host server.
 	 * 
-	 * @param message
-	 * @throws IOException
-	 * @throws UnknownHostException
+	 * @precondition - server connection established.
+	 * @postcondition - none.
+	 * 
+	 * @param message - the message to send.
+	 * @param port - the port to send the message to.
+	 * 
+	 * @throws IOException - when an I/O error occurs during socket transmission.
 	 */
-	public void sendMessage(TFTPmessage message) throws IOException, UnknownHostException;
+	public void sendMessage(TFTPmessage message, int port) throws IOException;
 	
 	/**
-	 * TODO
+	 * Receive a generic TFTP message from the host server.
 	 * 
-	 * @return
-	 * @throws TimeoutException
-	 * @throws MalformedMessageException
+	 * @precondition - server connection establish.
+	 * @postcondition - none.
+	 * 
+	 * @return - a generic TFTP message object instance. 
+	 * 
+	 * @throws TimeoutException - when the socket I/O times out.
+	 * @throws MalformedMessageException - when the message received is not valid. 
 	 */
-	public TFTPmessage getMessage() throws TimeoutException, MalformedMessageException;
+	public TFTPmessage getMessage() throws SocketTimeoutException, 
+		MalformedMessageException;
 }

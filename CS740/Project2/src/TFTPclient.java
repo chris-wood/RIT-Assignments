@@ -1,48 +1,86 @@
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 /*
  * TFTPclient.java
  * 
  * Version: 3/20/12
  */
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+
 /**
- * TODO
+ * This class implements the TFTP client interface methods that
+ * allow other users to communicate with the TFTP server using
+ * generic TFTP messages.
  * 
  * @author Christopher Wood (caw4567@rit.edu)
  */
 public class TFTPclient implements ITFTPclient 
 {
-	private DatagramSocket clientSocket = null;
-	private String host;
-	private int port;
+	/**
+	 * The datagram (UDP) socket used for communication with the server.
+	 */
+	private DatagramSocket serverSocket = null;
 	
+	/**
+	 * The server host name and port that we connect to for file I/O.
+	 */
+	private String host;
+	
+	/**
+	 * Open a connection to the host TFTP server to begin a file
+	 * read or write operation.
+	 * 
+	 * @precondition - server connection not already established.
+	 * @postcondition - server connection open and established.
+	 * 
+	 * @param host - name of the host server.
+	 * @param timeout - timeout value associated with socket transmissions.
+	 * 
+	 * @throws UnknownHostException - when the specified host does not exist.
+	 * @throws IOException - when an I/O error occurs during socket transmission.
+	 */
 	@Override
-	public void open(String host, int port, int timeout) throws UnknownHostException,
-			IOException {
-		clientSocket = new DatagramSocket();
-		clientSocket.setSoTimeout(timeout);
+	public void open(String host, int timeout) throws UnknownHostException, 
+		IOException 
+	{
+		serverSocket = new DatagramSocket();
+		serverSocket.setSoTimeout(timeout);
 		this.host = host;
-		this.port = port;
 	}
 
+	/**
+	 * Close the connection to the host TFTP server.
+	 * 
+	 * @precondition - server connection established.
+	 * @postcondition - server connection terminated.
+	 */
 	@Override
 	public void close() 
 	{
-		if (clientSocket != null && clientSocket.isConnected())
+		if (serverSocket != null && serverSocket.isConnected())
 		{
-			clientSocket.close();
-			clientSocket = null;
+			serverSocket.close();
+			serverSocket = null;
 		}
 	}
 	
+	/**
+	 * Send a generic TFTP message to the host server.
+	 * 
+	 * @precondition - server connection established.
+	 * @postcondition - none.
+	 * 
+	 * @param message - the message to send.
+	 * @param port - the port to send the message to.
+	 * 
+	 * @throws IOException - when an I/O error occurs during socket transmission.
+	 */
 	@Override
-	public void sendMessage(TFTPmessage message) throws IOException, 
-		UnknownHostException
+	public void sendMessage(TFTPmessage message, int port) throws IOException
 	{
 		// Create and send the UDP packet  
 		InetAddress IPAddress = null;
@@ -60,11 +98,22 @@ public class TFTPclient implements ITFTPclient
 		System.out.println();
 		
 		DatagramPacket packet = new DatagramPacket(data, data.length, IPAddress, port);
-		clientSocket.send(packet);
+		serverSocket.send(packet);
 	}
 
+	/**
+	 * Receive a generic TFTP message from the host server.
+	 * 
+	 * @precondition - server connection establish.
+	 * @postcondition - none.
+	 * 
+	 * @return - a generic TFTP message object instance. 
+	 * 
+	 * @throws TimeoutException - when the socket I/O times out.
+	 * @throws MalformedMessageException - when the message received is not valid. 
+	 */
 	@Override
-	public TFTPmessage getMessage() throws TimeoutException, 
+	public TFTPmessage getMessage() throws SocketTimeoutException, 
 		MalformedMessageException 
 	{
 		// Build a buffer to store the UDP message contents
@@ -75,7 +124,7 @@ public class TFTPclient implements ITFTPclient
 	    try 
 	    {
 	    	// Try to receive a UDP packet
-			clientSocket.receive(receivePacket);
+			serverSocket.receive(receivePacket);
 		} 
 	    catch (IOException e) 
 		{
@@ -83,7 +132,7 @@ public class TFTPclient implements ITFTPclient
 		}
 	    
 	    // debug
-	    System.out.print("Data received: ");
+	    System.out.print("Received: ");
 	    for (int i = 0; i < receiveData.length; i++)
 		{
 			System.out.print(receiveData[i] + " " );
@@ -100,23 +149,24 @@ public class TFTPclient implements ITFTPclient
 		
 		try
 		{
-			System.out.println("TELL ME ALL THE THOINGS");
+			// Determine the opcode from this packet
 			TFTPmessage.Opcode opcode = TFTPmessage.codes[(int)packet.getData()[1] - 1];
 			
-			// Create the appropriate packet
+			// Create the appropriate packet based on the opcode
 			switch (opcode)
 			{
 				case ACK:
 					// TODO
-					System.out.println("got this!asdasd");
+					System.out.println("Got ACK");
 					message = new AckMessage(packet.getData());
 					break;
 				case DATA:
-					System.out.println("got this!");
-					message = new DataMessage(packet.getData(), packet.getLength());
+					System.out.println("Got DATA");
+					message = new DataMessage(packet);
 					break;
 				case ERROR:
 					// TODO
+					System.out.println("Got ERROR");
 					message = new ErrorMessage(packet.getData(), packet.getLength());
 					break;
 				default:

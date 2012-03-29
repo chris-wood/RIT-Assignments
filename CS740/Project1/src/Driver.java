@@ -21,7 +21,7 @@ public class Driver
 	/**
 	 * The server to connect to.
 	 */
-	private static final String HOST_SERVER = "glados.cs.rit.edu";
+	private static final String HOST_SERVER = "localhost";
 	
 	/**
 	 * The port that runs the log server.

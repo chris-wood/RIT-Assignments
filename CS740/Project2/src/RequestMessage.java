@@ -1,22 +1,62 @@
+/*
+ * RequestMessage.java
+ * 
+ * Version: 3/20/12
+ */
 
+/**
+ * This class represents a wrapper for the request
+ * messages that are sent back and forth between the TFTP
+ * client and server.
+ * 
+ * @author Christopher Wood (caw4567@rit.edu)
+ */
 public class RequestMessage extends TFTPmessage 
 {
+	/**
+	 * The file name associated with this request.
+	 */
 	public String fileName;
+	
+	/**
+	 * The opcode for this request (read or write).
+	 */
 	public Opcode opcode;
+	
+	/**
+	 * The transfer mode for this request.
+	 */
 	public TransferMode transferMode;
 	
+	/**
+	 * Create a new request message with the specified file name, request
+	 * type, and transfer mode. 
+	 * 
+	 * @param name - name of the file for this request.
+	 * @param code - type of request (read or write).
+	 * @param mode - transfer mode (netascci or octet).
+	 */
 	public RequestMessage(String name, Opcode code, TransferMode mode)
 	{
 		fileName = name;
 		opcode = code;
 		transferMode = mode;
 	}
-	
+
+	/**
+	 * Create a new request message from the raw packet data received 
+	 * from the server.
+	 * 
+	 * @param packet - raw packet data.
+	 */
 	public RequestMessage(byte[] packet)
 	{
 		// TODO
 	}
 
+	/**
+	 * Build and return the raw data that represents this acknowledgment message.
+	 */
 	@Override
 	public byte[] rawData() 
 	{
@@ -50,3 +90,4 @@ public class RequestMessage extends TFTPmessage
 		return rawData;
 	}
 }
+

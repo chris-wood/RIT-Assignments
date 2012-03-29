@@ -1,11 +1,9 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /*
@@ -15,15 +13,33 @@ import java.util.Map;
  */
 
 /**
- * TODO
+ * This class is responsible for driving the TFTP protocol
+ * behavior in order to download a file specified by the user.
  * 
  * @author Christopher Wood (caw4567@rit.edu)
  */
 public class TFTPreader 
 {	
+	/**
+	 * The default timeout value for network transmissions.
+	 */
 	private static final int DEFAULT_TIMEOUT = 2000;
+	
+	/**
+	 * The default TFTP port.
+	 */
 	private static final int DEFAULT_PORT = 69;
 	
+	/**
+	 * Append a block of data to the file buffer that is in memory
+	 * so that it can be written to the disk once the file 
+	 * transmission is complete.
+	 * 
+	 * @param dataBlocks - the file buffer that maps file blocks to raw data.
+	 * @param message - the data message that conains the bytes to add to the buffer.
+	 * 
+	 * @return true if successful (block number not present), false otherwise.
+	 */
 	public boolean appendData(Map<Integer, byte[]> dataBlocks, DataMessage message)
 	{
 		boolean result = false;
@@ -35,13 +51,20 @@ public class TFTPreader
 		return result;
 	}
 	
-	public void readFile(TFTPmessage.TransferMode mode, String host, String fileName)
+	/**
+	 * Attempt to read a file from the TFTP server and write it to the disk.
+	 * 
+	 * @param mode - the transfer mode to use for the file reception.
+	 * @param host - the host server name where the TFTP program is located.
+	 * @param fileName - the file to receive.
+	 */
+	public void receiveFile(TFTPmessage.TransferMode mode, String host, String fileName)
 	{
 		TFTPclient client = new TFTPclient();
 		Map<Integer, byte[]> dataBlocks = new HashMap<Integer, byte[]>();
 		try 
 		{
-			client.open(host, DEFAULT_PORT, DEFAULT_TIMEOUT);
+			client.open(host, DEFAULT_TIMEOUT);
 		} 
 		catch (UnknownHostException e) 
 		{
@@ -52,10 +75,15 @@ public class TFTPreader
 			e.printStackTrace();
 		}
 		
+		// TODO
+		// 1. verify valid machine/server name (else print another error - add error printing as a private static method)
+		// 2. connect to the TFTP server
+		// 3. transfer the file using the protocol specified
+		
 		// Send a request for a new file to the client
 		try 
 		{
-			client.sendMessage(new RequestMessage(fileName, TFTPmessage.Opcode.RRQ, TFTPmessage.TransferMode.NETASCII));
+			client.sendMessage(new RequestMessage(fileName, TFTPmessage.Opcode.RRQ, TFTPmessage.TransferMode.OCTET), DEFAULT_PORT);
 			try 
 			{
 				// Continue reading data until we reach a non-full block
@@ -79,15 +107,15 @@ public class TFTPreader
 							}
 							else
 							{
-								System.out.println("Sending ack for block " + msg.blockNumber);
-								client.sendMessage(new AckMessage(msg.blockNumber));
+								//System.out.println("Sending ack for block " + msg.blockNumber);
+								client.sendMessage(new AckMessage(msg.blockNumber), msg.port);
 							}
 						}
 					}
 					else if (result instanceof ErrorMessage)
 					{
-						System.err.println("OH NO");
-						// TODO
+						// TODO: parse and display this error message
+						System.err.println("Error: display contents here...");
 						return;
 					}
 				}
@@ -100,7 +128,7 @@ public class TFTPreader
 				e.printStackTrace();
 			}
 		} 
-		catch (TimeoutException e1) 
+		catch (SocketTimeoutException e1) 
 		{
 			e1.printStackTrace();
 		}
@@ -108,11 +136,14 @@ public class TFTPreader
 		{
 			e.printStackTrace();
 		}
-		// 1. verify valid machine/server name (else print another error - add error printing as a private static method)
-		// 2. connect to the TFTP server
-		// 3. transfer the file using the protocol specified
 	}
 	
+	/**
+	 * Write the data provided to disk under the file name specified.
+	 * 
+	 * @param file - the file to store the data.
+	 * @param data - the file data, partitioned by block number.
+	 */
 	private void writeFile(String file, Map<Integer, byte[]> data)
 	{
 		try 
@@ -121,7 +152,7 @@ public class TFTPreader
 			FileOutputStream fos = new FileOutputStream(file, false);
 			
 			// Iterate across the entire data set and write the bytes
-			System.out.println("here we go...");
+			System.out.println("Writing file contents.");
 			for (int i = 1; i <= data.size(); i++)
 			{
 				fos.write(data.get(i));
@@ -158,7 +189,6 @@ public class TFTPreader
 		}
 		else
 		{
-			//readFile("glados.cs.rit.edu", 69, "testing123");
 			TFTPreader reader = new TFTPreader();
 			
 			// TODO: add method for param validation inside TFTPclient!
@@ -168,7 +198,7 @@ public class TFTPreader
 			//    do the read...
 			//}
 			
-			reader.readFile(TFTPmessage.TransferMode.NETASCII, "glados.cs.rit.edu", "test1.txt");
+			reader.receiveFile(TFTPmessage.TransferMode.NETASCII, "glados.cs.rit.edu", "test1.txt");
 		}
 	}
 	

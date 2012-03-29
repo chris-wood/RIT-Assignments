@@ -1,0 +1,26 @@
+Starting server on port: 6007
+Issuing New Ticket: 16152f98-f15c-4045-8b58-b0692ba1b1ec
+Received 1
+16152f98-f15c-4045-8b58-b0692ba1b1ec:Message 1-caw
+Received 1
+16152f98-f15c-4045-8b58-b0692ba1b1ec:Message 2-caw
+Received 1
+16152f98-f15c-4045-8b58-b0692ba1b1ec:Message 3-caw
+Received 1
+16152f98-f15c-4045-8b58-b0692ba1b1ec:Message 4-caw
+Received 1
+16152f98-f15c-4045-8b58-b0692ba1b1ec:Message 5-caw
+Received 1
+16152f98-f15c-4045-8b58-b0692ba1b1ec:Message 6-caw
+Received 1
+16152f98-f15c-4045-8b58-b0692ba1b1ec:Message 7-caw
+Delivering messages for: 16152f98-f15c-4045-8b58-b0692ba1b1ec
+Delivering 7 to user
+Displaying message: Message 1-caw
+Displaying message: Message 2-caw
+Displaying message: Message 3-caw
+Displaying message: Message 4-caw
+Displaying message: Message 5-caw
+Displaying message: Message 6-caw
+Displaying message: Message 7-caw
+Releasing Ticket: 16152f98-f15c-4045-8b58-b0692ba1b1ec

@@ -1,4 +1,15 @@
+/*
+ * TFTPmessage.java
+ * 
+ * Version: 3/20/12
+ */
 
+/**
+ * This class represents a generic message interface and parent
+ * class for all messages supported by the TFTP protocol.
+ * 
+ * @author Christopher Wood (caw4567@rit.edu)
+ */
 public abstract class TFTPmessage 
 {
 	/**
@@ -33,7 +44,12 @@ public abstract class TFTPmessage
 			this.value = value;
 		}
 		
-		// TODO
+		/**
+		 * Internal constructor for the enumeration based
+		 * on a byte value.
+		 * 
+		 * @param value - the value for this opcode to use.
+		 */
 		private Opcode(byte value)
 		{
 			this.value = (int)value;
@@ -50,6 +66,10 @@ public abstract class TFTPmessage
 		}
 	};
 	
+	/**
+	 * A fixed array containing references to the appropriate enumeration
+	 * type, which is used when reconstructing messages from the server.
+	 */
 	public static final Opcode[] codes = {Opcode.RRQ, Opcode.WRQ, Opcode.DATA, Opcode.ACK, Opcode.ERROR};
 	
 	/**
@@ -92,22 +112,40 @@ public abstract class TFTPmessage
 	 */
 	public static final int DATA_BLOCK_SIZE = 512;
 	
+	/**
+	 * The fields representing the opcode slot size and index.
+	 */
 	public static final int OPCODE_SIZE = 2;
 	public static final int OPCODE_INDEX = 0;
 	
+	/**
+	 * The fields representing the block number slot size and index;
+	 */
 	public static final int BLOCK_NUMBER_SIZE = 2;
 	public static final int BLOCK_NUMBER_INDEX = 2;
 	
+	/**
+	 * An aggregate of all message components that indicates the maximum size
+	 * for a data packet.
+	 */
 	public static final int MESSAGE_SIZE = DATA_BLOCK_SIZE + OPCODE_SIZE + BLOCK_NUMBER_SIZE + 2; // at most 2 zeroes for padding
 	
+	/**
+	 * Build and return the raw data associated with this packet that
+	 * conform to the TFTP protocol.
+	 * 
+	 * @return - raw packet contents.
+	 */
 	public abstract byte[] rawData();
 	
 	/**
-	 * TODO
+	 * Public method that converts integers to byte arrays of the specified size.
+	 * Used to convert client values into raw packet contents.
 	 * 	
-	 * @param code
+	 * @param val - the integer value to convert.
+	 * @param size - the size of the output byte array.
 	 * 
-	 * @return
+	 * @return - byte array of the specified size.
 	 */
 	public byte[] intToByteArray(int val, int size)
 	{

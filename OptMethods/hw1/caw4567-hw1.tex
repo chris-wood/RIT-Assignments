@@ -26,7 +26,6 @@ $x_{2}$ = the number of pounds of mixed nut type $B$ \\
 %\end{eqnarray*}
 
 \textbf{Constraints:}  \\
-Since the new nut type is required to have at least 4 pounds of almonds, 5 pounds of cashew nuts, and 6 pounds of walnuts, with no constraint on the number of pounds of peanuts, we can define the following size constraints using the $x_{1}$ and $x_{2}$ variables previously mentioned. 
 Since the new nut type is required to have at least 4 pounds of almonds, 5 pounds of cashew nuts, and 6 pounds of walnuts, with no constraint on the number of pounds of peanuts, we can define the following constraints for the problem. 
 \begin{eqnarray*}
 0.2x_{1} + 0.1x_{2} \geq 4 \\
@@ -72,7 +71,7 @@ where $x_{3}$, $x_{4}$, and $x_{5}$ are slack (surplus) variables introduced to 
 \begin{sol} 
 
 \textbf{Design variables:}\\ 
-The cost of shipping is directly related to the number of items shipped along each route. Hence, the design variables should collectively represent all of these numbers, as shown below: \\ \\
+The cost of shipping is directly related to the number of equipment sets shipped along each route. Hence, the design variables should collectively represent all of these numbers, as shown below: \\ \\
 %\begin{eqnarray*}
 $x_{1,1}$ = \#resources from New York to Seattle\\
 $x_{1,2}$ = \#resources from New York to Houston\\
@@ -154,10 +153,10 @@ x_{1} + x_{2} + x_{3} + x_{4} \leq 50000
 \end{eqnarray*}
 
 \textbf{Cost function:} \\
-Now that each investment is accumulating revenue after every maturity, we can use the standard compound interest equation ($FV = PV(1+i)^{n}$) to represent the amount of revenue earned by each investment at the end of the fourth year. Then, if we sum together these values, we attain our cost function that can be maximized. This is shown below.
+Now that each investment is accumulating revenue after every maturity, we can use the standard compound interest equation ($FV = PV(1+i)^{n}$, where $FV$ is the final value after $n$ maturities and $PV$ is the initial investment) to represent the amount of revenue earned by each investment at the end of the fourth year. Then, if we sum together these values, we attain our cost function that can be maximized. This is shown below.
 \begin{eqnarray*}
 %f(x_{1},x_{2}) = 2.5x_{1} + 3x_{2}
-f(x_{1}, x_{2}, x_{3}, x_{4}) = x_{1}(1.05)^{8} + x_{2}(1.07)^{4} + x_{3}(1.1)^{2} + x_{4}(1.15)
+f(x_{1}, x_{2}, x_{3}, x_{4}) = (1.05)^{8}x_{1} + (1.07)^{4}x_{2} + (1.1)^{2}x_{3} + (1.15)x_{4}
 \end{eqnarray*}
 Note that we could subtract the sum $\sum_{i=1}^{2}\sum_{j=1}^{3}x_{i,j}$ from this cost function to reflect only the amount of money that was gained in profit (that is, excluding our initial investment), but this would simply be a difference of a scalar that would not change the solution itself. Therefore, for simplicity, we keep this scalar value off the cost function. \\
 
