@@ -30,7 +30,7 @@ T_{F}(1) & = & 1 \\
 T_{F}(n) & = & T_{F}(n-1) + T_{F}(n-2)
 \end{eqnarray*}
 
-The solution to $T_{F}(n)$ can be solved using the method of homogeneous equations, which yields the result that $T_{F}(n) = \frac{1}{\sqrt{5}}(\phi^{n} - \phi'^{n})$, where $\phi = \frac{1 + \sqrt{5}}{2}$ and $\phi' = \frac{1 - \sqrt{5}}{2}$. Thus, we can express this solution, and subsequentially the time complexity of $F_{n}$, as a function of exponential growth of $n$, as shown below. 
+The solution to $T_{F}(n)$ can be solved using the method of homogeneous equations, which yields the result that $T_{F}(n) = \frac{1}{\sqrt{5}}(\phi^{n} - \phi'^{n})$, where $\phi = \frac{1 + \sqrt{5}}{2}$ and $\phi' = \frac{1 - \sqrt{5}}{2}$. Thus, we can express this solution, and subsequently the time complexity of $F_{n}$, as a function of exponential growth of $n$, as shown below. 
 \begin{eqnarray*}
 T_{F}(n) \in \Theta(\phi^{n}) \implies T_{F}(n) = \Theta(\phi^{n})
 \end{eqnarray*}
@@ -138,7 +138,7 @@ def power(o, p):
 \end{prob}
 \begin{sol}
 
-Using the representation for $L$ and the $power$ function described above, we can implement fibPow as follows:
+Using the representation for $L$ and the $power$ function described above, we can implement $fibPow$ as follows:
 \begin{lstlisting}
 def fibPow(n):
 	o = L(0,1)
