@@ -11,6 +11,7 @@
 
 \newcommand{\tlg}{\text{ lg}}
 \newcommand{\tln}{\text{ ln}}
+\newcommand{\tlog}{\text{ log}}
 
 %\setlength{\parindent}{0pt}
 
@@ -22,15 +23,17 @@
 \end{prob}
 \begin{sol} 
 
-The time complexity of the recurrence $F_{n}$ can be defined as follows.
-
+The time complexity of the recurrence $F_{n}$ can be characterized using a recurrence relation that defines the number of recursive calls made by $F_{n}$, as shown below.
 \begin{eqnarray*}
 T_{F}(0) & = & 1 \\
 T_{F}(1) & = & 1 \\
 T_{F}(n) & = & T_{F}(n-1) + T_{F}(n-2)
 \end{eqnarray*}
 
-The solution to $T_{F}(n)$ can be solved using the method of homogeneous equations, which yields the result that $T_{F}(n) = \Theta(\phi^{n})$, where $\phi = \frac{1 + \sqrt{5}}{2}$ (the golden ratio).
+The solution to $T_{F}(n)$ can be solved using the method of homogeneous equations, which yields the result that $T_{F}(n) = \frac{1}{\sqrt{5}}(\phi^{n} - \phi'^{n})$, where $\phi = \frac{1 + \sqrt{5}}{2}$ and $\phi' = \frac{1 - \sqrt{5}}{2}$. Thus, we can express this solution, and subsequentially the time complexity of $F_{n}$, as a function of exponential growth of $n$, as shown below. 
+\begin{eqnarray*}
+T_{F}(n) \in \Theta(\phi^{n}) \implies T_{F}(n) = \Theta(\phi^{n})
+\end{eqnarray*}
 
 \end{sol}
 
@@ -38,8 +41,7 @@ The solution to $T_{F}(n)$ can be solved using the method of homogeneous equatio
 \end{prob}
 \begin{sol}
 
-The time complexity of the $fibIt$ routine can be found by solving the recurrence relation that defines $fibIt$. More specifically, we can such a recurrence relation for $fibIt$ by analyzing the number of additions performed, which corresponds to the following equation.
-
+The time complexity of the $fibIt$ routine can be found by solving the recurrence relation that defines $fibIt$. Such a recurrence relation can be defined by analyzing the number of additions performed during each call to $fibIt$, which is captured in the following set of equations.
 \begin{eqnarray*}
 T_{f}(0) & = & 0 \\
 T_{f}(1) & = & 0 \\
@@ -48,8 +50,7 @@ T_{f}(n) & = & T_{f}(n-1) + 1
 
 This is because there is only one addition made in each recursive call from $f(n;a,b)$ to $f(n-1;b,a+b)$, and there are no additions made in the two cases where $n = 0$ and $n = 1$.
 
-In order to solve this recurrence relation we can expand out the expression and attempt to identify the pattern. This process is shown below.
-
+In order to solve this recurrence relation we can expand out the expression and attempt to identify the pattern (i.e. the \textbf{method of backwards substitution}). This process is shown below.
 \begin{eqnarray*}
 T_{f}(n) & = & T_{f}(n - 1) + 1 \\
 & = & (T_{f}(n - 2) + 1) + 1 = T_{f}(n - 2) + 2 \\
@@ -59,7 +60,6 @@ T_{f}(n) & = & T_{f}(n - 1) + 1 \\
 \end{eqnarray*}
 
 Based on this pattern, we can reach the first base case of this recurrence relation ($T_{f}(1)$) when $(n - k) = 1$, meaning that $k = (n - 1)$. Thus, we have the following.
-
 \begin{eqnarray*}
 T_{f}(n) & = & T_{f}(n - (n - 1)) + (n - 1)  \\
 & = & T_{f}(1) + (n - 1) \\
@@ -87,19 +87,17 @@ Based on this observation we can see that $T_{f}(n) \in \Theta(n)$, or simply $T
 \begin{sol}
 
 \textbf{Base ($n = 0$)} \\
-When $n = 0$, we have the following equality.
-
-\begin{eqnarray*}
-L_{0}(a,b) & = & (f(0;a,b),f(1;a,b)) \\
-& = & (a, b)
-\end{eqnarray*}
+When $n = 0$, we know that $L^{0}(a,b) = (a,b)$ because the operator $L$ is applied $0$ times to $(a,b)$. Furthermore, by definition of $f$, we know that $(f(0;a,b), f(1;a,b)) = (a,b)$. Thus, $L^{0}(a,b) = (f(0;a,b), f(1;a,b))$. \\
+%\begin{eqnarray*}
+%L^{0}(a,b) & = & (f(0;a,b),f(1;a,b)) \text{ (by the induction hypothesis)}\\
+%& = & (a, b) \text{ (by definition of $f$)}
+%\end{eqnarray*}
 
 \textbf{Induction ($n > 0$)} \\
 First, we assume that $L^{n}(a,b) = (f(n;a,b),f(n + 1;a,b))$. Now we show that $L^{n+1}(a,b) = (f(n + 1;a,b),f(n + 2;a,b))$.
-
 \begin{eqnarray*}
-L^{n + 1}(a,b) & = & L(L^{n}(a,b)) \text{ (by multiplication powers)}\\
-& = & L(f(n;a,b),f(n + 1;a,b)) \text{ (by induction)} \\
+L^{n + 1}(a,b) & = & L(L^{n}(a,b)) \text{ (by law of exponents)}\\
+& = & L(f(n;a,b),f(n + 1;a,b)) \text{ (by the induction hypothesis)} \\
 & = & (f(n + 1;a,b), f(n;a,b) + f(n + 1;a,b)) \text{ (by definition of $L$)} \\
 & = & (f(n + 1;a,b), f(n + 2;a,b)) \text{ (by Theorem 1)}
 \end{eqnarray*}
@@ -108,14 +106,52 @@ Thus, $L^{n+1}(a,b) = (f(n + 1;a,b),f(n + 2;a,b))$, as desired. Therefore, we kn
 
 \end{sol}
 
-\begin{prob}{4}
+\begin{prob}{4-a}
 \end{prob}
 \begin{sol}
-TODO: talk about representation, mention multiplication algorithm for logn time, give fibpow listing, list time complexity \\
-TODO: matrix \\
-TODO: repeated squaring \\
-TODO: code here \\
-TODO: time complexity
+
+L can be represented as the product of two matrices, as shown below.
+\begin{center}
+$L\begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} b \\ a+b \end{pmatrix}$
+\end{center}
+\end{sol}
+
+\begin{prob}{4-b}
+\end{prob}
+\begin{sol}
+
+We can use the method of repeated squaring to achieve fast exponentiation in $\Theta(\tlog n)$ time. The source code for this routine is shown below.
+\begin{lstlisting}
+def power(o, p):
+	if (p == 0):
+		return IDENTITY
+	elif (p == 1):
+		return o
+	elif ((p % 2) == 0):
+		return power(o * o, p / 2)
+	else:
+		return o * power(o * o, (p - 1) / 2)
+\end{lstlisting}
+\end{sol}
+
+\begin{prob}{4-c}
+\end{prob}
+\begin{sol}
+
+Using the representation for $L$ and the $power$ function described above, we can implement fibPow as follows:
+\begin{lstlisting}
+def fibPow(n):
+	o = L(0,1)
+	o = power(o, n)
+	return o[0]
+\end{lstlisting}
+\end{sol}
+
+\begin{prob}{4-d}
+\end{prob}
+\begin{sol}
+
+Since the time to perform matrix multiplication with a $2x2$ and $2x1$ matrix is constant time (i.e. $\Theta(1)$), and the multiplication routine of repeated squares that surrounds this constant operation runs in $\Theta(\tlog n)$ time, we can conclude that the time complexity of $fibPow$ is $\Theta(\tlog n)$.
 \end{sol}
 
 \begin{prob}{5-a}
@@ -123,7 +159,7 @@ Write down the definition of pseudo-polynomial time.
 \end{prob}
 \begin{sol}
 \begin{define}
-A pseudo-polynomial-time algorithm is one that runs in time polynomial in the dimension of the problem and the magnitudes of the data involved (provided these are given as integers), rather than the base-two logarithms of their magnitudes .
+A pseudo-polynomial-time algorithm is one that runs in time polynomial in the dimension of the problem and the magnitudes of the data involved (provided these are given as integers), rather than the base-two logarithms of their magnitudes.
 %\cite{BELOW}
 % http://www.esi2.us.es/~mbilbao/complexi.htm
 \end{define}
