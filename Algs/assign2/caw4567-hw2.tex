@@ -123,7 +123,9 @@ Write down the definition of pseudo-polynomial time.
 \end{prob}
 \begin{sol}
 \begin{define}
-Pseudo-polynomial time is the complexity class that encompasses all functions $f(n)$ that run in polynomial time in the numeric value of $n$, which is exponential in the length of $n$. 
+A pseudo-polynomial-time algorithm is one that runs in time polynomial in the dimension of the problem and the magnitudes of the data involved (provided these are given as integers), rather than the base-two logarithms of their magnitudes .
+%\cite{BELOW}
+% http://www.esi2.us.es/~mbilbao/complexi.htm
 \end{define}
 \end{sol}
 
@@ -131,27 +133,28 @@ Pseudo-polynomial time is the complexity class that encompasses all functions $f
 Is $fib$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
-\begin{define}
-TODO
-\end{define}
+No - exponential in value of input (not polynomial).
+
+No, $fib$ has a time complexity of $\Theta(\phi_{n})$, where $n$ is the input magnitude, which means that it is exponential in the magnitude of the input, which further implies that it is not polynomial in the magnitude of the input. Therefore, by definition, $fib$ cannot be a pseudo-polynomial time algorithm.
 \end{sol}
 
 \begin{prob}{5-c}
 Is $fibIt$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
-\begin{define}
-TODO
-\end{define}
+Yes - polynomial in value of input, which is exponential in number of bits in the input (base 2 logarithm)
+
+Yes, $fibIt$ has a time complexity of $\Theta(n)$, which can also be defined as $\Theta(2^{\tlg n})$, where $n$ is the input magnitude, which means that it also has polynomial time complexity in the magnitude of $n$ but exponential time in the bit size of of $n$. Therefore, by definition, $fibIt$ must be a pseudo-polynomial time algorithm.
 \end{sol}
 
 \begin{prob}{5-d}
 Is $fibPow$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
-\begin{define}
-TOOD
-\end{define}
+Don't believe so, it isn't exponential in the magnitude of the input (see below)
+Is 2**(lglgn) exponential? If so, then yes, if not, then no.
+
+No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which can also be defined as $\Theta(2^{\tlg \tlg n})$, where $n$ is the input magnitude, which means that it is sub-polynomial in the magnitude of $n$ and sub-exponential in the bit size of $n$. Therefore, by definition, $fibPow$ must be a pseudo-polynomial time algorithm.
 \end{sol}
 
 \end{document}
