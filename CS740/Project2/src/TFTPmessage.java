@@ -119,16 +119,23 @@ public abstract class TFTPmessage
 	public static final int OPCODE_INDEX = 0;
 	
 	/**
-	 * The fields representing the block number slot size and index;
+	 * The fields representing the block number slot size and index.
 	 */
 	public static final int BLOCK_NUMBER_SIZE = 2;
 	public static final int BLOCK_NUMBER_INDEX = 2;
 	
 	/**
+	 * The fields representing the error number slot size and index.
+	 */
+	public static final int ERROR_NUMBER_SIZE = 2;
+	public static final int ERROR_NUMBER_INDEX = 2;
+	
+	/**
 	 * An aggregate of all message components that indicates the maximum size
 	 * for a data packet.
 	 */
-	public static final int MESSAGE_SIZE = DATA_BLOCK_SIZE + OPCODE_SIZE + BLOCK_NUMBER_SIZE + 2; // at most 2 zeroes for padding
+	public static final int MESSAGE_SIZE = DATA_BLOCK_SIZE + OPCODE_SIZE 
+			+ BLOCK_NUMBER_SIZE + 2; // at most 2 zeroes for padding
 	
 	/**
 	 * Build and return the raw data associated with this packet that

@@ -64,6 +64,6 @@ public interface ITFTPclient
 	 * @throws TimeoutException - when the socket I/O times out.
 	 * @throws MalformedMessageException - when the message received is not valid. 
 	 */
-	public TFTPmessage getMessage() throws SocketTimeoutException, 
-		MalformedMessageException;
+	public TFTPmessage getMessage() throws 
+		SocketTimeoutException, MalformedMessageException;
 }

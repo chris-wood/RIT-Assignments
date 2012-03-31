@@ -44,18 +44,10 @@ public class RequestMessage extends TFTPmessage
 	}
 
 	/**
-	 * Create a new request message from the raw packet data received 
-	 * from the server.
+	 * Build and return the raw data associated with this packet that
+	 * conform to the TFTP protocol.
 	 * 
-	 * @param packet - raw packet data.
-	 */
-	public RequestMessage(byte[] packet)
-	{
-		// TODO
-	}
-
-	/**
-	 * Build and return the raw data that represents this acknowledgment message.
+	 * @return - raw packet contents.
 	 */
 	@Override
 	public byte[] rawData() 
@@ -80,7 +72,7 @@ public class RequestMessage extends TFTPmessage
 		{
 			rawData[offset++] = (byte)fileBuffer[i]; 
 		}
-		rawData[offset++] = MESSAGE_PAD;;
+		rawData[offset++] = MESSAGE_PAD;
 		for (int i = 0; i < modeBuffer.length; i++)
 		{
 			rawData[offset++] = (byte)modeBuffer[i]; 
@@ -88,6 +80,17 @@ public class RequestMessage extends TFTPmessage
 		rawData[offset++] = MESSAGE_PAD;
 		
 		return rawData;
+	}
+	
+	/**
+	 * Return a friendly version of the request packet for debug purposes.
+	 * 
+	 * @return readable version of this request message.
+	 */
+	@Override
+	public String toString()
+	{
+		return "REQUEST " + fileName + " " + transferMode.getValue();
 	}
 }
 

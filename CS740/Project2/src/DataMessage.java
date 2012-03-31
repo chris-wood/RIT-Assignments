@@ -53,15 +53,18 @@ public class DataMessage extends TFTPmessage
 	 * Create a data message from the raw packet data and its size.
 	 * 
 	 * @param packet - raw packet data.
-	 * @param size - size of the packet data.
 	 */
 	public DataMessage(DatagramPacket packet)
 	{
+		// Fetch and store the packet transfer port and payload size
 		size = packet.getLength();
 		port = packet.getPort(); 
-		blockNumber = (int)(packet.getData()[BLOCK_NUMBER_INDEX] << 8 | packet.getData()[BLOCK_NUMBER_INDEX + 1]);
 		
-		// Copy the data from the packet into this data buffer.
+		// Rebuild the block number for this file block
+		blockNumber = (int)(packet.getData()[BLOCK_NUMBER_INDEX] << 8 | 
+				packet.getData()[BLOCK_NUMBER_INDEX + 1]);
+		
+		// Rebuild the raw data 
 		data = new byte[size - (OPCODE_SIZE + BLOCK_NUMBER_SIZE)];
 		for (int i = OPCODE_SIZE + BLOCK_NUMBER_SIZE, index = 0; i < size; i++, index++)
 		{
@@ -70,12 +73,55 @@ public class DataMessage extends TFTPmessage
 	}
 
 	/**
-	 * Build and return the raw data that represents this data message.
+	 * Build and return the raw data associated with this packet that
+	 * conform to the TFTP protocol.
+	 * 
+	 * @return - raw packet contents.
 	 */
 	@Override
 	public byte[] rawData() 
 	{
-		// TODO
-		return null;
+		// Create the byte array message content
+		byte[] codeBuffer = intToByteArray(Opcode.DATA.getValue(), OPCODE_SIZE);
+		byte[] blockBuffer = intToByteArray(blockNumber, OPCODE_SIZE);
+		
+		// Create a dynamically sized byte buffer
+		int messageSize = codeBuffer.length + blockBuffer.length 
+				+ data.length;
+		byte[] rawData = new byte[messageSize];
+		
+		// Fill the byte array with the message contents
+		int offset = 0;
+		for (int i = 0; i < codeBuffer.length; i++)
+		{
+			rawData[offset++] = codeBuffer[i];
+		}
+		for (int i = 0; i < blockBuffer.length; i++)
+		{
+			rawData[offset++] = blockBuffer[i]; 
+		}
+		for (int i = 0; i < data.length; i++)
+		{
+			rawData[offset++] = data[i]; 
+		}
+		
+		return rawData;
+	}
+	
+	/**
+	 * Return a friendly version of the data packet for debug purposes.
+	 * 
+	 * @return readable version of this data message.
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuilder builder = new StringBuilder("DATA[" + blockNumber + ": ");
+		for (int i = 0; i < data.length; i++)
+		{
+			builder.append(data[i] + " ");
+		}
+		builder.append("\n");
+		return builder.toString();
 	}
 }

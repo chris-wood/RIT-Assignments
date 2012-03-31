@@ -90,12 +90,7 @@ public class TFTPclient implements ITFTPclient
 		byte[] data = message.rawData();
 		
 		// debug
-		System.out.print("Sending: ");
-		for (int i = 0; i < data.length; i++)
-		{
-			System.out.print(data[i] + " ");
-		}
-		System.out.println();
+		System.out.println(message.toString());
 		
 		DatagramPacket packet = new DatagramPacket(data, data.length, IPAddress, port);
 		serverSocket.send(packet);
@@ -113,8 +108,8 @@ public class TFTPclient implements ITFTPclient
 	 * @throws MalformedMessageException - when the message received is not valid. 
 	 */
 	@Override
-	public TFTPmessage getMessage() throws SocketTimeoutException, 
-		MalformedMessageException 
+	public TFTPmessage getMessage() throws 
+		SocketTimeoutException, MalformedMessageException 
 	{
 		// Build a buffer to store the UDP message contents
 		int messageSize = TFTPmessage.MESSAGE_SIZE;
@@ -131,18 +126,24 @@ public class TFTPclient implements ITFTPclient
 			e.printStackTrace();
 		}
 	    
-	    // debug
-	    System.out.print("Received: ");
-	    for (int i = 0; i < receiveData.length; i++)
-		{
-			System.out.print(receiveData[i] + " " );
-		}
-	    System.out.println("");
-	    
 	    TFTPmessage message = buildMessage(receivePacket);
+	    
+	    // debug 
+	    System.out.println(message.toString());
+	    
 	    return message;
 	}
 	
+	/**
+	 * Helper method that will construct a new TFTPmessage based on the contents
+	 * of the datagram packet that was received from the TFTP server.
+	 * 
+	 * @param packet - the received datagram packet.
+	 * 
+	 * @return value TFTPmessage object.
+	 * 
+	 * @throws MalformedMessageException - when the message type/format is invalid.
+	 */
 	private TFTPmessage buildMessage(DatagramPacket packet) throws MalformedMessageException
 	{
 		TFTPmessage message = null;
@@ -156,27 +157,23 @@ public class TFTPclient implements ITFTPclient
 			switch (opcode)
 			{
 				case ACK:
-					// TODO
 					System.out.println("Got ACK");
-					message = new AckMessage(packet.getData());
+					message = new AckMessage(packet);
 					break;
 				case DATA:
 					System.out.println("Got DATA");
 					message = new DataMessage(packet);
 					break;
 				case ERROR:
-					// TODO
 					System.out.println("Got ERROR");
-					message = new ErrorMessage(packet.getData(), packet.getLength());
+					message = new ErrorMessage(packet);
 					break;
 				default:
-					System.err.println("Invalid message type encounterd.");
 					throw new MalformedMessageException(host);
 			}
 		}
 		catch (IndexOutOfBoundsException e)
 		{
-			e.printStackTrace();
 			throw new MalformedMessageException(host);
 		}
 		

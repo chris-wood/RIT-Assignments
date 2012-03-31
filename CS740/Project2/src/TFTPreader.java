@@ -56,31 +56,10 @@ public class TFTPreader
 		} 
 		catch (UnknownHostException e) 
 		{
-			System.err.println("Error: Invalid machine name.");
+			System.err.println("Error: " + host + " is an invalid machine name.");
 		}
 		
 		return valid;
-	}
-	
-	/**
-	 * Append a block of data to the file buffer that is in memory
-	 * so that it can be written to the disk once the file 
-	 * transmission is complete.
-	 * 
-	 * @param dataBlocks - the file buffer that maps file blocks to raw data.
-	 * @param message - the data message that conains the bytes to add to the buffer.
-	 * 
-	 * @return true if successful (block number not present), false otherwise.
-	 */
-	public boolean appendData(Map<Integer, byte[]> dataBlocks, DataMessage message)
-	{
-		boolean result = false;
-		if (!dataBlocks.containsKey(message.blockNumber))
-		{
-			dataBlocks.put(message.blockNumber, message.data);
-			result = true;
-		}
-		return result;
 	}
 	
 	/**
@@ -100,66 +79,63 @@ public class TFTPreader
 		} 
 		catch (UnknownHostException e) 
 		{
-			e.printStackTrace();
+			System.err.println("Error: " + host + " is an invalid machine name.");
+			return;
 		} 
 		catch (IOException e) 
 		{
-			e.printStackTrace();
+			System.err.println("Error: " + e.getMessage());
+			return;
 		}
 		
-		// TODO
-		// 1. verify valid machine/server name (else print another error - add error printing as a private static method)
-		// 2. connect to the TFTP server
-		// 3. transfer the file using the protocol specified
-		
-		// Send a request for a new file to the client
+		// If we got here then no errors have occured when communicating with
+		// the TFTP server, so proceed as usual
 		try 
 		{
-			client.sendMessage(new RequestMessage(fileName, TFTPmessage.Opcode.RRQ, TFTPmessage.TransferMode.OCTET), DEFAULT_PORT);
-			try 
+			// Send a request for a new file to the client
+			client.sendMessage(new RequestMessage(fileName, TFTPmessage.Opcode.RRQ, mode), DEFAULT_PORT);
+
+			// Continue reading data until we reach a non-full block
+			boolean transferComplete = false;
+			while (!transferComplete)
 			{
-				// Continue reading data until we reach a non-full block
-				boolean transferComplete = false;
-				while (!transferComplete)
+				TFTPmessage result = client.getMessage();
+				if (result instanceof DataMessage)
 				{
-					TFTPmessage result = client.getMessage();
-					if (result instanceof DataMessage)
+					DataMessage msg = (DataMessage)result;
+					
+					// Attempt to append the message, which will succeed if 
+					// we have not seen this block number yet
+					if (appendData(dataBlocks, msg))
 					{
-						DataMessage msg = (DataMessage)result;
-						
-						// Attempt to append the message, which will succeed if 
-						// we have not seen this block number yet
-						if (appendData(dataBlocks, msg))
+						// Determine if we should ask for more data or 
+						// end the file transfer.
+						if (msg.size < TFTPmessage.DATA_BLOCK_SIZE)
 						{
-							// Determine if we should ask for more data or 
-							// end the file transfer.
-							if (msg.size < TFTPmessage.DATA_BLOCK_SIZE)
-							{
-								transferComplete = true;
-							}
-							else
-							{
-								//System.out.println("Sending ack for block " + msg.blockNumber);
-								client.sendMessage(new AckMessage(msg.blockNumber), msg.port);
-							}
+							transferComplete = true;
+						}
+						else
+						{
+							//System.out.println("Sending ack for block " + msg.blockNumber);
+							client.sendMessage(new AckMessage(msg.blockNumber), msg.port);
 						}
 					}
-					else if (result instanceof ErrorMessage)
-					{
-						// TODO: parse and display this error message
-						System.err.println("Error: display contents here...");
-						return;
-					}
 				}
-				
-				System.out.println("Transfer complete.");
-				writeFile(fileName, dataBlocks);
-			} 
-			catch (MalformedMessageException e) 
-			{
-				e.printStackTrace();
+				else if (result instanceof ErrorMessage)
+				{
+					ErrorMessage msg = (ErrorMessage)result;
+					System.err.println(msg.toString());
+					return;
+				}
 			}
+			
+			// Finally, write the file contents to the disk.
+			writeFile(fileName, dataBlocks);
 		} 
+		catch (MalformedMessageException e)
+		{
+			e.printStackTrace();
+		}
 		catch (SocketTimeoutException e1) 
 		{
 			e1.printStackTrace();
@@ -168,6 +144,27 @@ public class TFTPreader
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Append a block of data to the file buffer that is in memory
+	 * so that it can be written to the disk once the file 
+	 * transmission is complete.
+	 * 
+	 * @param dataBlocks - the file buffer that maps file blocks to raw data.
+	 * @param message - the data message that conains the bytes to add to the buffer.
+	 * 
+	 * @return true if successful (block number not present), false otherwise.
+	 */
+	private boolean appendData(Map<Integer, byte[]> dataBlocks, DataMessage message)
+	{
+		boolean result = false;
+		if (!dataBlocks.containsKey(message.blockNumber))
+		{
+			dataBlocks.put(message.blockNumber, message.data);
+			result = true;
+		}
+		return result;
 	}
 	
 	/**
@@ -184,7 +181,6 @@ public class TFTPreader
 			FileOutputStream fos = new FileOutputStream(file, false);
 			
 			// Iterate across the entire data set and write the bytes
-			System.out.println("Writing file contents.");
 			for (int i = 1; i <= data.size(); i++)
 			{
 				fos.write(data.get(i));
@@ -222,10 +218,10 @@ public class TFTPreader
 		else
 		{
 			TFTPreader reader = new TFTPreader();
-			if (reader.validateParameters(args[0], args[1]))
+			if (reader.validateParameters(args[1], args[0]))
 			{
-				// TODO: replace with args[] values
-				reader.receiveFile(TFTPmessage.TransferMode.NETASCII, "glados.cs.rit.edu", "test1.txt");
+				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode(args[0]);
+				reader.receiveFile(mode, args[1], args[2]);
 			}		
 		}
 	}

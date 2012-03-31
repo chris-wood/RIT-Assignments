@@ -1,3 +1,5 @@
+import java.net.DatagramPacket;
+
 /*
  * AckMessage.java
  * 
@@ -33,13 +35,17 @@ public class AckMessage extends TFTPmessage
 	 * 
 	 * @param packet - raw packet data.
 	 */
-	public AckMessage(byte[] packet)
+	public AckMessage(DatagramPacket packet)
 	{
-		// TODO
+		blockNumber = (int)(packet.getData()[BLOCK_NUMBER_INDEX] << 8 | 
+				packet.getData()[BLOCK_NUMBER_INDEX + 1]);
 	}
 
 	/**
-	 * Build and return the raw data that represents this acknowledgment message.
+	 * Build and return the raw data associated with this packet that
+	 * conform to the TFTP protocol.
+	 * 
+	 * @return - raw packet contents.
 	 */
 	@Override
 	public byte[] rawData() 
@@ -61,5 +67,16 @@ public class AckMessage extends TFTPmessage
 		}
 		
 		return rawData;
+	}
+	
+	/**
+	 * Return a friendly version of the acknowledgment packet for debug purposes.
+	 * 
+	 * @return readable version of this acknowledgment message.
+	 */
+	@Override
+	public String toString()
+	{
+		return "ACK " + blockNumber;
 	}
 }
