@@ -16,7 +16,7 @@ public class MalformedMessageException extends Exception
 	/**
 	 * The UID for this message
 	 */
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Create a new exception with the fixed string, and include

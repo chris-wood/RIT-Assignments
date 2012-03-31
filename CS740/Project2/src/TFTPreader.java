@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -29,6 +30,37 @@ public class TFTPreader
 	 * The default TFTP port.
 	 */
 	private static final int DEFAULT_PORT = 69;
+	
+	/**
+	 * Validate the parameters used to retrieve the file from the TFTP server.
+	 * 
+	 * @param host - the specified host server.
+	 * @param mode - the specified transfer mode.
+	 * 
+	 * @return true if valid, false otherwise.
+	 */
+	public boolean validateParameters(String host, String mode)
+	{
+		boolean valid = false;
+		
+		try 
+		{
+			// Attempt to resolve this host name
+			InetAddress.getByName(host);
+			
+			// Attempt to resolve the transfer mode to a fixed type
+			if (TFTPmessage.buildTransferMode(mode) != null)
+			{
+				valid = true;
+			}
+		} 
+		catch (UnknownHostException e) 
+		{
+			System.err.println("Error: Invalid machine name.");
+		}
+		
+		return valid;
+	}
 	
 	/**
 	 * Append a block of data to the file buffer that is in memory
@@ -190,15 +222,11 @@ public class TFTPreader
 		else
 		{
 			TFTPreader reader = new TFTPreader();
-			
-			// TODO: add method for param validation inside TFTPclient!
-			// if (client.validHost())
-			//{
-			//	if valid transfer mode
-			//    do the read...
-			//}
-			
-			reader.receiveFile(TFTPmessage.TransferMode.NETASCII, "glados.cs.rit.edu", "test1.txt");
+			if (reader.validateParameters(args[0], args[1]))
+			{
+				// TODO: replace with args[] values
+				reader.receiveFile(TFTPmessage.TransferMode.NETASCII, "glados.cs.rit.edu", "test1.txt");
+			}		
 		}
 	}
 	

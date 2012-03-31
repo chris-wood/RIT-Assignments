@@ -147,7 +147,7 @@ public abstract class TFTPmessage
 	 * 
 	 * @return - byte array of the specified size.
 	 */
-	public byte[] intToByteArray(int val, int size)
+	public static byte[] intToByteArray(int val, int size)
 	{
 		byte[] data = new byte[size];
 		for (int i = 0; i < data.length; i++)
@@ -155,5 +155,29 @@ public abstract class TFTPmessage
 			data[i] = (byte)(val >> (8 * (data.length - (i + 1))));
 		}
 		return data;
+	}
+	
+	/**
+	 * Build a transfer mode enum based on the string representation
+	 * for the mode.
+	 * 
+	 * @param mode - the string representation.
+	 * 
+	 * @return a valid TransferMode enum object if valid, else null.
+	 */
+	public static TransferMode buildTransferMode(String mode)
+	{
+		TransferMode tMode = null;
+		
+		if (mode.equals("netascii"))
+		{
+			tMode = TransferMode.NETASCII;
+		}
+		else if (mode.equals("octet"))
+		{
+			tMode = TransferMode.OCTET;
+		}
+		
+		return tMode;
 	}
 }
