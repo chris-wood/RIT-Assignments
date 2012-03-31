@@ -1,0 +1,111 @@
+\documentclass[11pt]{article}
+
+\usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype,
+	    graphicx, verbatim, listings, color, fancybox}
+\usepackage[pdftex]{hyperref}
+%\usepackage[margin=1in]{geometry}
+\usepackage{cawsty}
+\usepackage{fullpage}
+\usepackage{pseudocode}
+\usepackage{verbatim}
+
+\newcommand{\tlg}{\text{ lg}}
+\newcommand{\tln}{\text{ ln}}
+
+%\setlength{\parindent}{0pt}
+
+\linespread{1.2}
+
+\begin{document}
+\arltitle{4005-800 Algorithms}{Homework 2}
+\begin{prob}{1}
+\end{prob}
+\begin{sol} 
+
+The time complexity of the recurrence $F_{n}$ can be defined as follows.
+
+\begin{eqnarray*}
+T_{F}(0) & = & 1 \\
+T_{F}(1) & = & 1 \\
+T_{F}(n) & = & T_{F}(n-1) + T_{F}(n-2)
+\end{eqnarray*}
+
+The solution to $T_{F}(n)$ can be solved using the method of homogeneous equations, which yields the result that $T_{F}(n) = \Theta(\phi^{n})$, where $\phi = \frac{1 + \sqrt{5}}{2}$ (the golden ratio).
+
+\end{sol}
+
+\begin{prob}{2}
+\end{prob}
+\begin{sol}
+
+The time complexity of the $fibIt$ routine can be found by solving the recurrence relation that defines $fibIt$. More specifically, we can such a recurrence relation for $fibIt$ by analyzing the number of additions performed, which corresponds to the following equation.
+
+\begin{eqnarray*}
+T_{f}(0) & = & 0 \\
+T_{f}(1) & = & 0 \\
+T_{f}(n) & = & T_{f}(n-1) + 1
+\end{eqnarray*}
+
+This is because there is only one addition made in each recursive call from $f(n;a,b)$ to $f(n-1;b,a+b)$, and there are no additions made in the two cases where $n = 0$ and $n = 1$.
+
+In order to solve this recurrence relation we can expand out the expression and attempt to identify the pattern. This process is shown below.
+
+\begin{eqnarray*}
+T_{f}(n) & = & T_{f}(n - 1) + 1 \\
+& = & (T_{f}(n - 2) + 1) + 1 = T_{f}(n - 2) + 2 \\
+& = & (T_{f}(n - 3) + 1) + 2 = T_{f}(n - 3) + 3 \\
+& = & ... \\
+& = & (T_{f}(n - k) + 1) + k = T_{f}(n - k) + k
+\end{eqnarray*}
+
+Based on this pattern, we can reach the first base case of this recurrence relation ($T_{f}(1)$) when $(n - k) = 1$, meaning that $k = (n - 1)$. Thus, we have the following.
+
+\begin{eqnarray*}
+T_{f}(n) & = & T_{f}(n - (n - 1)) + (n - 1)  \\
+& = & T_{f}(1) + (n - 1) \\
+& = & 0 + (n - 1) \\
+& = & n - 1
+\end{eqnarray*}
+
+Based on this observation we can see that $T_{f}(n) \in \Theta(n)$, or simply $T_{f}(n) = \Theta(n)$. 
+
+%However, to verify this, we perform the substitution method on this recurrence relation. To start, we also %assume that $T_{f}(n - 1) \in \Theta(n)$. Then, we perform the induction as follows.
+
+%\begin{eqnarray*}
+%T_{f}(n) & = & T_{f}(n - 1) + 1 \\
+%& = & \Theta(n) + 1 \\
+%& = & n + (n - 1) \\
+%& = & n - 1
+%\end{eqnarray*}
+
+%%TODO: is it necessary to perform substitution to solve the rest of this?
+
+\end{sol}
+
+\begin{prob}{3}
+\end{prob}
+\begin{sol}
+
+\textbf{Base ($n = 0$)} \\
+When $n = 0$, we have the following equality.
+
+\begin{eqnarray*}
+L_{0}(a,b) & = & (f(0;a,b),f(1;a,b)) \\
+& = & (a, b)
+\end{eqnarray*}
+
+\textbf{Induction ($n > 0$)} \\
+First, we assume that $L^{n}(a,b) = (f(n;a,b),f(n + 1;a,b))$. Now we show that $L^{n+1}(a,b) = (f(n + 1;a,b),f(n + 2;a,b))$.
+
+\begin{eqnarray*}
+L^{n + 1}(a,b) & = & L(L^{n}(a,b)) \text{ (by multiplication powers)}\\
+& = & L(f(n;a,b),f(n + 1;a,b)) \text{ (by induction)} \\
+& = & (f(n + 1;a,b), f(n;a,b) + f(n + 1;a,b)) \text{ (by definition of $L$)} \\
+& = & (f(n + 1;a,b), f(n + 2;a,b)) \text{ (by Theorem 1)}
+\end{eqnarray*}
+
+Thus, $L^{n+1}(a,b) = (f(n + 1;a,b),f(n + 2;a,b))$, as desired. Therefore, we know that $f(n;a,b) = (L^{n}(a,b))_{1}$.
+
+\end{sol}
+
+\end{document}
