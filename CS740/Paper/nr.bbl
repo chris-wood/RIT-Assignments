@@ -4,4 +4,17 @@
 Anthony~Dekker Bernard.
 \newblock Network robustness and graph topology.
 
+\bibitem{Onion}
+Hans~J Herrmann, Christian~M Schneider, André~A Moreira, José S~Andrade Jr,
+  and Shlomo Havlin.
+\newblock Onion-like network topology enhances robustness against malicious
+  attacks.
+\newblock {\em Journal of Statistical Mechanics: Theory and Experiment},
+  2011(01):P01027, 2011.
+
+\bibitem{Attacks}
+Petter Holme, Beom~Jun Kim, Chang~No Yoon, and Seung~Kee Han.
+\newblock Attack vulnerability of complex networks.
+\newblock {\em Phys. Rev. E}, 65:056109, May 2002.
+
 \end{thebibliography}

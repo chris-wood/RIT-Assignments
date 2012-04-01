@@ -8,6 +8,30 @@
 \usepackage{fullpage}
 \usepackage{pseudocode}
 
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}% http://ctan.org/pkg/algorithmicx
+\usepackage{lipsum}% http://ctan.org/pkg/lipsum
+\usepackage{xifthen}% http://ctan.org/pkg/xifthen
+\usepackage{needspace}% http://ctan.org/pkg/needspace
+\usepackage{hyperref}% http://ctan.org/pkg/hyperref
+
+% ================ ALGORITHM ENVIRONMENT ================
+\newcounter{numberedAlg}% Algorithm counter
+\newenvironment{numberedAlg}[1][]%
+  {% \begin{numberedAlg}[#1]
+    \needspace{2\baselineskip}% At least 2\baselineskip required, otherwise break
+    \noindent \rule{\linewidth}{1pt} \endgraf% Top rule
+    \refstepcounter{numberedAlg}% For correct reference of algorithm
+    \centering \textsc{Algorithm}~\thenumberedAlg%
+    \ifthenelse{\isempty{#1}}{}{:\ #1}% Typeset name (if provided)
+  }{% \end{numberedAlg}
+  \noindent \rule{\linewidth}{1pt}% Bottom rule
+  }%
+
 %\setlength{\parindent}{0pt}
 
 \linespread{1.2}
@@ -72,11 +96,29 @@ node can be seen as $K_{n}$, the complete graph on $n$ vertices (that is, $|V(G)
 communicate with exactly $n-1$ other nodes, which means that its degree $deg(v) = n-1$. 
 
 In order to discuss the connectivity of networks, it is necessary to define the connectivity of such
-graphs in terms of both the vertices and edges. TODO: pull definitions from graph theory textbook
+graphs in terms of both the vertices and edges. We introduce the following terms to use throughout 
+the remainder of this paper.
 
-TODO: finish definitions above
+% graph connectivity
+\begin{define}
+A graph $G$ is said to be \textbf{connected} if and only if $\forall u,v \in V(G)$ there exists a path between $u$ and $v$.
+\end{define}
 
-TODO: continue with the idea of optimal connectivity among nodes
+% vertex connectivity
+% edge connectivity
+
+TODO: continue with the idea of optimal connectivity among nodes?
+
+\section{Network Attacks}
+%HDA - high degree adaptiveness - onion
+% from: http://polymer.bu.edu/~hes/networks/hsmah11.pdf
+
+%more from http://www.ncbi.nlm.nih.gov/pubmed/12059649
+%Some other attacks are described in \cite{Attacks}
+
+Attacks on large scale networks are not usually ad-hoc; they are based on a logical and structured strategy for dereasing the connectivity of the network by taking as little action as possible. Clearly, if one was to delete all nodes from a network, then that would yield the maximum decrease in connectivity. However, such attacks are not practical, so these strategies must be considered at a smaller scale.
+
+%TODO: print attack paper, read, and include attack summaries in here
 
 \section{Network Robustness}
 %http://arxiv.org/pdf/1203.2982v1.pdf
@@ -87,16 +129,39 @@ a two unique instances of such measurements, one of which is based entirely on n
 
 \subsection{Node-based Measurement}
 A natural way to think of network robustness is from the perspective of individual nodes, since they are 
-usually the primary targets in malicious or non-malicious network attacks. Using this idea, (AUTHOR NAME) 
+usually the primary targets in malicious or non-malicious network attacks. Using this idea, Herrmann et al
 defined a concise equation for calculating the robustness of a network based on the size of connected
-components in the corresponding graph. Mathematically, this can be defined as follows (CITE 24 HERE):
+components in the corresponding graph. Mathematically, this can be defined as follows \cite{Onion}:
 
+%24: http://polymer.bu.edu/~hes/networks/hsmah11.pdf
 \begin{eqnarray*}
-%TODO: verify that this is correct
 R_{n} = \frac{1}{n}\sum_{q=\frac{1}{n}}^{1}S(q)
 \end{eqnarray*}
 
-TODO: get details from this paper
+In laymen terms, this robustness measurement computes the fractions of nodes in the largest connected cluster $S(q)$ after removing $q$ nodes. This is an intuitive calculation, since the goal of engineering robust networks is to ensure the highest measure of connectivity in the event of any node deletions. Furthermore, it has been mathematically verified to represent the exact amount of nodes that need to be deleted for the network to collapse when targeted by high-degree adaptive attacks, which are a specific class of attacks that attempt to remove highly connected nodes from the network. 
+
+In their study of optimal graph structures that yield the highest resilience to such attacks, Herrmann et al found that most networks will exhibit onion topolgies, meaning that there are distinct layers of nodes that are connected, and that each layer $i$ has more connectivity than its parent layer $i+1$ \cite{Onion}. An example of such a graph is shown in Figure~\ref{fig:Onion}.
+
+\begin{figure}[h!]
+	\label{fig:Onion}
+	\centering
+		\includegraphics[width=0.5\textwidth]{Onion.jpg}
+	\caption{An example of a graph with the onion-like topology \cite{Onion}}
+\end{figure}
+
+Herrmann et al have also conducted research on optimization algorithms that increase this robustness measure while at the same time maintaining the distribution of vertex degrees throughout the network. This is an important concept, because their algorithm simply seeks to re-arrange node edges and connections to improve the resilience of the host network to any kinds of attacks. This algorithm can be described as follows:
+
+% the re-structure algorithm
+\begin{numberedAlg}[Monte-Carlo-based Robustness Optimization]
+\label{alg1}
+\begin{algorithmic}[1]
+        \item Choose two random edges $(a,b)$ and $(c,d)$ from the graph $G$.
+	\item Replace these edges with $(a,c)$ and $(b,d)$.
+	\item If $R_{new} > R_{old}$, accept the swap and goto step 1. Otherwise, revert the swap and goto step 1. 
+\end{algorithmic}
+\end{numberedAlg}
+
+Algorithm~\ref{alg1} is repeated until an ideal level of robustness has been obtained, albiet at the sake of sometimes massive computations (as is the case with Monte-Carlo methods).
 
 \subsection{Node- and Link-based Measurement}
 %TODO: http://arxiv.org/pdf/1203.2982v1.pdf
