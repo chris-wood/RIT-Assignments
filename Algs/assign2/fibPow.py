@@ -12,8 +12,8 @@ import sys
 ##########################################################################
 # Answer 4a: L is represented as the matrix product:
 #            
-#            L(a,b) = |0 1||a| = (b, a+b)
-#                     |1 1||b|
+#            L(a,b) = (0 1)(a) = (b, a+b)
+#                     (1 1)(b)
 #
 # Answer 4b: The method of repeated squaring was implemented
 #            to raise objects of type L to the nth power in 
@@ -42,15 +42,16 @@ class L(object):
 		
 		By matrix representation: 
 		
-			L(a,b) = |0 1||a| = (b, a+b)
-			         |1 1||b|
+			L(a,b) = (0 1)(a) = (b, a+b)
+			         (1 1)(b)
 		
-			L^n(a,b) = (|0 1|)^n|a| = (f(n;a,b), f(n+1;a,b))
-			           (|1 1|)  |b|
+			L^n(a,b) = (0 1)^n(a) = (f(n;a,b), f(n+1;a,b))
+			           (1 1)  (b)
 	"""
 	
 	# The internal slots for the L object, consisting of the 
 	# pair of elements a and b and the product matrix m.
+	# The matrix is represented as a flat array/tuple.
 	__slots__ = ['a', 'b', 'm']
 	
 	# Constructor for L that initializes the (a,b) variables
