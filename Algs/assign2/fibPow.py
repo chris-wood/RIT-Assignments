@@ -52,7 +52,9 @@ class L(object):
 	# The internal slots for the L object, consisting of the 
 	# pair of elements a and b and the product matrix m.
 	# The matrix is represented as a flat array/tuple.
-	__slots__ = ['a', 'b', 'm']
+	a = 0            # default to 0
+	b = 0            # default to 0
+	m = (1, 0, 0, 1) # default to identity matrix
 	
 	# Constructor for L that initializes the (a,b) variables
 	# and the product matrix.
@@ -72,7 +74,7 @@ class L(object):
 		v3 = (self.m[2] * other.m[0]) + (self.m[3] * other.m[2])
 		v4 = (self.m[2] * other.m[1]) + (self.m[3] * other.m[3])
 		
-		# Return a new L object that represents the result of this mult
+		# Return a new L object that represents the result 
 		return L(self.a, self.b, v1, v2, v3, v4)
 	
 	# Evaluate the L object to compute and return the resulting 
@@ -82,24 +84,29 @@ class L(object):
 		v2 = (self.m[2] * self.a) + (self.m[3] * self.b)
 		return (v1, v2)
 
-# The identity matrix used by power in the base case
-# where the power value is 0 (i.e. o ^ 0 = I)
-IDENTITY = L(0, 0, 1, 0, 0, 1)
-
 def power(o, p):
 	""" Raise the object o to the power p
 		
 		This function implements the method of repeated
 		squaring to perform exponentiation in O(logn) time.
 	"""
-	if (p == 0):
-		return IDENTITY
-	elif (p == 1):
-		return o
-	elif ((p % 2) == 0):
-		return power(o * o, p / 2)
-	else:
-		return o * power(o * o, (p - 1) / 2)
+	# Initialize the product to the identity
+	r = L(o.a, o.b, 1, 0, 0, 1)
+	
+	# Loop while the power is non-zero
+	while (p != 0):
+		
+		# If the power is odd, multiply by r 
+		if ((p % 2) != 0):
+			r = r * o
+			p = p - 1
+		
+		# Square the base object and then cut the power in half 
+		o = o * o
+		p = p / 2
+
+	# Return the resulting object 
+	return r
 
 
 def fibPow(n):
