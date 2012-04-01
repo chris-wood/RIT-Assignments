@@ -104,27 +104,21 @@ public class TFTPclient implements ITFTPclient
 	 * 
 	 * @return - a generic TFTP message object instance. 
 	 * 
-	 * @throws TimeoutException - when the socket I/O times out.
+	 * @throws IOException - when a socket I/O error occurs
+	 * @throws SocketTimeoutException - when the socket I/O times out.
 	 * @throws MalformedMessageException - when the message received is not valid. 
 	 */
 	@Override
 	public TFTPmessage getMessage() throws 
-		SocketTimeoutException, MalformedMessageException 
+		IOException, SocketTimeoutException, MalformedMessageException 
 	{
 		// Build a buffer to store the UDP message contents
 		int messageSize = TFTPmessage.MESSAGE_SIZE;
 		byte[] receiveData = new byte[messageSize];
 		DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 		
-	    try 
-	    {
-	    	// Try to receive a UDP packet
-			serverSocket.receive(receivePacket);
-		} 
-	    catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
+	    // Try to receive a UDP packet
+		serverSocket.receive(receivePacket);
 	    
 	    TFTPmessage message = buildMessage(receivePacket);
 	    
@@ -178,5 +172,63 @@ public class TFTPclient implements ITFTPclient
 		}
 		
 		return message;
+	}
+
+	/**
+	 * Send a message to the TFTP server and wait for a response, retrying the
+	 * message send a specific number of times.
+	 * 
+	 * @precondition - server connection established.
+	 * @postcondition - none.
+	 * 
+	 * @param msg - message to send.
+	 * @param port - port to send the message to.
+	 * 
+	 * @return a new TFTPmessage if transfer was successful, false otherwise.
+	 * 
+	 * @throws IOException - when an I/O error occurs. 
+	 * @throws SocketTimeoutException - when the socket I/O times out more than numRetries times.
+	 * @throws MalformedMessageException - when the message received is not valid.
+	 */
+	@Override
+	public TFTPmessage sendAndReceiveMessage(TFTPmessage msg, int port, int numRetries) 
+			throws IOException, SocketTimeoutException, MalformedMessageException 
+	{
+		int failures = 0;
+		TFTPmessage result = null;
+
+		// Continue until we fail out
+		while (failures < numRetries)
+		{	
+			try 
+			{
+				// Try to send the message and then receive the result
+				sendMessage(msg, port);
+				result = getMessage();
+				failures = numRetries + 1;
+			}
+			catch (SocketTimeoutException e)
+			{
+				failures++;
+				
+				// Propagate the exception up the stack if we failed for the last time
+				if (failures >= numRetries)
+				{
+					throw e;
+				}
+			}
+			catch (IOException e)
+			{
+				failures++;
+				
+				// Propagate the exception up the stack if we failed for the last time
+				if (failures >= numRetries)
+				{
+					throw e;
+				}
+			}
+		}
+		
+		return result;
 	}
 }

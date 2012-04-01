@@ -105,6 +105,6 @@ public class ErrorMessage extends TFTPmessage
 	@Override
 	public String toString()
 	{
-		return "ERROR (" + errorNumber + "): " + errorMessage;
+		return "Error code " + errorNumber + ": " + errorMessage;
 	}
 }

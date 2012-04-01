@@ -56,14 +56,34 @@ public interface ITFTPclient
 	/**
 	 * Receive a generic TFTP message from the host server.
 	 * 
-	 * @precondition - server connection establish.
+	 * @precondition - server connection established.
 	 * @postcondition - none.
 	 * 
 	 * @return - a generic TFTP message object instance. 
 	 * 
+	 * @throws IOException - when a socket I/O error occurs
 	 * @throws TimeoutException - when the socket I/O times out.
 	 * @throws MalformedMessageException - when the message received is not valid. 
 	 */
 	public TFTPmessage getMessage() throws 
-		SocketTimeoutException, MalformedMessageException;
+		IOException, SocketTimeoutException, MalformedMessageException;
+	
+	/**
+	 * Send a message to the TFTP server and wait for a response, retrying the
+	 * message send a specific number of times.
+	 * 
+	 * @precondition - server connection established.
+	 * @postcondition - none.
+	 * 
+	 * @param msg - message to send.
+	 * @param port - port to send the message to.
+	 * 
+	 * @return a new TFTPmessage if transfer was successful, false otherwise.
+	 * 
+	 * @throws IOException - when an I/O error occurs. 
+	 * @throws SocketTimeoutException - when the socket I/O times out more than numRetries times.
+	 * @throws MalformedMessageException - when the message received is not valid.
+	 */
+	public TFTPmessage sendAndReceiveMessage(TFTPmessage msg, int port, int numRetries) 
+			throws IOException, SocketTimeoutException, MalformedMessageException;
 }

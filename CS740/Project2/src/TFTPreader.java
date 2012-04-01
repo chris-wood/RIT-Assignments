@@ -27,6 +27,11 @@ public class TFTPreader
 	private static final int DEFAULT_TIMEOUT = 2000;
 	
 	/**
+	 * The default number of packet retries before failure.
+	 */
+	private static final int RETRY_TIMES = 5;
+	
+	/**
 	 * The default TFTP port.
 	 */
 	private static final int DEFAULT_PORT = 69;
@@ -88,18 +93,19 @@ public class TFTPreader
 			return;
 		}
 		
-		// If we got here then no errors have occured when communicating with
+		// If we got here then no errors have occurred when communicating with
 		// the TFTP server, so proceed as usual
 		try 
 		{
 			// Send a request for a new file to the client
-			client.sendMessage(new RequestMessage(fileName, TFTPmessage.Opcode.RRQ, mode), DEFAULT_PORT);
+			TFTPmessage result = client.sendAndReceiveMessage(new 
+					RequestMessage(fileName, TFTPmessage.Opcode.RRQ, mode), 
+					DEFAULT_PORT, RETRY_TIMES);
 
 			// Continue reading data until we reach a non-full block
 			boolean transferComplete = false;
 			while (!transferComplete)
 			{
-				TFTPmessage result = client.getMessage();
 				if (result instanceof DataMessage)
 				{
 					DataMessage msg = (DataMessage)result;
@@ -116,8 +122,8 @@ public class TFTPreader
 						}
 						else
 						{
-							//System.out.println("Sending ack for block " + msg.blockNumber);
-							client.sendMessage(new AckMessage(msg.blockNumber), msg.port);
+							result = client.sendAndReceiveMessage(new AckMessage(msg.blockNumber), 
+									msg.port, RETRY_TIMES);
 						}
 					}
 				}
@@ -132,17 +138,17 @@ public class TFTPreader
 			// Finally, write the file contents to the disk.
 			writeFile(fileName, dataBlocks);
 		} 
+		catch (SocketTimeoutException e)
+		{
+			System.err.println("TFTPreader: " + e.getMessage());
+		}
 		catch (MalformedMessageException e)
 		{
-			e.printStackTrace();
-		}
-		catch (SocketTimeoutException e1) 
-		{
-			e1.printStackTrace();
+			System.err.println("TFTPreader: " + e.getMessage());
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			System.err.println("TFTPreader: " + e.getMessage());
 		}
 	}
 	
