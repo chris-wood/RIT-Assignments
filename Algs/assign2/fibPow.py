@@ -25,9 +25,9 @@ import sys
 #
 # Answer 4d: Since the product of any two matrices is a constant
 #            time operation running in O(1) (theta), and we are performing
-#            O(logn) (theta) multiplications using the method of repeated
+#            O(logn) multiplications using the method of repeated
 #            squaring for fast exponentiation, we can conclude that
-#            fibPow runs in O(logn) (theta) time.
+#            fibPow runs in O(logn) time.
 #
 ##########################################################################
 class L(object):
@@ -84,30 +84,46 @@ class L(object):
 		v2 = (self.m[2] * self.a) + (self.m[3] * self.b)
 		return (v1, v2)
 
-def power(o, p):
-	""" Raise the object o to the power p
+def powerOne(base, p):
+	""" Raise the object 'base' to the power p
 		
 		This function implements the method of repeated
-		squaring to perform exponentiation in O(logn) time.
+		squaring using a recursive approach to perform 
+		exponentiation in O(logn) time.
+	"""
+	if (p == 0):
+		return IDENTITY
+	elif (p == 1):
+		return base
+	elif ((p % 2) == 0):
+		return powerTwo(base * base, p / 2)
+	else:
+		return base * powerTwo(base * base, (p - 1) / 2)
+
+def powerTwo(base, p):
+	""" Raise the object 'base' to the power p
+		
+		This function implements the method of repeated
+		squaring using an iterative based approach 
+		to perform exponentiation in O(logn) time.
 	"""
 	# Initialize the product to the identity
-	r = L(o.a, o.b, 1, 0, 0, 1)
+	result = L(base.a, base.b, 1, 0, 0, 1)
 	
 	# Loop while the power is non-zero
 	while (p != 0):
 		
 		# If the power is odd, multiply by r 
 		if ((p % 2) != 0):
-			r = r * o
+			result = result * base
 			p = p - 1
 		
 		# Square the base object and then cut the power in half 
-		o = o * o
+		base = base * base
 		p = p / 2
 
 	# Return the resulting object 
-	return r
-
+	return result
 
 def fibPow(n):
 	""" Return the nth Fibonacci number.
@@ -117,9 +133,9 @@ def fibPow(n):
 		nth power and then return the first pair
 		in L's evaluated tuple.
 	"""
-	o = L(0, 1, 0, 1, 1, 1)
-	o = power(o, n)
-	return o.evaluate()[0]
+	base = L(0, 1, 0, 1, 1, 1)
+	base = powerOne(base, n)
+	return base.evaluate()[0]
 
 # This is the fixed upper bound used for autonomous testing
 # of the fibPow function.

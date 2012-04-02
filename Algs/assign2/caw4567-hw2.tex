@@ -120,24 +120,29 @@ $L\begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pma
 \end{prob}
 \begin{sol}
 
-We can use the method of repeated squaring to achieve fast exponentiation in $\Theta(\tlog n)$ time. The source code for this routine is shown below.
+We can use the method of repeated squaring to achieve fast exponentiation in $O(\tlog n)$ time. The source code for this routine (which can be implemented both recursively and iteratively) is shown below.
 \begin{lstlisting}
-def power(o, p):
-	r = IDENTITY
-	
-	# Loop while the power is non-zero
-	while (p != 0):
-		
-		# If the power is odd, multiply by r 
-		if ((p % 2) != 0):
-			r = r * o
-			p = p - 1
-		
-		# Square the base object and then cut the power in half 
-		o = o * o
-		p = p / 2
+def power(base, p):
+	if (p == 0):
+		return IDENTITY
+	elif (p == 1):
+		return base
+	elif ((p % 2) == 0):
+		return power(base * base, p / 2)
+	else:
+		return base * power(base * base, (p - 1) / 2)
+\end{lstlisting}
 
-	return r
+\begin{lstlisting}
+def power(base, p):
+	result = IDENTITY
+	while (p != 0):
+		if ((p % 2) != 0):
+			result = result * base
+			p = p - 1
+		base = base * base
+		p = p / 2
+	return result
 \end{lstlisting}
 \end{sol}
 
@@ -145,12 +150,12 @@ def power(o, p):
 \end{prob}
 \begin{sol}
 
-Using the representation for $L$ and the $power$ function described above, we can implement $fibPow$ as follows:
+Using the representation for $L$ and the power functions described above, we can implement $fibPow$ as follows:
 \begin{lstlisting}
 def fibPow(n):
-	o = L(0,1)
-	o = power(o, n)
-	return o[0]
+	base = L(0,1)
+	base = power(base, n)
+	return base[0]
 \end{lstlisting}
 \end{sol}
 
@@ -158,7 +163,7 @@ def fibPow(n):
 \end{prob}
 \begin{sol}
 
-Since the time to perform matrix multiplication with a $2x2$ and $2x1$ matrix is constant time (i.e. $\Theta(1)$), and the multiplication routine of repeated squares that surrounds this constant operation runs in $\Theta(\tlog n)$ time, we can conclude that the time complexity of $fibPow$ is $\Theta(\tlog n)$.
+Since the time to perform matrix multiplication with a $2x2$ and $2x1$ matrix is constant time (i.e. $\Theta(1)$), and the multiplication routine of repeated squares that utilizes this constant operation runs in $O(\tlog n)$ time, we can conclude that the time complexity of $fibPow$ is $O(\tlog n)$.
 \end{sol}
 
 \begin{prob}{5-a}

@@ -14,7 +14,7 @@ import sys
 #
 # Answer: The smallest n that appears to make fib run slowly 
 # is n = 31.
-UPPER_BOUND = 31
+UPPER_BOUND = 4
 
 def fib(n):
 	""" Return the nth Fibonacci number.
@@ -22,6 +22,7 @@ def fib(n):
 		This function follows the recurrence relation
 		defined in the homework assignment.
 	"""
+	
 	if (n == 0):
 		return 0
 	elif (n == 1):
