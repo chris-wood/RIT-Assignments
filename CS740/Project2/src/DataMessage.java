@@ -116,7 +116,7 @@ public class DataMessage extends TFTPmessage
 	@Override
 	public String toString()
 	{
-		StringBuilder builder = new StringBuilder("DATA[" + blockNumber + ": ");
+		StringBuilder builder = new StringBuilder("DATA[" + blockNumber + "]: ");
 		for (int i = 0; i < data.length; i++)
 		{
 			builder.append(data[i] + " ");

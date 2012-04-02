@@ -54,7 +54,7 @@ public class ErrorMessage extends TFTPmessage
 		StringBuilder builder = new StringBuilder();
 		for (int i = OPCODE_SIZE + ERROR_NUMBER_SIZE; i < packet.getLength(); i++)
 		{
-			builder.append(packet.getData()[i]);
+			builder.append((char)packet.getData()[i]);
 		}
 		errorMessage = builder.toString();
 	}

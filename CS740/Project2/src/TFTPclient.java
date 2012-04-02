@@ -88,10 +88,6 @@ public class TFTPclient implements ITFTPclient
 		
 		// Send the message to the server
 		byte[] data = message.rawData();
-		
-		// debug
-		System.out.println(message.toString());
-		
 		DatagramPacket packet = new DatagramPacket(data, data.length, IPAddress, port);
 		serverSocket.send(packet);
 	}
@@ -117,14 +113,9 @@ public class TFTPclient implements ITFTPclient
 		byte[] receiveData = new byte[messageSize];
 		DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 		
-	    // Try to receive a UDP packet
+	    // Get and return the next message
 		serverSocket.receive(receivePacket);
-	    
 	    TFTPmessage message = buildMessage(receivePacket);
-	    
-	    // debug 
-	    System.out.println(message.toString());
-	    
 	    return message;
 	}
 	
@@ -151,15 +142,12 @@ public class TFTPclient implements ITFTPclient
 			switch (opcode)
 			{
 				case ACK:
-					System.out.println("Got ACK");
 					message = new AckMessage(packet);
 					break;
 				case DATA:
-					System.out.println("Got DATA");
 					message = new DataMessage(packet);
 					break;
 				case ERROR:
-					System.out.println("Got ERROR");
 					message = new ErrorMessage(packet);
 					break;
 				default:
