@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.net.DatagramPacket;
 
 /*
@@ -61,14 +62,21 @@ public class DataMessage extends TFTPmessage
 		port = packet.getPort(); 
 		
 		// Rebuild the block number for this file block
-		blockNumber = (int)(packet.getData()[BLOCK_NUMBER_INDEX] << 8 | 
-				packet.getData()[BLOCK_NUMBER_INDEX + 1]);
+		byte[] blockBuffer = new byte[BLOCK_NUMBER_SIZE];
+		for (int i = 0; i < BLOCK_NUMBER_SIZE; i++)
+		{
+			blockBuffer[i] = packet.getData()[BLOCK_NUMBER_INDEX + i];
+		}
+		blockNumber = new BigInteger(blockBuffer).intValue(); 
 		
 		// Rebuild the raw data 
-		data = new byte[size - (OPCODE_SIZE + BLOCK_NUMBER_SIZE)];
-		for (int i = OPCODE_SIZE + BLOCK_NUMBER_SIZE, index = 0; i < size; i++, index++)
+		if (size > (OPCODE_SIZE + BLOCK_NUMBER_SIZE))
 		{
-			data[index] = packet.getData()[i];
+			data = new byte[size - (OPCODE_SIZE + BLOCK_NUMBER_SIZE)];
+			for (int i = OPCODE_SIZE + BLOCK_NUMBER_SIZE, index = 0; i < size; i++, index++)
+			{
+				data[index] = packet.getData()[i];
+			}
 		}
 	}
 

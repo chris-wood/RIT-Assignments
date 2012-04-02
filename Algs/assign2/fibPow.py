@@ -92,7 +92,7 @@ def powerOne(base, p):
 		exponentiation in O(logn) time.
 	"""
 	if (p == 0):
-		return IDENTITY
+		return L(base.a, base.b, 1, 0, 0, 1)
 	elif (p == 1):
 		return base
 	elif ((p % 2) == 0):
