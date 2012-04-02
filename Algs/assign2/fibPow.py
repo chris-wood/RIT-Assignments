@@ -24,10 +24,10 @@ import sys
 #            L and the power function, as described.
 #
 # Answer 4d: Since the product of any two matrices is a constant
-#            time operation running in O(1) (theta), and we are performing
-#            O(logn) multiplications using the method of repeated
-#            squaring for fast exponentiation, we can conclude that
-#            fibPow runs in O(logn) time.
+#            time operation running in O(1) (Theta) time, and we are using 
+#            a fast exponentiation algorithm (the method of repeated
+#            squaring) that performs in O(logn) (Theta) time, we can 
+#            conclude that fibPow runs in O(logn) (Theta) time.
 #
 ##########################################################################
 class L(object):

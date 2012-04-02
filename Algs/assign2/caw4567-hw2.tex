@@ -23,17 +23,44 @@
 \end{prob}
 \begin{sol} 
 
-The time complexity of the recurrence $F_{n}$ can be characterized using a recurrence relation that defines the number of recursive calls made by $F_{n}$, as shown below.
+The time complexity of the recurrence $fib$ can be characterized using a recurrence relation that defines the number of recursive calls made by $F_{n}$, as shown below.
 \begin{eqnarray*}
 T_{F}(0) & = & 1 \\
 T_{F}(1) & = & 1 \\
 T_{F}(n) & = & T_{F}(n-1) + T_{F}(n-2)
 \end{eqnarray*}
 
-The solution to $T_{F}(n)$ can be solved by treating it as a homogeneous second-order linear recurrence with constant coefficients, which yields the result that $T_{F}(n) = \frac{1}{\sqrt{5}}(\phi^{n+1} - \phi'^{n+1})$, where $\phi = \frac{1 + \sqrt{5}}{2}$ and $\phi' = \frac{1 - \sqrt{5}}{2}$. Thus, we can express this solution, and subsequently the time complexity of $F_{n}$, as a function of exponential growth of $n$, as shown below. 
+The solution to $T_{F}(n)$ can be solved by making the observation that $T_{F}(n) = F_{n+1}$, which is proved below using strong induction.\\
+
+\textbf{Base ($n = 0$)} \\
+By definition we know that $T_{F}(0) = 1$ and $F_{0 + 1} = F_{1} = 1$. Thus, $T_{F}(0) = F_{1}$.
+
+\textbf{Base ($n = 1$)} \\
+By definition we know that $T_{F}(1) = 1$ and $F_{1 + 1} = F_{2} = F_{1} + F_{0} = 0 + 1 = 1$. Thus, $T_{F}(1) = F_{2}$.
+
+\textbf{Induction ($n > 1$)} \\
+Assume that $T_{F}(k) = F_{k + 1}$ for all $k$ such that $2 \leq k < n$. We will show that $T_{F}(n) = F_{n + 1}$
+\begin{eqnarray*}
+T_{F}(n) & = & T_{F}(n - 1) + T_{F}(n - 2) \text{ (by definition of $T_{F}$)} \\
+& = & F_{n} + F_{n - 1} \text{ (by the induction hypothesis)} \\
+& = & F_{n + 1} \text{ (by definition of $F_{n}$) }
+\end{eqnarray*}
+
+The solution to the recurrence $T_{F}(n) = F_{n+1}$ can then be solved by treating it as a homogeneous second-order linear recurrence with constant coefficients, which yields the result that $T_{F}(n) = F_{n+1} = \frac{1}{\sqrt{5}}(\phi^{n+1} - \phi'^{n+1})$, where $\phi = \frac{1 + \sqrt{5}}{2}$ and $\phi' = \frac{1 - \sqrt{5}}{2}$. Thus, we can express this solution, and subsequently the time complexity of $fib$, as a function of exponential growth of $n$, as shown below. 
 \begin{eqnarray*}
 T_{F}(n) \in \Theta(\phi^{n}) \implies T_{F}(n) = \Theta(\phi^{n})
 \end{eqnarray*}
+
+However, without loss of generality, we can also solve $T_{F}(n)$ using the substitution approach, knowing that $T_{F}(n) = \Theta(a^{n})$ for some $a$, where $a$ is a real number.
+\begin{eqnarray*}
+T_{F}(n) &=& T_{F}(n-1) + T_{F}(n-2) \\
+a^{n} &=& a^{n-1} + a^{n-2} \text{ (by substitution)}\\
+0 &=& a^{n} - a^{n-1} - a^{n-2}  \text{ (move terms to one side)}\\
+0 &=& a^{2} - a - 1  \text{ (divide by $a^{n-2}$)}\\
+a &=& \frac{1 \pm \sqrt(5)}{2} \text{ (by quadratic equation for polynomial roots)}
+\end{eqnarray*}
+
+Thus, since $a = \frac{1 + \sqrt(5)}{2} = \phi$ is the larger of the two roots, we can conclude that $T_{F}(n) = \Theta(\phi^{n})$.
 
 \end{sol}
 
@@ -50,7 +77,7 @@ T_{f}(n) & = & T_{f}(n-1) + 1
 
 This is because there is only one addition made in each recursive call from $f(n;a,b)$ to $f(n-1;b,a+b)$, and there are no additions made in the two cases where $n = 0$ and $n = 1$.
 
-In order to solve this recurrence relation we can expand out the expression and attempt to identify the pattern (i.e. the \textbf{method of backwards substitution}). This process is shown below.
+In order to solve this recurrence relation we can expand out the expression and attempt to identify the pattern (i.e. the \textbf{method of iteration}). This process is shown below.
 \begin{eqnarray*}
 T_{f}(n) & = & T_{f}(n - 1) + 1 \\
 & = & (T_{f}(n - 2) + 1) + 1 = T_{f}(n - 2) + 2 \\
@@ -67,7 +94,7 @@ T_{f}(n) & = & T_{f}(n - (n - 1)) + (n - 1)  \\
 & = & n - 1
 \end{eqnarray*}
 
-Based on this observation we can clearly see that $T_{f}(n) \in \Theta(n)$, or simply $T_{f}(n) = \Theta(n)$. 
+Based on this observation we can clearly see that $T_{f}(n) \in \Theta(n - 1) = \Theta(n)$, or simply $T_{f}(n) = \Theta(n)$. 
 
 %However, to verify this, we perform the substitution method on this recurrence relation. To start, we also %assume that $T_{f}(n - 1) \in \Theta(n)$. Then, we perform the induction as follows.
 
@@ -120,7 +147,7 @@ $L\begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pma
 \end{prob}
 \begin{sol}
 
-We can use the method of repeated squaring to achieve fast exponentiation in $O(\tlog n)$ time. The source code for this routine (which can be implemented both recursively and iteratively) is shown below.
+We can use the method of repeated squaring to achieve fast exponentiation in $\Theta(\tlog n)$ time. The source code for this routine (which can be implemented both recursively and iteratively) is shown below.
 \begin{lstlisting}
 def power(base, p):
 	if (p == 0):
@@ -163,7 +190,7 @@ def fibPow(n):
 \end{prob}
 \begin{sol}
 
-Since the time to perform matrix multiplication with a $2x2$ and $2x1$ matrix is constant time (i.e. $\Theta(1)$), and the multiplication routine of repeated squares that utilizes this constant operation runs in $O(\tlog n)$ time, we can conclude that the time complexity of $fibPow$ is $O(\tlog n)$.
+Since the time to perform matrix multiplication with a $2x2$ and $2x1$ matrix is constant time (i.e. $\Theta(1)$), and the multiplication routine of repeated squares that utilizes this constant operation runs in $\Theta(\tlog n)$ time, we can conclude that the time complexity of $fibPow$ is $\Theta(\tlog n)$.
 \end{sol}
 
 \begin{prob}{5-a}
@@ -171,7 +198,7 @@ Write down the definition of pseudo-polynomial time.
 \end{prob}
 \begin{sol}
 \begin{define}
-A pseudo-polynomial time algorithm is one that runs in polynomial time in the numeric value of its input $n$, where the value is exponential in terms of the length of $n$ (i.e. the number of bits or digits).
+A pseudo-polynomial time algorithm is one that runs in polynomial time (i.e. $\Theta(n^{k}), n \geq 1$) with respect to the value of its input, but does not run in polynomial time with respect to the size of the input (i.e. it must be exponential time). In other words, when working with numerical input $n$ to an algorithm, we can say that such an algorithm runs in pseudo-polynomial time if its time complexity is polynomial with respect to $n$ and exponential with respect to $b = \tlg (n)$, because $b$ represents the approximate number of bits used to represent $n$ (i.e. the size of $n$).
 %\cite{BELOW}
 % http://www.esi2.us.es/~mbilbao/complexi.htm
 \end{define}
@@ -182,7 +209,7 @@ Is $fib$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
 
-No, $fib$ has a time complexity of $\Theta(\phi^{n})$, where $n$ is the input value, which means that it is exponential in the value of the input, which further implies that it is not polynomial in the value of the input. Therefore, by definition, $fib$ cannot be a pseudo-polynomial time algorithm.
+No, $fib$ has a time complexity of $\Theta(\phi^{n})$, where $n$ is the input value, which means that it is exponential with respect to the value of the input, which further implies that it is not polynomial with respect to the value of the input. Therefore, by definition, $fib$ is not a pseudo-polynomial time algorithm.
 \end{sol}
 
 \begin{prob}{5-c}
@@ -190,7 +217,7 @@ Is $fibIt$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
 
-Yes, $fibIt$ has a time complexity of $\Theta(n)$, which can also be defined as $\Theta(2^{\tlg n})$, where $n$ is the input value, which means that it also has polynomial time complexity in the value of $n$ but exponential time in the length of $n$. Therefore, by definition, $fibIt$ must be a pseudo-polynomial time algorithm.
+Yes, $fibIt$ has a time complexity of $\Theta(n)$, which can also be defined as $\Theta(2^{\tlg n})$, where $n$ is the input value and $\tlg (n)$ is the size of $n$. This means that it $fibIt$ has polynomial time complexity with respect to the value of $n$ and exponential time with respect to the size of $n$. Therefore, by definition, $fibIt$ is a pseudo-polynomial time algorithm.
 \end{sol}
 
 \begin{prob}{5-d}
@@ -198,7 +225,9 @@ Is $fibPow$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
 
-No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which can also be defined as $\Theta(2^{\tlg \tlg n})$, where $n$ is the input magnitude, which means that it is sub-polynomial in the magnitude of $n$ and sub-exponential in the bit size of $n$. Therefore, by definition, $fibPow$ is not a pseudo-polynomial time algorithm.
+No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which means that $fibPow$ does not have a time complexity of $\Theta(n^{k}), k \geq 1$. Therefore, since $fibPow$ does not have polynomial runtime in the value of $n$, it is not a pseudo-polynomial time algorithm.
+
+%No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which can also be defined as $\Theta(2^{\tlg \tlg n})$, where $n$ is the input value, which means that it is sub-polynomial in the magnitude of $n$ and sub-exponential in the bit size of $n$. Therefore, by definition, $fibPow$ is not a pseudo-polynomial time algorithm.
 
 %You can write n^(log(n)) as (k^(logk(n)))^(log(n)) = k^(K*(log(n)^2)). Since (log(n))^2 < n for n large enough, then this means that n^(log(n)) will grow slower than k^n
 \end{sol}
