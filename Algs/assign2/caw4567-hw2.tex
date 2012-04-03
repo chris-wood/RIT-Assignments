@@ -133,7 +133,7 @@ L^{n + 1}(a,b) & = & L(L^{n}(a,b)) \text{ (by law of exponents)}\\
 & = & (f(n + 1;a,b), f(n + 2;a,b)) \text{ (by Theorem 1)}
 \end{eqnarray*}
 
-Thus, $L^{n+1}(a,b) = (f(n + 1;a,b),f(n + 2;a,b))$, as desired. Therefore, we know that $f(n;a,b) = (L^{n}(a,b))_{1}$.
+Thus, $L^{n+1}(a,b) = (f(n + 1;a,b),f(n + 2;a,b))$, as desired. Therefore, we know that for any $n \in \mathbb{N}$, $L^{n}(a,b) = (f(n;a,b),f(n + 1;a,b))$, and subsequently that $f(n;a,b) = (L^{n}(a,b))_{1}$.
 
 \end{sol}
 
@@ -226,7 +226,7 @@ Write down the definition of pseudo-polynomial time.
 \end{prob}
 \begin{sol}
 \begin{define}
-A pseudo-polynomial time algorithm is one that runs in polynomial time with respect to the value $n$ of its input (i.e. $\Theta(n^{k}), n \geq 1$), but does not run in polynomial time with respect to the size $b$ of its input (i.e. it must run in exponential time with respect to the size of the input, or simply $\Theta(m^{b}), m > 1$). In other words, when working with numerical input $n$ to an algorithm, we can say that such an algorithm runs in pseudo-polynomial time if its time complexity is polynomial with respect to $n$ and exponential with respect to $b = \tlg (n)$, because $b$ represents the approximate number of bits used to represent $n$ (i.e. the size of $n$).
+A pseudo-polynomial time algorithm is one that runs in polynomial time with respect to the numerical value $n$ of its input (i.e. $\Theta(n^{k}), n \geq 1$), but does not run in polynomial time with respect to the size $b$ of its input (i.e. it must run in exponential time with respect to the size of the input, or simply $\Theta(m^{b}), m > 1$). In other words, when working with numerical input $n$ to an algorithm, we can say that such an algorithm runs in pseudo-polynomial time if its time complexity is polynomial with respect to $n$ and exponential with respect to $b = \tlg (n)$, because $b$ represents the approximate number of bits used to represent $n$ (i.e. the size of $n$).
 %\cite{BELOW}
 % http://www.esi2.us.es/~mbilbao/complexi.htm
 \end{define}
