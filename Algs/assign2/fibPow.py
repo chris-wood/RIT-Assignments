@@ -22,16 +22,22 @@ import sys
 # Answer 4b: The method of repeated squaring was implemented
 #            to raise objects of type L to the nth power in 
 #            O(logn) (Theta) time. The corresponding function to perform
-#            this operation is 'power'.
+#            this operation is 'power', which utilizes a 'matrixPower'
+#            implementation to perform fast exponentiation.
 #
 # Answer 4c: fibPow is implemented using the definition for 
 #            L and the power function, as described.
 #
-# Answer 4d: Since the product of any two matrices is a constant
-#            time operation running in O(1) (Theta) time, and we are using 
-#            a fast exponentiation algorithm (the method of repeated
-#            squaring) that performs in O(logn) (Theta) time, we can 
-#            conclude that fibPow runs in O(logn) (Theta) time.
+# Answer 4d: Notice that the time complexity of fibPow is directly 
+#            dependent on the complexity of power, where power can 
+#            be characterized as a single invocation of the matrixPower 
+#            routine followed by one more constant time matrix multiplication
+#            (i.e. a O(1) operation). Therefore, since the time 
+#            complexity of matrixPower is O(log n), we know that 
+#            the time complexity of power is O(log n) + O(1),
+#            which can be simplified to O(log n). Therefore, we 
+#            can conclude that the time complexity of the fibPow routine 
+#            is O(log n).
 #
 ##########################################################################
 class L(object):
