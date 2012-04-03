@@ -162,7 +162,7 @@ a^{n} = \left\{
   \end{array} \right.
 \]
 
-Careful analysis reveals that this algorithm runs in $\Theta(\tlog n)$ time because, on each iteration, the size is reduced by about a half at the expense of one or two multiplications. This assumes of course that the time for multiplication is $\Theta(1)$.
+Careful analysis reveals that this algorithm runs in $\Theta(\tlog n)$ time because, on each iteration, the size is reduced by about a half at the expense of one or two multiplications \cite{AlgoBook}. This assumes of course that the time for multiplication is $\Theta(1)$.
 
 The source code for this routine (which can be implemented both recursively and iteratively) is shown below.
 \begin{lstlisting}
@@ -196,10 +196,9 @@ def power(base, p):
 
 Using the representation for $L$ and the power functions described above, we can implement $fibPow$ as follows:
 \begin{lstlisting}
-def fibPow(n):
-	base = L(0,1)
-	base = power(base, n)
-	return base[0]
+def fibPow(n, a, b):
+	base = L(a,b)
+	return power(base, n)
 \end{lstlisting}
 \end{sol}
 
@@ -248,5 +247,11 @@ No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which can also be define
 
 %You can write n^(log(n)) as (k^(logk(n)))^(log(n)) = k^(K*(log(n)^2)). Since (log(n))^2 < n for n large enough, then this means that n^(log(n)) will grow slower than k^n
 \end{sol}
+
+\begin{thebibliography}{}
+\bibitem{AlgoBook}
+Levitin, Anany. {\it Introduction to the Design and Analysis of Algorithms.} Pearson, Boston: 2012. Print.
+\end{thebibliography}
+
 
 \end{document}

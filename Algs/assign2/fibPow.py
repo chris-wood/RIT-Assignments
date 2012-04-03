@@ -101,7 +101,7 @@ def powerOne(base, p):
 		exponentiation in O(logn) time.
 	"""
 	if (p == 0):
-		return L(base.a, base.b, 1, 0, 0, 1)
+		return L(base.a, base.b, 1, 0, 0, 1) # Identity 
 	elif (p == 1):
 		return base
 	elif ((p % 2) == 0):
@@ -134,17 +134,17 @@ def powerTwo(base, p):
 	# Return the resulting object 
 	return result
 
-def fibPow(n):
-	""" Return the nth Fibonacci number.
+def fibPow(n, a, b):
+	""" Implement L^{n}(a,b), which requires three parameters
+		for n, a, and b.
 		
 		This function utilizes the method of repeated
 		squaring to raise an object of type L to the
 		nth power and then return the first pair
 		in L's evaluated tuple.
 	"""
-	base = L(0, 1, 0, 1, 1, 1)
-	base = powerOne(base, n)
-	return base.evaluate()[0]
+	base = L(a, b, 0, 1, 1, 1)
+	return powerOne(base, n)
 
 # This is the fixed upper bound used for autonomous testing
 # of the fibPow function.
@@ -156,6 +156,6 @@ FIXED_POWER = 31
 	number, else run it with a pre-defined constant.
 """
 if (len(sys.argv) > 1):
-	print fibPow(int(sys.argv[1]))
+	print fibPow(int(sys.argv[1]), 0, 1).evaluate()[0]
 else:
-	print fibPow(FIXED_POWER)
+	print fibPow(FIXED_POWER, 0, 1).evaluate()[0]
