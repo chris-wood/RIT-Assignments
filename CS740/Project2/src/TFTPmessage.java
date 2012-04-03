@@ -70,7 +70,8 @@ public abstract class TFTPmessage
 	 * A fixed array containing references to the appropriate enumeration
 	 * type, which is used when reconstructing messages from the server.
 	 */
-	public static final Opcode[] codes = {Opcode.RRQ, Opcode.WRQ, Opcode.DATA, Opcode.ACK, Opcode.ERROR};
+	public static final Opcode[] codes = {Opcode.RRQ, Opcode.WRQ, Opcode.DATA, 
+		Opcode.ACK, Opcode.ERROR};
 	
 	/**
 	 * This enumeration defines the different transfer modes supported

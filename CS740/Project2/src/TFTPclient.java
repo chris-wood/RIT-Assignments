@@ -116,7 +116,6 @@ public class TFTPclient implements ITFTPclient
 	    // Get and return the next message
 		serverSocket.receive(receivePacket);
 	    TFTPmessage message = buildMessage(receivePacket);
-	    System.out.println(message);
 	    return message;
 	}
 	

@@ -86,10 +86,10 @@ network engineering that have been employed to help networks deal with topology 
 Lastly, it will discuss avenues for future research and open problems that have been posed by 
 researchers in the field.
 
-\section{Definitions}
+\section{Network Functionality}
 
-It is natural to model a communication network as an undirected graph $G$, which has a fixed 
-set of vertices $V(G)$ and edges $E(G)$ that represent physical connections between such vertices. The topology of a network
+It is natural to model any communication network as an undirected graph $G$, which has a fixed 
+set of vertices (nodes) $V(G)$ and edges (links) $E(G)$ that represent physical connections between such vertices. The topology of a network
 can thus be visualized graphically using elements from these two sets. For the remainder of this paper,
 we use the term vertex as a synonom for node and edge as a synonom for communication link. As an example of a graph representing a network, consider a completely connected network with $n$ nodes in which every node can directly communicate with every other 
 node can be seen as $K_{n}$, the complete graph on $n$ vertices (that is, $|V(G)|$ $= n$). In such a network, every node $v$ can
@@ -116,9 +116,20 @@ TODO: continue with the idea of optimal connectivity among nodes?
 %more from http://www.ncbi.nlm.nih.gov/pubmed/12059649
 %Some other attacks are described in \cite{Attacks}
 
+TODO: describe some common networks here, why they are studied, etc
+TODO: depends on type of network (is it ad-hoc or fixed topology?)
+
+\subsection{Attack Strategies}
+%TODO: vertex/edge based attacks, degree or betweeness attacks
 Attacks on large scale networks are not usually ad-hoc; they are based on a logical and structured strategy for dereasing the connectivity of the network by taking as little action as possible. Clearly, if one was to delete all nodes from a network, then that would yield the maximum decrease in connectivity. However, such attacks are not practical, so these strategies must be considered at a smaller scale.
 
 %TODO: print attack paper, read, and include attack summaries in here
+
+\subsection{Vertex Attacks}
+TODO
+
+\subsection{Edge Attacks}
+TODO
 
 \section{Network Robustness}
 %http://arxiv.org/pdf/1203.2982v1.pdf

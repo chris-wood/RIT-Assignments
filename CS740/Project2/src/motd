@@ -1,0 +1,37 @@
+Linux glados 2.6.35-23-generic-pae #41~lucid1-Ubuntu SMP Thu Dec 2 23:51:29 UTC 2010 i686 GNU/Linux
+Ubuntu 10.04.4 LTS
+
+Welcome to Ubuntu!
+ * Documentation:  https://help.ubuntu.com/
+-------------------------------------------------------------------------------
+                     Rochester Institute of Technology
+                      Department of Computer Science
+
+                             - REMINDER -
+
+Use of this computer system is governed by the Code of Conduct for Use of DCS
+Facilities; by continuing to use this system, you hereby agree to abide by
+its terms.  Read the file /usr/local/pub/doc/CodeOfConduct.txt for details.
+
+General Systems status can be found here:
+http://www.cs.rit.edu/resources/computing/status
+
+                              Don't Panic
+
+11/16/2011  the problem with firefox lock files is bug that we are waiting for
+            an ubuntu fix for. In the meantime there is a script that will find
+            and remove the lock files for you:
+            /usr/local/dcs/bin/fixfox
+            this is in the default path and can be run just as
+            fixfox
+
+--------------------------------------------------------------------------------
+
+  System information as of Tue Mar 13 09:10:36 EDT 2012
+
+  System load:  0.48               Processes:           266
+  Usage of /:   4.4% of 268.97GB   Users logged in:     6
+  Memory usage: 1%                 IP address for eth0: 129.21.30.38
+  Swap usage:   0%
+
+  Graph this data and manage this system at https://landscape.canonical.com/
