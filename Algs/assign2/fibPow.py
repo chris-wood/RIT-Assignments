@@ -10,14 +10,18 @@
 import sys
 
 ##########################################################################
-# Answer 4a: L is represented as the matrix product:
+# The answers to these questions are discussed in more detail in the
+# homework assignment handed in with this code. It seemed easier to
+# represent all of the math using TeX markup instead of regular text.
+#
+# Answer 4a: L is represented as the 2x2 and 2x1 matrix product:
 #            
-#            L(a,b) = (0 1)(a) = (b, a+b)
-#                     (1 1)(b)
+#            L(a) = (0 1)(a) = (  b  )
+#             (b)   (1 1)(b)   (a + b)
 #
 # Answer 4b: The method of repeated squaring was implemented
 #            to raise objects of type L to the nth power in 
-#            O(logn) time. The corresponding function to perform
+#            O(logn) (Theta) time. The corresponding function to perform
 #            this operation is 'power'.
 #
 # Answer 4c: fibPow is implemented using the definition for 
@@ -42,14 +46,14 @@ class L(object):
 		
 		By matrix representation: 
 		
-			L(a,b) = (0 1)(a) = (b, a+b)
-			         (1 1)(b)
+			L(a) = (0 1)(a) = (  b  )
+			 (b)   (1 1)(b)   (a + b)
 		
-			L^n(a,b) = (0 1)^n(a) = (f(n;a,b), f(n+1;a,b))
-			           (1 1)  (b)
+			L^n(a) = (0 1)^n(a) = ( f(n;a,b) )
+			   (b)   (1 1)  (b)   (f(n+1;a,b))
 	"""
 	
-	# The internal slots for the L object, consisting of the 
+	# The instance variables for the L object, consisting of the 
 	# pair of elements a and b and the product matrix m.
 	# The matrix is represented as a flat array/tuple.
 	a = 0            # default to 0
@@ -68,7 +72,12 @@ class L(object):
 	# (meaning that their product matrices are multiplied together
 	# to yield a new 2x2 matrix) and returns a new L instance.
 	def __mul__(self, other):
-		# Perform the constant time matrix multiplication (L * L)
+		# Perform the constant time matrix multiplication (L1 * L2)
+		#
+		# Note: for-loops (or other iterative constructs) were not
+		# used to compute this product because the matrix size
+		# will always be fixed to 2x2 for objects of type L, so I 
+		# unrolled the loop into four separate arithmetic operations.
 		v1 = (self.m[0] * other.m[0]) + (self.m[1] * other.m[2])
 		v2 = (self.m[0] * other.m[1]) + (self.m[1] * other.m[3])
 		v3 = (self.m[2] * other.m[0]) + (self.m[3] * other.m[2])
@@ -113,7 +122,7 @@ def powerTwo(base, p):
 	# Loop while the power is non-zero
 	while (p != 0):
 		
-		# If the power is odd, multiply by r 
+		# If the power is odd, multiply by the base 
 		if ((p % 2) != 0):
 			result = result * base
 			p = p - 1

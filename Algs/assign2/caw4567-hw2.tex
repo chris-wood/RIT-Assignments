@@ -53,14 +53,18 @@ T_{F}(n) \in \Theta(\phi^{n}) \implies T_{F}(n) = \Theta(\phi^{n})
 
 However, without loss of generality, we can also solve $T_{F}(n)$ using the substitution approach, knowing that $T_{F}(n) = \Theta(a^{n})$ for some $a$, where $a$ is a real number.
 \begin{eqnarray*}
-T_{F}(n) &=& T_{F}(n-1) + T_{F}(n-2) \\
-a^{n} &=& a^{n-1} + a^{n-2} \text{ (by substitution)}\\
-0 &=& a^{n} - a^{n-1} - a^{n-2}  \text{ (move terms to one side)}\\
-0 &=& a^{2} - a - 1  \text{ (divide by $a^{n-2}$)}\\
-a &=& \frac{1 \pm \sqrt(5)}{2} \text{ (by quadratic equation for polynomial roots)}
+T_{F}(n) = T_{F}(n-1) + T_{F}(n-2) \\
+a^{n} = a^{n-1} + a^{n-2} \text{ (by substitution)}\\
+a^{2}  =  a + 1 \text{ (divide by $a^{n-2}$)} \\
+a^{2} - a - 1 = 0 \text{ (move terms to one side)}
 \end{eqnarray*}
 
-Thus, since $a = \frac{1 + \sqrt(5)}{2} = \phi$ is the larger of the two roots, we can conclude that $T_{F}(n) = \Theta(\phi^{n})$.
+At this point one can see we have a very simply quadratic equation with two roots. We can solve for these roots using the quadratic equation, which yields $a = \frac{1 \pm \sqrt{5}}{2}$. Thus, since $a = \frac{1 + \sqrt{5}}{2} = \phi$ is the larger of the two roots and $a = \frac{1 - \sqrt{5}}{2}$ is negative, we can conclude that $a = \frac{1 + \sqrt{5}}{2} = \phi$, which implies that $T_{F}(n) = \Theta(\phi^{n})$.
+
+%0 &=& a^{n} - a^{n-1} - a^{n-2}  \text{ (move terms to one side)}\\
+%0 &=& a^{2} - a - 1  \text{ (divide by $a^{n-2}$)}\\
+%a &=& \frac{1 \pm \sqrt(5)}{2} \text{ (by quadratic equation for polynomial roots)}
+%\end{eqnarray*}
 
 \end{sol}
 
@@ -94,7 +98,7 @@ T_{f}(n) & = & T_{f}(n - (n - 1)) + (n - 1)  \\
 & = & n - 1
 \end{eqnarray*}
 
-Based on this observation we can clearly see that $T_{f}(n) \in \Theta(n - 1) = \Theta(n)$, or simply $T_{f}(n) = \Theta(n)$. 
+Based on this observation we can clearly see that $T_{f}(n) \in \Theta(n - 1) = \Theta(n)$, or simply $T_{f}(n) = \Theta(n)$. Therefore, the time complexity of $fibIt$ is $\Theta(n)$.
 
 %However, to verify this, we perform the substitution method on this recurrence relation. To start, we also %assume that $T_{f}(n - 1) \in \Theta(n)$. Then, we perform the induction as follows.
 
@@ -147,7 +151,20 @@ $L\begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pma
 \end{prob}
 \begin{sol}
 
-We can use the method of repeated squaring to achieve fast exponentiation in $\Theta(\tlog n)$ time. The source code for this routine (which can be implemented both recursively and iteratively) is shown below.
+We can use the method of repeated squaring to achieve fast exponentiation in $\Theta(\tlog n)$ time. The recursive definition for this algorithm is shown below.
+
+\[
+a^{n} = \left\{ 
+  \begin{array}{l l}
+    (a^{\frac{n}{2}})^{2}, & \quad \text{ if n is even and positive,} \\
+    (a^{\frac{(n-1)}{2}})^{2} * a, & \quad \text{ if n is odd}, \\
+   1 & \quad \text{ if n = 0}
+  \end{array} \right.
+\]
+
+Careful analysis reveals that this algorithm runs in $\Theta(\tlog n)$ time because, on each iteration, the size is reduced by about a half at the expense of one or two multiplications. This assumes of course that the time for multiplication is $\Theta(1)$.
+
+The source code for this routine (which can be implemented both recursively and iteratively) is shown below.
 \begin{lstlisting}
 def power(base, p):
 	if (p == 0):
@@ -198,7 +215,7 @@ Write down the definition of pseudo-polynomial time.
 \end{prob}
 \begin{sol}
 \begin{define}
-A pseudo-polynomial time algorithm is one that runs in polynomial time (i.e. $\Theta(n^{k}), n \geq 1$) with respect to the value of its input, but does not run in polynomial time with respect to the size of the input (i.e. it must be exponential time). In other words, when working with numerical input $n$ to an algorithm, we can say that such an algorithm runs in pseudo-polynomial time if its time complexity is polynomial with respect to $n$ and exponential with respect to $b = \tlg (n)$, because $b$ represents the approximate number of bits used to represent $n$ (i.e. the size of $n$).
+A pseudo-polynomial time algorithm is one that runs in polynomial time (i.e. $\Theta(n^{k}), n \geq 1$) with respect to the value $n$ of its input, but does not run in polynomial time with respect to the size $b$ of its input (i.e. it must run in exponential time with respect to the size of the input, or simply $\Theta(m^{b}), m > 1$). In other words, when working with numerical input $n$ to an algorithm, we can say that such an algorithm runs in pseudo-polynomial time if its time complexity is polynomial with respect to $n$ and exponential with respect to $b = \tlg (n)$, because $b$ represents the approximate number of bits used to represent $n$ (i.e. the size of $n$).
 %\cite{BELOW}
 % http://www.esi2.us.es/~mbilbao/complexi.htm
 \end{define}
@@ -217,7 +234,7 @@ Is $fibIt$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
 
-Yes, $fibIt$ has a time complexity of $\Theta(n)$, which can also be defined as $\Theta(2^{\tlg n})$, where $n$ is the input value and $\tlg (n)$ is the size of $n$. This means that it $fibIt$ has polynomial time complexity with respect to the value of $n$ and exponential time with respect to the size of $n$. Therefore, by definition, $fibIt$ is a pseudo-polynomial time algorithm.
+Yes, $fibIt$ has a time complexity of $\Theta(n)$, which can also be defined as $\Theta(2^{\tlg n})$, where $n$ is the input value and $\tlg (n)$ is the bit size of $n$. This means that it $fibIt$ has polynomial time complexity with respect to the value of $n$ and exponential time with respect to the size of $n$. Therefore, by definition, $fibIt$ is a pseudo-polynomial time algorithm.
 \end{sol}
 
 \begin{prob}{5-d}
@@ -225,7 +242,7 @@ Is $fibPow$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
 
-No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which means that $fibPow$ does not have a time complexity of $\Theta(n^{k}), k \geq 1$. Therefore, since $fibPow$ does not have polynomial runtime in the value of $n$, it is not a pseudo-polynomial time algorithm.
+No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which can also be defined as $\Theta(2^{\tlg \tlg n})$, where $n$ is the input value and $\tlg n$ is the bit size of $n$. This means that $fibPow$ has a sub-linear time complexity with respect to the value of $n$ (i.e. it does not have a time complexity of $\Theta(n^{k}), k \geq 1$) and thus sub-exponential time complexity with respect to the size of $n$. Therefore, since $fibPow$ does not have polynomial runtime in the value of $n$, nor does it have exponential time complexity in the size of $n$, it is not a pseudo-polynomial time algorithm.
 
 %No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which can also be defined as $\Theta(2^{\tlg \tlg n})$, where $n$ is the input value, which means that it is sub-polynomial in the magnitude of $n$ and sub-exponential in the bit size of $n$. Therefore, by definition, $fibPow$ is not a pseudo-polynomial time algorithm.
 
