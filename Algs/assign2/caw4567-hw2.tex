@@ -145,13 +145,17 @@ L can be represented as the product of two matrices, as shown below.
 \begin{center}
 $L\begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} b \\ a+b \end{pmatrix}$
 \end{center}
+
+\begin{center}
+$L^{n}\begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix}^{n} \begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} f(n;a,b) \\ f(n+1;a,b) \end{pmatrix}$
+\end{center}
 \end{sol} 
 
 \begin{prob}{4-b}
 \end{prob}
 \begin{sol}
 
-We can use the method of repeated squaring to achieve fast exponentiation in $\Theta(\tlog n)$ time. The recursive definition for this algorithm is shown below.
+We can use the method of repeated squaring to achieve fast exponentiation of these matrices in $\Theta(\tlog n)$ time. The recursive definition for this algorithm is shown below.
 
 \[
 a^{n} = \left\{ 
@@ -166,19 +170,19 @@ Careful analysis reveals that this algorithm runs in $\Theta(\tlog n)$ time beca
 
 The source code for this routine (which can be implemented both recursively and iteratively) is shown below.
 \begin{lstlisting}
-def power(base, p):
+def matrixPower(base, p):
 	if (p == 0):
 		return IDENTITY
 	elif (p == 1):
 		return base
 	elif ((p % 2) == 0):
-		return power(base * base, p / 2)
+		return matrixPower(base * base, p / 2)
 	else:
-		return base * power(base * base, (p - 1) / 2)
+		return base * matrixPower(base * base, (p - 1) / 2)
 \end{lstlisting}
 
 \begin{lstlisting}
-def power(base, p):
+def matrixPower(base, p):
 	result = IDENTITY
 	while (p != 0):
 		if ((p % 2) != 0):
@@ -187,6 +191,14 @@ def power(base, p):
 		base = base * base
 		p = p / 2
 	return result
+\end{lstlisting}
+Finally, we can implement a single $power$ routine that uses either one of these multiplication functions to raise objects of type $L$ to the $n$th power that is $\Theta(tlog n)$, as shown below.
+\begin{lstlisting}
+def power(base, p):
+	matrix = matrixPower(base.m, p)
+	v1 = (matrix[0] * base.a) + (matrix[1] * base.b)
+	v2 = (matrix[2] * base.a) + (matrix[3] * base.b)
+	return (v1, v2)
 \end{lstlisting}
 \end{sol}
 
@@ -197,8 +209,8 @@ def power(base, p):
 Using the representation for $L$ and the power functions described above, we can implement $fibPow$ as follows:
 \begin{lstlisting}
 def fibPow(n, a, b):
-	base = L(a,b)
-	return power(base, n)
+	base = L(a,b,0,1,1,1)
+	return base.power(n)
 \end{lstlisting}
 \end{sol}
 

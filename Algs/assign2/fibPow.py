@@ -44,7 +44,7 @@ class L(object):
 			L(a,b) = (b, a+b)
 			L^n(a,b) = (f(n;a,b),f(n+1;a,b))
 		
-		By matrix representation: 
+		By matrix representation:
 		
 			L(a) = (0 1)(a) = (  b  )
 			 (b)   (1 1)(b)   (a + b)
@@ -60,75 +60,74 @@ class L(object):
 	b = 0            # default to 0
 	m = (1, 0, 0, 1) # default to identity matrix
 	
-	# Constructor for L that initializes the (a,b) variables
-	# and the product matrix.
 	def __init__(self, a, b, v1, v2, v3, v4):
+		""" Constructor for L that initializes the (a,b) variables
+			and the product matrix.
+		"""
 		self.a = a
 		self.b = b
 		self.m = (v1, v2, v3, v4)
-	
-	# The overwritten multiplication operation that computes the
-	# result of two L objects being multiplied by one another 
-	# (meaning that their product matrices are multiplied together
-	# to yield a new 2x2 matrix) and returns a new L instance.
-	def __mul__(self, other):
-		# Perform the constant time matrix multiplication (L1 * L2)
-		#
-		# Note: for-loops (or other iterative constructs) were not
-		# used to compute this product because the matrix size
-		# will always be fixed to 2x2 for objects of type L, so I 
-		# unrolled the loop into four separate arithmetic operations.
-		v1 = (self.m[0] * other.m[0]) + (self.m[1] * other.m[2])
-		v2 = (self.m[0] * other.m[1]) + (self.m[1] * other.m[3])
-		v3 = (self.m[2] * other.m[0]) + (self.m[3] * other.m[2])
-		v4 = (self.m[2] * other.m[1]) + (self.m[3] * other.m[3])
-		
-		# Return a new L object that represents the result 
-		return L(self.a, self.b, v1, v2, v3, v4)
-	
-	# Evaluate the L object to compute and return the resulting 
-	# (a,b) tuple based on the product matrix.
-	def evaluate(self):
-		v1 = (self.m[0] * self.a) + (self.m[1] * self.b)
-		v2 = (self.m[2] * self.a) + (self.m[3] * self.b)
+
+	def power(self, p):
+		""" Raise this object to the power p.
+			
+			This function utilizes one of the matrix power
+			routines to calculate the power of the L object's 
+			product matrix, and then performs the final matrix
+			multiplication to find the resulting (a,b) tuple.
+		"""
+		matrix = matrixPowerOne(self.m, p)
+		v1 = (matrix[0] * self.a) + (matrix[1] * self.b)
+		v2 = (matrix[2] * self.a) + (matrix[3] * self.b)
 		return (v1, v2)
 
-def powerOne(base, p):
-	""" Raise the object 'base' to the power p
+def matrixProduct(m1, m2):
+	""" Compute the product of two 2x2 matrices, where 
+		each matrix is represented as a flat array/tuple.
+	"""
+	v1 = (m1[0] * m2[0]) + (m1[1] * m2[2])
+	v2 = (m1[0] * m2[1]) + (m1[1] * m2[3])
+	v3 = (m1[2] * m2[0]) + (m1[3] * m2[2])
+	v4 = (m1[2] * m2[1]) + (m1[3] * m2[3])
+	return (v1, v2, v3, v4)
+
+def matrixPowerOne(base, p):
+	""" Raise the object 'base' to the power p.
 		
 		This function implements the method of repeated
 		squaring using a recursive approach to perform 
 		exponentiation in O(logn) time.
 	"""
 	if (p == 0):
-		return L(base.a, base.b, 1, 0, 0, 1) # Identity 
+		return (1, 0, 0, 1) # Identity 
 	elif (p == 1):
 		return base
 	elif ((p % 2) == 0):
-		return powerTwo(base * base, p / 2)
+		return matrixPowerOne(matrixProduct(base, base), p / 2)
 	else:
-		return base * powerTwo(base * base, (p - 1) / 2)
+		return matrixProduct(base, 
+			matrixPowerOne(matrixProduct(base, base), (p - 1) / 2))
 
-def powerTwo(base, p):
-	""" Raise the object 'base' to the power p
+def matrixPowerTwo(base, p):
+	""" Raise the object 'base' to the power p.
 		
 		This function implements the method of repeated
 		squaring using an iterative based approach 
 		to perform exponentiation in O(logn) time.
 	"""
 	# Initialize the product to the identity
-	result = L(base.a, base.b, 1, 0, 0, 1)
+	result = (1, 0, 0, 1)
 	
 	# Loop while the power is non-zero
 	while (p != 0):
 		
 		# If the power is odd, multiply by the base 
 		if ((p % 2) != 0):
-			result = result * base
+			result = matrixProduct(result, base)
 			p = p - 1
 		
 		# Square the base object and then cut the power in half 
-		base = base * base
+		base = matrixProduct(base, base)
 		p = p / 2
 
 	# Return the resulting object 
@@ -136,7 +135,7 @@ def powerTwo(base, p):
 
 def fibPow(n, a, b):
 	""" Implement L^{n}(a,b), which requires three parameters
-		for n, a, and b.
+		for n, a, and b. It returns a tuple (f(n;a,b), f(n+1;a,b)).
 		
 		This function utilizes the method of repeated
 		squaring to raise an object of type L to the
@@ -144,7 +143,7 @@ def fibPow(n, a, b):
 		in L's evaluated tuple.
 	"""
 	base = L(a, b, 0, 1, 1, 1)
-	return powerOne(base, n)
+	return base.power(n)
 
 # This is the fixed upper bound used for autonomous testing
 # of the fibPow function.
@@ -156,6 +155,6 @@ FIXED_POWER = 31
 	number, else run it with a pre-defined constant.
 """
 if (len(sys.argv) > 1):
-	print fibPow(int(sys.argv[1]), 0, 1).evaluate()[0]
+	print fibPow(int(sys.argv[1]), 0, 1)[0]
 else:
-	print fibPow(FIXED_POWER, 0, 1).evaluate()[0]
+	print fibPow(FIXED_POWER, 0, 1)[0]
