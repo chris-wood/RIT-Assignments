@@ -226,7 +226,7 @@ Write down the definition of pseudo-polynomial time.
 \end{prob}
 \begin{sol}
 \begin{define}
-A pseudo-polynomial time algorithm is one that runs in polynomial time with respect to the numerical value $n$ of its input (i.e. $\Theta(n^{k}), n \geq 1$), but does not run in polynomial time with respect to the size $b$ of its input (i.e. it must run in exponential time with respect to the size of the input, or simply $\Theta(m^{b}), m > 1$). In other words, when working with numerical input $n$ to an algorithm, we can say that such an algorithm runs in pseudo-polynomial time if its time complexity is polynomial with respect to $n$ and exponential with respect to $b = \tlg (n)$, because $b$ represents the approximate number of bits used to represent $n$ (i.e. the size of $n$).
+A pseudo-polynomial time algorithm is one that runs in polynomial time with respect to the numerical value $n$ of its input (i.e. $\Theta(n^{k}), k \geq 1$), but does not run in polynomial time with respect to the size $b$ of its input (i.e. it must run in exponential time with respect to the size of the input, or simply $\Theta(m^{b}), m > 1$). In other words, when working with numerical input $n$ to an algorithm, we can say that such an algorithm runs in pseudo-polynomial time if its time complexity is polynomial with respect to $n$ and exponential with respect to $b = \tlg (n)$, because $b$ represents the approximate number of bits used to represent $n$ (i.e. the size of $n$).
 %\cite{BELOW}
 % http://www.esi2.us.es/~mbilbao/complexi.htm
 \end{define}
@@ -245,7 +245,7 @@ Is $fibIt$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
 
-Yes, $fibIt$ has a time complexity of $\Theta(n)$, which can also be defined as $\Theta(2^{\tlg n})$, where $n$ is the input value and $\tlg (n)$ is the bit size of $n$. This means that it $fibIt$ has polynomial time complexity with respect to the value of $n$ and exponential time with respect to the size of $n$. Therefore, by definition, $fibIt$ is a pseudo-polynomial time algorithm.
+Yes, $fibIt$ has a time complexity of $\Theta(n)$, which can also be defined as $\Theta(2^{\tlg n})$, where $n$ is the input value and $\tlg (n)$ is the bit size of $n$. This means that $fibIt$ has polynomial time complexity with respect to the value of $n$ and exponential time complexity with respect to the size of $n$. Therefore, by definition, $fibIt$ is a pseudo-polynomial time algorithm.
 \end{sol}
 
 \begin{prob}{5-d}
@@ -253,7 +253,7 @@ Is $fibPow$ a pseudo-polynomial time algorithm? Explain.
 \end{prob}
 \begin{sol}
 
-No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which can also be defined as $\Theta(2^{\tlg \tlg n})$, where $n$ is the input value and $\tlg n$ is the bit size of $n$. This means that $fibPow$ has a sub-linear time complexity with respect to the value of $n$ (i.e. it does not have a time complexity of $\Theta(n^{k}), k \geq 1$) and thus sub-exponential time complexity with respect to the size of $n$. Therefore, since $fibPow$ does not have polynomial runtime in the value of $n$, nor does it have exponential time complexity in the size of $n$, it is not a pseudo-polynomial time algorithm.
+No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which can also be defined as $\Theta(2^{\tlg \tlg n})$, where $n$ is the input value and $\tlg n$ is the bit size of $n$. This means that $fibPow$ has a sub-linear time complexity with respect to the value of $n$ (i.e. it does not have a time complexity of $\Theta(n^{k}), k \geq 1$) and also sub-exponential time complexity with respect to the size of $n$. Therefore, by definition, it is not a pseudo-polynomial time algorithm.
 
 %No, $fibPow$ has a time complexity of $\Theta(\tlg n)$, which can also be defined as $\Theta(2^{\tlg \tlg n})$, where $n$ is the input value, which means that it is sub-polynomial in the magnitude of $n$ and sub-exponential in the bit size of $n$. Therefore, by definition, $fibPow$ is not a pseudo-polynomial time algorithm.
 
