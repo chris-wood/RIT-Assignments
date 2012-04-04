@@ -16,17 +16,17 @@ public class RequestMessage extends TFTPmessage
 	/**
 	 * The file name associated with this request.
 	 */
-	public String fileName;
+	private String fileName;
 	
 	/**
 	 * The opcode for this request (read or write).
 	 */
-	public Opcode opcode;
+	private Opcode opcode;
 	
 	/**
 	 * The transfer mode for this request.
 	 */
-	public TransferMode transferMode;
+	private TransferMode transferMode;
 	
 	/**
 	 * Create a new request message with the specified file name, request

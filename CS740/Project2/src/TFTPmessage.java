@@ -1,3 +1,5 @@
+import java.math.BigInteger;
+
 /*
  * TFTPmessage.java
  * 
@@ -147,8 +149,31 @@ public abstract class TFTPmessage
 	public abstract byte[] rawData();
 	
 	/**
+	 * Public method that converts byte array contents to an integer
+	 * of the appropriate size using the BigInteger class.
+	 * 
+	 * @param data - the raw byte data
+	 * @param startIndex - the index to start
+	 * @param size - the size of the bytes to use to convert
+	 * 
+	 * @return int value represented into the byte array.
+	 */
+	public static int byteArrayToInt(byte[] data, int startIndex, int size)
+	{
+		byte[] buffer = new byte[size];
+		for (int i = 0; i < size; i++)
+		{
+			buffer[i] = data[startIndex + i];
+		}
+		return new BigInteger(buffer).intValue();
+	}
+	
+	/**
 	 * Public method that converts integers to byte arrays of the specified size.
 	 * Used to convert client values into raw packet contents.
+	 * 
+	 * NOTE: These methods do not use the BigInteger class for byte array/int
+	 * conversion because we are forcing the size of the byte array. 
 	 * 	
 	 * @param val - the integer value to convert.
 	 * @param size - the size of the output byte array.

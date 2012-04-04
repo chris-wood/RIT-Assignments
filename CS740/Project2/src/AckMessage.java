@@ -18,7 +18,7 @@ public class AckMessage extends TFTPmessage
 	/**
 	 * The block number associated with this acknowledgment
 	 */
-	public int blockNumber;
+	private int blockNumber;
 	
 	/**
 	 * Construct an acknowledgment message from the specified block number.
@@ -37,8 +37,8 @@ public class AckMessage extends TFTPmessage
 	 */
 	public AckMessage(DatagramPacket packet)
 	{
-		blockNumber = (int)(packet.getData()[BLOCK_NUMBER_INDEX] << 8 | 
-				packet.getData()[BLOCK_NUMBER_INDEX + 1]);
+		blockNumber = byteArrayToInt(packet.getData(), BLOCK_NUMBER_INDEX, 
+				BLOCK_NUMBER_SIZE);
 	}
 
 	/**

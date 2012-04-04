@@ -1,5 +1,5 @@
-import java.math.BigInteger;
 import java.net.DatagramPacket;
+import java.util.Arrays;
 
 /*
  * DataMessage.java
@@ -19,22 +19,22 @@ public class DataMessage extends TFTPmessage
 	/**
 	 * The block number of the file that this data represents.
 	 */
-	public int blockNumber;
+	private int blockNumber;
 	
 	/**
 	 * The size of this data block.
 	 */
-	public int size;
+	private int size;
 	
 	/**
 	 * The raw file data itself.
 	 */
-	public byte[] data;
+	private byte[] data;
 	
 	/**
 	 * The new port to handle the data communication.
 	 */
-	public int port;
+	private int port;
 	
 	/**
 	 * Create a data message from the block number and data associated with it.
@@ -62,12 +62,8 @@ public class DataMessage extends TFTPmessage
 		port = packet.getPort(); 
 		
 		// Rebuild the block number for this file block
-		byte[] blockBuffer = new byte[BLOCK_NUMBER_SIZE];
-		for (int i = 0; i < BLOCK_NUMBER_SIZE; i++)
-		{
-			blockBuffer[i] = packet.getData()[BLOCK_NUMBER_INDEX + i];
-		}
-		blockNumber = new BigInteger(blockBuffer).intValue(); 
+		blockNumber = byteArrayToInt(packet.getData(), BLOCK_NUMBER_INDEX, 
+				BLOCK_NUMBER_SIZE);
 		
 		// Rebuild the raw data 
 		if (size > (OPCODE_SIZE + BLOCK_NUMBER_SIZE))
@@ -114,6 +110,47 @@ public class DataMessage extends TFTPmessage
 		}
 		
 		return rawData;
+	}
+	
+	/**
+	 * Retrieve the block number for this data message.
+	 * 
+	 * @return block number
+	 */
+	public int getBlockNumber()
+	{
+		return blockNumber;
+	}
+	
+	/**
+	 * Retrieve the port that this data message was transmitted on.
+	 * 
+	 * @return port
+	 */
+	public int getPort()
+	{
+		return port;
+	}
+	
+	/**
+	 * Retrieve the byte size of this data message. 
+	 * 
+	 * @return size
+	 */
+	public int getSize()
+	{
+		return size;
+	}
+	
+	/**
+	 * Return a copy of the data for this message (so the caller 
+	 * cannot mutate the internal state of this message).
+	 * 
+	 * @return copy of data array
+	 */
+	public byte[] getData()
+	{
+		return Arrays.copyOf(data, data.length);
 	}
 	
 	/**

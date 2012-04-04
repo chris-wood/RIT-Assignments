@@ -5,6 +5,7 @@
  */
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -135,8 +136,16 @@ public class TFTPclient implements ITFTPclient
 		
 		try
 		{
+			// Determine the opcode
+			byte[] codeBuffer = new byte[TFTPmessage.OPCODE_SIZE];
+			for (int i = 0; i < TFTPmessage.OPCODE_SIZE; i++)
+			{
+				codeBuffer[i] = packet.getData()[TFTPmessage.OPCODE_INDEX + i];
+			}
+			int codeNumber = new BigInteger(codeBuffer).intValue(); 
+			
 			// Determine the opcode from this packet
-			TFTPmessage.Opcode opcode = TFTPmessage.codes[(int)packet.getData()[1] - 1];
+			TFTPmessage.Opcode opcode = TFTPmessage.codes[codeNumber - 1];
 			
 			// Create the appropriate packet based on the opcode
 			switch (opcode)

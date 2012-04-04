@@ -116,14 +116,15 @@ public class TFTPreader
 					{
 						// Determine if we should ask for more data or 
 						// end the file transfer.
-						if (msg.size < TFTPmessage.DATA_BLOCK_SIZE)
+						if (msg.getSize() < TFTPmessage.DATA_BLOCK_SIZE)
 						{
 							transferComplete = true;
 						}
 						else
 						{
-							result = client.sendAndReceiveMessage(new AckMessage(msg.blockNumber), 
-									msg.port, RETRY_TIMES);
+							result = client.sendAndReceiveMessage(new 
+									AckMessage(msg.getBlockNumber()), msg.getPort(), 
+									RETRY_TIMES);
 						}
 					}
 				}
@@ -132,6 +133,10 @@ public class TFTPreader
 					ErrorMessage msg = (ErrorMessage)result;
 					System.err.println(msg.toString());
 					return;
+				}
+				else
+				{
+					System.out.println("WTF");
 				}
 			}
 			
@@ -165,9 +170,9 @@ public class TFTPreader
 	private boolean appendData(Map<Integer, byte[]> dataBlocks, DataMessage message)
 	{
 		boolean result = false;
-		if (!dataBlocks.containsKey(message.blockNumber))
+		if (!dataBlocks.containsKey(message.getBlockNumber()))
 		{
-			dataBlocks.put(message.blockNumber, message.data);
+			dataBlocks.put(message.getBlockNumber(), message.getData());
 			result = true;
 		}
 		return result;

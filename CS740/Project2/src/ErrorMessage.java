@@ -18,12 +18,12 @@ public class ErrorMessage extends TFTPmessage
 	/**
 	 * The error number returned from the server.
 	 */
-	public int errorNumber;
+	private int errorNumber;
 	
 	/**
 	 * The error message associated with this error number.
 	 */
-	public String errorMessage;
+	private String errorMessage;
 	
 	/**
 	 * Create a new error message from the specified error code and 
@@ -47,8 +47,8 @@ public class ErrorMessage extends TFTPmessage
 	public ErrorMessage(DatagramPacket packet)
 	{	
 		// Rebuild the block number for this file block
-		errorNumber = (int)(packet.getData()[ERROR_NUMBER_INDEX] << 8 | 
-				packet.getData()[ERROR_NUMBER_INDEX + 1]);
+		errorNumber = byteArrayToInt(packet.getData(), ERROR_NUMBER_INDEX, 
+				ERROR_NUMBER_SIZE);
 		
 		// Rebuild the error message 
 		StringBuilder builder = new StringBuilder();
