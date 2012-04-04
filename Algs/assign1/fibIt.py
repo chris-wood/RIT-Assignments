@@ -37,6 +37,6 @@ def fibIt(n, a, b):
 	number, else run it with a pre-defined constant.
 """
 if (len(sys.argv) > 1):
-	print str(fibIt(int(sys.argv[1]), 0, 1))
+	print str(fibIt(int(sys.argv[1]), 2, 1))
 else:
-	print str(fibIt(UPPER_BOUND, 0, 1))
+	print str(fibIt(UPPER_BOUND, 2, 1))

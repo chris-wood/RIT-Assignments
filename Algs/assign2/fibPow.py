@@ -161,6 +161,6 @@ FIXED_POWER = 31
 	number, else run it with a pre-defined constant.
 """
 if (len(sys.argv) > 1):
-	print fibPow(int(sys.argv[1]), 0, 1)[0]
+	print fibPow(int(sys.argv[1]), 2, 1)[0]
 else:
-	print fibPow(FIXED_POWER, 0, 1)[0]
+	print fibPow(FIXED_POWER, 2, 1)[0]
