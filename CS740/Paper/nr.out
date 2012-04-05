@@ -1,11 +1,14 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Network Functionality}{}% 2
-\BOOKMARK [1][-]{section.3}{Network Attacks}{}% 3
-\BOOKMARK [2][-]{subsection.3.1}{Attack Strategies}{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{Vertex Attacks}{section.3}% 5
-\BOOKMARK [2][-]{subsection.3.3}{Edge Attacks}{section.3}% 6
-\BOOKMARK [1][-]{section.4}{Network Robustness}{}% 7
-\BOOKMARK [2][-]{subsection.4.1}{Node-based Measurement}{section.4}% 8
-\BOOKMARK [2][-]{subsection.4.2}{Node- and Link-based Measurement}{section.4}% 9
-\BOOKMARK [1][-]{section.5}{Network Traffic Load}{}% 10
-\BOOKMARK [2][-]{subsection.5.1}{Dynamic Load Balancing}{section.5}% 11
+\BOOKMARK [1][-]{section.2}{Fundamentals}{}% 2
+\BOOKMARK [1][-]{section.3}{Fundamentals}{}% 3
+\BOOKMARK [1][-]{section.4}{Network Functionality}{}% 4
+\BOOKMARK [1][-]{section.5}{Network Attacks}{}% 5
+\BOOKMARK [2][-]{subsection.5.1}{Attack Strategies}{section.5}% 6
+\BOOKMARK [2][-]{subsection.5.2}{Vertex Attacks}{section.5}% 7
+\BOOKMARK [2][-]{subsection.5.3}{Edge Attacks}{section.5}% 8
+\BOOKMARK [2][-]{subsection.5.4}{Random Attacks}{section.5}% 9
+\BOOKMARK [1][-]{section.6}{Network Robustness}{}% 10
+\BOOKMARK [2][-]{subsection.6.1}{Node-based Measurement}{section.6}% 11
+\BOOKMARK [2][-]{subsection.6.2}{Node- and Link-based Measurement}{section.6}% 12
+\BOOKMARK [1][-]{section.7}{Network Traffic Load}{}% 13
+\BOOKMARK [2][-]{subsection.7.1}{Dynamic Load Balancing}{section.7}% 14

@@ -1,0 +1,2113 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    107967,       2103]
+NotebookOptionsPosition[    107406,       2079]
+NotebookOutlinePosition[    107817,       2097]
+CellTagsIndexPosition[    107774,       2094]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+a^(n - 1) + b(sum from i=0 to (n-2) of (a^i(n-i)))\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.5426229435482073`*^9, 3.5426230085482483`*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "a^(n - 1) + b(sum from i=0 to (n-2) of (a^i(n-i)))", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Input interpretation", "scanner" -> "Identity", "id" -> 
+     "Input", "position" -> "100", "error" -> "false", "numsubpods" -> "1"}, {
+    
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               SuperscriptBox["a", 
+                RowBox[{"n", "-", "1"}]], "+", 
+               RowBox[{"b", " ", 
+                 FormBox[
+                  TagBox[
+                   RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"i", "=", "0"}], 
+                    RowBox[{"n", "-", "2"}]], 
+                    RowBox[{
+                    SuperscriptBox["a", "i"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"n", "-", "i"}], ")"}]}]}], HoldForm], 
+                  TraditionalForm]}]}], 
+             PolynomialForm[#, TraditionalOrder -> False]& ], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement["dataformats", {}, {"plaintext"}]}]}], Typeset`pod2$$ = 
+   XMLElement[
+   "pod", {"title" -> "Result", "scanner" -> "Identity", "id" -> "Result", 
+     "position" -> "200", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> "", "primary" -> "true"}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               SuperscriptBox["a", 
+                RowBox[{"n", "-", "1"}]], "-", 
+               FractionBox[
+                RowBox[{"b", " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"-", 
+                    RowBox[{"2", " ", 
+                    SuperscriptBox["a", 
+                    RowBox[{"n", "+", "1"}]]}]}], "+", 
+                    SuperscriptBox["a", "n"], "+", 
+                    RowBox[{
+                    SuperscriptBox["a", "2"], " ", "n"}], "+", 
+                    SuperscriptBox["a", "2"], "-", 
+                    RowBox[{"a", " ", "n"}]}], ")"}]}], 
+                RowBox[{
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{"a", "-", "1"}], ")"}], "2"], " ", "a"}]]}], 
+             Identity], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,moutput,computabledata,formatteddata,formuladata"}]}]}], 
+   Typeset`pod3$$ = XMLElement[
+   "pod", {"title" -> "Alternate forms", "scanner" -> "Simplification", "id" -> 
+     "AlternateForm", "position" -> "300", "error" -> "false", "numsubpods" -> 
+     "3"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "FullSimplify[a^(-1 + n) - (b (a^2 + a^n - 2 a^(1 + n) - a n + a^2 \
+n))/((-1 + a)^2 a)]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             FractionBox[
+              RowBox[{
+                FractionBox[
+                 RowBox[{
+                   RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"2", " ", "a"}], "-", "1"}], ")"}], " ", "b", " ", 
+                    SuperscriptBox["a", "n"]}], "-", 
+                   RowBox[{"a", " ", "b", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"a", "-", "1"}], ")"}], " ", "n"}], "+", "a"}], 
+                    ")"}]}]}], 
+                 SuperscriptBox[
+                  RowBox[{"(", 
+                    RowBox[{"a", "-", "1"}], ")"}], "2"]], "+", 
+                SuperscriptBox["a", "n"]}], "a"], Identity], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             FractionBox[
+              RowBox[{
+                RowBox[{"2", " ", "b", " ", 
+                  SuperscriptBox["a", 
+                   RowBox[{"n", "+", "1"}]]}], "-", 
+                RowBox[{"b", " ", 
+                  SuperscriptBox["a", "n"]}], "+", 
+                RowBox[{
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{"a", "-", "1"}], ")"}], "2"], " ", 
+                  SuperscriptBox["a", "n"]}], "+", 
+                RowBox[{
+                  SuperscriptBox["a", "2"], " ", "b", " ", 
+                  RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"-", 
+                    RowBox[{"n"}]}], "-", "1"}], ")"}]}], "+", 
+                RowBox[{"a", " ", "b", " ", "n"}]}], 
+              RowBox[{
+                SuperscriptBox[
+                 RowBox[{"(", 
+                   RowBox[{"a", "-", "1"}], ")"}], "2"], " ", "a"}]], 
+             Identity], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,moutput,computabledata,formatteddata,formuladata"}]}], 
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "Factor[a^(-1 + n) - (b (a^2 + a^n - 2 a^(1 + n) - a n + a^2 n))/((-1 \
++ a)^2 a)]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             FractionBox[
+              RowBox[{
+                RowBox[{"2", " ", "b", " ", 
+                  SuperscriptBox["a", 
+                   RowBox[{"n", "+", "1"}]]}], "-", 
+                RowBox[{"2", " ", 
+                  SuperscriptBox["a", 
+                   RowBox[{"n", "+", "1"}]]}], "+", 
+                SuperscriptBox["a", 
+                 RowBox[{"n", "+", "2"}]], "-", 
+                RowBox[{
+                  RowBox[{"b"}], " ", 
+                  SuperscriptBox["a", "n"]}], "+", 
+                SuperscriptBox["a", "n"], "-", 
+                RowBox[{
+                  SuperscriptBox["a", "2"], " ", "b", " ", "n"}], "-", 
+                RowBox[{
+                  SuperscriptBox["a", "2"], " ", "b"}], "+", 
+                RowBox[{"a", " ", "b", " ", "n"}]}], 
+              RowBox[{
+                SuperscriptBox[
+                 RowBox[{"(", 
+                   RowBox[{"a", "-", "1"}], ")"}], "2"], " ", "a"}]], 
+             Identity], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+]}], Typeset`pod4$$ = XMLElement[
+   "pod", {"title" -> "Expanded form", "scanner" -> "Simplification", "id" -> 
+     "ExpandedForm", "position" -> "400", "error" -> "false", "numsubpods" -> 
+     "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "Expand[a^(-1 + n) - (b (a^2 + a^n - 2 a^(1 + n) - a n + a^2 n))/((-1 \
++ a)^2 a)]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{"-", 
+                 RowBox[{
+                   FractionBox[
+                    RowBox[{"b", " ", 
+                    SuperscriptBox["a", 
+                    RowBox[{"n", "-", "1"}]]}], 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"a", "-", "1"}], ")"}], "2"]]}]}], "+", 
+               SuperscriptBox["a", 
+                RowBox[{"n", "-", "1"}]], "+", 
+               FractionBox[
+                RowBox[{"2", " ", "b", " ", 
+                  SuperscriptBox["a", "n"]}], 
+                SuperscriptBox[
+                 RowBox[{"(", 
+                   RowBox[{"a", "-", "1"}], ")"}], "2"]], "-", 
+               FractionBox[
+                RowBox[{"a", " ", "b", " ", "n"}], 
+                SuperscriptBox[
+                 RowBox[{"(", 
+                   RowBox[{"a", "-", "1"}], ")"}], "2"]], "+", 
+               FractionBox[
+                RowBox[{"b", " ", "n"}], 
+                SuperscriptBox[
+                 RowBox[{"(", 
+                   RowBox[{"a", "-", "1"}], ")"}], "2"]], "-", 
+               FractionBox[
+                RowBox[{"a", " ", "b"}], 
+                SuperscriptBox[
+                 RowBox[{"(", 
+                   RowBox[{"a", "-", "1"}], ")"}], "2"]]}], Identity], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata,formuladata"}]}\
+], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show steps", "input" -> 
+         "ExpandedForm__Show steps"}, {}]}]}], Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`aux3$$ = {True, False, {False, False, False}, True}, 
+   Typeset`aux4$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "4", "datatypes" -> 
+    "Math", "timedout" -> "", "timedoutpods" -> "", "timing" -> "2.627", 
+    "parsetiming" -> "0.915", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa23951a11b960482404900000281f47747593h50g", "host" -> 
+    "http://www4a.wolframalpha.com", "server" -> "53", "related" -> 
+    "http://www4a.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa23961a11b96048240490000021c8bd582a52g4db&s=53", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 4, 5, 9, 56, 54.553805`8.489400021434003}, "Line" -> 28, 
+    "SessionID" -> 23214026327207079544}, Typeset`showpods$$ = {1, 2, 3, 4}, 
+   Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "a^(n - 1) + b(sum from i=0 to (n-2) of (a^i(n-i)))"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$}, 
+        Typeset`chosen$$, Typeset`open$$, Typeset`elements$$, Typeset`q$$, 
+        Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
+        Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
+        Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {229., 235.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$}],
+        Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.542623014572405*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+plot sum from i=0 to (n-2) of (a^i(n-i))\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.5426230164673557`*^9, 3.5426230408831787`*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "plot sum from i=0 to (n-2) of (a^i(n-i))", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Input interpretation", "scanner" -> "Identity", "id" -> 
+     "Input", "position" -> "100", "error" -> "false", "numsubpods" -> "1"}, {
+    
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             TagBox[
+              GridBox[{{
+                 StyleBox[
+                  TagBox[
+                   GridBox[{{
+                    StyleBox[
+                    "\"plot\"", {
+                    LineIndent -> 0, LineSpacing -> {0.9, 0, 1.5}}], 
+                    FormBox[
+                    TagBox[
+                    RowBox[{
+                    UnderoverscriptBox["\[Sum]", 
+                    RowBox[{"i", "=", "0"}], 
+                    RowBox[{"n", "-", "2"}]], 
+                    RowBox[{
+                    SuperscriptBox["a", "i"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{"n", "-", "i"}], ")"}]}]}], HoldForm], 
+                    TraditionalForm]}}, GridBoxBackground -> {"Columns" -> {
+                    GrayLevel[0.949], None}, "Rows" -> {{None}}}, 
+                    GridBoxItemSize -> {
+                    "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                    ColumnsEqual -> False, RowsEqual -> False, 
+                    GridBoxDividers -> {"Columns" -> {
+                    GrayLevel[0.84], 
+                    GrayLevel[0.84], 
+                    GrayLevel[0.84]}, "Rows" -> {{
+                    GrayLevel[0.84]}}, 
+                    "RowsIndexed" -> {
+                    1 -> GrayLevel[0.84], -1 -> GrayLevel[0.84]}}, 
+                    GridBoxSpacings -> {
+                    "Columns" -> {2, 2, 2}, "Rows" -> {{1}}}, 
+                    GridBoxAlignment -> {
+                    "Columns" -> {{Left}}, "Rows" -> {{Baseline}}}, 
+                    AllowScriptLevelChange -> False, BaselinePosition -> 1], 
+                   $CellContext`TagBoxWrapper["Separator" -> " | "]], 
+                  LineSpacing -> {1, 0, 1.5}, LineIndent -> 0]}}, 
+               GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+               ColumnsEqual -> False, RowsEqual -> False, 
+               GridBoxSpacings -> {"Columns" -> {{
+                    AbsoluteThickness[-1]}}, "Rows" -> {{0}}}, 
+               AllowScriptLevelChange -> False], 
+              $CellContext`TagBoxWrapper["Separator" -> " | "]], 
+             PolynomialForm[#, TraditionalOrder -> False]& ], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement["dataformats", {}, {"plaintext"}]}]}], Typeset`pod2$$ = 
+   XMLElement[
+   "pod", {"title" -> "3D plots", "scanner" -> "Plot", "id" -> "3DPlot", 
+     "position" -> "200", "error" -> "false", "numsubpods" -> "2"}, {
+     XMLElement["subpod", {"title" -> "Real part"}, {
+       XMLElement[
+       "minput", {}, {
+        "Plot3D[Re[(-a^n + 2 a^(1 + n) + a n - a^2 (1 + n))/((-1 + a)^2 a)], \
+{a, -2.28825, 2.28825}, {n, -5., 5.}]"}], 
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             FormBox[
+              StyleBox[
+               
+               DynamicModuleBox[{
+                CalculateUtilities`GraphicsUtilities`Private`density$$ = 15, 
+                 CalculateUtilities`GraphicsUtilities`Private`max481$$ = 0.5, 
+                 CalculateUtilities`GraphicsUtilities`Private`max483$$ = 0.5, 
+                 CalculateUtilities`GraphicsUtilities`Private`min480$$ = -0.5,
+                  CalculateUtilities`GraphicsUtilities`Private`min482$$ = \
+-0.5, CalculateUtilities`GraphicsUtilities`Private`more$$ = False, 
+                 CalculateUtilities`GraphicsUtilities`Private`xmesh$$ = True, 
+                 CalculateUtilities`GraphicsUtilities`Private`ymesh$$ = True, 
+                 CalculateUtilities`GraphicsUtilities`Private`zmesh$$ = False,
+                  Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+                 Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, 
+                 Typeset`animvar$$ = 1, Typeset`name$$ = "\"untitled\"", 
+                 Typeset`specs$$ = {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$], {
+                    False, True}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min480$$], \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "min"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max481$$], 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "max"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min482$$], \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "min"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max483$$], 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "max"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$], 
+                    True, "x"}, {True, False}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$$], 
+                    True, "y"}, {True, False}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$$], 
+                    False, "z"}, {True, False}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`density$$], 
+                    15, "mesh density"}, 1, 30, 1}, {
+                    Hold[
+                    Style[
+                    Overlay[{
+                    RawBoxes[
+                    PaneBox[
+                    GraphicsBox[
+                    
+                    RasterBox[{{{0, 0, 0, 24}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    10}}, {{0, 0, 0, 10}}, {{0, 0, 0, 9}}, {{0, 0, 0, 9}}, {{
+                    0, 0, 0, 8}}, {{0, 0, 0, 8}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    8}}, {{0, 0, 0, 7}}, {{0, 0, 0, 7}}, {{0, 0, 0, 8}}, {{0, 
+                    0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 
+                    6}}, {{0, 0, 0, 5}}, {{0, 0, 0, 6}}, {{0, 0, 0, 5}}, {{0, 
+                    0, 0, 4}}, {{0, 0, 0, 4}}, {{0, 0, 0, 5}}, {{0, 0, 0, 
+                    5}}, {{0, 0, 0, 3}}, {{0, 0, 0, 4}}, {{0, 0, 0, 3}}, {{0, 
+                    0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 
+                    2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 
+                    0, 0, 1}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 
+                    0}}, {{0, 0, 0, 1}}, {{255, 255, 255, 0}}, {{255, 255, 
+                    255, 0}}, {{255, 255, 255, 0}}, {{255, 255, 255, 0}}, {{
+                    255, 255, 255, 0}}, {{255, 255, 255, 0}}}, {{0, 45}, {
+                    2500, 0}}, {0, 255}, ColorFunction -> RGBColor], 
+                    ImageSize -> {2500, 45}, 
+                    PlotRange -> {{0, 2500}, {0, 45}}], ImageSize -> 
+                    Scaled[1], ScrollPosition -> {0., 0.}]], 
+                    Pane[
+                    Column[{
+                    Row[{
+                    Invisible[
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{255, 132, 
+                    0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}}}, {{0, 2}, {6, 0}}, {0, 255}, 
+                    ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 2}, 
+                    BaselinePosition -> (Scaled[0] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 2}}]]], " ", 
+                    Grid[{{
+                    Manipulate`Place[1], 
+                    Manipulate`Place[2]}, {
+                    Manipulate`Place[3], 
+                    Manipulate`Place[4]}}]}], 
+                    PaneSelector[{True -> Grid[{{
+                    Button[
+                    Row[{
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{255, 132, 
+                    0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}}}, {{0, 2}, {6, 0}}, {0, 255}, 
+                    ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 2}, 
+                    BaselinePosition -> (Scaled[0] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 2}}]], " "}], 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    False, Appearance -> None, BaseStyle -> {}], 
+                    Button[
+                    "Fewer controls", 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    False, Appearance -> None, BaseStyle -> {}]}, {"", 
+                    Item[
+                    Grid[{{"mesh:", 
+                    Manipulate`Place[5], 
+                    Manipulate`Place[6], 
+                    Manipulate`Place[7]}}], ItemSize -> Scaled[1], 
+                    Frame -> {None, None, True, None}]}, {"", 
+                    Item[
+                    Manipulate`Place[8], ItemSize -> Scaled[1], 
+                    Frame -> {None, None, True, None}]}}, FrameStyle -> 
+                    GrayLevel[0.9], Alignment -> Left, Spacings -> {0, 0.8}], 
+                    False -> Button[
+                    Row[{
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 255, 255}, {255, 255, 255}, {255, 132, 
+                    0}, {255, 132, 0}, {255, 255, 255}, {255, 255, 255}}, {{
+                    255, 255, 255}, {255, 255, 255}, {255, 132, 0}, {255, 132,
+                     0}, {255, 255, 255}, {255, 255, 255}}, {{255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 
+                    0}, {255, 132, 0}}, {{255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{
+                    255, 255, 255}, {255, 255, 255}, {255, 132, 0}, {255, 132,
+                     0}, {255, 255, 255}, {255, 255, 255}}, {{255, 255, 
+                    255}, {255, 255, 255}, {255, 132, 0}, {255, 132, 0}, {255,
+                     255, 255}, {255, 255, 255}}}, {{0, 6}, {6, 0}}, {0, 255},
+                     ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 6}, 
+                    BaselinePosition -> (Scaled[0.3] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 6}}]], " More controls"}], 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    True, Appearance -> None, BaseStyle -> {}]}, 
+                    Dynamic[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$], 
+                    ImageSize -> Automatic]}], 
+                    ImageMargins -> {{20, 30}, {10, 10}}]}, {1, 2}, 2, 
+                    Alignment -> {Left, Top}]]], 
+                    Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = 
+                 Automatic, Typeset`update$$ = 0, Typeset`initDone$$ = False, 
+                 Typeset`skipInitDone$$ = True, 
+                 CalculateUtilities`GraphicsUtilities`Private`more$509577$$ = 
+                 False, CalculateUtilities`GraphicsUtilities`Private`min480$\
+509582$$ = 0, CalculateUtilities`GraphicsUtilities`Private`max481$509583$$ = 
+                 0, CalculateUtilities`GraphicsUtilities`Private`min482$\
+509584$$ = 0, CalculateUtilities`GraphicsUtilities`Private`max483$509585$$ = 
+                 0, CalculateUtilities`GraphicsUtilities`Private`xmesh$509586$\
+$ = False, CalculateUtilities`GraphicsUtilities`Private`ymesh$509587$$ = 
+                 False, CalculateUtilities`GraphicsUtilities`Private`zmesh$\
+509588$$ = False, 
+                 CalculateUtilities`GraphicsUtilities`Private`density$509589$$\
+ = 0}, 
+                DynamicBox[
+                 Manipulate`ManipulateBoxes[
+                 2, TraditionalForm, 
+                  "Variables" :> {
+                   CalculateUtilities`GraphicsUtilities`Private`density$$ = 
+                    15, CalculateUtilities`GraphicsUtilities`Private`max481$$ = 
+                    0.5, CalculateUtilities`GraphicsUtilities`Private`max483$$\
+ = 0.5, CalculateUtilities`GraphicsUtilities`Private`min480$$ = -0.5, 
+                    CalculateUtilities`GraphicsUtilities`Private`min482$$ = \
+-0.5, CalculateUtilities`GraphicsUtilities`Private`more$$ = False, 
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$ = 
+                    True, CalculateUtilities`GraphicsUtilities`Private`ymesh$$\
+ = True, CalculateUtilities`GraphicsUtilities`Private`zmesh$$ = False}, 
+                  "ControllerVariables" :> {
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`more$509577$$\
+, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min480$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min480$\
+509582$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max481$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`max481$\
+509583$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min482$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min482$\
+509584$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max483$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`max483$\
+509585$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$509586$\
+$, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$509587$\
+$, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$509588$\
+$, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`density$$, 
+                    
+                    CalculateUtilities`GraphicsUtilities`Private`density$\
+509589$$, 0]}, "OtherVariables" :> {
+                   Typeset`show$$, Typeset`bookmarkList$$, 
+                    Typeset`bookmarkMode$$, Typeset`animator$$, 
+                    Typeset`animvar$$, Typeset`name$$, Typeset`specs$$, 
+                    Typeset`size$$, Typeset`update$$, Typeset`initDone$$, 
+                    Typeset`skipInitDone$$}, "Body" :> Function[Null, 
+                    
+                    Plot3D[#, #2, #3, Mesh -> 
+                    CalculateUtilities`GraphicsUtilities`Private`density$$, 
+                    MeshFunctions :> Flatten[{
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$, #& \
+, {}], 
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$$, #2& \
+, {}], 
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$$, #3& \
+, {}]}], 
+                    SlotSequence[4]], HoldAll][
+                    
+                    Re[(-1 + Global`a)^(-2) 
+                    Global`a^(-1) (-Global`a^Global`n + 
+                    2 Global`a^(1 + Global`n) + Global`a Global`n - 
+                    Global`a^2 (1 + Global`n))], {Global`a, 
+                    If[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min480$$], 
+                    (
+                    Piecewise[{{
+                    0. + 2.4462374554754875` Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    2.4462374554754875` Tan[1.5040801783846716` #]]& )[
+                    CalculateUtilities`GraphicsUtilities`Private`min480$$], \
+-2.2882456112707374`], 
+                    If[
+                    And[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min480$$], 
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`max481$$]], 
+                    (
+                    Piecewise[{{
+                    0. + 2.4462374554754875` Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    2.4462374554754875` Tan[1.5040801783846716` #]]& )[
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`min480$$ == 
+                    CalculateUtilities`GraphicsUtilities`Private`max481$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min480$$ + 
+                    0.004576491222541475, 
+                    CalculateUtilities`GraphicsUtilities`Private`max481$$]], 
+                    2.2882456112707374`]}, {Global`n, 
+                    If[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min482$$], 
+                    (
+                    Piecewise[{{
+                    0. + 5.345224838248487 Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    5.345224838248487 Tan[1.5040801783846716` #]]& )[
+                    CalculateUtilities`GraphicsUtilities`Private`min482$$], \
+-5.], 
+                    If[
+                    And[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min482$$], 
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`max483$$]], 
+                    (
+                    Piecewise[{{
+                    0. + 5.345224838248487 Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 5.345224838248487 Tan[1.5040801783846716` #]]& )[
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`min482$$ == 
+                    CalculateUtilities`GraphicsUtilities`Private`max483$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min482$$ + 
+                    0.01, CalculateUtilities`GraphicsUtilities`Private`max483$\
+$]], 5.]}, AxesLabel -> {
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], 
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]]}, ImageSize -> {300.}, 
+                    ClippingStyle -> Opacity[0.25], AxesLabel -> {
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], 
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]]}, MeshStyle -> 
+                    Opacity[0.45], Mesh -> 20, ColorFunction :> (Blend[{
+                    RGBColor[0.628962, 0.149248, 0.135592], 
+                    RGBColor[1., 0.634379, 0.186801], 
+                    RGBColor[1., 0.895537, 0.582162], 
+                    RGBColor[1., 0.995346, 0.826535]}, #3]& )], 
+                  "Specifications" :> {{
+                    CalculateUtilities`GraphicsUtilities`Private`more$$, {
+                    False, True}, ControlType -> None}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`min480$$, \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "min"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 1}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`max481$$, 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "max"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 2}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`min482$$, \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "min"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 3}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`max483$$, 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "max"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 4}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$, 
+                    True, "x"}, {True, False}, ControlPlacement -> 5}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$$, 
+                    True, "y"}, {True, False}, ControlPlacement -> 6}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$$, 
+                    False, "z"}, {True, False}, ControlPlacement -> 7}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`density$$, 
+                    15, "mesh density"}, 1, 30, 1, ImageSize -> Tiny, 
+                    ControlPlacement -> 8}, 
+                    Style[
+                    Overlay[{
+                    RawBoxes[
+                    PaneBox[
+                    GraphicsBox[
+                    
+                    RasterBox[{{{0, 0, 0, 24}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    10}}, {{0, 0, 0, 10}}, {{0, 0, 0, 9}}, {{0, 0, 0, 9}}, {{
+                    0, 0, 0, 8}}, {{0, 0, 0, 8}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    8}}, {{0, 0, 0, 7}}, {{0, 0, 0, 7}}, {{0, 0, 0, 8}}, {{0, 
+                    0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 
+                    6}}, {{0, 0, 0, 5}}, {{0, 0, 0, 6}}, {{0, 0, 0, 5}}, {{0, 
+                    0, 0, 4}}, {{0, 0, 0, 4}}, {{0, 0, 0, 5}}, {{0, 0, 0, 
+                    5}}, {{0, 0, 0, 3}}, {{0, 0, 0, 4}}, {{0, 0, 0, 3}}, {{0, 
+                    0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 
+                    2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 
+                    0, 0, 1}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 
+                    0}}, {{0, 0, 0, 1}}, {{255, 255, 255, 0}}, {{255, 255, 
+                    255, 0}}, {{255, 255, 255, 0}}, {{255, 255, 255, 0}}, {{
+                    255, 255, 255, 0}}, {{255, 255, 255, 0}}}, {{0, 45}, {
+                    2500, 0}}, {0, 255}, ColorFunction -> RGBColor], 
+                    ImageSize -> {2500, 45}, 
+                    PlotRange -> {{0, 2500}, {0, 45}}], ImageSize -> 
+                    Scaled[1], ScrollPosition -> {0., 0.}]], 
+                    Pane[
+                    Column[{
+                    Row[{
+                    Invisible[
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{255, 132, 
+                    0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}}}, {{0, 2}, {6, 0}}, {0, 255}, 
+                    ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 2}, 
+                    BaselinePosition -> (Scaled[0] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 2}}]]], " ", 
+                    Grid[{{
+                    Manipulate`Place[1], 
+                    Manipulate`Place[2]}, {
+                    Manipulate`Place[3], 
+                    Manipulate`Place[4]}}]}], 
+                    PaneSelector[{True -> Grid[{{
+                    Button[
+                    Row[{
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{255, 132, 
+                    0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}}}, {{0, 2}, {6, 0}}, {0, 255}, 
+                    ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 2}, 
+                    BaselinePosition -> (Scaled[0] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 2}}]], " "}], 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    False, Appearance -> None, BaseStyle -> {}], 
+                    Button[
+                    "Fewer controls", 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    False, Appearance -> None, BaseStyle -> {}]}, {"", 
+                    Item[
+                    Grid[{{"mesh:", 
+                    Manipulate`Place[5], 
+                    Manipulate`Place[6], 
+                    Manipulate`Place[7]}}], ItemSize -> Scaled[1], 
+                    Frame -> {None, None, True, None}]}, {"", 
+                    Item[
+                    Manipulate`Place[8], ItemSize -> Scaled[1], 
+                    Frame -> {None, None, True, None}]}}, FrameStyle -> 
+                    GrayLevel[0.9], Alignment -> Left, Spacings -> {0, 0.8}], 
+                    False -> Button[
+                    Row[{
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 255, 255}, {255, 255, 255}, {255, 132, 
+                    0}, {255, 132, 0}, {255, 255, 255}, {255, 255, 255}}, {{
+                    255, 255, 255}, {255, 255, 255}, {255, 132, 0}, {255, 132,
+                     0}, {255, 255, 255}, {255, 255, 255}}, {{255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 
+                    0}, {255, 132, 0}}, {{255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{
+                    255, 255, 255}, {255, 255, 255}, {255, 132, 0}, {255, 132,
+                     0}, {255, 255, 255}, {255, 255, 255}}, {{255, 255, 
+                    255}, {255, 255, 255}, {255, 132, 0}, {255, 132, 0}, {255,
+                     255, 255}, {255, 255, 255}}}, {{0, 6}, {6, 0}}, {0, 255},
+                     ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 6}, 
+                    BaselinePosition -> (Scaled[0.3] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 6}}]], " More controls"}], 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    True, Appearance -> None, BaseStyle -> {}]}, 
+                    Dynamic[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$], 
+                    ImageSize -> Automatic]}], 
+                    ImageMargins -> {{20, 30}, {10, 10}}]}, {1, 2}, 2, 
+                    Alignment -> {Left, Top}]]}, 
+                  "Options" :> {
+                   TrackedSymbols -> True, ControlPlacement -> Bottom, 
+                    FrameMargins -> {{0, 0}, {0, 10}}, Paneled -> False, 
+                    AppearanceElements -> {}, 
+                    LabelStyle -> {
+                    "DialogStyle", FontColor -> GrayLevel[0.25]}}, 
+                  "DefaultOptions" :> {}], SingleEvaluation -> True], 
+                DynamicModuleValues :> {}, Deinitialization :> None, 
+                UntrackedVariables :> {Typeset`size$$}, 
+                SynchronousInitialization -> True, 
+                UnsavedVariables :> {Typeset`initDone$$}], "Manipulate", 
+               Deployed -> True, StripOnInput -> False], TraditionalForm], 
+             Manipulate`InterpretManipulate[1]], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement["dataformats", {}, {"minput"}]}], 
+     XMLElement["subpod", {"title" -> "Imaginary part"}, {
+       XMLElement[
+       "minput", {}, {
+        "Plot3D[Im[(-a^n + 2 a^(1 + n) + a n - a^2 (1 + n))/((-1 + a)^2 a)], \
+{a, -2.28825, 2.28825}, {n, -5., 5.}]"}], 
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             FormBox[
+              StyleBox[
+               
+               DynamicModuleBox[{
+                CalculateUtilities`GraphicsUtilities`Private`density$$ = 15, 
+                 CalculateUtilities`GraphicsUtilities`Private`max485$$ = 0.5, 
+                 CalculateUtilities`GraphicsUtilities`Private`max487$$ = 0.5, 
+                 CalculateUtilities`GraphicsUtilities`Private`min484$$ = -0.5,
+                  CalculateUtilities`GraphicsUtilities`Private`min486$$ = \
+-0.5, CalculateUtilities`GraphicsUtilities`Private`more$$ = False, 
+                 CalculateUtilities`GraphicsUtilities`Private`xmesh$$ = True, 
+                 CalculateUtilities`GraphicsUtilities`Private`ymesh$$ = True, 
+                 CalculateUtilities`GraphicsUtilities`Private`zmesh$$ = False,
+                  Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+                 Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, 
+                 Typeset`animvar$$ = 1, Typeset`name$$ = "\"untitled\"", 
+                 Typeset`specs$$ = {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$], {
+                    False, True}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min484$$], \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "min"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max485$$], 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "max"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min486$$], \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "min"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max487$$], 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "max"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$], 
+                    True, "x"}, {True, False}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$$], 
+                    True, "y"}, {True, False}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$$], 
+                    False, "z"}, {True, False}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`density$$], 
+                    15, "mesh density"}, 1, 30, 1}, {
+                    Hold[
+                    Style[
+                    Overlay[{
+                    RawBoxes[
+                    PaneBox[
+                    GraphicsBox[
+                    
+                    RasterBox[{{{0, 0, 0, 24}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    10}}, {{0, 0, 0, 10}}, {{0, 0, 0, 9}}, {{0, 0, 0, 9}}, {{
+                    0, 0, 0, 8}}, {{0, 0, 0, 8}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    8}}, {{0, 0, 0, 7}}, {{0, 0, 0, 7}}, {{0, 0, 0, 8}}, {{0, 
+                    0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 
+                    6}}, {{0, 0, 0, 5}}, {{0, 0, 0, 6}}, {{0, 0, 0, 5}}, {{0, 
+                    0, 0, 4}}, {{0, 0, 0, 4}}, {{0, 0, 0, 5}}, {{0, 0, 0, 
+                    5}}, {{0, 0, 0, 3}}, {{0, 0, 0, 4}}, {{0, 0, 0, 3}}, {{0, 
+                    0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 
+                    2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 
+                    0, 0, 1}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 
+                    0}}, {{0, 0, 0, 1}}, {{255, 255, 255, 0}}, {{255, 255, 
+                    255, 0}}, {{255, 255, 255, 0}}, {{255, 255, 255, 0}}, {{
+                    255, 255, 255, 0}}, {{255, 255, 255, 0}}}, {{0, 45}, {
+                    2500, 0}}, {0, 255}, ColorFunction -> RGBColor], 
+                    ImageSize -> {2500, 45}, 
+                    PlotRange -> {{0, 2500}, {0, 45}}], ImageSize -> 
+                    Scaled[1], ScrollPosition -> {0., 0.}]], 
+                    Pane[
+                    Column[{
+                    Row[{
+                    Invisible[
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{255, 132, 
+                    0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}}}, {{0, 2}, {6, 0}}, {0, 255}, 
+                    ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 2}, 
+                    BaselinePosition -> (Scaled[0] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 2}}]]], " ", 
+                    Grid[{{
+                    Manipulate`Place[1], 
+                    Manipulate`Place[2]}, {
+                    Manipulate`Place[3], 
+                    Manipulate`Place[4]}}]}], 
+                    PaneSelector[{True -> Grid[{{
+                    Button[
+                    Row[{
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{255, 132, 
+                    0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}}}, {{0, 2}, {6, 0}}, {0, 255}, 
+                    ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 2}, 
+                    BaselinePosition -> (Scaled[0] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 2}}]], " "}], 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    False, Appearance -> None, BaseStyle -> {}], 
+                    Button[
+                    "Fewer controls", 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    False, Appearance -> None, BaseStyle -> {}]}, {"", 
+                    Item[
+                    Grid[{{"mesh:", 
+                    Manipulate`Place[5], 
+                    Manipulate`Place[6], 
+                    Manipulate`Place[7]}}], ItemSize -> Scaled[1], 
+                    Frame -> {None, None, True, None}]}, {"", 
+                    Item[
+                    Manipulate`Place[8], ItemSize -> Scaled[1], 
+                    Frame -> {None, None, True, None}]}}, FrameStyle -> 
+                    GrayLevel[0.9], Alignment -> Left, Spacings -> {0, 0.8}], 
+                    False -> Button[
+                    Row[{
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 255, 255}, {255, 255, 255}, {255, 132, 
+                    0}, {255, 132, 0}, {255, 255, 255}, {255, 255, 255}}, {{
+                    255, 255, 255}, {255, 255, 255}, {255, 132, 0}, {255, 132,
+                     0}, {255, 255, 255}, {255, 255, 255}}, {{255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 
+                    0}, {255, 132, 0}}, {{255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{
+                    255, 255, 255}, {255, 255, 255}, {255, 132, 0}, {255, 132,
+                     0}, {255, 255, 255}, {255, 255, 255}}, {{255, 255, 
+                    255}, {255, 255, 255}, {255, 132, 0}, {255, 132, 0}, {255,
+                     255, 255}, {255, 255, 255}}}, {{0, 6}, {6, 0}}, {0, 255},
+                     ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 6}, 
+                    BaselinePosition -> (Scaled[0.3] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 6}}]], " More controls"}], 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    True, Appearance -> None, BaseStyle -> {}]}, 
+                    Dynamic[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$], 
+                    ImageSize -> Automatic]}], 
+                    ImageMargins -> {{20, 30}, {10, 10}}]}, {1, 2}, 2, 
+                    Alignment -> {Left, Top}]]], 
+                    Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = 
+                 Automatic, Typeset`update$$ = 0, Typeset`initDone$$ = False, 
+                 Typeset`skipInitDone$$ = True, 
+                 CalculateUtilities`GraphicsUtilities`Private`more$509660$$ = 
+                 False, CalculateUtilities`GraphicsUtilities`Private`min484$\
+509661$$ = 0, CalculateUtilities`GraphicsUtilities`Private`max485$509662$$ = 
+                 0, CalculateUtilities`GraphicsUtilities`Private`min486$\
+509663$$ = 0, CalculateUtilities`GraphicsUtilities`Private`max487$509664$$ = 
+                 0, CalculateUtilities`GraphicsUtilities`Private`xmesh$509665$\
+$ = False, CalculateUtilities`GraphicsUtilities`Private`ymesh$509666$$ = 
+                 False, CalculateUtilities`GraphicsUtilities`Private`zmesh$\
+509667$$ = False, 
+                 CalculateUtilities`GraphicsUtilities`Private`density$509668$$\
+ = 0}, 
+                DynamicBox[
+                 Manipulate`ManipulateBoxes[
+                 2, TraditionalForm, 
+                  "Variables" :> {
+                   CalculateUtilities`GraphicsUtilities`Private`density$$ = 
+                    15, CalculateUtilities`GraphicsUtilities`Private`max485$$ = 
+                    0.5, CalculateUtilities`GraphicsUtilities`Private`max487$$\
+ = 0.5, CalculateUtilities`GraphicsUtilities`Private`min484$$ = -0.5, 
+                    CalculateUtilities`GraphicsUtilities`Private`min486$$ = \
+-0.5, CalculateUtilities`GraphicsUtilities`Private`more$$ = False, 
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$ = 
+                    True, CalculateUtilities`GraphicsUtilities`Private`ymesh$$\
+ = True, CalculateUtilities`GraphicsUtilities`Private`zmesh$$ = False}, 
+                  "ControllerVariables" :> {
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`more$509660$$\
+, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min484$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min484$\
+509661$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max485$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`max485$\
+509662$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min486$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min486$\
+509663$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max487$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`max487$\
+509664$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$509665$\
+$, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$$, 
+                    
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$509666$\
+$, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$509667$\
+$, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`density$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`density$\
+509668$$, 0]}, "OtherVariables" :> {
+                   Typeset`show$$, Typeset`bookmarkList$$, 
+                    Typeset`bookmarkMode$$, Typeset`animator$$, 
+                    Typeset`animvar$$, Typeset`name$$, Typeset`specs$$, 
+                    Typeset`size$$, Typeset`update$$, Typeset`initDone$$, 
+                    Typeset`skipInitDone$$}, "Body" :> Function[Null, 
+                    
+                    Plot3D[#, #2, #3, Mesh -> 
+                    CalculateUtilities`GraphicsUtilities`Private`density$$, 
+                    MeshFunctions :> Flatten[{
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$, #& \
+, {}], 
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$$, #2& \
+, {}], 
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$$, #3& \
+, {}]}], 
+                    SlotSequence[4]], HoldAll][
+                    
+                    Im[(-1 + Global`a)^(-2) 
+                    Global`a^(-1) (-Global`a^Global`n + 
+                    2 Global`a^(1 + Global`n) + Global`a Global`n - 
+                    Global`a^2 (1 + Global`n))], {Global`a, 
+                    If[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min484$$], 
+                    (
+                    Piecewise[{{
+                    0. + 2.4462374554754875` Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    2.4462374554754875` Tan[1.5040801783846716` #]]& )[
+                    CalculateUtilities`GraphicsUtilities`Private`min484$$], \
+-2.2882456112707374`], 
+                    If[
+                    And[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min484$$], 
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`max485$$]], 
+                    (
+                    Piecewise[{{
+                    0. + 2.4462374554754875` Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    2.4462374554754875` Tan[1.5040801783846716` #]]& )[
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`min484$$ == 
+                    CalculateUtilities`GraphicsUtilities`Private`max485$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min484$$ + 
+                    0.004576491222541475, 
+                    CalculateUtilities`GraphicsUtilities`Private`max485$$]], 
+                    2.2882456112707374`]}, {Global`n, 
+                    If[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min486$$], 
+                    (
+                    Piecewise[{{
+                    0. + 5.345224838248487 Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    5.345224838248487 Tan[1.5040801783846716` #]]& )[
+                    CalculateUtilities`GraphicsUtilities`Private`min486$$], \
+-5.], 
+                    If[
+                    And[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min486$$], 
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`max487$$]], 
+                    (
+                    Piecewise[{{
+                    0. + 5.345224838248487 Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 5.345224838248487 Tan[1.5040801783846716` #]]& )[
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`min486$$ == 
+                    CalculateUtilities`GraphicsUtilities`Private`max487$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min486$$ + 
+                    0.01, CalculateUtilities`GraphicsUtilities`Private`max487$\
+$]], 5.]}, AxesLabel -> {
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], 
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]]}, ImageSize -> {300.}, 
+                    ClippingStyle -> Opacity[0.25], AxesLabel -> {
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], 
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]]}, MeshStyle -> 
+                    Opacity[0.45], Mesh -> 20, ColorFunction :> (Blend[{
+                    RGBColor[0.628962, 0.149248, 0.135592], 
+                    RGBColor[1., 0.634379, 0.186801], 
+                    RGBColor[1., 0.895537, 0.582162], 
+                    RGBColor[1., 0.995346, 0.826535]}, #3]& )], 
+                  "Specifications" :> {{
+                    CalculateUtilities`GraphicsUtilities`Private`more$$, {
+                    False, True}, ControlType -> None}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`min484$$, \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "min"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 1}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`max485$$, 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "max"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 2}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`min486$$, \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "min"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 3}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`max487$$, 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "max"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 4}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`xmesh$$, 
+                    True, "x"}, {True, False}, ControlPlacement -> 5}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`ymesh$$, 
+                    True, "y"}, {True, False}, ControlPlacement -> 6}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`zmesh$$, 
+                    False, "z"}, {True, False}, ControlPlacement -> 7}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`density$$, 
+                    15, "mesh density"}, 1, 30, 1, ImageSize -> Tiny, 
+                    ControlPlacement -> 8}, 
+                    Style[
+                    Overlay[{
+                    RawBoxes[
+                    PaneBox[
+                    GraphicsBox[
+                    
+                    RasterBox[{{{0, 0, 0, 24}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    10}}, {{0, 0, 0, 10}}, {{0, 0, 0, 9}}, {{0, 0, 0, 9}}, {{
+                    0, 0, 0, 8}}, {{0, 0, 0, 8}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    8}}, {{0, 0, 0, 7}}, {{0, 0, 0, 7}}, {{0, 0, 0, 8}}, {{0, 
+                    0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 
+                    6}}, {{0, 0, 0, 5}}, {{0, 0, 0, 6}}, {{0, 0, 0, 5}}, {{0, 
+                    0, 0, 4}}, {{0, 0, 0, 4}}, {{0, 0, 0, 5}}, {{0, 0, 0, 
+                    5}}, {{0, 0, 0, 3}}, {{0, 0, 0, 4}}, {{0, 0, 0, 3}}, {{0, 
+                    0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 
+                    2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 
+                    0, 0, 1}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 
+                    0}}, {{0, 0, 0, 1}}, {{255, 255, 255, 0}}, {{255, 255, 
+                    255, 0}}, {{255, 255, 255, 0}}, {{255, 255, 255, 0}}, {{
+                    255, 255, 255, 0}}, {{255, 255, 255, 0}}}, {{0, 45}, {
+                    2500, 0}}, {0, 255}, ColorFunction -> RGBColor], 
+                    ImageSize -> {2500, 45}, 
+                    PlotRange -> {{0, 2500}, {0, 45}}], ImageSize -> 
+                    Scaled[1], ScrollPosition -> {0., 0.}]], 
+                    Pane[
+                    Column[{
+                    Row[{
+                    Invisible[
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{255, 132, 
+                    0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}}}, {{0, 2}, {6, 0}}, {0, 255}, 
+                    ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 2}, 
+                    BaselinePosition -> (Scaled[0] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 2}}]]], " ", 
+                    Grid[{{
+                    Manipulate`Place[1], 
+                    Manipulate`Place[2]}, {
+                    Manipulate`Place[3], 
+                    Manipulate`Place[4]}}]}], 
+                    PaneSelector[{True -> Grid[{{
+                    Button[
+                    Row[{
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{255, 132, 
+                    0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}}}, {{0, 2}, {6, 0}}, {0, 255}, 
+                    ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 2}, 
+                    BaselinePosition -> (Scaled[0] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 2}}]], " "}], 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    False, Appearance -> None, BaseStyle -> {}], 
+                    Button[
+                    "Fewer controls", 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    False, Appearance -> None, BaseStyle -> {}]}, {"", 
+                    Item[
+                    Grid[{{"mesh:", 
+                    Manipulate`Place[5], 
+                    Manipulate`Place[6], 
+                    Manipulate`Place[7]}}], ItemSize -> Scaled[1], 
+                    Frame -> {None, None, True, None}]}, {"", 
+                    Item[
+                    Manipulate`Place[8], ItemSize -> Scaled[1], 
+                    Frame -> {None, None, True, None}]}}, FrameStyle -> 
+                    GrayLevel[0.9], Alignment -> Left, Spacings -> {0, 0.8}], 
+                    False -> Button[
+                    Row[{
+                    RawBoxes[
+                    GraphicsBox[
+                    TagBox[
+                    
+                    RasterBox[{{{255, 255, 255}, {255, 255, 255}, {255, 132, 
+                    0}, {255, 132, 0}, {255, 255, 255}, {255, 255, 255}}, {{
+                    255, 255, 255}, {255, 255, 255}, {255, 132, 0}, {255, 132,
+                     0}, {255, 255, 255}, {255, 255, 255}}, {{255, 132, 0}, {
+                    255, 132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 
+                    0}, {255, 132, 0}}, {{255, 132, 0}, {255, 132, 0}, {255, 
+                    132, 0}, {255, 132, 0}, {255, 132, 0}, {255, 132, 0}}, {{
+                    255, 255, 255}, {255, 255, 255}, {255, 132, 0}, {255, 132,
+                     0}, {255, 255, 255}, {255, 255, 255}}, {{255, 255, 
+                    255}, {255, 255, 255}, {255, 132, 0}, {255, 132, 0}, {255,
+                     255, 255}, {255, 255, 255}}}, {{0, 6}, {6, 0}}, {0, 255},
+                     ColorFunction -> RGBColor], 
+                    BoxForm`ImageTag[
+                    "Byte", ColorSpace -> "RGB", Interleaving -> True], 
+                    Selectable -> False], BaseStyle -> "ImageGraphics", 
+                    ImageSize -> Magnification[1], ImageSizeRaw -> {6, 6}, 
+                    BaselinePosition -> (Scaled[0.3] -> Center), 
+                    PlotRange -> {{0, 6}, {0, 6}}]], " More controls"}], 
+                    CalculateUtilities`GraphicsUtilities`Private`more$$ = 
+                    True, Appearance -> None, BaseStyle -> {}]}, 
+                    Dynamic[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$], 
+                    ImageSize -> Automatic]}], 
+                    ImageMargins -> {{20, 30}, {10, 10}}]}, {1, 2}, 2, 
+                    Alignment -> {Left, Top}]]}, 
+                  "Options" :> {
+                   TrackedSymbols -> True, ControlPlacement -> Bottom, 
+                    FrameMargins -> {{0, 0}, {0, 10}}, Paneled -> False, 
+                    AppearanceElements -> {}, 
+                    LabelStyle -> {
+                    "DialogStyle", FontColor -> GrayLevel[0.25]}}, 
+                  "DefaultOptions" :> {}], SingleEvaluation -> True], 
+                DynamicModuleValues :> {}, Deinitialization :> None, 
+                UntrackedVariables :> {Typeset`size$$}, 
+                SynchronousInitialization -> True, 
+                UnsavedVariables :> {Typeset`initDone$$}], "Manipulate", 
+               Deployed -> True, StripOnInput -> False], TraditionalForm], 
+             Manipulate`InterpretManipulate[1]], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement["dataformats", {}, {"minput"}]}]}], Typeset`pod3$$ = 
+   XMLElement[
+   "pod", {"title" -> "Contour plots", "scanner" -> "Plot", "id" -> 
+     "ContourPlot", "position" -> "300", "error" -> "false", "numsubpods" -> 
+     "2"}, {
+     XMLElement["subpod", {"title" -> "Real part"}, {
+       XMLElement[
+       "minput", {}, {
+        "ContourPlot[Re[(-a^n + 2 a^(1 + n) + a n - a^2 (1 + n))/((-1 + a)^2 \
+a)], {a, -2.28825, 2.28825}, {n, -5., 5.}]"}], 
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             FormBox[
+              StyleBox[
+               
+               DynamicModuleBox[{
+                CalculateUtilities`GraphicsUtilities`Private`max1922$$ = 0.5, 
+                 CalculateUtilities`GraphicsUtilities`Private`max1924$$ = 0.5,
+                  CalculateUtilities`GraphicsUtilities`Private`min1921$$ = \
+-0.5, CalculateUtilities`GraphicsUtilities`Private`min1923$$ = -0.5, 
+                 CalculateUtilities`GraphicsUtilities`Private`more$$ = False, 
+                 Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+                 Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, 
+                 Typeset`animvar$$ = 1, Typeset`name$$ = "\"untitled\"", 
+                 Typeset`specs$$ = {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$], {
+                    False, True}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min1921$$], \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "min"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max1922$$], 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "max"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$$], \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "min"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max1924$$], 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "max"]}, -1, 1}, {
+                    Hold[
+                    Style[
+                    Overlay[{
+                    RawBoxes[
+                    PaneBox[
+                    GraphicsBox[
+                    
+                    RasterBox[{{{0, 0, 0, 24}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    10}}, {{0, 0, 0, 10}}, {{0, 0, 0, 9}}, {{0, 0, 0, 9}}, {{
+                    0, 0, 0, 8}}, {{0, 0, 0, 8}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    8}}, {{0, 0, 0, 7}}, {{0, 0, 0, 7}}, {{0, 0, 0, 8}}, {{0, 
+                    0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 
+                    6}}, {{0, 0, 0, 5}}, {{0, 0, 0, 6}}, {{0, 0, 0, 5}}, {{0, 
+                    0, 0, 4}}, {{0, 0, 0, 4}}, {{0, 0, 0, 5}}, {{0, 0, 0, 
+                    5}}, {{0, 0, 0, 3}}, {{0, 0, 0, 4}}, {{0, 0, 0, 3}}, {{0, 
+                    0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 
+                    2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 
+                    0, 0, 1}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 
+                    0}}, {{0, 0, 0, 1}}, {{255, 255, 255, 0}}, {{255, 255, 
+                    255, 0}}, {{255, 255, 255, 0}}, {{255, 255, 255, 0}}, {{
+                    255, 255, 255, 0}}, {{255, 255, 255, 0}}}, {{0, 45}, {
+                    2500, 0}}, {0, 255}, ColorFunction -> RGBColor], 
+                    ImageSize -> {2500, 45}, 
+                    PlotRange -> {{0, 2500}, {0, 45}}], ImageSize -> 
+                    Scaled[1], ScrollPosition -> {0., 0.}]], 
+                    Pane[
+                    Column[{
+                    Grid[{{
+                    Manipulate`Place[1], 
+                    Manipulate`Place[2]}, {
+                    Manipulate`Place[3], 
+                    Manipulate`Place[4]}}]}], 
+                    ImageMargins -> {{20, 30}, {10, 10}}]}, {1, 2}, 2, 
+                    Alignment -> {Left, Top}]]], 
+                    Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = 
+                 Automatic, Typeset`update$$ = 0, Typeset`initDone$$ = False, 
+                 Typeset`skipInitDone$$ = True, 
+                 CalculateUtilities`GraphicsUtilities`Private`more$1742146$$ = 
+                 False, CalculateUtilities`GraphicsUtilities`Private`min1921$\
+1742151$$ = 0, CalculateUtilities`GraphicsUtilities`Private`max1922$1742152$$ = 
+                 0, CalculateUtilities`GraphicsUtilities`Private`min1923$\
+1742153$$ = 0, CalculateUtilities`GraphicsUtilities`Private`max1924$1742154$$ = 
+                 0}, 
+                DynamicBox[
+                 Manipulate`ManipulateBoxes[
+                 2, TraditionalForm, 
+                  "Variables" :> {
+                   CalculateUtilities`GraphicsUtilities`Private`max1922$$ = 
+                    0.5, CalculateUtilities`GraphicsUtilities`Private`max1924$\
+$ = 0.5, CalculateUtilities`GraphicsUtilities`Private`min1921$$ = -0.5, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$$ = \
+-0.5, CalculateUtilities`GraphicsUtilities`Private`more$$ = False}, 
+                  "ControllerVariables" :> {
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`more$1742146$\
+$, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min1921$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1921$\
+1742151$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max1922$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`max1922$\
+1742152$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$\
+1742153$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max1924$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`max1924$\
+1742154$$, 0]}, "OtherVariables" :> {
+                   Typeset`show$$, Typeset`bookmarkList$$, 
+                    Typeset`bookmarkMode$$, Typeset`animator$$, 
+                    Typeset`animvar$$, Typeset`name$$, Typeset`specs$$, 
+                    Typeset`size$$, Typeset`update$$, Typeset`initDone$$, 
+                    Typeset`skipInitDone$$}, "Body" :> ContourPlot[
+                    
+                    Re[(-1 + Global`a)^(-2) 
+                    Global`a^(-1) (-Global`a^Global`n + 
+                    2 Global`a^(1 + Global`n) + Global`a Global`n - 
+                    Global`a^2 (1 + Global`n))], {Global`a, 
+                    If[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min1921$$], 
+                    (
+                    Piecewise[{{
+                    0. + 2.4462374554754875` Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    2.4462374554754875` Tan[1.5040801783846716` #]]& )[
+                    CalculateUtilities`GraphicsUtilities`Private`min1921$$], \
+-2.2882456112707374`], 
+                    If[
+                    And[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min1921$$], 
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`max1922$$]], \
+
+                    (
+                    Piecewise[{{
+                    0. + 2.4462374554754875` Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    2.4462374554754875` Tan[1.5040801783846716` #]]& )[
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`min1921$$ == 
+                    CalculateUtilities`GraphicsUtilities`Private`max1922$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1921$$ + 
+                    0.004576491222541475, 
+                    CalculateUtilities`GraphicsUtilities`Private`max1922$$]], 
+                    2.2882456112707374`]}, {Global`n, 
+                    If[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$$], 
+                    (
+                    Piecewise[{{
+                    0. + 5.345224838248487 Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    5.345224838248487 Tan[1.5040801783846716` #]]& )[
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$$], \
+-5.], 
+                    If[
+                    And[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$$], 
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`max1924$$]], \
+
+                    (
+                    Piecewise[{{
+                    0. + 5.345224838248487 Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 5.345224838248487 Tan[1.5040801783846716` #]]& )[
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$$ == 
+                    CalculateUtilities`GraphicsUtilities`Private`max1924$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$$ + 
+                    0.01, CalculateUtilities`GraphicsUtilities`Private`\
+max1924$$]], 5.]}, FrameLabel -> {
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], 
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]]}, ImageSize -> {300.}, 
+                    ClippingStyle -> Automatic, FrameLabel -> Automatic, 
+                    RotateLabel -> False, PlotRangePadding -> 0, 
+                    ColorFunction :> (Blend[{
+                    RGBColor[
+                    0.6289616235599298, 0.1492484931715877, 
+                    0.1355916685740444], 
+                    RGBColor[1., 0.634378576333257, 0.1868009460593576], 
+                    RGBColor[1., 0.8955367360952163, 0.5821622034027619], 
+                    RGBColor[
+                    1., 0.9953459983215076, 0.826535439078355]}, #]& )], 
+                  "Specifications" :> {{
+                    CalculateUtilities`GraphicsUtilities`Private`more$$, {
+                    False, True}, ControlType -> None}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`min1921$$, \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "min"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 1}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`max1922$$, 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "max"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 2}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`min1923$$, \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "min"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 3}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`max1924$$, 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "max"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 4}, 
+                    Style[
+                    Overlay[{
+                    RawBoxes[
+                    PaneBox[
+                    GraphicsBox[
+                    
+                    RasterBox[{{{0, 0, 0, 24}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    10}}, {{0, 0, 0, 10}}, {{0, 0, 0, 9}}, {{0, 0, 0, 9}}, {{
+                    0, 0, 0, 8}}, {{0, 0, 0, 8}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    8}}, {{0, 0, 0, 7}}, {{0, 0, 0, 7}}, {{0, 0, 0, 8}}, {{0, 
+                    0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 
+                    6}}, {{0, 0, 0, 5}}, {{0, 0, 0, 6}}, {{0, 0, 0, 5}}, {{0, 
+                    0, 0, 4}}, {{0, 0, 0, 4}}, {{0, 0, 0, 5}}, {{0, 0, 0, 
+                    5}}, {{0, 0, 0, 3}}, {{0, 0, 0, 4}}, {{0, 0, 0, 3}}, {{0, 
+                    0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 
+                    2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 
+                    0, 0, 1}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 
+                    0}}, {{0, 0, 0, 1}}, {{255, 255, 255, 0}}, {{255, 255, 
+                    255, 0}}, {{255, 255, 255, 0}}, {{255, 255, 255, 0}}, {{
+                    255, 255, 255, 0}}, {{255, 255, 255, 0}}}, {{0, 45}, {
+                    2500, 0}}, {0, 255}, ColorFunction -> RGBColor], 
+                    ImageSize -> {2500, 45}, 
+                    PlotRange -> {{0, 2500}, {0, 45}}], ImageSize -> 
+                    Scaled[1], ScrollPosition -> {0., 0.}]], 
+                    Pane[
+                    Column[{
+                    Grid[{{
+                    Manipulate`Place[1], 
+                    Manipulate`Place[2]}, {
+                    Manipulate`Place[3], 
+                    Manipulate`Place[4]}}]}], 
+                    ImageMargins -> {{20, 30}, {10, 10}}]}, {1, 2}, 2, 
+                    Alignment -> {Left, Top}]]}, 
+                  "Options" :> {
+                   TrackedSymbols -> True, ControlPlacement -> Bottom, 
+                    FrameMargins -> {{0, 0}, {0, 10}}, Paneled -> False, 
+                    AppearanceElements -> {}, 
+                    LabelStyle -> {
+                    "DialogStyle", FontColor -> GrayLevel[0.25]}}, 
+                  "DefaultOptions" :> {}], SingleEvaluation -> True], 
+                DynamicModuleValues :> {}, Deinitialization :> None, 
+                UntrackedVariables :> {Typeset`size$$}, 
+                SynchronousInitialization -> True, 
+                UnsavedVariables :> {Typeset`initDone$$}], "Manipulate", 
+               Deployed -> True, StripOnInput -> False], TraditionalForm], 
+             Manipulate`InterpretManipulate[1]], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement["dataformats", {}, {"minput"}]}], 
+     XMLElement["subpod", {"title" -> "Imaginary part"}, {
+       XMLElement[
+       "minput", {}, {
+        "ContourPlot[Im[(-a^n + 2 a^(1 + n) + a n - a^2 (1 + n))/((-1 + a)^2 \
+a)], {a, -2.28825, 2.28825}, {n, -5., 5.}]"}], 
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             FormBox[
+              StyleBox[
+               
+               DynamicModuleBox[{
+                CalculateUtilities`GraphicsUtilities`Private`max1926$$ = 0.5, 
+                 CalculateUtilities`GraphicsUtilities`Private`max1928$$ = 0.5,
+                  CalculateUtilities`GraphicsUtilities`Private`min1925$$ = \
+-0.5, CalculateUtilities`GraphicsUtilities`Private`min1927$$ = -0.5, 
+                 CalculateUtilities`GraphicsUtilities`Private`more$$ = False, 
+                 Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+                 Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, 
+                 Typeset`animvar$$ = 1, Typeset`name$$ = "\"untitled\"", 
+                 Typeset`specs$$ = {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$], {
+                    False, True}}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min1925$$], \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "min"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max1926$$], 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "max"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$$], \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "min"]}, -1, 1}, {{
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max1928$$], 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "max"]}, -1, 1}, {
+                    Hold[
+                    Style[
+                    Overlay[{
+                    RawBoxes[
+                    PaneBox[
+                    GraphicsBox[
+                    
+                    RasterBox[{{{0, 0, 0, 24}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    10}}, {{0, 0, 0, 10}}, {{0, 0, 0, 9}}, {{0, 0, 0, 9}}, {{
+                    0, 0, 0, 8}}, {{0, 0, 0, 8}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    8}}, {{0, 0, 0, 7}}, {{0, 0, 0, 7}}, {{0, 0, 0, 8}}, {{0, 
+                    0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 
+                    6}}, {{0, 0, 0, 5}}, {{0, 0, 0, 6}}, {{0, 0, 0, 5}}, {{0, 
+                    0, 0, 4}}, {{0, 0, 0, 4}}, {{0, 0, 0, 5}}, {{0, 0, 0, 
+                    5}}, {{0, 0, 0, 3}}, {{0, 0, 0, 4}}, {{0, 0, 0, 3}}, {{0, 
+                    0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 
+                    2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 
+                    0, 0, 1}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 
+                    0}}, {{0, 0, 0, 1}}, {{255, 255, 255, 0}}, {{255, 255, 
+                    255, 0}}, {{255, 255, 255, 0}}, {{255, 255, 255, 0}}, {{
+                    255, 255, 255, 0}}, {{255, 255, 255, 0}}}, {{0, 45}, {
+                    2500, 0}}, {0, 255}, ColorFunction -> RGBColor], 
+                    ImageSize -> {2500, 45}, 
+                    PlotRange -> {{0, 2500}, {0, 45}}], ImageSize -> 
+                    Scaled[1], ScrollPosition -> {0., 0.}]], 
+                    Pane[
+                    Column[{
+                    Grid[{{
+                    Manipulate`Place[1], 
+                    Manipulate`Place[2]}, {
+                    Manipulate`Place[3], 
+                    Manipulate`Place[4]}}]}], 
+                    ImageMargins -> {{20, 30}, {10, 10}}]}, {1, 2}, 2, 
+                    Alignment -> {Left, Top}]]], 
+                    Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = 
+                 Automatic, Typeset`update$$ = 0, Typeset`initDone$$ = False, 
+                 Typeset`skipInitDone$$ = True, 
+                 CalculateUtilities`GraphicsUtilities`Private`more$1742217$$ = 
+                 False, CalculateUtilities`GraphicsUtilities`Private`min1925$\
+1742218$$ = 0, CalculateUtilities`GraphicsUtilities`Private`max1926$1742219$$ = 
+                 0, CalculateUtilities`GraphicsUtilities`Private`min1927$\
+1742220$$ = 0, CalculateUtilities`GraphicsUtilities`Private`max1928$1742221$$ = 
+                 0}, 
+                DynamicBox[
+                 Manipulate`ManipulateBoxes[
+                 2, TraditionalForm, 
+                  "Variables" :> {
+                   CalculateUtilities`GraphicsUtilities`Private`max1926$$ = 
+                    0.5, CalculateUtilities`GraphicsUtilities`Private`max1928$\
+$ = 0.5, CalculateUtilities`GraphicsUtilities`Private`min1925$$ = -0.5, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$$ = \
+-0.5, CalculateUtilities`GraphicsUtilities`Private`more$$ = False}, 
+                  "ControllerVariables" :> {
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`more$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`more$1742217$\
+$, False], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min1925$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1925$\
+1742218$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max1926$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`max1926$\
+1742219$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$\
+1742220$$, 0], 
+                    Hold[
+                    CalculateUtilities`GraphicsUtilities`Private`max1928$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`max1928$\
+1742221$$, 0]}, "OtherVariables" :> {
+                   Typeset`show$$, Typeset`bookmarkList$$, 
+                    Typeset`bookmarkMode$$, Typeset`animator$$, 
+                    Typeset`animvar$$, Typeset`name$$, Typeset`specs$$, 
+                    Typeset`size$$, Typeset`update$$, Typeset`initDone$$, 
+                    Typeset`skipInitDone$$}, "Body" :> ContourPlot[
+                    
+                    Im[(-1 + Global`a)^(-2) 
+                    Global`a^(-1) (-Global`a^Global`n + 
+                    2 Global`a^(1 + Global`n) + Global`a Global`n - 
+                    Global`a^2 (1 + Global`n))], {Global`a, 
+                    If[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min1925$$], 
+                    (
+                    Piecewise[{{
+                    0. + 2.4462374554754875` Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    2.4462374554754875` Tan[1.5040801783846716` #]]& )[
+                    CalculateUtilities`GraphicsUtilities`Private`min1925$$], \
+-2.2882456112707374`], 
+                    If[
+                    And[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min1925$$], 
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`max1926$$]], \
+
+                    (
+                    Piecewise[{{
+                    0. + 2.4462374554754875` Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    2.4462374554754875` Tan[1.5040801783846716` #]]& )[
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`min1925$$ == 
+                    CalculateUtilities`GraphicsUtilities`Private`max1926$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1925$$ + 
+                    0.004576491222541475, 
+                    CalculateUtilities`GraphicsUtilities`Private`max1926$$]], 
+                    2.2882456112707374`]}, {Global`n, 
+                    If[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$$], 
+                    (
+                    Piecewise[{{
+                    0. + 5.345224838248487 Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 
+                    5.345224838248487 Tan[1.5040801783846716` #]]& )[
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$$], \
+-5.], 
+                    If[
+                    And[
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$$], 
+                    NumericQ[
+                    CalculateUtilities`GraphicsUtilities`Private`max1928$$]], \
+
+                    (
+                    Piecewise[{{
+                    0. + 5.345224838248487 Tan[1.5040801783846716` #], # < 
+                    0}}, 0. + 5.345224838248487 Tan[1.5040801783846716` #]]& )[
+                    If[
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$$ == 
+                    CalculateUtilities`GraphicsUtilities`Private`max1928$$, 
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$$ + 
+                    0.01, CalculateUtilities`GraphicsUtilities`Private`\
+max1928$$]], 5.]}, FrameLabel -> {
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], 
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]]}, ImageSize -> {300.}, 
+                    ClippingStyle -> Automatic, FrameLabel -> Automatic, 
+                    RotateLabel -> False, PlotRangePadding -> 0, 
+                    ColorFunction :> (Blend[{
+                    RGBColor[
+                    0.6289616235599298, 0.1492484931715877, 
+                    0.1355916685740444], 
+                    RGBColor[1., 0.634378576333257, 0.1868009460593576], 
+                    RGBColor[1., 0.8955367360952163, 0.5821622034027619], 
+                    RGBColor[
+                    1., 0.9953459983215076, 0.826535439078355]}, #]& )], 
+                  "Specifications" :> {{
+                    CalculateUtilities`GraphicsUtilities`Private`more$$, {
+                    False, True}, ControlType -> None}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`min1925$$, \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "min"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 1}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`max1926$$, 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["a", TraditionalForm]], "max"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 2}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`min1927$$, \
+-0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "min"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 3}, {{
+                    CalculateUtilities`GraphicsUtilities`Private`max1928$$, 
+                    0.5, 
+                    Subscript[
+                    RawBoxes[
+                    FormBox["n", TraditionalForm]], "max"]}, -1, 1, ImageSize -> 
+                    Tiny, ControlPlacement -> 4}, 
+                    Style[
+                    Overlay[{
+                    RawBoxes[
+                    PaneBox[
+                    GraphicsBox[
+                    
+                    RasterBox[{{{0, 0, 0, 24}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    10}}, {{0, 0, 0, 10}}, {{0, 0, 0, 9}}, {{0, 0, 0, 9}}, {{
+                    0, 0, 0, 8}}, {{0, 0, 0, 8}}, {{0, 0, 0, 9}}, {{0, 0, 0, 
+                    8}}, {{0, 0, 0, 7}}, {{0, 0, 0, 7}}, {{0, 0, 0, 8}}, {{0, 
+                    0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 6}}, {{0, 0, 0, 
+                    6}}, {{0, 0, 0, 5}}, {{0, 0, 0, 6}}, {{0, 0, 0, 5}}, {{0, 
+                    0, 0, 4}}, {{0, 0, 0, 4}}, {{0, 0, 0, 5}}, {{0, 0, 0, 
+                    5}}, {{0, 0, 0, 3}}, {{0, 0, 0, 4}}, {{0, 0, 0, 3}}, {{0, 
+                    0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 3}}, {{0, 0, 0, 
+                    2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 
+                    0, 0, 1}}, {{0, 0, 0, 2}}, {{0, 0, 0, 2}}, {{0, 0, 0, 
+                    0}}, {{0, 0, 0, 1}}, {{255, 255, 255, 0}}, {{255, 255, 
+                    255, 0}}, {{255, 255, 255, 0}}, {{255, 255, 255, 0}}, {{
+                    255, 255, 255, 0}}, {{255, 255, 255, 0}}}, {{0, 45}, {
+                    2500, 0}}, {0, 255}, ColorFunction -> RGBColor], 
+                    ImageSize -> {2500, 45}, 
+                    PlotRange -> {{0, 2500}, {0, 45}}], ImageSize -> 
+                    Scaled[1], ScrollPosition -> {0., 0.}]], 
+                    Pane[
+                    Column[{
+                    Grid[{{
+                    Manipulate`Place[1], 
+                    Manipulate`Place[2]}, {
+                    Manipulate`Place[3], 
+                    Manipulate`Place[4]}}]}], 
+                    ImageMargins -> {{20, 30}, {10, 10}}]}, {1, 2}, 2, 
+                    Alignment -> {Left, Top}]]}, 
+                  "Options" :> {
+                   TrackedSymbols -> True, ControlPlacement -> Bottom, 
+                    FrameMargins -> {{0, 0}, {0, 10}}, Paneled -> False, 
+                    AppearanceElements -> {}, 
+                    LabelStyle -> {
+                    "DialogStyle", FontColor -> GrayLevel[0.25]}}, 
+                  "DefaultOptions" :> {}], SingleEvaluation -> True], 
+                DynamicModuleValues :> {}, Deinitialization :> None, 
+                UntrackedVariables :> {Typeset`size$$}, 
+                SynchronousInitialization -> True, 
+                UnsavedVariables :> {Typeset`initDone$$}], "Manipulate", 
+               Deployed -> True, StripOnInput -> False], TraditionalForm], 
+             Manipulate`InterpretManipulate[1]], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement["dataformats", {}, {"minput"}]}]}], Typeset`pod4$$, 
+   Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+   Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+   Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+   Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+   Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+   Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+   Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$, Typeset`pod32$$, 
+   Typeset`pod33$$, Typeset`aux1$$ = {True, False, {False}, True}, 
+   Typeset`aux2$$ = {True, False, {False, False}, True}, Typeset`aux3$$ = {
+   True, False, {False, False}, True}, Typeset`aux4$$ = {
+   True, False, {False}, True}, Typeset`aux5$$ = {True, False, {False}, True},
+    Typeset`aux6$$ = {True, False, {False}, True}, Typeset`aux7$$ = {
+   True, False, {False}, True}, Typeset`aux8$$ = {True, False, {False}, True},
+    Typeset`aux9$$ = {True, False, {False}, True}, Typeset`aux10$$ = {
+   True, False, {False}, True}, Typeset`aux11$$ = {
+   True, False, {False}, True}, Typeset`aux12$$ = {
+   True, False, {False}, True}, Typeset`aux13$$ = {
+   True, False, {False}, True}, Typeset`aux14$$ = {
+   True, False, {False}, True}, Typeset`aux15$$ = {
+   True, False, {False}, True}, Typeset`aux16$$ = {
+   True, False, {False}, True}, Typeset`aux17$$ = {
+   True, False, {False}, True}, Typeset`aux18$$ = {
+   True, False, {False}, True}, Typeset`aux19$$ = {
+   True, False, {False}, True}, Typeset`aux20$$ = {
+   True, False, {False}, True}, Typeset`aux21$$ = {
+   True, False, {False}, True}, Typeset`aux22$$ = {
+   True, False, {False}, True}, Typeset`aux23$$ = {
+   True, False, {False}, True}, Typeset`aux24$$ = {
+   True, False, {False}, True}, Typeset`aux25$$ = {
+   True, False, {False}, True}, Typeset`aux26$$ = {
+   True, False, {False}, True}, Typeset`aux27$$ = {
+   True, False, {False}, True}, Typeset`aux28$$ = {
+   True, False, {False}, True}, Typeset`aux29$$ = {
+   True, False, {False}, True}, Typeset`aux30$$ = {
+   True, False, {False}, True}, Typeset`aux31$$ = {
+   True, False, {False}, True}, Typeset`aux32$$ = {
+   True, False, {False}, True}, Typeset`aux33$$ = {
+   True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, 
+   Typeset`queryinfo$$ = {{
+    "success" -> "true", "error" -> "false", "numpods" -> "3", "datatypes" -> 
+     "Plot", "timedout" -> "Plot", "timedoutpods" -> "", "timing" -> "4.092", 
+     "parsetiming" -> "0.618", "parsetimedout" -> "false", "recalculate" -> 
+     "http://www4a.wolframalpha.com/api/v2/recalc.jsp?id=\
+MSPa10561a11ba7ggi721aii00002803b55i81331hf9&s=48", "id" -> 
+     "MSPa10571a11ba7ggi721aii00005ccei34i85c589ih", "host" -> 
+     "http://www4a.wolframalpha.com", "server" -> "48", "related" -> 
+     "http://www4a.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa10581a11ba7ggi721aii00004e41hh16f0iacba4&s=48", "version" -> "2.5"}, {
+    "success" -> "true", "error" -> "false", "numpods" -> "0", "datatypes" -> 
+     "Plot", "timedout" -> "Plot", "timedoutpods" -> "", "timing" -> "0.94", 
+     "parsetiming" -> "0.", "parsetimedout" -> "false", "recalculate" -> "", 
+     "id" -> "", "host" -> "http://www4a.wolframalpha.com", "server" -> "48", 
+     "related" -> "", "version" -> "2.5"}}, Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 4, 5, 9, 57, 25.486876`8.158891588343637}, "Line" -> 30, 
+    "SessionID" -> 23214026327207079544}, Typeset`showpods$$ = {1, 2, 3}, 
+   Typeset`failedpods$$ = {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 
+   18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33}, 
+   Typeset`chosen$$ = {}, Typeset`open$$ = False, Typeset`newq$$ = 
+   "plot sum from i=0 to (n-2) of (a^i(n-i))"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+         Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+         Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+         Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+         Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+         Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+         Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$, Typeset`pod32$$, 
+         Typeset`pod33$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+         Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+         Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+         Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+         Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+         Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+         Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+         Typeset`aux29$$, Typeset`aux30$$, Typeset`aux31$$, Typeset`aux32$$, 
+         Typeset`aux33$$}, Typeset`chosen$$, Typeset`open$$, 
+        Typeset`elements$$, Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, 
+        Typeset`queryinfo$$, Typeset`sessioninfo$$, Typeset`showpods$$, 
+        Typeset`failedpods$$, Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {856., 862.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], AlphaIntegration`DoAsyncInitialization[
+       Hold[{
+        2, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+          Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$, Typeset`pod8$$, 
+          Typeset`pod9$$, Typeset`pod10$$, Typeset`pod11$$, Typeset`pod12$$, 
+          Typeset`pod13$$, Typeset`pod14$$, Typeset`pod15$$, Typeset`pod16$$, 
+          Typeset`pod17$$, Typeset`pod18$$, Typeset`pod19$$, Typeset`pod20$$, 
+          Typeset`pod21$$, Typeset`pod22$$, Typeset`pod23$$, Typeset`pod24$$, 
+          Typeset`pod25$$, Typeset`pod26$$, Typeset`pod27$$, Typeset`pod28$$, 
+          Typeset`pod29$$, Typeset`pod30$$, Typeset`pod31$$, Typeset`pod32$$, 
+          Typeset`pod33$$}, {
+         Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+          Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$, Typeset`aux8$$, 
+          Typeset`aux9$$, Typeset`aux10$$, Typeset`aux11$$, Typeset`aux12$$, 
+          Typeset`aux13$$, Typeset`aux14$$, Typeset`aux15$$, Typeset`aux16$$, 
+          Typeset`aux17$$, Typeset`aux18$$, Typeset`aux19$$, Typeset`aux20$$, 
+          Typeset`aux21$$, Typeset`aux22$$, Typeset`aux23$$, Typeset`aux24$$, 
+          Typeset`aux25$$, Typeset`aux26$$, Typeset`aux27$$, Typeset`aux28$$, 
+          Typeset`aux29$$, Typeset`aux30$$, Typeset`aux31$$, Typeset`aux32$$, 
+          Typeset`aux33$$}, Typeset`chosen$$, Typeset`open$$, 
+         Typeset`elements$$, Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, 
+         Typeset`queryinfo$$, Typeset`sessioninfo$$, Typeset`showpods$$, 
+         Typeset`failedpods$$, Typeset`newq$$, 
+         "http://www4a.wolframalpha.com/api/v2/recalc.jsp?id=\
+MSPa10561a11ba7ggi721aii00002803b55i81331hf9&s=48", Typeset`asyncpods$$}]]; 
+     Typeset`asyncpods$$ = {}; Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.54262304551604*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.542637050095652*^9, 3.542637052461506*^9}}]
+},
+WindowSize->{740, 756},
+WindowMargins->{{84, Automatic}, {16, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 156, 3, 37, "WolframAlphaLong"],
+Cell[738, 27, 12043, 281, 474, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12818, 313, 146, 3, 37, "WolframAlphaLong"],
+Cell[12967, 318, 94328, 1755, 1728, "Print"]
+}, Open  ]],
+Cell[107310, 2076, 92, 1, 27, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

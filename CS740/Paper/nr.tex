@@ -37,7 +37,7 @@
 \linespread{1.2}
 
 \begin{document}
-\arltitle{Trends in Network Robustness Research}{4005-700 Data Communication and Networks I}
+\arltitle{Engineering Networks for Optimal Robustness}{4005-700 Data Communication and Networks I}
 
 \begin{abstract}
 Due to the growing pervasiveness of civilian and 
@@ -86,8 +86,8 @@ network engineering that have been employed to help networks deal with topology 
 Lastly, it will discuss avenues for future research and open problems that have been posed by 
 researchers in the field.
 
-\section{Network Functionality}
-\label{Definitions}
+\section{Fundamentals}
+\section{Fundamentals}
 
 It is natural to model any communication network as an undirected graph $G$, which has a fixed 
 set of vertices (nodes) $V(G)$ and edges (links) $E(G)$ that represent physical connections between such vertices. For conveniene, we let $N = |V(G)|$ and $M = |E(G)|$. The topology of a network
@@ -107,6 +107,9 @@ A graph $G$ is said to be \textbf{connected} if and only if $\forall u,v \in V(G
 
 % vertex connectivity
 % edge connectivity
+
+\section{Network Functionality}
+\label{NetworkFunctionality}
 
 Network engineers strive for high performance networks that display high throughput and low 
 latency between any two nodes in the same network. Several mathematical metrics based on
@@ -131,6 +134,10 @@ As in the centrality measure for vertices, $\sigma_{wx}(e)$ is the number of pat
 
 It is important to note that the centrality of a vertex and its measure of centrality are not the same metrics. In fact, as will be shown in section~\ref{AttackStrategies}, network attacks can vary based on the measure an adversary is trying to reduce. 
 
+Finally, we introduce a metric that characterized the number of nodes (or rather, a fraction of the total nodes) that need to be removed in order for the graph to become globally disconnected.
+
+%TODO: read http://polymer.bu.edu/hes/articles/pshs06.pdf and discuss the metric here - devote entire section to it in the NR part
+
 \section{Network Attacks}
 %HDA - high degree adaptiveness - onion
 % from: http://polymer.bu.edu/~hes/networks/hsmah11.pdf
@@ -152,18 +159,21 @@ From the definitions presented in section~\ref{Definitions}, we can see that the
 
 \subsection{Vertex Attacks}
 Based on the attack objectives discussed in the previous section, the following distinct attack strategies on network nodes have been identified \cite{ATTACKS}.
-
 \begin{itemize}
-	\item \textbf{ID removal} - 
-	\item \textbf{IB removal} - 
-	\item \textbf{RD removal} - 
-	\item \textbf{RB removal} - 
+	\item \textbf{ID removal} - initial degree distribution vertex removal
+	\item \textbf{IB removal} - initial betweenness distribution vertex removal
+	\item \textbf{RD removal} - recalculated degree distribution vertex removal
+	\item \textbf{RB removal} - recalculated betweenness distribution vertex removal
 \end{itemize}
+Clearly, RD and RB attacks on vertices would yield the optimal results because they take a greedy approach to decrease the target metric. However, the implication of these attacks is that there exists an efficient and tractable way to measure these metrics after every change, which isn't always the case (especially when the topology of the network is unknown). Therefore, ID and IB attacks are more realistic, but they also assume some prior knowledge of the network infrastructure before the attack begins. Attacks that do not rely on this knowledge are referred to as random attacks, and are discussed in section~\ref{RandomAttacks}.
+
+Furthermore, it should be noted that both the ID and RD attacks are computationally less taxing than IB and RB attacks \cite{ATTACKS}. In fact, the time complexity of a successful ID attack (and subsequently, an entire RD attack), runs in linear time with N (i.e. $O(N)$), whereas the time complexity of betweenness-based attacks has a time complexity of $O(NL)$. The implication of this is that the adversary must make tradeoffs based on their knowledge of the network infrastructure, 
 
 \subsection{Edge Attacks}
 TODO
 
 \subsection{Random Attacks}
+\label{RandomAttacks}
 TODO
 
 \section{Network Robustness}

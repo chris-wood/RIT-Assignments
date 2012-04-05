@@ -1,0 +1,1100 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     48231,       1090]
+NotebookOptionsPosition[     47766,       1069]
+NotebookOutlinePosition[     48123,       1085]
+CellTagsIndexPosition[     48080,       1082]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+((3.456 + 1.258) / 2) + abs((3.456 - 1.258) / 2)\
+\>", "WolframAlphaLong",
+ CellChangeTimes->{{3.5426370757325907`*^9, 3.5426370997054243`*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = 
+   "((3.456 + 1.258) / 2) + abs((3.456 - 1.258) / 2)", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Input", "scanner" -> "Identity", "id" -> "Input", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {"(3.456 + 1.258)/2 + Abs[(3.456 - 1.258)/2]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               RowBox[{
+                 FractionBox["1", "2"], " ", 
+                 RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "+", "1.258`"}], 
+                   ")"}]}], "+", 
+               TemplateBox[{
+                 RowBox[{
+                   FractionBox["1", "2"], " ", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "-", "1.258`"}], 
+                    ")"}]}]}, "Abs"]}], 
+             PolynomialForm[#, TraditionalOrder -> False]& ], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata,formuladata"}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement[
+       "info", {
+        "text" -> 
+         "\[LeftBracketingBar]z\[RightBracketingBar] is the absolute value of \
+z"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Abs.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ComplexComponents/Abs", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/AbsoluteValue.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   TemplateBox[{"z"}, "Abs"], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the absolute value of\"", 
+                  StyleBox[
+                  "z", FontFamily -> "Bitstream Charter", Bold, 14, 
+                   StripOnInput -> False]}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2, " ", #3}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3}], "}"}], ",", "\" \""}], 
+                    "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Result", "scanner" -> "Numeric", "id" -> "Result", 
+     "position" -> "200", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"N[432/125]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             TagBox[
+              TagBox[
+               GridBox[{{
+                  StyleBox[
+                  "\"3.456\"", LineIndent -> 0.54, StripOnInput -> False]}}, 
+                GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                GridBoxItemSize -> {
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], 
+               "Column"], 
+              $CellContext`TagBoxWrapper["StringBoxes" -> "3.456"]], 
+             Identity], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata,numberdata"}]}]}], 
+   Typeset`pod3$$ = XMLElement[
+   "pod", {"title" -> "Rational approximation", "scanner" -> "Numeric", "id" -> 
+     "RationalApproximation", "position" -> "300", "error" -> "false", 
+     "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"Rationalize[3.456]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TemplateBox[{
+              FractionBox["432", "125"], "\" = \"", "3", "\" + \"", 
+              FractionBox["57", "125"]}, "Row", 
+             DisplayFunction -> (
+              RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+                "\[InvisibleSpace]", #4, "\[InvisibleSpace]", #5}]& ), 
+             InterpretationFunction -> (RowBox[{
+                StyleBox[
+                "Row", FontFamily -> "Bitstream Vera Sans", 
+                 FontSize -> -1 + Inherited], "[", 
+                RowBox[{"{", 
+                  RowBox[{#, ",", #2, ",", #3, ",", #4, ",", #5}], "}"}], 
+                "]"}]& )], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata"}]}]}], 
+   Typeset`pod4$$ = XMLElement[
+   "pod", {"title" -> "Number line", "scanner" -> "NumberLine", "id" -> 
+     "NumberLine", "position" -> "400", "error" -> "false", "numsubpods" -> 
+     "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "Graphics[{Tooltip[{PointSize[0.02], RGBColor[0.2472, 0.24, 0.6], \
+Point[{3.456, 0.062208}]}, 3.456]}, {ImageSize -> 300., Axes -> {True, \
+False}, AxesStyle -> {}, PlotRange -> {{2.4192, 4.4928}, Automatic}, \
+AxesOrigin -> {0, 0}}]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TemplateBox[{
+              GraphicsBox[{
+                TagBox[
+                 TooltipBox[{
+                   PointSize[0.02], 
+                   RGBColor[0.24720000000000014`, 0.24, 0.6], 
+                   PointBox[{3.4560000000000004`, 0.06220800000000002}]}, 
+                  "3.4560000000000004`"], 
+                 Annotation[#, 3.4560000000000004`, "Tooltip"]& ]}, ImageSize -> 
+               300., Axes -> {True, False}, AxesStyle -> {}, 
+               PlotRange -> {{2.4192, 4.492800000000001}, Automatic}, 
+               AxesOrigin -> {0, 0}], "\"\""}, "Labeled", 
+             DisplayFunction -> (FormBox[
+               GridBox[{{
+                  TagBox[
+                   ItemBox[
+                    PaneBox[
+                    TagBox[#, "SkipImageSizeLevel"], 
+                    Alignment -> {Center, Baseline}, BaselinePosition -> 
+                    Baseline], DefaultBaseStyle -> "Labeled"], 
+                   "SkipImageSizeLevel"]}, {
+                  ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+                GridBoxAlignment -> {
+                 "Columns" -> {{Center}}, "Rows" -> {{Center}}}, AutoDelete -> 
+                False, GridBoxItemSize -> {
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                BaselinePosition -> {1, 1}], TraditionalForm]& ), 
+             InterpretationFunction -> (RowBox[{
+                StyleBox[
+                "Labeled", FontFamily -> "Bitstream Vera Sans", 
+                 FontSize -> -1 + Inherited], "[", 
+                RowBox[{#, ",", #2, ",", 
+                  StyleBox[
+                  "Bottom", FontFamily -> "Bitstream Vera Sans", 
+                   FontSize -> -1 + Inherited]}], "]"}]& )], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement["dataformats", {}, {"minput"}]}]}], Typeset`pod5$$ = 
+   XMLElement[
+   "pod", {"title" -> "Percent increase", "scanner" -> "Numeric", "id" -> 
+     "PercentIncrease/decrease", "position" -> "500", "error" -> "false", 
+     "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"N[100 (1.099/2.357)]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TemplateBox[{
+              RowBox[{
+                TagBox[
+                 RowBox[{
+                   RowBox[{
+                    FractionBox["1", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "+", "1.258`"}], 
+                    ")"}]}], "+", 
+                   TemplateBox[{
+                    RowBox[{
+                    FractionBox["1", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "-", "1.258`"}], 
+                    ")"}]}]}, "Abs"]}], HoldForm], "\[LongEqual]", 
+                TagBox["3.4560000000000004`", Identity]}], "\" is \"", 
+              "46.62706830717013`", "\"% \"", "\" larger\"", "\" than \"", 
+              TagBox[
+               RowBox[{
+                 FractionBox["1", "2"], " ", 
+                 RowBox[{"(", 
+                   RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "+", "1.258`"}], 
+                   ")"}]}], HoldForm], "\" = \"", "2.357`", "\".\""}, "Row", 
+             DisplayFunction -> (
+              RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+                "\[InvisibleSpace]", #4, "\[InvisibleSpace]", #5, 
+                "\[InvisibleSpace]", #6, "\[InvisibleSpace]", #7, 
+                "\[InvisibleSpace]", #8, "\[InvisibleSpace]", #9, 
+                "\[InvisibleSpace]", #10}]& ), 
+             InterpretationFunction -> (RowBox[{
+                StyleBox[
+                "Row", FontFamily -> "Bitstream Vera Sans", 
+                 FontSize -> -1 + Inherited], "[", 
+                RowBox[{"{", 
+                  
+                  RowBox[{#, ",", #2, ",", #3, ",", #4, ",", #5, ",", #6, 
+                    ",", #7, ",", #8, ",", #9, ",", #10}], "}"}], "]"}]& )], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata"}]}]}], 
+   Typeset`pod6$$ = XMLElement[
+   "pod", {"title" -> "Alternative representations", "scanner" -> 
+     "MathematicalFunctionData", "id" -> 
+     "AlternativeRepresentations:MathematicalFunctionIdentityData", 
+     "position" -> "600", "error" -> "false", "numsubpods" -> "3"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "(3.456 + 1.258)/2 + Abs[(3.456 - 1.258)/2] == 2.357 + \
+1.099/Sign[1.099]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            FrameBox[
+             TagBox[
+              RowBox[{
+                RowBox[{
+                  RowBox[{
+                    FractionBox["1", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "+", "1.258`"}], 
+                    ")"}]}], "+", 
+                  TemplateBox[{
+                    RowBox[{
+                    FractionBox["1", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "-", "1.258`"}], 
+                    ")"}]}]}, "Abs"]}], "\[LongEqual]", 
+                RowBox[{
+                  RowBox[{"2.357`", "\[VeryThinSpace]"}], "+", 
+                  FractionBox["1.099`", 
+                   RowBox[{"sgn", "(", "1.099`", ")"}]]}]}], HoldForm], 
+             FrameStyle -> None, FrameMargins -> {{-1, -1}, {3, 3}}], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata,formuladata"}]}], 
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "(3.456 + 1.258)/2 + Abs[(3.456 - 1.258)/2] == 2.357 + Sqrt[1.099 \
+Conjugate[1.099]]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            FrameBox[
+             TagBox[
+              RowBox[{
+                RowBox[{
+                  RowBox[{
+                    FractionBox["1", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "+", "1.258`"}], 
+                    ")"}]}], "+", 
+                  TemplateBox[{
+                    RowBox[{
+                    FractionBox["1", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "-", "1.258`"}], 
+                    ")"}]}]}, "Abs"]}], "\[LongEqual]", 
+                RowBox[{
+                  RowBox[{"2.357`", "\[VeryThinSpace]"}], "+", 
+                  SqrtBox[
+                   RowBox[{"1.099`", " ", 
+                    
+                    TemplateBox[{"1.099`"}, "Conjugate", SyntaxForm -> 
+                    SuperscriptBox]}]]}]}], HoldForm], FrameStyle -> None, 
+             FrameMargins -> {{-1, -1}, {3, 3}}], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata,formuladata"}]}], 
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "(3.456 + 1.258)/2 + Abs[(3.456 - 1.258)/2] == 2.357 + Sqrt[-1.099^2 \
++ 2.198 Re[1.099]]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            FrameBox[
+             TagBox[
+              RowBox[{
+                RowBox[{
+                  RowBox[{
+                    FractionBox["1", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "+", "1.258`"}], 
+                    ")"}]}], "+", 
+                  TemplateBox[{
+                    RowBox[{
+                    FractionBox["1", "2"], " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"3.456`", "\[VeryThinSpace]"}], "-", "1.258`"}], 
+                    ")"}]}]}, "Abs"]}], "\[LongEqual]", 
+                RowBox[{
+                  RowBox[{"2.357`", "\[VeryThinSpace]"}], "+", 
+                  SqrtBox[
+                   RowBox[{
+                    RowBox[{"-", 
+                    SuperscriptBox["1.099`", "2"]}], "+", 
+                    RowBox[{"2.198`", " ", 
+                    RowBox[{"Re", "(", "1.099`", ")"}]}]}]]}]}], HoldForm], 
+             FrameStyle -> None, FrameMargins -> {{-1, -1}, {3, 3}}], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata,formuladata"}]}], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More", "input" -> 
+         "AlternativeRepresentations:MathematicalFunctionIdentityData__More"},\
+ {}]}], 
+     XMLElement["infos", {"count" -> "4"}, {
+       XMLElement["info", {"text" -> "sgn(x) is the sign of x"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Sign.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ComplexComponents/Sign", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/Sign.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"sgn", "(", "x", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the sign of\"", 
+                  StyleBox[
+                  "x", FontFamily -> "Bitstream Charter", Bold, 14, 
+                   StripOnInput -> False]}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2, " ", #3}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3}], "}"}], ",", "\" \""}], 
+                    "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}], 
+       XMLElement[
+       "info", {"text" -> "z^\[Conjugate] is the complex conjugate of z"}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://reference.wolfram.com/mathematica/ref/Conjugate.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ComplexComponents/Conjugate",
+            "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/ComplexConjugate.html", 
+           "text" -> "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   
+                   TemplateBox[{"z"}, "Conjugate", SyntaxForm -> 
+                    SuperscriptBox], FontFamily -> "Bitstream Charter", Bold, 
+                   14, StripOnInput -> False], 
+                  "\"is the complex conjugate of\"", 
+                  StyleBox[
+                  "z", FontFamily -> "Bitstream Charter", Bold, 14, 
+                   StripOnInput -> False]}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2, " ", #3}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3}], "}"}], ",", "\" \""}], 
+                    "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}], 
+       XMLElement["info", {"text" -> "Re(z) is the real part of z"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Re.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ComplexComponents/Re", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/RealPart.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"Re", "(", "z", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the real part of\"", 
+                  StyleBox[
+                  "z", FontFamily -> "Bitstream Charter", Bold, 14, 
+                   StripOnInput -> False]}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2, " ", #3}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3}], "}"}], ",", "\" \""}], 
+                    "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}], 
+       XMLElement["info", {}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://functions.wolfram.com/ComplexComponents/Abs/27/ShowAll.\
+html", "text" -> "More information"}, {}]}]}]}], Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`aux3$$ = {True, False, {False}, True}, Typeset`aux4$$ = {
+   True, False, {False}, True}, Typeset`aux5$$ = {True, False, {False}, True},
+    Typeset`aux6$$ = {True, False, {False, False, False}, True}, 
+   Typeset`asyncpods$$ = {}, Typeset`nonpods$$ = {}, Typeset`initdone$$ = 
+   True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "6", "datatypes" -> 
+    "Math,MathematicalFunctionIdentity", "timedout" -> "", "timedoutpods" -> 
+    "", "timing" -> "1.112", "parsetiming" -> "0.461", "parsetimedout" -> 
+    "false", "recalculate" -> "", "id" -> 
+    "MSPa101371a11bi3abh8d6h7h000041i1ia93272a6hea", "host" -> 
+    "http://www4a.wolframalpha.com", "server" -> "61", "related" -> 
+    "http://www4a.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa101381a11bi3abh8d6h7h000062hfifb7083if3d5&s=61", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 4, 5, 13, 51, 43.037617`8.386423193798038}, "Line" -> 31,
+     "SessionID" -> 23214026327207079544}, Typeset`showpods$$ = {1, 2, 3, 4, 
+   5, 6}, Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = 
+   False, Typeset`newq$$ = 
+   "((3.456 + 1.258) / 2) + abs((3.456 - 1.258) / 2)"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$, Typeset`pod6$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+         Typeset`aux5$$, Typeset`aux6$$}, Typeset`chosen$$, Typeset`open$$, 
+        Typeset`elements$$, Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, 
+        Typeset`queryinfo$$, Typeset`sessioninfo$$, Typeset`showpods$$, 
+        Typeset`failedpods$$, Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {337., 342.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{
+        Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$, Typeset`pod6$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.5426371032807283`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["(3+5)/2 + abs((3-5)/2)", "WolframAlphaLong",
+ CellChangeTimes->{{3.542637128151157*^9, 3.5426371388798637`*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "(3+5)/2 + abs((3-5)/2)", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Input", "scanner" -> "Identity", "id" -> "Input", 
+     "position" -> "100", "error" -> "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"(3 + 5)/2 + Abs[(3 - 5)/2]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               FractionBox[
+                RowBox[{"3", "+", "5"}], "2"], "+", 
+               TemplateBox[{
+                 FractionBox[
+                  RowBox[{"3", "-", "5"}], "2"]}, "Abs"]}], 
+             PolynomialForm[#, TraditionalOrder -> False]& ], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata,formuladata"}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement[
+       "info", {
+        "text" -> 
+         "\[LeftBracketingBar]z\[RightBracketingBar] is the absolute value of \
+z"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Abs.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ComplexComponents/Abs", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/AbsoluteValue.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   TemplateBox[{"z"}, "Abs"], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the absolute value of\"", 
+                  StyleBox[
+                  "z", FontFamily -> "Bitstream Charter", Bold, 14, 
+                   StripOnInput -> False]}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2, " ", #3}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3}], "}"}], ",", "\" \""}], 
+                    "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Result", "scanner" -> "Identity", "id" -> "Result", 
+     "position" -> "200", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> "", "primary" -> "true"}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox["5", TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,moutput,computabledata,formatteddata,numberdata"}]}]}], 
+   Typeset`pod3$$ = XMLElement[
+   "pod", {"title" -> "Number name", "scanner" -> "Integer", "id" -> 
+     "NumberName", "position" -> "300", "error" -> "false", "numsubpods" -> 
+     "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox["\"five\"", TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {"plaintext,computabledata,formatteddata"}]}]}], 
+   Typeset`pod4$$ = XMLElement[
+   "pod", {"title" -> "Visual representation", "scanner" -> "Integer", "id" -> 
+     "VisualRepresentation", "position" -> "400", "error" -> "false", 
+     "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            StyleBox[
+            "\"\[FilledSmallCircle]\[ThinSpace]\[FilledSmallCircle]\
+\[ThinSpace]\[FilledSmallCircle]\[ThinSpace]\[FilledSmallCircle]\[ThinSpace]\
+\[FilledSmallCircle]\"", FontFamily -> "Courier", 
+             GrayLevel[0.5], StripOnInput -> False], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {"plaintext,computabledata,formatteddata"}]}]}], 
+   Typeset`pod5$$ = XMLElement[
+   "pod", {"title" -> "Number line", "scanner" -> "NumberLine", "id" -> 
+     "NumberLine", "position" -> "500", "error" -> "false", "numsubpods" -> 
+     "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "Graphics[{Tooltip[{PointSize[0.02], RGBColor[0.2472, 0.24, 0.6], \
+Point[{5., 0.09}]}, 5]}, {ImageSize -> 300., Axes -> {True, False}, AxesStyle \
+-> {}, PlotRange -> {{3.5, 6.5}, Automatic}, AxesOrigin -> {0, 0}}]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TemplateBox[{
+              GraphicsBox[{
+                TagBox[
+                 TooltipBox[{
+                   PointSize[0.02], 
+                   RGBColor[0.24720000000000014`, 0.24, 0.6], 
+                   PointBox[{5., 0.09}]}, "5"], 
+                 Annotation[#, 5, "Tooltip"]& ]}, ImageSize -> 300., 
+               Axes -> {True, False}, AxesStyle -> {}, 
+               PlotRange -> {{3.5, 6.5}, Automatic}, AxesOrigin -> {0, 0}], 
+              "\"\""}, "Labeled", DisplayFunction -> (FormBox[
+               GridBox[{{
+                  TagBox[
+                   ItemBox[
+                    PaneBox[
+                    TagBox[#, "SkipImageSizeLevel"], 
+                    Alignment -> {Center, Baseline}, BaselinePosition -> 
+                    Baseline], DefaultBaseStyle -> "Labeled"], 
+                   "SkipImageSizeLevel"]}, {
+                  ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+                GridBoxAlignment -> {
+                 "Columns" -> {{Center}}, "Rows" -> {{Center}}}, AutoDelete -> 
+                False, GridBoxItemSize -> {
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                BaselinePosition -> {1, 1}], TraditionalForm]& ), 
+             InterpretationFunction -> (RowBox[{
+                StyleBox[
+                "Labeled", FontFamily -> "Bitstream Vera Sans", 
+                 FontSize -> -1 + Inherited], "[", 
+                RowBox[{#, ",", #2, ",", 
+                  StyleBox[
+                  "Bottom", FontFamily -> "Bitstream Vera Sans", 
+                   FontSize -> -1 + Inherited]}], "]"}]& )], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement["dataformats", {}, {"minput"}]}]}], Typeset`pod6$$ = 
+   XMLElement[
+   "pod", {"title" -> "Percent increase", "scanner" -> "Numeric", "id" -> 
+     "PercentIncrease/decrease", "position" -> "600", "error" -> "false", 
+     "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"N[100 (1/4)]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TemplateBox[{
+              RowBox[{
+                TagBox[
+                 RowBox[{
+                   FractionBox[
+                    RowBox[{"3", "+", "5"}], "2"], "+", 
+                   TemplateBox[{
+                    FractionBox[
+                    RowBox[{"3", "-", "5"}], "2"]}, "Abs"]}], HoldForm], 
+                "\[LongEqual]", "5"}], "\" is \"", "25", "\"% \"", 
+              "\" larger\"", "\" than \"", 
+              TagBox[
+               FractionBox[
+                RowBox[{"3", "+", "5"}], "2"], HoldForm], "\" = \"", "4", 
+              "\".\""}, "Row", 
+             DisplayFunction -> (
+              RowBox[{#, "\[InvisibleSpace]", #2, "\[InvisibleSpace]", #3, 
+                "\[InvisibleSpace]", #4, "\[InvisibleSpace]", #5, 
+                "\[InvisibleSpace]", #6, "\[InvisibleSpace]", #7, 
+                "\[InvisibleSpace]", #8, "\[InvisibleSpace]", #9, 
+                "\[InvisibleSpace]", #10}]& ), 
+             InterpretationFunction -> (RowBox[{
+                StyleBox[
+                "Row", FontFamily -> "Bitstream Vera Sans", 
+                 FontSize -> -1 + Inherited], "[", 
+                RowBox[{"{", 
+                  
+                  RowBox[{#, ",", #2, ",", #3, ",", #4, ",", #5, ",", #6, 
+                    ",", #7, ",", #8, ",", #9, ",", #10}], "}"}], "]"}]& )], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,moutput,computabledata,formatteddata"}]}]}], 
+   Typeset`pod7$$ = XMLElement[
+   "pod", {"title" -> "Alternative representations", "scanner" -> 
+     "MathematicalFunctionData", "id" -> 
+     "AlternativeRepresentations:MathematicalFunctionIdentityData", 
+     "position" -> "700", "error" -> "false", "numsubpods" -> "3"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {"(3 + 5)/2 + Abs[(3 - 5)/2] == 4 - Sign[-1]^(-1)"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            FrameBox[
+             TagBox[
+              RowBox[{
+                RowBox[{
+                  FractionBox[
+                   RowBox[{"3", "+", "5"}], "2"], "+", 
+                  TemplateBox[{
+                    FractionBox[
+                    RowBox[{"3", "-", "5"}], "2"]}, "Abs"]}], "\[LongEqual]", 
+                
+                RowBox[{"4", "-", 
+                  FractionBox["1", 
+                   RowBox[{"sgn", "(", 
+                    RowBox[{"-", "1"}], ")"}]]}]}], HoldForm], FrameStyle -> 
+             None, FrameMargins -> {{-1, -1}, {3, 3}}], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata,formuladata"}]}], 
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "(3 + 5)/2 + Abs[(3 - 5)/2] == 4 + Sqrt[-Conjugate[-1]]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            FrameBox[
+             TagBox[
+              RowBox[{
+                RowBox[{
+                  FractionBox[
+                   RowBox[{"3", "+", "5"}], "2"], "+", 
+                  TemplateBox[{
+                    FractionBox[
+                    RowBox[{"3", "-", "5"}], "2"]}, "Abs"]}], "\[LongEqual]", 
+                
+                RowBox[{"4", "+", 
+                  SqrtBox[
+                   RowBox[{"-", 
+                    TemplateBox[{
+                    RowBox[{"(", 
+                    RowBox[{"-", "1"}], ")"}]}, "Conjugate", SyntaxForm -> 
+                    SuperscriptBox]}]]}]}], HoldForm], FrameStyle -> None, 
+             FrameMargins -> {{-1, -1}, {3, 3}}], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata,formuladata"}]}], 
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "(3 + 5)/2 + Abs[(3 - 5)/2] == 4 + Sqrt[-(-1)^2 - 2 Re[-1]]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            FrameBox[
+             TagBox[
+              RowBox[{
+                RowBox[{
+                  FractionBox[
+                   RowBox[{"3", "+", "5"}], "2"], "+", 
+                  TemplateBox[{
+                    FractionBox[
+                    RowBox[{"3", "-", "5"}], "2"]}, "Abs"]}], "\[LongEqual]", 
+                
+                RowBox[{"4", "+", 
+                  SqrtBox[
+                   RowBox[{
+                    RowBox[{"-", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"-", "1"}], ")"}], "2"]}], "-", 
+                    RowBox[{"2", " ", 
+                    RowBox[{"Re", "(", 
+                    RowBox[{"-", "1"}], ")"}]}]}]]}]}], HoldForm], FrameStyle -> 
+             None, FrameMargins -> {{-1, -1}, {3, 3}}], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,minput,computabledata,formatteddata,formuladata"}]}], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "More", "input" -> 
+         "AlternativeRepresentations:MathematicalFunctionIdentityData__More"},\
+ {}]}], 
+     XMLElement["infos", {"count" -> "4"}, {
+       XMLElement["info", {"text" -> "sgn(x) is the sign of x"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Sign.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ComplexComponents/Sign", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/Sign.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"sgn", "(", "x", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the sign of\"", 
+                  StyleBox[
+                  "x", FontFamily -> "Bitstream Charter", Bold, 14, 
+                   StripOnInput -> False]}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2, " ", #3}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3}], "}"}], ",", "\" \""}], 
+                    "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}], 
+       XMLElement[
+       "info", {"text" -> "z^\[Conjugate] is the complex conjugate of z"}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://reference.wolfram.com/mathematica/ref/Conjugate.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ComplexComponents/Conjugate",
+            "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/ComplexConjugate.html", 
+           "text" -> "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   
+                   TemplateBox[{"z"}, "Conjugate", SyntaxForm -> 
+                    SuperscriptBox], FontFamily -> "Bitstream Charter", Bold, 
+                   14, StripOnInput -> False], 
+                  "\"is the complex conjugate of\"", 
+                  StyleBox[
+                  "z", FontFamily -> "Bitstream Charter", Bold, 14, 
+                   StripOnInput -> False]}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2, " ", #3}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3}], "}"}], ",", "\" \""}], 
+                    "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}], 
+       XMLElement["info", {"text" -> "Re(z) is the real part of z"}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://reference.wolfram.com/mathematica/ref/Re.html", 
+           "text" -> "Documentation", "title" -> "Mathematica"}, {}], 
+         XMLElement[
+         "link", {
+          "url" -> "http://functions.wolfram.com/ComplexComponents/Re", 
+           "text" -> "Properties", "title" -> "Wolfram Functions Site"}, {}], 
+         
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/RealPart.html", "text" -> 
+           "Definition", "title" -> "MathWorld"}, {}], 
+         XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+           Cell[
+            BoxData[
+             StyleBox[
+              FormBox[
+               StyleBox[
+                TemplateBox[{
+                  StyleBox[
+                   RowBox[{"Re", "(", "z", ")"}], FontFamily -> 
+                   "Bitstream Charter", Bold, 14, StripOnInput -> False], 
+                  "\"is the real part of\"", 
+                  StyleBox[
+                  "z", FontFamily -> "Bitstream Charter", Bold, 14, 
+                   StripOnInput -> False]}, "Row", 
+                 DisplayFunction -> (RowBox[{#, " ", #2, " ", #3}]& ), 
+                 InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2, ",", #3}], "}"}], ",", "\" \""}], 
+                    "]"}]& )], 
+                GrayLevel[0.3], StripOnInput -> False], TraditionalForm], 
+              FontFamily -> "Verdana", FontSize -> 12]], "Output", 
+            LinebreakAdjustments -> {1, 10, 0, 0, 10}]}]}], 
+       XMLElement["info", {}, {
+         XMLElement[
+         "link", {
+          "url" -> 
+           "http://functions.wolfram.com/ComplexComponents/Abs/27/ShowAll.\
+html", "text" -> "More information"}, {}]}]}]}], Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`aux3$$ = {True, False, {False}, True}, Typeset`aux4$$ = {
+   True, False, {False}, True}, Typeset`aux5$$ = {True, False, {False}, True},
+    Typeset`aux6$$ = {True, False, {False}, True}, Typeset`aux7$$ = {
+   True, False, {False, False, False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "7", "datatypes" -> 
+    "Math,MathematicalFunctionIdentity", "timedout" -> "", "timedoutpods" -> 
+    "", "timing" -> "0.862", "parsetiming" -> "0.313", "parsetimedout" -> 
+    "false", "recalculate" -> "", "id" -> 
+    "MSPa46821a11c3063f77bgc10000372f5c8f0cii2c7e", "host" -> 
+    "http://www4a.wolframalpha.com", "server" -> "1", "related" -> 
+    "http://www4a.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa46831a11c3063f77bgc1000029g74c8421076cc7&s=1", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 4, 5, 13, 52, 20.422656`8.062687205840424}, "Line" -> 32,
+     "SessionID" -> 23214026327207079544}, Typeset`showpods$$ = {1, 2, 3, 4, 
+   5, 6, 7}, Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, 
+   Typeset`open$$ = False, Typeset`newq$$ = "(3+5)/2 + abs((3-5)/2)"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+         Typeset`aux5$$, Typeset`aux6$$, Typeset`aux7$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {354., 360.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{
+        Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$, Typeset`pod6$$, Typeset`pod7$$}], 
+       Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.5426371406720448`*^9}]
+}, Open  ]]
+},
+WindowSize->{740, 756},
+WindowMargins->{{92, Automatic}, {-4, Automatic}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 154, 3, 37, "WolframAlphaLong"],
+Cell[736, 27, 24656, 544, 689, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25429, 576, 118, 1, 37, "WolframAlphaLong"],
+Cell[25550, 579, 22200, 487, 724, "Print"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
