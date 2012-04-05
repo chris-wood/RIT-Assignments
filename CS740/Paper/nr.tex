@@ -87,9 +87,10 @@ Lastly, it will discuss avenues for future research and open problems that have 
 researchers in the field.
 
 \section{Network Functionality}
+\label{Definitions}
 
 It is natural to model any communication network as an undirected graph $G$, which has a fixed 
-set of vertices (nodes) $V(G)$ and edges (links) $E(G)$ that represent physical connections between such vertices. The topology of a network
+set of vertices (nodes) $V(G)$ and edges (links) $E(G)$ that represent physical connections between such vertices. For conveniene, we let $N = |V(G)|$ and $M = |E(G)|$. The topology of a network
 can thus be visualized graphically using elements from these two sets. For the remainder of this paper,
 we use the term vertex as a synonom for node and edge as a synonom for communication link. As an example of a graph representing a network, consider a completely connected network with $n$ nodes in which every node can directly communicate with every other 
 node can be seen as $K_{n}$, the complete graph on $n$ vertices (that is, $|V(G)|$ $= n$). In such a network, every node $v$ can
@@ -107,7 +108,28 @@ A graph $G$ is said to be \textbf{connected} if and only if $\forall u,v \in V(G
 % vertex connectivity
 % edge connectivity
 
-The process of measuring the functionality of a network 
+Network engineers strive for high performance networks that display high throughput and low 
+latency between any two nodes in the same network. Several mathematical metrics based on
+the corresponding graph that represents a network have been proposed to reflect this need. 
+For example, metrics such as the average geodesic path length between any two nodes in a network and vertex and edge betweeness (which are essentially measures of centralities located within a graph). 
+
+The average geodesic length $L$ can be defined as follows,
+\begin{eqnarray*}
+L(d(v,w)) = \frac{1}{N(N-1)}\sum_{v \in V(G)}\sum_{w \not= v \in V(G)} d(v,w),
+\end{eqnarray*}
+where $d(v,w)$ is the distance of the shortest path between vertices $v$ and $w$, and $N(N-1)$ is the total number of pairs of vertices, independent of whether or not each pair represents an edge in $E(G)$. The most immediate result from this measurement is that large values for $L$ indicate that the average length between any two nodes in the network is long, and thus the latency between two nodes will be proportionally large as well. 
+
+Another important metric that measures the functionality of a network is the measure of vertex and edge centrality in the network. Although a high measure of centrality may indicate more traffic funnels through a vertex or an edge, it also implies that any attacks on this vertex or edge would most likely have an negative impact on the traffic in the network by increasing the load on neighboring nodes and increasing the average geodesic path length. Although there is not a single definition for this metric, Holme et al \cite{ATTACKS} propose the use of the following definitions for vertex, $C_{B}(v)$ and edge $C_{B}(e)$ centrality.
+\begin{eqnarray*}
+C_{B}(v) = \sum_{w \not= x \in V(G)} \frac{\sigma_{wx}(v)}{\sigma_{wx}},
+\end{eqnarray*}
+where $\sigma_{wx}(v)$ is the number of paths between $w$ and $x$ that pass through $v$ and $\sigma_{wx}$ is total of paths from $w$ to $x$ (notice that $\sigma_{wx}(v) \leq \sigma_{wx}$).
+\begin{eqnarray*}
+C_{B}(v) = \sum_{w \not= x \in V(G)} \frac{\sigma_{wx}(e)}{\sigma_{wx}}
+\end{eqnarray*}
+As in the centrality measure for vertices, $\sigma_{wx}(e)$ is the number of paths between $w$ and $x$ that contain $e$ and $\sigma_{wx}$ is total of paths from $w$ to $x$ (notice again that $\sigma_{wx}(e) \leq \sigma_{wx}$).
+
+It is important to note that the centrality of a vertex and its measure of centrality are not the same metrics. In fact, as will be shown in section~\ref{AttackStrategies}, network attacks can vary based on the measure an adversary is trying to reduce. 
 
 \section{Network Attacks}
 %HDA - high degree adaptiveness - onion
@@ -116,19 +138,32 @@ The process of measuring the functionality of a network
 %more from http://www.ncbi.nlm.nih.gov/pubmed/12059649
 %Some other attacks are described in \cite{Attacks}
 
-TODO: describe some common networks here, why they are studied, etc
-TODO: depends on type of network (is it ad-hoc or fixed topology?)
+%TODO: describe some common networks here, why they are studied, etc
+%TODO: depends on type of network (is it ad-hoc or fixed topology?)
 
 \subsection{Attack Strategies}
+\label{AttackStrategies}
 %TODO: vertex/edge based attacks, degree or betweeness attacks
-Attacks on large scale networks are not usually ad-hoc; they are based on a logical and structured strategy for dereasing the connectivity of the network by taking as little action as possible. Clearly, if one was to delete all nodes from a network, then that would yield the maximum decrease in connectivity. However, such attacks are not practical, so these strategies must be considered at a smaller scale.
+Attacks on large scale networks are not usually ad-hoc; they are based on a logical and structured strategy for dereasing the connectivity of the network by taking as little action as possible. Clearly, if one was to delete all nodes from a network, then that would yield the maximum decrease in connectivity. However, such attacks are not practical, so these strategies must be considered at a smaller scale. 
 
-%TODO: print attack paper, read, and include attack summaries in here
+From a general perspectiv, practical attacks are theoretically focused on the objective of decreasing the number of total links in the network or the average geodesic length. Consider, for example, the situations of cutting communication cables or performing a DDOS attack on a node or server with a high measure of centrality. Such attacks would decrease the number of edges in the network graph and increase the average geodesic path length, respectively. 
+
+From the definitions presented in section~\ref{Definitions}, we can see that the number of edges in the network is directly related to the degree of each vertex (in fact, we know that $2|E(G)| =\sum_{v \in V(G)}deg(v)$). On the other hand, the measure of centrality of a vertex or edge is more related to the average geodesic path length in the network. 
 
 \subsection{Vertex Attacks}
-TODO
+Based on the attack objectives discussed in the previous section, the following distinct attack strategies on network nodes have been identified \cite{ATTACKS}.
+
+\begin{itemize}
+	\item \textbf{ID removal} - 
+	\item \textbf{IB removal} - 
+	\item \textbf{RD removal} - 
+	\item \textbf{RB removal} - 
+\end{itemize}
 
 \subsection{Edge Attacks}
+TODO
+
+\subsection{Random Attacks}
 TODO
 
 \section{Network Robustness}
