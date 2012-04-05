@@ -23,7 +23,7 @@ public class AckMessage extends TFTPmessage
 	/**
 	 * Construct an acknowledgment message from the specified block number.
 	 * 
-	 * @param number - the block numebr to ACK.
+	 * @param number - the block number to ACK.
 	 */
 	public AckMessage(int number)
 	{

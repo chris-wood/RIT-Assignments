@@ -58,7 +58,7 @@ public class DataMessage extends TFTPmessage
 	public DataMessage(DatagramPacket packet)
 	{
 		// Fetch and store the packet transfer port and payload size
-		size = packet.getLength();
+		size = packet.getLength() - (OPCODE_SIZE + BLOCK_NUMBER_SIZE);
 		port = packet.getPort(); 
 		
 		// Rebuild the block number for this file block
@@ -66,10 +66,11 @@ public class DataMessage extends TFTPmessage
 				BLOCK_NUMBER_SIZE);
 		
 		// Rebuild the raw data 
-		if (size > (OPCODE_SIZE + BLOCK_NUMBER_SIZE))
+		if (size > 0)
 		{
-			data = new byte[size - (OPCODE_SIZE + BLOCK_NUMBER_SIZE)];
-			for (int i = OPCODE_SIZE + BLOCK_NUMBER_SIZE, index = 0; i < size; i++, index++)
+			data = new byte[size];
+			for (int i = OPCODE_SIZE + BLOCK_NUMBER_SIZE, index = 0;
+					i < size + (OPCODE_SIZE + BLOCK_NUMBER_SIZE); i++, index++)
 			{
 				data[index] = packet.getData()[i];
 			}
@@ -150,7 +151,14 @@ public class DataMessage extends TFTPmessage
 	 */
 	public byte[] getData()
 	{
-		return Arrays.copyOf(data, data.length);
+		if (data == null)
+		{
+			return null;
+		}
+		else
+		{
+			return Arrays.copyOf(data, data.length);
+		}
 	}
 	
 	/**

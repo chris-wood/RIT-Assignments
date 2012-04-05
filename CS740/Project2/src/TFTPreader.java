@@ -61,7 +61,8 @@ public class TFTPreader
 		} 
 		catch (UnknownHostException e) 
 		{
-			System.err.println("Error: " + host + " is an invalid machine name.");
+			System.err.println("TFTPreader: Error: " + host + 
+					" is an invalid machine name.");
 		}
 		
 		return valid;
@@ -78,23 +79,24 @@ public class TFTPreader
 	{
 		TFTPclient client = new TFTPclient();
 		Map<Integer, byte[]> dataBlocks = new HashMap<Integer, byte[]>();
+		
 		try 
 		{
+			// Open the client to begin the transfer
 			client.open(host, DEFAULT_TIMEOUT);
 		} 
 		catch (UnknownHostException e) 
 		{
-			System.err.println("Error: " + host + " is an invalid machine name.");
+			System.err.println("TFTPreader: Error: " + host + 
+					" is an invalid machine name.");
 			return;
 		} 
 		catch (IOException e) 
 		{
-			System.err.println("Error: " + e.getMessage());
+			System.err.println("TFTPreader: Error: " + e.getMessage());
 			return;
 		}
 		
-		// If we got here then no errors have occurred when communicating with
-		// the TFTP server, so proceed as usual
 		try 
 		{
 			// Send a request for a new file to the client
@@ -127,21 +129,27 @@ public class TFTPreader
 									RETRY_TIMES);
 						}
 					}
+					else
+					{
+						// Relay another ack message to get the next data block
+						System.err.println("TFTPreader: Error: duplicate data block " +
+								"received. Retransmitting last ACK message.");
+						result = client.sendAndReceiveMessage(new 
+								AckMessage(msg.getBlockNumber()), msg.getPort(), 
+								RETRY_TIMES);
+					}
 				}
 				else if (result instanceof ErrorMessage)
 				{
 					ErrorMessage msg = (ErrorMessage)result;
-					System.err.println(msg.toString());
+					System.err.println("TFTPreader: " + msg.toString());
 					return;
-				}
-				else
-				{
-					System.out.println("WTF");
 				}
 			}
 			
-			// Finally, write the file contents to the disk.
+			// Finally, write the file contents to the disk and clean up.
 			writeFile(fileName, dataBlocks);
+			client.close();
 		} 
 		catch (SocketTimeoutException e)
 		{
@@ -160,7 +168,8 @@ public class TFTPreader
 	/**
 	 * Append a block of data to the file buffer that is in memory
 	 * so that it can be written to the disk once the file 
-	 * transmission is complete.
+	 * transmission is complete. Data blocks are only appended
+	 * if they are "new" (i.e. not received already).
 	 * 
 	 * @param dataBlocks - the file buffer that maps file blocks to raw data.
 	 * @param message - the data message that conains the bytes to add to the buffer.
@@ -172,7 +181,10 @@ public class TFTPreader
 		boolean result = false;
 		if (!dataBlocks.containsKey(message.getBlockNumber()))
 		{
-			dataBlocks.put(message.getBlockNumber(), message.getData());
+			if (message.getData() != null)
+			{
+				dataBlocks.put(message.getBlockNumber(), message.getData());
+			}
 			result = true;
 		}
 		return result;
@@ -191,7 +203,7 @@ public class TFTPreader
 			// Create (overwrite, if already present) the new file
 			FileOutputStream fos = new FileOutputStream(file, false);
 			
-			// Iterate across the entire data set and write the bytes
+			// Iterate across the entire data set and write the bytes (start at block 1)
 			for (int i = 1; i <= data.size(); i++)
 			{
 				fos.write(data.get(i));
