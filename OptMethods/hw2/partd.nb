@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      4328,        168]
-NotebookOptionsPosition[      3392,        129]
-NotebookOutlinePosition[      3749,        145]
-CellTagsIndexPosition[      3706,        142]
+NotebookDataLength[      5220,        198]
+NotebookOptionsPosition[      4136,        154]
+NotebookOutlinePosition[      4493,        170]
+CellTagsIndexPosition[      4450,        167]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -125,6 +125,31 @@ Cell[BoxData[
 
 Cell[BoxData["0.7861519722689756`"], "Output",
  CellChangeTimes->{3.542657306548975*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CheckDiff", "[", "x_", "]"}], ":=", 
+  RowBox[{"Abs", "[", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"OF", "[", 
+       RowBox[{"x", " ", "+", " ", "0.001"}], "]"}], " ", "-", " ", 
+      RowBox[{"OF", "[", 
+       RowBox[{"x", " ", "-", " ", "0.001"}], "]"}]}], ")"}], "/", 
+    RowBox[{"(", 
+     RowBox[{"2", "*", "0.001"}], ")"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.542657377957111*^9, 3.54265747121096*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CheckDiff", "[", "0.786152", "]"}]], "Input",
+ CellChangeTimes->{{3.542657473512532*^9, 3.542657485392425*^9}}],
+
+Cell[BoxData["1.1507905739449598`*^-8"], "Output",
+ CellChangeTimes->{3.5426574861908607`*^9}]
 }, Open  ]]
 },
 WindowSize->{740, 756},
@@ -169,10 +194,14 @@ Cell[3105, 116, 87, 1, 27, "Output"]
 Cell[CellGroupData[{
 Cell[3229, 122, 56, 1, 27, "Input"],
 Cell[3288, 125, 88, 1, 27, "Output"]
+}, Open  ]],
+Cell[3391, 129, 472, 13, 27, "Input"],
+Cell[CellGroupData[{
+Cell[3888, 146, 135, 2, 27, "Input"],
+Cell[4026, 150, 94, 1, 30, "Output"]
 }, Open  ]]
 }
 ]
 *)
 
 (* End of internal cache information *)
-
