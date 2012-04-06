@@ -1,0 +1,188 @@
+\documentclass[11pt]{article}
+
+\usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype,
+	    graphicx, verbatim, listings, color, fancybox}
+\usepackage[pdftex]{hyperref}
+%\usepackage[margin=1in]{geometry}
+\usepackage{cawsty}
+\usepackage{fullpage}
+\usepackage{pseudocode}
+\usepackage{verbatim}
+
+\newcommand{\tlg}{\text{ lg}}
+\newcommand{\tln}{\text{ ln}}
+\newcommand{\tlog}{\text{ log}}
+
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}% http://ctan.org/pkg/algorithmicx
+\usepackage{lipsum}% http://ctan.org/pkg/lipsum
+\usepackage{xifthen}% http://ctan.org/pkg/xifthen
+\usepackage{needspace}% http://ctan.org/pkg/needspace
+\usepackage{hyperref}% http://ctan.org/pkg/hyperref
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,%
+                shapes,positioning}
+
+\tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=0pt]
+\tikzstyle{selected vertex} = [vertex, fill=red!24]
+\tikzstyle{edge} = [draw,thick,-]
+\tikzstyle{weight} = [font=\small]
+\tikzstyle{selected edge} = [draw,line width=5pt,-,red!50]
+\tikzstyle{ignored edge} = [draw,line width=5pt,-,black!20]
+
+\allowdisplaybreaks[1]
+
+% ================ ALGORITHM ENVIRONMENT ================
+\newcounter{numberedAlg}% Algorithm counter
+\newenvironment{numberedAlg}[1][]%
+  {% \begin{numberedAlg}[#1]
+    \needspace{2\baselineskip}% At least 2\baselineskip required, otherwise break
+    \noindent \rule{\linewidth}{1pt} \endgraf% Top rule
+    \refstepcounter{numberedAlg}% For correct reference of algorithm
+    \centering \textsc{Algorithm}~\thenumberedAlg%
+    \ifthenelse{\isempty{#1}}{}{:\ #1}% Typeset name (if provided)
+  }{% \end{numberedAlg}
+  \noindent \rule{\linewidth}{1pt}% Bottom rule
+  }%
+
+%\setlength{\parindent}{0pt}
+
+\linespread{1.2}
+
+\begin{document}
+\cawtitle{4005-800 Algorithms}{Homework 3}
+\begin{prob}{1}
+CLRS 22.1-1 
+\end{prob}
+\begin{sol} 
+
+Given an adjacency list representation of a \emph{directed} graph, the only way to determine the adjacent vertices of each vertex $v \in V$ is to traverse the entire adjacency list of $v$. Using this fact, we can easily determine the time complexity of computing out-degree and in-degree of every vertex as follows.
+
+\begin{enumerate}
+	\item To compute the out-degree for a single vertex $u \in V$, we must count the total amount of vertices contained within the adjacency list of $u$. To do this, we must traverse the the adjacency list for $u$, which amounts to traversing all outgoing edges starting from $u$ as well. Therefore, in order to compute the out-degree of every vertex in a directed graph, we must repeat this procedure for every vertex, which means that we will traverse over every vertex and every edge in the graph. Thus, the time complexity is to compute the out-degree of every vertex is $\Theta(V+ E)$.
+	\item To compute the in-degree for a single vertex $u in V$, we must inspect all adjacency lists for every vertex $v \in V$ to determine if $u$ is adjacent to $v$. Only after a complete traversal of the entire adjacency list representation can we be certain that we have examined all possible edges leading to $u$, and thus can compute the in-degree. A naive approach to extend this to all vertices would be to repeat this search procedure $V$ times, amounting in a time complexity of $O(V(V+E))$. However, if we use an auxiliary data structure to keep track of the in-degree of every vertex $u \in V$, we need only perform this adjacency list traversal once, incrementing the in-degree of each vertex $v$ that is visited in the traversal. Therefore, just as with the out-degree calculation, the time complexity is simply $\Theta(V + E)$.
+\end{enumerate}
+
+\end{sol}
+
+\begin{prob}{2-a}
+CLRS 22.2-2
+\end{prob}
+\begin{sol} 
+
+After running the breadth-first search on the undirected graph shown below (INSERT IMAGE), using vertex $u$ as the source, we arrive at the following values for $d$ and $\pi$.
+
+TODO: copy from paper and insert images of before/after graphs
+
+\begin{comment}
+
+\end{comment}
+
+\begin{eqnarray*}
+d = TODO \\
+\pi = TODO
+\end{eqnarray*}
+
+\end{sol}
+
+\begin{prob}{2-b}
+CLRS 22.2-3 
+\end{prob}
+\begin{sol} 
+
+The purpose of the gray colors in BFS is to indicate vertices that have been discovered in the traversal. Without this color, we are guaranteed that the only vertices \emph{added} to the queue $Q$ are those that are white upon discovery. Furthermore, the only way to avoid being added to the queue $Q$ is for the vertex under consideration to be colored black. Therefore, without the intermediate gray color, it is possible for a vertex $v$ to be added to $Q$ multiple times before its adjacency list is completely traversed and it is assigned a color black. We now show that these duplicate entries in $Q$ do not change the behavior or result of the BFS procedure.
+
+Let $v$ be a vertex in that was just added to $Q$ for the first time. If at a later point in time (after $v$ was dequeued from $Q$) $v$ is re-added to $Q$, where $v, v_{1}, v_{2}, ..., v_{i}, v$ is a sequence of vertices in $Q$, we know the following must be true: 
+
+\begin{enumerate}
+	\item $v$ will be colored black by the time the second instance of $v$ is dequeued from $Q$. This is because the BFS routine will enqueue all neighbors of $v$ before continuing to the next vertex to dequeue and process in a breadth-first manner, at which point $v$ would be colored black.
+	\item All vertices $v_{1}, v_{2},...,v_{i}$ that exist in $Q$ will also be colored black because the BFS routine must have dequeued all of them, enqueued their white-colored adjacent vertices, and then finished by coloring all of them black.
+\end{enumerate}
+
+Therefore, using these facts we know that upon the next visit to $v$ (i.e. after it is dequeued the next time), all of the vertices adjacent to $v$ that were contained within $\{v_{1}, v_{2},...,v_{i}\}$ will not be added to $Q$ again because they are colored black. Furthermore, using this same argument, any additional adjacant vertices $\{u : u \notin \{v_{1}, v_{2}, ..., v_{i}\}\}$ that are enqueued into $Q$ because they are not colored black must be duplicates. 
+
+Finally, since after every traversal of the adjacency list of a vertex $v$ we are guaranteed to color the vertex black we know that any duplicate vertices that appear in $Q$ will not have any impact on the results of the BFS traversal. Furthermore, since the removal of the gray color does not change the breadth-first behavior of the traversal (because it does not modify the behavior of $Q$), we can conclude that the removal of the gray color altogether does not change the behavior of BFS; it simply poses the risk of a longer time complexity.
+
+\end{sol}
+
+\begin{prob}{2-c}
+CLRS 22.2-5 
+\end{prob}
+\begin{sol} 
+
+In the correctness proof provided in the textbook, it is shown that $u.d$ = $\delta(s,u)$, meaning that $u.d$ is always equal to the length of the shortest path between $s$ and $u$ upon termination of the BFS routine. Furthermore, the proof goes on to show that the BFS routine will always produce the shortest path lengths between a start vertex $s$ and all other vertices $u \in V$ for any graph $G$. Finally, since the order of vertices in the adjacency list representation of a graph $G$ does not have any effect on the topolgy of $G$ (i.e. the actual edges that exist in the graph), we can now conclude that the value $u.d$ assigned to a vertex $u$ is independent of the order in which the vertices appear in each adjacency list for $G$.
+
+TODO: show image of different paths/trees based on neighbor ordering (from paper drawing)
+
+\end{sol}
+
+\begin{prob}{3}
+CLRS 22.3-7
+\end{prob}
+\begin{sol} 
+
+The code for the DFS algorithm that uses a stack for its depth-first traversal is shown below:
+
+% Stack-based approach here
+\begin{numberedAlg}[Stack-Based DFS]
+\label{alg1}
+\begin{algorithmic}[1]
+	\item TODO: copy from textbook here
+\end{algorithmic}
+\end{numberedAlg}
+%\end{algorithm}
+
+\end{sol}
+
+\begin{prob}{4-a}
+$T(n) = aT(n-1) + bn$
+\end{prob}
+\begin{sol} 
+
+
+\end{sol}
+
+\begin{prob}{4-b}
+$T(n) = aT(n-1) + bn\tlog(n)$
+\end{prob}
+\begin{sol} 
+
+
+\end{sol}
+
+\begin{prob}{4-c}
+$T(n) = aT(n-1) + bn^{c}$
+\end{prob}
+\begin{sol} 
+
+
+\end{sol}
+
+\begin{prob}{4-d}
+$T(n) = aT(n/2) + bn^{c}$
+\end{prob}
+\begin{sol} 
+
+
+\end{sol}
+
+\begin{prob}{5}
+\end{prob}
+\begin{sol} 
+
+TODO: discuss the maximum routine that requires NO comparisons! \\
+max(a,b) = (a+b)/2 + |(a-b)/2|
+
+\end{sol}
+
+%\begin{thebibliography}{}
+%\bibitem{AlgoBook}
+%Levitin, Anany. {\it Introduction to the Design and Analysis of Algorithms.} Pearson, Boston: 2012. Print.
+%\end{thebibliography}
+
+\end{document}
