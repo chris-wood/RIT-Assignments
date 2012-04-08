@@ -202,11 +202,11 @@ public abstract class TFTPmessage
 	{
 		TransferMode tMode = null;
 		
-		if (mode.equals("netascii"))
+		if (mode.equalsIgnoreCase("netascii"))
 		{
 			tMode = TransferMode.NETASCII;
 		}
-		else if (mode.equals("octet"))
+		else if (mode.equalsIgnoreCase("octet"))
 		{
 			tMode = TransferMode.OCTET;
 		}

@@ -58,6 +58,10 @@ public class TFTPreader
 			{
 				valid = true;
 			}
+			else
+			{
+				System.err.println("TFTPreader: Error: Invalid transfer mode.");
+			}
 		} 
 		catch (UnknownHostException e) 
 		{

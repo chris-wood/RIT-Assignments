@@ -95,19 +95,31 @@ CLRS 22.2-3
 \end{prob}
 \begin{sol} 
 
-The purpose of the gray colors in BFS is to indicate vertices that have been discovered in the traversal. Without this color, we are guaranteed that the only vertices \emph{added} to the queue $Q$ are those that are white upon discovery. Furthermore, the only way to avoid being added to the queue $Q$ is for the vertex under consideration to be colored black. Therefore, without the intermediate gray color, it is possible for a vertex $v$ to be added to $Q$ multiple times before its adjacency list is completely traversed and it is assigned a color black. We now show that these duplicate entries in $Q$ do not change the behavior or result of the BFS procedure.
+The purpose of the gray colors in BFS is to indicate vertices that have been discovered in the traversal. Without this color, we are guaranteed that the only vertices added to the queue $Q$ are those that are white when visited during the traversal of a vertex adjacency list. Furthermore, the only way to avoid being added to the queue $Q$ is for the vertex under consideration to be colored black. Therefore, without the intermediate gray color, it is possible for a vertex $v$ to be added to $Q$ multiple times before its adjacency list is completely traversed and it is assigned a color black. We now show that duplicate entries in $Q$ do not change the behavior or result of the BFS procedure.
 
-Let $v$ be a vertex in that was just added to $Q$ for the first time. If at a later point in time (after $v$ was dequeued from $Q$) $v$ is re-added to $Q$, where $v, v_{1}, v_{2}, ..., v_{i}, v$ is a sequence of vertices in $Q$, we know the following must be true: 
+Let $v$ be a vertex in that was just added to $Q$ for the first time. If at a later point in time (after $v$ was added to $Q$) $v$ is re-added to $Q$, we now have the sequence $v, v_{1}, v_{2}, ..., v_{i}, v$ contained in $Q$. Based on the iterative approach to the BFS procedure, all of the vertices $v, v_{1}, v_{2}, ..., v_{i}$ will be colored black by the time the second instance of $v$ is dequeued from $Q$ to be processed. This has two implications:
 
 \begin{enumerate}
-	\item $v$ will be colored black by the time the second instance of $v$ is dequeued from $Q$. This is because the BFS routine will enqueue all neighbors of $v$ before continuing to the next vertex to dequeue and process in a breadth-first manner, at which point $v$ would be colored black.
-	\item All vertices $v_{1}, v_{2},...,v_{i}$ that exist in $Q$ will also be colored black because the BFS routine must have dequeued all of them, enqueued their white-colored adjacent vertices, and then finished by coloring all of them black.
+	\item The number of vertices adjacent to $v$ that are enqueued upon the first visit to $v$ will be strictly larger than the number of vertices adjacent to $v$ that are enqueued upon the second visit to $v$. 
+	\item The first visit to $v$ will enqueue all of the vertices in $V$ that are adjacent to $v$ following the normal breadth-first traversal approach, so any duplicate vertices that are re-added upon the second visit to $v$ will have already been added to the queue in the appropriate BFS.
+\end{enumerate}
+
+%TODO: how do you say that it still proceeds in BFS manner?
+
+\begin{comment}
+Since the $Q$ still operates as before by providing first-in and first-out traversal of the vertices in $V$ (i.e. breadth-first traversal), the only difference in the BFS routine is the duplicate items in $Q$. We now show that these duplicate entries in $Q$ do not change the behavior or result of the BFS procedure.
+
+Let $v$ be a vertex in that was just added to $Q$ for the first time. If at a later point in time (after $v$ was added to $Q$) $v$ is re-added to $Q$, where $v, v_{1}, v_{2}, ..., v_{i}, v$ is a sequence of vertices in $Q$, we know the following must be true: 
+
+\begin{enumerate}
+	\item $v, v_{1}, v_{2}, .., v_{i}$ will all be colored black by the time the second instance of $v$ is dequeued from $Q$. This is because the BFS routine will enqueue all neighbors of $v$ before continuing to the next vertex to dequeue and process in a breadth-first manner, at which point $v$ would be colored black.
+	%\item All vertices $v_{1}, v_{2},...,v_{i}$ that exist in $Q$ will also be colored black by the time the second instance of $v$ is dequeued from $Q$ because the BFS routine must have dequeued all of them, enqueued their white-colored adjacent vertices, and then finished by coloring all of them black.
 \end{enumerate}
 
 Therefore, using these facts we know that upon the next visit to $v$ (i.e. after it is dequeued the next time), all of the vertices adjacent to $v$ that were contained within $\{v_{1}, v_{2},...,v_{i}\}$ will not be added to $Q$ again because they are colored black. Furthermore, using this same argument, any additional adjacant vertices $\{u : u \notin \{v_{1}, v_{2}, ..., v_{i}\}\}$ that are enqueued into $Q$ because they are not colored black must be duplicates. 
 
 Finally, since after every traversal of the adjacency list of a vertex $v$ we are guaranteed to color the vertex black we know that any duplicate vertices that appear in $Q$ will not have any impact on the results of the BFS traversal. Furthermore, since the removal of the gray color does not change the breadth-first behavior of the traversal (because it does not modify the behavior of $Q$), we can conclude that the removal of the gray color altogether does not change the behavior of BFS; it simply poses the risk of a longer time complexity.
-
+\end{comment}
 \end{sol}
 
 \begin{prob}{2-c}
