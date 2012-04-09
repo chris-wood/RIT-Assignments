@@ -22,15 +22,15 @@ Making the substitution of $f(\lambda)$ for $\frac{\tau_{zy}}{p_max}$, where $\l
 
 \begin{eqnarray*}
 f(\lambda) & = & -\frac{1}{2}\Bigg[ -\frac{1}{\sqrt[]{1 + \lambda^2}} +  \Bigg(2 - \frac{1}{1 + \lambda^2}\Bigg) \sqrt[]{1 + \lambda^2} -2\lambda \Bigg] \\
-& = & DISTRIBUTE (-1/2) throughout
+& = & -\frac{1}{2}\Bigg[ -\frac{1}{\sqrt[]{1 + \lambda^2}} +  2\sqrt[]{1 + \lambda^2} - \frac{\sqrt[]{1 + \lambda^2}}{1 + \lambda^2} -2\lambda \Bigg] \\
+& = & \frac{0.5}{\sqrt[]{1 + \lambda^2}} - \sqrt[]{1 + \lambda^2} + \frac{0.5\sqrt[]{1 + \lambda^2}}{1 + \lambda^2} + \lambda \\
+& = & \frac{0.5}{\sqrt[]{1 + \lambda^2}} - \sqrt[]{1 + \lambda^2}\Bigg(1 - \frac{0.5}{1 + \lambda^2}\Bigg) + \lambda
 \end{eqnarray*}
 
+Therefore, as shown, we can reduce the problem of finding the location of the maximum shear stress for $v_{1} = v_{2} = 3$ reduces to maximizing the function shown below:
 
-
-TODO: introduce variable replacements, and then start simplification below
 \begin{eqnarray*}
-f(\lambda) & = & lol \\
-& = & \frac{0.5}{\sqrt[]{1+\lambda^2}}-\sqrt{1+\lambda^2} \left(1-\frac{0.5}{1+\lambda^2}\right)+\lambda
+f(\lambda) = \frac{0.5}{\sqrt[]{1 + \lambda^2}} - \sqrt[]{1 + \lambda^2}\Bigg(1 - \frac{0.5}{1 + \lambda^2}\Bigg) + \lambda
 \end{eqnarray*}
 
 \end{sol}
