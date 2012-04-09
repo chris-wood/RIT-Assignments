@@ -4,6 +4,8 @@
  * Version: 4/3/12
  */
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.NoSuchElementException;
 
@@ -90,8 +92,17 @@ public class FTP
 			System.exit(1);
 		}
 		
+		System.out.println("Connecting to: " + args[0]);
 		FTPClient client = new FTPClient();
-		client.open(args[0], DEFAULT_TIMEOUT);
+		try {
+			System.out.println(client.open(args[0], DEFAULT_TIMEOUT));
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		// Begin accepting and processing user commands to interact
 		// with the FTP server.
@@ -142,6 +153,12 @@ public class FTP
 					break;
 
 				case DIR:
+					try {
+						System.out.println(client.sendAndReceiveControl("dir"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 
 				case GET:

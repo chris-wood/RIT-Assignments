@@ -68,15 +68,16 @@ The values for $J, A_{1}, B_{1}, L_{1}, L_{2}^*$ from each iteration of the Fibo
 \end{prob}
 \begin{sol} 
 
-%TODO: replace x with lambda
+In order to apply Newton's method to find a critical point of the given objective function, we must first derive the first and second derivatives of $f(\lambda)$ with respect to $\lambda$. The original function and its derivatives are shown below.
+
 \begin{eqnarray*}
-f(x)=\frac{0.5}{\sqrt{1+x^2}}-\sqrt{1+x^2} \left(1-\frac{0.5}{1+x^2}\right)+x 
+f(\lambda)=\frac{0.5}{\sqrt{1+\lambda^2}}-\sqrt{1+\lambda^2} \left(1-\frac{0.5}{1+\lambda^2}\right)+\lambda
 \end{eqnarray*}
 \begin{eqnarray*}
-f'(x)=\frac{x \left(-x^2-2.\right)}{\left(x^2+1\right)^{3/2}}+1 \\
+f'(\lambda)=\frac{\lambda \left(-\lambda^2-2.\right)}{\left(\lambda^2+1\right)^{3/2}}+1 \\
 \end{eqnarray*}
 \begin{eqnarray*}
-f''(x)=\frac{x^2-2.}{\sqrt{x^2+1} \left(x^2+1.\right)^2}
+f''(\lambda)=\frac{\lambda^2-2.}{\sqrt{\lambda^2+1} \left(\lambda^2+1.\right)^2}
 \end{eqnarray*}
 
 \end{sol}
