@@ -44,6 +44,11 @@ public class FTP
 	public static final int PWD = 10;
 	public static final int QUIT = 11;
 	public static final int USER = 12;
+	
+	/**
+	 * Default timeout of 2000 seconds for connections
+	 */
+	public static final int DEFAULT_TIMEOUT = 2000;
 
 	/**
 	 * Array of help messages displayed to the user when requested.
@@ -84,6 +89,9 @@ public class FTP
 			System.err.println("Usage: java FTP server");
 			System.exit(1);
 		}
+		
+		FTPClient client = new FTPClient();
+		client.open(args[0], DEFAULT_TIMEOUT);
 
 		// Begin accepting and processing user commands to interact
 		// with the FTP server.
