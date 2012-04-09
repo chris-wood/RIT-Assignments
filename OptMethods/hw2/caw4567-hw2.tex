@@ -18,7 +18,7 @@
 \end{prob}
 \begin{sol} 
 
-Making the substitution of $f(\lambda)$ for $\frac{\tau_{zy}}{p_max}$, where $\lambda = \frac{z}{b}$, we get a simplified equation that can be simplified as follows.
+Making the substitution of $f(\lambda)$ for $\frac{\tau_{zy}}{p_{max}}$, where $\lambda = \frac{z}{b}$, we get a simplified equation that can be simplified as follows.
 
 \begin{eqnarray*}
 f(\lambda) & = & -\frac{1}{2}\Bigg[ -\frac{1}{\sqrt[]{1 + \lambda^2}} +  \Bigg(2 - \frac{1}{1 + \lambda^2}\Bigg) \sqrt[]{1 + \lambda^2} -2\lambda \Bigg] \\
@@ -29,9 +29,10 @@ f(\lambda) & = & -\frac{1}{2}\Bigg[ -\frac{1}{\sqrt[]{1 + \lambda^2}} +  \Bigg(2
 
 Therefore, as shown, we can reduce the problem of finding the location of the maximum shear stress for $v_{1} = v_{2} = 3$ reduces to maximizing the function shown below:
 
-\begin{eqnarray*}
+\begin{eqnarray}
+\label{OriginalFunc}
 f(\lambda) = \frac{0.5}{\sqrt[]{1 + \lambda^2}} - \sqrt[]{1 + \lambda^2}\Bigg(1 - \frac{0.5}{1 + \lambda^2}\Bigg) + \lambda
-\end{eqnarray*}
+\end{eqnarray}
 
 \end{sol}
 
@@ -39,18 +40,25 @@ f(\lambda) = \frac{0.5}{\sqrt[]{1 + \lambda^2}} - \sqrt[]{1 + \lambda^2}\Bigg(1 
 \end{prob}
 \begin{sol} 
 
+In order to apply the Fibonacci method, we must be trying to minimize the objective function for a particular problem. Therefore, since we were given an objective function (\ref{OriginalFunc}) that we must maximize, we simply negate this function so that we can apply the Fibonacci method to solve it numerically. The resulting function that we seek to minimize is shown below.
+
 \begin{eqnarray*}
 f'(x) = -f(x) =-\frac{0.5}{\sqrt{1+x^2}}+\sqrt{1+x^2} \left(1-\frac{0.5}{1+x^2}\right)-x 
 \end{eqnarray*}
 
+The values for $J, A_{1}, B_{1}, L_{1}, L_{2}^*$ from each iteration of the Fibonacci method from $J=2$ to $J=8$ are shown below.
 
 \begin{center}
   \begin{tabular}{| c | c | c | c | c |}
     \hline
-    J & $A_{1}$ & $B_{1}$ & \textbf{$L_{1}$} & \textbf{$L_{2}^{*}$} \\ \hline
-    4 & 5 & 6 & 1 & 1\\ \hline
-    7 & 8 & 9 & 1 & 1\\
-    \hline
+	J & $A_{1}$ & $B_{1}$ & \textbf{$L_{1}$} & \textbf{$L_{2}^{*}$} \\ \hline
+	2 & 0 & 3 & 3 & $\frac{39}{34}$ \\ \hline
+	3 & 0 & $\frac{63}{34}$ & $\frac{63}{34}$ & $\frac{39}{34}$ \\ \hline
+	4 & 0 & $\frac{39}{34}$ & $\frac{39}{34}$ & $\frac{12}{17}$ \\ \hline
+	5 & $\frac{15}{34}$ & $\frac{39}{34}$ & $\frac{12}{17}$ & $\frac{15}{34}$ \\ \hline
+	6 & $\frac{15}{34}$ & $\frac{15}{17}$ & $\frac{15}{34}$ & $\frac{9}{34}$ \\ \hline
+	7 & $\frac{21}{34}$ & $\frac{15}{17}$ & $\frac{9}{34}$ & $\frac{3}{17}$ \\ \hline
+	8 & $\frac{12}{17}$ & $\frac{15}{17}$ 
   \end{tabular}
 \end{center}
 

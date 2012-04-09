@@ -77,16 +77,20 @@ CLRS 22.2-2
 
 After running the breadth-first search on the undirected graph shown below (INSERT IMAGE), using vertex $u$ as the source, we arrive at the following values for $d$ and $\pi$.
 
-TODO: copy from paper and insert images of before/after graphs
-
-\begin{comment}
-
-\end{comment}
-
-\begin{eqnarray*}
-d = TODO \\
-\pi = TODO
-\end{eqnarray*}
+\begin{center}
+  \begin{tabular}{| c | c  c |}
+    \hline
+	Vertex & $d$ & $\pi$ \\ \hline
+	$r$ & 4 & $s$ \\
+	$s$ & 3 & $w$ \\
+	$t$ & 1 & $u$ \\
+	$u$ & 0 & NIL\\ 
+	$v$ & 5 & $r$\\ 
+	$w$ & 2 & $t$\\
+	$x$ & 1 & $u$\\
+	$y$ & 1 & $y$\\ \hline
+  \end{tabular}
+\end{center}
 
 \end{sol}
 
@@ -127,9 +131,9 @@ CLRS 22.2-5
 \end{prob}
 \begin{sol} 
 
-In the correctness proof provided in the textbook, it is shown that $u.d$ = $\delta(s,u)$, meaning that $u.d$ is always equal to the length of the shortest path between $s$ and $u$ upon termination of the BFS routine. Furthermore, the proof goes on to show that the BFS routine will always produce the shortest path lengths between a start vertex $s$ and all other vertices $u \in V$ for any graph $G$. Finally, since the order of vertices in the adjacency list representation of a graph $G$ does not have any effect on the topolgy of $G$ (i.e. the actual edges that exist in the graph), we can now conclude that the value $u.d$ assigned to a vertex $u$ is independent of the order in which the vertices appear in each adjacency list for $G$.
+In the correctness proof provided in the textbook, it is shown that $u.d$ = $\delta(s,u)$, meaning that $u.d$ is always equal to the length of the shortest path between $s$ and $u$ upon termination of the BFS routine. Furthermore, the proof goes on to show that the BFS routine will always produce the shortest path lengths between a start vertex $s$ and all other vertices $u \in V$ for any graph $G$ without assuming any particular order of the adjacency lists. This is intuitively true since the order of vertices in the adjacency list representation of a graph $G$ does not have any effect on the topolgy of $G$ (i.e. the actual edges that exist in the graph). Therefore, we can conclude that the value $u.d$ assigned to a vertex $u$ is independent of the order in which the vertices appear in each adjacency list for $G$.
 
-TODO: show image of different paths/trees based on neighbor ordering (from paper drawing)
+In Figure 22.3 from the textbook, we see that $t$ must precede $u$ in the adjacency list for $w$. However, if we swap the position of $t$ and $x$ in the adjacency list for $w$, a BFS traversal will yield the edge $(x,u)$, rather than $(t,u)$, which is a different different breadth-first tree. This difference occurs because the vertices adjacent to $x$ will be enqueued in $Q$ before the vertices adjacent to $t$ because $x$ is visited first in the adjacency list. Therefore, the predecessor of $u$ will be $x$, not $t$.
 
 \end{sol}
 
@@ -141,37 +145,173 @@ CLRS 22.3-7
 The code for the DFS algorithm that uses a stack for its depth-first traversal is shown below:
 
 % Stack-based approach here
-\begin{numberedAlg}[Stack-Based DFS]
+\begin{numberedAlg}[StackDFS]
 \label{alg1}
 \begin{algorithmic}[1]
-	\item TODO: copy from textbook here
+	\For {each vertex $u \in G.V$}
+		\State $u.color = WHITE$
+		\State $u.\pi = NIL$
+	\EndFor
+	\State $time$ = 0
+	\State $S = makeStack()$
+	\For {each vertex $u \in G.V$}
+		\If {$u.color == WHITE$}
+			\State $S.push(u)$
+			\While{$S.notEmpty()$}
+				\State $time = time + 1$
+				\State $v = S.top()$
+				\State $S.pop()$
+				\State $v.d = time$
+				\State $v.color = GRAY$
+				\For {each vertex $w \in G.Adj[v]$}
+					\If {$w.color == WHITE$}
+						\State $S.push(w)$
+					\EndIf
+				\EndFor
+				\State $v.color = BLACK$
+				\State $time = time + 1$
+				\State $v.f = time$
+			\EndWhile
+		\EndIf
+	\EndFor
 \end{algorithmic}
 \end{numberedAlg}
 %\end{algorithm}
 
+\begin{comment}
+\begin{algorithm}                      
+\caption{StackDFS}          
+\label{alg1}                           
+\begin{algorithmic}                   
+    \Ensure $y = x^n$
+    \State $y \Leftarrow 1$
+    \If{$n < 0$}
+        \State $X \Leftarrow 1 / x$
+        \State $N \Leftarrow -n$
+    \Else
+        \State $X \Leftarrow x$
+        \State $N \Leftarrow n$
+    \EndIf
+    \While{$N \neq 0$}
+        \If{$N$ is even}
+            \State $X \Leftarrow X \times X$
+            \State $N \Leftarrow N / 2$
+        \Else[$N$ is odd]
+            \State $y \Leftarrow y \times X$
+            \State $N \Leftarrow N - 1$
+        \EndIf
+    \EndWhile
+\end{algorithmic}
+\end{algorithm}
+\end{comment}
+
 \end{sol}
 
 \begin{prob}{4-a}
-$T(n) = aT(n-1) + bn$
+$T(1) = 1, T(n) = aT(n-1) + bn$
 \end{prob}
 \begin{sol} 
 
+To solve this recurrence relation using the iteration method, we first expand the recursive calls in order to identify a pattern, as shown below:
+
+\begin{eqnarray*}
+T(n) & = & aT(n-1) + bn \\
+& = & a(aT(n-2) + b(n-1)) + bn \\
+& = & a^2T(n-2) + ab(n-1) + bn\\
+& = & a^2(aT(n-3) + b(n-2)) + ab(n-1) + bn\\
+& = & a^3T(n-3) + a^2b(n-2) + ab(n-1) + bn \\
+& = & ... \\
+& = & a^kT(n-k) + a^{k-1}b(n-(k-1)) + ... + ab(n-1) + bn
+\end{eqnarray*}
+
+Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and end up the following result:
+
+\begin{eqnarray*}
+T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2)) + ... + ab(n-1) + bn \\
+& = & a^{n-1}T(1) + a^{n-2}b(n-(n-2)) + ... + ab(n-1) + bn \\
+& = & a^{n-1} + b\sum_{i=0}^{n-2} a^i(n-i)
+\end{eqnarray*}
+
+Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} (\frac{1}{a})^{n-i}(n-i)$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} (n-i) = \frac{1}{2} (n-1) (n+2)$. We now have the following:
+
+\begin{eqnarray*}
+T(n) < a^{n-1} + a^{n}b\sum_{i=0}^{n-2} (n-i) & = & a^{n-1} + a^{n}b\Big(\frac{1}{2} (n-1) (n+2) \Big) \\
+& = & a^{n-1} + \frac{a^{n}b}{2}(n^2 + n - 2)
+\end{eqnarray*}
+
+Therefore, by discarding the lowest terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^nn^2)$.
 
 \end{sol}
 
 \begin{prob}{4-b}
-$T(n) = aT(n-1) + bn\tlog(n)$
+$T(1) = 1, T(n) = aT(n-1) + bn\tlog(n)$
 \end{prob}
 \begin{sol} 
 
+To solve this recurrence relation using the iteration method, we first expand the recursive calls in order to identify a pattern, as shown below:
+
+\begin{eqnarray*}
+T(n) & = & aT(n-1) + bn\tlog(n) \\
+& = & a(aT(n-2) + b(n-1)\tlog(n-1)) + bn\tlog(n) \\
+& = & a^2T(n-2) + ab(n-1)\tlog(n-1) + bn\tlog(n)\\
+& = & a^2(aT(n-3) + b(n-2)\tlog(n-2)) + ab(n-1)\tlog(n-1) + bn\tlog(n) \\
+& = & a^3T(n-3) + a^2b(n-2)\tlog(n-2) + ab(n-1)\tlog(n-1) + bn\tlog(n) \\
+& = & ... \\
+& = & a^kT(n-k) + a^{k-1}b(n-(k-1))\tlog(n-(k-1)) + ... + ab(n-1)\tlog(n-1) + bn\tlog(n)
+\end{eqnarray*}
+
+Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and end up the following result:
+
+\begin{eqnarray*}
+T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2))\tlog(n-(n-2)) + ... + ab(n-1)\tlog(n-1) + bn\tlog(n) \\
+& = & a^{n-1}T(1) + a^{n-2}b(n-(n-2))\tlog(n-(n-2)) + ... + ab(n-1)\tlog(n-1) + bn\tlog(n) \\
+& = & a^{n-1} + b\sum_{i=0}^{n-2} a^i(n-i)\tlog(n-i)
+\end{eqnarray*}
+
+Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} \frac{1}{a}^{n-i}(n-i)\tlog(n-i)$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)\tlog(n-i)$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} \tlog(n-i) < \sum_{i=0}^{n-2} \tlog(n)$, which means we that $a^{n}\sum_{i=0}^{n-2} (n-i)\tlog(n-i) < a^{n}\tlog(n)\sum_{i=0}^{n-2} (n-i)$. We now have the following:
+
+\begin{eqnarray*}
+T(n) < a^{n-1} + a^{n}b\tlog(n)\sum_{i=0}^{n-2} (n-i) & = & a^{n-1} + a^{n}b\tlog(n)\Big(\frac{1}{2}(n-1)(n+2)\Big) \\
+& = & a^{n-1} + \frac{a^{n}b\tlog(n)}{2}(n^2 + n - 2)
+\end{eqnarray*}
+
+Therefore, by discarding the lowest terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^n\tlog(n)n^2)$.
 
 \end{sol}
 
 \begin{prob}{4-c}
-$T(n) = aT(n-1) + bn^{c}$
+$T(1) = 1, T(n) = aT(n-1) + bn^{c}$
 \end{prob}
 \begin{sol} 
 
+To solve this recurrence relation using the iteration method, we first expand the recursive calls in order to identify a pattern, as shown below:
+
+\begin{eqnarray*}
+T(n) & = & aT(n-1) + bn^c \\
+& = & a(aT(n-2) + b(n-1)^c) + bn^c \\
+& = & a^2T(n-2) + ab(n-1)^c + bn^c\\
+& = & a^2(aT(n-3) + b(n-2)^c) + ab(n-1)^c + bn^c \\
+& = & a^3T(n-3) + a^2b(n-2)^c + ab(n-1)^c + bn^c \\
+& = & ... \\
+& = & a^kT(n-k) + a^{k-1}b(n-(k-1))^c + ... + ab(n-1)^c + bn^c
+\end{eqnarray*}
+
+Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and end up the following result:
+
+\begin{eqnarray*}
+T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2))^c + ... + ab(n-1)^c + bn^c \\
+& = & a^{n-1}T(1) + a^{n-2}b(n-(n-2))^c + ... + ab(n-1)^c + bn^c \\
+& = & a^{n-1} + b\sum_{i=0}^{n-2} a^i(n-i)^c
+\end{eqnarray*}
+
+Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} \frac{1}{a}^{n-i}(n-i)^c$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)^c$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} (n-i)^c < \sum_{i=0}^{n-2} n^c$, which means we that $a^{n}\sum_{i=0}^{n-2} (n-i)^c < a^{n}\sum_{i=0}^{n-2} n^c$. We now have the following:
+
+\begin{eqnarray*}
+T(n) < a^{n-1} + a^{n}b\sum_{i=0}^{n-2} (n)^c & = & a^{n-1} + a^{n}b\Big( (n-1)n^c \Big) \\
+& = & a^{n-1} + a^{n}b(n^{c+1} - n^c)
+\end{eqnarray*}
+
+Therefore, by discarding the lowest terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^nn^{c+1})$.
 
 \end{sol}
 
@@ -180,6 +320,45 @@ $T(n) = aT(n/2) + bn^{c}$
 \end{prob}
 \begin{sol} 
 
+To solve this recurrence relation using the iteration method, we assume that $n = 2^k$ and then continue to expand the recursive calls in order to identify a pattern, as shown below:
+
+\begin{eqnarray*}
+T(n) & = & aT(n/2) + bn^c \\
+& = & a(aT(n/2^2) + b(n/2)^c) + bn^c \\
+& = & a^2T(n/2^2) + ab(n/2)^c + bn^c\\
+& = & a^2(aT(n/2^3) + b(n/2^2)^c) + ab(n/2)^c + bn^c \\
+& = & a^3T(n/2^3) + a^2b(n/2^2)^c + ab(n/2)^c + bn^c \\
+& = & ... \\
+& = & a^iT(n/2^i) + a^{i-1}b(n/2^{i-1})^c + ... + ab(n/2)^c + bn^c
+\end{eqnarray*}
+
+Now, if we let $i = k$, we will reach the end of these recursive calls and end up the following result:
+
+\begin{eqnarray*}
+T(n) & = & a^{k}T(n/2^k) + a^{k-1}b(n/2^{k-1})^c + ... + ab(n/2)^c + bn^c \\
+& = & a^{k}T(1) + a^{k-1}b(n/2^{k-1})^c + ... + ab(n/2)^c + bn^c \\
+& = & a^{k} + b\sum_{j=0}^{k-1} a^j(n/2^j)^c
+\end{eqnarray*}
+
+Now we make the observation that $a^j(\frac{n}{2^j})^{c} = a^jn^c(\frac{1}{2^c})^j = a^jn^c(\frac{1}{2^j})^c = n^c(\frac{a}{2^c})^j$, so we can re-write the summation above as $n^{c}\sum_{j=0}^{k-1} (\frac{a}{2^c})^{j}$. We now have the following:
+
+\begin{eqnarray*}
+T(n) & =&  a^{k} + n^{c}b\sum_{j=0}^{k-1} (\frac{a}{2^c})^j \\
+& = & a^{k} + n^{c}b\Bigg(\frac{(\frac{a}{2^c})^k - 1}{(\frac{a}{2^c}) - 1}\Bigg) \\
+& = & a^{k} + \frac{bn^c(\frac{a}{2^c})^k}{(\frac{a}{2^c}) - 1} - \frac{bn^c}{(\frac{a}{2^c}) - 1}
+\end{eqnarray*}
+
+Now, we can observe that $a^{k} + \frac{bn^c(\frac{a}{2^c})^k}{(\frac{a}{2^c}) - 1} - \frac{bn^c}{(\frac{a}{2^c}) - 1} < a^{k} + bn^c(\frac{a}{2^c})^k$. Now, by replacing $k$ with $\tlg(n)$, we have the following:
+
+\begin{eqnarray*}
+T(n) <  a^{\tlg(n)} + bn^c(\frac{a}{2^c})^{\tlg(n)} & = & n^{\tlg(a)} + bn^cn^{\tlg(\frac{a}{2^c})} \\
+& = & n^{\tlg(a)} + bn^cn^{\tlg(a) - \tlg(2^c)} \\
+& = & n^{\tlg(a)} + bn^cn^{\tlg(a) - c} \\
+& = & n^{\tlg(a)} + bn^{\tlg(a) - c + c} \\
+& = & (b+1)n^{\tlg(a)}
+\end{eqnarray*}
+
+Therefore, we can conclude that $T(n) = O(n^{\tlg(a)})$.
 
 \end{sol}
 
@@ -187,8 +366,22 @@ $T(n) = aT(n/2) + bn^{c}$
 \end{prob}
 \begin{sol} 
 
-TODO: discuss the maximum routine that requires NO comparisons! \\
-max(a,b) = (a+b)/2 + |(a-b)/2|
+The maximum element out of a set of 5 numbers can be found by iteratively applying the following equation.
+
+\begin{eqnarray*}
+\text{max}(a,b) = \frac{a+b}{2} + |\frac{a-b}{2}| = \frac{a + b + |a - b|}{2}
+\end{eqnarray*}
+
+The source code for the $max5$ routine that relies on this equation is shown below.
+
+\begin{lstlisting}
+def max5(x1, x2, x3, x4, x5):
+	max1 = (x1 + x2 + abs(x1 - x2)) / 2
+	max2 = (max1 + x3 + abs(max1 - x3)) / 2
+	max3 = (max2 + x4 + abs(max2 - x4)) / 2
+	max4 = (max3 + x5 + abs(max3 - x5)) / 2
+	return max4
+\end{lstlisting}
 
 \end{sol}
 
