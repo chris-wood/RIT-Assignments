@@ -11,7 +11,16 @@ import sys
 
 ##########################################################################
 #
-# TODO: answers to questions here
+# This implementation of max5 was written to use zero (0) comparisons.
+# As proof, we introduce the following mathematical relation between 
+# two numbers a and b:
+#
+# max(a,b) = ((a+b)/2) + abs((a-b)/2)
+#
+# Therefore, since addition, subtraction, division, and absolute value
+# do not require any comparisons, the entire max5 routine doesn't either,
+# since it iteratively applies this operation among all elements in the 
+# set of 5 numbers to determine the maximum.
 #
 ##########################################################################
 
