@@ -167,11 +167,17 @@ The code for the DFS algorithm that uses a stack for its depth-first traversal i
 				\State $S.pop()$
 				\State $v.d = time$
 				\State $v.color = GRAY$
+				\State $TS = makeStack()$
 				\For {each vertex $w \in G.Adj[v]$}
+					\State $TS.push(w)$
+				\EndFor
+				\While{$TS.notEmpty()$}
+					\State $w = TS.top()$
+					\State $TS.pop()$
 					\If {$w.color == WHITE$}
 						\State $S.push(w)$
 					\EndIf
-				\EndFor
+				\EndWhile
 				\State $v.color = BLACK$
 				\State $time = time + 1$
 				\State $v.f = time$
