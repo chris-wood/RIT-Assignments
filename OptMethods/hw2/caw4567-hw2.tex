@@ -46,7 +46,7 @@ In order to apply the Fibonacci method, we must be trying to minimize the object
 f'(x) = -f(x) =-\frac{0.5}{\sqrt{1+x^2}}+\sqrt{1+x^2} \left(1-\frac{0.5}{1+x^2}\right)-x 
 \end{eqnarray*}
 
-The values for $J, A_{1}, B_{1}, L_{1}, L_{2}^*$ from each iteration of the Fibonacci method from $J=2$ to $J=8$ are shown below.
+The values for $J, A_{1}, B_{1}, L_{1}, L_{2}^*$ from each iteration of the Fibonacci method from $J=2$ to $J=8$ are shown below, starting with initial values of $0$ and $3$ for $A_{1}$ and $B_{1}$, respectively.
 
 \begin{center}
   \begin{tabular}{| c | c | c | c | c |}
@@ -68,7 +68,7 @@ The values for $J, A_{1}, B_{1}, L_{1}, L_{2}^*$ from each iteration of the Fibo
 \end{prob}
 \begin{sol} 
 
-In order to apply Newton's method to find a critical point of the given objective function, we must first derive the first and second derivatives of $f(\lambda)$ with respect to $\lambda$. The original function and its derivatives are shown below.
+In order to apply Newton's method to find a critical point of the given objective function, we must first derive the first derviative of $f(\lambda)$ with respect to $\lambda$. The original function and its derivative are shown below.
 
 \begin{eqnarray*}
 f(\lambda)=\frac{0.5}{\sqrt{1+\lambda^2}}-\sqrt{1+\lambda^2} \left(1-\frac{0.5}{1+\lambda^2}\right)+\lambda
@@ -76,9 +76,20 @@ f(\lambda)=\frac{0.5}{\sqrt{1+\lambda^2}}-\sqrt{1+\lambda^2} \left(1-\frac{0.5}{
 \begin{eqnarray*}
 f'(\lambda)=\frac{\lambda \left(-\lambda^2-2.\right)}{\left(\lambda^2+1\right)^{3/2}}+1 \\
 \end{eqnarray*}
-\begin{eqnarray*}
-f''(\lambda)=\frac{\lambda^2-2.}{\sqrt{\lambda^2+1} \left(\lambda^2+1.\right)^2}
-\end{eqnarray*}
+%\begin{eqnarray*}
+%f''(\lambda)=\frac{\lambda^2-2.}{\sqrt{\lambda^2+1} \left(\lambda^2+1.\right)^2}
+%\end{eqnarray*}
+
+Iteratively applying the Newton method with $\lambda = 0.6$ to start, we end up with the following results:
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+	$\lambda_{n}$ & $f(\lambda)$ & $f'(\lambda)$ & $\lambda_{n+1}$ & $\epsilon$ \\ \hline
+	0.6 & 0.291303 & 0.107199 & -2.11741 & 2.06913 \\ \hline
+	
+  \end{tabular}
+\end{center}
 
 \end{sol}
 

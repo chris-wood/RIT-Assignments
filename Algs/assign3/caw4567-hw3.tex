@@ -75,7 +75,7 @@ CLRS 22.2-2
 \end{prob}
 \begin{sol} 
 
-After running the breadth-first search on the undirected graph shown below (INSERT IMAGE), using vertex $u$ as the source, we arrive at the following values for $d$ and $\pi$.
+After running the breadth-first search on the undirected graph shown in Figure 22.3 in the textbook (using vertex $u$ as the source) we arrive at the following values for $d$ and $\pi$.
 
 \begin{center}
   \begin{tabular}{| c | c  c |}
@@ -232,18 +232,27 @@ Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and e
 
 \begin{eqnarray*}
 T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2)) + ... + ab(n-1) + bn \\
-& = & a^{n-1}T(1) + a^{n-2}b(n-(n-2)) + ... + ab(n-1) + bn \\
-& = & a^{n-1} + b\sum_{i=0}^{n-2} a^i(n-i)
+& = & b\sum_{i=0}^{n-1} a^i(n-i)
 \end{eqnarray*}
 
-Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} (\frac{1}{a})^{n-i}(n-i)$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} (n-i) = \frac{1}{2} (n-1) (n+2)$. We now have the following:
+Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-1} (\frac{1}{a})^{n-i}(n-i)$, which is the same as $a^{n}\sum_{i=0}^{n} i(\frac{1}{a})^i$. We now have the following:
 
 \begin{eqnarray*}
-T(n) < a^{n-1} + a^{n}b\sum_{i=0}^{n-2} (n-i) & = & a^{n-1} + a^{n}b\Big(\frac{1}{2} (n-1) (n+2) \Big) \\
-& = & a^{n-1} + \frac{a^{n}b}{2}(n^2 + n - 2)
+T(n) & = & a^{n}b\sum_{i=0}^{n} i(\frac{1}{a})^i \\
+& = & a^{n}b\Bigg(\frac{n(\frac{1}{a})^{n+2} - (n+1)(\frac{1}{a})^{n+1} + (\frac{1}{a})}{((\frac{1}{a}) - 1)^2} \Bigg)\\
+& = & \frac{a^{n}bn(\frac{1}{a})^{n+2} - a^{n}b(n+1)(\frac{1}{a})^{n+1} + a^{n}b(\frac{1}{a})}{((\frac{1}{a}) - 1)^2} \\
+& = & \frac{bn(\frac{1}{a^2}) - b(n+1)(\frac{1}{a}) + a^{n - 1}b}{((\frac{1}{a}) - 1)^2} 
 \end{eqnarray*}
 
-Therefore, by discarding the lowest terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^nn^2)$.
+By another observation we can see that the $((\frac{1}{a}) - 1)^2$ term in the demoniator of the expression above can be discarded to obtain an upper bound on T(n). Thus, we have the following:
+
+%\begin{eqnarray*]
+\begin{eqnarray*}
+T(n) < bn(\frac{1}{a^2}) - b(n+1)(\frac{1}{a}) + a^{n - 1}b = ba^{n-1} + bn(\frac{1}{a^2}) - b(n+1)(\frac{1}{a}) 
+\end{eqnarray*}
+%\end{eqnarray*}
+
+Therefore, by discarding the lowest terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^n)$.
 
 \end{sol}
 
@@ -268,15 +277,14 @@ Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and e
 
 \begin{eqnarray*}
 T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2))\tlog(n-(n-2)) + ... + ab(n-1)\tlog(n-1) + bn\tlog(n) \\
-& = & a^{n-1}T(1) + a^{n-2}b(n-(n-2))\tlog(n-(n-2)) + ... + ab(n-1)\tlog(n-1) + bn\tlog(n) \\
-& = & a^{n-1} + b\sum_{i=0}^{n-2} a^i(n-i)\tlog(n-i)
+& = & b\sum_{i=0}^{n-1} a^i(n-i)\tlog(n-i)
 \end{eqnarray*}
 
-Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} \frac{1}{a}^{n-i}(n-i)\tlog(n-i)$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)\tlog(n-i)$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} \tlog(n-i) < \sum_{i=0}^{n-2} \tlog(n)$, which means we that $a^{n}\sum_{i=0}^{n-2} (n-i)\tlog(n-i) < a^{n}\tlog(n)\sum_{i=0}^{n-2} (n-i)$. We now have the following:
+Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-1} \frac{1}{a}^{n-i}(n-i)\tlog(n-i)$, which is less than $a^{n}\sum_{i=0}^{n-1} (n-i)\tlog(n-i)$. Furthermore, we make the observation that $\sum_{i=0}^{n-1} \tlog(n-i) < \sum_{i=0}^{n-1} \tlog(n)$, which means we that $a^{n}\sum_{i=0}^{n-1} (n-i)\tlog(n-i) < a^{n}\tlog(n)\sum_{i=0}^{n-1} (n-i)$. We now have the following:
 
 \begin{eqnarray*}
-T(n) < a^{n-1} + a^{n}b\tlog(n)\sum_{i=0}^{n-2} (n-i) & = & a^{n-1} + a^{n}b\tlog(n)\Big(\frac{1}{2}(n-1)(n+2)\Big) \\
-& = & a^{n-1} + \frac{a^{n}b\tlog(n)}{2}(n^2 + n - 2)
+T(n) < a^{n}b\tlog(n)\sum_{i=0}^{n-1} (n-i) & = & a^{n}b\tlog(n)\Big(\frac{n(n+1)}{2}\Big) \\
+& = & \frac{a^{n}b\tlog(n)(n^2 + n)}{2}
 \end{eqnarray*}
 
 Therefore, by discarding the lowest terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^n\tlog(n)n^2)$.
@@ -304,15 +312,14 @@ Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and e
 
 \begin{eqnarray*}
 T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2))^c + ... + ab(n-1)^c + bn^c \\
-& = & a^{n-1}T(1) + a^{n-2}b(n-(n-2))^c + ... + ab(n-1)^c + bn^c \\
-& = & a^{n-1} + b\sum_{i=0}^{n-2} a^i(n-i)^c
+& = & b\sum_{i=0}^{n-1} a^i(n-i)^c
 \end{eqnarray*}
 
-Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} \frac{1}{a}^{n-i}(n-i)^c$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)^c$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} (n-i)^c < \sum_{i=0}^{n-2} n^c$, which means we that $a^{n}\sum_{i=0}^{n-2} (n-i)^c < a^{n}\sum_{i=0}^{n-2} n^c$. We now have the following:
+Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-1} \frac{1}{a}^{n-i}(n-i)^c$, which is less than $a^{n}\sum_{i=0}^{n-1} (n-i)^c$. Furthermore, we make the observation that $\sum_{i=0}^{n-1} (n-i)^c < \sum_{i=0}^{n-1} n^c$, which means we that $a^{n}\sum_{i=0}^{n-1} (n-i)^c < a^{n}\sum_{i=0}^{n-1} n^c$. We now have the following:
 
 \begin{eqnarray*}
-T(n) < a^{n-1} + a^{n}b\sum_{i=0}^{n-2} (n)^c & = & a^{n-1} + a^{n}b\Big( (n-1)n^c \Big) \\
-& = & a^{n-1} + a^{n}b(n^{c+1} - n^c)
+T(n) < a^{n}b\sum_{i=0}^{n-1} (n)^c & = & a^{n}b(n(n^c))\\
+& = & a^{n}b(n^{c+1})
 \end{eqnarray*}
 
 Therefore, by discarding the lowest terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^nn^{c+1})$.
@@ -340,26 +347,25 @@ Now, if we let $i = k$, we will reach the end of these recursive calls and end u
 
 \begin{eqnarray*}
 T(n) & = & a^{k}T(n/2^k) + a^{k-1}b(n/2^{k-1})^c + ... + ab(n/2)^c + bn^c \\
-& = & a^{k}T(1) + a^{k-1}b(n/2^{k-1})^c + ... + ab(n/2)^c + bn^c \\
-& = & a^{k} + b\sum_{j=0}^{k-1} a^j(n/2^j)^c
+& = & b\sum_{j=0}^{k} a^j(n/2^j)^c
 \end{eqnarray*}
 
-Now we make the observation that $a^j(\frac{n}{2^j})^{c} = a^jn^c(\frac{1}{2^c})^j = a^jn^c(\frac{1}{2^j})^c = n^c(\frac{a}{2^c})^j$, so we can re-write the summation above as $n^{c}\sum_{j=0}^{k-1} (\frac{a}{2^c})^{j}$. We now have the following:
+Now we make the observation that $a^j(\frac{n}{2^j})^{c} = a^jn^c(\frac{1}{2^c})^j = a^jn^c(\frac{1}{2^j})^c = n^c(\frac{a}{2^c})^j$, so we can re-write the summation above as $n^{c}\sum_{j=0}^{k} (\frac{a}{2^c})^{j}$. We now have the following:
 
 \begin{eqnarray*}
-T(n) & =&  a^{k} + n^{c}b\sum_{j=0}^{k-1} (\frac{a}{2^c})^j \\
-& = & a^{k} + n^{c}b\Bigg(\frac{(\frac{a}{2^c})^k - 1}{(\frac{a}{2^c}) - 1}\Bigg) \\
-& = & a^{k} + \frac{bn^c(\frac{a}{2^c})^k}{(\frac{a}{2^c}) - 1} - \frac{bn^c}{(\frac{a}{2^c}) - 1}
+T(n) & =& n^{c}b\sum_{j=0}^{k} (\frac{a}{2^c})^j \\
+& = & n^{c}b\Bigg(\frac{(\frac{a}{2^c})^{k+1} - 1}{(\frac{a}{2^c}) - 1}\Bigg) \\
+& = & \frac{bn^c(\frac{a}{2^c})^{k+1}}{(\frac{a}{2^c}) - 1} - \frac{bn^c}{(\frac{a}{2^c}) - 1}
 \end{eqnarray*}
 
-Now, we can observe that $a^{k} + \frac{bn^c(\frac{a}{2^c})^k}{(\frac{a}{2^c}) - 1} - \frac{bn^c}{(\frac{a}{2^c}) - 1} < a^{k} + bn^c(\frac{a}{2^c})^k$. Now, by replacing $k$ with $\tlg(n)$, we have the following:
+Now, we can observe that $\frac{bn^c(\frac{a}{2^c})^{k+1}}{(\frac{a}{2^c}) - 1} - \frac{bn^c}{(\frac{a}{2^c}) - 1} < bn^c(\frac{a}{2^c})^{k+1}$. Now, by replacing $k$ with $\tlg(n)$, we have the following:
 
 \begin{eqnarray*}
-T(n) <  a^{\tlg(n)} + bn^c(\frac{a}{2^c})^{\tlg(n)} & = & n^{\tlg(a)} + bn^cn^{\tlg(\frac{a}{2^c})} \\
-& = & n^{\tlg(a)} + bn^cn^{\tlg(a) - \tlg(2^c)} \\
-& = & n^{\tlg(a)} + bn^cn^{\tlg(a) - c} \\
-& = & n^{\tlg(a)} + bn^{\tlg(a) - c + c} \\
-& = & (b+1)n^{\tlg(a)}
+T(n) <  bn^c(\frac{a}{2^c})^{\tlg(n) + 1} = bn^c(\frac{a}{2^c})(\frac{a}{2^c})^{\tlg(n)} & = & bn^c(\frac{a}{2^c})n^{\tlg(\frac{a}{2^c})} \\
+& = & bn^c(\frac{a}{2^c})n^{\tlg(a) - \tlg(2^c)} \\
+& = & bn^c(\frac{a}{2^c})n^{\tlg(a) - c} \\
+& = & b(\frac{a}{2^c})n^{\tlg(a) - c + c} \\
+& = & (b+1)(\frac{a}{2^c})n^{\tlg(a)}
 \end{eqnarray*}
 
 Therefore, we can conclude that $T(n) = O(n^{\tlg(a)})$.
