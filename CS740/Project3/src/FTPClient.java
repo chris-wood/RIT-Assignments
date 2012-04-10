@@ -81,7 +81,7 @@ public class FTPClient
 		String line = null;
 		// TODO: this blocks?
 		//controlOut.writeBytes("dir\n");
-		while ((line = controlIn.readLine()) != null)
+		//while ((line = controlIn.readLine()) != null)
 		{
 			reply.append(line);
 		}

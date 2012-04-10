@@ -49,18 +49,20 @@ f'(x) = -f(x) =-\frac{0.5}{\sqrt{1+x^2}}+\sqrt{1+x^2} \left(1-\frac{0.5}{1+x^2}\
 The values for $J, A_{1}, B_{1}, L_{1}, L_{2}^*$ from each iteration of the Fibonacci method from $J=2$ to $J=8$ are shown below, starting with initial values of $0$ and $3$ for $A_{1}$ and $B_{1}$, respectively.
 
 \begin{center}
-  \begin{tabular}{| c | c | c | c | c |}
+  \begin{tabular}{| c | c | c | c | c | c |}
     \hline
-	J & $A_{1}$ & $B_{1}$ & \textbf{$L_{1}$} & \textbf{$L_{2}^{*}$} \\ \hline
-	2 & 0 & 3 & 3 & $\frac{39}{34}$ \\ \hline
-	3 & 0 & $\frac{63}{34}$ & $\frac{63}{34}$ & $\frac{39}{34}$ \\ \hline
-	4 & 0 & $\frac{39}{34}$ & $\frac{39}{34}$ & $\frac{12}{17}$ \\ \hline
-	5 & $\frac{15}{34}$ & $\frac{39}{34}$ & $\frac{12}{17}$ & $\frac{15}{34}$ \\ \hline
-	6 & $\frac{15}{34}$ & $\frac{15}{17}$ & $\frac{15}{34}$ & $\frac{9}{34}$ \\ \hline
-	7 & $\frac{21}{34}$ & $\frac{15}{17}$ & $\frac{9}{34}$ & $\frac{3}{17}$ \\ \hline
-	8 & $\frac{12}{17}$ & $\frac{15}{17}$ 
+	Step & J & $A_{1}$ & $B_{1}$ & \textbf{$L_{1}$} & \textbf{$L_{2}^{*}$} \\ \hline
+	1 & 2 & 0 & 3 & 3 & $\frac{39}{34}$ \\ \hline
+	2 & 3 & 0 & $\frac{63}{34}$ & $\frac{63}{34}$ & $\frac{39}{34}$ \\ \hline
+	3 & 4 & 0 & $\frac{39}{34}$ & $\frac{39}{34}$ & $\frac{12}{17}$ \\ \hline
+	4 & 5 & $\frac{15}{34}$ & $\frac{39}{34}$ & $\frac{12}{17}$ & $\frac{15}{34}$ \\ \hline
+	5 & 6 & $\frac{15}{34}$ & $\frac{15}{17}$ & $\frac{15}{34}$ & $\frac{9}{34}$ \\ \hline
+	6 & 7 & $\frac{21}{34}$ & $\frac{15}{17}$ & $\frac{9}{34}$ & $\frac{3}{17}$ \\ \hline
+	7 & 8 & $\frac{12}{17}$ & $\frac{15}{17}$ & - & - \\ \hline
   \end{tabular}
 \end{center}
+
+Once $J=n=8$ we no longer have to derive the value for $L_{1}$ or $L_{2}^*$, and we can conclude that the maximum value of \ref{OriginalFunc} occurs at $\lambda \approx \frac{A_1+B_1}{2} = \frac{12+15}{17*2} = \frac{27}{34} = 0.7941176$.
 
 \end{sol}
 
@@ -68,28 +70,31 @@ The values for $J, A_{1}, B_{1}, L_{1}, L_{2}^*$ from each iteration of the Fibo
 \end{prob}
 \begin{sol} 
 
-In order to apply Newton's method to find a critical point of the given objective function, we must first derive the first derviative of $f(\lambda)$ with respect to $\lambda$. The original function and its derivative are shown below.
+In order to apply Newton's method to find a critical point of the given objective function, we must first derive the first and second derviatives of $f(\lambda)$ with respect to $\lambda$. The original function and its derivatives are shown below.
 
 \begin{eqnarray*}
 f(\lambda)=\frac{0.5}{\sqrt{1+\lambda^2}}-\sqrt{1+\lambda^2} \left(1-\frac{0.5}{1+\lambda^2}\right)+\lambda
 \end{eqnarray*}
 \begin{eqnarray*}
-f'(\lambda)=\frac{\lambda \left(-\lambda^2-2.\right)}{\left(\lambda^2+1\right)^{3/2}}+1 \\
+f'(\lambda)=\frac{\lambda \left(-\lambda^2-2\right)}{\left(\lambda^2+1\right)^{3/2}}+1 \\
 \end{eqnarray*}
-%\begin{eqnarray*}
-%f''(\lambda)=\frac{\lambda^2-2.}{\sqrt{\lambda^2+1} \left(\lambda^2+1.\right)^2}
-%\end{eqnarray*}
+\begin{eqnarray*}
+f''(\lambda)=\frac{\lambda^2-2}{\sqrt{\lambda^2+1} \left(\lambda^2+1\right)^2}
+\end{eqnarray*}
 
 Iteratively applying the Newton method with $\lambda = 0.6$ to start, we end up with the following results:
 
 \begin{center}
   \begin{tabular}{| c | c | c | c | c |}
     \hline
-	$\lambda_{n}$ & $f(\lambda)$ & $f'(\lambda)$ & $\lambda_{n+1}$ & $\epsilon$ \\ \hline
-	0.6 & 0.291303 & 0.107199 & -2.11741 & 2.06913 \\ \hline
-	
+	Step & $\lambda_{n}$ & $f'(\lambda)$ & $f''(\lambda)$ \\ \hline
+	1 & 0.6 & 0.107199 & -0.76032 \\ \hline
+	2 & 0.740991 & 0.0203099 & -0.485815 \\ \hline
+	3 & 0.782797 & 0.00140036 & -0.419968 \\ \hline	
   \end{tabular}
 \end{center}
+
+At this point we can see that the value of the first derivative for the given value of $\lambda$ is less than or equal to the $\epsilon = 0.01$ (i.e. $f(\lambda_3) = 0.00140036 \leq 0.01$), so we conclude that the maximum of equation \ref{OriginalFunc} occurs at $\lambda \approx \lambda_{3} = 0.782797$.
 
 \end{sol}
 
@@ -97,7 +102,37 @@ Iteratively applying the Newton method with $\lambda = 0.6$ to start, we end up 
 \end{prob}
 \begin{sol} 
 
+In order to apply the Quasi-Newton method with a fixed step size of $0.001$, we must utilize the following functions:
 
+\begin{eqnarray}
+f(\lambda) = \frac{0.5}{\sqrt[]{1 + \lambda^2}} - \sqrt[]{1 + \lambda^2}\Bigg(1 - \frac{0.5}{1 + \lambda^2}\Bigg) + \lambda
+\end{eqnarray}
+\begin{eqnarray*}
+f'(\lambda_i) = \frac{f(\lambda_i + \Delta\lambda) - f(\lambda_i - \Delta\lambda)}{2\Delta\lambda}
+\end{eqnarray*}
+\begin{eqnarray*}
+f''(\lambda_i) = \frac{f(\lambda_i + \Delta\lambda) - 2f(\lambda_i) + f(\lambda_i - \Delta\lambda)}{\Delta\lambda^2}
+\end{eqnarray*}
+
+Using these equations, we can calculate $\lambda_{i+1}$ as follows:
+
+\begin{eqnarray*}
+\lambda_{i+1} = \lambda_{i} - \frac{f'(\lambda_i)}{f''(\lambda_i)}
+\end{eqnarray*}
+
+The results from iterating using the Quasi-Newton method with these equation are shown in the table below.
+
+\begin{center}
+  \begin{tabular}{| c | c | c | c | c | c |}
+    \hline
+	Step & $\lambda_{n}$ & $f(\lambda)$ & $f'(\lambda)$ \\ \hline
+	1 & 0.6 & 0.107199 & -0.760321  \\ \hline	
+	2 & 0.740992 & 0.0203097 & -0.485814 \\ \hline
+	3 & 0.782798 & 0.00140018 & -0.419967 \\ \hline
+  \end{tabular}
+\end{center}
+
+At this point we can see that the value of the approximated first derivative is less than or equal to the $\epsilon = 0.01$, so we conclude that the maximum of equation \ref{OriginalFunc} occurs at $\lambda \approx \lambda_{3} = 0.782798$.
 
 \end{sol}
 
