@@ -65,7 +65,7 @@ Given an adjacency list representation of a \emph{directed} graph, the only way 
 
 \begin{enumerate}
 	\item To compute the out-degree for a single vertex $u \in V$, we must count the total amount of vertices contained within the adjacency list of $u$. To do this, we must traverse the the adjacency list for $u$, which amounts to traversing all outgoing edges starting from $u$ as well. Therefore, in order to compute the out-degree of every vertex in a directed graph, we must repeat this procedure for every vertex, which means that we will traverse over every vertex and every edge in the graph. Thus, the time complexity is to compute the out-degree of every vertex is $\Theta(V+ E)$.
-	\item To compute the in-degree for a single vertex $u in V$, we must inspect all adjacency lists for every vertex $v \in V$ to determine if $u$ is adjacent to $v$. Only after a complete traversal of the entire adjacency list representation can we be certain that we have examined all possible edges leading to $u$, and thus can compute the in-degree. A naive approach to extend this to all vertices would be to repeat this search procedure $V$ times, amounting in a time complexity of $O(V(V+E))$. However, if we use an auxiliary data structure to keep track of the in-degree of every vertex $u \in V$, we need only perform this adjacency list traversal once, incrementing the in-degree of each vertex $v$ that is visited in the traversal. Therefore, just as with the out-degree calculation, the time complexity is simply $\Theta(V + E)$.
+	\item To compute the in-degree for a single vertex $u \in V$, we must inspect all adjacency lists for every vertex $v \in V$ to determine if $u$ is adjacent to $v$. Only after a complete traversal of the entire adjacency list representation can we be certain that we have examined all possible edges leading to $u$, and thus can compute the in-degree. A naive approach to extend this to all vertices would be to repeat this search procedure $V$ times, amounting in a time complexity of $O(V(V+E))$. However, if we use an auxiliary data structure to keep track of the in-degree of every vertex $u \in V$, we need only perform this adjacency list traversal once, incrementing the in-degree of each vertex $v$ that is visited in the traversal. Therefore, just as with the out-degree calculation, the time complexity is simply $\Theta(V + E)$.
 \end{enumerate}
 
 \end{sol}
@@ -92,6 +92,8 @@ After running the breadth-first search on the undirected graph shown in Figure 2
   \end{tabular}
 \end{center}
 
+Note that the steps for the BFS procedure were omitted because the textbook question did not explicitly ask for them; it simply asked for the $d$ and $\pi$ values upon termination.
+
 \end{sol}
 
 \begin{prob}{2-b}
@@ -101,7 +103,11 @@ CLRS 22.2-3
 
 The purpose of the black color is to indicate that a vertex has been completely traversed and all of its neighbors have been discovered. By removing line 18 in the BFS algorithm, we limit the vertex colors to only white and gray, which means only a single bit is necessary to store this information. We now show that removing the black color does not change the results of the BFS procedure. 
 
-The correctness of the BFS routine is based on the usage of the queue $Q$. Vertices are only enqueued into $Q$ when they are found to be colored gray or black, but since we removed the possibility of vertices having a black color, we know that vertices are only enqueued if they are not gray. Therefore, since there is not distinction between gray and black vertices when enqueing a vertex into $Q$, the removal of the black color does not change the breadth-first behavior of the BFS routine. Furthermore, one can see that the algorithm does not explicitly depend on a vertex being colored black (i.e. there is no conditional statement in the algorithm that hinges on whether a vertex is gray or black). Therefore, by removing the color black, we are not changing the control flow of the algorithm in any way. Thus, we can conclude that removing the color black does not change $Q$ and in effect change the breadth-first traversal of a graph, nor does it change the control flow of the algorithm, so it must therefore produce the same result.
+The initialization part of the BFS procedure (lines 1-9) does not change by removing the black color. Therefore, we must examine the main loop of the procedure, which is entirely dependent on how the queue $Q$ is used, in order to determine if this modified version produces the same results as the original. 
+
+The results of the BFS procedure depend on the order in which vertices are visited in the breadth-first traversal, which ultimately depends on the order in which they are enqueued into $Q$. Based on the algorithm we know that vertices are only enqueued into $Q$ when they are found to be colored white (i.e. not gray or black). By removing the black color we are not changing the result of this condition, since there is no distinction between black and gray vertices when they are enqueued (i.e. both gray and black are non-white). Therefore, the removal of the black color does not change the order in which vertices are enqueued into $Q$. Furthermore, since vertices are still colored gray when they are discovered, and all vertices are discovered in the same order, we can see that the removal of the black color does not change the breadth-first traversal of the BFS routine.
+
+As an additional argument, one can see that the algorithm does not explicitly depend on a vertex being colored black (i.e. there is no conditional statement in the algorithm that hinges on whether a vertex is gray or black). Therefore, by removing the color black, we are not changing the control flow of the algorithm in any way. Thus, we can conclude that removing the color black does not change $Q$ and in effect change the breadth-first traversal of a graph, nor does it change the control flow of the algorithm, so it must therefore produce the same result.
 
 \begin{comment}
 Let $v$ be a vertex in that was just added to $Q$ for the first time. If at a later point in time (after $v$ was added to $Q$) $v$ is re-added to $Q$, we now have the sequence $v, v_{1}, v_{2}, ..., v_{i}, v$ contained in $Q$. Based on the iterative approach to the BFS procedure, all of the vertices $v, v_{1}, v_{2}, ..., v_{i}$ will be colored black by the time the second instance of $v$ is dequeued from $Q$ to be processed. This has two implications:
@@ -135,9 +141,9 @@ CLRS 22.2-5
 \end{prob}
 \begin{sol} 
 
-In the correctness proof provided in the textbook, it is shown that $u.d$ = $\delta(s,u)$, meaning that $u.d$ is always equal to the length of the shortest path between $s$ and $u$ upon termination of the BFS routine. Furthermore, the proof goes on to show that the BFS routine will always produce the shortest path lengths between a start vertex $s$ and all other vertices $u \in V$ for any graph $G$ without assuming any particular order of the adjacency lists. This is intuitively true since the order of vertices in the adjacency list representation of a graph $G$ does not have any effect on the topolgy of $G$ (i.e. the actual edges that exist in the graph). Therefore, we can conclude that the value $u.d$ assigned to a vertex $u$ is independent of the order in which the vertices appear in each adjacency list for $G$.
+In the correctness proof provided in the textbook, it is shown that $u.d$ = $\delta(s,u)$ upon termination of the BFS procedure, meaning that $u.d$ is always equal to the length of the shortest path between $s$ and $u$ after running the BFS procedure. Since there are no assumptions made about the order of a vertex's adjacency list in the BFS algorithm, this means that the BFS procedure will always produce the shortest path lengths between a start vertex $s$ and all other vertices $u \in V$ for any graph $G$, despite the order of its vertex adjacency lists. This is intuitively true since the order of vertices in the adjacency list representation of a graph $G$ does not have any effect on the topolgy of $G$ (i.e. the actual edges that exist in the graph), and therefore does not have any effect on the path lengths in $G$. Therefore, we can conclude that the value $u.d$ assigned to a vertex $u$ is independent of the order in which the vertices appear in each adjacency list for $G$.
 
-In Figure 22.3 from the textbook, we see that $t$ must precede $u$ in the adjacency list for $w$. However, if we swap the position of $t$ and $x$ in the adjacency list for $w$, a BFS traversal will yield the edge $(x,u)$, rather than $(t,u)$, which is a different different breadth-first tree. This difference occurs because the vertices adjacent to $x$ will be enqueued in $Q$ before the vertices adjacent to $t$ because $x$ is visited first in the adjacency list. Therefore, the predecessor of $u$ will be $x$, not $t$.
+In Figure 22.3 from the textbook, we see that $t$ must precede $x$ in the adjacency list for $w$ because the edge $(t,u)$ exists in the resulting breadth-first tree ($t$ and $x$ share the common neighbor of $u$, but $u$ was visited through $t$ because $t$ was enqueued into $Q$ and visited before $x$). However, if we swap the position of $t$ and $x$ in the adjacency list for $w$, a BFS traversal will yield the edge $(x,u)$, rather than $(t,u)$, which will result in a different different breadth-first tree. This difference occurs because the vertices adjacent to $x$ will be enqueued in $Q$ before the vertices adjacent to $t$ because $x$ is visited first from the adjacency list of $w$. Therefore, the predecessor ($\pi$) of $u$ will be $x$, not $t$.
 
 \end{sol}
 
@@ -146,7 +152,7 @@ CLRS 22.3-7
 \end{prob}
 \begin{sol} 
 
-The code for the DFS algorithm that uses a stack for its depth-first traversal is shown below:
+The code for the DFS algorithm that uses a stack for its depth-first traversal is shown below. It uses three stacks to keep track of the recursive, depth-first traversal of vertices that are discovered ($SD$), the path of vertices that need to be finished by backtracking ($SF$), and a temporary stack used to push adjacent vertices onto the main discovery stack in the correct order ($TS$).
 
 % Stack-based approach here
 \begin{numberedAlg}[StackDFS]
@@ -157,30 +163,47 @@ The code for the DFS algorithm that uses a stack for its depth-first traversal i
 		\State $u.\pi = NIL$
 	\EndFor
 	\State $time$ = 0
-	\State $S = makeStack()$
+	\State $SD = makeStack()$
+	\State $SF = makeStack()$
+	\State $TS = makeStack()$
 	\For {each vertex $u \in G.V$}
 		\If {$u.color == WHITE$}
-			\State $S.push(u)$
-			\While{$S.notEmpty()$}
+			\State $Push(SD, u)$
+			\While{not $isEmpty(SD)$}
+				\State $v = Top(SD)$
+				\State $Pop(SD)$
+				\If {v.color == WHITE}
+					\State $time = time + 1$
+					\State $v.d = time$
+					\State $v.color = GRAY$
+					\State $vCount = 0$
+					\For {each vertex $w \in G.Adj[v]$}
+						\State $Push(TS, w)$
+					\EndFor
+					\While{not $isEmpty(TS)$}
+						\State $w = Top(TS)$
+						\State $Pop(TS)$
+						\If {$w.color == WHITE$}
+							\State $Push(SD, w)$
+							\State $w.\pi = v$
+							\State $vCount = vCount+ 1$
+						\EndIf
+					\EndWhile
+					\For{$i = 1 \to vCount$}
+						\State $Push(SF, v)$
+					\EndFor
+				\EndIf
+			\EndWhile
+			\State $v_1 = Top(SF)$
+			\State $Pop(SF)$
+			\State $v_2 = Top(SF)$
+			\While{not $isEmpty(SF)$ and $v1 \not= v2$}
 				\State $time = time + 1$
-				\State $v = S.top()$
-				\State $S.pop()$
-				\State $v.d = time$
-				\State $v.color = GRAY$
-				\State $TS = makeStack()$
-				\For {each vertex $w \in G.Adj[v]$}
-					\State $TS.push(w)$
-				\EndFor
-				\While{$TS.notEmpty()$}
-					\State $w = TS.top()$
-					\State $TS.pop()$
-					\If {$w.color == WHITE$}
-						\State $S.push(w)$
-					\EndIf
-				\EndWhile
-				\State $v.color = BLACK$
-				\State $time = time + 1$
-				\State $v.f = time$
+				\State $v_1.f = time$
+				\State $v_1.color = BLACK$
+				\State $v_1 = v_2$
+				\State $Pop(SF)$
+				\State $v_2 = Top(SF)$
 			\EndWhile
 		\EndIf
 	\EndFor
@@ -377,16 +400,15 @@ T(2^k) & = & a^{k} + b\sum_{j=0}^{k-1} a^j2^{(k-j)c} \\
 & = & a^{k} + \frac{b2^{kc}(\frac{a}{2^c})^k - b2^{kc}}{(\frac{a}{2^c}) - 1} 
 \end{eqnarray*}
 
-Now, by removing the denominator from the term above and replacing $k$ with $\tlg(n)$, we have the following:
+Now, by ignoring the constant denominator from the term above and replacing $k$ with $\tlg(n)$, we have the following:
 
 \begin{eqnarray*}
-T(n) & = & a^{k} + b2^{kc}(\frac{a}{2^c})^k - b2^{kc} \\
-& = & a^{\tlg(n)} + bn^c(\frac{a}{2^c})^{\tlg(n)} - bn^c \\
+T(n) \approx a^{k} + b2^{kc}(\frac{a}{2^c})^k - b2^{kc} & = & a^{\tlg(n)} + bn^c(\frac{a}{2^c})^{\tlg(n)} - bn^c \\
 & = & n^{\tlg(a)} + bn^cn^{\tlg(\frac{a}{2^c})} - bn^c \\ 
 & = & n^{\tlg(a)} + bn^cn^{\tlg(a) - \tlg(2^c)} - bn^c \\
 & = & n^{\tlg(a)} + bn^cn^{\tlg(a) - c} - bn^c \\
 & = & n^{\tlg(a)} + bn^{\tlg(a)} - bn^c \\
-& = & (n+1)n^{\tlg(a)} - bn^c
+& = & (b+1)n^{\tlg(a)} - bn^c
 \end{eqnarray*}
 
 Now, by discarding constants, we can conclude that $T(n) = O(n^{\tlg(a)} - n^c)$, since the dominating term depends on the constants $a$ and $c$.

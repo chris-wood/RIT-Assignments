@@ -76,14 +76,18 @@ public class FTPClient
 		// Save the host name for future reference
 		this.host = host;
 		
-		// Get the reply from the server (if any) and return it
+		// Get the initial reply from the server (if any) and return it
 		StringBuilder reply = new StringBuilder();
 		String line = null;
-		// TODO: this blocks?
-		//controlOut.writeBytes("dir\n");
-		//while ((line = controlIn.readLine()) != null)
+		line = controlIn.readLine();
+		// TODO: refactor this logic
+		while (line != null && line.length() > 0)
 		{
-			reply.append(line);
+			reply.append(line + TELNET_END);
+			if (controlIn.ready())
+				line = controlIn.readLine();
+			else
+				break;
 		}
 		return reply.toString();
 	}
