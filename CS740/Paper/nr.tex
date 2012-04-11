@@ -37,7 +37,7 @@
 \linespread{1.2}
 
 \begin{document}
-\arltitle{Engineering Networks for Optimal Robustness}{4005-700 Data Communication and Networks I}
+\arltitle{Engineering Networks for Optimal Robustness}{Data Communication and Networks I [4005-700]}
 
 \begin{abstract}
 Due to the growing pervasiveness of civilian and 
@@ -87,7 +87,6 @@ Lastly, it will discuss avenues for future research and open problems that have 
 researchers in the field.
 
 \section{Fundamentals}
-\section{Fundamentals}
 
 It is natural to model any communication network as an undirected graph $G$, which has a fixed 
 set of vertices (nodes) $V(G)$ and edges (links) $E(G)$ that represent physical connections between such vertices. For conveniene, we let $N = |V(G)|$ and $M = |E(G)|$. The topology of a network
@@ -105,6 +104,8 @@ the remainder of this paper.
 A graph $G$ is said to be \textbf{connected} if and only if $\forall u,v \in V(G)$ there exists a path between $u$ and $v$.
 \end{define}
 
+% graph, vertex, edge, degree,
+% path
 % vertex connectivity
 % edge connectivity
 
@@ -134,7 +135,7 @@ As in the centrality measure for vertices, $\sigma_{wx}(e)$ is the number of pat
 
 It is important to note that the centrality of a vertex and its measure of centrality are not the same metrics. In fact, as will be shown in section~\ref{AttackStrategies}, network attacks can vary based on the measure an adversary is trying to reduce. 
 
-Finally, we introduce a metric that characterized the number of nodes (or rather, a fraction of the total nodes) that need to be removed in order for the graph to become globally disconnected.
+Finally, we introduce a metric that characterizes the number of nodes (or rather, a fraction of the total nodes) that need to be removed in order for the graph to become globally disconnected.
 
 %TODO: read http://polymer.bu.edu/hes/articles/pshs06.pdf and discuss the metric here - devote entire section to it in the NR part
 
@@ -153,21 +154,25 @@ Finally, we introduce a metric that characterized the number of nodes (or rather
 %TODO: vertex/edge based attacks, degree or betweeness attacks
 Attacks on large scale networks are not usually ad-hoc; they are based on a logical and structured strategy for dereasing the connectivity of the network by taking as little action as possible. Clearly, if one was to delete all nodes from a network, then that would yield the maximum decrease in connectivity. However, such attacks are not practical, so these strategies must be considered at a smaller scale. 
 
-From a general perspectiv, practical attacks are theoretically focused on the objective of decreasing the number of total links in the network or the average geodesic length. Consider, for example, the situations of cutting communication cables or performing a DDOS attack on a node or server with a high measure of centrality. Such attacks would decrease the number of edges in the network graph and increase the average geodesic path length, respectively. 
+From a general perspective, practical attacks are theoretically focused on the objective of decreasing the number of total links in the network or the average geodesic length (or both). Consider, for example, the situations of cutting communication cables or performing a DDOS attack on a node or server with a high measure of centrality. Such attacks would decrease the number of edges in the network graph and increase the average geodesic path length, respectively. 
 
-From the definitions presented in section~\ref{Definitions}, we can see that the number of edges in the network is directly related to the degree of each vertex (in fact, we know that $2|E(G)| =\sum_{v \in V(G)}deg(v)$). On the other hand, the measure of centrality of a vertex or edge is more related to the average geodesic path length in the network. 
+From the definitions presented in section~\ref{Definitions}, we can see that the number of edges in the network is directly related to the degree of each vertex (in fact, we know that $2|E(G)| =\sum_{v \in V(G)}deg(v)$). On the other hand, the measure of centrality of a vertex or edge is more related to the average geodesic path length in the network. As such, we consider practical attack patterns that focus on decreasing both of these measurements by targeting individual vertices and/or edges, as well as randomized attacks that have no specific targets. 
 
-\subsection{Vertex Attacks}
-Based on the attack objectives discussed in the previous section, the following distinct attack strategies on network nodes have been identified \cite{ATTACKS}.
+In general, most focused attacks fall under one of the following four categories \cite{ATTACKS}.
+
 \begin{itemize}
-	\item \textbf{ID removal} - initial degree distribution vertex removal
-	\item \textbf{IB removal} - initial betweenness distribution vertex removal
-	\item \textbf{RD removal} - recalculated degree distribution vertex removal
-	\item \textbf{RB removal} - recalculated betweenness distribution vertex removal
+	\item \textbf{ID removal} - initial degree distribution vertex/edge removal
+	\item \textbf{IB removal} - initial betweenness distribution vertex/edge removal
+	\item \textbf{RD removal} - recalculated degree distribution vertex/edge removal
+	\item \textbf{RB removal} - recalculated betweenness distribution vertex/edge removal
 \end{itemize}
+
 Clearly, RD and RB attacks on vertices would yield the optimal results because they take a greedy approach to decrease the target metric. However, the implication of these attacks is that there exists an efficient and tractable way to measure these metrics after every change, which isn't always the case (especially when the topology of the network is unknown). Therefore, ID and IB attacks are more realistic, but they also assume some prior knowledge of the network infrastructure before the attack begins. Attacks that do not rely on this knowledge are referred to as random attacks, and are discussed in section~\ref{RandomAttacks}.
 
-Furthermore, it should be noted that both the ID and RD attacks are computationally less taxing than IB and RB attacks \cite{ATTACKS}. In fact, the time complexity of a successful ID attack (and subsequently, an entire RD attack), runs in linear time with N (i.e. $O(N)$), whereas the time complexity of betweenness-based attacks has a time complexity of $O(NL)$. The implication of this is that the adversary must make tradeoffs based on their knowledge of the network infrastructure, 
+Furthermore, it should be noted that both the ID and RD attacks are computationally less taxing than IB and RB attacks \cite{ATTACKS}. In fact, the time complexity of a successful ID attack (and subsequently, an entire RD attack), runs in linear time with N (i.e. $O(N)$), whereas the time complexity of betweenness-based attacks has a time complexity of $O(NL)$. The implication of this is that the adversary must make tradeoffs based on their knowledge of the network infrastructure.
+
+\subsection{Vertex Attacks}
+Based on the attack objectives discussed in the previous section, the following distinct attack strategies on network nodes have been identified .
 
 \subsection{Edge Attacks}
 TODO
@@ -222,7 +227,7 @@ Algorithm~\ref{alg1} is repeated until an ideal level of robustness has been obt
 \subsection{Node- and Link-based Measurement}
 %TODO: http://arxiv.org/pdf/1203.2982v1.pdf
 
-\section{Network Traffic Load}
+\section{Network Traffic Load Balancing}
 %TODO: discuss the link load
 %TODO: discuss incidents that indicate this importance
 

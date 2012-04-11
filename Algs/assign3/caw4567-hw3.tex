@@ -155,20 +155,20 @@ CLRS 22.3-7
 The code for the DFS algorithm that uses a stack for its depth-first traversal is shown below. It uses three stacks to keep track of the recursive, depth-first traversal of vertices that are discovered ($SD$), the path of vertices that need to be finished by backtracking ($SF$), and a temporary stack used to push adjacent vertices onto the main discovery stack in the correct order ($TS$).
 
 % Stack-based approach here
-\begin{numberedAlg}[StackDFS]
+\begin{numberedAlg}[DFS($G$)]
 \label{alg1}
 \begin{algorithmic}[1]
-	\For {each vertex $u \in G.V$}
+	\For {each vertex $u \in G.V$} \Comment Initialization
 		\State $u.color = WHITE$
 		\State $u.\pi = NIL$
 	\EndFor
 	\State $time$ = 0
-	\State $SD = makeStack()$
-	\State $SF = makeStack()$
-	\State $TS = makeStack()$
+	\State $SD = makeStack()$ \Comment Maintains depth-first traversal of the graph
+	\State $SF = makeStack()$ \Comment Maintains backtracking of graph (for finish times)
+	\State $TS = makeStack()$ \Comment Temporary stack to reverse adjacency list order
 	\For {each vertex $u \in G.V$}
 		\If {$u.color == WHITE$}
-			\State $Push(SD, u)$
+			\State $Push(SD, u)$ \Comment Ensure that all vertices are visited
 			\While{not $isEmpty(SD)$}
 				\State $v = Top(SD)$
 				\State $Pop(SD)$
@@ -176,35 +176,49 @@ The code for the DFS algorithm that uses a stack for its depth-first traversal i
 					\State $time = time + 1$
 					\State $v.d = time$
 					\State $v.color = GRAY$
-					\State $vCount = 0$
-					\For {each vertex $w \in G.Adj[v]$}
+					\State $vCount = 0$ \Comment The number of new vertices that are discovered
+					\For {each vertex $w \in G.Adj[v]$} \Comment Reverse the vertex order 
 						\State $Push(TS, w)$
 					\EndFor
 					\While{not $isEmpty(TS)$}
 						\State $w = Top(TS)$
 						\State $Pop(TS)$
-						\If {$w.color == WHITE$}
+						\If {$w.color == WHITE$} \Comment Only push undiscovered vertices
 							\State $Push(SD, w)$
 							\State $w.\pi = v$
 							\State $vCount = vCount+ 1$
 						\EndIf
 					\EndWhile
-					\For{$i = 1 \to vCount$}
-						\State $Push(SF, v)$
-					\EndFor
+					\If{$vCount == 0$} \Comment Backtrack using SF if we reached a dead-end
+						\State $v_1 = v$
+						\State $done = Size(SF) == 0$
+						\While {not $done$}
+							\State $v_2 = Top(SF)$
+							\If{$v1 \not= v2$}
+								\State $time = time + 1$
+								\State $v_1.f = time$
+								\State $v_1.color = BLACK$
+								\State $v_1 = v_2$
+								\State $Pop(SF)$
+								\If{$Size(SF) == 0$}
+									\State $done = True$
+								\Else
+									\State $v_2 = Top(SF)$
+								\EndIf
+							\Else
+								\State $done = True$
+							\EndIf
+						\EndWhile
+					\Else \Comment Append multiple copies of $v$ for backtracking 
+						\For{$i = 1 \to vCount$}
+							\State $Push(SF, v)$
+						\EndFor
+					\EndIf
 				\EndIf
 			\EndWhile
-			\State $v_1 = Top(SF)$
-			\State $Pop(SF)$
-			\State $v_2 = Top(SF)$
-			\While{not $isEmpty(SF)$ and $v1 \not= v2$}
-				\State $time = time + 1$
-				\State $v_1.f = time$
-				\State $v_1.color = BLACK$
-				\State $v_1 = v_2$
-				\State $Pop(SF)$
-				\State $v_2 = Top(SF)$
-			\EndWhile
+			\State $time = time + 1$
+			\State $u.f = time$
+			\State $u.color = BLACK$
 		\EndIf
 	\EndFor
 \end{algorithmic}
@@ -257,7 +271,7 @@ T(n) & = & aT(n-1) + bn \\
 & = & a^kT(n-k) + a^{k-1}b(n-(k-1)) + ... + ab(n-1) + bn
 \end{eqnarray*}
 
-Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and end up the following result:
+Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and end up with the following result:
 
 \begin{eqnarray*}
 T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2)) + ... + ab(n-1) + bn \\
@@ -309,7 +323,7 @@ T(n) & = & aT(n-1) + bn\tlog(n) \\
 & = & a^kT(n-k) + a^{k-1}b(n-(k-1))\tlog(n-(k-1)) + ... + ab(n-1)\tlog(n-1) + bn\tlog(n)
 \end{eqnarray*}
 
-Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and end up the following result:
+Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and end up with the following result:
 
 \begin{eqnarray*}
 T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2))\tlog(n-(n-2)) + ... + ab(n-1)\tlog(n-1) + bn\tlog(n) \\
@@ -345,7 +359,7 @@ T(n) & = & aT(n-1) + bn^c \\
 & = & a^kT(n-k) + a^{k-1}b(n-(k-1))^c + ... + ab(n-1)^c + bn^c
 \end{eqnarray*}
 
-Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and end up the following result:
+Now, if we let $k = (n-1)$, we will reach the end of these recursive calls and end up with the following result:
 
 \begin{eqnarray*}
 T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2))^c + ... + ab(n-1)^c + bn^c \\
@@ -381,7 +395,7 @@ T(n) & = & aT(n/2) + bn^c \\
 & = & a^iT(n/2^i) + a^{i-1}b(n/2^{i-1})^c + ... + ab(n/2)^c + bn^c
 \end{eqnarray*}
 
-Now, if we let $i = k$, we will reach the end of these recursive calls and end up the following result:
+Now, if we let $i = k$, we will reach the end of these recursive calls and end up with the following result:
 
 \begin{eqnarray*}
 T(n) & = & a^{k}T(n/2^k) + a^{k-1}b(n/2^{k-1})^c + ... + ab(n/2)^c + bn^c \\

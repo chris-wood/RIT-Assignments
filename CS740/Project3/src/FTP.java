@@ -147,6 +147,8 @@ public class FTP
 						cmd = i;
 					}
 				}
+				
+				// TODO: write method that forwards immediate queries (e.g. ascii, pwd, dir, etc...)
 
 				// TODO
 				switch (cmd) 
