@@ -33,10 +33,6 @@ from math import sqrt
 #
 ##########################################################################
 
-# This is the fixed upper bound used for autonomous testing
-# of the fibPow function.
-FIXED_POWER = 31
-
 def max5(x1, x2, x3, x4, x5):
 	""" Compute the maximum of five numbers without any comparisons.
 		

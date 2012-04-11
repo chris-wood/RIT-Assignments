@@ -61,7 +61,7 @@ CLRS 22.1-1
 \end{prob}
 \begin{sol} 
 
-Given an adjacency list representation of a \emph{directed} graph, the only way to determine the adjacent vertices of each vertex $v \in V$ is to traverse the entire adjacency list of $v$. Using this fact, we can easily determine the time complexity of computing out-degree and in-degree of every vertex as follows.
+Given an adjacency list representation of a \emph{directed} graph, the only way to determine the adjacent vertices of each vertex $v \in V$ is to traverse the entire adjacency list of $v$. Using this fact, we can easily determine the time complexity of computing the out-degree and in-degree of every vertex as follows.
 
 \begin{enumerate}
 	\item To compute the out-degree for a single vertex $u \in V$, we must count the total amount of vertices contained within the adjacency list of $u$. To do this, we must traverse the the adjacency list for $u$, which amounts to traversing all outgoing edges starting from $u$ as well. Therefore, in order to compute the out-degree of every vertex in a directed graph, we must repeat this procedure for every vertex, which means that we will traverse over every vertex and every edge in the graph. Thus, the time complexity is to compute the out-degree of every vertex is $\Theta(V+ E)$.
@@ -143,7 +143,7 @@ CLRS 22.2-5
 
 In the correctness proof provided in the textbook, it is shown that $u.d$ = $\delta(s,u)$ upon termination of the BFS procedure, meaning that $u.d$ is always equal to the length of the shortest path between $s$ and $u$ after running the BFS procedure. Since there are no assumptions made about the order of a vertex's adjacency list in the BFS algorithm, this means that the BFS procedure will always produce the shortest path lengths between a start vertex $s$ and all other vertices $u \in V$ for any graph $G$, despite the order of its vertex adjacency lists. This is intuitively true since the order of vertices in the adjacency list representation of a graph $G$ does not have any effect on the topolgy of $G$ (i.e. the actual edges that exist in the graph), and therefore does not have any effect on the path lengths in $G$. Therefore, we can conclude that the value $u.d$ assigned to a vertex $u$ is independent of the order in which the vertices appear in each adjacency list for $G$.
 
-In Figure 22.3 from the textbook, we see that $t$ must precede $x$ in the adjacency list for $w$ because the edge $(t,u)$ exists in the resulting breadth-first tree ($t$ and $x$ share the common neighbor of $u$, but $u$ was visited through $t$ because $t$ was enqueued into $Q$ and visited before $x$). However, if we swap the position of $t$ and $x$ in the adjacency list for $w$, a BFS traversal will yield the edge $(x,u)$, rather than $(t,u)$, which will result in a different different breadth-first tree. This difference occurs because the vertices adjacent to $x$ will be enqueued in $Q$ before the vertices adjacent to $t$ because $x$ is visited first from the adjacency list of $w$. Therefore, the predecessor ($\pi$) of $u$ will be $x$, not $t$.
+In Figure 22.3 from the textbook, we see that $t$ must precede $x$ in the adjacency list for $w$ because the edge $(t,u)$ exists in the resulting breadth-first tree ($t$ and $x$ share the common neighbor of $u$, but $u$ was visited through $t$ because $t$ was enqueued into $Q$ and visited before $x$). However, if we swap the position of $t$ and $x$ in the adjacency list for $w$, a BFS traversal will yield the edge $(x,u)$, rather than $(t,u)$, which will result in a different different breadth-first tree. This difference occurs because the vertices adjacent to $x$ will be enqueued in $Q$ before the vertices adjacent to $t$ because $x$ is visited first from the adjacency list of $w$. Therefore, the predecessor ($\pi$) of $u$ will be $x$, not $t$, and we conclude that the breadth-first tree computed by BFS can depend on the ordering within adjacency lists.
 
 \end{sol}
 
@@ -317,14 +317,14 @@ T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2))\tlog(n-(n-2)) + ... + ab(n-1)\t
 & = & a^{n-1} + b\sum_{i=0}^{n-2} a^i(n-i)\tlog(n-i)
 \end{eqnarray*}
 
-Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} \frac{1}{a}^{n-i}(n-i)\tlog(n-i)$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)\tlog(n-i)$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} \tlog(n-i) < \sum_{i=0}^{n-2} \tlog(n)$, which means we that $a^{n}\sum_{i=0}^{n-2} (n-i)\tlog(n-i) < a^{n}\tlog(n)\sum_{i=0}^{n-2} (n-i)$. We now have the following:
+Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} (\frac{1}{a})^{n-i}(n-i)\tlog(n-i)$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)\tlog(n-i)$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} \tlog(n-i) < \sum_{i=0}^{n-2} \tlog(n)$, which means we that $a^{n}\sum_{i=0}^{n-2} (n-i)\tlog(n-i) < a^{n}\tlog(n)\sum_{i=0}^{n-2} (n-i)$. We now have the following:
 
 \begin{eqnarray*}
 T(n) < a^{n-1} + a^{n}b\tlog(n)\sum_{i=0}^{n-2} (n-i) & = & a^{n-1} + a^{n}b\tlog(n)\Big(\frac{1}{2}(n-1)(n+2)\Big) \\
 & = & a^{n-1} + \frac{a^{n}b\tlog(n)}{2}(n^2 + n - 2)
 \end{eqnarray*}
 
-Therefore, by discarding the lowest terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^n\tlog(n)n^2)$.
+Therefore, by discarding constant and lower order terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^n\tlog(n)n^2)$.
 
 \end{sol}
 
@@ -353,14 +353,14 @@ T(n) & = & a^{n-1}T(n-(n-1)) + a^{n-2}b(n-(n-2))^c + ... + ab(n-1)^c + bn^c \\
 & = & a^{n-1} + b\sum_{i=0}^{n-2} a^i(n-i)^c
 \end{eqnarray*}
 
-Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} \frac{1}{a}^{n-i}(n-i)^c$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)^c$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} (n-i)^c < \sum_{i=0}^{n-2} n^c$, which means we that $a^{n}\sum_{i=0}^{n-2} (n-i)^c < a^{n}\sum_{i=0}^{n-2} n^c$. We now have the following:
+Now we make the observation that $a^n(\frac{1}{a})^{n-i} = a^{i}$, so we can re-write the summation above as $a^{n}\sum_{i=0}^{n-2} (\frac{1}{a})^{n-i}(n-i)^c$, which is less than $a^{n}\sum_{i=0}^{n-2} (n-i)^c$. Furthermore, we make the observation that $\sum_{i=0}^{n-2} (n-i)^c < \sum_{i=0}^{n-2} n^c$, which means we that $a^{n}\sum_{i=0}^{n-2} (n-i)^c < a^{n}\sum_{i=0}^{n-2} n^c$. We now have the following:
 
 \begin{eqnarray*}
 T(n) < a^{n-1} + a^{n}b\sum_{i=0}^{n-2} (n)^c & = & a^{n-1} + a^{n}b\Big( (n-1)n^c \Big) \\
 & = & a^{n-1} + a^{n}b(n^{c+1} - n^c)
 \end{eqnarray*}
 
-Therefore, by discarding the lowest terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^nn^{c+1})$.
+Therefore, by discarding constants and lower order terms in this expression for $T(n)$, we can conclude that $T(n) = O(a^nn^{c+1})$.
 
 \end{sol}
 

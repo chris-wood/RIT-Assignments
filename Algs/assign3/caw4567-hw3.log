@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  10 APR 2012 20:00
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  10 APR 2012 20:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1010,11 +1010,11 @@ Package rerunfilecheck Info: File `caw4567-hw3.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 468.
  ) 
 Here is how much of TeX's memory you used:
- 20905 strings out of 493633
- 381800 string characters out of 3143378
+ 20907 strings out of 493633
+ 381818 string characters out of 3143378
  657558 words of memory out of 3000000
  23679 multiletter control sequences out of 15000+200000
- 14350 words of font info for 84 fonts, out of 3000000 for 9000
+ 14401 words of font info for 85 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  63i,10n,58p,1010b,1059s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -1031,7 +1031,7 @@ live/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texliv
 e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
 /2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
 011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on caw4567-hw3.pdf (9 pages, 176991 bytes).
+Output written on caw4567-hw3.pdf (9 pages, 177352 bytes).
 PDF statistics:
  120 PDF objects out of 1000 (max. 8388607)
  94 compressed objects within 1 object stream

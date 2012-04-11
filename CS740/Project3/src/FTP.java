@@ -51,6 +51,11 @@ public class FTP
 	 * Default timeout of 2000 seconds for connections
 	 */
 	public static final int DEFAULT_TIMEOUT = 2000;
+	
+	/**
+	 * Debug mode flag.
+	 */
+	private boolean debugMode = false;
 
 	/**
 	 * Array of help messages displayed to the user when requested.
@@ -72,30 +77,33 @@ public class FTP
 		"quit       --> Close the connection to the server and terminate",
 		"user login --> Specify the user name (will prompt for password" 
 	};
-
+	
 	/**
-	 * Read commands and execute commands entered from the keyboard. The user
-	 * must specify the address of the server from the command line.
-	 * 
-	 * @param args - command line arguments 
+	 * Helper method that handles debug messages (printing to console, file, etc).
+	 *
+	 * @param message - the debug message to handle.
 	 */
-	public static void main(String args[]) 
+	public void debugPrint(String message)
+	{
+		System.out.println("TFTP DEBUG: " + message);
+	}
+	
+	/**
+	 * Read commands and execute commands entered from the keyboard in order
+	 * to interact with the FTP server specified.
+	 * 
+	 * @param server - the host FTP server to connect to.
+	 */
+	public void processInput(String server)
 	{
 		Scanner in = new Scanner(System.in);
 		boolean eof = false;
 		String input = null;
-
-		// Ensure we have the right amount of command line arguments
-		if (args.length != 1) 
-		{
-			System.err.println("Usage: java FTP server");
-			System.exit(1);
-		}
 		
-		System.out.println("Connecting to: " + args[0]);
+		System.out.println("Connecting to: " + server);
 		FTPClient client = new FTPClient();
 		try {
-			System.out.println(client.open(args[0], DEFAULT_TIMEOUT));
+			System.out.println(client.open(server, DEFAULT_TIMEOUT));
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -124,8 +132,14 @@ public class FTP
 			{
 				int cmd = -1;
 				String argv[] = input.split("\\s+");
+				
+				//debug
+				for (int i = 0; i < argv.length; i++)
+				{
+					System.out.println("argv[" + i + "]: " + argv[i]);
+				}
 
-				// What command was entered?
+				// TODO
 				for (int i = 0; i < COMMANDS.length && cmd == -1; i++) 
 				{
 					if (COMMANDS[i].equalsIgnoreCase(argv[0])) 
@@ -134,7 +148,7 @@ public class FTP
 					}
 				}
 
-				// Execute the command
+				// TODO
 				switch (cmd) 
 				{
 				case ASCII:
@@ -144,19 +158,54 @@ public class FTP
 					break;
 
 				case CD:
+					if (argv.length == 2)
+					{
+						// TODO: make a map of user commands to FTP protocol commands
+						try 
+						{
+							System.out.println(client.sendAndReceiveControl("cwd " + argv[1]));
+						} 
+						catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 					break;
 
 				case CDUP:
+					if (argv.length == 1)
+					{
+						// TODO: make a map of user commands to FTP protocol commands
+						try 
+						{
+							System.out.println(client.sendAndReceiveControl(argv[0]));
+						} 
+						catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 					break;
 
 				case DEBUG:
+					debugMode = !debugMode;
+					if (debugMode)
+					{
+						debugPrint("Debug mode enabled.");
+					}
+					else
+					{
+						debugPrint("Debug mode disabled.");
+					}
 					break;
 
 				case DIR:
-					try {
-						System.out.println(client.sendAndReceiveControl("dir"));
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
+					try 
+					{
+						System.out.println(client.sendAndReceiveControl(argv[0]));
+					} 
+					catch (IOException e) 
+					{
 						e.printStackTrace();
 					}
 					break;
@@ -178,6 +227,17 @@ public class FTP
 					break;
 
 				case PWD:
+					if (argv.length == 1)
+					{
+						try 
+						{
+							System.out.println(client.sendAndReceiveControl(argv[0]));
+						} 
+						catch (IOException e) 
+						{
+							e.printStackTrace();
+						}
+					}
 					break;
 
 				case QUIT:
@@ -185,6 +245,29 @@ public class FTP
 					break;
 
 				case USER:
+					// Parse the user information
+					if (argv.length == 2)
+					{
+						try 
+						{
+							System.out.println(client.sendAndReceiveControl(argv[0] + " " + argv[1]));
+							System.out.print("Enter a password: ");
+							String pw = in.nextLine();
+							
+							// TODO: how should we send the password
+							System.out.println("Sending password: " + pw + " to server...");
+							System.out.println(client.sendAndReceiveControl("pass" + " " + pw));
+						} 
+						catch (IOException e) 
+						{
+							e.printStackTrace();
+						}
+					}
+					else
+					{
+						//System.err.println("Error: ")
+						// TODO: display user command error to user
+					}
 					break;
 
 				default:
@@ -193,6 +276,26 @@ public class FTP
 			}
 		} 
 		while (!eof);
+	}
+
+	/**
+	 * TODO
+	 * 
+	 * @param args - command line arguments 
+	 */
+	public static void main(String args[]) 
+	{
+		// Ensure we have the right amount of command line arguments
+		if (args.length != 1) 
+		{
+			System.err.println("Usage: java FTP server");
+			System.exit(1);
+		}
+		else
+		{
+			FTP ftp = new FTP();
+			ftp.processInput(args[0]);
+		}
 	}
 
 } // FTP

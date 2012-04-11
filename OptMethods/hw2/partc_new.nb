@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    370332,       7365]
-NotebookOptionsPosition[    367757,       7277]
-NotebookOutlinePosition[    368112,       7293]
-CellTagsIndexPosition[    368069,       7290]
+NotebookDataLength[    370301,       7361]
+NotebookOptionsPosition[    367726,       7273]
+NotebookOutlinePosition[    368081,       7289]
+CellTagsIndexPosition[    368038,       7286]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -2459,8 +2459,7 @@ $, False],
                     
                     Plot[
                     SlotSequence[1]]], HoldAll][
-                   0.6 - (1 + 
-                    Global`x (-2. - Global`x^2) (1 + Global`x^2)^
+                   0.6 - (1 + (Global`x (-2. - Global`x^2)) (1 + Global`x^2)^
                     Rational[-3, 2])^(-1) (Global`x + 
                     0.5 (1 + Global`x^2)^Rational[-1, 2] - (1 + Global`x^2)^
                     Rational[1, 2] (1 - 0.5/(1 + Global`x^2))), {Global`x, 
@@ -3600,9 +3599,8 @@ MSPa4561a12e5c1c819a73a00005b12i9d74hc2g84d&s=18", Typeset`asyncpods$$}]];
 
 Cell[CellGroupData[{
 
-Cell["\<\
-plot f(x) = 0.5/Sqrt[1+x^2]-Sqrt[1+x^2] (1-0.5/(1+x^2))+x\
-\>", "WolframAlphaLong",
+Cell["plot f(x) = 0.5/Sqrt[1+x^2]-Sqrt[1+x^2] (1-0.5/(1+x^2))+x", \
+"WolframAlphaLong",
  CellChangeTimes->{{3.543009963746129*^9, 3.543009972277432*^9}}],
 
 Cell[BoxData[
@@ -6057,9 +6055,7 @@ MSPa6891a12e2fa9182a3e3000056194da69bgbfbic&s=3", "version" -> "2.5"},
 
 Cell[CellGroupData[{
 
-Cell["\<\
-f(x) = (x (-x^2-2.))/(x^2+1)^(3/2)+1 where x = 0.6\
-\>", "WolframAlphaLong",
+Cell["f(x) = (x (-x^2-2.))/(x^2+1)^(3/2)+1 where x = 0.6", "WolframAlphaLong",
  CellChangeTimes->{{3.543009089744153*^9, 3.543009095571783*^9}, {
   3.5430091872259274`*^9, 3.543009188521393*^9}}],
 
@@ -6237,7 +6233,7 @@ $, False],
                     
                     Plot[
                     SlotSequence[1]]], HoldAll][
-                   1 + Global`x (-2. - Global`x^2) (1 + Global`x^2)^
+                   1 + (Global`x (-2. - Global`x^2)) (1 + Global`x^2)^
                     Rational[-3, 2], {Global`x, 
                     If[
                     NumericQ[
@@ -7298,78 +7294,77 @@ Cell[774, 28, 114605, 2223, 1289, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[115416, 2256, 209, 4, 37, "WolframAlphaLong"],
-Cell[115628, 2262, 53811, 1033, 528, "Print"]
+Cell[115628, 2262, 53792, 1032, 528, "Print"]
 }, Open  ]],
-Cell[169454, 3298, 92, 1, 27, "Input"],
+Cell[169435, 3297, 92, 1, 27, "Input"],
 Cell[CellGroupData[{
-Cell[169571, 3303, 168, 3, 37, "WolframAlphaLong"],
-Cell[169742, 3308, 14559, 289, 322, "Print"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[184338, 3602, 159, 3, 37, "WolframAlphaLong"],
-Cell[184500, 3607, 98002, 1857, 683, "Print"]
+Cell[169552, 3302, 168, 3, 37, "WolframAlphaLong"],
+Cell[169723, 3307, 14559, 289, 322, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[282539, 5469, 331, 6, 37, "WolframAlphaLong"],
-Cell[282873, 5477, 14594, 290, 322, "Print"]
+Cell[184319, 3601, 153, 2, 37, "WolframAlphaLong"],
+Cell[184475, 3605, 98002, 1857, 683, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[297504, 5772, 598, 19, 55, "WolframAlphaLong"],
-Cell[298105, 5793, 11167, 261, 439, "Print"]
+Cell[282514, 5467, 331, 6, 37, "WolframAlphaLong"],
+Cell[282848, 5475, 14594, 290, 322, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[309309, 6059, 203, 4, 37, "WolframAlphaLong"],
-Cell[309515, 6065, 52555, 1004, 512, "Print"]
-}, Open  ]],
-Cell[362085, 7072, 578, 19, 27, "Input"],
-Cell[CellGroupData[{
-Cell[362688, 7095, 516, 17, 27, "Input"],
-Cell[363207, 7114, 484, 10, 23, "Message"],
-Cell[363694, 7126, 76, 1, 27, "Output"]
-}, Open  ]],
-Cell[363785, 7130, 515, 17, 27, "Input"],
-Cell[364303, 7149, 544, 18, 27, "Input"],
-Cell[364850, 7169, 365, 9, 27, "Input"],
-Cell[CellGroupData[{
-Cell[365240, 7182, 126, 2, 27, "Input"],
-Cell[365369, 7186, 141, 2, 27, "Output"]
+Cell[297479, 5770, 598, 19, 55, "WolframAlphaLong"],
+Cell[298080, 5791, 11167, 261, 439, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[365547, 7193, 127, 2, 27, "Input"],
-Cell[365677, 7197, 91, 1, 27, "Output"]
+Cell[309284, 6057, 195, 2, 37, "WolframAlphaLong"],
+Cell[309482, 6061, 52557, 1004, 512, "Print"]
+}, Open  ]],
+Cell[362054, 7068, 578, 19, 27, "Input"],
+Cell[CellGroupData[{
+Cell[362657, 7091, 516, 17, 27, "Input"],
+Cell[363176, 7110, 484, 10, 23, "Message"],
+Cell[363663, 7122, 76, 1, 27, "Output"]
+}, Open  ]],
+Cell[363754, 7126, 515, 17, 27, "Input"],
+Cell[364272, 7145, 544, 18, 27, "Input"],
+Cell[364819, 7165, 365, 9, 27, "Input"],
+Cell[CellGroupData[{
+Cell[365209, 7178, 126, 2, 27, "Input"],
+Cell[365338, 7182, 141, 2, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[365805, 7203, 128, 2, 27, "Input"],
-Cell[365936, 7207, 105, 2, 27, "Output"]
+Cell[365516, 7189, 127, 2, 27, "Input"],
+Cell[365646, 7193, 91, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[366078, 7214, 128, 2, 27, "Input"],
-Cell[366209, 7218, 88, 1, 27, "Output"]
+Cell[365774, 7199, 128, 2, 27, "Input"],
+Cell[365905, 7203, 105, 2, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[366334, 7224, 134, 2, 27, "Input"],
-Cell[366471, 7228, 90, 1, 27, "Output"]
+Cell[366047, 7210, 128, 2, 27, "Input"],
+Cell[366178, 7214, 88, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[366598, 7234, 131, 2, 27, "Input"],
-Cell[366732, 7238, 107, 2, 27, "Output"]
+Cell[366303, 7220, 134, 2, 27, "Input"],
+Cell[366440, 7224, 90, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[366876, 7245, 131, 2, 27, "Input"],
-Cell[367010, 7249, 90, 1, 27, "Output"]
+Cell[366567, 7230, 131, 2, 27, "Input"],
+Cell[366701, 7234, 107, 2, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[367137, 7255, 132, 2, 27, "Input"],
-Cell[367272, 7259, 91, 1, 27, "Output"]
+Cell[366845, 7241, 131, 2, 27, "Input"],
+Cell[366979, 7245, 90, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[367400, 7265, 133, 2, 27, "Input"],
-Cell[367536, 7269, 106, 2, 27, "Output"]
+Cell[367106, 7251, 132, 2, 27, "Input"],
+Cell[367241, 7255, 91, 1, 27, "Output"]
 }, Open  ]],
-Cell[367657, 7274, 96, 1, 27, "Input"]
+Cell[CellGroupData[{
+Cell[367369, 7261, 133, 2, 27, "Input"],
+Cell[367505, 7265, 106, 2, 27, "Output"]
+}, Open  ]],
+Cell[367626, 7270, 96, 1, 27, "Input"]
 }
 ]
 *)
 
 (* End of internal cache information *)
-
