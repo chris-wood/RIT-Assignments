@@ -112,7 +112,7 @@ public class FTPClient
 		}
 	}
 	
-	public String sendAndReceiveControl(String command) throws IOException
+	public String sendControl(String command) throws IOException
 	{
 		String reply = null;
 		
@@ -120,5 +120,15 @@ public class FTPClient
 		reply = controlIn.readLine();
 		
 		return reply;
+	}
+	
+	public void getFile(String command, String file)
+	{
+		// TODO
+	}
+	
+	public void putFile(String command, String file)
+	{
+		
 	}
 }

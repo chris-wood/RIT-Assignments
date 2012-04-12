@@ -150,22 +150,21 @@ public class FTP
 				
 				// TODO: write method that forwards immediate queries (e.g. ascii, pwd, dir, etc...)
 
-				// TODO
+				// Handle the command appropriately
 				switch (cmd) 
 				{
 				case ASCII:
-					break;
-
 				case BINARY:
-					break;
-
-				case CD:
-					if (argv.length == 2)
+				case CDUP:
+				case DIR:
+				case PWD:
+				case PASSIVE:
+					if (argv.length == 1)
 					{
 						// TODO: make a map of user commands to FTP protocol commands
 						try 
 						{
-							System.out.println(client.sendAndReceiveControl("cwd " + argv[1]));
+							System.out.println(client.sendControl(argv[0]));
 						} 
 						catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -173,14 +172,14 @@ public class FTP
 						}
 					}
 					break;
-
-				case CDUP:
-					if (argv.length == 1)
+					
+				case CD:
+					if (argv.length == 2)
 					{
 						// TODO: make a map of user commands to FTP protocol commands
 						try 
 						{
-							System.out.println(client.sendAndReceiveControl(argv[0]));
+							System.out.println(client.sendControl("cwd " + argv[1]));
 						} 
 						catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -201,18 +200,11 @@ public class FTP
 					}
 					break;
 
-				case DIR:
-					try 
-					{
-						System.out.println(client.sendAndReceiveControl(argv[0]));
-					} 
-					catch (IOException e) 
-					{
-						e.printStackTrace();
-					}
-					break;
-
 				case GET:
+					if (argv.length == 2)
+					{
+						// TODO: invoke GETFILE from FTPclient
+					}
 					break;
 
 				case HELP:
@@ -222,24 +214,7 @@ public class FTP
 					}
 					break;
 
-				case PASSIVE:
-					break;
-
 				case PUT:
-					break;
-
-				case PWD:
-					if (argv.length == 1)
-					{
-						try 
-						{
-							System.out.println(client.sendAndReceiveControl(argv[0]));
-						} 
-						catch (IOException e) 
-						{
-							e.printStackTrace();
-						}
-					}
 					break;
 
 				case QUIT:
@@ -252,13 +227,13 @@ public class FTP
 					{
 						try 
 						{
-							System.out.println(client.sendAndReceiveControl(argv[0] + " " + argv[1]));
+							System.out.println(client.sendControl(argv[0] + " " + argv[1]));
 							System.out.print("Enter a password: ");
 							String pw = in.nextLine();
 							
 							// TODO: how should we send the password
 							System.out.println("Sending password: " + pw + " to server...");
-							System.out.println(client.sendAndReceiveControl("pass" + " " + pw));
+							System.out.println(client.sendControl("pass" + " " + pw));
 						} 
 						catch (IOException e) 
 						{

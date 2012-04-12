@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[    371881,       7410]
-NotebookOptionsPosition[    368906,       7309]
-NotebookOutlinePosition[    369264,       7325]
-CellTagsIndexPosition[    369221,       7322]
+NotebookDataLength[    382821,       7648]
+NotebookOptionsPosition[    379497,       7535]
+NotebookOutlinePosition[    379854,       7551]
+CellTagsIndexPosition[    379811,       7548]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -5446,7 +5446,7 @@ MSPa30011a12d6c30d31ii25000048g571i685cd91ig&s=2", "version" -> "2.5"},
         Typeset`opts$$, Typeset`nonpods$$, Typeset`queryinfo$$, 
         Typeset`sessioninfo$$, Typeset`showpods$$, Typeset`failedpods$$, 
         Typeset`newq$$}]], StandardForm],
-    ImageSizeCache->{673., {407., 412.}},
+    ImageSizeCache->{673., {334., 339.}},
     TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
    DynamicModuleValues:>{},
    Initialization:>If[
@@ -7087,7 +7087,17 @@ Cell[BoxData[
 
  CellChangeTimes->{{3.5430091959376793`*^9, 3.543009230406295*^9}, {
   3.543155689805676*^9, 3.5431556938503313`*^9}, {3.54315575132577*^9, 
-  3.543155751542818*^9}}],
+  3.543155751542818*^9}, {3.543229443638968*^9, 3.5432294455544767`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"OriginalFunc", "[", "0.7941176", "]"}]], "Input",
+ CellChangeTimes->{{3.543229447685251*^9, 3.543229457970083*^9}}],
+
+Cell[BoxData["0.3002700625874083`"], "Output",
+ CellChangeTimes->{3.5432294583600187`*^9}]
+}, Open  ]],
 
 Cell[BoxData[
  RowBox[{
@@ -7108,6 +7118,222 @@ Cell[BoxData[
       RowBox[{"3", "/", "2"}], ")"}]}]}], "+", "1"}]}]], "Input",
  CellChangeTimes->{{3.543009234543578*^9, 3.543009248795804*^9}, {
   3.5431557541112967`*^9, 3.543155754407373*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"OriginalFunc", "[", "0.782797", "]"}]], "Input",
+ CellChangeTimes->{{3.5432296085712767`*^9, 3.543229612876204*^9}}],
+
+Cell[BoxData["0.30028076201662757`"], "Output",
+ CellChangeTimes->{3.5432296132522383`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["is 0.00140036 less than 0.01?", "WolframAlphaLong",
+ CellChangeTimes->{{3.5432298802497187`*^9, 3.543229891682783*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "is 0.00140036 less than 0.01?", 
+   Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Input interpretation", "scanner" -> "Identity", "id" -> 
+     "Input", "position" -> "100", "error" -> "false", "numsubpods" -> "1"}, {
+    
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["minput", {}, {"TrueQ[0.00140036 < 0.01]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             RowBox[{
+               TagBox[
+                StyleBox[
+                "TrueQ", FontFamily -> "Bitstream Vera Sans", 
+                 FontSize -> -1 + Inherited], HoldForm], "[", 
+               
+               RowBox[{
+                "0.00140036000000000001620981127103959807`6.14613969704631", 
+                 "<", "0.01`"}], "]"}], 
+             PolynomialForm[#, TraditionalOrder -> False]& ], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement["dataformats", {}, {"plaintext,minput"}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Result", "scanner" -> "Identity", "id" -> "Result", 
+     "position" -> "200", "error" -> "false", "numsubpods" -> "1", "primary" -> 
+     "true"}, {
+     XMLElement["subpod", {"title" -> "", "primary" -> "true"}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            StyleBox[
+            "True", FontFamily -> "Bitstream Vera Sans", 
+             FontSize -> -1 + Inherited], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {
+        "plaintext,moutput,computabledata,formatteddata"}]}]}], 
+   Typeset`pod3$$ = XMLElement[
+   "pod", {"title" -> "Number line", "scanner" -> "NumberLine", "id" -> 
+     "NumberLine", "position" -> "300", "error" -> "false", "numsubpods" -> 
+     "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement[
+       "minput", {}, {
+        "Graphics[{Tooltip[{PointSize[0.02], RGBColor[0.2472, 0.24, 0.6], \
+Point[{0.00140036, 0.000283788}]}, 0.00140036], Tooltip[{PointSize[0.02], \
+RGBColor[0.6, 0.24, 0.442893], Point[{0.01, 0.000283788}]}, 0.01]}, \
+{ImageSize -> 300., Axes -> {True, False}, AxesStyle -> {}, PlotRange -> \
+{{0.000970378, 0.01043}, Automatic}, AxesOrigin -> {0, 0}}]"}], 
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TemplateBox[{
+              GraphicsBox[{
+                TagBox[
+                 TooltipBox[{
+                   PointSize[0.02], 
+                   RGBColor[0.24720000000000014`, 0.24, 0.6], 
+                   PointBox[{0.00140036, 0.00028378812000000005`}]}, 
+                  "0.00140036`"], Annotation[#, 0.00140036, "Tooltip"]& ], 
+                TagBox[
+                 TooltipBox[{
+                   PointSize[0.02], 
+                   RGBColor[0.6, 0.24, 0.4428931686004542], 
+                   PointBox[{0.01, 0.00028378812000000005`}]}, "0.01`"], 
+                 Annotation[#, 0.01, "Tooltip"]& ]}, {GridLines -> Dynamic[
+                  Map[{{#, 
+                    GrayLevel[0.7]}}& , 
+                   MousePosition[{"Graphics", Graphics}, None]]], 
+                Method -> {"GridLinesInFront" -> True}, ImageSize -> 300., 
+                Axes -> {True, False}, AxesStyle -> {}, 
+                PlotRange -> {{0.0009703779999999992, 0.010429982}, 
+                  Automatic}, AxesOrigin -> {0, 0}}], 
+              StyleBox[
+               RowBox[{
+                 TemplateBox[{
+                   GraphicsBox[{
+                    RGBColor[0.24720000000000014`, 0.24, 0.6], 
+                    DiskBox[
+                    Scaled[{0.5, 0.5}], 0.5]}, ImageSize -> 13, 
+                    BaselinePosition -> (Center -> Center)], 
+                   StyleBox[
+                   "0.00140036`", LinebreakAdjustments -> {1, 100, 1, 0, 100},
+                     LineIndent -> 0, {
+                    FontFamily -> "Verdana", FontSize -> 10}, 
+                    GrayLevel[0.5], StripOnInput -> False]}, "Row", 
+                  DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                  InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", " "}], "]"}]& )], 
+                 StyleBox[
+                  RowBox[{"\[NoBreak]", 
+                    PaneBox[
+                    "\" | \"", BaselinePosition -> Baseline, BaseStyle -> 
+                    GrayLevel[0.6]]}], AutoSpacing -> True], 
+                 TemplateBox[{
+                   GraphicsBox[{
+                    RGBColor[0.6, 0.24, 0.4428931686004542], 
+                    DiskBox[
+                    Scaled[{0.5, 0.5}], 0.5]}, ImageSize -> 13, 
+                    BaselinePosition -> (Center -> Center)], 
+                   StyleBox[
+                   "0.01`", LinebreakAdjustments -> {1, 100, 1, 0, 100}, 
+                    LineIndent -> 0, {
+                    FontFamily -> "Verdana", FontSize -> 10}, 
+                    GrayLevel[0.5], StripOnInput -> False]}, "Row", 
+                  DisplayFunction -> (RowBox[{#, " ", #2}]& ), 
+                  InterpretationFunction -> (RowBox[{
+                    StyleBox[
+                    "Row", FontFamily -> "Bitstream Vera Sans", 
+                    FontSize -> -1 + Inherited], "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{#, ",", #2}], "}"}], ",", " "}], "]"}]& )]}], 
+               LinebreakAdjustments -> {1, 10, 0, 0, 100}, LineIndent -> 0]}, 
+             "Labeled", DisplayFunction -> (FormBox[
+               GridBox[{{
+                  TagBox[
+                   ItemBox[
+                    PaneBox[
+                    TagBox[#, "SkipImageSizeLevel"], 
+                    Alignment -> {Center, Baseline}, BaselinePosition -> 
+                    Baseline], DefaultBaseStyle -> "Labeled"], 
+                   "SkipImageSizeLevel"]}, {
+                  ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+                GridBoxAlignment -> {
+                 "Columns" -> {{Center}}, "Rows" -> {{Center}}}, AutoDelete -> 
+                False, GridBoxItemSize -> {
+                 "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+                BaselinePosition -> {1, 1}], TraditionalForm]& ), 
+             InterpretationFunction -> (RowBox[{
+                StyleBox[
+                "Labeled", FontFamily -> "Bitstream Vera Sans", 
+                 FontSize -> -1 + Inherited], "[", 
+                RowBox[{#, ",", #2, ",", 
+                  StyleBox[
+                  "Bottom", FontFamily -> "Bitstream Vera Sans", 
+                   FontSize -> -1 + Inherited]}], "]"}]& )], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement["dataformats", {}, {"minput"}]}]}], Typeset`aux1$$ = {
+   True, False, {False}, True}, Typeset`aux2$$ = {True, False, {False}, True},
+    Typeset`aux3$$ = {True, False, {False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "3", "datatypes" -> 
+    "", "timedout" -> "", "timedoutpods" -> "", "timing" -> "0.678", 
+    "parsetiming" -> "0.489", "parsetimedout" -> "false", "recalculate" -> "",
+     "id" -> "MSPa12131a137d9hd761102100005ca158i0cab2hd1a", "host" -> 
+    "http://www4a.wolframalpha.com", "server" -> "3", "related" -> 
+    "http://www4a.wolframalpha.com/api/v2/relatedQueries.jsp?id=\
+MSPa12141a137d9hd761102100004gf1ed86d0ha79b4&s=3", "version" -> "2.5"}, 
+   Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2012, 4, 12, 10, 31, 33.198469`8.273693036146785}, "Line" -> 
+    118, "SessionID" -> 23220329206144724971}, Typeset`showpods$$ = {1, 2, 3},
+    Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = False, 
+   Typeset`newq$$ = "is 0.00140036 less than 0.01?"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$}, Typeset`chosen$$, 
+        Typeset`open$$, Typeset`elements$$, Typeset`q$$, Typeset`opts$$, 
+        Typeset`nonpods$$, Typeset`queryinfo$$, Typeset`sessioninfo$$, 
+        Typeset`showpods$$, Typeset`failedpods$$, Typeset`newq$$}]], 
+     StandardForm],
+    ImageSizeCache->{673., {118., 123.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$}], 
+       Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.543229893462104*^9}]
+}, Open  ]],
 
 Cell[BoxData[
  RowBox[{
@@ -7308,7 +7534,7 @@ Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.5430106557428017`*^9, 3.5430106780843983`*^9}}]
 },
 WindowSize->{740, 756},
-WindowMargins->{{Automatic, 191}, {Automatic, 43}},
+WindowMargins->{{64, Automatic}, {23, Automatic}},
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
 2011)",
 StyleDefinitions->"Default.nb"
@@ -7339,7 +7565,7 @@ Cell[169723, 3307, 14559, 289, 322, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[184319, 3601, 153, 2, 37, "WolframAlphaLong"],
-Cell[184475, 3605, 98002, 1857, 829, "Print"]
+Cell[184475, 3605, 98002, 1857, 683, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[282514, 5467, 331, 6, 37, "WolframAlphaLong"],
@@ -7353,65 +7579,77 @@ Cell[CellGroupData[{
 Cell[309284, 6057, 195, 2, 37, "WolframAlphaLong"],
 Cell[309482, 6061, 52557, 1004, 512, "Print"]
 }, Open  ]],
-Cell[362054, 7068, 681, 21, 27, "Input"],
-Cell[362738, 7091, 571, 18, 27, "Input"],
-Cell[363312, 7111, 515, 17, 27, "Input"],
-Cell[363830, 7130, 596, 19, 27, "Input"],
-Cell[364429, 7151, 425, 10, 27, "Input"],
+Cell[362054, 7068, 729, 21, 27, "Input"],
 Cell[CellGroupData[{
-Cell[364879, 7165, 181, 3, 27, "Input"],
-Cell[365063, 7170, 237, 4, 27, "Output"]
+Cell[362808, 7093, 139, 2, 27, "Input"],
+Cell[362950, 7097, 90, 1, 27, "Output"]
+}, Open  ]],
+Cell[363055, 7101, 571, 18, 27, "Input"],
+Cell[CellGroupData[{
+Cell[363651, 7123, 140, 2, 27, "Input"],
+Cell[363794, 7127, 91, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[365337, 7179, 129, 2, 27, "Input"],
-Cell[365469, 7183, 112, 1, 27, "Output"]
+Cell[363922, 7133, 125, 1, 37, "WolframAlphaLong"],
+Cell[364050, 7136, 9838, 198, 251, "Print"]
+}, Open  ]],
+Cell[373903, 7337, 515, 17, 27, "Input"],
+Cell[374421, 7356, 596, 19, 27, "Input"],
+Cell[375020, 7377, 425, 10, 27, "Input"],
+Cell[CellGroupData[{
+Cell[375470, 7391, 181, 3, 27, "Input"],
+Cell[375654, 7396, 237, 4, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[365618, 7189, 128, 2, 27, "Input"],
-Cell[365749, 7193, 90, 1, 27, "Output"]
-}, Open  ]],
-Cell[365854, 7197, 113, 1, 27, InheritFromParent],
-Cell[CellGroupData[{
-Cell[365992, 7202, 129, 2, 27, "Input"],
-Cell[366124, 7206, 127, 2, 27, "Output"]
+Cell[375928, 7405, 129, 2, 27, "Input"],
+Cell[376060, 7409, 112, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[366288, 7213, 130, 2, 27, "Input"],
-Cell[366421, 7217, 91, 1, 27, "Output"]
+Cell[376209, 7415, 128, 2, 27, "Input"],
+Cell[376340, 7419, 90, 1, 27, "Output"]
+}, Open  ]],
+Cell[376445, 7423, 113, 1, 27, "Input"],
+Cell[CellGroupData[{
+Cell[376583, 7428, 129, 2, 27, "Input"],
+Cell[376715, 7432, 127, 2, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[366549, 7223, 179, 3, 27, "Input"],
-Cell[366731, 7228, 113, 1, 27, "Output"]
+Cell[376879, 7439, 130, 2, 27, "Input"],
+Cell[377012, 7443, 91, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[366881, 7234, 179, 3, 27, "Input"],
-Cell[367063, 7239, 127, 2, 27, "Output"]
+Cell[377140, 7449, 179, 3, 27, "Input"],
+Cell[377322, 7454, 113, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[367227, 7246, 128, 2, 27, "Input"],
-Cell[367358, 7250, 88, 1, 27, "Output"]
+Cell[377472, 7460, 179, 3, 27, "Input"],
+Cell[377654, 7465, 127, 2, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[367483, 7256, 134, 2, 27, "Input"],
-Cell[367620, 7260, 90, 1, 27, "Output"]
+Cell[377818, 7472, 128, 2, 27, "Input"],
+Cell[377949, 7476, 88, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[367747, 7266, 131, 2, 27, "Input"],
-Cell[367881, 7270, 107, 2, 27, "Output"]
+Cell[378074, 7482, 134, 2, 27, "Input"],
+Cell[378211, 7486, 90, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[368025, 7277, 131, 2, 27, "Input"],
-Cell[368159, 7281, 90, 1, 27, "Output"]
+Cell[378338, 7492, 131, 2, 27, "Input"],
+Cell[378472, 7496, 107, 2, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[368286, 7287, 132, 2, 27, "Input"],
-Cell[368421, 7291, 91, 1, 27, "Output"]
+Cell[378616, 7503, 131, 2, 27, "Input"],
+Cell[378750, 7507, 90, 1, 27, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[368549, 7297, 133, 2, 27, "Input"],
-Cell[368685, 7301, 106, 2, 27, "Output"]
+Cell[378877, 7513, 132, 2, 27, "Input"],
+Cell[379012, 7517, 91, 1, 27, "Output"]
 }, Open  ]],
-Cell[368806, 7306, 96, 1, 27, "Input"]
+Cell[CellGroupData[{
+Cell[379140, 7523, 133, 2, 27, "Input"],
+Cell[379276, 7527, 106, 2, 27, "Output"]
+}, Open  ]],
+Cell[379397, 7532, 96, 1, 27, "Input"]
 }
 ]
 *)
