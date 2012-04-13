@@ -154,18 +154,61 @@ public class FTP
 				switch (cmd) 
 				{
 				case ASCII:
+					try {
+						client.setTransferType(FTPClient.TransferType.ASCII);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
 				case BINARY:
-				case CDUP:
+					try {
+						client.setTransferType(FTPClient.TransferType.BINARY);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					break;
+					
 				case DIR:
-				case PWD:
+					if (argv.length == 1)
+					{
+						// TODO: make a map of user commands to FTP protocol commands
+						try
+						{
+							System.out.println(client.sendControl("list"));
+						}
+						catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					break;
+					
 				case PASSIVE:
 					if (argv.length == 1)
 					{
 						// TODO: make a map of user commands to FTP protocol commands
-						try 
+						try
+						{
+							client.toggleTransferMode();
+						}
+						catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					break;
+					
+				case CDUP:
+				case PWD:
+					if (argv.length == 1)
+					{
+						// TODO: make a map of user commands to FTP protocol commands
+						try
 						{
 							System.out.println(client.sendControl(argv[0]));
-						} 
+						}
 						catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -203,7 +246,12 @@ public class FTP
 				case GET:
 					if (argv.length == 2)
 					{
-						// TODO: invoke GETFILE from FTPclient
+						try {
+							client.getFile(argv[0], argv[1]);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 					break;
 
@@ -215,6 +263,7 @@ public class FTP
 					break;
 
 				case PUT:
+					System.err.println("Error: command not supported");
 					break;
 
 				case QUIT:
