@@ -102,14 +102,15 @@ public class FTP
 		
 		System.out.println("Connecting to: " + server);
 		FTPClient client = new FTPClient();
+		System.out.println("here we go!");
 		try {
-			System.out.println(client.open(server, DEFAULT_TIMEOUT));
-		} catch (UnknownHostException e1) {
+			System.out.println(client.connect(server, DEFAULT_TIMEOUT));
+		} catch (UnknownHostException e2) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
+			e2.printStackTrace();
+		} catch (IOException e2) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e2.printStackTrace();
 		}
 
 		// Begin accepting and processing user commands to interact
@@ -174,11 +175,9 @@ public class FTP
 					if (argv.length == 1)
 					{
 						// TODO: make a map of user commands to FTP protocol commands
-						try
-						{
-							System.out.println(client.sendControl("list"));
-						}
-						catch (IOException e) {
+						try {
+							System.out.println(client.sendRequest("list", null));
+						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
@@ -205,11 +204,9 @@ public class FTP
 					if (argv.length == 1)
 					{
 						// TODO: make a map of user commands to FTP protocol commands
-						try
-						{
-							System.out.println(client.sendControl(argv[0]));
-						}
-						catch (IOException e) {
+						try {
+							System.out.println(client.sendCommand(argv[0]));
+						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
@@ -220,11 +217,9 @@ public class FTP
 					if (argv.length == 2)
 					{
 						// TODO: make a map of user commands to FTP protocol commands
-						try 
-						{
-							System.out.println(client.sendControl("cwd " + argv[1]));
-						} 
-						catch (IOException e) {
+						try {
+							System.out.println(client.sendCommand("cwd " + argv[1]));
+						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
@@ -246,12 +241,7 @@ public class FTP
 				case GET:
 					if (argv.length == 2)
 					{
-						try {
-							client.getFile(argv[0], argv[1]);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						//client.getFile(argv[0], argv[1]);
 					}
 					break;
 
@@ -274,19 +264,29 @@ public class FTP
 					// Parse the user information
 					if (argv.length == 2)
 					{
-						try 
+						//try 
 						{
-							System.out.println(client.sendControl(argv[0] + " " + argv[1]));
+							try {
+								System.out.println(client.sendCommand(argv[0] + " " + argv[1]));
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							System.out.print("Enter a password: ");
 							String pw = in.nextLine();
 							
 							// TODO: how should we send the password
 							System.out.println("Sending password: " + pw + " to server...");
-							System.out.println(client.sendControl("pass" + " " + pw));
+							try {
+								System.out.println(client.sendCommand("pass" + " " + pw));
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						} 
-						catch (IOException e) 
+						//catch (IOException e) 
 						{
-							e.printStackTrace();
+							//e.printStackTrace();
 						}
 					}
 					else
