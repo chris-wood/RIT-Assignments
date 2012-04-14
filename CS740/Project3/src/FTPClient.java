@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 /**
  * TODO
@@ -51,28 +52,28 @@ public class FTPClient
 	
 	public String sendCommand(String command) throws IOException
 	{
-		return cProcess.sendControl(command);
+		System.out.println("DEBUG: sending control: " + command);
+		cProcess.sendControl(command);
+		return cProcess.receiveControl();
 	}
 	
 	public String sendRequest(String command, String[] arguments) throws IOException
 	{
-		System.out.println("Sending request: " + command);
+		System.out.println("DEBUG: Sending request: " + command);
 		
 		// Handle the data connection logic first
-		if (!dProcess.dataConnectionReady)
-		{
 		switch (tMode)
 		{
 		case ACTIVE:
 			System.out.println("DEBUG: Establishing active connection");
-			dProcess.establishConnection(FTPClient.TransferMode.ACTIVE);
+			dProcess.establishConnection(FTPClient.TransferMode.ACTIVE, 0);
 			break;
 		case PASSIVE:
 			System.out.println("DEBUG: Establishing passive connection");
-			System.out.println(cProcess.sendControl("pasv"));
-			dProcess.establishConnection(FTPClient.TransferMode.PASSIVE);
+			int port = cProcess.sendPassiveCommand();
+			System.out.println("DEBUG: FTP server returned with port: " + port);
+			dProcess.establishConnection(FTPClient.TransferMode.PASSIVE, port);
 			break;
-		}
 		}
 		
 		// Send the command to the FTP server
@@ -87,8 +88,22 @@ public class FTPClient
 		}
 		builder.append(TELNET_END);
 		
+		// Send the request command
+		cProcess.sendControl(builder.toString());
+		System.out.println("DEBUG: " + cProcess.receiveControl());
+		System.out.println("DEBUG: " + cProcess.receiveControl());
 		
-		return cProcess.sendControl(builder.toString());
+		// Retrieve the data
+		System.out.println("DEBUG: Data retrieved: ");
+		ArrayList<Byte> data = dProcess.readStream();
+		builder = new StringBuilder();
+		for (Byte b : data)
+		{
+			builder.append((char)b.byteValue());
+		}
+		System.out.println(builder.toString());
+		
+		return builder.toString();
 	}
 	
 	public void toggleTransferMode() throws IOException

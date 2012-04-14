@@ -8,6 +8,8 @@
 \usepackage{fullpage}
 \usepackage{pseudocode}
 
+\newcommand{\field}[1]{\mathbb{#1}} %requires amsfonts
+
 %\setlength{\parindent}{0pt}
 
 \linespread{1.2}
@@ -16,6 +18,26 @@
 \arltitle{4040-849 Optimization Methods}{Project Proposal}
 
 \begin{abstract}
+Cryptographically secure block ciphers are based around Shannon's principles of confusion and diffusion (CITE HERE). It is important to optimize these characteristics in order to make ciphers less susceptible to linear and differential cryptanalysis. The most traditional way to integrate mathematical structures that improve the confusion of a block cipher is to use a substitution box  (or simply, an S-box). Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis. In this work, we attempt to formulate the problem of cryptographically strong S-box designs into an integer programming problem that can be optimized to yield the highest confusion dividends in resulting cipher implementations.
+\end{abstract}
+
+\section{Problem Statement}
+
+Mathematically, a S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In cryptographic terms, such a function $f$ must be bijective in order to avoid bias towards any specific output element in the field. 
+
+\begin{define}
+Let $S$ be an S-Box with $m = |S|$ input values. Let $n$ be the number of elements $x$ that satisfy $S(x \oplus \Delta_i) = S(x) \oplus \Delta_o$. Then, $\frac{n}{m}$ is the \emph{differential probability p} of the characteristic $S_D(\Delta_i \to \Delta_o)$.
+\end{define}
+
+\begin{define}
+Branch number
+\end{define}
+
+\begin{define}
+Strict avalanche criterion
+\end{define}
+
+\begin{comment}
 Key distribution is a vital part of wireless ad-hoc communication networks that need to transfer text, audio, and video data both securely and efficiently. Traditionally, key agreement protocols are based upon the commonly known Diffie Hellman key exchange protocol, in which two (or more) parties may exchange public information in order to establish a common key. The problem with this approach is that it is very computationally inefficient, and doesn't lend itself directly to the problem of establishing a single common group key among multiple parties in a group. This is especially true in wireless ad-hoc networks where the nodes themselves have constrained processing and power resources.
 
 For this reason, key agreement schemes for this specific type of network typically rely on pre-placed information that can be easily distributed to members of the group in order to establish a common group key. Therefore, at the physical layer of the network, where the group topology is represented as a single spanning tree, it is important that the latency of sending data between two nodes is as small as possible in order to ensure the fastest transmission of data. Depending on the radio propagation model and specific waveform used to propagate the digital data via an analog signal to each of the nodes, the structure of this tree can have a drastic impact on the time it takes to distribute a specific piece of data from node to every other node in the group.
@@ -42,7 +64,6 @@ Therefore, the purpose of this project is to minimize the time it takes this dat
 % all node children <= max number of children
 % #used TDAM slots <= #available TDMA slots
 % #
-
-\end{abstract}
+\end{comment}
 
 \end{document}

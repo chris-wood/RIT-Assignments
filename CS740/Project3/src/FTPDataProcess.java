@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
 
@@ -68,7 +69,7 @@ public class FTPDataProcess extends Thread
 
 	// IF PASSIVE, WE LISTENS AND SERVER ESTABLISH, IF ACTIVE, ESTABLISH
 	
-	public void establishConnection(FTPClient.TransferMode mode)
+	public void establishConnection(FTPClient.TransferMode mode, int port)
 	{
 		switch (mode)
 		{
@@ -80,7 +81,7 @@ public class FTPDataProcess extends Thread
 			try 
 			{
 				System.out.println("DEBUG: attempting to connect directly to server.");
-				passiveSocket = new Socket(client.host, 25); // parse resulting stuff!
+				passiveSocket = new Socket(client.host, port); // parse resulting stuff!
 				System.out.println("DEBUG: connection returned");
 				dataOut = new DataOutputStream(passiveSocket.getOutputStream());
 				dataIn = new DataInputStream(passiveSocket.getInputStream());
@@ -96,6 +97,19 @@ public class FTPDataProcess extends Thread
 			}
 			break;
 		}
+	}
+	
+	public ArrayList<Byte> readStream() throws IOException
+	{
+		ArrayList<Byte> data = new ArrayList<Byte>();
+		
+		int dataByte = 0;
+		while ((dataByte = dataIn.read()) != -1)
+		{
+			data.add((byte)dataByte);
+		}
+		
+		return data;
 	}
 	
 }

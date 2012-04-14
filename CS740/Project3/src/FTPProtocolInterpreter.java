@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -43,32 +44,15 @@ public class FTPProtocolInterpreter
 	{	
 		controlSocket = new Socket(host, FTPClient.FTP_PORT);
 		controlOut = new DataOutputStream(controlSocket.getOutputStream());
-		controlIn = new BufferedReader(new 
-				InputStreamReader(controlSocket.getInputStream()));
-		
-		//dataSocket = new Socket(host, FTP_PORT);
-		//dataOut = new DataOutputStream(dataSocket.getOutputStream());
-		//dataIn = new DataInputStream(dataSocket.getInputStream());
+		controlIn = new BufferedReader(new InputStreamReader(controlSocket.getInputStream()));
 		
 		// Get the initial reply from the server (if any) and return it
 		StringBuilder reply = new StringBuilder();
-		String line = null;
 		System.out.println("DEBUG: getting greeting.");
-		// TODO: turn this into a handy helper method (isStreamReady)
-		controlIn.readLine(); // TODO TODO TODO TODO WTF WTF WTF WTF WTF
-		while (controlIn.ready())
-		{
-			line = controlIn.readLine();
-			reply.append(line + FTPClient.TELNET_END);
-		}
-		System.out.println(reply.toString());
+		System.out.println(receiveControl());
 		
 		// Save the host name for future reference
 		client.host = host;
-		
-		// Set up the transfer mode and type (defaults!)
-		// TODO: build logic into the FTP client to make it smarter about sending this command!
-		//toggleTransferMode(TransferMode.PASSIVE);
 		
 		return ""; // TODO: remove this return type
 	}
@@ -88,23 +72,34 @@ public class FTPProtocolInterpreter
 				controlSocket.isConnected())
 		{
 			controlSocket.close();
-			//dataSocket.close();
 			controlSocket = null;
-			//dataSocket = null;
 		}
 	}
 	
-	public String sendControl(String command) throws IOException
-	{	
+	public void sendControl(String command) throws IOException
+	{
+		System.out.println("DEBUG: sending control: " + command);
 		controlOut.writeBytes(command + FTPClient.TELNET_END);
-		
-		// Read in the server response
-		// TODO: make this into a helper method to reduce code everywhere
+		//controlOut.flush();
+	}
+	
+	public String receiveControl() throws IOException
+	{
+		// Reconstruct the input, byte by byte
 		StringBuilder builder = new StringBuilder();
-		builder.append(controlIn.readLine());
-		while (controlIn.ready())
+		try 
 		{
-			builder.append(controlIn.readLine() + "\n");
+			String line;
+			do 
+			{
+				line = controlIn.readLine();
+				builder.append(line + "\n");
+			}
+			while (controlIn.ready());
+		}
+		catch (EOFException e)
+		{
+			// Do nothing, we have reached the end of the stream
 		}
 		
 		return builder.toString();
@@ -115,14 +110,7 @@ public class FTPProtocolInterpreter
 		// Ask the server for this specific file
 		// TODO: use command as a map
 		controlOut.writeBytes("retrieve" + " " + file + FTPClient.TELNET_END);
-		
-		StringBuilder builder = new StringBuilder();
-		builder.append(controlIn.readLine());
-		while (controlIn.ready())
-		{
-			builder.append(controlIn.readLine() + "\n");
-		}
-		System.out.println(builder.toString());
+		System.out.println(receiveControl());
 		
 		// Now, establish a connection!
 		
@@ -130,7 +118,7 @@ public class FTPProtocolInterpreter
 		switch (client.tType)
 		{
 		case ASCII:
-			builder = new StringBuilder();
+			StringBuilder builder = new StringBuilder();
 			// TODO: do something here...
 			break;
 			
@@ -140,8 +128,43 @@ public class FTPProtocolInterpreter
 		}
 	}
 	
+	public int sendPassiveCommand() throws IOException
+	{
+		// Send the command to switch to passive mode
+		controlOut.writeBytes("pasv" + FTPClient.TELNET_END);
+		controlOut.flush();
+		
+		// Retrieve the response and parse it 
+		String result = receiveControl();
+		System.out.println("DEBUG: passive command response: " + result);
+		int startIndex = result.indexOf('(') + 1;
+		int endIndex = result.indexOf(')', startIndex); 
+		String data = result.substring(startIndex, endIndex);
+		String[] splits = data.split(",");
+		
+		// Return the resulting port number to use
+		return buildPort(splits[4], splits[5]);
+	}
+	
 	public void putFile(String command, String file)
 	{
 		System.err.println("Error: unsupported connection.");
+	}
+	
+	private int buildPort(String v1, String v2)
+	{
+		int port = 0;
+		
+		try 
+		{
+			port = (Integer.parseInt(v1) * 256) + Integer.parseInt(v2);
+		}
+		catch (NumberFormatException e)
+		{
+			System.err.println("Error: invalid port returned from host FTP server.");
+			port = -1;
+		}
+		
+		return port;
 	}
 }

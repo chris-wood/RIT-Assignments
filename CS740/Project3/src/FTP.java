@@ -100,9 +100,9 @@ public class FTP
 		boolean eof = false;
 		String input = null;
 		
-		System.out.println("Connecting to: " + server);
+		System.out.println("DEBUG: Connecting to: " + server);
 		FTPClient client = new FTPClient();
-		System.out.println("here we go!");
+		System.out.println("DEBUG: Connection successful.");
 		try {
 			System.out.println(client.connect(server, DEFAULT_TIMEOUT));
 		} catch (UnknownHostException e2) {
@@ -267,7 +267,7 @@ public class FTP
 						//try 
 						{
 							try {
-								System.out.println(client.sendCommand(argv[0] + " " + argv[1]));
+								System.out.println("DEBUG: received: " + client.sendCommand(argv[0] + " " + argv[1]));
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
