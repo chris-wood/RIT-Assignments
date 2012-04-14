@@ -25,17 +25,59 @@ Cryptographically secure block ciphers are based around Shannon's principles of 
 
 Mathematically, a S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In cryptographic terms, such a function $f$ must be bijective in order to avoid bias towards any specific output element in the field. 
 
+%TODO: http://www.waset.org/journals/waset/v48/v48-24.pdf
+
 \begin{define}
-Let $S$ be an S-Box with $m = |S|$ input values. Let $n$ be the number of elements $x$ that satisfy $S(x \oplus \Delta_i) = S(x) \oplus \Delta_o$. Then, $\frac{n}{m}$ is the \emph{differential probability p} of the characteristic $S_D(\Delta_i \to \Delta_o)$.
+The Hamming weight of an element $a \in \field{F}_2^n$ is defined as wt$(x) = \sum x_i$.
+\end{define}
+
+%\begin{define}
+%Let $S$ be an S-Box with $m = |S|$ input values. Let $n$ be the number of elements $x$ that satisfy $S(x %\oplus \Delta_i) = S(x) \oplus \Delta_o$. Then, $\frac{n}{m}$ is the \emph{differential probability p} of the %characteristic $S_D(\Delta_i \to \Delta_o)$.
+%\end{define}
+
+\begin{define}
+The \emph{branch number} of an $n \times n$-bit S-Box is
+\begin{eqnarray*}
+BN = \text{min}_{a, b\not=a}(\text{wt}(a \oplus b) + \text{wt}(S(a) \oplus S(b))),
+\end{eqnarray*}
+where $a, b \in \field{F}_2^n$.
 \end{define}
 
 \begin{define}
-Branch number
+A function $f : \field{F}_2^n \to \field{F}_2^n$ exhibits the avalanche effect if and only if 
+\begin{eqnarray*}
+\sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus c_{i}^{n})) = n2^{n-1},
+\end{eqnarray*}
+for all $i (1 \leq i \leq n)$, where $c_{i}^{n} = [0, 0, ..., 1, ..., 0]$ (where a $1$ is in the $n$th position of the vector of cardinality $n$.
 \end{define}
 
 \begin{define}
-Strict avalanche criterion
+A function $f : \field{F}_2^n \to \field{F}_2^n$ satisfies the Strong Avalanche Critertion (SAC) if for all $i (1 \leq i \leq n)$ the following equations hold:
+\begin{eqnarray*}
+\sum_{x \in \field{F}_2^n} f(x) \oplus f(x \oplus c_i^n) = (2^{n-1}, 2^{n-1}, ..., 2^{n-1})
+\end{eqnarray*}
+This simply means that the $f(x) \oplus f(x \oplus c_i^n)$ is balanced for every element in $\field{F}_2^n$ with Hamming distance of $1$. 
 \end{define}
+
+Ideal construction of cryptographic primitives will utilize internal boolean functions that satisfy the SAC criterion because they result in high levels of confusion, thus thwarting attempts by an attacker to statistically relate the ciphertext of a cipher to the key that was used for encryption or decryption. However, in order to prevent differential cryptanalysis attacks, it is important that these boolean functions also have a high branch number (CITE PAPER ABOVE).
+
+(CITE 65,66 from thesis below)
+Strong S-Boxes also exhibit strong non-linearity properties. It has been shown by Rueppel that the nonlinearity of a boolean function can be measured by the Hamming distance to the set of affine transformations and is related to the Walsh transform $\hat{F}$ of $\hat{f} : \field{F}_2^n \to \{-1, 1\}$ according to:
+\begin{eqnarray*}
+\delta(f)  = 2^{n-1} - \frac{1}{2}\text{max}_w|\hat{F}(w)|,
+\end{eqnarray*}
+where $\hat{F}(w)$ is the Walsh transformation defined as follows:
+\begin{eqnarray*}
+W_f(a) = \sum_{x \in \field{F}_2^n} (-1)^{f(x) + <a,x>},
+\end{eqnarray*}
+where $<a,x>$ is the scalar product of $a$ and $x$ (if they are thought of as vectors).
+%\begin{define}
+%TODO: nonlinearity Walsh transform 
+%\end{define}
+
+It is easy to see that satisfaction of the SAC criterion for a boolean function, improving its branch number, and improving its non-linearity are not mutually exclusive tasks. Therefore, it is natural to reduce the problem of finding an optimal S-Box design based on these conditions to an integer programming problem that seeks to optimize each one of these construction dimensions.
+
+TODO: continue
 
 \begin{comment}
 Key distribution is a vital part of wireless ad-hoc communication networks that need to transfer text, audio, and video data both securely and efficiently. Traditionally, key agreement protocols are based upon the commonly known Diffie Hellman key exchange protocol, in which two (or more) parties may exchange public information in order to establish a common key. The problem with this approach is that it is very computationally inefficient, and doesn't lend itself directly to the problem of establishing a single common group key among multiple parties in a group. This is especially true in wireless ad-hoc networks where the nodes themselves have constrained processing and power resources.
