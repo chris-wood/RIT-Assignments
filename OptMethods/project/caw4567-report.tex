@@ -15,25 +15,25 @@
 \linespread{1.2}
 
 \begin{document}
-\arltitle{4040-849 Optimization Methods}{Project Proposal}
+\arltitle{4040-849 Optimization Methods}{Project Proposal: Optimizing Boolean Function Constructions}
 
 \begin{abstract}
-Cryptographically secure block ciphers are based around Shannon's principles of confusion and diffusion (CITE HERE). It is important to optimize these characteristics in order to make ciphers less susceptible to linear and differential cryptanalysis. The most traditional way to integrate mathematical structures that improve the confusion of a block cipher is to use a substitution box  (or simply, an S-box). Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis. In this work, we attempt to formulate the problem of cryptographically strong S-box designs into an integer programming problem that can be optimized to yield the highest confusion dividends in resulting cipher implementations.
+Cryptographically secure block ciphers are based around Shannon's principles of confusion and diffusion \cite{Kim90astudy}. It is important to optimize these characteristics in order to make ciphers less susceptible to linear and differential cryptanalysis. The most traditional way to integrate mathematical structures that improve the confusion of a block cipher is to use a substitution box  (or simply, an S-box). Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis. In this work, we attempt to formulate the problem of cryptographically strong S-box designs into an integer programming problem that can be optimized to yield the highest confusion dividends in resulting cipher implementations.
 \end{abstract}
 
 \section{Problem Statement}
 
-Mathematically, a S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In cryptographic terms, such a function $f$ must be bijective in order to avoid bias towards any specific output element in the field. 
+Mathematically, an S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In cryptographic terms, such a function $f$ must be bijective in order to avoid bias towards any specific output element in the field. We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes \cite{Mar_newanalysis}.
 
-%TODO: http://www.waset.org/journals/waset/v48/v48-24.pdf
+%TODO: http://www.waset.org/journals/waset/v48/v48-24.pdf && thesis work
 
 \begin{define}
 The Hamming weight of an element $a \in \field{F}_2^n$ is defined as wt$(x) = \sum x_i$.
 \end{define}
 
-%\begin{define}
-%Let $S$ be an S-Box with $m = |S|$ input values. Let $n$ be the number of elements $x$ that satisfy $S(x %\oplus \Delta_i) = S(x) \oplus \Delta_o$. Then, $\frac{n}{m}$ is the \emph{differential probability p} of the %characteristic $S_D(\Delta_i \to \Delta_o)$.
-%\end{define}
+\begin{define}
+Let $S$ be an S-Box with $m = |S|$ input values. Let $n$ be the number of elements $x$ that satisfy $S(x \oplus \Delta_i) = S(x) \oplus \Delta_o$. Then, $\frac{n}{m}$ is the \emph{differential probability p} of the characteristic $S_D(\Delta_i \to \Delta_o)$.
+\end{define}
 
 \begin{define}
 The \emph{branch number} of an $n \times n$-bit S-Box is
@@ -59,10 +59,9 @@ A function $f : \field{F}_2^n \to \field{F}_2^n$ satisfies the Strong Avalanche 
 This simply means that the $f(x) \oplus f(x \oplus c_i^n)$ is balanced for every element in $\field{F}_2^n$ with Hamming distance of $1$. 
 \end{define}
 
-Ideal construction of cryptographic primitives will utilize internal boolean functions that satisfy the SAC criterion because they result in high levels of confusion, thus thwarting attempts by an attacker to statistically relate the ciphertext of a cipher to the key that was used for encryption or decryption. However, in order to prevent differential cryptanalysis attacks, it is important that these boolean functions also have a high branch number (CITE PAPER ABOVE).
+Ideal construction of cryptographic primitives will utilize internal boolean functions that satisfy the SAC criterion because they result in high levels of confusion, thus thwarting attempts by an attacker to statistically relate the ciphertext of a cipher to the key that was used for encryption or decryption. However, in order to prevent differential cryptanalysis attacks, it is important that these boolean functions also have a high branch number.
 
-(CITE 65,66 from thesis below)
-Strong S-Boxes also exhibit strong non-linearity properties. It has been shown by Rueppel that the nonlinearity of a boolean function can be measured by the Hamming distance to the set of affine transformations and is related to the Walsh transform $\hat{F}$ of $\hat{f} : \field{F}_2^n \to \{-1, 1\}$ according to:
+Strong S-Boxes also exhibit strong non-linearity properties \cite{Kim90astudy}. It has been shown by Rueppel that the nonlinearity of a boolean function can be measured by the Hamming distance to the set of affine transformations and is related to the Walsh transform $\hat{F}$ of $\hat{f} : \field{F}_2^n \to \{-1, 1\}$ according to:
 \begin{eqnarray*}
 \delta(f)  = 2^{n-1} - \frac{1}{2}\text{max}_w|\hat{F}(w)|,
 \end{eqnarray*}
@@ -75,9 +74,13 @@ where $<a,x>$ is the scalar product of $a$ and $x$ (if they are thought of as ve
 %TODO: nonlinearity Walsh transform 
 %\end{define}
 
-It is easy to see that satisfaction of the SAC criterion for a boolean function, improving its branch number, and improving its non-linearity are not mutually exclusive tasks. Therefore, it is natural to reduce the problem of finding an optimal S-Box design based on these conditions to an integer programming problem that seeks to optimize each one of these construction dimensions.
+It is easy to see that satisfaction of the SAC criterion for a boolean function, improving its branch number, minimizing its differential propagation probability, and improving its non-linearity are not mutually exclusive tasks. Therefore, it is natural to reduce the problem of finding an optimal S-Box design based on these conditions to an integer programming problem that seeks to optimize each one of these construction dimensions. 
 
-TODO: continue
+In this work we will seek to abstract the construction of S-Boxes away from the Boolean functions that they represent and optimize the representation of this function in order to achieve ideal values for aforementioned metrics. In other words, we focus on the construction of a function $f$ with finite domain and range (both of the same cardinality) that could potentially be realized by a mathematical operation or construction. Only the forward version of $f$ shall be considered in this construction. However, in practical settings, $f$ must be invertible to be applied in symmetric key cryptosystems. 
+
+\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{caw4567-report}
 
 \begin{comment}
 Key distribution is a vital part of wireless ad-hoc communication networks that need to transfer text, audio, and video data both securely and efficiently. Traditionally, key agreement protocols are based upon the commonly known Diffie Hellman key exchange protocol, in which two (or more) parties may exchange public information in order to establish a common key. The problem with this approach is that it is very computationally inefficient, and doesn't lend itself directly to the problem of establishing a single common group key among multiple parties in a group. This is especially true in wireless ad-hoc networks where the nodes themselves have constrained processing and power resources.

@@ -90,8 +90,8 @@ public class FTPClient
 		
 		// Send the request command
 		cProcess.sendControl(builder.toString());
-		System.out.println("DEBUG: " + cProcess.receiveControl());
-		System.out.println("DEBUG: " + cProcess.receiveControl());
+		System.out.println("DEBUG 1: " + cProcess.receiveControl());
+		System.out.println("DEBUG 2: " + cProcess.receiveControl());
 		
 		// Retrieve the data
 		System.out.println("DEBUG: Data retrieved: ");

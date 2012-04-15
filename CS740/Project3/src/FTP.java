@@ -176,7 +176,7 @@ public class FTP
 					{
 						// TODO: make a map of user commands to FTP protocol commands
 						try {
-							System.out.println(client.sendRequest("list", null));
+							System.out.println(client.sendRequest("LIST", null));
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

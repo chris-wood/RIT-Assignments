@@ -80,7 +80,7 @@ public class FTPProtocolInterpreter
 	{
 		System.out.println("DEBUG: sending control: " + command);
 		controlOut.writeBytes(command + FTPClient.TELNET_END);
-		//controlOut.flush();
+		controlOut.flush();
 	}
 	
 	public String receiveControl() throws IOException
@@ -131,7 +131,7 @@ public class FTPProtocolInterpreter
 	public int sendPassiveCommand() throws IOException
 	{
 		// Send the command to switch to passive mode
-		controlOut.writeBytes("pasv" + FTPClient.TELNET_END);
+		controlOut.writeBytes("PASV" + FTPClient.TELNET_END);
 		controlOut.flush();
 		
 		// Retrieve the response and parse it 
@@ -151,7 +151,8 @@ public class FTPProtocolInterpreter
 		System.err.println("Error: unsupported connection.");
 	}
 	
-	private int buildPort(String v1, String v2)
+	// TODO: let the ftpclient invoke this
+	public int buildPort(String v1, String v2)
 	{
 		int port = 0;
 		
