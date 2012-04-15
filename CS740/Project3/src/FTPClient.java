@@ -37,7 +37,7 @@ public class FTPClient
 	public TransferType tType = TransferType.ASCII; // TODO make private
 	
 	public static enum TransferMode {ACTIVE, PASSIVE};
-	public TransferMode tMode = TransferMode.PASSIVE; // TODO make private
+	public TransferMode tMode = TransferMode.ACTIVE; // TODO make private
 	
 	private FTPController cProcess;
 	
@@ -73,7 +73,7 @@ public class FTPClient
 		return cProcess.receiveControl();
 	}
 	
-	private String buildPortParam(int port)
+	private String buildPortParam(ServerSocket socket)
 	{
 		StringBuilder builder = new StringBuilder();
 		//builder.append("(");
@@ -82,16 +82,17 @@ public class FTPClient
 		InetAddress addr = null;
 		try 
 		{
-			addr = InetAddress.getLocalHost();
+			addr = socket.getInetAddress().getLocalHost();
 			String strAddr = addr.getHostAddress().toString();
 			System.out.println("IP address = " + strAddr);
+			System.out.println("port = " + socket.getLocalPort());
 			strAddr = strAddr.replaceAll("\\.", ",");
 			System.out.println("IP address = " + strAddr);
 			builder.append(strAddr);
 			
 			// Fill in the port information now
-			int p1 = port / 256; // TODO: MAGIC NUMBER
-			int p2 = port % 256; // TODO: MAGIC NUMBER
+			int p1 = socket.getLocalPort() / 256; // TODO: MAGIC NUMBER
+			int p2 = socket.getLocalPort() % 256; // TODO: MAGIC NUMBER
 			builder.append("," + p1 + "," + p2);
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -110,7 +111,7 @@ public class FTPClient
 			System.out.println("DEBUG: Establishing active connection");
 			//dProcess.establishConnection(FTPClient.TransferMode.ACTIVE, 0);
 			
-			String portParam = buildPortParam(activeSocket.getLocalPort());
+			String portParam = buildPortParam(activeSocket);
 			System.out.println("port param = " + portParam);
 			cProcess.sendControl("PORT " + portParam);
 			System.out.println("DEBUG: received: " + cProcess.receiveControl());
