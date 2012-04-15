@@ -27,10 +27,16 @@ public class FTP
 	 * Array of available commands supported by this client
 	 * and the corresponding indices for these commands.
 	 */
-	public static final String COMMANDS[] = 
+	public static final String USER_COMMANDS[] = 
 	{ 
 		"ascii", "binary", "cd", "cdup", "debug", "dir", 
 		"get", "help", "passive", "put", "pwd", "quit", "user" 
+	};
+	
+	public static final String FTP_COMMANDS[] = 
+	{
+		"ASCII", "BINARY", "CWD", "CDUP", "DEBUG", "LIST", 
+		"RETR", "HELP", "PASV", "PUT", "PWD", "QUIT", "USER"
 	};
 
 	public static final int ASCII = 0;
@@ -141,9 +147,9 @@ public class FTP
 				}
 
 				// TODO
-				for (int i = 0; i < COMMANDS.length && cmd == -1; i++) 
+				for (int i = 0; i < USER_COMMANDS.length && cmd == -1; i++) 
 				{
-					if (COMMANDS[i].equalsIgnoreCase(argv[0])) 
+					if (USER_COMMANDS[i].equalsIgnoreCase(argv[0])) 
 					{
 						cmd = i;
 					}
@@ -176,7 +182,7 @@ public class FTP
 					{
 						// TODO: make a map of user commands to FTP protocol commands
 						try {
-							System.out.println(client.sendRequest("LIST", null));
+							System.out.println(client.sendRequest(FTP_COMMANDS[DIR], null));
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -205,7 +211,7 @@ public class FTP
 					{
 						// TODO: make a map of user commands to FTP protocol commands
 						try {
-							System.out.println(client.sendCommand(argv[0]));
+							System.out.println(client.sendCommand(FTP_COMMANDS[PWD]));
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -218,7 +224,7 @@ public class FTP
 					{
 						// TODO: make a map of user commands to FTP protocol commands
 						try {
-							System.out.println(client.sendCommand("cwd " + argv[1]));
+							System.out.println(client.sendCommand(FTP_COMMANDS[CD] + " " + argv[1]));
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -241,7 +247,12 @@ public class FTP
 				case GET:
 					if (argv.length == 2)
 					{
-						//client.getFile(argv[0], argv[1]);
+						try {
+							System.out.println(client.sendRequest(FTP_COMMANDS[GET], new String[] {argv[1]}));
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 					break;
 
@@ -267,7 +278,7 @@ public class FTP
 						//try 
 						{
 							try {
-								System.out.println("DEBUG: received: " + client.sendCommand(argv[0] + " " + argv[1]));
+								System.out.println("DEBUG: received: " + client.sendCommand(FTP_COMMANDS[USER] + " " + argv[1]));
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -278,7 +289,7 @@ public class FTP
 							// TODO: how should we send the password
 							System.out.println("Sending password: " + pw + " to server...");
 							try {
-								System.out.println(client.sendCommand("pass" + " " + pw));
+								System.out.println(client.sendCommand("PASS" + " " + pw)); // TODO: magic string
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
