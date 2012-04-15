@@ -79,25 +79,17 @@ public class FTPClient
 		//builder.append("(");
 		
 		// Get the IP address and convert into bytes
-		InetAddress addr = null;
-		try 
-		{
-			addr = socket.getInetAddress().getLocalHost();
-			String strAddr = addr.getHostAddress().toString();
-			System.out.println("IP address = " + strAddr);
-			System.out.println("port = " + socket.getLocalPort());
-			strAddr = strAddr.replaceAll("\\.", ",");
-			System.out.println("IP address = " + strAddr);
-			builder.append(strAddr);
-			
-			// Fill in the port information now
-			int p1 = socket.getLocalPort() / 256; // TODO: MAGIC NUMBER
-			int p2 = socket.getLocalPort() % 256; // TODO: MAGIC NUMBER
-			builder.append("," + p1 + "," + p2);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String strAddr = socket.getLocalSocketAddress().toString();
+		System.out.println("IP address = " + strAddr);
+		System.out.println("port = " + socket.getLocalPort());
+		strAddr = strAddr.replaceAll("\\.", ",");
+		System.out.println("IP address = " + strAddr);
+		builder.append(strAddr);
+		
+		// Fill in the port information now
+		int p1 = socket.getLocalPort() / 256; // TODO: MAGIC NUMBER
+		int p2 = socket.getLocalPort() % 256; // TODO: MAGIC NUMBER
+		builder.append("," + p1 + "," + p2);
 		
 		return builder.toString();
 	}
@@ -113,8 +105,8 @@ public class FTPClient
 			
 			String portParam = buildPortParam(activeSocket);
 			System.out.println("port param = " + portParam);
-			cProcess.sendControl("PORT " + portParam);
-			System.out.println("DEBUG: received: " + cProcess.receiveControl());
+			//cProcess.sendControl("PORT " + portParam);
+			//System.out.println("DEBUG: received: " + cProcess.receiveControl());
 			
 			// Send the command to the FTP server
 			StringBuilder builder = new StringBuilder();
