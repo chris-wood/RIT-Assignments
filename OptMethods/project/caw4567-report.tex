@@ -15,15 +15,16 @@
 \linespread{1.2}
 
 \begin{document}
-\arltitle{4040-849 Optimization Methods}{Project Proposal: Optimizing Boolean Function Constructions}
+\arltitle{4040-849 Optimization Methods}{Optimizing Cryptographic Boolean Function Constructions}
 
+%TODO: define boolean function
 \begin{abstract}
-Cryptographically secure block ciphers are based around Shannon's principles of confusion and diffusion \cite{Kim90astudy}. It is important to optimize these characteristics in order to make ciphers less susceptible to linear and differential cryptanalysis. The most traditional way to integrate mathematical structures that improve the confusion of a block cipher is to use a substitution box  (or simply, an S-box). Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis. In this work, we attempt to formulate the problem of cryptographically strong S-box designs into an integer programming problem that can be optimized to yield the highest confusion dividends in resulting cipher implementations.
+Cryptographically secure block ciphers are based around Shannon's principles of confusion and diffusion \cite{Kim90astudy}. It is important to optimize these characteristics in order to make ciphers less susceptible to linear and differential cryptanalysis attacks. The most traditional way to integrate mathematical structures that improve the confusion of a block cipher is to use a substitution box  (or simply, an S-box). Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis. In this work, we attempt to formulate the problem of cryptographically strong S-box designs (and subsequently, any confusion layer design) into an integer programming problem that can be optimized to yield the highest confusion dividends in resulting cipher implementations.
 \end{abstract}
 
-\section{Problem Statement}
+\section{Problem Description and Background Information}
 
-Mathematically, an S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In cryptographic terms, such a function $f$ must be bijective in order to avoid bias towards any specific output element in the field. We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes \cite{Mar_newanalysis}.
+Mathematically, an S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In cryptographic terms, such a function $f$ must be bijective in order to avoid bias towards any specific output element in the field. We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes (or confusion layers) \cite{Mar_newanalysis}.
 
 %TODO: http://www.waset.org/journals/waset/v48/v48-24.pdf && thesis work
 
@@ -32,7 +33,7 @@ The Hamming weight of an element $a \in \field{F}_2^n$ is defined as wt$(x) = \s
 \end{define}
 
 \begin{define}
-Let $S$ be an S-Box with $m = |S|$ input values. Let $n$ be the number of elements $x$ that satisfy $S(x \oplus \Delta_i) = S(x) \oplus \Delta_o$. Then, $\frac{n}{m}$ is the \emph{differential probability p} of the characteristic $S_D(\Delta_i \to \Delta_o)$.
+Let $f$ be a bijective function with range $\mathbb{R^*}$, where $|\mathbb{R^*}| = m$. Let $n$ be the number of elements $x$ that satisfy $f(x \oplus \Delta_i) = f(x) \oplus \Delta_o$. Then, $\frac{n}{m}$ is the \emph{differential probability p} of the characteristic $f_D(\Delta_i \to \Delta_o)$.
 \end{define}
 
 \begin{define}
@@ -74,10 +75,30 @@ where $<a,x>$ is the scalar product of $a$ and $x$ (if they are thought of as ve
 %TODO: nonlinearity Walsh transform 
 %\end{define}
 
-It is easy to see that satisfaction of the SAC criterion for a boolean function, improving its branch number, minimizing its differential propagation probability, and improving its non-linearity are not mutually exclusive tasks. Therefore, it is natural to reduce the problem of finding an optimal S-Box design based on these conditions to an integer programming problem that seeks to optimize each one of these construction dimensions. 
+Designers of cryptographically secure cryptographic primitives (e.g. block ciphers, hash functions, etc) use these measurements as a basis for their susceptibility to linear and differential cryptanalysis when constructing their algorithms. However, they place the additional constraint on such primitives that fast and simple mathematical operations must be used to emulate a bijective function $f$ that exhbits ideal properties for all of these values.
 
-In this work we will seek to abstract the construction of S-Boxes away from the Boolean functions that they represent and optimize the representation of this function in order to achieve ideal values for aforementioned metrics. In other words, we focus on the construction of a function $f$ with finite domain and range (both of the same cardinality) that could potentially be realized by a mathematical operation or construction. Only the forward version of $f$ shall be considered in this construction. However, in practical settings, $f$ must be invertible to be applied in symmetric key cryptosystems. 
+As previously mentioned, S-Boxes have been the primary source of confusion in most cryptographic primitives. However, some recently proposed cryptographic primitives (e.g. the Skein hash function \cite{Ferguson09theskein}) are making use of an ARX (Addition, Rotation, and XOR) layer to provide similar results. This design decision was driven by the lack of strict security proofs for S-Boxes and the implementation efficiency of the ARX design. However, at an abstract level, an ARX layer can be represented by a bijective function $f$ as well, thus making it applicable to this problem. However, because the security of ARX confusion layers is not well understood and has only recently faced considerable cryptanalysis research \cite{Khovratovich:2010:RCA:1876089.1876116}, we restrict ourselves to S-Box designs.
 
+\section{Optimization Candidate Description}
+Cryptographically secure primitives utilize confusion layers that offer the following characteristics:
+
+\begin{enumerate}
+	\item Low differential propagation probability
+	\item High branch number
+	\item Satisfaction of the SAC criterion
+	\item High degree of non-linearity
+\end{enumerate}
+
+Therefore, it is natural to reduce the problem of finding an optimal confusion layer for cryptographic primitives to an integer programming problem that seeks to optimize each one of these construction dimensions. In other words, optimal confusion layer construction can be thought of an integer programming problem with multiple cost functions that share a single, balanced solution. The common solutions to these objectives (if they exist) are thus contained within the Pareto set for the problem.
+
+In this work we will seek to abstract the construction of confusion layers away from the Boolean functions that they represent and optimize the representation of this function in order to achieve ideal values for aforementioned metrics. In other words, we focus on the construction of a function $f$ with finite domain and range (both of the same cardinality) that could potentially be realized by a mathematical operation or construction. Only the forward version of $f$ shall be considered in this construction. However, in practical settings, $f$ must be invertible to be applied in symmetric key cryptosystems. 
+
+Therefore, the design variables pair-wise mappings of the bijective function $f$. In order to manage the complexity of the problem, only 4-bit layers will be considered (i.e. $|\mathbb{R^*}| = 2^4 = 16$).
+
+\section{Programming Language Use}
+The Optimization Toolkit will be utilized in conjunction with MatLab in order to perform the mathematical computations. In addition, Mathematica will be utilized to allow for easy data collection management and visualization during the course of the project. 
+
+%TODO: include one more reputable source of information
 \bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{caw4567-report}

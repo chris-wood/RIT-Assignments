@@ -29,4 +29,17 @@ K.~Kim, ``A study on the construction and analysis of substitution boxes for
 P.~P. Mar and K.~M. Latt, ``New analysis methods on strict avalanche criterion
   of s- boxes.''
 
+\bibitem{Ferguson09theskein}
+N.~Ferguson, S.~Lucks, B.~Schneier, D.~Whiting, M.~Bellare, T.~Kohno,
+  J.~Callas, and J.~Walker, ``The skein hash function family,'' 2009.
+
+\bibitem{Khovratovich:2010:RCA:1876089.1876116}
+\BIBentryALTinterwordspacing
+D.~Khovratovich and I.~Nikoli\'{c}, ``Rotational cryptanalysis of arx,'' in
+  \emph{Proceedings of the 17th international conference on Fast software
+  encryption}, ser. FSE'10.\hskip 1em plus 0.5em minus 0.4em\relax Berlin,
+  Heidelberg: Springer-Verlag, 2010, pp. 333--346. [Online]. Available:
+  \url{http://dl.acm.org/citation.cfm?id=1876089.1876116}
+\BIBentrySTDinterwordspacing
+
 \end{thebibliography}
