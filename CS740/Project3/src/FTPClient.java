@@ -180,7 +180,7 @@ public class FTPClient
 			System.out.println(builder.toString());
 			
 			System.out.println("DEBUG 1: " + cProcess.receiveControl());
-			System.out.println("DEBUG 2: " + cProcess.receiveControl());
+			//System.out.println("DEBUG 2: " + cProcess.receiveControl());
 			
 			break;
 		}
