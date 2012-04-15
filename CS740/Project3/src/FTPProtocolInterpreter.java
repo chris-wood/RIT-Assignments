@@ -1,3 +1,4 @@
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -14,7 +15,7 @@ public class FTPProtocolInterpreter
 	 * Socket and data streams for the control channel.
 	 */
 	private Socket controlSocket = null;
-	private DataOutputStream controlOut = null;
+	private BufferedOutputStream controlOut = null;
 	private BufferedReader controlIn = null;
 	
 	private FTPClient client;
@@ -43,11 +44,10 @@ public class FTPProtocolInterpreter
 		IOException 
 	{	
 		controlSocket = new Socket(host, FTPClient.FTP_PORT);
-		controlOut = new DataOutputStream(controlSocket.getOutputStream());
+		controlOut = new BufferedOutputStream(controlSocket.getOutputStream());
 		controlIn = new BufferedReader(new InputStreamReader(controlSocket.getInputStream()));
 		
 		// Get the initial reply from the server (if any) and return it
-		StringBuilder reply = new StringBuilder();
 		System.out.println("DEBUG: getting greeting.");
 		System.out.println(receiveControl());
 		
@@ -79,7 +79,10 @@ public class FTPProtocolInterpreter
 	public void sendControl(String command) throws IOException
 	{
 		System.out.println("DEBUG: sending control: " + command);
-		controlOut.writeBytes(command + FTPClient.TELNET_END);
+		//controlOut.write(command + FTPClient.TELNET_END);
+		//controlOut.flush();
+		String cmd = command + FTPClient.TELNET_END;
+		controlOut.write(cmd.getBytes(), 0, cmd.length());
 		controlOut.flush();
 	}
 	
@@ -109,7 +112,7 @@ public class FTPProtocolInterpreter
 	{
 		// Ask the server for this specific file
 		// TODO: use command as a map
-		controlOut.writeBytes("retrieve" + " " + file + FTPClient.TELNET_END);
+		//controlOut.writeBytes("retrieve" + " " + file + FTPClient.TELNET_END);
 		System.out.println(receiveControl());
 		
 		// Now, establish a connection!
@@ -131,7 +134,9 @@ public class FTPProtocolInterpreter
 	public int sendPassiveCommand() throws IOException
 	{
 		// Send the command to switch to passive mode
-		controlOut.writeBytes("PASV" + FTPClient.TELNET_END);
+		//controlOut.writeBytes("PASV" + FTPClient.TELNET_END);
+		String cmd = "PASV" + FTPClient.TELNET_END;
+		controlOut.write(cmd.getBytes(), 0, cmd.length());
 		controlOut.flush();
 		
 		// Retrieve the response and parse it 

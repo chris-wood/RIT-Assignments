@@ -27,17 +27,33 @@ public class FTPDataProcess extends Thread
 	
 	public FTPDataProcess(FTPClient client)
 	{
+		// Save a reference to the client
 		this.client = client;
+		
+		// Create the server socket for this port
+		try 
+		{
+			activeSocket = new ServerSocket(0);
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
+	// TODO: get rid of this multi-threading bullshit! just implement timeouts
 	private Semaphore semaphore;
 	
 	public void run()
 	{
 		semaphore = new Semaphore(1);
-		try {
+		try 
+		{
 			semaphore.acquire(); // acquire one to start
-		} catch (InterruptedException e2) {
+		}
+		catch (InterruptedException e2) 
+		{
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
@@ -74,8 +90,14 @@ public class FTPDataProcess extends Thread
 		switch (mode)
 		{
 		case ACTIVE:
-			System.err.println("DEBUG: Releasing semaphore to start listening.");
-			semaphore.release();
+			/*System.out.println("DEBUG: Releasing semaphore to start listening.");
+			try {
+				activeSocket = new ServerSocket(0);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			semaphore.release();*/
 			break;
 		case PASSIVE:
 			try 
@@ -96,6 +118,18 @@ public class FTPDataProcess extends Thread
 				e.printStackTrace();
 			}
 			break;
+		}
+	}
+	
+	public int getActivePort()
+	{
+		if (activeSocket != null)
+		{
+			return activeSocket.getLocalPort();
+		}
+		else
+		{
+			return 0;
 		}
 	}
 	

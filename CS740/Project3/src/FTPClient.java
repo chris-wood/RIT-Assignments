@@ -1,4 +1,8 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
@@ -37,10 +41,23 @@ public class FTPClient
 	private FTPDataProcess dProcess;
 	private FTPProtocolInterpreter cProcess;
 	
+	private ServerSocket activeSocket = null;
+	private DataOutputStream dataOut = null;
+	private DataInputStream dataIn = null;
+	
 	public FTPClient()
 	{
 		dProcess = new FTPDataProcess(this);
+		dProcess.start();
 		cProcess = new FTPProtocolInterpreter(this);
+		
+		// trying it out
+		try {
+			activeSocket = new ServerSocket(0);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String connect(String host, int timeout) throws UnknownHostException, IOException
@@ -57,53 +74,119 @@ public class FTPClient
 		return cProcess.receiveControl();
 	}
 	
+	private String buildPortParam(int port)
+	{
+		StringBuilder builder = new StringBuilder();
+		//builder.append("(");
+		
+		// Get the IP address and convert into bytes
+		InetAddress addr = null;
+		try 
+		{
+			addr = InetAddress.getLocalHost();
+			String strAddr = addr.getHostAddress().toString();
+			System.out.println("IP address = " + strAddr);
+			strAddr = strAddr.replaceAll("\\.", ",");
+			System.out.println("IP address = " + strAddr);
+			builder.append(strAddr);
+			
+			// Fill in the port information now
+			int p1 = port / 256; // TODO: MAGIC NUMBER
+			int p2 = port % 256; // TODO: MAGIC NUMBER
+			builder.append("," + p1 + "," + p2);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return builder.toString();
+	}
+	
 	public String sendRequest(String command, String[] arguments) throws IOException
 	{
-		System.out.println("DEBUG: Sending request: " + command);
-		
 		// Handle the data connection logic first
 		switch (tMode)
 		{
 		case ACTIVE:
 			System.out.println("DEBUG: Establishing active connection");
-			dProcess.establishConnection(FTPClient.TransferMode.ACTIVE, 0);
+			//dProcess.establishConnection(FTPClient.TransferMode.ACTIVE, 0);
+			
+			String portParam = buildPortParam(activeSocket.getLocalPort());
+			System.out.println("port param = " + portParam);
+			cProcess.sendControl("PORT " + portParam);
+			
+			// Send the command to the FTP server
+			StringBuilder builder = new StringBuilder();
+			builder.append(command);
+			if (arguments != null)
+			{
+				for (int i = 0; i < arguments.length; i++)
+				{
+					builder.append(" " + arguments[i]);
+				}
+			}
+			builder.append(TELNET_END);
+			
+			// Send the request command
+			cProcess.sendControl(builder.toString());
+			System.out.println("Trying to accept...");
+			activeSocket.setSoTimeout(2000);
+			activeSocket.accept();
+			System.out.println("It accepted!");
+			
+			// Retrieve the data
+			System.out.println("DEBUG: Data retrieved: ");
+			ArrayList<Byte> data = dProcess.readStream();
+			builder = new StringBuilder();
+			for (Byte b : data)
+			{
+				builder.append((char)b.byteValue());
+			}
+			System.out.println(builder.toString());
+			
+			System.out.println("DEBUG 1: " + cProcess.receiveControl());
+			System.out.println("DEBUG 2: " + cProcess.receiveControl());
+			
 			break;
 		case PASSIVE:
 			System.out.println("DEBUG: Establishing passive connection");
 			int port = cProcess.sendPassiveCommand();
 			System.out.println("DEBUG: FTP server returned with port: " + port);
 			dProcess.establishConnection(FTPClient.TransferMode.PASSIVE, port);
+			
+			// Send the command to the FTP server
+			builder = new StringBuilder();
+			builder.append(command);
+			if (arguments != null)
+			{
+				for (int i = 0; i < arguments.length; i++)
+				{
+					builder.append(" " + arguments[i]);
+				}
+			}
+			builder.append(TELNET_END);
+			
+			// Send the request command
+			cProcess.sendControl(builder.toString());
+			
+			// Retrieve the data
+			System.out.println("DEBUG: Data retrieved: ");
+			data = dProcess.readStream();
+			builder = new StringBuilder();
+			for (Byte b : data)
+			{
+				builder.append((char)b.byteValue());
+			}
+			System.out.println(builder.toString());
+			
+			System.out.println("DEBUG 1: " + cProcess.receiveControl());
+			System.out.println("DEBUG 2: " + cProcess.receiveControl());
+			
 			break;
 		}
 		
-		// Send the command to the FTP server
-		StringBuilder builder = new StringBuilder();
-		builder.append(command);
-		if (arguments != null)
-		{
-			for (int i = 0; i < arguments.length; i++)
-			{
-				builder.append(" " + arguments[i]);
-			}
-		}
-		builder.append(TELNET_END);
-		
-		// Send the request command
-		cProcess.sendControl(builder.toString());
-		System.out.println("DEBUG 1: " + cProcess.receiveControl());
-		System.out.println("DEBUG 2: " + cProcess.receiveControl());
-		
-		// Retrieve the data
-		System.out.println("DEBUG: Data retrieved: ");
-		ArrayList<Byte> data = dProcess.readStream();
-		builder = new StringBuilder();
-		for (Byte b : data)
-		{
-			builder.append((char)b.byteValue());
-		}
-		System.out.println(builder.toString());
-		
-		return builder.toString();
+		// TODO: remove this return?
+		return "";
 	}
 	
 	public void toggleTransferMode() throws IOException
