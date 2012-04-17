@@ -25,13 +25,14 @@
 K.~Kim, ``A study on the construction and analysis of substitution boxes for
   symmetric cryptosystems,'' 1990.
 
-\bibitem{Mar_newanalysis}
-P.~P. Mar and K.~M. Latt, ``New analysis methods on strict avalanche criterion
-  of s- boxes.''
+\bibitem{Heys01atutorial}
+H.~M. Heys, ``A tutorial on linear and differential cryptanalysis,'' Tech.
+  Rep., 2001.
 
-\bibitem{Ferguson09theskein}
-N.~Ferguson, S.~Lucks, B.~Schneier, D.~Whiting, M.~Bellare, T.~Kohno,
-  J.~Callas, and J.~Walker, ``The skein hash function family,'' 2009.
+\bibitem{Daemen:2002:DRA}
+J.~Daemen and V.~Rijmen, \emph{The design of {Rijndael}: {AES} --- the
+  {Advanced Encryption Standard}}.\hskip 1em plus 0.5em minus 0.4em\relax
+  Spring{\-}er-Ver{\-}lag, 2002.
 
 \bibitem{Khovratovich:2010:RCA:1876089.1876116}
 \BIBentryALTinterwordspacing
@@ -41,5 +42,13 @@ D.~Khovratovich and I.~Nikoli\'{c}, ``Rotational cryptanalysis of arx,'' in
   Heidelberg: Springer-Verlag, 2010, pp. 333--346. [Online]. Available:
   \url{http://dl.acm.org/citation.cfm?id=1876089.1876116}
 \BIBentrySTDinterwordspacing
+
+\bibitem{Mar_newanalysis}
+P.~P. Mar and K.~M. Latt, ``New analysis methods on strict avalanche criterion
+  of s- boxes.''
+
+\bibitem{Ferguson09theskein}
+N.~Ferguson, S.~Lucks, B.~Schneier, D.~Whiting, M.~Bellare, T.~Kohno,
+  J.~Callas, and J.~Walker, ``The skein hash function family,'' 2009.
 
 \end{thebibliography}

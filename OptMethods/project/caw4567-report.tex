@@ -15,15 +15,31 @@
 \linespread{1.2}
 
 \begin{document}
-\arltitle{4040-849 Optimization Methods}{Optimizing Cryptographic Boolean Function Constructions}
+\arltitle{4040-849 Optimization Methods}{Optimizing Cryptographic Strength of Substitution Layers in Symmetric-Key Cryptosystems}
 
 %TODO: define boolean function
 \begin{abstract}
 Cryptographically secure block ciphers are based around Shannon's principles of confusion and diffusion \cite{Kim90astudy}. It is important to optimize these characteristics in order to make ciphers less susceptible to linear and differential cryptanalysis attacks. The most traditional way to integrate mathematical structures that improve the confusion of a block cipher is to use a substitution box  (or simply, an S-box). Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis. In this work, we attempt to formulate the problem of cryptographically strong S-box designs (and subsequently, any confusion layer design) into an integer programming problem that can be optimized to yield the highest confusion dividends in resulting cipher implementations.
 \end{abstract}
 
-\section{Problem Description and Background Information}
+%TODO: cost functions? multiple, optimize BN/nonlinearity/DPP 
+%TODO: design variables must then be elements in the field
 
+\section{Block Cipher Security and Linear Cryptanalysis}
+
+%TODO: find a way to introduce linear cryptanalysis
+
+Ever since the application of linear cryptanalysis on the FEAL and DES block ciphers in the early ninties, nonlinearity has become a essential characteristic of any secure symmetric-key cryptographic algorithm design (especially block ciphers) \cite{Heys01atutorial}. Linear cryptanalysis is a cryptanalytic attack that attempts to take advantage of high probability occurrences of linear expressions involving plaintext bits, ciphertext bits, and subkey bits. Mathematically, the attack is based on the idea of approximating the operation of a portion of the block cipher in question with an expression that is linear in terms of the bits of the inputs ($X$) and outputs ($Y$) involved, as shown below \cite{Heys01atutorial}:
+\begin{eqnarray*}
+X_{i_{1}} \oplus X_{i_{2}} ... \oplus X_{i_{r}} \oplus Y_{j_{1}} \oplus Y_{j_{2}} ... \oplus Y_{j_{s}} \oplus  = 0
+\end{eqnarray*}
+Using this expression, attackers can guage the amount of randomness introduced by the cipher. That is, if such an expression occurrs frequently with a relatively high probability, then we know that the probability of the expression holding for any two values $a,b\in \field{F}_2^n$ is approximately $\frac{1}{2}$. However, when this probability shifts away from $\frac{1}{2}$, the amount of known plaintexts required to determine the key (or key block) that was used to reproduce the output goes down dramatically. Thus, such a deviation from the expected probability of $\frac{1}{2}$ for any expression of the form above, which is referred to as the \emph{linear bias}, determines the susceptibility of the block cipher to known plaintext attacks. Consequently, it is important to introduce a great deal of nonlinearity into the block cipher in order to thwart such attacks.
+
+In traditional block ciphers based on substitution-permitatuon networks (such as the DES and AES), the S(ubstitution)-box is the primary source of nonlinearity that is designed to thwart such cryptanalysis attacks. Rijndael (the AES algorithm) was selected as the finalist in the AES competition due to its simplistic design, implementation metrics, and strong security properties. Perhaps the most notable element of its security is the S-box design it uses to achieve nonlinearity. Mathematically, the substitution of a single element $a \in  \field{F}_2^n$ is computed by performing an affine transformation on $a^{-1}$ (the multiplicative inverse of $a$). The affine transformation was carefully constructed to yield high resistance against known cryptanalytic attacks of the time, including both linear and differential cryptanalysis \cite{Daemen:2002:DRA}. 
+
+S-boxes are not the only proposed source of nonlinearity, however. One other notable deisgn technique is based on the notion of modular ($2^n$) addition, bit-wise rotation, and XOR operations. Separate, these simple routines are very easy to invert and fit to a linear model. However, when brought together in the right way using information from the secret key as an operand, an artificial degree of nonlinearity begins to emerge in the result. Threefish, the block cipher inside Skein (one of final candidates for the SHA-3 hash function competition), relies on the ARX operation for nonlinear behavior between rounds of the cipher. However, such designs are also susceptible to similar cryptanalytic attacks, as was shown in \cite{Khovratovich:2010:RCA:1876089.1876116}. Therefore, the focus and scope of this project will be geared towards S-box design due to its simplicity and cryptographic maturity.
+
+\section{Cryptographic Strength}
 Mathematically, an S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In cryptographic terms, such a function $f$ must be bijective in order to avoid bias towards any specific output element in the field. We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes (or confusion layers) \cite{Mar_newanalysis}.
 
 %TODO: http://www.waset.org/journals/waset/v48/v48-24.pdf && thesis work
@@ -77,7 +93,7 @@ where $<a,x>$ is the scalar product of $a$ and $x$ (if they are thought of as ve
 
 Designers of cryptographically secure cryptographic primitives (e.g. block ciphers, hash functions, etc) use these measurements as a basis for their susceptibility to linear and differential cryptanalysis when constructing their algorithms. However, they place the additional constraint on such primitives that fast and simple mathematical operations must be used to emulate a bijective function $f$ that exhbits ideal properties for all of these values.
 
-As previously mentioned, S-Boxes have been the primary source of confusion in most cryptographic primitives. However, some recently proposed cryptographic primitives (e.g. the Skein hash function \cite{Ferguson09theskein}) are making use of an ARX (Addition, Rotation, and XOR) layer to provide similar results. This design decision was driven by the lack of strict security proofs for S-Boxes and the implementation efficiency of the ARX design. However, at an abstract level, an ARX layer can be represented by a bijective function $f$ as well, thus making it applicable to this problem. However, because the security of ARX confusion layers is not well understood and has only recently faced considerable cryptanalysis research \cite{Khovratovich:2010:RCA:1876089.1876116}, we restrict ourselves to S-Box designs.
+As previously mentioned, S-Boxes have been the primary source of confusion in most cryptographic primitives. However, some recently proposed cryptographic primitives (e.g. the Skein hash function \cite{Ferguson09theskein}) are making use of an ARX (Addition, Rotation, and XOR) layer to provide similar results. This design decision was driven by the lack of strict security proofs for S-Boxes and the implementation efficiency of the ARX design. However, at an abstract level, an ARX layer can be represented by a bijective function $f$ as well, thus making it applicable to this problem. However, because the security of ARX confusion layers is not well understood and has only recently faced considerable cryptanalysis research \cite{}, we restrict ourselves to S-Box designs.
 
 \section{Optimization Candidate Description}
 Cryptographically secure primitives utilize confusion layers that offer the following characteristics:

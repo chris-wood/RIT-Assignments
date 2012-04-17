@@ -37,11 +37,11 @@ public class FTPClient
 	public TransferType tType = TransferType.ASCII; // TODO make private
 	
 	public static enum TransferMode {ACTIVE, PASSIVE};
-	public TransferMode tMode = TransferMode.ACTIVE; // TODO make private
+	public TransferMode tMode = TransferMode.PASSIVE; // TODO make private
 	
 	private FTPController cProcess;
 	
-	private Socket passiveSocket = null;
+	private Socket dataSocket = null;
 	private ServerSocket activeSocket = null;
 	private DataOutputStream dataOut = null;
 	private DataInputStream dataIn = null;
@@ -79,7 +79,15 @@ public class FTPClient
 		//builder.append("(");
 		
 		// Get the IP address and convert into bytes
-		String strAddr = socket.getLocalSocketAddress().toString();
+		InetAddress addr = null;
+		try {
+			addr = InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//String strAddr = socket.getLocalSocketAddress().toString();
+		String strAddr = addr.getHostAddress();
 		System.out.println("IP address = " + strAddr);
 		System.out.println("port = " + socket.getLocalPort());
 		strAddr = strAddr.replaceAll("\\.", ",");
@@ -96,6 +104,8 @@ public class FTPClient
 	
 	public String sendRequest(String command, String[] arguments) throws IOException
 	{
+		ArrayList<Byte> data;
+		
 		// Handle the data connection logic first
 		switch (tMode)
 		{
@@ -105,8 +115,8 @@ public class FTPClient
 			
 			String portParam = buildPortParam(activeSocket);
 			System.out.println("port param = " + portParam);
-			//cProcess.sendControl("PORT " + portParam);
-			//System.out.println("DEBUG: received: " + cProcess.receiveControl());
+			cProcess.sendControl("PORT " + portParam);
+			System.out.println("DEBUG: received: " + cProcess.receiveControl());
 			
 			// Send the command to the FTP server
 			StringBuilder builder = new StringBuilder();
@@ -124,13 +134,14 @@ public class FTPClient
 			cProcess.sendControl(builder.toString());
 			System.out.println("Trying to accept...");
 			activeSocket.setSoTimeout(2000);
-			activeSocket.accept();
+			dataSocket = activeSocket.accept();
+			dataOut = new DataOutputStream(dataSocket.getOutputStream());
+			dataIn = new DataInputStream(dataSocket.getInputStream());
 			System.out.println("It accepted!");
 			
 			// Retrieve the data
-			/*
 			System.out.println("DEBUG: Data retrieved: ");
-			ArrayList<Byte> data = dProcess.readStream();
+			data = readStream();
 			builder = new StringBuilder();
 			for (Byte b : data)
 			{
@@ -139,8 +150,6 @@ public class FTPClient
 			System.out.println(builder.toString());
 			
 			System.out.println("DEBUG 1: " + cProcess.receiveControl());
-			System.out.println("DEBUG 2: " + cProcess.receiveControl());
-			*/
 			
 			break;
 		case PASSIVE:
@@ -152,10 +161,10 @@ public class FTPClient
 			try 
 			{
 				System.out.println("DEBUG: attempting to connect directly to server.");
-				passiveSocket = new Socket(host, port); // parse resulting stuff!
+				dataSocket = new Socket(host, port); // parse resulting stuff!
 				System.out.println("DEBUG: connection returned");
-				dataOut = new DataOutputStream(passiveSocket.getOutputStream());
-				dataIn = new DataInputStream(passiveSocket.getInputStream());
+				dataOut = new DataOutputStream(dataSocket.getOutputStream());
+				dataIn = new DataInputStream(dataSocket.getInputStream());
 			} 
 			catch (UnknownHostException e) 
 			{
@@ -185,7 +194,7 @@ public class FTPClient
 			
 			// Retrieve the data
 			System.out.println("DEBUG: Data retrieved: ");
-			ArrayList<Byte> data = readStream();
+			data = readStream();
 			builder = new StringBuilder();
 			for (Byte b : data)
 			{

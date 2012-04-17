@@ -78,6 +78,12 @@ public class FTPController
 	
 	public void sendControl(String command) throws IOException
 	{
+		// Flush the stream first
+		if (controlIn.ready())
+		{
+			System.out.println(receiveControl());
+		}
+		
 		System.out.println("DEBUG: sending control: " + command);
 		//controlOut.write(command + FTPClient.TELNET_END);
 		//controlOut.flush();

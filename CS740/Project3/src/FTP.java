@@ -277,19 +277,24 @@ public class FTP
 					{
 						//try 
 						{
+							String response = null;
 							try {
-								System.out.println("DEBUG: received: " + client.sendCommand(FTP_COMMANDS[USER] + " " + argv[1]));
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							System.out.print("Enter a password: ");
-							String pw = in.nextLine();
-							
-							// TODO: how should we send the password
-							System.out.println("Sending password: " + pw + " to server...");
-							try {
-								System.out.println(client.sendCommand("PASS" + " " + pw)); // TODO: magic string
+								response = client.sendCommand(FTP_COMMANDS[USER] + " " + argv[1]);
+								System.out.println(response);
+								if (response.contains("331"))
+								{
+									System.out.print("Enter a password: ");
+									String pw = in.nextLine();
+									
+									// TODO: how should we send the password
+									System.out.println("Sending password: " + pw + " to server...");
+									try {
+										System.out.println(client.sendCommand("PASS" + " " + pw)); // TODO: magic string
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+								}
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
