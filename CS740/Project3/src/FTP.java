@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.NoSuchElementException;
 
 /**
- * An RFC959 compliant FTP client.
+ * The user interface to an RFC959 compliant FTP client.
  * 
  * @author Paul Tymann (ptt@cs.rit.edu)
  * @author Jeremy Brown (jsb@cs.rit.edu)
@@ -24,8 +24,8 @@ public class FTP
 	public static final String PROMPT = "FTP> ";
 
 	/**
-	 * Array of available commands supported by this client
-	 * and the corresponding indices for these commands.
+	 * Array of user-friendly available commands supported by 
+	 * this client.
 	 */
 	public static final String USER_COMMANDS[] = 
 	{ 
@@ -33,12 +33,20 @@ public class FTP
 		"get", "help", "passive", "put", "pwd", "quit", "user" 
 	};
 	
+	/**
+	 * Array of FTP-compliant commands that can be parsed 
+	 * and interpreted by the server (used to translate user-
+	 * friendly commands to send to the server).
+	 */
 	public static final String FTP_COMMANDS[] = 
 	{
 		"ASCII", "BINARY", "CWD", "CDUP", "DEBUG", "LIST", 
 		"RETR", "HELP", "PASV", "PUT", "PWD", "QUIT", "USER"
 	};
 
+	/**
+	 * The indices into the command arrays for each supported user command.
+	 */
 	public static final int ASCII = 0;
 	public static final int BINARY = 1;
 	public static final int CD = 2;
@@ -52,11 +60,6 @@ public class FTP
 	public static final int PWD = 10;
 	public static final int QUIT = 11;
 	public static final int USER = 12;
-	
-	/**
-	 * Default timeout of 2000 seconds for connections
-	 */
-	public static final int DEFAULT_TIMEOUT = 2000;
 	
 	/**
 	 * Debug mode flag.
@@ -110,7 +113,7 @@ public class FTP
 		FTPClient client = new FTPClient();
 		System.out.println("DEBUG: Connection successful.");
 		try {
-			System.out.println(client.connect(server, DEFAULT_TIMEOUT));
+			System.out.println(client.connect(server));
 		} catch (UnknownHostException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -162,7 +165,7 @@ public class FTP
 				{
 				case ASCII:
 					try {
-						client.setTransferType(FTPClient.TransferType.ASCII);
+						client.setTransferType(FTPClient.TransferType.ASCII, FTP_COMMANDS[ASCII]);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -170,7 +173,7 @@ public class FTP
 					break;
 				case BINARY:
 					try {
-						client.setTransferType(FTPClient.TransferType.BINARY);
+						client.setTransferType(FTPClient.TransferType.BINARY, FTP_COMMANDS[BINARY]);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -192,16 +195,8 @@ public class FTP
 					
 				case PASSIVE:
 					if (argv.length == 1)
-					{
-						// TODO: make a map of user commands to FTP protocol commands
-						try
-						{
-							client.toggleTransferMode();
-						}
-						catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					{ 
+						client.toggleTransferMode();
 					}
 					break;
 					

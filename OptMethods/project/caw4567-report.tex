@@ -15,9 +15,15 @@
 \linespread{1.2}
 
 \begin{document}
-\arltitle{4040-849 Optimization Methods}{Optimizing Cryptographic Strength of Substitution Layers in Symmetric-Key Cryptosystems}
+\cawtitlelong{4040-849 Optimization Methods}{Optimizing Cryptographic Strength of Substitution}{Layers in Symmetric-Key Cryptosystems}
 
-%TODO: define boolean function
+%TODO: make sure DC is covered in enough detail
+%TODO: make sure relation to security from DC/LC is discussed
+%TODO: make sure definitions and relation to secuirty ^^^ are complete
+%TODO: make sure optimization portion is well thought-out
+%TODO: make sure language of choice is well thought out
+%TODO: mention always tried to be based on certain mathematical operations (bent functions, invertible affine transformations, etc)
+
 \begin{abstract}
 Cryptographically secure block ciphers are based around Shannon's principles of confusion and diffusion \cite{Kim90astudy}. It is important to optimize these characteristics in order to make ciphers less susceptible to linear and differential cryptanalysis attacks. The most traditional way to integrate mathematical structures that improve the confusion of a block cipher is to use a substitution box (or simply, an S-box). Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis. In this work, we attempt to formulate the problem of cryptographically strong S-box designs (and subsequently, any confusion layer design) into a mixed integer programming problem that can be optimized to yield the high diffusion and confusion dividends in resulting cipher implementations.
 \end{abstract}
@@ -105,9 +111,13 @@ Cryptographically secure primitives utilize diffusion and confusion layers that 
 \begin{enumerate}
 	\item Low differential propagation probability
 	\item High branch number
-	\item Satisfaction of the SAC criterion
+	\item High satisfaction of the SAC criterion
 	\item High degree of non-linearity
 \end{enumerate}
+
+TODO: goal is to abstract construction away from mathematical operations, find optimal input/output pairs for the S-box, and then try to fit a mathematical operation on top of that
+TODO: discuss multiple cost functions (and how to handle them)
+TODO: the only design variable is thus the input/output pairs, and the constraints are that they must all be unique since the S-box is over a finite field (and the function is bijective)
 
 Therefore, it is natural to reduce the problem of finding an optimal confusion layer for cryptographic primitives to an integer programming problem that seeks to optimize each one of these construction dimensions. In other words, optimal confusion layer construction can be thought of an integer programming problem with multiple cost functions that share a single, balanced solution. The common solutions to these objectives (if they exist) are thus contained within the Pareto set for the problem.
 

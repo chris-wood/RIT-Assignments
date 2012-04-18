@@ -4,25 +4,25 @@
 
 %\setlength{\parindent}{0pt}
 
+\usepackage{tikz}
+\usetikzlibrary{arrows,%
+                shapes,positioning}
+
+\tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=0pt]
+\tikzstyle{selected vertex} = [vertex, fill=red!24]
+\tikzstyle{edge} = [draw,thick,-]
+\tikzstyle{weight} = [font=\small]
+\tikzstyle{selected edge} = [draw,line width=5pt,-,red!50]
+\tikzstyle{ignored edge} = [draw,line width=5pt,-,black!20]
+
 \newcommand{\caw}{Christopher Wood}
+\newcommand{\spr}{Stanis{\l}aw Radziszowski}
 \newcommand{\rit}{Rochester Institute of Technology}
 
 \newcommand{\cawtitle}[2]{
   \centerline{\bf \sc \LARGE #1}
   \vspace{.5pc}
   \centerline{\sc \large #2}
-  \vspace{.5pc}
-  \centerline{\small Christopher Wood}
-  \centerline{\small\today}
-  \vspace{1pc}
-}
-
-\newcommand{\cawtitlelong}[3]{
-  \centerline{\bf \sc \LARGE #1}
-  \vspace{.5pc}
-  \centerline{\sc \large #2}
-  \vspace{.5pc}
-  \centerline{\sc \large #3}
   \vspace{.5pc}
   \centerline{\small Christopher Wood}
   \centerline{\small\today}

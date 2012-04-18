@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class FTPController 
+public class FTPProtocolManager 
 {
 	/**
 	 * Socket and data streams for the control channel.
@@ -20,7 +20,7 @@ public class FTPController
 	
 	private FTPClient client;
 	
-	public FTPController(FTPClient client)
+	public FTPProtocolManager(FTPClient client)
 	{
 		this.client = client;
 	}
@@ -118,29 +118,7 @@ public class FTPController
 		return builder.toString();
 	}
 	
-	public void getFile(String command, String file) throws IOException
-	{
-		// Ask the server for this specific file
-		// TODO: use command as a map
-		//controlOut.writeBytes("retrieve" + " " + file + FTPClient.TELNET_END);
-		System.out.println(receiveControl());
-		
-		// Now, establish a connection!
-		
-		// Receive the data appropriately 
-		switch (client.tType)
-		{
-		case ASCII:
-			StringBuilder builder = new StringBuilder();
-			// TODO: do something here...
-			break;
-			
-		case BINARY:
-			System.err.println("Error: BINARY transfer type not supported.");
-			break;
-		}
-	}
-	
+	// TODO: move into FTPClient.java
 	public int sendPassiveCommand() throws IOException
 	{
 		// Send the command to switch to passive mode
@@ -166,7 +144,13 @@ public class FTPController
 		System.err.println("Error: unsupported connection.");
 	}
 	
-	// TODO: let the ftpclient invoke this
+	/**
+	 * TODO 
+	 * 
+	 * @param v1
+	 * @param v2
+	 * @return
+	 */
 	public int buildPort(String v1, String v2)
 	{
 		int port = 0;
