@@ -47,7 +47,7 @@ public class FTPClient
 	/**
 	 * The FTP protocol manager 
 	 */
-	private FTPProtocolManager ftpMgr;
+	private FTPTransmissionManager ftpMgr;
 	
 	/**
 	 * TODO: MOVE TO FTPProtocolManager
@@ -72,50 +72,38 @@ public class FTPClient
 	 */
 	public FTPClient()
 	{
-		ftpMgr = new FTPProtocolManager(this);
+		ftpMgr = new FTPTransmissionManager();
 	}
 	
+	/**
+	 * Attempt to connect to the specified FTP location
+	 * @param host
+	 * @return
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
 	public String connect(String host) throws UnknownHostException, IOException
 	{
+		this.host = host;
 		return ftpMgr.open(host, DEFAULT_TIMEOUT);
 	}
 	
 	// TODO: implement message handling routine in here (FTP.java simply parse user input and send to this client)
 	
+	/**
+	 * Send a control command to the FTP server and read its response.
+	 * 
+	 * @param command - the String command to send.
+	 * 
+	 * @return the response from the server.
+	 * 
+	 * @throws IOException - when an I/O error occurs when communicating with the server.
+	 */
 	public String sendCommand(String command) throws IOException
 	{
 		System.out.println("DEBUG: sending control: " + command);
 		ftpMgr.sendControl(command);
 		return ftpMgr.receiveControl();
-	}
-	
-	private String buildPortParam(ServerSocket socket)
-	{
-		StringBuilder builder = new StringBuilder();
-		//builder.append("(");
-		
-		// Get the IP address and convert into bytes
-		InetAddress addr = null;
-		try {
-			addr = InetAddress.getLocalHost();
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//String strAddr = socket.getLocalSocketAddress().toString();
-		String strAddr = addr.getHostAddress();
-		System.out.println("IP address = " + strAddr);
-		System.out.println("port = " + socket.getLocalPort());
-		strAddr = strAddr.replaceAll("\\.", ",");
-		System.out.println("IP address = " + strAddr);
-		builder.append(strAddr);
-		
-		// Fill in the port information now
-		int p1 = socket.getLocalPort() / PORT_MODULUS; 
-		int p2 = socket.getLocalPort() % PORT_MODULUS; 
-		builder.append("," + p1 + "," + p2);
-		
-		return builder.toString();
 	}
 	
 	public String sendRequest(String command, String[] arguments) throws IOException
@@ -126,29 +114,23 @@ public class FTPClient
 		switch (tMode)
 		{
 		case ACTIVE:
-			System.out.println("DEBUG: Establishing active connection");
-			//dProcess.establishConnection(FTPClient.TransferMode.ACTIVE, 0);
+			FTP.debugPrint("Establishing active connection");
 			
+			// Initialize a new active socket and then send the port 
+			// command to the server so it can connect.
 			activeSocket = new ServerSocket(0);
 			String portParam = buildPortParam(activeSocket);
-			System.out.println("port param = " + portParam);
+			FTP.debugPrint("port param = " + portParam);
 			ftpMgr.sendControl("PORT " + portParam);
-			System.out.println("DEBUG: received: " + ftpMgr.receiveControl());
+			FTP.debugPrint("received " + ftpMgr.receiveControl());
 			
 			// Send the command to the FTP server
-			StringBuilder builder = new StringBuilder();
-			builder.append(command);
-			if (arguments != null)
-			{
-				for (int i = 0; i < arguments.length; i++)
-				{
-					builder.append(" " + arguments[i]);
-				}
-			}
-			builder.append(TELNET_END);
+			// TODO: put into a separate method
+			
+			//builder.append(TELNET_END);
 			
 			// Send the request command
-			ftpMgr.sendControl(builder.toString());
+			ftpMgr.sendControl(buildCommand(command, arguments));
 			System.out.println("Trying to accept...");
 			activeSocket.setSoTimeout(2000);
 			dataSocket = activeSocket.accept();
@@ -158,7 +140,7 @@ public class FTPClient
 			// Retrieve the data
 			System.out.println("DEBUG: Data retrieved: ");
 			data = readStream();
-			builder = new StringBuilder();
+			StringBuilder builder = new StringBuilder();
 			for (Byte b : data)
 			{
 				builder.append((char)b.byteValue());
@@ -223,7 +205,6 @@ public class FTPClient
 			System.out.println(builder.toString());
 			
 			System.out.println("DEBUG 1: " + ftpMgr.receiveControl());
-			//System.out.println("DEBUG 2: " + cProcess.receiveControl());
 			
 			break;
 		}
@@ -298,5 +279,53 @@ public class FTPClient
 		}
 		
 		return data;
+	}
+	
+	private String buildPortParam(ServerSocket socket)
+	{
+		StringBuilder builder = new StringBuilder();
+		
+		try 
+		{
+			// Get the IP address and convert into bytes
+			InetAddress addr = InetAddress.getLocalHost();
+			String strAddr = addr.getHostAddress();
+			strAddr = strAddr.replaceAll("\\.", ",");
+			builder.append(strAddr);
+			
+			// Fill in the port information at the end
+			int p1 = socket.getLocalPort() / PORT_MODULUS; 
+			int p2 = socket.getLocalPort() % PORT_MODULUS; 
+			builder.append("," + p1 + "," + p2);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Helper method that constructs a single string object
+	 * from a single command and array of command arguments.
+	 * 
+	 * @param command - the single command to use as the basis.
+	 * 
+	 * @param arguments - the arguments appended to this command.
+	 * 
+	 * @return a single String that represents the command with its arguments.
+	 */
+	private String buildCommand(String command, String[] arguments)
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append(command);
+		if (arguments != null)
+		{
+			for (int i = 0; i < arguments.length; i++)
+			{
+				builder.append(" " + arguments[i]);
+			}
+		}
+		return builder.toString();
 	}
 }

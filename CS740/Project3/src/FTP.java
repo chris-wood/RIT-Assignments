@@ -21,7 +21,12 @@ public class FTP
 	/**
 	 * The fixed terminal prompt string.
 	 */
-	public static final String PROMPT = "FTP> ";
+	private static final String PROMPT = "FTP> ";
+	
+	/**
+	 * The regex string used to split up user commands.
+	 */
+	private static final String SPLIT_STRING = "\\s+";
 
 	/**
 	 * Array of user-friendly available commands supported by 
@@ -64,7 +69,7 @@ public class FTP
 	/**
 	 * Debug mode flag.
 	 */
-	private boolean debugMode = false;
+	private static boolean debugMode = true;
 
 	/**
 	 * Array of help messages displayed to the user when requested.
@@ -88,13 +93,65 @@ public class FTP
 	};
 	
 	/**
-	 * Helper method that handles debug messages (printing to console, file, etc).
+	 * The FTP client that this main class uses.
+	 */
+	private FTPClient client;
+	
+	/**
+	 * Helper method that handles debug messages (printing to console, 
+	 * file, etc).
 	 *
 	 * @param message - the debug message to handle.
 	 */
-	public void debugPrint(String message)
+	public static void debugPrint(String message)
 	{
-		System.out.println("TFTP DEBUG: " + message);
+		if (debugMode)
+		{
+			System.out.println("Debug: " + message);
+		}
+	}
+	
+	/**
+	 * Helper method that will print all error messages to the 
+	 * standard err stream.
+	 *  
+	 * @param error - the error message
+	 */
+	public static void errorPrint(String error)
+	{
+		System.err.println("Error: " + error);
+	}
+	
+	/**
+	 * Attempt to establish a control connection with the 
+	 * specified server.
+	 * 
+	 * @param server - the host target server
+	 * 
+	 * @return true if successful, false otherwise
+	 */
+	public boolean connect(String server)
+	{
+		boolean successful = true;
+		client = new FTPClient();
+		
+		try 
+		{
+			debugPrint("Connecting to: " + server + ".");
+			System.out.println(client.connect(server));
+			debugPrint("Connection successful.");
+		}
+		catch (UnknownHostException e) 
+		{
+			System.err.println("Error: " + e.getMessage());
+			successful = false;
+		} catch (IOException e) 
+		{
+			System.err.println("Error: " + e.getMessage());
+			successful = false;
+		}
+		
+		return successful;
 	}
 	
 	/**
@@ -103,27 +160,12 @@ public class FTP
 	 * 
 	 * @param server - the host FTP server to connect to.
 	 */
-	public void processInput(String server)
+	public void processInput()
 	{
 		Scanner in = new Scanner(System.in);
 		boolean eof = false;
 		String input = null;
-		
-		System.out.println("DEBUG: Connecting to: " + server);
-		FTPClient client = new FTPClient();
-		System.out.println("DEBUG: Connection successful.");
-		try {
-			System.out.println(client.connect(server));
-		} catch (UnknownHostException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-
-		// Begin accepting and processing user commands to interact
-		// with the FTP server.
+	
 		do 
 		{
 			try 
@@ -140,189 +182,157 @@ public class FTP
 			// Keep going if we have not hit end of file
 			if (!eof && input.length() > 0) 
 			{
-				int cmd = -1;
-				String argv[] = input.split("\\s+");
+				// Parse the command and handle it appropriately 
+				String argv[] = input.split(SPLIT_STRING);
+				int cmd = parseCommand(argv[0]);
 				
-				//debug
-				for (int i = 0; i < argv.length; i++)
+				try 
 				{
-					System.out.println("argv[" + i + "]: " + argv[i]);
-				}
-
-				// TODO
-				for (int i = 0; i < USER_COMMANDS.length && cmd == -1; i++) 
-				{
-					if (USER_COMMANDS[i].equalsIgnoreCase(argv[0])) 
+					switch (cmd) 
 					{
-						cmd = i;
-					}
-				}
-				
-				// TODO: write method that forwards immediate queries (e.g. ascii, pwd, dir, etc...)
-
-				// Handle the command appropriately
-				switch (cmd) 
-				{
-				case ASCII:
-					try {
-						client.setTransferType(FTPClient.TransferType.ASCII, FTP_COMMANDS[ASCII]);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					break;
-				case BINARY:
-					try {
-						client.setTransferType(FTPClient.TransferType.BINARY, FTP_COMMANDS[BINARY]);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					break;
-					
-				case DIR:
-					if (argv.length == 1)
-					{
-						// TODO: make a map of user commands to FTP protocol commands
-						try {
-							System.out.println(client.sendRequest(FTP_COMMANDS[DIR], null));
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					break;
-					
-				case PASSIVE:
-					if (argv.length == 1)
-					{ 
-						client.toggleTransferMode();
-					}
-					break;
-					
-				case CDUP:
-				case PWD:
-					if (argv.length == 1)
-					{
-						// TODO: make a map of user commands to FTP protocol commands
-						try {
-							System.out.println(client.sendCommand(FTP_COMMANDS[PWD]));
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					break;
-					
-				case CD:
-					if (argv.length == 2)
-					{
-						// TODO: make a map of user commands to FTP protocol commands
-						try {
-							System.out.println(client.sendCommand(FTP_COMMANDS[CD] + " " + argv[1]));
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					break;
-
-				case DEBUG:
-					debugMode = !debugMode;
-					if (debugMode)
-					{
-						debugPrint("Debug mode enabled.");
-					}
-					else
-					{
-						debugPrint("Debug mode disabled.");
-					}
-					break;
-
-				case GET:
-					if (argv.length == 2)
-					{
-						try {
-							System.out.println(client.sendRequest(FTP_COMMANDS[GET], new String[] {argv[1]}));
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					break;
-
-				case HELP:
-					for (int i = 0; i < HELP_MESSAGE.length; i++) 
-					{
-						System.out.println(HELP_MESSAGE[i]);
-					}
-					break;
-
-				case PUT:
-					System.err.println("Error: command not supported");
-					break;
-
-				case QUIT:
-					eof = true;
-					break;
-
-				case USER:
-					// Parse the user information
-					if (argv.length == 2)
-					{
-						//try 
+					case ASCII:
+						if (argv.length == 1) // TODO: PUT THESE NUMBERS INTO ARRAY (USER_COMMAND_LENGTH[ASCII] = 1)
 						{
-							String response = null;
-							try {
-								response = client.sendCommand(FTP_COMMANDS[USER] + " " + argv[1]);
-								System.out.println(response);
-								if (response.contains("331"))
-								{
-									System.out.print("Enter a password: ");
-									String pw = in.nextLine();
-									
-									// TODO: how should we send the password
-									System.out.println("Sending password: " + pw + " to server...");
-									try {
-										System.out.println(client.sendCommand("PASS" + " " + pw)); // TODO: magic string
-									} catch (IOException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-								}
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+							client.setTransferType(FTPClient.TransferType.ASCII, FTP_COMMANDS[ASCII]);
+						}
+						break;
+						
+					case BINARY:
+						if (argv.length == 1)
+						{
+							client.setTransferType(FTPClient.TransferType.BINARY, FTP_COMMANDS[BINARY]);
+						}
+						break;
+						
+					case DIR:
+						if (argv.length == 1)
+						{
+							client.sendRequest(FTP_COMMANDS[DIR], null);
+						}
+						break;
+						
+					case PASSIVE:
+						if (argv.length == 1)
+						{ 
+							client.toggleTransferMode();
+						}
+						break;
+						
+					case CDUP:
+					case PWD:
+						if (argv.length == 1)
+						{
+							client.sendCommand(FTP_COMMANDS[cmd]);
+						}
+						break;
+						
+					case CD:
+						if (argv.length == 2)
+						{
+							client.sendCommand(FTP_COMMANDS[CD] + " " + argv[1]);
+						}
+						break;
+
+					case DEBUG:
+						if (debugMode)
+						{
+							debugPrint("Debug mode enabled.");
+							debugMode = !debugMode;
+						}
+						else
+						{
+							debugMode = !debugMode;
+							debugPrint("Debug mode disabled.");
+						}
+						break;
+
+					case GET:
+						if (argv.length == 2)
+						{
+							client.sendRequest(FTP_COMMANDS[GET], new String[] {argv[1]});
+						}
+						break;
+
+					case HELP:
+						for (int i = 0; i < HELP_MESSAGE.length; i++) 
+						{
+							System.out.println(HELP_MESSAGE[i]);
+						}
+						break;
+
+					case PUT:
+						System.err.println("Error: command not supported");
+						break;
+
+					case QUIT:
+						eof = true;
+						break;
+
+					case USER:
+						// Parse the user information
+						if (argv.length == 2)
+						{
+							String response = client.sendCommand(FTP_COMMANDS[USER] + " " + argv[1]);
+							System.out.println(response);
+							if (response.contains("331"))
+							{
+								System.out.print("Enter a password: ");
+								String pw = in.nextLine();
+								
+								// TODO: how should we send the password
+								System.out.println("Sending password: " + pw + " to server...");
+								System.out.println(client.sendCommand("PASS" + " " + pw)); // TODO: magic string
 							}
-						} 
-						//catch (IOException e) 
-						{
-							//e.printStackTrace();
 						}
-					}
-					else
-					{
-						//System.err.println("Error: ")
-						// TODO: display user command error to user
-					}
-					break;
+						break;
 
-				default:
-					System.out.println("Invalid command");
+					default:
+						System.out.println("Invalid command.");
+					}
+				} 
+				catch (IOException e)
+				{
+					errorPrint(e.getMessage());
+					eof = true;
 				}
 			}
 		} 
 		while (!eof);
 	}
+	
+	/**
+	 * Helper routine to handle the translation between string 
+	 * commands and their integer command equivalents.
+	 * 
+	 * @param input - string representation for a user command.
+	 * @return corresponding command ID if valid, -1 if not.
+	 */
+	private int parseCommand(String input)
+	{	
+		int cmd = -1;
+
+		// Loop through the list of available user commands and return 
+		// the appropriate command ID.
+		for (int i = 0; i < USER_COMMANDS.length && cmd == -1; i++) 
+		{
+			if (USER_COMMANDS[i].equalsIgnoreCase(input)) 
+			{
+				cmd = i;
+			}
+		}
+		
+		return cmd;
+	}
 
 	/**
-	 * TODO
+	 * The main entry point into the program that checks the validity
+	 * of the command line arguments and then jumps into the main
+	 * user input processing loop.
 	 * 
 	 * @param args - command line arguments 
 	 */
 	public static void main(String args[]) 
 	{
-		// Ensure we have the right amount of command line arguments
 		if (args.length != 1) 
 		{
 			System.err.println("Usage: java FTP server");
@@ -330,8 +340,13 @@ public class FTP
 		}
 		else
 		{
+			// Attempt to establish a connection with the server and, if successful,
+			// begin parsing user input.
 			FTP ftp = new FTP();
-			ftp.processInput(args[0]);
+			if (ftp.connect(args[0]))
+			{
+				ftp.processInput();
+			}
 		}
 	}
 

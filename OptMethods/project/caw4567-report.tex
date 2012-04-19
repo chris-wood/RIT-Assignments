@@ -54,7 +54,7 @@ Linear cryptanalysis is not the only attack that threatens existing block cipher
 \begin{eqnarray*}
 \Delta Y= [\Delta Y_1 \oplus \Delta Y_2 \oplus ... \oplus \Delta Y_n]
 \end{eqnarray*}
-where $\Delta X_i = X_{i,1} oplus X_{i,2}$ and $\Delta Y_i = Y_{i,1} oplus Y_{i,2}$. It is an ideal block cipher the output different $\Delta Y$ for a specific input different $\Delta X$ will occur with a probability of approximately $\frac{1}{2^n}$ (i.e. it produces random output based on every input block). Note that it is common to represent the input and output difference pairs as $(\Delta X, \Delta Y)$ (which are referred to as differentials).
+where $\Delta X_i = X_{i,1} \oplus X_{i,2}$ and $\Delta Y_i = Y_{i,1} \oplus Y_{i,2}$. It is an ideal block cipher the output different $\Delta Y$ for a specific input different $\Delta X$ will occur with a probability of approximately $\frac{1}{2^n}$ (i.e. it produces random output based on every input block). Note that it is common to represent the input and output difference pairs as $(\Delta X, \Delta Y)$ (which are referred to as differentials).
 
 With the idea of differential pairs in mind, we define differential cryptanalysis as the process of finding differentials that occur with a probability much higher than $\frac{1}{2^n}$, which subsequently gives rise to a statistical correlation between the relationship between the input and output of a block cipher and can allow one to deduce the private key used in the cipher. Therefore, it is ideal to maximize the amount of randomness introduced by the block cipher through each iteration. Clearly, this necessity can be traced back to the need for high diffusion levels in block ciphers.
 
