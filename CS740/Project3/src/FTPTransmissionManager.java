@@ -18,6 +18,10 @@ public class FTPTransmissionManager
 	private BufferedOutputStream controlOut = null;
 	private BufferedReader controlIn = null;
 	
+	private static final int END_CODE_INDEX = 3;
+	private static final char HYPHEN = '-';
+	private static final char SPACE = ' ';
+	
 	/**
 	 * Open a connection to the host FTP server to begin a file
 	 * read or write operation.
@@ -42,7 +46,7 @@ public class FTPTransmissionManager
 		
 		// Get the initial reply from the server (if any) and return it
 		System.out.println("DEBUG: getting greeting.");
-		return receiveControl();
+		return receiveControl(true);
 	}
 
 	/**
@@ -69,7 +73,7 @@ public class FTPTransmissionManager
 		// Flush the stream first
 		if (controlIn.ready() && (controlSocket.getInputStream().available() > 0))
 		{
-			System.out.println(receiveControl());
+			System.out.println(receiveControl(true));
 		}
 		
 		System.out.println("DEBUG: sending control: " + command);
@@ -78,25 +82,47 @@ public class FTPTransmissionManager
 		String cmd = command + FTPClient.TELNET_END;
 		controlOut.write(cmd.getBytes(), 0, cmd.length());
 		controlOut.flush();
-		for (int i = 0; i < cmd.length(); i++)
+		/*for (int i = 0; i < cmd.length(); i++)
 		{
 			System.out.println(cmd.getBytes()[i]);
-		}
+		}*/
 	}
 	
-	public String receiveControl() throws IOException
+	public String receiveControl(boolean wait) throws IOException
 	{
 		// Reconstruct the input, byte by byte
 		StringBuilder builder = new StringBuilder();
 		try 
 		{
-			String line;
-			do 
+			// Simulate a busy-wait while data is expected to retrieve
+			// TODO: would a timeout be better?
+			if (wait)
+			{
+				while (!(controlSocket.getInputStream().available() > 0))
+				{
+					// Busy wait
+				}
+			}
+			
+			// Read in the immediate response and then check to see if more is on the way
+			String line = controlIn.readLine();
+			builder.append(line);
+			boolean endOfReply = true;
+			if (line.charAt(END_CODE_INDEX) == HYPHEN)
+			{
+				endOfReply = false;
+			}
+			
+			// Loop until we reach the end of the reply
+			while (!endOfReply)
 			{
 				line = controlIn.readLine();
-				builder.append(line + "\n");
+				builder.append("\n" + line);
+				if (isFtpResponse(line) && line.charAt(END_CODE_INDEX) == SPACE)
+				{
+					endOfReply = true;
+				}
 			}
-			while (controlIn.ready());
 		}
 		catch (EOFException e)
 		{
@@ -109,6 +135,12 @@ public class FTPTransmissionManager
 	// TODO: move into FTPClient.java
 	public int sendPassiveCommand() throws IOException
 	{
+		// Flush the stream first
+		if (controlIn.ready() && (controlSocket.getInputStream().available() > 0))
+		{
+			System.out.println(receiveControl(false));
+		}
+		
 		// Send the command to switch to passive mode
 		//controlOut.writeBytes("PASV" + FTPClient.TELNET_END);
 		String cmd = "PASV" + FTPClient.TELNET_END;
@@ -116,7 +148,7 @@ public class FTPTransmissionManager
 		controlOut.flush();
 		
 		// Retrieve the response and parse it 
-		String result = receiveControl();
+		String result = receiveControl(true);
 		System.out.println("DEBUG: passive command response: " + result);
 		int startIndex = result.indexOf('(') + 1;
 		int endIndex = result.indexOf(')', startIndex); 
@@ -127,6 +159,23 @@ public class FTPTransmissionManager
 		return buildPort(splits[4], splits[5]);
 	}
 	
+	private boolean isFtpResponse(String line)
+	{
+		boolean valid = false;
+		
+		try
+		{
+			Integer.parseInt(line.substring(0, END_CODE_INDEX));
+			valid = true;
+		}
+		catch (Exception e)
+		{
+			// Do nothing, this was handled okay.
+		}
+		
+		return valid;
+	}
+	
 	/**
 	 * TODO 
 	 * 
@@ -134,7 +183,7 @@ public class FTPTransmissionManager
 	 * @param v2
 	 * @return
 	 */
-	public int buildPort(String v1, String v2)
+	private int buildPort(String v1, String v2)
 	{
 		int port = 0;
 		

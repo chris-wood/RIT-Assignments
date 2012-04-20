@@ -15,8 +15,6 @@ import java.util.ArrayList;
  */
 public class FTPClient 
 {	
-	// TODO: change all to private that should be private
-	
 	/**
 	 * The server host name and port that we connect to for file I/O.
 	 */
@@ -36,13 +34,13 @@ public class FTPClient
 	 * Enumerations for the possible transfer types available.
 	 */
 	public static enum TransferType {ASCII, BINARY};
-	public TransferType tType = TransferType.BINARY; // TODO make private
+	public TransferType tType = TransferType.BINARY; 
 	
 	/**
 	 * Enumerations for the possible transfer modes available.
 	 */
 	public static enum TransferMode {ACTIVE, PASSIVE};
-	public TransferMode tMode = TransferMode.ACTIVE; // TODO make private
+	public TransferMode tMode = TransferMode.PASSIVE; 
 	
 	/**
 	 * The FTP protocol manager 
@@ -103,12 +101,172 @@ public class FTPClient
 	{
 		System.out.println("DEBUG: sending control: " + command);
 		ftpMgr.sendControl(command);
-		return ftpMgr.receiveControl();
+		return ftpMgr.receiveControl(true);
+	}
+	
+	public void getFile(String command, String file)
+	{
+		// This is a special request - just collect the bytes and then write them to disk 
+		if (openDataConnection())
+		{
+			// Handle the data connection logic first
+			try 
+			{
+			switch (tMode)
+			{
+			case ACTIVE:
+				FTP.debugPrint("Establishing active connection");
+				
+				
+				
+				// Send the request command
+				ftpMgr.sendControl(command + " " + file);
+				System.out.println("Trying to accept...");
+				activeSocket.setSoTimeout(2000);
+				dataSocket = activeSocket.accept();
+				dataIn = new DataInputStream(dataSocket.getInputStream());
+				System.out.println("It accepted!");
+				
+				System.out.println("DEBUG 1: " + ftpMgr.receiveControl(true));
+				
+				// Retrieve the data
+				System.out.println("DEBUG: Data retrieved: ");
+				ArrayList<Byte> data = readStream();
+				/*StringBuilder builder = new StringBuilder();
+				for (Byte b : data)
+				{
+					builder.append((char)b.byteValue());
+				}
+				System.out.println(builder.toString());*/
+				//System.out.println("DEBUG 2: " + ftpMgr.receiveControl());
+				
+				// TODO: this works.. just make it cleaner
+				closeDataConnection();
+				
+				break;
+			case PASSIVE:
+				// Send the command to the FTP server
+				// TODO: move into new function (by self)
+				ftpMgr.sendControl(command + " " + file);
+				
+				// Retrieve the data
+				System.out.println("DEBUG: Data retrieved: ");
+				data = readStream();
+				/*ArrayList<Byte> builder = new StringBuilder();
+				for (Byte b : data)
+				{
+					builder.append((char)b.byteValue());
+				}
+				System.out.println(builder.toString());*/
+				
+				System.out.println("DEBUG 1: " + ftpMgr.receiveControl(true));
+				
+				// THIS MUST HAPPEN LUL
+				closeDataConnection();
+				
+				break;
+			}
+			}
+			catch (IOException e)
+			{
+				// TODO: handle this appropriately
+			}
+			
+			closeDataConnection();
+		}
+	}
+	
+	private boolean openDataConnection()
+	{
+		// TODO: use this method to initialize a data connection with the server
+		// just sends either port() or passive() command to the server
+		
+		boolean successful = true;
+		
+		switch (tMode)
+		{
+		case ACTIVE:
+			// Initialize a new active socket and then send the port 
+			// command to the server so it can connect.
+			try 
+			{
+				activeSocket = new ServerSocket(0);
+				String portParam = buildPortParam(activeSocket);
+				FTP.debugPrint("port param = " + portParam);
+				ftpMgr.sendControl("PORT " + portParam);
+				FTP.debugPrint("received " + ftpMgr.receiveControl(true));
+			} 
+			catch (IOException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				successful = false;
+			}
+			break;
+			
+		case PASSIVE:
+			try 
+			{
+				System.out.println("DEBUG: Establishing passive connection");
+				int port = ftpMgr.sendPassiveCommand();
+				System.out.println("DEBUG: FTP server returned with port: " + port);
+				//dProcess.establishConnection(FTPClient.TransferMode.PASSIVE, port);
+				
+				System.out.println("DEBUG: attempting to connect directly to server.");
+				dataSocket = new Socket(host, port); // parse resulting stuff!
+				System.out.println("DEBUG: connection returned");
+				dataIn = new DataInputStream(dataSocket.getInputStream());
+			} 
+			catch (UnknownHostException e) 
+			{
+				e.printStackTrace();
+				successful = false;
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+				successful = false;
+			}
+			break;
+		}
+		
+		return successful;
+	}
+	
+	private boolean closeDataConnection()
+	{
+		// TODO: perform the closing routine 
+		boolean successful = true;
+		
+		try 
+		{
+			switch (tMode)
+			{
+			case ACTIVE:
+				dataSocket.close();
+				activeSocket.close();
+				break;
+				
+			case PASSIVE:
+				dataSocket.close();
+				break;
+			}
+		} 
+		catch (IOException e)
+		{
+			successful = false;
+		}
+		
+		
+		return successful;
 	}
 	
 	public String sendRequest(String command, String[] arguments) throws IOException
 	{
 		ArrayList<Byte> data;
+		
+		if (openDataConnection())
+		{
 		
 		// Handle the data connection logic first
 		switch (tMode)
@@ -116,18 +274,7 @@ public class FTPClient
 		case ACTIVE:
 			FTP.debugPrint("Establishing active connection");
 			
-			// Initialize a new active socket and then send the port 
-			// command to the server so it can connect.
-			activeSocket = new ServerSocket(0);
-			String portParam = buildPortParam(activeSocket);
-			FTP.debugPrint("port param = " + portParam);
-			ftpMgr.sendControl("PORT " + portParam);
-			FTP.debugPrint("received " + ftpMgr.receiveControl());
 			
-			// Send the command to the FTP server
-			// TODO: put into a separate method
-			
-			//builder.append(TELNET_END);
 			
 			// Send the request command
 			ftpMgr.sendControl(buildCommand(command, arguments));
@@ -136,6 +283,8 @@ public class FTPClient
 			dataSocket = activeSocket.accept();
 			dataIn = new DataInputStream(dataSocket.getInputStream());
 			System.out.println("It accepted!");
+			
+			System.out.println("DEBUG 1: " + ftpMgr.receiveControl(true));
 			
 			// Retrieve the data
 			System.out.println("DEBUG: Data retrieved: ");
@@ -147,35 +296,15 @@ public class FTPClient
 			}
 			System.out.println(builder.toString());
 			
-			System.out.println("DEBUG 1: " + ftpMgr.receiveControl());
-			
 			// TODO: this works.. just make it cleaner
-			dataSocket.close();
-			activeSocket.close();
+			closeDataConnection();
+			
+			System.out.println("DEBUG 1: " + ftpMgr.receiveControl(true));
+			
+			//System.out.println("DEBUG 2: " + ftpMgr.receiveControl());
 			
 			break;
 		case PASSIVE:
-			System.out.println("DEBUG: Establishing passive connection");
-			int port = ftpMgr.sendPassiveCommand();
-			System.out.println("DEBUG: FTP server returned with port: " + port);
-			//dProcess.establishConnection(FTPClient.TransferMode.PASSIVE, port);
-			
-			try 
-			{
-				System.out.println("DEBUG: attempting to connect directly to server.");
-				dataSocket = new Socket(host, port); // parse resulting stuff!
-				System.out.println("DEBUG: connection returned");
-				dataIn = new DataInputStream(dataSocket.getInputStream());
-			} 
-			catch (UnknownHostException e) 
-			{
-				e.printStackTrace();
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-			}
-			
 			// Send the command to the FTP server
 			// TODO: move into new function (by self)
 			builder = new StringBuilder();
@@ -193,6 +322,7 @@ public class FTPClient
 			
 			// Send the request command
 			ftpMgr.sendControl(builder.toString());
+			System.out.println("DEBUG 1: " + ftpMgr.receiveControl(true));
 			
 			// Retrieve the data
 			System.out.println("DEBUG: Data retrieved: ");
@@ -203,10 +333,13 @@ public class FTPClient
 				builder.append((char)b.byteValue());
 			}
 			System.out.println(builder.toString());
+			// THIS MUST HAPPEN LUL
+			closeDataConnection();
 			
-			System.out.println("DEBUG 1: " + ftpMgr.receiveControl());
+			System.out.println("DEBUG 1: " + ftpMgr.receiveControl(true));
 			
 			break;
+		}
 		}
 		
 		// TODO: remove this return?
@@ -245,12 +378,12 @@ public class FTPClient
 		case ASCII:
 			tType = type;
 			ftpMgr.sendControl(cmd);
-			System.out.println(ftpMgr.receiveControl());
+			System.out.println(ftpMgr.receiveControl(true));
 			break;
 		case BINARY:
 			tType = type;
 			ftpMgr.sendControl(cmd);
-			System.out.println(ftpMgr.receiveControl());
+			System.out.println(ftpMgr.receiveControl(true));
 			break;
 		default:
 			System.err.println("Error: invalid transfer type");
@@ -327,5 +460,15 @@ public class FTPClient
 			}
 		}
 		return builder.toString();
+	}
+	
+	private int parseResponseCode(String response)
+	{
+		int code = -1;
+		
+		//for (int i = 0; i < response.length)
+		// TODO: create a loop that we simply iterate through!
+		
+		return code;
 	}
 }
