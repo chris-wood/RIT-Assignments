@@ -1,14 +1,29 @@
+/*
+ * FTPTransmissionManager.java
+ *
+ * Version: 4/3/12
+ */
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
+/**
+ * This class is responsible for handling the network communications
+ * with the server and is utilized by the main FTP client in order
+ * to perform actions according to the protocol specification outlined
+ * in the FTP RFC.
+ * 
+ * @author Christopher Wood (caw4567@rit.edu)
+ */
 public class FTPTransmissionManager 
 {
 	/**
@@ -18,9 +33,18 @@ public class FTPTransmissionManager
 	private BufferedOutputStream controlOut = null;
 	private BufferedReader controlIn = null;
 	
-	private static final int END_CODE_INDEX = 3;
-	private static final char HYPHEN = '-';
-	private static final char SPACE = ' ';
+	/**
+	 * Socket and data streams for the data channel.
+	 */
+	private Socket dataSocket = null;
+	private ServerSocket activeSocket = null;
+	private DataInputStream dataIn = null;
+	
+	/**
+	 * Commands for the port/passive controls that are below user level.
+	 */
+	private static final String PORT_COMMAND = "PORT";
+	private static final String PASSIVE_COMMAND = "PASV";
 	
 	/**
 	 * Open a connection to the host FTP server to begin a file
@@ -45,7 +69,7 @@ public class FTPTransmissionManager
 		controlIn = new BufferedReader(new InputStreamReader(controlSocket.getInputStream()));
 		
 		// Get the initial reply from the server (if any) and return it
-		System.out.println("DEBUG: getting greeting.");
+		FTP.debugPrint("Getting greeting.");
 		return receiveControl(true);
 	}
 
@@ -59,35 +83,158 @@ public class FTPTransmissionManager
 	 */
 	public void close() throws IOException 
 	{
-		// TODO: fix this logic
-		if (controlSocket != null && 
-				controlSocket.isConnected())
+		if (controlSocket != null && controlSocket.isConnected())
 		{
 			controlSocket.close();
 			controlSocket = null;
 		}
 	}
 	
+	/**
+	 * Prepare the data communication socket/stream for a connection.
+	 * 
+	 * @param timeout - the timeout for the socket communication
+	 * 
+	 * @throws IOException - when an I/O error occurs
+	 */
+	public void prepareActiveConnection(int timeout) throws IOException
+	{
+		activeSocket.setSoTimeout(2000);
+		dataSocket = activeSocket.accept();
+		dataIn = new DataInputStream(dataSocket.getInputStream());
+	}
+	
+	/**
+	 * Open a data connection with the server.
+	 * 
+	 * @param tMode - the transfer mode to use.
+	 *  
+	 * @return - true if successful, false otherwise
+	 */
+	public boolean openDataConnection(String host, FTPClient.TransferMode tMode)
+	{
+		boolean successful = true;
+		
+		switch (tMode)
+		{
+		case ACTIVE:
+			// Initialize a new active socket and then send the port 
+			// command to the server so it can connect.
+			try 
+			{
+				activeSocket = new ServerSocket(0);
+				String portParam = buildPortParam(activeSocket);
+				FTP.debugPrint("Port command parameter: " + portParam);
+				sendControl(PORT_COMMAND + " " + portParam);
+				FTP.debugPrint("Received: " + receiveControl(true));
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+				successful = false;
+			}
+			break;
+			
+		case PASSIVE:
+			try 
+			{
+				FTP.debugPrint("Establishing passive connection.");
+				int port = sendPassiveCommand();
+				if (port != -1)
+				{
+					// Now attempt to directly connect to the server
+					FTP.debugPrint("FTP server returned with port: " + port);
+					FTP.debugPrint("Attempting to connect directly to server.");
+					dataSocket = new Socket(host, port); 
+					FTP.debugPrint("Connection returned.");
+					dataIn = new DataInputStream(dataSocket.getInputStream());
+				}
+				else
+				{
+					successful = false;
+				}
+			} 
+			catch (UnknownHostException e) 
+			{
+				e.printStackTrace();
+				successful = false;
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+				successful = false;
+			}
+			break;
+		}
+		
+		return successful;
+	}
+	
+	/**
+	 * Close the data connection that is open with the server.
+	 * 
+	 * @param tMode - the transfer mode to use.
+	 * 
+	 * @return true if successful, false otherwise
+	 */
+	public boolean closeDataConnection(FTPClient.TransferMode tMode)
+	{
+		boolean successful = true;
+		
+		try 
+		{
+			switch (tMode)
+			{
+			case ACTIVE:
+				dataSocket.close();
+				activeSocket.close();
+				break;
+				
+			case PASSIVE:
+				dataSocket.close();
+				break;
+			}
+		} 
+		catch (IOException e)
+		{
+			successful = false;
+		}
+		
+		return successful;
+	}
+	
+	/**
+	 * Send a command/control string to the FTP server.
+	 * 
+	 * @param command - the command to send
+	 * 
+	 * @throws IOException - when an I/O error occurs
+	 */
 	public void sendControl(String command) throws IOException
 	{
-		// Flush the stream first
+		// Flush the stream first to get rid of back-logged data
 		if (controlIn.ready() && (controlSocket.getInputStream().available() > 0))
 		{
 			System.out.println(receiveControl(true));
 		}
 		
-		System.out.println("DEBUG: sending control: " + command);
-		//controlOut.write(command + FTPClient.TELNET_END);
-		//controlOut.flush();
+		// Now strip out the commands and send them to the server
+		FTP.debugPrint("Sending control: " + command);
 		String cmd = command + FTPClient.TELNET_END;
 		controlOut.write(cmd.getBytes(), 0, cmd.length());
 		controlOut.flush();
-		/*for (int i = 0; i < cmd.length(); i++)
-		{
-			System.out.println(cmd.getBytes()[i]);
-		}*/
 	}
 	
+	/**
+	 * Retrieve the control/command response from the server.
+	 * 
+	 * @param wait - parameter that indicates whether or not
+	 * 				 this should block until the server returns something.
+	 * 
+	 * @return - the String response
+	 * 
+	 * @throws IOException - when an I/O error occurs
+	 */
 	public String receiveControl(boolean wait) throws IOException
 	{
 		// Reconstruct the input, byte by byte
@@ -95,7 +242,6 @@ public class FTPTransmissionManager
 		try 
 		{
 			// Simulate a busy-wait while data is expected to retrieve
-			// TODO: would a timeout be better?
 			if (wait)
 			{
 				while (!(controlSocket.getInputStream().available() > 0))
@@ -108,7 +254,7 @@ public class FTPTransmissionManager
 			String line = controlIn.readLine();
 			builder.append(line);
 			boolean endOfReply = true;
-			if (line.charAt(END_CODE_INDEX) == HYPHEN)
+			if (line.charAt(FTPClient.END_CODE_INDEX) == FTPClient.HYPHEN)
 			{
 				endOfReply = false;
 			}
@@ -118,7 +264,8 @@ public class FTPTransmissionManager
 			{
 				line = controlIn.readLine();
 				builder.append("\n" + line);
-				if (isFtpResponse(line) && line.charAt(END_CODE_INDEX) == SPACE)
+				if (isFtpResponse(line) && line.charAt(FTPClient.END_CODE_INDEX) 
+						== FTPClient.SPACE)
 				{
 					endOfReply = true;
 				}
@@ -132,7 +279,13 @@ public class FTPTransmissionManager
 		return builder.toString();
 	}
 	
-	// TODO: move into FTPClient.java
+	/**
+	 * Send a passive command to the server (this is special).
+	 * 
+	 * @return the port to connect to.
+	 * 
+	 * @throws IOException - when an I/O error occurs
+	 */
 	public int sendPassiveCommand() throws IOException
 	{
 		// Flush the stream first
@@ -142,21 +295,29 @@ public class FTPTransmissionManager
 		}
 		
 		// Send the command to switch to passive mode
-		//controlOut.writeBytes("PASV" + FTPClient.TELNET_END);
-		String cmd = "PASV" + FTPClient.TELNET_END;
+		String cmd = PASSIVE_COMMAND + FTPClient.TELNET_END;
 		controlOut.write(cmd.getBytes(), 0, cmd.length());
 		controlOut.flush();
 		
 		// Retrieve the response and parse it 
 		String result = receiveControl(true);
-		System.out.println("DEBUG: passive command response: " + result);
-		int startIndex = result.indexOf('(') + 1;
-		int endIndex = result.indexOf(')', startIndex); 
-		String data = result.substring(startIndex, endIndex);
-		String[] splits = data.split(",");
+		System.out.println(result);
+		if (FTPClient.validResponseCode(PASSIVE_COMMAND, result))
+		{
+			FTP.debugPrint("Passive command response: " + result);
+			int startIndex = result.indexOf('(') + 1;
+			int endIndex = result.indexOf(')', startIndex); 
+			String data = result.substring(startIndex, endIndex);
+			String[] splits = data.split(",");
 		
-		// Return the resulting port number to use
-		return buildPort(splits[4], splits[5]);
+			// Return the resulting port number to use
+			return buildPort(splits[4], splits[5]);
+		}
+		else
+		{
+			System.out.println("GAH!");
+			return -1;
+		}
 	}
 	
 	private boolean isFtpResponse(String line)
@@ -165,7 +326,7 @@ public class FTPTransmissionManager
 		
 		try
 		{
-			Integer.parseInt(line.substring(0, END_CODE_INDEX));
+			Integer.parseInt(line.substring(0, FTPClient.END_CODE_INDEX));
 			valid = true;
 		}
 		catch (Exception e)
@@ -177,11 +338,12 @@ public class FTPTransmissionManager
 	}
 	
 	/**
-	 * TODO 
+	 * Rebuild the port number that was sent from the server.
 	 * 
-	 * @param v1
-	 * @param v2
-	 * @return
+	 * @param v1 - part 1 of the port
+	 * @param v2 - part 2 of the port
+	 * 
+	 * @return the corresponding port number
 	 */
 	private int buildPort(String v1, String v2)
 	{
@@ -189,14 +351,70 @@ public class FTPTransmissionManager
 		
 		try 
 		{
-			port = (Integer.parseInt(v1) * 256) + Integer.parseInt(v2);
+			port = (Integer.parseInt(v1) * FTPClient.PORT_MODULUS) 
+					+ Integer.parseInt(v2);
 		}
 		catch (NumberFormatException e)
 		{
-			System.err.println("Error: invalid port returned from host FTP server.");
+			FTP.errorPrint("Invalid port returned from host FTP server.");
 			port = -1;
 		}
 		
 		return port;
+	}
+	
+	/**
+	 * Build the port parameter used in active data connection mode.
+	 * 
+	 * @param socket - the socket hosting the data connection.
+	 * 
+	 * @return a String parameter for the PORT command
+	 */
+	private String buildPortParam(ServerSocket socket)
+	{
+		StringBuilder builder = new StringBuilder();
+		
+		try 
+		{
+			// Get the IP address and convert into bytes
+			InetAddress addr = InetAddress.getLocalHost();
+			String strAddr = addr.getHostAddress();
+			strAddr = strAddr.replaceAll("\\.", ",");
+			builder.append(strAddr);
+			
+			// Fill in the port information at the end
+			int p1 = socket.getLocalPort() / FTPClient.PORT_MODULUS; 
+			int p2 = socket.getLocalPort() % FTPClient.PORT_MODULUS; 
+			builder.append("," + p1 + "," + p2);
+		} 
+		catch (UnknownHostException e) 
+		{
+			FTP.errorPrint(e.getMessage());
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Read a stream of bytes from the data channel established with the 
+	 * FTP server.
+	 * 
+	 * @return - a list of bytes retrieved from the FTP server.
+	 * 
+	 * @throws IOException - when an I/O exception occurs communicating with
+	 * 						 the server.
+	 */
+	public ArrayList<Byte> readStream() throws IOException
+	{
+		ArrayList<Byte> data = new ArrayList<Byte>();
+		
+		// Read until the stream is end
+		int dataByte = 0;
+		while ((dataByte = dataIn.read()) != -1)
+		{
+			data.add((byte)dataByte);
+		}
+		
+		return data;
 	}
 }

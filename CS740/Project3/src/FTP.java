@@ -35,7 +35,7 @@ public class FTP
 	public static final String USER_COMMANDS[] = 
 	{ 
 		"ascii", "binary", "cd", "cdup", "debug", "dir", 
-		"get", "help", "passive", "put", "pwd", "quit", "user" 
+		"get", "help", "passive", "put", "pwd", "quit", "user", "pass"
 	};
 	
 	/**
@@ -45,8 +45,17 @@ public class FTP
 	 */
 	public static final String FTP_COMMANDS[] = 
 	{
-		"ASCII", "BINARY", "CWD", "CDUP", "DEBUG", "LIST", 
-		"RETR", "HELP", "PASV", "PUT", "PWD", "QUIT", "USER"
+		"A", "L 8", "CWD", "CDUP", "DEBUG", "LIST", 
+		"RETR", "HELP", "PASV", "PUT", "PWD", "QUIT", "USER", "PASS"
+	};
+	
+	/**
+	 * Array that maintains the length of each command line argument
+	 * array (including the command itself) to aid in command validation.
+	 */
+	public static final int FTP_CMD_LENGTH[] = 
+	{
+		1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1
 	};
 
 	/**
@@ -65,6 +74,7 @@ public class FTP
 	public static final int PWD = 10;
 	public static final int QUIT = 11;
 	public static final int USER = 12;
+	public static final int PASSWORD = 13;
 	
 	/**
 	 * Debug mode flag.
@@ -188,108 +198,88 @@ public class FTP
 				
 				try 
 				{
-					switch (cmd) 
+					if (cmd != -1 && argv.length == FTP_CMD_LENGTH[cmd])
 					{
-					case ASCII:
-						if (argv.length == 1) // TODO: PUT THESE NUMBERS INTO ARRAY (USER_COMMAND_LENGTH[ASCII] = 1)
+						switch (cmd) 
 						{
-							client.setTransferType(FTPClient.TransferType.ASCII, FTP_COMMANDS[ASCII]);
-						}
-						break;
-						
-					case BINARY:
-						if (argv.length == 1)
-						{
-							client.setTransferType(FTPClient.TransferType.BINARY, FTP_COMMANDS[BINARY]);
-						}
-						break;
-						
-					case DIR:
-						if (argv.length == 1)
-						{
+						case ASCII:
+							client.setTransferType(FTPClient.TransferType.ASCII, 
+									FTP_COMMANDS[ASCII]);
+							break;
+							
+						case BINARY:
+							client.setTransferType(FTPClient.TransferType.BINARY, 
+									FTP_COMMANDS[BINARY]);
+							break;
+							
+						case DIR:
 							client.sendRequest(FTP_COMMANDS[DIR], null);
-						}
-						break;
-						
-					case PASSIVE:
-						if (argv.length == 1)
-						{ 
+							break;
+							
+						case PASSIVE:
 							client.toggleTransferMode();
-						}
-						break;
-						
-					case CDUP:
-					case PWD:
-						if (argv.length == 1)
-						{
-							client.sendCommand(FTP_COMMANDS[cmd]);
-						}
-						break;
-						
-					case CD:
-						if (argv.length == 2)
-						{
-							client.sendCommand(FTP_COMMANDS[CD] + " " + argv[1]);
-						}
-						break;
-
-					case DEBUG:
-						if (debugMode)
-						{
-							debugPrint("Debug mode enabled.");
-							debugMode = !debugMode;
-						}
-						else
-						{
-							debugMode = !debugMode;
-							debugPrint("Debug mode disabled.");
-						}
-						break;
-
-					case GET:
-						if (argv.length == 2)
-						{
-							client.sendRequest(FTP_COMMANDS[GET], new String[] {argv[1]});
-						}
-						break;
-
-					case HELP:
-						for (int i = 0; i < HELP_MESSAGE.length; i++) 
-						{
-							System.out.println(HELP_MESSAGE[i]);
-						}
-						break;
-
-					case PUT:
-						System.err.println("Error: command not supported");
-						break;
-
-					case QUIT:
-						eof = true;
-						break;
-
-					case USER:
-						// Parse the user information
-						if (argv.length == 2)
-						{
-							String response = client.sendCommand(FTP_COMMANDS[USER] + " " + argv[1]);
-							System.out.println(response);
-							if (response.contains("331"))
+							break;
+							
+						case CDUP:
+						case PWD:
+							client.sendCommand(cmd, null);
+							break;
+							
+						case CD:
+							client.sendCommand(cmd, argv[1]);
+							break;
+	
+						case DEBUG:
+							if (debugMode)
+							{
+								debugPrint("Debug mode disabled.");
+								debugMode = !debugMode;
+							}
+							else
+							{
+								debugMode = !debugMode;
+								debugPrint("Debug mode enabled.");
+							}
+							break;
+	
+						case GET:
+							client.getFile(FTP_COMMANDS[cmd], argv[1]);
+							break;
+	
+						case HELP:
+							for (int i = 0; i < HELP_MESSAGE.length; i++) 
+							{
+								System.out.println(HELP_MESSAGE[i]);
+							}
+							break;
+	
+						case PUT:
+							System.err.println("Error: command not supported");
+							break;
+	
+						case QUIT:
+							eof = true;
+							break;
+	
+						case USER:
+							if (client.sendCommand(cmd, argv[1]))
 							{
 								System.out.print("Enter a password: ");
 								String pw = in.nextLine();
-								
-								// TODO: how should we send the password
-								System.out.println("Sending password: " + pw + " to server...");
-								System.out.println(client.sendCommand("PASS" + " " + pw)); // TODO: magic string
+								client.sendCommand(PASSWORD, pw);
 							}
+							break;
 						}
-						break;
-
-					default:
-						System.out.println("Invalid command.");
 					}
-				} 
+					else if (cmd == -1)
+					{
+						errorPrint("Invalid command.");
+					}
+					else
+					{
+						errorPrint("Invalid number of arguments for command " + argv[0] + ".");
+					}
+				}
 				catch (IOException e)
 				{
 					errorPrint(e.getMessage());
@@ -349,5 +339,4 @@ public class FTP
 			}
 		}
 	}
-
 } // FTP
