@@ -76,16 +76,17 @@ public class FTPClient
 		"200", // 1
 		"250", // 2
 		"250", // 3
-		"0", // 4
+		"0",   // 4
 		"150", // 5
 		"150", // 6
-		"0", // 7
+		"0",   // 7
 		"227", // 8
-		"0", // 9
+		"0",   // 9
 		"257", // 10
 		"331", // 11
 		"331", // 12
-		"230"  // 13
+		"230", // 13
+		"200"  // 14
 	};
 	
 	/**
@@ -255,9 +256,11 @@ public class FTPClient
 		{
 		case ACTIVE:
 			tMode = TransferMode.PASSIVE;
+			FTP.debugPrint("Changing to passive mode.");
 			break;
 		case PASSIVE:
 			tMode = TransferMode.ACTIVE;
+			FTP.debugPrint("Changing to active mode.");
 			break;
 		}
 	}

@@ -34,8 +34,8 @@ public class FTP
 	 */
 	public static final String USER_COMMANDS[] = 
 	{ 
-		"ascii", "binary", "cd", "cdup", "debug", "dir", 
-		"get", "help", "passive", "put", "pwd", "quit", "user", "pass"
+		"ascii", "binary", "cd", "cdup", "debug", "dir", "get", 
+		"help", "passive", "put", "pwd", "quit", "user", "pass", "port"
 	};
 	
 	/**
@@ -45,8 +45,8 @@ public class FTP
 	 */
 	public static final String FTP_COMMANDS[] = 
 	{
-		"A", "L 8", "CWD", "CDUP", "DEBUG", "LIST", 
-		"RETR", "HELP", "PASV", "PUT", "PWD", "QUIT", "USER", "PASS"
+		"A", "L 8", "CWD", "CDUP", "DEBUG", "LIST", "RETR", 
+		"HELP", "PASV", "PUT", "PWD", "QUIT", "USER", "PASS", "PORT"
 	};
 	
 	/**
@@ -75,6 +75,7 @@ public class FTP
 	public static final int QUIT = 11;
 	public static final int USER = 12;
 	public static final int PASSWORD = 13;
+	public static final int PORT = 14;
 	
 	/**
 	 * Debug mode flag.

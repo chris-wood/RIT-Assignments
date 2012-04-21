@@ -126,7 +126,14 @@ public class FTPTransmissionManager
 				String portParam = buildPortParam(activeSocket);
 				FTP.debugPrint("Port command parameter: " + portParam);
 				sendControl(PORT_COMMAND + " " + portParam);
-				FTP.debugPrint("Received: " + receiveControl(true));
+				
+				// Validate the response
+				String response = receiveControl(true);
+				System.out.println(response);
+				if (!FTPClient.validResponseCode(PORT_COMMAND, response))
+				{
+					successful = false;
+				}
 			} 
 			catch (IOException e) 
 			{
