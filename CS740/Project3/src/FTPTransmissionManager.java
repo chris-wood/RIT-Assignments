@@ -132,6 +132,7 @@ public class FTPTransmissionManager
 				System.out.println(response);
 				if (!FTPClient.validResponseCode(PORT_COMMAND, response))
 				{
+					FTP.debugPrint("Failed to establish data connection.");
 					successful = false;
 				}
 			} 
@@ -158,6 +159,7 @@ public class FTPTransmissionManager
 				}
 				else
 				{
+					FTP.debugPrint("Failed to establish data connection.");
 					successful = false;
 				}
 			} 
@@ -187,6 +189,7 @@ public class FTPTransmissionManager
 	public boolean closeDataConnection(FTPClient.TransferMode tMode)
 	{
 		boolean successful = true;
+		FTP.debugPrint("Closing data connection.");
 		
 		try 
 		{
@@ -322,7 +325,7 @@ public class FTPTransmissionManager
 		}
 		else
 		{
-			System.out.println("GAH!");
+			FTP.debugPrint("Failed to establish passive connection.");
 			return -1;
 		}
 	}

@@ -154,7 +154,7 @@ public class FTP
 		}
 		catch (UnknownHostException e) 
 		{
-			System.err.println("Error: " + e.getMessage());
+			System.err.println("Error: Unknown host: " + e.getMessage());
 			successful = false;
 		} catch (IOException e) 
 		{
@@ -214,6 +214,7 @@ public class FTP
 							break;
 							
 						case DIR:
+							debugPrint("Requesting current working directory contents.");
 							client.sendRequest(FTP_COMMANDS[DIR], null);
 							break;
 							
@@ -222,11 +223,17 @@ public class FTP
 							break;
 							
 						case CDUP:
+							debugPrint("Changing to parent directory.");
+							client.sendCommand(cmd, null);
+							break;
+							
 						case PWD:
+							debugPrint("Requesting current working directory.");
 							client.sendCommand(cmd, null);
 							break;
 							
 						case CD:
+							debugPrint("Requesting to change to directory: " + argv[1]);
 							client.sendCommand(cmd, argv[1]);
 							break;
 	
@@ -244,10 +251,12 @@ public class FTP
 							break;
 	
 						case GET:
+							debugPrint("Requesting to get file: " + argv[1]);
 							client.getFile(FTP_COMMANDS[cmd], argv[1]);
 							break;
 	
 						case HELP:
+							debugPrint("Displaying list of available commands.");
 							for (int i = 0; i < HELP_MESSAGE.length; i++) 
 							{
 								System.out.println(HELP_MESSAGE[i]);
@@ -259,14 +268,17 @@ public class FTP
 							break;
 	
 						case QUIT:
+							debugPrint("Goodbye!");
 							eof = true;
 							break;
 	
 						case USER:
+							debugPrint("Trying to log in with user: " + argv[1]);
 							if (client.sendCommand(cmd, argv[1]))
 							{
 								System.out.print("Enter a password: ");
 								String pw = in.nextLine();
+								debugPrint("Trying to enter password: " + pw);
 								client.sendCommand(PASSWORD, pw);
 							}
 							break;

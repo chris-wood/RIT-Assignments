@@ -169,7 +169,15 @@ public class FTPClient
 				// Send the request command and display the response
 				FTP.debugPrint("Establishing active connection");
 				ftpMgr.sendControl(buildCommand(command, new String[]{file}));
-				ftpMgr.prepareActiveConnection(DEFAULT_TIMEOUT);
+				try
+				{
+					ftpMgr.prepareActiveConnection(DEFAULT_TIMEOUT);
+				} 
+				catch (Exception e)
+				{
+					FTP.errorPrint("Error while trying to establish active connection.");
+					FTP.errorPrint(e.getMessage());
+				}
 				break;
 				
 			case PASSIVE:			
@@ -278,11 +286,13 @@ public class FTPClient
 		switch (type)
 		{
 		case ASCII:
+			FTP.debugPrint("Chaning to ASCII transfer type.");
 			tType = type;
 			ftpMgr.sendControl("TYPE " + cmd);
 			System.out.println(ftpMgr.receiveControl(true));
 			break;
 		case BINARY:
+			FTP.debugPrint("Chaning to BINARY transfer type.");
 			tType = type;
 			ftpMgr.sendControl("TYPE " + cmd);
 			System.out.println(ftpMgr.receiveControl(true));
