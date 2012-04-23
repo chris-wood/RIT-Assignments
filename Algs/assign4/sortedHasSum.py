@@ -19,6 +19,12 @@ from math import sqrt
 ##########################################################################
 
 def sortedHasSum(S, x):
+	""" This function iteratively passes through the sorted sequence 
+		S, cmoputes the difference (X - a) for all elements a in
+		the first half of the sequence, and then checks for these
+		differences to be present in the second half of the list.
+		This is all possible because the list is sorted.
+	"""
 	# List to store pair-wise differences 
 	stack = list()
 

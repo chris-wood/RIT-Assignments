@@ -14,49 +14,73 @@ from math import sqrt
 
 ##########################################################################
 #
-# TODO: explain algorithm here
+# TODO: explain assignment solution here
 #
 ##########################################################################
-
-def split(S)
-	""" TODO
-	"""
-	if (len(S) == 0):
-		return ([], [])
-	elif (len(S) == 1):
-		return ([S[0]], [])
-	else:
-		splitA = list()
-		splitB = list()
-		index = 0
-		for x in S:
-			if (index % 2 == 0):
-				splitA.append(S[x])
-			else:
-				splitB.append(S[x])
-		return (split(splitA), split(splitB))
 			
 def merge(A, B):
-	""" TODO
+	""" Merge together the two sorted sequences A and B
+		and return the resulting sequence.
 	"""
-	C = list()
+	# Allocate space for the new list and set up the
+	# subsequence indices
+	result = []
+	i = 0
+	j = 0
+	
+	# Ensure that we traverse over all of A's and B's elements
+	while (i < len(A) and j < len(B)):
+		if (A[i] <= B[j]):
+			result.append(A[i])
+			i = i + 1
+		else:
+			result.append(B[j])
+			j = j + 1
+
+	# Append the left overs
+	while (i < len(A)):
+		result.append(A[i])
+		i = i + 1
+	while (j < len(B)):
+		result.append(B[j])
+		j = j + 1
+	
+	# Return the newly sorted sequence
+	return result
 
 def msort(S):
-	""" TODO
+	""" Sort the sequence S by splitting it into two
+		separate sequences, calling sort on the two
+		sub-sequences, and then merging those sequences
+		back together.
 	"""
-	print "do something!"
+	if (len(S) <= 1):
+		return S
+	else:
+		first = msort(S[:len(S)/2])
+		second = msort(S[len(S)/2:len(S)])
+		return merge(first, second)
 
 def hasSum(S, x):
-	""" TODO
+	""" Sort the sequence S using merge sort to guarantee a
+		O(nlogn) time complexity and then perform the O(n)
+		sortedHasSum routine that we used in part (a).
 	"""
 	# Sort the data to start using Merge Sort (O(nlogn))
-	msort(S)
+	print "Unsorted list: " + str(S)
+	sortedList = msort(S)
+	print "Sorted list: " + str(sortedList)
+	print "Target sum: " + str(x)
 
 	# Now run the sortedHasSum routine on S with target sum x
-	return sortedHasSum(S, x)
+	return sortedHasSum(sortedList, x)
 
 def sortedHasSum(S, x):
-	""" TODO
+	""" This function iteratively passes through the sorted sequence 
+		S, cmoputes the difference (X - a) for all elements a in
+		the first half of the sequence, and then checks for these
+		differences to be present in the second half of the list.
+		This is all possible because the list is sorted.
 	"""
 	# List to store pair-wise differences 
 	stack = list()
@@ -101,14 +125,12 @@ if (len(sys.argv) == 7):
 	# Run the sortedHasSum routine on the list and sum
 	print "List: " + str(newList)
 	print "Target sum: " + str(sum)
-	print "Result: " + str(sortedHasSum(newList, sum))
+	print "Result: " + str(hasSum(newList, sum))
 else:
 	# Fix some data for the sortedHasSum routine
-	newList = [1, 1, 5, 7, 14, 15, 100]
-	sum = 16
+	newList = [1, 5, 2, 100, 15, 23, 14]
+	sum = 29
 	
 	# Run the sortedHasSum routine on the list and sum
-	print "List: " + str(newList)
-	print "Target sum: " + str(sum)
-	print "Result: " + str(sortedHasSum(newList, sum))
+	print "Result: " + str(hasSum(newList, sum))
 
