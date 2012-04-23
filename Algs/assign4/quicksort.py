@@ -32,14 +32,18 @@ def partition(A, p, r):
 	i = i + 1
 	temp = A[i]
 	A[i] = A[r]
-	A[r] = A[i]
+	A[r] = temp
 	return i
 
 def sort(A, p, r):
 	if (p < r):
 		q = partition(A, p, r)
-		sort(A, p, q - 1)
-		sort(A, q + 1, r)
+		if (q < ((p + r) / 2)):
+			sort(A, p, q - 1)
+			sort(A, q + 1, r)
+		else:
+			sort(A, q + 1, r)
+			sort(A, p, q - 1)
 	return A	
 
 """ Run the quicksort function.
@@ -52,5 +56,6 @@ if (len(sys.argv) == 6):
 else:
 	# Run the quicksort routine with some random data
 	newList = [1, 2, 5, 3, 1]
-	print sort(newList, 0, 4)
+	print "Unsorted: " + str(newList)
+	print "Sorted: " + str(sort(newList, 0, 4))
 
