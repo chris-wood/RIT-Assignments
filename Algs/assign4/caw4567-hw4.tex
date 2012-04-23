@@ -57,7 +57,7 @@
 \begin{document}
 \cawtitle{4005-800 Algorithms}{Homework 4}
 \begin{prob}{1-a}
-TODO
+Prove that for any $n \in \mathbb{N}, \lfloor(n+1)/2\rfloor = \lceil n/2 \rceil$.
 \end{prob}
 \begin{sol}
 
@@ -87,7 +87,7 @@ Thus, since a number $n \in \mathbb{N}$ can only be even or odd, we can conclude
 \end{sol}
 
 \begin{prob}{1-b}
-TODO
+Prove that for any $n \in \mathbb{N}, \lfloor n/2\rfloor + 1 = \lceil (n+1)/2 \rceil$.
 \end{prob}
 \begin{sol}
 \textbf{Case 1:} $n$ is even ($2$ $|$ $n$, or $n = 2m$ for some $m \in \mathbb{N}$) 
@@ -118,7 +118,7 @@ Thus, since a number $n \in \mathbb{N}$ can only be even or odd, we can conclude
 \end{sol}
 
 \begin{prob}{1-c}
-
+Let $D(n) = T(n+1) - T(n)$. Determine a recurrence for $D(n)$.
 \end{prob}
 \begin{sol}
 
@@ -150,7 +150,7 @@ D(n) & = & D(\Big\lfloor\frac{n}{2}\Big\rfloor) + 1
 \end{sol}
 
 \begin{prob}{1-d}
-TODO
+Prove using the strong form of induction that for any $n \in \mathbb{N}$, if $n \geq 1$ then $D(n) = \lfloor \tlg(n) \rfloor + 2$.
 \end{prob}
 \begin{sol}
 \textbf{Base ($n = 1$)} \\
@@ -166,18 +166,25 @@ D(1) & = & 2 \\
 Assume that $D(k) = \Big\lfloor\tlg(k)\Big\rfloor + 2$ for some $k \in \mathbb{N}$ such that $2 \leq k < n$. We now show that $D(n) = \Big\lfloor\tlg(n)\Big\rfloor + 2$.
 \begin{eqnarray*}
 D(n) & = &  D(\Big\lfloor\frac{n}{2}\Big\rfloor) + 1 \\
-& = & \Big(\Big\lfloor\tlg(\frac{n}{2})\Big\rfloor + 2\Big) + 1 \\
-& = & \Big(\Big\lfloor\tlg(n) - \tlg(2)\Big\rfloor + 2\Big) + 1 \\
-& = & \Big(\Big\lfloor\tlg(n) - 1\Big\rfloor + 2\Big) + 1 \\
-& = & \Big((\Big\lfloor\tlg(n)\Big\rfloor - 1) + 2\Big) + 1 \\
-& = & \Big(\Big\lfloor\tlg(n)\Big\rfloor + 1\Big) + 1 \\
+& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor + 2\Big) + 1 \\
+& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor + 1\Big) + 2 \\
+& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor + \tlg(2)\Big) + 2 \\
+& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor) + \tlg(2)\Big\rfloor\Big) + 2 \\
+& = & \Big(\Big\lfloor\tlg(2\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor\Big) + 2 \\
+& = & \Big(\Big\lfloor\tlg(n)\Big\rfloor\Big) + 2 \\
 & = & \Big\lfloor\tlg(n)\Big\rfloor + 2
+%
+%& = & \Big(\Big\lfloor\tlg(n) - \tlg(2)\Big\rfloor + 2\Big) + 1 \\
+%& = & \Big(\Big\lfloor\tlg(n) - 1\Big\rfloor + 2\Big) + 1 \\
+%& = & \Big((\Big\lfloor\tlg(n)\Big\rfloor - 1) + 2\Big) + 1 \\
+%& = & \Big(\Big\lfloor\tlg(n)\Big\rfloor + 1\Big) + 1 \\
+%& = & \Big\lfloor\tlg(n)\Big\rfloor + 2
 \end{eqnarray*}
 Thus, $D(n) = \Big\lfloor\tlg(n)\Big\rfloor + 2$, as desired.
 \end{sol}
 
 \begin{prob}{1-e}
-TODO
+Then prove that $T(n) - T(1) = \sum_{k=1}^{n-1} D(k)$, and show that an immediate consequence is that $T(n) = \sum_{k=1}^{n-1}\lfloor \tlg(k) \rfloor + 2$.
 \end{prob}
 \begin{sol}
 By the definition of $D(n)$, we observe the following:
@@ -191,18 +198,18 @@ Therefore, since $\sum_{k=1}^{n-1}D(k)$ turns into a telescoping sum, we see tha
 T(n) - T(1) & = & \sum_{k=1}^{n-1}D(k) \\
 & = & \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)
 \end{eqnarray*}
-Thus, we see that $T(n) - T(1) = \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)$, and since $T(1) = 0$, we conclude that $T(n) = \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)$.
+Thus, we see that $T(n) - T(1) = \sum_{k=1}^{n-1}\big(\lfloor\tlg(k)\rfloor + 2\big)$, and since $T(1) = 0$, we conclude that $T(n) = \sum_{k=1}^{n-1}\big(\lfloor\tlg(k)\rfloor + 2\big)$.
 \end{sol}
 
 \begin{prob}{1-f}
-TODO
+Now show that $T(n) = \sum_{k=1}^{n-1}\lfloor \tlg(k) \rfloor + 2$ implies that $T(n) = O(n\tlog(n))$.
 \end{prob}
 \begin{sol}
 Using the fact that $T(n) = \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)$. We now evaluate this summation as follows:
 \begin{eqnarray*}
-T(n) & = & \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(n)\Big\rfloor + 2\big) \\ 
-& = & \sum_{k=1}^{n-1}\Big\lfloor\tlg(k)\Big\rfloor + \sum_{k=1}^{n-1}2 \\
-& < & \sum_{k=1}^{n-1}\Big\lfloor\tlg(n)\Big\rfloor + \sum_{k=1}^{n-1}2 \\
+T(n) & = & \sum_{k=1}^{n-1}\big(\lfloor\tlg(n)\rfloor + 2\big) \\ 
+& = & \sum_{k=1}^{n-1}\lfloor\tlg(k)\rfloor + \sum_{k=1}^{n-1}2 \\
+& < & \sum_{k=1}^{n-1}\lfloor\tlg(n)\rfloor + \sum_{k=1}^{n-1}2 \\
 & = & (n-1)\tlg(n) + 2(n-1) \\
 & = & n\tlg(n) - \tlg(n) + 2n - 1 \\
 & = & O(n\tlg(n)) \\

@@ -50,8 +50,19 @@ def sortedHasSum(S, x):
 	If the user enters a valid set of numbers, run it on that
 	set, else run the program with some random numbers.
 """
-if (len(sys.argv) == 6):
-	print "TODO"
+if (len(sys.argv) == 7):
+	v1 = int(sys.argv[1])
+	v2 = int(sys.argv[2])
+	v3 = int(sys.argv[3])
+	v4 = int(sys.argv[4])
+	v5 = int(sys.argv[5])
+	sum = int(sys.argv[6])
+	newList = [v1, v2, v3, v4, v5]
+	
+	# Run the sortedHasSum routine on the list and sum
+	print "List: " + str(newList)
+	print "Target sum: " + str(sum)
+	print "Result: " + str(sortedHasSum(newList, sum))
 else:
 	# Fix some data for the sortedHasSum routine
 	newList = [1, 1, 5, 7, 14, 15, 100]

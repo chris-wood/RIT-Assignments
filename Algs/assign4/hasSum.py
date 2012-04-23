@@ -19,6 +19,8 @@ from math import sqrt
 ##########################################################################
 
 def split(S)
+	""" TODO
+	"""
 	if (len(S) == 0):
 		return ([], [])
 	elif (len(S) == 1):
@@ -35,12 +37,18 @@ def split(S)
 		return (split(splitA), split(splitB))
 			
 def merge(A, B):
-	# copy code from textbook for merge sort!
+	""" TODO
+	"""
+	C = list()
 
 def msort(S):
+	""" TODO
+	"""
 	print "do something!"
 
 def hasSum(S, x):
+	""" TODO
+	"""
 	# Sort the data to start using Merge Sort (O(nlogn))
 	msort(S)
 
@@ -48,6 +56,8 @@ def hasSum(S, x):
 	return sortedHasSum(S, x)
 
 def sortedHasSum(S, x):
+	""" TODO
+	"""
 	# List to store pair-wise differences 
 	stack = list()
 
@@ -74,18 +84,29 @@ def sortedHasSum(S, x):
 
 	return (-1, -1)
 
-""" Run the sortedHasSum function.
+""" Run the hasSum function.
 	
 	If the user enters a valid set of numbers, run it on that
 	set, else run the program with some random numbers.
 """
-if (len(sys.argv) == 6):
-	print "TODO"
+if (len(sys.argv) == 7):
+	v1 = int(sys.argv[1])
+	v2 = int(sys.argv[2])
+	v3 = int(sys.argv[3])
+	v4 = int(sys.argv[4])
+	v5 = int(sys.argv[5])
+	sum = int(sys.argv[6])
+	newList = [v1, v2, v3, v4, v5]
+	
+	# Run the sortedHasSum routine on the list and sum
+	print "List: " + str(newList)
+	print "Target sum: " + str(sum)
+	print "Result: " + str(sortedHasSum(newList, sum))
 else:
 	# Fix some data for the sortedHasSum routine
 	newList = [1, 1, 5, 7, 14, 15, 100]
 	sum = 16
-
+	
 	# Run the sortedHasSum routine on the list and sum
 	print "List: " + str(newList)
 	print "Target sum: " + str(sum)
