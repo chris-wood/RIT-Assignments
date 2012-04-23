@@ -9,9 +9,9 @@
 \usepackage{pseudocode}
 \usepackage{verbatim}
 
-\newcommand{\tlg}{\text{ lg}}
-\newcommand{\tln}{\text{ ln}}
-\newcommand{\tlog}{\text{ log}}
+\newcommand{\tlg}{\text{lg}}
+\newcommand{\tln}{\text{ln}}
+\newcommand{\tlog}{\text{log}}
 
 \usepackage{algorithm}
 %\usepackage{algorithmic}
@@ -63,27 +63,27 @@ TODO
 
 \textbf{Case 1:} $n$ is even ($2$ $|$ $n$, or $n = 2m$ for some $m \in \mathbb{N}$) 
 \begin{eqnarray*}
-\lfloor\frac{n+1}{2}\rfloor & = & \lfloor\frac{2m + 1}{2}\rfloor \\
-& = & \lfloor\frac{2m}{2}  + \frac{1}{2}\rfloor\\
-& = & m + \lfloor\frac{1}{2}\rfloor \\
+\Big\lfloor\frac{n+1}{2}\Big\rfloor & = & \Big\lfloor\frac{2m + 1}{2}\Big\rfloor \\
+& = & \Big\lfloor\frac{2m}{2}  + \frac{1}{2}\Big\rfloor\\
+& = & m + \Big\lfloor\frac{1}{2}\Big\rfloor \\
 & = & m \\
-& = & \lceil\frac{2m}{2}\rceil \\
-& = & \lceil\frac{n}{2}\rceil
+& = & \Big\lceil\frac{2m}{2}\Big\rceil \\
+& = & \Big\lceil\frac{n}{2}\Big\rceil
 \end{eqnarray*}
 
 \textbf{Case 2:} $n$ is odd ($2 \not|$  $n$, or $n = 2m + 1$ for some $m \in \mathbb{N}$) 
 \begin{eqnarray*}
-\lfloor\frac{n+1}{2}\rfloor & = & \lfloor\frac{(2m + 1) +1}{2}\rfloor \\
-& = & \lfloor\frac{2(m + 1)}{2}\rfloor \\
+\Big\lfloor\frac{n+1}{2}\Big\rfloor & = & \Big\lfloor\frac{(2m + 1) +1}{2}\Big\rfloor \\
+& = & \Big\lfloor\frac{2(m + 1)}{2}\Big\rfloor \\
 & = & m + 1 \\
-& = & m + \lceil\frac{1}{2}\rceil \\
-& = & \frac{2m}{2} + \lceil\frac{1}{2}\rceil \\
-& = & \lceil\frac{2m}{2} + \frac{1}{2}\rceil \\
-& = & \lceil\frac{2m + 1}{2}\rceil  \\
-& = & \lceil\frac{n}{2}\rceil
+& = & m + \Big\lceil\frac{1}{2}\Big\rceil \\
+& = & \frac{2m}{2} + \Big\lceil\frac{1}{2}\Big\rceil \\
+& = & \Big\lceil\frac{2m}{2} + \frac{1}{2}\Big\rceil \\
+& = & \Big\lceil\frac{2m + 1}{2}\Big\rceil  \\
+& = & \Big\lceil\frac{n}{2}\Big\rceil
 \end{eqnarray*}
 
-Thus, since a number $n \in \mathbb{N}$ can only be even or odd, we can conclude that for any $n \in \mathbb{N}, \lfloor\frac{n+1}{2}\rfloor = \lceil\frac{n}{2}\rceil$.
+Thus, since a number $n \in \mathbb{N}$ can only be even or odd, we can conclude that for any $n \in \mathbb{N}, \Big\lfloor\frac{n+1}{2}\Big\rfloor = \Big\lceil\frac{n}{2}\Big\rceil$.
 \end{sol}
 
 \begin{prob}{1-b}
@@ -92,29 +92,29 @@ TODO
 \begin{sol}
 \textbf{Case 1:} $n$ is even ($2$ $|$ $n$, or $n = 2m$ for some $m \in \mathbb{N}$) 
 \begin{eqnarray*}
-\lfloor\frac{n}{2} \rfloor + 1 & = & \lfloor\frac{2m}{2} \rfloor + 1\\
+\Big\lfloor\frac{n}{2} \Big\rfloor + 1 & = & \Big\lfloor\frac{2m}{2} \Big\rfloor + 1\\
 & = & \frac{2m}{2} + 1 \\
-& = & \frac{2m}{2} + \lceil\frac{1}{2}\rceil \\
-& = & \lceil\frac{2m}{2}\rceil + \lceil\frac{1}{2}\rceil \\
-& = & \lceil\frac{2m}{2} + \frac{1}{2}\rceil \\
-& = & \lceil \frac{2m + 1}{2} \rceil \\
-& = & \lceil\frac{n+1}{2} \rceil
+& = & \frac{2m}{2} + \Big\lceil\frac{1}{2}\Big\rceil \\
+& = & \Big\lceil\frac{2m}{2}\Big\rceil + \Big\lceil\frac{1}{2}\Big\rceil \\
+& = & \Big\lceil\frac{2m}{2} + \frac{1}{2}\Big\rceil \\
+& = & \Big\lceil \frac{2m + 1}{2} \Big\rceil \\
+& = & \Big\lceil\frac{n+1}{2} \Big\rceil
 \end{eqnarray*}
 
 \textbf{Case 2:} $n$ is odd ($2 \not|$  $n$, or $n = 2m + 1$ for some $m \in \mathbb{N}$) \\
 \begin{eqnarray*}
-\lfloor\frac{n}{2}\rfloor + 1 & = & \lfloor\frac{2m+1}{2}\rfloor + 1 \\
-& = & \lfloor\frac{2m}{2} + \frac{1}{2}\rfloor + 1 \\
-& = & m + \lfloor\frac{1}{2}\rfloor + 1 \\
+\Big\lfloor\frac{n}{2}\Big\rfloor + 1 & = & \Big\lfloor\frac{2m+1}{2}\Big\rfloor + 1 \\
+& = & \Big\lfloor\frac{2m}{2} + \frac{1}{2}\Big\rfloor + 1 \\
+& = & m + \Big\lfloor\frac{1}{2}\Big\rfloor + 1 \\
 & = & m + 1 \\
 & = & \frac{2(m+1)}{2} \\
-& = & \lceil\frac{2(m+1)}{2}\rceil \\
-& = & \lceil\frac{2m + 2}{2}\rceil \\
-& = & \lceil\frac{(2m + 1) + 1}{2}\rceil \\
-& = & \lceil\frac{n+1}{2}\rceil
+& = & \Big\lceil\frac{2(m+1)}{2}\Big\rceil \\
+& = & \Big\lceil\frac{2m + 2}{2}\Big\rceil \\
+& = & \Big\lceil\frac{(2m + 1) + 1}{2}\Big\rceil \\
+& = & \Big\lceil\frac{n+1}{2}\Big\rceil
 \end{eqnarray*}
 
-Thus, since a number $n \in \mathbb{N}$ can only be even or odd, we can conclude that for any $n \in \mathbb{N}, \lfloor\frac{n}{2}\rfloor + 1 = \lceil\frac{n+1}{2}\rceil$.
+Thus, since a number $n \in \mathbb{N}$ can only be even or odd, we can conclude that for any $n \in \mathbb{N}, \Big\lfloor\frac{n}{2}\Big\rfloor + 1 = \Big\lceil\frac{n+1}{2}\Big\rceil$.
 \end{sol}
 
 \begin{prob}{1-c}
@@ -125,27 +125,27 @@ Thus, since a number $n \in \mathbb{N}$ can only be even or odd, we can conclude
 Let $D(n) = T(n+1) - T(n)$. If we let $n = 1$ be the base case for the recurrence as in $T(n)$, we obtain the following:
 \begin{eqnarray*}
 D(1) & = & T(2) - T(1) \\
-& = &  T\Big(\lceil\frac{2}{2}\rceil\Big) + T\Big(\lfloor\frac{2}{2}\rfloor\Big) + 2 - 0 \\
+& = &  T\Big(\Big\lceil\frac{2}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{2}{2}\Big\rfloor\Big) + 2 - 0 \\
 & = & T(1) + T(1) + 2 \\
 & = & 2
 \end{eqnarray*}
 Thus, we can see that $D(1) = 2$. We now seek the general case for $D(n)$ by expanding the its representation using the definition for $T(n)$, as shown below.
 \begin{eqnarray*}
 D(n) & = & T(n+1) - T(n) \\
-& = & \Bigg(T\Big(\lceil\frac{n+1}{2}\rceil\Big) + T\Big(\lfloor\frac{n+1}{2}\rfloor\Big) + (n+1)\Bigg) - \Bigg(T\Big(\lceil\frac{n}{2}\rceil\Big) + T\Big(\lfloor\frac{n}{2}\rfloor\Big) + n\Bigg) \\
-& = & T\Big(\lceil\frac{n+1}{2}\rceil\Big) + T\Big(\lfloor\frac{n+1}{2}\rfloor\Big) - T\Big(\lceil\frac{n}{2}\rceil\Big) - T\Big(\lfloor\frac{n}{2}\rfloor\Big) + 1 \\
-& = & T\Big(\lceil\frac{n+1}{2}\rceil\Big) + T\Big(\lfloor\frac{n}{2}\rfloor\Big) + 1 \\
-& = & T\Big(\lfloor\frac{n}{2}\rfloor + 1\Big) + T\Big(\lfloor\frac{n}{2}\rfloor\Big) + 1
+& = & \Bigg(T\Big(\Big\lceil\frac{n+1}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{n+1}{2}\Big\rfloor\Big) + (n+1)\Bigg) - \Bigg(T\Big(\Big\lceil\frac{n}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + n\Bigg) \\
+& = & T\Big(\Big\lceil\frac{n+1}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{n+1}{2}\Big\rfloor\Big) - T\Big(\Big\lceil\frac{n}{2}\Big\rceil\Big) - T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1 \\
+& = & T\Big(\Big\lceil\frac{n+1}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1 \\
+& = & T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor + 1\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1
 \end{eqnarray*}
 Now, by observing that this expression takes the same form as $D(n)$, we obtain the following:
 \begin{eqnarray*}
-D(n) & = & T\Big(\lfloor\frac{n}{2}\rfloor + 1\Big) + T\Big(\lfloor\frac{n}{2}\rfloor\Big) + 1 \\
-& = & D(\lfloor\frac{n}{2}\rfloor) + 1
+D(n) & = & T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor + 1\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1 \\
+& = & D(\Big\lfloor\frac{n}{2}\Big\rfloor) + 1
 \end{eqnarray*}
 Now, putting these results together, we obtain the following recurrence for $D(n)$:
 \begin{eqnarray*}
 D(1) & = & 2 \\
-D(n) & = & D(\lfloor\frac{n}{2}\rfloor) + 1
+D(n) & = & D(\Big\lfloor\frac{n}{2}\Big\rfloor) + 1
 \end{eqnarray*}
 \end{sol}
 
@@ -159,21 +159,21 @@ By the definition of $D(n)$, we know the following:
 D(1) & = & 2 \\ 
 & = & 0 + 2 \\
 & = & \tlg(1) + 2 \\
-& = & \lfloor\tlg(1)\rfloor + 2 
+& = & \Big\lfloor\tlg(1)\Big\rfloor + 2 
 \end{eqnarray*}
 
 \textbf{Induction ($n > 1$)} \\
-Assume that $D(k) = \lfloor\tlg(k)\rfloor + 2$ for some $k \in \mathbb{N}$ such that $2 \leq k < n$. We now show that $D(n) = \lfloor\tlg(n)\rfloor + 2$.
+Assume that $D(k) = \Big\lfloor\tlg(k)\Big\rfloor + 2$ for some $k \in \mathbb{N}$ such that $2 \leq k < n$. We now show that $D(n) = \Big\lfloor\tlg(n)\Big\rfloor + 2$.
 \begin{eqnarray*}
-D(n) & = &  D(\lfloor\frac{n}{2}\rfloor) + 1 \\
-& = & \Big(\lfloor\tlg(\frac{n}{2})\rfloor + 2\Big) + 1 \\
-& = & \Big(\lfloor\tlg(n) - \tlg(2)\rfloor + 2\Big) + 1 \\
-& = & \Big(\lfloor\tlg(n) - 1\rfloor + 2\Big) + 1 \\
-& = & \Big((\lfloor\tlg(n)\rfloor - 1) + 2\Big) + 1 \\
-& = & \Big(\lfloor\tlg(n)\rfloor + 1\Big) + 1 \\
-& = & \lfloor\tlg(n)\rfloor + 2
+D(n) & = &  D(\Big\lfloor\frac{n}{2}\Big\rfloor) + 1 \\
+& = & \Big(\Big\lfloor\tlg(\frac{n}{2})\Big\rfloor + 2\Big) + 1 \\
+& = & \Big(\Big\lfloor\tlg(n) - \tlg(2)\Big\rfloor + 2\Big) + 1 \\
+& = & \Big(\Big\lfloor\tlg(n) - 1\Big\rfloor + 2\Big) + 1 \\
+& = & \Big((\Big\lfloor\tlg(n)\Big\rfloor - 1) + 2\Big) + 1 \\
+& = & \Big(\Big\lfloor\tlg(n)\Big\rfloor + 1\Big) + 1 \\
+& = & \Big\lfloor\tlg(n)\Big\rfloor + 2
 \end{eqnarray*}
-Thus, $D(n) = \lfloor\tlg(n)\rfloor + 2$, as desired.
+Thus, $D(n) = \Big\lfloor\tlg(n)\Big\rfloor + 2$, as desired.
 \end{sol}
 
 \begin{prob}{1-e}
@@ -186,23 +186,23 @@ By the definition of $D(n)$, we observe the following:
 & = & \big(T(2) - T(1)\big) + \big(T(3) - T(2)\big) + \big(T(4) - T(3)\big) + ... + \big(T(n) - T(n-1)\big) \\
 & = & T(n) - T(1) 
 \end{eqnarray*}
-Therefore, since $\sum_{k=1}^{n-1}D(k)$ turns into a telescoping sum, we see that it collapses to $T(n) - T(1)$, and since $D(n) = \lfloor\tlg(n)\rfloor + 2$, we also know the following:
+Therefore, since $\sum_{k=1}^{n-1}D(k)$ turns into a telescoping sum, we see that it collapses to $T(n) - T(1)$, and since $D(n) = \Big\lfloor\tlg(n)\Big\rfloor + 2$, we also know the following:
 \begin{eqnarray*}
 T(n) - T(1) & = & \sum_{k=1}^{n-1}D(k) \\
-& = & \sum_{k=1}^{n-1}\big(\lfloor\tlg(k)\rfloor + 2\big)
+& = & \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)
 \end{eqnarray*}
-Thus, we see that $T(n) - T(1) = \sum_{k=1}^{n-1}\big(\lfloor\tlg(k)\rfloor + 2\big)$, and since $T(1) = 0$, we conclude that $T(n) = \sum_{k=1}^{n-1}\big(\lfloor\tlg(k)\rfloor + 2\big)$.
+Thus, we see that $T(n) - T(1) = \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)$, and since $T(1) = 0$, we conclude that $T(n) = \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)$.
 \end{sol}
 
 \begin{prob}{1-f}
 TODO
 \end{prob}
 \begin{sol}
-Using the fact that $T(n) = \sum_{k=1}^{n-1}\big(\lfloor\tlg(k)\rfloor + 2\big)$. We now evaluate this summation as follows:
+Using the fact that $T(n) = \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)$. We now evaluate this summation as follows:
 \begin{eqnarray*}
-T(n) & = & \sum_{k=1}^{n-1}\big(\lfloor\tlg(n)\rfloor + 2\big) \\ 
-& = & \sum_{k=1}^{n-1}\lfloor\tlg(k)\rfloor + \sum_{k=1}^{n-1}2 \\
-& < & \sum_{k=1}^{n-1}\lfloor\tlg(n)\rfloor + \sum_{k=1}^{n-1}2 \\
+T(n) & = & \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(n)\Big\rfloor + 2\big) \\ 
+& = & \sum_{k=1}^{n-1}\Big\lfloor\tlg(k)\Big\rfloor + \sum_{k=1}^{n-1}2 \\
+& < & \sum_{k=1}^{n-1}\Big\lfloor\tlg(n)\Big\rfloor + \sum_{k=1}^{n-1}2 \\
 & = & (n-1)\tlg(n) + 2(n-1) \\
 & = & n\tlg(n) - \tlg(n) + 2n - 1 \\
 & = & O(n\tlg(n)) \\
