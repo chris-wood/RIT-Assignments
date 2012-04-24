@@ -97,9 +97,9 @@ def sortedHasSum(S, x):
 		elif (x < sum):
 			end = end - 1
 		else:
-			return (start, end)
+			return True
 	
-	return (-1, -1)
+	return False
 
 """ Run the hasSum function.
 	
