@@ -217,4 +217,28 @@ T(n) & = & \sum_{k=1}^{n-1}\big(\lfloor\tlg(n)\rfloor + 2\big) \\
 \end{eqnarray*}
 \end{sol}
 
+\begin{prob}{Extra credit}
+Prove that for any $n \in \mathbb{N}, \lfloor\tlg(2\lfloor n/2 \rfloor) \rfloor = \lfloor \tlg (n) \rfloor$.
+\end{prob}
+\begin{sol}
+
+\textbf{Case 1:} $n$ is even ($2$ $|$ $n$, or $n = 2m$ for some $m \in \mathbb{N}$)
+\begin{eqnarray*}
+\lfloor \tlg (2\lfloor n/2 \rfloor) \rfloor & = & \lfloor \tlg (2\lfloor 2m/2 \rfloor) \rfloor \\
+& = & \lfloor \tlg (2\lfloor m \rfloor) \rfloor \\
+& = & \lfloor \tlg (2m) \rfloor \\
+& = & \lfloor \tlg (n) \rfloor
+\end{eqnarray*}
+\textbf{Case 2:} $n$ is odd ($2 \not| $  $n$, or $n = 2m + 1$ for some $m \in \mathbb{N}$)
+\begin{eqnarray*}
+\lfloor \tlg (2\lfloor n/2 \rfloor) \rfloor & = & \lfloor \tlg (2\lfloor (2m + 1)/2 \rfloor) \rfloor \\
+& = & \lfloor \tlg (2\lfloor (2m/2) + (1/2) \rfloor) \rfloor \\
+& = & \lfloor \tlg (2\lfloor m + (1/2) \rfloor) \rfloor \\
+& = & \lfloor \tlg (2(m + \lfloor 1/2 \rfloor) \rfloor \\
+& = & \lfloor \tlg (2m + 2\lfloor 1/2 \rfloor ) \rfloor \\
+& = & \lfloor \tlg (2m + 1) \rfloor \\
+& = & \lfloor \tlg (n) \rfloor
+\end{eqnarray*}
+\end{sol}
+
 \end{document}

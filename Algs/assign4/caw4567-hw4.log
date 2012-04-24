@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  23 APR 2012 14:00
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  24 APR 2012 00:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -992,21 +992,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--105
 
  []
 
-[2] [3] [4]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 220.
- [5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 220.
+[2] [3] [4] [5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 244.
+ [6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 244.
  (./caw4567-hw4.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 220.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 220.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 244.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 244.
 Package rerunfilecheck Info: File `caw4567-hw4.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 220.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 244.
  ) 
 Here is how much of TeX's memory you used:
- 20690 strings out of 493633
- 379483 string characters out of 3143378
- 610527 words of memory out of 3000000
+ 20691 strings out of 493633
+ 379489 string characters out of 3143378
+ 610525 words of memory out of 3000000
  23531 multiletter control sequences out of 15000+200000
  11650 words of font info for 54 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
@@ -1022,10 +1022,10 @@ cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loc
 al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local
 /texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/
 texlive/2011/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on caw4567-hw4.pdf (5 pages, 119369 bytes).
+Output written on caw4567-hw4.pdf (6 pages, 121106 bytes).
 PDF statistics:
- 76 PDF objects out of 1000 (max. 8388607)
- 57 compressed objects within 1 object stream
- 6 named destinations out of 1000 (max. 500000)
+ 82 PDF objects out of 1000 (max. 8388607)
+ 62 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
  13325 words of extra memory for PDF output out of 14400 (max. 10000000)
 

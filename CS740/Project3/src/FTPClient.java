@@ -21,7 +21,7 @@ public class FTPClient
 	/**
 	 * The server host name and port that we connect to for file I/O.
 	 */
-	public String host;
+	private String host;
 	
 	/**
 	 * The default port for the FTP server.
@@ -29,7 +29,7 @@ public class FTPClient
 	public static final int FTP_PORT = 21;
 	
 	/**
-	 * Message end flag marker for telnet protocol.
+	 * Message end flag marker for Telnet protocol.
 	 */
 	public static final String TELNET_END = "\r\n";
 	
@@ -44,13 +44,13 @@ public class FTPClient
 	 * Enumerations for the possible transfer types available.
 	 */
 	public static enum TransferType {ASCII, BINARY};
-	public TransferType tType = TransferType.BINARY; 
+	private TransferType tType = TransferType.BINARY; 
 	
 	/**
 	 * Enumerations for the possible transfer modes available.
 	 */
 	public static enum TransferMode {ACTIVE, PASSIVE};
-	public TransferMode tMode = TransferMode.PASSIVE; 
+	private TransferMode tMode = TransferMode.PASSIVE; 
 	
 	/**
 	 * The FTP protocol manager 
@@ -112,6 +112,21 @@ public class FTPClient
 	{
 		this.host = host;
 		return ftpMgr.open(host, DEFAULT_TIMEOUT);
+	}
+	
+	/**
+	 * Close the server control connection.
+	 */
+	public void close()
+	{
+		try 
+		{
+			ftpMgr.close();
+		} 
+		catch (IOException e) 
+		{
+			FTP.errorPrint(e.getMessage());
+		}
 	}
 	
 	/**
@@ -213,6 +228,14 @@ public class FTPClient
 		}
 	}
 	
+	/**
+	 * Send a request command to the server (one that requires a data connection).
+	 * 
+	 * @param command - the command to send
+	 * @param arguments - the arguments to the command
+	 * 
+	 * @throws IOException - when a socket I/O error occurs.
+	 */
 	public void sendRequest(String command, String[] arguments) throws IOException
 	{	
 		if (ftpMgr.openDataConnection(host, tMode))
@@ -359,4 +382,4 @@ public class FTPClient
 		}
 		return false;
 	}
-}
+} // FTPClient

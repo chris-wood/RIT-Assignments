@@ -19,35 +19,28 @@ from math import sqrt
 ##########################################################################
 
 def sortedHasSum(S, x):
-	""" This function iteratively passes through the sorted sequence 
-		S, cmoputes the difference (X - a) for all elements a in
-		the first half of the sequence, and then checks for these
-		differences to be present in the second half of the list.
-		This is all possible because the list is sorted.
+	""" This function determines if there is a pair of elements in S
+		that sum to x by taking advantage of the sorted nature of S and
+		searching from the ends of the sequence towards the middle (in
+		one pass) checking each pair of numbers and moving closer to
+		termination at every step.
 	"""
-	# List to store pair-wise differences 
-	stack = list()
-
-	# Traverse the list and compute the pair-wise differences
-	# between x and each element a
-	seqIndex = 0
-	for a in S:
-		if (2*a <= x):
-			stack.append(x - a)
-			seqIndex = seqIndex + 1
-
-	# Traverse the list of elements and see if we can
-	# find a match for the pair-wise difference
-	while (len(stack) != 0 and seqIndex >= 0):
-		item = stack.pop(len(stack) - 1)
-		moveOn = False
-		while (not moveOn):
-			if (item == S[seqIndex]):
-				return (x - item, S[seqIndex])
-			elif (item > S[seqIndex]):
-				seqIndex = seqIndex + 1
-			else: # item < S[seqIndex]
-				moveOn = True
+	# Initialize the start/end indices
+	start = 0
+	end = len(S) - 1
+	
+	# Loop until the endpoints reach each other (which will
+	# only take one pass through the list)
+	while (start < end):
+		sum = S[start] + S[end]
+		
+		# Check to see where the sum would lie in the list
+		if (sum < x):
+			start = start + 1
+		elif (x < sum):
+			end = end - 1
+		else:
+			return (start, end)
 
 	return (-1, -1)
 
@@ -72,7 +65,7 @@ if (len(sys.argv) == 7):
 else:
 	# Fix some data for the sortedHasSum routine
 	newList = [1, 1, 5, 7, 14, 15, 100]
-	sum = 16
+	sum = 101
 
 	# Run the sortedHasSum routine on the list and sum
 	print "List: " + str(newList)

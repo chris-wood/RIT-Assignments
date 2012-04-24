@@ -269,6 +269,7 @@ public class FTP
 	
 						case QUIT:
 							debugPrint("Goodbye!");
+							client.close();
 							eof = true;
 							break;
 	

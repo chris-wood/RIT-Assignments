@@ -153,7 +153,7 @@ public class FTPTransmissionManager
 					// Now attempt to directly connect to the server
 					FTP.debugPrint("FTP server returned with port: " + port);
 					FTP.debugPrint("Attempting to connect directly to server.");
-					dataSocket = new Socket(host, port); 
+					dataSocket = new Socket(host, port);
 					FTP.debugPrint("Connection returned.");
 					dataIn = new DataInputStream(dataSocket.getInputStream());
 				}
@@ -330,6 +330,13 @@ public class FTPTransmissionManager
 		}
 	}
 	
+	/**
+	 * Determine if the server response is a valid FTP message.
+	 * 
+	 * @param line - the server response
+	 * 
+	 * @return true if valid response, false otherwise.
+	 */
 	private boolean isFtpResponse(String line)
 	{
 		boolean valid = false;
@@ -427,4 +434,4 @@ public class FTPTransmissionManager
 		
 		return data;
 	}
-}
+} // FTPTransmissionManager
