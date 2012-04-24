@@ -67,9 +67,9 @@ def qsort(A, p, r):
 		# Continue the sorting of the smaller branches
 		while (p < r):
 			# Continue splitting the smaller partition and place the larger
-			# one on the stack
+			# one on the stack - this limits the size of the stack to O(log(n)).
 			q = partition(A, p, r)
-			if (q - p + 1 < p - q):
+			if (q - p + 1 < r - q):
 				pair = (q + 1, r)
 				stack.append(pair)
 				r = q - 1
