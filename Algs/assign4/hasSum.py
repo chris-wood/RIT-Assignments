@@ -14,7 +14,12 @@ from math import sqrt
 
 ##########################################################################
 #
-# TODO: explain assignment solution here
+# 4-2b: This function relies on merge sort (which always runs in O(nlogn) 
+# time) to put the sequence S in sorted order and then runs the same 
+# sortedHasSum routine to again. Since the time complexity of sortedHasSum
+# is O(n) and merge sort is O(nlogn), and they are performed back-to-back,
+# the resulting time complexity is O(nlogn) because the O(n) function can 
+# be ignored (it is smaller than O(nlogn)).
 #
 ##########################################################################
 			

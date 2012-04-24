@@ -14,7 +14,11 @@ from math import sqrt
 
 ##########################################################################
 #
-# TODO: explain algorithm here
+# 4-2a: This algorithm relies on the sorted nature of the sequence S to 
+# traverse from both endpoints (front and back) towards the middle, checking
+# each pair of numbers to see if they sum to the target value and, if not, 
+# advancing the front pointer if the sum is less than the target
+# or decrementing the back pointer if the sum is more than the target.
 #
 ##########################################################################
 
