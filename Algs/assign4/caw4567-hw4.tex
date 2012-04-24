@@ -63,24 +63,26 @@ Prove that for any $n \in \mathbb{N}, \lfloor(n+1)/2\rfloor = \lceil n/2 \rceil$
 
 \textbf{Case 1:} $n$ is even ($2$ $|$ $n$, or $n = 2m$ for some $m \in \mathbb{N}$) 
 \begin{eqnarray*}
-\Big\lfloor\frac{n+1}{2}\Big\rfloor & = & \Big\lfloor\frac{2m + 1}{2}\Big\rfloor \\
-& = & \Big\lfloor\frac{2m}{2}  + \frac{1}{2}\Big\rfloor\\
-& = & m + \Big\lfloor\frac{1}{2}\Big\rfloor \\
-& = & m \\
-& = & \Big\lceil\frac{2m}{2}\Big\rceil \\
-& = & \Big\lceil\frac{n}{2}\Big\rceil
+\Big\lfloor\frac{n+1}{2}\Big\rfloor & = & \Big\lfloor\frac{2m + 1}{2}\Big\rfloor \text{ (by substitution)}\\
+& = & \Big\lfloor\frac{2m}{2}  + \frac{1}{2}\Big\rfloor \text{ (by partial fractions)}\\
+& = & \Big\lfloor m  + \frac{1}{2}\Big\rfloor \text{ (by division)}\\
+& = & m + \Big\lfloor\frac{1}{2}\Big\rfloor \text{ (by property of floor function)}\\
+& = & m \text{ (by property of floor function)}\\
+& = & \frac{2m}{2} \text{ (by division)} \\
+& = & \Big\lceil\frac{2m}{2}\Big\rceil \text{ (by property of ceiling function)}\\
+& = & \Big\lceil\frac{n}{2}\Big\rceil \text{ (by substitution)}
 \end{eqnarray*}
 
 \textbf{Case 2:} $n$ is odd ($2 \not|$  $n$, or $n = 2m + 1$ for some $m \in \mathbb{N}$) 
 \begin{eqnarray*}
-\Big\lfloor\frac{n+1}{2}\Big\rfloor & = & \Big\lfloor\frac{(2m + 1) +1}{2}\Big\rfloor \\
-& = & \Big\lfloor\frac{2(m + 1)}{2}\Big\rfloor \\
-& = & m + 1 \\
-& = & m + \Big\lceil\frac{1}{2}\Big\rceil \\
-& = & \frac{2m}{2} + \Big\lceil\frac{1}{2}\Big\rceil \\
-& = & \Big\lceil\frac{2m}{2} + \frac{1}{2}\Big\rceil \\
-& = & \Big\lceil\frac{2m + 1}{2}\Big\rceil  \\
-& = & \Big\lceil\frac{n}{2}\Big\rceil
+\Big\lfloor\frac{n+1}{2}\Big\rfloor & = & \Big\lfloor\frac{(2m + 1) +1}{2}\Big\rfloor \text{ (by substitution)}\\
+& = & \Big\lfloor\frac{2(m + 1)}{2}\Big\rfloor \text{ (by factoring)}\\
+& = & m + 1 \text{ (by division and property of floor function)}\\
+& = & m + \Big\lceil\frac{1}{2}\Big\rceil \text{ (by property of ceiling function)}\\
+& = & \frac{2m}{2} + \Big\lceil\frac{1}{2}\Big\rceil \text{ (by division)}\\
+& = & \Big\lceil\frac{2m}{2} + \frac{1}{2}\Big\rceil \text{ (by property of ceiling function)}\\
+& = & \Big\lceil\frac{2m + 1}{2}\Big\rceil  \text{ (by partial fractions)}\\
+& = & \Big\lceil\frac{n}{2}\Big\rceil \text{ (by substitution)}
 \end{eqnarray*}
 
 Thus, since a number $n \in \mathbb{N}$ can only be even or odd, we can conclude that for any $n \in \mathbb{N}, \Big\lfloor\frac{n+1}{2}\Big\rfloor = \Big\lceil\frac{n}{2}\Big\rceil$.
@@ -92,26 +94,26 @@ Prove that for any $n \in \mathbb{N}, \lfloor n/2\rfloor + 1 = \lceil (n+1)/2 \r
 \begin{sol}
 \textbf{Case 1:} $n$ is even ($2$ $|$ $n$, or $n = 2m$ for some $m \in \mathbb{N}$) 
 \begin{eqnarray*}
-\Big\lfloor\frac{n}{2} \Big\rfloor + 1 & = & \Big\lfloor\frac{2m}{2} \Big\rfloor + 1\\
-& = & \frac{2m}{2} + 1 \\
-& = & \frac{2m}{2} + \Big\lceil\frac{1}{2}\Big\rceil \\
-& = & \Big\lceil\frac{2m}{2}\Big\rceil + \Big\lceil\frac{1}{2}\Big\rceil \\
-& = & \Big\lceil\frac{2m}{2} + \frac{1}{2}\Big\rceil \\
-& = & \Big\lceil \frac{2m + 1}{2} \Big\rceil \\
-& = & \Big\lceil\frac{n+1}{2} \Big\rceil
+\Big\lfloor\frac{n}{2} \Big\rfloor + 1 & = & \Big\lfloor\frac{2m}{2} \Big\rfloor + 1 \text{ (by substitution)}\\
+& = & \frac{2m}{2} + 1 \text{ (by property of floor function)}\\
+& = & \frac{2m}{2} + \Big\lceil\frac{1}{2}\Big\rceil \text{ (by property of ceiling function)}\\
+& = & \Big\lceil\frac{2m}{2}\Big\rceil + \Big\lceil\frac{1}{2}\Big\rceil \text{ (by property of ceiling function)}\\
+& = & \Big\lceil\frac{2m}{2} + \frac{1}{2}\Big\rceil \text{ (by property of ceiling function)}\\
+& = & \Big\lceil \frac{2m + 1}{2} \Big\rceil \text{ (by partial fractions)}\\
+& = & \Big\lceil\frac{n+1}{2} \Big\rceil \text{ (by substitution)}
 \end{eqnarray*}
 
 \textbf{Case 2:} $n$ is odd ($2 \not|$  $n$, or $n = 2m + 1$ for some $m \in \mathbb{N}$) \\
 \begin{eqnarray*}
-\Big\lfloor\frac{n}{2}\Big\rfloor + 1 & = & \Big\lfloor\frac{2m+1}{2}\Big\rfloor + 1 \\
-& = & \Big\lfloor\frac{2m}{2} + \frac{1}{2}\Big\rfloor + 1 \\
-& = & m + \Big\lfloor\frac{1}{2}\Big\rfloor + 1 \\
-& = & m + 1 \\
-& = & \frac{2(m+1)}{2} \\
-& = & \Big\lceil\frac{2(m+1)}{2}\Big\rceil \\
-& = & \Big\lceil\frac{2m + 2}{2}\Big\rceil \\
-& = & \Big\lceil\frac{(2m + 1) + 1}{2}\Big\rceil \\
-& = & \Big\lceil\frac{n+1}{2}\Big\rceil
+\Big\lfloor\frac{n}{2}\Big\rfloor + 1 & = & \Big\lfloor\frac{2m+1}{2}\Big\rfloor + 1 \text{ (by substitution)}\\
+& = & \Big\lfloor\frac{2m}{2} + \frac{1}{2}\Big\rfloor + 1 \text{ (by partial fractions)}\\
+& = & m + \Big\lfloor\frac{1}{2}\Big\rfloor + 1 \text{ (by division and property of floor function)}\\
+& = & m + 1 \text{ (by property of floor function)}\\
+& = & \frac{2(m+1)}{2} \text{ (by division)}\\
+& = & \Big\lceil\frac{2(m+1)}{2}\Big\rceil \text{ (by property of ceiling function)}\\
+& = & \Big\lceil\frac{2m + 2}{2}\Big\rceil \text{ (by distribution)}\\
+& = & \Big\lceil\frac{(2m + 1) + 1}{2}\Big\rceil \text{ (by association)}\\
+& = & \Big\lceil\frac{n+1}{2}\Big\rceil \text{ (by substitution)}
 \end{eqnarray*}
 
 Thus, since a number $n \in \mathbb{N}$ can only be even or odd, we can conclude that for any $n \in \mathbb{N}, \Big\lfloor\frac{n}{2}\Big\rfloor + 1 = \Big\lceil\frac{n+1}{2}\Big\rceil$.
@@ -124,20 +126,20 @@ Let $D(n) = T(n+1) - T(n)$. Determine a recurrence for $D(n)$.
 
 Let $D(n) = T(n+1) - T(n)$. If we let $n = 1$ be the base case for the recurrence as in $T(n)$, we obtain the following:
 \begin{eqnarray*}
-D(1) & = & T(2) - T(1) \\
-& = &  T\Big(\Big\lceil\frac{2}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{2}{2}\Big\rfloor\Big) + 2 - 0 \\
+D(1) & = & T(2) - T(1) \text{ (by definition of $D(n)$)}\\
+& = &  T\Big(\Big\lfloor\frac{2}{2}\Big\rfloor\Big) + T\Big(\Big\lceil\frac{2}{2}\Big\rceil\Big) + 2 - 0 \text{ (by definition of $T(n)$ and $T(1)$)}\\
 & = & T(1) + T(1) + 2 \\
-& = & 2
+& = & 2 \text{ (by definition of $T(1)$)}
 \end{eqnarray*}
 Thus, we can see that $D(1) = 2$. We now seek the general case for $D(n)$ by expanding the its representation using the definition for $T(n)$, as shown below.
 \begin{eqnarray*}
-D(n) & = & T(n+1) - T(n) \\
-& = & \Bigg(T\Big(\Big\lceil\frac{n+1}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{n+1}{2}\Big\rfloor\Big) + (n+1)\Bigg) - \Bigg(T\Big(\Big\lceil\frac{n}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + n\Bigg) \\
+D(n) & = & T(n+1) - T(n) \text{ (by definition of $D(n)$)}\\
+& = & \Bigg(T\Big(\Big\lfloor\frac{n+1}{2}\Big\rfloor\Big) + T\Big(\Big\lceil\frac{n+1}{2}\Big\rceil\Big) + (n+1)\Bigg) - \Bigg(T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + T\Big(\Big\lceil\frac{n}{2}\Big\rceil\Big) + n\Bigg) \text{ (by definition of $T(n)$)}\\
 & = & T\Big(\Big\lceil\frac{n+1}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{n+1}{2}\Big\rfloor\Big) - T\Big(\Big\lceil\frac{n}{2}\Big\rceil\Big) - T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1 \\
-& = & T\Big(\Big\lceil\frac{n+1}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1 \\
-& = & T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor + 1\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1
+& = & T\Big(\Big\lceil\frac{n+1}{2}\Big\rceil\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1 \text{ (by the fact that $\lfloor (n+1)/2 \rfloor = \lceil n/2 \rceil$)} \\
+& = & T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor + 1\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1 \text{ (by the fact that $\lceil (n+1)/2 \rceil = \lfloor n/2 \rfloor + 1$)}
 \end{eqnarray*}
-Now, by observing that this expression takes the same form as $D(n)$, we obtain the following:
+Now, by observing that this last expression takes the same form as $D(n)$, we obtain the following:
 \begin{eqnarray*}
 D(n) & = & T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor + 1\Big) + T\Big(\Big\lfloor\frac{n}{2}\Big\rfloor\Big) + 1 \\
 & = & D(\Big\lfloor\frac{n}{2}\Big\rfloor) + 1
@@ -156,31 +158,31 @@ Prove using the strong form of induction that for any $n \in \mathbb{N}$, if $n 
 \textbf{Base ($n = 1$)} \\
 By the definition of $D(n)$, we know the following:
 \begin{eqnarray*}
-D(1) & = & 2 \\ 
-& = & 0 + 2 \\
-& = & \tlg(1) + 2 \\
-& = & \Big\lfloor\tlg(1)\Big\rfloor + 2 
+D(1) & = & 2 \text{ (by definition of $D(n)$)}\\ 
+& = & 0 + 2 \text{ (by additive identity)}\\
+& = & \tlg(1) + 2 \text{ (by property of logarithms)}\\
+& = & \Big\lfloor\tlg(1)\Big\rfloor + 2 \text{ (by property of floor function)}
 \end{eqnarray*}
+Thus, $D(1) = \lfloor\tlg(1)\rfloor + 2$, as desired. \\
 
 \textbf{Induction ($n > 1$)} \\
-Assume that $D(k) = \Big\lfloor\tlg(k)\Big\rfloor + 2$ for some $k \in \mathbb{N}$ such that $2 \leq k < n$. We now show that $D(n) = \Big\lfloor\tlg(n)\Big\rfloor + 2$.
+Assume that $D(k) = \lfloor\tlg(k)\rfloor + 2$ for some $k \in \mathbb{N}$ such that $2 \leq k < n$. We now show that $D(n) = \lfloor\tlg(n)\rfloor + 2$.
 \begin{eqnarray*}
-D(n) & = &  D(\Big\lfloor\frac{n}{2}\Big\rfloor) + 1 \\
-& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor + 2\Big) + 1 \\
-& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor + 1\Big) + 2 \\
-& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor + \tlg(2)\Big) + 2 \\
-& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor) + \tlg(2)\Big\rfloor\Big) + 2 \\
-& = & \Big(\Big\lfloor\tlg(2\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor\Big) + 2 \\
-& = & \Big(\Big\lfloor\tlg(n)\Big\rfloor\Big) + 2 \\
-& = & \Big\lfloor\tlg(n)\Big\rfloor + 2
+D(n) & = &  D(\Big\lfloor\frac{n}{2}\Big\rfloor) + 1 \text{ (by definition of $D(n)$)}\\
+& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor + 2\Big) + 1 \text{ (by induction hypothesis)}\\
+& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor + 1\Big) + 2 \text{ (by commutative property)}\\
+& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor + \tlg(2)\Big) + 2 \text{ (by property of logarithms)}\\
+& = & \Big(\Big\lfloor\tlg(\Big\lfloor\frac{n}{2}\Big\rfloor) + \tlg(2)\Big\rfloor\Big) + 2 \text{ (by property of floor function)}\\
+& = & \Big(\Big\lfloor\tlg(2\Big\lfloor\frac{n}{2}\Big\rfloor)\Big\rfloor\Big) + 2 \text{ (by property of logarithms)}\\
+& = & \lfloor\tlg(n)\rfloor + 2 \text{ (by the fact that $\lfloor \tlg (2\lfloor n/2 \rfloor)\rfloor = \lfloor \tlg n \rfloor$)} 
 %
 %& = & \Big(\Big\lfloor\tlg(n) - \tlg(2)\Big\rfloor + 2\Big) + 1 \\
 %& = & \Big(\Big\lfloor\tlg(n) - 1\Big\rfloor + 2\Big) + 1 \\
 %& = & \Big((\Big\lfloor\tlg(n)\Big\rfloor - 1) + 2\Big) + 1 \\
 %& = & \Big(\Big\lfloor\tlg(n)\Big\rfloor + 1\Big) + 1 \\
-%& = & \Big\lfloor\tlg(n)\Big\rfloor + 2
+%& = & \lfloor\tlg(n)\rfloor + 2
 \end{eqnarray*}
-Thus, $D(n) = \Big\lfloor\tlg(n)\Big\rfloor + 2$, as desired.
+Thus, $D(n) = \lfloor\tlg(n)\rfloor + 2$, as desired.
 \end{sol}
 
 \begin{prob}{1-e}
@@ -190,13 +192,13 @@ Then prove that $T(n) - T(1) = \sum_{k=1}^{n-1} D(k)$, and show that an immediat
 By the definition of $D(n)$, we observe the following:
 \begin{eqnarray*}
 \sum_{k=1}^{n-1}D(k) & = & \sum_{k=1}^{n-1}\Big(T(k + 1) - T(k)\Big) \\
-& = & \big(T(2) - T(1)\big) + \big(T(3) - T(2)\big) + \big(T(4) - T(3)\big) + ... + \big(T(n) - T(n-1)\big) \\
+& = & \big(T(2) - T(1)\big) + \big(T(3) - T(2)\big) + ... + \big(T(n-1) - T(n-2)\big) + \big(T(n) - T(n-1)\big) \\
 & = & T(n) - T(1) 
 \end{eqnarray*}
-Therefore, since $\sum_{k=1}^{n-1}D(k)$ turns into a telescoping sum, we see that it collapses to $T(n) - T(1)$, and since $D(n) = \Big\lfloor\tlg(n)\Big\rfloor + 2$, we also know the following:
+Therefore, since $\sum_{k=1}^{n-1}D(k)$ turns into a telescoping sum, we see that it collapses to $T(n) - T(1)$, and since $D(n) = \lfloor\tlg(n)\rfloor + 2$, we also know the following:
 \begin{eqnarray*}
 T(n) - T(1) & = & \sum_{k=1}^{n-1}D(k) \\
-& = & \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)
+& = & \sum_{k=1}^{n-1}\big(\lfloor\tlg(k)\rfloor + 2\big)
 \end{eqnarray*}
 Thus, we see that $T(n) - T(1) = \sum_{k=1}^{n-1}\big(\lfloor\tlg(k)\rfloor + 2\big)$, and since $T(1) = 0$, we conclude that $T(n) = \sum_{k=1}^{n-1}\big(\lfloor\tlg(k)\rfloor + 2\big)$.
 \end{sol}
@@ -207,14 +209,76 @@ Now show that $T(n) = \sum_{k=1}^{n-1}\lfloor \tlg(k) \rfloor + 2$ implies that 
 \begin{sol}
 Using the fact that $T(n) = \sum_{k=1}^{n-1}\big(\Big\lfloor\tlg(k)\Big\rfloor + 2\big)$. We now evaluate this summation as follows:
 \begin{eqnarray*}
-T(n) & = & \sum_{k=1}^{n-1}\big(\lfloor\tlg(n)\rfloor + 2\big) \\ 
-& = & \sum_{k=1}^{n-1}\lfloor\tlg(k)\rfloor + \sum_{k=1}^{n-1}2 \\
-& < & \sum_{k=1}^{n-1}\lfloor\tlg(n)\rfloor + \sum_{k=1}^{n-1}2 \\
-& = & (n-1)\tlg(n) + 2(n-1) \\
-& = & n\tlg(n) - \tlg(n) + 2n - 1 \\
-& = & O(n\tlg(n)) \\
-& = & O(n\tlog(n))
+T(n) & = & \sum_{k=1}^{n-1}\big(\lfloor\tlg(n)\rfloor + 2\big) \text{ (by definition of $T(n)$)}\\ 
+& = & \sum_{k=1}^{n-1}\lfloor\tlg(k)\rfloor + \sum_{k=1}^{n-1}2 \text{ (by splitting the summation)}\\
+& < & \sum_{k=1}^{n-1}\lfloor\tlg(n)\rfloor + \sum_{k=1}^{n-1}2 \text{ (by property of logarithms)}\\
+& = & (n-1)\tlg(n) + 2(n-1) \text{ (by evaluating each summation)}\\
+& = & n\tlg(n) - \tlg(n) + 2n - 1 \text{ (by distribution)}\\
+& = & O(n\tlg(n)) \text{ (by definition of $O(f(n))$)}\\
+& = & O(n\tlog(n)) \text{ (by definition of $O(f(n))$)}
 \end{eqnarray*}
+
+Thus, we can conclude that $T(n) = O(n\tlog(n))$.
+\end{sol}
+
+\begin{prob}{2-a}
+\end{prob}
+\begin{sol}
+This algorithm relies on the sorted nature of the sequence S to traverse from both endpoints (front and back) towards the middle, checking each pair of numbers to see if they sum to the target value and, if not, advancing the front pointer if the sum is less than the target or decrementing the back pointer if the sum is more than the target. The source code for this algorithm is shown below.
+\begin{lstlisting}
+def sortedHasSum(S, x):
+	start = 0
+	end = len(S) - 1
+	while (start < end):
+		sum = S[start] + S[end]
+		if (sum < x):
+			start = start + 1
+		elif (x < sum):
+			end = end - 1
+		else:
+			return True
+	return False
+\end{lstlisting}
+\end{sol}
+
+\begin{prob}{2-b}
+\end{prob}
+\begin{sol}
+This function relies on merge sort (which always runs in $O(nlogn)$ time) to put the sequence S in sorted order and then runs the same sortedHasSum routine again. Since the time complexity of sortedHasSum is $O(n)$ and merge sort is $O(nlogn)$, and they are performed back-to-back, the resulting time complexity is $O(nlogn)$ because the $O(n)$ function can be ignored (it is smaller than $O(nlogn)$). The source code for this algorithm is shown below.
+
+\begin{lstlisting}
+def hasSum(S, x):
+	S = mergeSort(S)
+	return sortedHasSum(S, x)
+\end{lstlisting}
+\end{sol}
+
+\begin{prob}{2-c}
+\end{prob}
+\begin{sol}
+Tail recursion was implemented by making the observation that only one 'recursive' call is needed after each partition of the target array. Therefore, by continuing this recursive call and placing the other partition on a stack, we make use of tail-recursion by only sorting both partitions of the target array once the other complete half has been finished. This tail-recursive implementation guarantees that the stack is always $O(logn)$. The source code for this implementaiton is shown below.
+
+\begin{lstlisting}
+def qsort(A, p, r):
+	stack = list()
+	bottom = (0, -1)
+	stack.append(bottom)
+	while (len(stack) != 0):
+		while (p < r):
+			q = partition(A, p, r)
+			if (q - p + 1 < r - q):
+				pair = (q + 1, r)
+				stack.append(pair)
+				r = q - 1
+			else:
+				pair = (p, q - 1)
+				stack.append(pair)
+				p = q + 1
+		newBound = stack.pop(len(stack) - 1)
+		p = newBound[0]
+		r = newBound[1]
+	return A
+\end{lstlisting}
 \end{sol}
 
 \begin{prob}{Extra credit}
