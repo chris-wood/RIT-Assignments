@@ -244,7 +244,7 @@ def sortedHasSum(S, x):
 \begin{prob}{2-b}
 \end{prob}
 \begin{sol}
-This function relies on merge sort (which always runs in $O(nlogn)$ time) to put the sequence S in sorted order and then runs the same sortedHasSum routine again. Since the time complexity of sortedHasSum is $O(n)$ and merge sort is $O(nlogn)$, and they are performed back-to-back, the resulting time complexity is $O(nlogn)$ because the $O(n)$ function can be ignored (it is smaller than $O(nlogn)$). The source code for this algorithm is shown below.
+This function relies on merge sort (which always runs in $O(n\tlog n)$ time) to put the sequence $S$ in sorted order and then runs the same sortedHasSum routine again. Since the time complexity of sortedHasSum is $O(n)$ and merge sort is $O(n\tlog n)$, then we know the time complexity $T(n)$ of hasSum(S, x), where $n = |S|$, is $T(n) = O(n\tlog n) + O(n) = O(n\tlog n)$. The source code for this algorithm is shown below.
 
 \begin{lstlisting}
 def hasSum(S, x):
@@ -253,10 +253,10 @@ def hasSum(S, x):
 \end{lstlisting}
 \end{sol}
 
-\begin{prob}{2-c}
+\begin{prob}{3}
 \end{prob}
 \begin{sol}
-Tail recursion was implemented by making the observation that only one 'recursive' call is needed after each partition of the target array. Therefore, by continuing this recursive call and placing the other partition on a stack, we make use of tail-recursion by only sorting both partitions of the target array once the other complete half has been finished. This tail-recursive implementation guarantees that the stack is always $O(logn)$. The source code for this implementaiton is shown below.
+Tail recursion was implemented by making the observation that only one 'recursive' call is needed after each partition of the target array. Therefore, by continuing this recursive call and placing the other partition on a stack, we make use of tail-recursion by only sorting both partitions of the target array once the other complete half has been finished. This tail-recursive implementation guarantees that the stack is always $O(\tlog n)$. The source code for this implementaiton is shown below.
 
 \begin{lstlisting}
 def qsort(A, p, r):
