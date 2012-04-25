@@ -9,9 +9,6 @@
 # For command line arguments
 import sys
 
-# For square root function
-from math import sqrt 
-
 ##########################################################################
 #
 # 4-2b: This function relies on merge sort (which always runs in 
@@ -62,6 +59,8 @@ def msort(S):
 	if (len(S) <= 1):
 		return S
 	else:
+		# These substring operations are guaranteed to run in
+		# O(1) time since they are simple array index lookups
 		first = msort(S[:len(S)/2])
 		second = msort(S[len(S)/2:len(S)])
 		return merge(first, second)

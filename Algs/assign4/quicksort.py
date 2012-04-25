@@ -11,12 +11,16 @@ import sys
 
 ##########################################################################
 #
-# 4-3: Tail recursion was implemented by making the observation that
-# only one 'recursive' call is needed after each partition of the target
-# array. Therefore, by continuing this recursive call and placing the 
-# other partition on a stack, we make use of tail-recursion by only 
-# sorting both partitions of the target array once the other complete
-# half has been finished.
+# 4-3: The stack size of quicksort can be reduced by O(log n) by making 
+# use of tail recursion, which was implemented by making the observation 
+# that only one 'recursive' call is needed after each partition of the 
+# target sequence. By taking the larger of the two partitions and placing
+# it on the stack, and then continuing with the smaller partition by adjusting
+# the sequence bounds (either moving up the start index or moving down the
+# end index), we make use of tail-recursion by only sorting half of the 
+# sequence at a time. When one half is completed, the other partitions are 
+# popped off of the stack and handled in the same way. This tail-recursive 
+# implementation guarantees that the stack is always O(log n).
 #
 ##########################################################################
 

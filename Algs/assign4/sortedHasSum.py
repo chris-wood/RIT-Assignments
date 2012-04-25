@@ -9,16 +9,17 @@
 # For command line arguments
 import sys
 
-# For square root function
-from math import sqrt 
-
 ##########################################################################
 #
 # 4-2a: This algorithm relies on the sorted nature of the sequence S to 
-# traverse from both endpoints (front and back) towards the middle, checking
-# each pair of numbers to see if they sum to the target value and, if not, 
-# advancing the front pointer if the sum is less than the target
-# or decrementing the back pointer if the sum is more than the target.
+# check for a pair of numbers by traversing from both endpoints of the 
+# sequence (front and back) towards the middle. At each iteration, the 
+# algorithm checks the pair of numbers at the front and back positions to 
+# see if they sum to the target value and, if not, advances the front 
+# pointer if the sum is less than the target or decrements the back pointer 
+# if the sum is more than the target. Since the algorithm only traverses 
+# through the list at most once before it terminates, the know the resulting 
+# time complexity must be O(n).
 #
 ##########################################################################
 
