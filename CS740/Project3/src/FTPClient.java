@@ -44,13 +44,13 @@ public class FTPClient
 	 * Enumerations for the possible transfer types available.
 	 */
 	public static enum TransferType {ASCII, BINARY};
-	private TransferType tType = TransferType.BINARY; 
+	private TransferType tType = TransferType.ASCII; 
 	
 	/**
 	 * Enumerations for the possible transfer modes available.
 	 */
 	public static enum TransferMode {ACTIVE, PASSIVE};
-	private TransferMode tMode = TransferMode.PASSIVE; 
+	private TransferMode tMode = TransferMode.ACTIVE; 
 	
 	/**
 	 * The FTP protocol manager 

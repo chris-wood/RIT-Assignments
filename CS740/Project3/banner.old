@@ -1,0 +1,11 @@
+
+Attention:
+
+Starting March 1st, 2004 ftp.cs.rit.edu will be available for 
+anonymous download only.  User logins via ftp will be disabled.
+
+If you need to upload files please use scp, sftp, or
+another form of secure upload.  You will be able to do this with 
+any machine in the CS labs.  
+
+If you have any questions, please send mail to problems@cs.rit.edu

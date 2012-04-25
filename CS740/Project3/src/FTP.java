@@ -45,7 +45,7 @@ public class FTP
 	 */
 	public static final String FTP_COMMANDS[] = 
 	{
-		"A", "L 8", "CWD", "CDUP", "DEBUG", "LIST", "RETR", 
+		"A", "I", "CWD", "CDUP", "DEBUG", "LIST", "RETR", 
 		"HELP", "PASV", "PUT", "PWD", "QUIT", "USER", "PASS", "PORT"
 	};
 	

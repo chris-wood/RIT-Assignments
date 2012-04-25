@@ -264,9 +264,11 @@ public class FTPTransmissionManager
 			String line = controlIn.readLine();
 			builder.append(line);
 			boolean endOfReply = true;
+			String response = line.substring(0, FTPClient.END_CODE_INDEX);
 			if (line.charAt(FTPClient.END_CODE_INDEX) == FTPClient.HYPHEN)
 			{
 				endOfReply = false;
+				
 			}
 			
 			// Loop until we reach the end of the reply
@@ -274,8 +276,9 @@ public class FTPTransmissionManager
 			{
 				line = controlIn.readLine();
 				builder.append("\n" + line);
-				if (isFtpResponse(line) && line.charAt(FTPClient.END_CODE_INDEX) 
-						== FTPClient.SPACE)
+				if (isFtpResponse(line) && 
+						line.charAt(FTPClient.END_CODE_INDEX) == FTPClient.SPACE && 
+						line.substring(0, FTPClient.END_CODE_INDEX).equals(response))
 				{
 					endOfReply = true;
 				}
@@ -305,9 +308,7 @@ public class FTPTransmissionManager
 		}
 		
 		// Send the command to switch to passive mode
-		String cmd = PASSIVE_COMMAND + FTPClient.TELNET_END;
-		controlOut.write(cmd.getBytes(), 0, cmd.length());
-		controlOut.flush();
+		sendControl(PASSIVE_COMMAND);
 		
 		// Retrieve the response and parse it 
 		String result = receiveControl(true);
