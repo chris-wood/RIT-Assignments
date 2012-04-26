@@ -1,5 +1,5 @@
-function f = objfun(X)
-% Description: objfun is a function that represents the objective 
+function f = objfunc(X)
+% Description: objfunc is a function that represents the objective 
 %   function for the problem defined in part #1 of the assignment.
 %
 % Prototype: f = objfun(X) (where size(X) == 4)
