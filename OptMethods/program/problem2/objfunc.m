@@ -15,3 +15,6 @@ function f = objfunc(X)
 % rotational speed, respectively, since we are seeking to optimize the 
 % energy towards its maximum (or in this case, minimum) value.
 f = -((1/4) * pi * (X(1)^4) * X(2) * 8000 * (100 * pi)^2);
+
+% Display the design variables at each iteration.
+X

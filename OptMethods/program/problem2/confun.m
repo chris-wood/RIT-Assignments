@@ -18,5 +18,8 @@ c = [X(1) - 0.5;
 (pi * (X(1)^2) * X(2) * 8000) - 70;
 (1/2) * 8000 * (3 + 0.3) * (100 * pi)^2 * (X(1)^2) - (140 * (10^6));];
 
+% Display the inequality constraints for each iteration.
+c
+
 % Nonlinear equality constraints (empty since we have no equalities).
 ceq = [];

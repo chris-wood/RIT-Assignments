@@ -13,3 +13,6 @@ function f = objfunc(X)
 % Direct copy of function definition from problem #1.
 f = X(1)^2 + X(2)^2 + 2*X(3)^2 - X(4)^2 - 5*X(1)^2 - 5*X(2)^2 ...
     - 21*X(3) + 7*X(4) + 100;
+
+% Display the design variables at each iteration.
+X

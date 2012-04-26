@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  21 APR 2012 19:37
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  26 APR 2012 19:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -457,7 +457,7 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 \c@pseudocode=\count126
 \c@pseudonum=\count127
 )
-No file caw4567-report.aux.
+(./caw4567-report.aux)
 \openout1 = `caw4567-report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
@@ -476,6 +476,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
 LaTeX Font Info:    ... okay on input line 17.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 17.
+
 (/usr/local/texlive/2011/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
@@ -538,44 +539,115 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 17.
 LaTeX Info: Redefining \pageref on input line 17.
 LaTeX Info: Redefining \nameref on input line 17.
+
+(./caw4567-report.out) (./caw4567-report.out)
 \@outlinefile=\write4
 \openout4 = `caw4567-report.out'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 22.
+LaTeX Font Info:    Try loading font information for U+msa on input line 25.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 25.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Try loading font information for U+lasy on input line 25.
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+Package epstopdf Info: Source file: <problem1/problem1.eps>
+(epstopdf)                    date: 2012-04-26 12:04:15
+(epstopdf)                    size: 21721 bytes
+(epstopdf)             Output file: <problem1/problem1-eps-converted-to.pdf>
+(epstopdf)                    date: 2012-04-26 18:48:28
+(epstopdf)                    size: 9742 bytes
+(epstopdf)             Command: <repstopdf --outfile=problem1/problem1-eps-conv
+erted-to.pdf problem1/problem1.eps>
+(epstopdf)             \includegraphics on input line 28.
+Package epstopdf Info: Output file is already uptodate.
+
+<problem1/problem1-eps-converted-to.pdf, id=4, 449.68pt x 338.26375pt>
+File: problem1/problem1-eps-converted-to.pdf Graphic file (type pdf)
+
+<use problem1/problem1-eps-converted-to.pdf>
+Package pdftex.def Info: problem1/problem1-eps-converted-to.pdf used on input l
+ine 28.
+(pdftex.def)             Requested size: 337.25917pt x 253.69717pt.
+
+Overfull \hbox (25.07964pt too wide) in paragraph at lines 63--69
+[][] 
+ []
 
 [1
 
-{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 22.
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./probl
+em1/problem1-eps-converted-to.pdf>] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
 
-(./caw4567-report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 22.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 22.
+ []
 
+[3]
+Package epstopdf Info: Source file: <problem2/problem2.eps>
+(epstopdf)                    date: 2012-04-26 12:04:41
+(epstopdf)                    size: 21305 bytes
+(epstopdf)             Output file: <problem2/problem2-eps-converted-to.pdf>
+(epstopdf)                    date: 2012-04-26 18:56:22
+(epstopdf)                    size: 9652 bytes
+(epstopdf)             Command: <repstopdf --outfile=problem2/problem2-eps-conv
+erted-to.pdf problem2/problem2.eps>
+(epstopdf)             \includegraphics on input line 131.
+Package epstopdf Info: Output file is already uptodate.
+ <problem2/problem2-eps-converted-to.pdf, id=39, 449.68pt x 338.26375pt>
+File: problem2/problem2-eps-converted-to.pdf Graphic file (type pdf)
 
-Package rerunfilecheck Warning: File `caw4567-report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `caw4567-report.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 22.
+<use problem2/problem2-eps-converted-to.pdf>
+Package pdftex.def Info: problem2/problem2-eps-converted-to.pdf used on input l
+ine 131.
+(pdftex.def)             Requested size: 337.25917pt x 253.69717pt.
+ [4 <./problem2/problem2-eps-converted-to.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 169.
+ [5]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 169.
+ (./caw4567-report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 169.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 169.
+Package rerunfilecheck Info: File `caw4567-report.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 169.
  ) 
 Here is how much of TeX's memory you used:
- 9476 strings out of 493633
- 140629 string characters out of 3143378
- 266002 words of memory out of 3000000
- 12654 multiletter control sequences out of 15000+200000
- 5619 words of font info for 27 fonts, out of 3000000 for 9000
+ 9625 strings out of 493633
+ 143275 string characters out of 3143378
+ 283002 words of memory out of 3000000
+ 12721 multiletter control sequences out of 15000+200000
+ 11179 words of font info for 59 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 33i,5n,51p,255b,329s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pf
-b></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on caw4567-report.pdf (1 page, 25797 bytes).
+ 33i,10n,51p,440b,434s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
+></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
+/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/lo
+cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
+/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/
+texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
+exlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on caw4567-report.pdf (5 pages, 134446 bytes).
 PDF statistics:
- 21 PDF objects out of 1000 (max. 8388607)
- 15 compressed objects within 1 object stream
- 2 named destinations out of 1000 (max. 500000)
- 9217 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 97 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
+ 14 named destinations out of 1000 (max. 500000)
+ 12299 words of extra memory for PDF output out of 14400 (max. 10000000)
 

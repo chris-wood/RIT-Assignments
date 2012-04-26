@@ -19,5 +19,8 @@ c = [(X(1) * X(1)) + (X(2) * X(2)) + (X(3) * X(3)) + (X(4) * X(4)) ...
     2*(X(1) * X(1)) + (X(2) * X(2)) + (X(3) * X(3)) + 2*X(1) - X(2) ...
     - X(4) - 5;];
 
+% Display the inequality constraints for each iteration.
+c
+
 % There are no nonlinear equality constraints, so leave this empty
 ceq = [];
