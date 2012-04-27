@@ -22,15 +22,16 @@
 \begin{solution}
 
 \end{solution}
-Solving the optimization problem using the $fmincon$ function with the interior-point algorithm yielded the following data for each iteration.
+Solving the optimization problem using the \emph{fmincon} function with the interior-point algorithm yielded the following data for each iteration.
 
 \begin{center}
 \includegraphics[scale=0.75]{problem1/problem1.eps}
 \end{center}
 
-The values of the objective function and design variables at each iteration are shown in the table below.
-\begin{center}
-\begin{table}
+The values of the objective function and design variables at each iteration are shown in Table \ref{Table1}. In addition, the final values of the objective function, design variables, and constraints after convergence of the interior-point algorithm are shown in the Table \ref{Table2}.
+
+\begin{table*}[htbp]
+	\centering
     \begin{tabular}{|l|l|l|l|l|l|}
         \hline
         Iteration & Function Value & X1 & X2 & X3 & X4\\ \hline
@@ -54,20 +55,21 @@ The values of the objective function and design variables at each iteration are 
 17 & 51.58233 & -1.049 & 0.8736 & 2.0485 & -0.8113\\ 
         \hline
     \end{tabular}
-\end{table}
-\end{center}
+	\caption{Objective function and design variable values for each iteration during the interior-point algorithm.}
+	\label{Table1}
+\end{table*}
 
-The final values of the objective function, design variables, and constraints after convergence are shown in the table below.
-\begin{center}
-\begin{table}
+\begin{table*}[htbp]
+	\centering
     \begin{tabular}{|l|l|l|l|l|l|l|l|}
         \hline
 	Objective Function & X1 & X2 & X3 & X4 & Constraint 1 & Constraint 2 & Constraint 3 \\ \hline
 	51.5823 & -1.049 & 0.8736 & 2.0485 & -0.8113 & -92.3447 & 0 & 0 \\ 
 	\hline
     \end{tabular}
-\end{table}
-\end{center}
+	\caption{Final objective function, design variable, and constraint values after convergence of the interior-point algorithm.}
+	\label{Table2}
+\end{table*}
 
 \begin{problem}{2-a}
 \end{problem}
@@ -131,9 +133,10 @@ Solving this optimization problem using the $fmincon$ function with the interior
 \includegraphics[scale=0.75]{problem2/problem2.eps}
 \end{center}
 
-The values of the objective function and design variables at each iteration are shown in the table below.
-\begin{center}
-\begin{table}
+The values of the energy function, radius, and width at each iteration of the interior-point algorithm are shown in Table \ref{Table3}. In addition, the final values of the energy, radius, and width, and constraints after convergence of the interior-point algorithm are shown in the Table \ref{Table4}. It is important to note that since we needed to negate the energy (objective) function to convert it into an appropriate minimization problem for use with the interior-point algorithm, the actual optimal energy value is 185606.1.
+
+\begin{table*}[htbp]
+	\centering
     \begin{tabular}{|l|l|l|l|}
         \hline
        Iteration & Function Value & Radius & Width\\ \hline
@@ -149,20 +152,21 @@ The values of the objective function and design variables at each iteration are 
 9 & -185606.1 & 0.3278 & 0.0259\\ 
         \hline
     \end{tabular}
-\end{table}
-\end{center}
+	\caption{Objective function and design variable values for each iteration during the interior-point algorithm.}
+	\label{Table3}
+\end{table*}
 
-The final values of the objective function, design variables, and constraints after convergence are shown in the table below.
-\begin{center}
-\begin{table}
+\begin{table*}[htbp]
+	\centering
     \begin{tabular}{|l|l|l|l|l|l|}
         \hline
 	Objective Function & Radius & Width & Constraint 1 & Constraint 2 & Constraint 3 \\ \hline
 	-185606.1 & 0.3278 & 0.0259 & -0.1722 & 0 & -0.0038 \\ 
 	\hline
     \end{tabular}
-\end{table}
-\end{center}
+	\caption{Final objective function, design variable, and constraint values after convergence of the interior-point algorithm.}
+	\label{Table4}
+\end{table*}
 
 \end{solution}
 
