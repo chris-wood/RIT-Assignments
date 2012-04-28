@@ -18,11 +18,14 @@ for i = 1:SBOX_SIZE
 	S(i) = i;
 end
 
+disp('Sample weight')
+wt(7, 8)
+
 % Attempt to calculate the BN for this S-box
-S
-[n, pair] = bn(S, SBOX_SIZE);
-n
-pair
+%S;
+%[n, pair] = bn(S, SBOX_SIZE);
+%n;
+%pair;
 
 %plot(DT)
 %title("Actual Packet Distribution Times");
