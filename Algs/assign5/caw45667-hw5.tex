@@ -120,10 +120,10 @@ To find the optimal parenthesization of a matrix chain product whose sequence of
 	\centering
 	\begin{tabular}{|l|l|l|l|l|l|}
 		 \hline
-        0 & 150 & - & - & - & - \\ 
-        - & 0 & 360 & - & - & - \\ 
-        - & - & 0 & 180 & - & - \\ 
-        - & - & - & 0 & 3000 & -\\ 
+        0 & 150 & 330 & - & - & - \\ 
+        - & 0 & 360 &330 & - & - \\ 
+        - & - & 0 & 180 & 930 & - \\ 
+        - & - & - & 0 & 3000 & 1860\\ 
         - & - & - & - & 0 & 1500  \\ 
         - & - & - & - & - & 0 \\
         \hline
@@ -131,16 +131,98 @@ To find the optimal parenthesization of a matrix chain product whose sequence of
 	\hspace{20mm}
 	\begin{tabular}{|l|l|l|l|l|l|}
 		 \hline
-        - & 1 & - & - & - & - \\ 
-        - & - & 2 & - & - & - \\ 
-        - & - & - & 3 & - & - \\ 
-        - & - & - & - & 4 & - \\ 
+        - & 1 & 2 & - & - & - \\ 
+        - & - & 2 & 2 & - & - \\ 
+        - & - & - & 3 & 4 & - \\ 
+        - & - & - & - & 4 & 4 \\ 
         - & - & - & - & - & 5 \\ 
         - & - & - & - & - & - \\
         \hline
 	\end{tabular}
 	\caption{$m$ and $c$ tables for $l = 3$}
 \end{table*}
+
+\begin{table*}[htbp]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|l|}
+		 \hline
+        0 & 150 & 330 & 405 & - & - \\ 
+        - & 0 & 360 &330 & 2430 & - \\ 
+        - & - & 0 & 180 & 930 & 1770 \\ 
+        - & - & - & 0 & 3000 & 1860\\ 
+        - & - & - & - & 0 & 1500  \\ 
+        - & - & - & - & - & 0 \\
+        \hline
+	\end{tabular}
+	\hspace{20mm}
+	\begin{tabular}{|l|l|l|l|l|l|}
+		 \hline
+        - & 1 & 2 & 2 & - & - \\ 
+        - & - & 2 & 2 & 2 & - \\ 
+        - & - & - & 3 & 4 & 4 \\ 
+        - & - & - & - & 4 & 4 \\ 
+        - & - & - & - & - & 5 \\ 
+        - & - & - & - & - & - \\
+        \hline
+	\end{tabular}
+	\caption{$m$ and $c$ tables for $l = 4$}
+\end{table*}
+
+\begin{table*}[htbp]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|l|}
+		 \hline
+        0 & 150 & 330 & 405 & 1655 & - \\ 
+        - & 0 & 360 &330 & 2430 & 1950 \\ 
+        - & - & 0 & 180 & 930 & 1770 \\ 
+        - & - & - & 0 & 3000 & 1860\\ 
+        - & - & - & - & 0 & 1500  \\ 
+        - & - & - & - & - & 0 \\
+        \hline
+	\end{tabular}
+	\hspace{20mm}
+	\begin{tabular}{|l|l|l|l|l|l|}
+		 \hline
+        - & 1 & 2 & 2 & 4 & - \\ 
+        - & - & 2 & 2 & 2 & 2 \\ 
+        - & - & - & 3 & 4 & 4 \\ 
+        - & - & - & - & 4 & 4 \\ 
+        - & - & - & - & - & 5 \\ 
+        - & - & - & - & - & - \\
+        \hline
+	\end{tabular}
+	\caption{$m$ and $c$ tables for $l = 5$}
+\end{table*}
+
+\begin{table*}[htbp]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|l|}
+		 \hline
+        0 & 150 & 330 & 405 & 1655 & 2010 \\ 
+        - & 0 & 360 &330 & 2430 & 1950 \\ 
+        - & - & 0 & 180 & 930 & 1770 \\ 
+        - & - & - & 0 & 3000 & 1860\\ 
+        - & - & - & - & 0 & 1500  \\ 
+        - & - & - & - & - & 0 \\
+        \hline
+	\end{tabular}
+	\hspace{20mm}
+	\begin{tabular}{|l|l|l|l|l|l|}
+		 \hline
+        - & 1 & 2 & 2 & 4 & 2 \\ 
+        - & - & 2 & 2 & 2 & 2 \\ 
+        - & - & - & 3 & 4 & 4 \\ 
+        - & - & - & - & 4 & 4 \\ 
+        - & - & - & - & - & 5 \\ 
+        - & - & - & - & - & - \\
+        \hline
+	\end{tabular}
+	\caption{$m$ and $c$ tables for $l = 6$}
+\end{table*}
+
+Now, using these values, we conclude that the minimum number of multiplications needed to evaluate this sequence of matrices is 2010. Since the sequence $<5, 10, 3, 12, 5, 50, 6>$ corresponds to the matrices $A_1$ (5 x 10), $A_2$ (10 x 3), $A_3$ (3 x 12), $A_4$ (12 x 5), $A_5$ (5 x 50), $A_6$ (50 x 6), respectively, we can now find the optimal parenthesization using the resulting $c$ matrix, which yields the following result: \\ 
+
+$((A_1A_2)(A_3A_4)(A_5A_6))$
 
 \end{sol}
 
@@ -162,7 +244,68 @@ Thus, we can see that a fully parenthesization of an $n$-element expression has 
 Which is a more efficient way to determine the optimal number of multiplications in a matrix-chain multiplication problem: enumerating all the ways of parenthesizing the product and computing the number of multiplications for each, or running the recursive matrix chain algorithm?
 \end{prob}
 \begin{sol}
+Running the RECURSIVE-MATRIX-CHAIN algorithm is more efficient than exhausting enumeration of the possible parenthesization of the matrix chain. Informally, it is easy to see that the recursion tree for the RECURSIVE-MATRIX-CHAIN algorithm does not contain all possible enumerations for the different parenthesization schemes for a given matrix chain. For each subproblem from index $i$ to $j$ that is solved by the RECURSIVE-MATRIX-CHAIN algorithm, we can see that the optimal midpoint in the chain from matrix $i$ to matrix $j$ is found recursively using two subproblem invocations of RECURSIVE-MATRIX-CHAIN on the left and right half of this midpoint, and then those results are simply combined to obtain the optimal result for matrices from index $i$ to $j$. However, using the enumeration approach, we would calculate all  parenthesization possibilies for all possible left and right halves of the matrix chain from $i$ to $j$, and then we would have to compute the result of all possible combinations of these left and right half possibilities to find the optimal value for the chain from $i$ to $j$. Basically, the RECURSIVE-MATRIX-CHAIN  algorithm only does one combination step after the left and right subproblems have been solved to find the optimal value, whereas the enumeration approach performs many combinations for left and right half partitions until it finds the optimal value. Thus, by this simple argument, we can see that the RECURSIVE-MATRIX-CHAIN algorithm is by far more efficient than the enumeration approach.
 
+Formally, we know (by section 15.2 in the textbook) that the enumeration approach runs in $\Omega(\frac{4^n}{n^{3/2}})$ (similar to the \emph{Catalan numbers}. To show that the RECURSIVE-MATRIX-CHAIN algorithm is computationally more efficient, we must establish an upper bound on its time complexity that is less than the enumeration approach. With this as motivation, we first identify a recurrence $T(n)$ for the time of the RECURSIVE-MATRIX-CHAIN algorithm as follows:
+
+\[
+T(n) = \left\{ 
+  \begin{array}{l l}
+    1, & \quad \text{if $n = 1$}, \\
+    1 + \sum_{k=1}^{n-1}(T(k) + T(n-k) + 1), & \quad \text{if $n > 1$}. \\
+  \end{array} \right.
+\]
+
+This is from the observation that the comparison and multiplication operations in the RECURSIVE-MATRIX-CHAIN algorithm take constant time $(O(1))$, and at each step in the partition loop we are making two recursive calls, where the size of the index range for each recursive call adds up to $n$. We can make a further observation that, if the inner sum was split up, the $T(k)$ and $T(n-k)$ terms could be rewritten as $T(k)$ and $T(k)$, which implies that we can rewrite $T(n)$ as follows:
+
+\[
+T(n) = \left\{ 
+  \begin{array}{l l}
+    1, & \quad \text{if $n = 1$}, \\
+    1 + \sum_{k=1}^{n-1}(2T(k) + 1), & \quad \text{if $n > 1$}. \\
+  \end{array} \right.
+\]
+
+Evaluating this recurrence by treating it as a recurrence with full history, and assuming that $T(2) = 3$, we obtain the following:
+\begin{eqnarray*}
+T(n) - T(n - 1) & = & (n - 1) - (n - 2) + 2T(n-1) \\
+\end{eqnarray*}
+Simplifying and evaluation this expression yields the following:
+\begin{eqnarray*}
+T(n) & = & 1 + 3T(n-1) \\
+& = & 1 + 3(1 + 3T(n-2)) \\
+& = & 1 + 3(1 + 3(1 + 3T(n-3))) \\
+& = & ... \\
+& = & \sum_{k=0}^{n-3}3^k + 3^{n-2}T(2) \\
+& = & \frac{3^{n-2} - 1}{2} + 3^{n-2}(3) \\
+& = & \frac{1}{2}(3^{n-2} + 2(3^{n-1}) - 1) \\
+& < & \frac{1}{2}(3^{n-2} + n(3^{n-1}) - 1) \\
+& = & O(n3^{n-1})
+\end{eqnarray*}
+Thus, since $T(n) = O(n3^{n-1})$ and the enumeration approach has a time complexity of $\Omega(\frac{4^n}{n^{3/2}})$, we can conclude that the RECURSIVE-MATRIX-CHAIN does indeed run more efficiently. 
+\end{sol}
+
+\begin{prob}{2-b}
+Draw the recursion tree for the MERGE-SORT procedure from Section 2.3.1 on an array of 16 elements. Explain why memoization fails to speed up a good divide-and-conquer algorithm such as MERGE-SORT.
+\end{prob}
+\begin{sol}
+
+TODO: insert drawing of recursion tree here (Visio?)
+
+Memoization fails to speed up a good divide-and-conquer algorithm such as MERGE-SORT because there are no overlapping subproblems. Memoization is most beneficial when the results of subproblems can be saved in a table using the top-down recursion approach and then recalled when they are encountered at later recursive calls. As shown by the merge-sort recursion tree, there are no overlapping subproblems, so we will never attempt to sort the same subsequences more than once. Thus, we would never make use of the sorted subsequences that have been stored, and will consequently not see any speedup. Other good divide-and-conquer algorithms yield the same results, because the subproblems that are solved recursively are chosen such that they are independent and do not overlap. 
+\end{sol}
+
+\begin{prob}{2-c}
+Consider a variant of the matrix-chain multiplication problem in which the goal is to parenthesize the sequence of matrices so as to maximize, rahter than minimize, the number of scalar multiplications. Does this problem exhibit optimal substructure?
+\end{prob}
+\begin{sol}
+Yes, this problem does exhibit optimal substructure. As with the minimization version of the problem, the optimal solution entails making a choice among two subproblems (the two partitions of the matrix-chain) as to which should be used to yield the maximum number of scalar multiplications. In addition, because matrix multiplication is not commutative, we are forced to maintain the same order of the matrix chain, and thus both partitions that represent the two subproblems involved in the optimal calculation are independent. In other words, the optimal solution to the left partition of the matrix-chain (the optimal number of scalar multiplications) does not affect the optimal solution to the right partition of the matrix-chain. Therefore, since the optimal value is obtained by making a choice among two subproblems that are independent, we can conclude that this problem variant yields optimal substructure.
+\end{sol}
+
+\begin{prob}{3}
+\end{prob}
+\begin{sol}
+TODO - describe the algorithm here and the approach taken - insert code - show correctness
 \end{sol}
 
 \end{document}
