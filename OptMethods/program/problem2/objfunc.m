@@ -14,7 +14,7 @@ function f = objfunc(X)
 % We use 8000 kg/m^3 and 100pi as the flywheel density and maximum 
 % rotational speed, respectively, since we are seeking to optimize the 
 % energy towards its maximum (or in this case, minimum) value.
-f = -((1/4) * pi * (X(1)^4) * X(2) * 8000 * (100 * pi)^2);
+f = -((1/4) * 8000 * pi * (100 * pi)^2 * (X(1)^4) * X(2));
 
 % Display the design variables at each iteration.
 X

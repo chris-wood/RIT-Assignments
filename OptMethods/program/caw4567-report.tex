@@ -75,7 +75,7 @@ The values of the objective function and design variables at each iteration are 
 \end{problem}
 \begin{solution}
 
-Based on the problem description, we seek to optimize the energy stored within the flywheel based on its design specifications, including the maximum permissable mass ($m = 70$ kg), radius ($r = 0.5$ m), rotational speed ($\omega = 3000$ rpm), stress ($\sigma_{max} = 140 x 10^5$ Pa), density ($\rho = 8000$ kg/m$^3$), and Poissons ratio ($v = 0.3$). We are given the equation for the energy of the flywheel as follows:
+Based on the problem description, we seek to optimize the energy stored within the flywheel based on its design specifications, including the maximum permissable mass ($m = 70$ kg), radius ($r = 0.5$ m), rotational speed ($\omega = 3000$ rpm), stress ($\sigma_{max} = 140 \times 10^5$ Pa), density ($\rho = 8000$ kg/m$^3$), and Poissons ratio ($v = 0.3$). We are given the equation for the energy of the flywheel as follows:
 \begin{eqnarray*}
 E & = & \frac{1}{2}I\omega^2 \\
 & = & \frac{1}{4}mr^2\omega^2
@@ -94,7 +94,7 @@ E & = & \frac{1}{4}mr^2\omega^2 \\
 & = &\frac{1}{4}\pi r^4 w \rho \omega^2 \\
 & = & \frac{1}{4}(8000\pi(100\pi)^2r^4 w) 
 \end{eqnarray*}
-Now that we have identified the objective that we must optimize, we must establish the constraints on the design variables $r$ and $w$, which are enumerated below:
+Now that we have identified the objective function that we must optimize, we must establish the constraints on the design variables $r$ and $w$, which are enumerated below:
 \begin{enumerate}
 	\item From the problem description we are told that $r \leq 0.5$ m.
 	\item From the problem description we are told that $m \leq 70$ kg, so replacing $m$ with our previously derived expression $\pi r^2 w \rho$, we know that $\pi r^2 w \rho \leq 70$ kg, where $\rho = 8000$ kg/m$^3$.
@@ -109,6 +109,10 @@ Again, using the fact that $\sigma_{max} = (140 \times 10^6)^2$ Pa and $\omega =
 \begin{eqnarray*}
 \frac{1}{4}(8000^2(3.3)^2(100\pi)^4r^4) \leq (140 \times 10^6)^2
 \end{eqnarray*}
+This can be further reduced by taking the square root of both sides of this expression, which yields the following constraint:
+\begin{eqnarray*}
+\frac{1}{2}(8000(3.3)(100\pi)^2r^2) \leq (140 \times 10^6)
+\end{eqnarray*}
 \end{enumerate}
 Now, realizing that by maximizing the energy we are minimizing the negation of the energy equation, we can write the problem formally as follows. \\
 
@@ -120,7 +124,7 @@ subject to the nonlinear constraints:
 \begin{enumerate}
 	\item $r - 0.5 \leq 0$
 	\item $8000\pi r^2 w  - 70 \leq 0$
-	\item $\frac{1}{4}(8000^2(3.3)^2(100\pi)^4r^4) - (140 \times 10^6)^2 \leq 0$
+	\item $\frac{1}{2}(8000(3.3)(100\pi)^2r^2) - (140 \times 10^6) \leq 0$
 \end{enumerate}
 \end{solution}
 
@@ -133,7 +137,7 @@ Solving this optimization problem using the $fmincon$ function with the interior
 \includegraphics[scale=0.75]{problem2/problem2.eps}
 \end{center}
 
-The values of the energy function, radius, and width at each iteration of the interior-point algorithm are shown in Table \ref{Table3}. In addition, the final values of the energy, radius, and width, and constraints after convergence of the interior-point algorithm are shown in the Table \ref{Table4}. It is important to note that since we needed to negate the energy (objective) function to convert it into an appropriate minimization problem for use with the interior-point algorithm, the actual optimal energy value is 185120.3, which is obtained when the radius and width are equal to $0.3278$ m and $0.0259$ m, respectively. 
+The values of the energy function, radius, and width at each iteration of the interior-point algorithm are shown in Table \ref{Table3}. In addition, the final values of the energy, radius, and width, and constraints after convergence of the interior-point algorithm are shown in the Table \ref{Table4}. It is important to note that since we needed to negate the energy (objective) function to convert it into an appropriate minimization problem for use with the interior-point algorithm, the actual optimal energy value is 185606.1, which is obtained when the radius and width are equal to $0.3278$ m and $0.0259$ m, respectively. 
 
 \begin{table*}[htbp]
 	\centering
@@ -161,47 +165,12 @@ The values of the energy function, radius, and width at each iteration of the in
     \begin{tabular}{|l|l|l|l|l|l|}
         \hline
 	Objective Function & Radius & Width & Constraint 1 & Constraint 2 & Constraint 3 \\ \hline
-	-185120.3 & 0.3274 & 0.0260 & 0 & 0 & -9.7792 \\ 
+	-185606.1 & 0.3278 & 0.0259 & -0.1722 & 0 & -0.7586 \\ 
 	\hline
     \end{tabular}
 	\caption{Final objective function, design variable, and constraint values after convergence of the interior-point algorithm.}
 	\label{Table4}
 \end{table*}
-
-\begin{comment}
-\begin{table*}[htbp]
-	\centering
-    \begin{tabular}{|l|l|l|l|}
-        \hline
-       Iteration & Function Value & Radius & Width\\ \hline
-0 & -39688.03 & 0.2 & 0.04\\ 
-1 & -70200.94 & 0.2013 & 0.069\\ 
-2 & -86527.45 & 0.2395 & 0.0424\\ 
-3 & -115583.3 & 0.3154 & 0.0188\\ 
-4 & -182378.1 & 0.324 & 0.0267\\ 
-5 & -184122.4 & 0.326 & 0.0263\\ 
-6 & -185674.5 & 0.3278 & 0.0259\\ 
-7 & -185607.6 & 0.3278 & 0.0259\\ 
-8 & -185606.1 & 0.3278 & 0.0259\\ 
-9 & -185606.1 & 0.3278 & 0.0259\\ 
-        \hline
-    \end{tabular}
-	\caption{Objective function and design variable values for each iteration during the interior-point algorithm.}
-	\label{Table3}
-\end{table*}
-
-\begin{table*}[htbp]
-	\centering
-    \begin{tabular}{|l|l|l|l|l|l|}
-        \hline
-	Objective Function & Radius & Width & Constraint 1 & Constraint 2 & Constraint 3 \\ \hline
-	-185606.1 & 0.3278 & 0.0259 & -0.1722 & 0 & -0.0038 \\ 
-	\hline
-    \end{tabular}
-	\caption{Final objective function, design variable, and constraint values after convergence of the interior-point algorithm.}
-	\label{Table4}
-\end{table*}
-\end{comment}
 
 \end{solution}
 
