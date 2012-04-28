@@ -80,7 +80,7 @@ public class FTP
 	/**
 	 * Debug mode flag.
 	 */
-	private static boolean debugMode = true;
+	private static boolean debugMode = false;
 
 	/**
 	 * Array of help messages displayed to the user when requested.

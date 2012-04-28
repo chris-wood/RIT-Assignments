@@ -15,19 +15,12 @@ S = zeros(1, SBOX_SIZE);
 
 % Dumbly fill in the S-box contents
 for i = 1:SBOX_SIZE
-	S(i) = i;
+	S(i) = i - 1;
 end
 
-disp('Sample weight')
-wt(7, 8)
+% Attempt to calculate the BN for this S-box (simple setup)
+S
+[n, pair] = bn(S, SBOX_SIZE)
 
-% Attempt to calculate the BN for this S-box
-%S;
-%[n, pair] = bn(S, SBOX_SIZE);
-%n;
-%pair;
-
-%plot(DT)
-%title("Actual Packet Distribution Times");
-%xlabel("N (number of nodes)");
-%ylabel("Estimated Time (Td)");
+% Now set up fmincon to optimize this for us
+% Negate BN: change it to maximizing the number? how to do this?
