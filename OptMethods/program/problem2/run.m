@@ -14,7 +14,7 @@ x0 = [0.2, 0.04];
 options = optimset('Algorithm','interior-point','Display','iter-detailed','PlotFcns','optimplotfval');
 
 % Invoke the fmincon function to find the minimum.
-[v1,v2] = fmincon('objfunc',x0,[],[],[],[],-Inf,Inf,'confun', options);
+[v1,v2] = fmincon('objfunc',x0,[],[],[],[],0,Inf,'confun', options);
 
 % Display the resulting solution.
 v1

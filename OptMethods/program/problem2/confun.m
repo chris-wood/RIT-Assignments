@@ -16,7 +16,7 @@ function [c, ceq] = confun(X)
 % and radius.
 c = [X(1) - 0.5;
 (pi * (X(1)^2) * X(2) * 8000) - 70;
-(1/2) * 8000 * (3 + 0.3) * (100 * pi)^2 * (X(1)^2) - (140 * (10^6));];
+((1/4) * (8000)^2 * (3 + 0.3)^2 * (100 * pi)^4 * (X(1)^4)) - (140 * (10^6))^2;];
 
 % Display the inequality constraints for each iteration.
 c

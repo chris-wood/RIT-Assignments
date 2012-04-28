@@ -82,45 +82,45 @@ E & = & \frac{1}{2}I\omega^2 \\
 \end{eqnarray*}
 Now, treating the flywheel radius $r$ and width $w$ as design variables, we can re-write $E$ in terms of $r$ and $w$ by making the following observations.
 \begin{enumerate}
-	\item $E$ is directly proportional to $\omega$, so we will be able to store the maximum energy only when $\omega$ is at its maximum value (that is, $3000$ rpm = $100\pi$ rad/s).
-	\item The mass of the flywheel can be derived using the equation for density ($\rho = \frac{m}{v}$), where the volume of the flywheel is equal to that of a cylinder with radius $r$ and height $w$. Thus, after algebraic maniupation, we determine the following:
+	\item $E$ is directly proportional to $\omega$, so we will be able to store the maximum energy only when $\omega$ is at its maximum value (that is, $3000$ rpm = $3000\frac{\text{rev}}{\text{min}}(\frac{1\text{min}}{60\text{s}})(\frac{2\pi \text{rad}}{1 \text{rev}}) = 100\pi$ rad/s).
+	\item The mass of the flywheel can be derived using the equation for density ($\rho = \frac{m}{V}$), where the volume $V$ of the flywheel is equal to that of a cylinder with radius $r$ and height $w$ ($V = \pi r^2 w$). Thus, after some algebraic maniupation, we determine the following:
 \begin{eqnarray*}
 m = \pi r^2 w \rho
 \end{eqnarray*} 
 \end{enumerate}
-Now, with these two observations, we can treat $\omega$ at its maximal value of $100\pi$ rad/s and substitute $m$ with the expression $m = \pi r^2 w \rho$, since $\rho$ is a fixed value and does not change. Doing this substitution yields the following expression for the energy of the flywheel:
+Now, with these two observations, we can treat $\omega$ at its maximal value of $100\pi$ rad/s and substitute $m$ with the expression $m = \pi r^2 w \rho$, since $\rho = 8000$ kg/m$^3$ is a fixed value and does not change. Doing this substitution yields the following expression for the energy of the flywheel:
 \begin{eqnarray*}
-E & = & \frac{1}{4}\pi r^4 w \rho \omega^2 \\
-& = & \Big(\frac{8000\pi(100\pi)^2}{4}\Big)r^4 w
+E & = & \frac{1}{4}mr^2\omega^2 \\
+& = &\frac{1}{4}\pi r^4 w \rho \omega^2 \\
+& = & \frac{1}{4}(8000\pi(100\pi)^2r^4 w) 
 \end{eqnarray*}
 Now that we have identified the objective that we must optimize, we must establish the constraints on the design variables $r$ and $w$, which are enumerated below:
 \begin{enumerate}
 	\item From the problem description we are told that $r \leq 0.5$ m.
-	\item From the problem description we are told that $m \leq 70$ kg, so replacing $m$ with our previously derived expression $\pi r^2 w \rho$, we know that $\pi r^2 w \rho \leq 70$ kg. Solving this in terms of $r$ and $w$ yields $r^2 w \leq \frac{70}{8000\pi}$ (since $\rho = 8000$ kg/m$^3$).
-	\item Based on the distortion energy theory of failure that is used to derive the maximal tangential and radial stresses, and assuming that each of these stresses are equal ($\sigma_t = \sigma_r$), we know that
+	\item From the problem description we are told that $m \leq 70$ kg, so replacing $m$ with our previously derived expression $\pi r^2 w \rho$, we know that $\pi r^2 w \rho \leq 70$ kg, where $\rho = 8000$ kg/m$^3$.
+	\item Based on the distortion energy theory of failure that is used to derive the maximal tangential and radial stresses, and assuming that each of these stresses are equal ($\sigma_t = \sigma_r = \frac{1}{2}\rho(3 + v)\omega^2r^2$), we know the following:
 \begin{eqnarray*}
-\sigma_t^2 + \sigma_r^2 - \sigma_t\sigma_r \leq \sigma_{max}^2, 
+\sigma_t^2 + \sigma_r^2 - \sigma_t\sigma_r & = & 2\sigma_t^2 - \sigma_t^2 \\
+& = & \sigma_t^2 \\
+& = & (\frac{1}{2}\rho(3 + v)\omega^2r^2)^2 \\
+& \leq & \sigma_{max}^2
 \end{eqnarray*}
-can be reduced to
+Again, using the fact that $\sigma_{max} = (140 \times 10^6)^2$ Pa and $\omega = 100\pi$ rad/s in this maximal case (as well as $v = 0.3$, $\rho = 8000$ kg/m$^3$, and $\sigma_{max} = 140 \times 10^6$ Pa), we can conclude the following:
 \begin{eqnarray*}
-\frac{1}{2}\rho(3 + v)\omega^2r^2 \leq \sigma_{max}^2.
-\end{eqnarray*}
-Again, using the fact that $\omega = 100\pi$ rad/s in this maximal case (as well as $v = 0.3$, $\rho = 8000$ kg/m$^3$, and $\sigma_{max} = 140$ x $10^6$ Pa), we can conclude the following:
-\begin{eqnarray*}
-\frac{8000(3.3)(100\pi)^2}{2}r^2 \leq (140 x 10^6)^2
+\frac{1}{4}(8000^2(3.3)^2(100\pi)^4r^4) \leq (140 \times 10^6)^2
 \end{eqnarray*}
 \end{enumerate}
 Now, realizing that by maximizing the energy we are minimizing the negation of the energy equation, we can write the problem formally as follows. \\
 
 Minimize
 \begin{eqnarray*}
-E' = -E = -\Big(\frac{8000\pi(100\pi)^2}{4}\Big)r^4 w
+E' = -E = -\frac{1}{4}(8000\pi(100\pi)^2r^4 w) 
 \end{eqnarray*}
 subject to the nonlinear constraints:
 \begin{enumerate}
 	\item $r - 0.5 \leq 0$
-	\item $r^2 w  - \frac{70}{8000\pi} \leq 0$
-	\item $\frac{8000(3.3)(100\pi)^2}{2}r^2 - (140$ x $10^6)^2 \leq 0$
+	\item $8000\pi r^2 w  - 70 \leq 0$
+	\item $\frac{1}{4}(8000^2(3.3)^2(100\pi)^4r^4) - (140 \times 10^6)^2 \leq 0$
 \end{enumerate}
 \end{solution}
 
@@ -133,8 +133,42 @@ Solving this optimization problem using the $fmincon$ function with the interior
 \includegraphics[scale=0.75]{problem2/problem2.eps}
 \end{center}
 
-The values of the energy function, radius, and width at each iteration of the interior-point algorithm are shown in Table \ref{Table3}. In addition, the final values of the energy, radius, and width, and constraints after convergence of the interior-point algorithm are shown in the Table \ref{Table4}. It is important to note that since we needed to negate the energy (objective) function to convert it into an appropriate minimization problem for use with the interior-point algorithm, the actual optimal energy value is 185606.1, which is obtained when the radius and width are equal to $0.3278$ m and $0.0259$ m, respectively. 
+The values of the energy function, radius, and width at each iteration of the interior-point algorithm are shown in Table \ref{Table3}. In addition, the final values of the energy, radius, and width, and constraints after convergence of the interior-point algorithm are shown in the Table \ref{Table4}. It is important to note that since we needed to negate the energy (objective) function to convert it into an appropriate minimization problem for use with the interior-point algorithm, the actual optimal energy value is 185120.3, which is obtained when the radius and width are equal to $0.3278$ m and $0.0259$ m, respectively. 
 
+\begin{table*}[htbp]
+	\centering
+    \begin{tabular}{|l|l|l|l|}
+        \hline
+       Iteration & Function Value & Radius & Width\\ \hline
+0 & -39688.03 & 0.2 & 0.04\\ 
+1 & -70200.94 & 0.2013 & 0.069\\ 
+2 & -86527.45 & 0.2395 & 0.0424\\ 
+3 & -115583.3 & 0.3154 & 0.0188\\ 
+4 & -182378.1 & 0.324 & 0.0267\\ 
+5 & -184122.4 & 0.326 & 0.0263\\ 
+6 & -185674.5 & 0.3278 & 0.0259\\ 
+7 & -185607.6 & 0.3278 & 0.0259\\ 
+8 & -185606.1 & 0.3278 & 0.0259\\ 
+9 & -185606.1 & 0.3278 & 0.0259\\ 
+        \hline
+    \end{tabular}
+	\caption{Objective function and design variable values for each iteration during the interior-point algorithm.}
+	\label{Table3}
+\end{table*}
+
+\begin{table*}[htbp]
+	\centering
+    \begin{tabular}{|l|l|l|l|l|l|}
+        \hline
+	Objective Function & Radius & Width & Constraint 1 & Constraint 2 & Constraint 3 \\ \hline
+	-185120.3 & 0.3274 & 0.0260 & 0 & 0 & -9.7792 \\ 
+	\hline
+    \end{tabular}
+	\caption{Final objective function, design variable, and constraint values after convergence of the interior-point algorithm.}
+	\label{Table4}
+\end{table*}
+
+\begin{comment}
 \begin{table*}[htbp]
 	\centering
     \begin{tabular}{|l|l|l|l|}
@@ -167,6 +201,7 @@ The values of the energy function, radius, and width at each iteration of the in
 	\caption{Final objective function, design variable, and constraint values after convergence of the interior-point algorithm.}
 	\label{Table4}
 \end{table*}
+\end{comment}
 
 \end{solution}
 
