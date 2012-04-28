@@ -28,31 +28,26 @@ Solving the optimization problem using the \emph{fmincon} function with the inte
 \includegraphics[scale=0.75]{problem1/problem1.eps}
 \end{center}
 
-The values of the objective function and design variables at each iteration are shown in Table \ref{Table1}. In addition, the final values of the objective function, design variables, and constraints after convergence of the interior-point algorithm are shown in the Table \ref{Table2}. From these tables, we can see that the optimal value of the function is $51.58233$, which is obtained when $X^T = [-1.049, 0.8736, 2.0485, -0.8113]$.
+The values of the objective function and design variables at each iteration are shown in Table \ref{Table1}. In addition, the final values of the objective function, design variables, and constraints after convergence of the interior-point algorithm are shown in the Table \ref{Table2}. From these tables, we can see that the optimal value of the function is $51.8983$, which is obtained when $X^T = [0.0869, 0.6598, 1.8950, -1.4445]$.
 
 \begin{table*}[htbp]
 	\centering
     \begin{tabular}{|l|l|l|l|l|l|}
         \hline
         Iteration & Function Value & X1 & X2 & X3 & X4\\ \hline
-0 & 100 & 0 & 0 & 0 & 0.149\\ 
-1 & 31.74371 & -0.118 & 0.0719 & 4.9217 & -1.5518\\ 
-2 & 23.33018 & -0.313 & 0.226 & 4.6407 & -2.3259\\ 
-3 & 13.32189 & -2.0674 & 2.1062 & 2.765 & -1.1165\\ 
-4 & 7.450429 & -2.7524 & 2.1686 & 2.4142 & -0.5794\\ 
-5 & 27.82769 & -1.7929 & 1.5429 & 3.1812 & -0.434\\ 
-6 & 34.71776 & -1.3829 & 1.0559 & 3.0505 & -0.9692\\ 
-7 & 32.77882 & -2.3277 & 0.4378 & 2.0451 & -1.2382\\ 
-8 & 49.36069 & -1.5979 & 0.4646 & 1.8595 & -0.9361\\ 
-9 & 51.36701 & -1.3108 & 0.6688 & 1.9072 & -0.9095\\ 
-10 & 51.06516 & -1.0413 & 0.8928 & 2.0933 & -0.797\\ 
-11 & 51.76738 & -1.0257 & 0.8771 & 2.0421 & -0.8189\\ 
-12 & 51.58357 & -1.0465 & 0.8699 & 2.0499 & -0.8145\\ 
-13 & 51.58272 & -1.0467 & 0.8717 & 2.0495 & -0.8136\\ 
-14 & 51.58265 & -1.0494 & 0.8737 & 2.0483 & -0.8112\\ 
-15 & 51.58273 & -1.049 & 0.8736 & 2.0484 & -0.8113\\ 
-16 & 51.58233 & -1.049 & 0.8736 & 2.0485 & -0.8113\\ 
-17 & 51.58233 & -1.049 & 0.8736 & 2.0485 & -0.8113\\ 
+0 & 100 & 0   &      0    &     0  &  1.0e-07 * 0.1490\\ 
+1 & 31.74371 & 0.5758   & 0.8903  &  3.2829  & -0.9824\\ 
+2 & 23.33018 & 0.2329   & 1.1938  &  3.2614  & -2.1305\\ 
+3 & 13.32189 & 0.0242    &0.1565  &  2.2417  & -1.7951\\ 
+4 & 7.450429 & 0.3914  &  0.5560  &  2.0194  & -1.8260\\ 
+5 & 27.82769 & 0.2306  &  0.6055  &  2.0312  & -1.6103 \\ 
+6 & 34.71776 & 0.1067  &  0.6481  &  1.8819  & -1.4587\\ 
+7 & 32.77882 & 0.0782  &  0.6694  &  1.9020  & -1.4333 \\ 
+8 & 49.36069 & 0.0865  &  0.6589  &  1.8953  & -1.4447 \\
+9 & 51.36701 & 0.0871  &  0.6601  &  1.8948  & -1.4445 \\ 
+10 & 51.06516 & 0.0869  &  0.6598  &  1.8950  & -1.4445 \\ 
+11 & 51.76738 & 0.0869  &  0.6598  &  1.8950  & -1.4445 \\ 
+12 & 51.58357 &  0.0869  &  0.6598  &  1.8950 &  -1.4445\\
         \hline
     \end{tabular}
 	\caption{Objective function and design variable values for each iteration during the interior-point algorithm.}
@@ -64,7 +59,7 @@ The values of the objective function and design variables at each iteration are 
     \begin{tabular}{|l|l|l|l|l|l|l|l|}
         \hline
 	Objective Function & X1 & X2 & X3 & X4 & Constraint 1 & Constraint 2 & Constraint 3 \\ \hline
-	51.5823 & -1.049 & 0.8736 & 2.0485 & -0.8113 & -92.3447 & 0 & 0 \\ 
+	51.5823 & 0.0869 & 0.6598 & 1.8950 & -1.4445 & -91.1129 & 0 & 0 \\ 
 	\hline
     \end{tabular}
 	\caption{Final objective function, design variable, and constraint values after convergence of the interior-point algorithm.}

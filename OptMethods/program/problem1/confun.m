@@ -12,12 +12,9 @@ function [c, ceq] = confun(X)
 % Version: 1.0
 
 % Build up the inequality matrix as defined by the problem.
-c = [(X(1) * X(1)) + (X(2) * X(2)) + (X(3) * X(3)) + (X(4) * X(4)) ...
-    + X(1) - X(2) + X(3) - X(4) - 100;
-    (X(1) * X(1)) + 2*(X(2) * X(2)) + (X(3) * X(3)) + 2*(X(4) * X(4)) ...
-    - X(1) - X(4) - 10;
-    2*(X(1) * X(1)) + (X(2) * X(2)) + (X(3) * X(3)) + 2*X(1) - X(2) ...
-    - X(4) - 5;];
+c = [X(1)^2 + X(2)^2 + X(3)^2 + X(4)^2 + X(1) - X(2) + X(3) - X(4) - 100;
+    X(1)^2 + 2*(X(2)^2) + X(3)^2 + 2*(X(4)^2) - X(1) - X(4) - 10;
+    2*(X(1)^2) + X(2)^2 + X(3)^2 + 2*X(1) - X(2) - X(4) - 5;];
 
 % Display the inequality constraints for each iteration.
 c
