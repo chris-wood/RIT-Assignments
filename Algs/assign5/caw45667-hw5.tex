@@ -10,6 +10,9 @@
 \usepackage{verbatim}
 \usepackage{multicol}
 
+\usepackage{fancybox}
+\usepackage{tikz}
+
 \newcommand{\tlg}{\text{lg}}
 \newcommand{\tln}{\text{ln}}
 \newcommand{\tlog}{\text{log}}
@@ -288,9 +291,130 @@ Thus, since $T(n) = O(n3^{n-1})$ and the enumeration approach has a time complex
 \begin{prob}{2-b}
 Draw the recursion tree for the MERGE-SORT procedure from Section 2.3.1 on an array of 16 elements. Explain why memoization fails to speed up a good divide-and-conquer algorithm such as MERGE-SORT.
 \end{prob}
-\begin{sol}
+\begin{sol} \\
 
-TODO: insert drawing of recursion tree here (Visio?)
+\ovalbox{
+\begin{tikzpicture}[
+auto,
+level 1/.style={sibling distance=80mm},
+level 2/.style={sibling distance=40mm},
+level 3/.style={sibling distance=20mm},
+level 4/.style={sibling distance=10mm}]
+\node [circle,draw] (z){$16$}
+  child {
+	node [circle,draw] (a) {$8$}
+    	child {
+		node [circle,draw] (b) {$4$}
+      		child {
+			node [circle,draw] (c) {$2$}
+        		child {
+				node [circle,draw] (d) {$1$}
+			}
+        		child {
+				node [circle,draw] (e) {$1$}
+			}
+      		} 
+     		child {
+			node [circle,draw] (f) {$2$}
+        		child {
+				node [circle,draw] (g) {$1$}
+			}
+        		child {
+				node [circle,draw] (h) {$1$}
+			}
+      		} 
+    	}
+   	child {
+		node [circle,draw] (b1) {$4$}
+      		child {
+			node [circle,draw] (c1) {$2$}
+        		child {
+				node [circle,draw] (d1) {$1$}
+			}
+        		child {
+				node [circle,draw] (e1) {$1$}
+			}
+      		} 
+      		child {
+			node [circle,draw] (f1) {$2$}
+        		child {
+				node [circle,draw] (g1) {$1$}
+			}
+        		child {
+				node [circle,draw] (h1) {$1$}
+			}
+      		} 
+    	}
+  }
+  child {
+	node [circle,draw] (ar) {$8$}
+    	child {
+		node [circle,draw] (br) {$4$}
+  	  	child {
+			node [circle,draw] (cr) {$2$}
+        		child {
+				node [circle,draw] (dr) {$1$}
+			}
+        		child {
+				node [circle,draw] (er) {$1$}
+			}
+      		} 
+      		child {
+			node [circle,draw] (fr) {$2$}
+        		child {
+				node [circle,draw] (gr) {$1$}
+			}
+        		child {
+				node [circle,draw] (hr) {$1$}
+			}
+      		}	 
+    	}
+    	child {
+		node [circle,draw] (br1) {$4$}
+      		child {
+			node [circle,draw] (cr1) {$2$}
+        		child {
+				node [circle,draw] (dr1) {$1$}
+			}
+        		child {
+				node [circle,draw] (er1) {$1$}
+			}
+      		} 
+      		child {
+			node [circle,draw] (fr1) {$2$}
+        		child {
+				node [circle,draw] (gr1) {$1$}
+			}
+        		child {
+				node [circle,draw] (hr1) {$1$}
+			}
+      		} 
+    	}
+};
+\path (a) -- (ar) node [midway] {+};
+\path (b) -- (b1) node [midway] {+};
+\path (c) -- (f) node [midway] {+};
+\path (d) -- (e) node [midway] {+};
+\path (g) -- (h) node [midway] {+};
+\path (c1) -- (f1) node [midway] {+};
+\path (d1) -- (e1) node [midway] {+};
+\path (g1) -- (h1) node [midway] {+};
+\path (br) -- (br1) node [midway] {+};
+\path (cr) -- (fr) node [midway] {+};
+\path (dr) -- (er) node [midway] {+};
+\path (gr) -- (hr) node [midway] {+};
+\path (cr1) -- (fr1) node [midway] {+};
+\path (dr1) -- (er1) node [midway] {+};
+\path (gr1) -- (hr1) node [midway] {+};
+\end{tikzpicture}}\\
+
+This same recursion tree can be shown using arrays instead, as depicted below.
+
+\begin{center}
+	\includegraphics[width=150mm]{msort16.jpg}
+\end{center}
+
+One can see that there is no overlap in the sorting subproblems for this specific input array to mergesort, meaning that no there is not an instance where two identitical sub-arrays are passed into mergesort. 
 
 Memoization fails to speed up a good divide-and-conquer algorithm such as MERGE-SORT because there are no overlapping subproblems. Memoization is most beneficial when the results of subproblems can be saved in a table using the top-down recursion approach and then recalled when they are encountered at later recursive calls. As shown by the merge-sort recursion tree, there are no overlapping subproblems, so we will never attempt to sort the same subsequences more than once. Thus, we would never make use of the sorted subsequences that have been stored, and will consequently not see any speedup. Other good divide-and-conquer algorithms yield the same results, because the subproblems that are solved recursively are chosen such that they are independent and do not overlap. 
 \end{sol}

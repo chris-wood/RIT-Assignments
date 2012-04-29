@@ -23,52 +23,32 @@ def printMatrix(matrix, n):
 		print ""
 	print ""
 
-def numLneEndSpaces(S, i, j, n, M):
-	sum = 0
-	for index in range(i, j + 1):
-		sum = sum + len(S[index])
-	num = M - j + i - sum
-
-	# Treat the negative case special (since it is an
-	# indication that we can't fit these words on one line)
-	if (num < 0):
-		return -1
-	elif (j == n):
-		return 0
-	else:
-		return num
-
-def printSequence(S, i, j):
-	print "Words from " + str(i) + "," + str(j) + ":",
-	for index in range(j, j + 1):
-		print S[index],
-	print ""
-
-def minLineSpaces(S, M):
+def minSpaces(S, M):
 	""" TODO
 	"""
 	n = len(S)
 	
 	# TODO
 	spaces = list()
-	indices = list()
+	inserts = list()
 	for i in range(0, n):
 		spaces.append(list())
-		indices.append(list())
 		for j in range(0, n):
 			spaces[i].append(0)
-			indices[i].append(0)
 	
 	# TODO
-	for i in range(0, n - 1): # was n-1
+	for i in range(0, n - 1):
 		spaces[i][i] = M - len(S[i])
-	spaces[0][n - 1] = 0
+	spaces[n-1][n-1] = 0
 
 	# TODO
 	for l in range(1, n):
 		for i in range(0, n - l):
 			j = i + l
-			numSpaces = numLneEndSpaces(S, i, j, n, M)
+			sum = 0
+			for index in range(i, j + 1):
+				sum = sum + len(S[index])
+			numSpaces = M - j + i - sum
 		
 			# Check to see if a split is even necessary 
 			if (numSpaces >= 0):
@@ -92,32 +72,16 @@ def minLineSpaces(S, M):
 			# If the subproblem maximum is less than this one then set it
 			if (maxVal < spaces[i][j]):
 				spaces[i][j] = maxVal
-				print str(i) + "," + str(j) + " - " + str(minIndex)
-				indices[i][j] = (i + minIndex)
-			else:
-				indices[i][j] = -1
+				inserts.append = minIndex
 
-	printMatrix(indices, n)
+	print inserts
 	return spaces[0][n - 1]
-
-def mineLineSpaces2(S, M):
-	n = len(S)
-	
-	# TODO
-	spaces = list()
-	indices = list()
-	
-	# TODO
-	for i in range(0, n + 1): 
-		spaces.append(0)
-		indices.append(0)
-
-	# TODO
 
 # TODO
 def printParagraph(S, M):
 	""" TODO: describe
 	"""
+
 
 """ Run the printParagraph function.
 	
@@ -129,9 +93,9 @@ if (len(sys.argv) > 2):
 	lineSize = int(sys.argv[1])
 	for i in range(2, len(sys.argv)):
 		words.append(sys.argv[i])
-	print "Minimum max line spaces: " + str(minLineSpaces(words, lineSize))
+	print "Minimum extra spaces: " + str(minSpaces(words, lineSize))
 
 else:
 	# Run the printParagraph routine with some random data
-	print "Minimum max line spaces: " + str(minLineSpaces(["hello", "world", "by", "caw"], 10))
+	print "Minimum extra spaces: " + str(minSpaces(["12", "def", "geh"], 6))
 
