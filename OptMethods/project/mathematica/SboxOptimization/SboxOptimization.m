@@ -1,8 +1,20 @@
-function [n,pair] = bn(S, n)
-	minVal = n;
-	pair = zeros(1,2);
-	bits = log2(n);
+(* Mathematica Package *)
+
+(* Created by the Wolfram Workbench Apr 28, 2012 *)
+
+BeginPackage["SboxOptimization`"]
+(* Exported symbols added here with SymbolName::usage *) 
+
+Begin["`Private`"]
+(* Implementation of the package *)
+
+branchNumber[sbox_, nElements_] :=
+	minVal = nElements
+	Print[minVal]
+	
+	(*For[a = 0,a < nElements, a++,For[b = 1, b < nElements; b++, Print[a + " " + b]]]*)
     
+    (*
     % Fetch the size of the S-box
     [~, sc] = size(S);
     
@@ -22,4 +34,9 @@ function [n,pair] = bn(S, n)
 		end 
 	end	
 	n = minVal; 
-end
+	*)
+
+End[]
+
+EndPackage[]
+

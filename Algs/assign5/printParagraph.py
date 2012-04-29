@@ -11,26 +11,25 @@ import sys
 
 ##########################################################################
 #
-# 5-3: TODO - discuss the paragraph thing
+# 5-3: TODO - take from discussion in paper copy
 #
 ##########################################################################
 
-def printMatrix(matrix, n):
-	print "Matrix:"
-	for i in range(0, n):
-		for j in range(0, n):
-			print str(matrix[i][j]) + " ",
-		print ""
-	print ""
-
 def numLineEndSpaces(S, i, j, n, M):
+	""" Compute the number of additional line spaces at the end
+		of the line of words indexed from i to j, using the line
+		width as M. We assume that all lines that cannot fit on
+		a single line (i.e. those that return a negative number
+		of additional spaces) simply return -1, and that any line
+		ending with the last word receives no additional spaces.
+	"""
+	# Compute the number of additional spaces at the end of this line
 	sum = 0
 	for index in range(i, j + 1):
 		sum = sum + len(S[index])
 	num = M - j + i - sum
 
-	# Treat the negative case special (since it is an
-	# indication that we can't fit these words on one line)
+	# Determine which value to return
 	if (num < 0):
 		return -1
 	elif (j == n):
@@ -38,82 +37,59 @@ def numLineEndSpaces(S, i, j, n, M):
 	else:
 		return num
 
-def printSequence(S, i, j):
-	print "Words from " + str(i) + "," + str(j) + ":",
-	for index in range(j, j + 1):
-		print S[index],
-	print ""
-
 def minLineSpaces(S, M):
-	""" TODO
+	""" Utilize the dynamic programming algorithm described above to
+		determine the minimum number of maximum spaces at the end
+		of any line, while at the same time recording the line
+		positions (newline characters) that were found to yield
+		the optimal result.
 	"""
 	n = len(S)
 	
-	# TODO
-	spaces = list()
-	for i in range(0, n):
-		spaces.append(list())
-		for j in range(0, n):
-			spaces[i].append(0)
-	
-	# TODO
-	for i in range(0, n - 1): # was n-1
-		spaces[i][i] = M - len(S[i])
-	spaces[0][n - 1] = 0
-
-	# TODO
-	for l in range(1, n):
-		for i in range(0, n - l):
-			j = i + l
-			numSpaces = numLineEndSpaces(S, i, j, n, M)
-		
-			# Check to see if a split is even necessary 
-			if (numSpaces >= 0):
-				spaces[i][j] = numSpaces
-			else:
-				spaces[i][j] = sys.maxint
-
-			# Perform decision (do we even need to split?)
-			maxVal = sys.maxint
-			for k in range(i, j):
-				val = max(spaces[i][k], spaces[k+1][j])
-				
-				# If we found a new minimum in the partition, set the 
-				# spaces table entry and log the split index for 
-				# printing the paragraph based on the neatness criterion
-				if (val < maxVal):
-					maxVal = val
-		
-			# If the subproblem maximum is less than this one then set it
-			if (maxVal < spaces[i][j]):
-				spaces[i][j] = maxVal
-
-	return spaces[0][n - 1]
-
-def mineLineSpacesFast(S, M):
-	n = len(S)
-	
-	# TODO
+	# Create the DP table and newline index container
 	spaces = list()
 	indices = list()
 	
-	# TODO
+	# Initialize the tables (we go to n+1 because we treat the base
+	# case n = 0 special)
 	for i in range(0, n + 1): 
 		spaces.append(0)
 		indices.append(0)
 
-	# Base case (the last line)
+	# Base case: assume that we have no maximal number of spaces
+	# when there are no words yet added to any lines.
 	spaces[0] = 0
 
+	# Iteratively start adding words to the lines and re-calculating the
+	# maximum number of spaces at each step, varying the newline positions 
+	# accordingly so as to always yield a minimum number after the addition
+	# of every word.
 	for j in range(1, n + 1):
+		
+		# Infinity - special marker.
 		spaces[j] = sys.maxint
-		for i in range(1, j + 1): # we go up to j
+		
+		# Try all possible line combinations less than the current word index
+		# in order to find the optimal value, relying on previously computed 
+		# values.
+		for i in range(1, j + 1): # So we go up to j
+			
+			# Compute the number of spaces for this new line (i and j are 
+			# offset by 1).
 			numSpaces = numLineEndSpaces(S, i - 1, j - 1, n - 1, M)
+			
+			# Determine which line (the previous or current one) yields
+			# the maximum line spaces after appending the word.
 			newMax = max(numSpaces, spaces[i - 1])
+			
+			# Check to see if we reached a new maximum, and if so set
+			# the value and update the newline character appropriately.
 			if (numSpaces > -1 and newMax < spaces[j]):
 				spaces[j] = newMax
 				indices[j] = i
 		
+	# Return the minimum number of maximal spaces and the index locations
+	# that can be used to re-build this optimal value.
 	return (spaces[n], indices)
 
 def formatWords(S, indices, n, M):
@@ -140,8 +116,8 @@ def printParagraph(S, M):
 	""" TODO: describe
 	"""
 	# Minimize the maximum number of extra spaces on any one line
-	result = mineLineSpacesFast(S, M)
-	print "\nFormatted paragraph (minimum extra space = " + str(result[0]) + "\n"
+	result = minLineSpaces(S, M)
+	print "\nFormatted paragraph (minimum extra space = " + str(result[0]) + ")\n"
 	
 	# Display the resulting formatted paragraph based on this optimal result
 	formatWords(S, result[1], len(S), M)

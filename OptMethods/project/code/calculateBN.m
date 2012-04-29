@@ -19,8 +19,13 @@ for i = 1:SBOX_SIZE
 end
 
 % Attempt to calculate the BN for this S-box (simple setup)
-S
-[n, pair] = bn(S, SBOX_SIZE)
+S;
+[n, pair] = bn(S, SBOX_SIZE);
 
-% Now set up fmincon to optimize this for us
-% Negate BN: change it to maximizing the number? how to do this?
+% Set up the options for the solver to make sure the interior-point 
+% algorithm is used.
+options = optimset('Algorithm','interior-point','Display','iter-detailed','PlotFcns','optimplotfval');
+
+% Invoke the fmincon function to find the minimum.
+S
+[v1,v2] = fmincon('sboxbnobj',S,[],[],[],[],0,(2^SBOX_SIZE) - 1,'sboxcon', options);
