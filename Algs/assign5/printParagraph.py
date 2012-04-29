@@ -23,7 +23,7 @@ def printMatrix(matrix, n):
 		print ""
 	print ""
 
-def numLneEndSpaces(S, i, j, n, M):
+def numLineEndSpaces(S, i, j, n, M):
 	sum = 0
 	for index in range(i, j + 1):
 		sum = sum + len(S[index])
@@ -51,13 +51,10 @@ def minLineSpaces(S, M):
 	
 	# TODO
 	spaces = list()
-	indices = list()
 	for i in range(0, n):
 		spaces.append(list())
-		indices.append(list())
 		for j in range(0, n):
 			spaces[i].append(0)
-			indices[i].append(0)
 	
 	# TODO
 	for i in range(0, n - 1): # was n-1
@@ -68,7 +65,7 @@ def minLineSpaces(S, M):
 	for l in range(1, n):
 		for i in range(0, n - l):
 			j = i + l
-			numSpaces = numLneEndSpaces(S, i, j, n, M)
+			numSpaces = numLineEndSpaces(S, i, j, n, M)
 		
 			# Check to see if a split is even necessary 
 			if (numSpaces >= 0):
@@ -78,7 +75,6 @@ def minLineSpaces(S, M):
 
 			# Perform decision (do we even need to split?)
 			maxVal = sys.maxint
-			minIndex = -1
 			for k in range(i, j):
 				val = max(spaces[i][k], spaces[k+1][j])
 				
@@ -87,20 +83,14 @@ def minLineSpaces(S, M):
 				# printing the paragraph based on the neatness criterion
 				if (val < maxVal):
 					maxVal = val
-					minIndex = k
 		
 			# If the subproblem maximum is less than this one then set it
 			if (maxVal < spaces[i][j]):
 				spaces[i][j] = maxVal
-				print str(i) + "," + str(j) + " - " + str(minIndex)
-				indices[i][j] = (i + minIndex)
-			else:
-				indices[i][j] = -1
 
-	printMatrix(indices, n)
 	return spaces[0][n - 1]
 
-def mineLineSpaces2(S, M):
+def mineLineSpacesFast(S, M):
 	n = len(S)
 	
 	# TODO
@@ -112,12 +102,50 @@ def mineLineSpaces2(S, M):
 		spaces.append(0)
 		indices.append(0)
 
-	# TODO
+	# Base case (the last line)
+	spaces[0] = 0
+
+	for j in range(1, n + 1):
+		spaces[j] = sys.maxint
+		for i in range(1, j + 1): # we go up to j
+			numSpaces = numLineEndSpaces(S, i - 1, j - 1, n - 1, M)
+			newMax = max(numSpaces, spaces[i - 1])
+			if (numSpaces > -1 and newMax < spaces[j]):
+				spaces[j] = newMax
+				indices[j] = i
+		
+	return (spaces[n], indices)
+
+def formatWords(S, indices, n, M):
+	start = indices[n]
+	end = n
+	maxLine = 0
+	if (start != 1):
+		result = formatWords(S, indices, start - 1, M)
+		val = printLine(S, start, end, M)
+		maxLine = max(result, val)
+	else:
+		maxLine = printLine(S, start, end, M)
+	return maxLine
+
+def printLine(S, i, j, M):
+	index = i - 1
+	for index in range(i - 1, j):
+		print S[index],
+	print ""
+	return numLineEndSpaces(S, i - 1, j - 1, len(S) - 1, M)
 
 # TODO
 def printParagraph(S, M):
 	""" TODO: describe
 	"""
+	# Minimize the maximum number of extra spaces on any one line
+	result = mineLineSpacesFast(S, M)
+	print "\nFormatted paragraph (minimum extra space = " + str(result[0]) + "\n"
+	
+	# Display the resulting formatted paragraph based on this optimal result
+	formatWords(S, result[1], len(S), M)
+	
 
 """ Run the printParagraph function.
 	
@@ -129,9 +157,13 @@ if (len(sys.argv) > 2):
 	lineSize = int(sys.argv[1])
 	for i in range(2, len(sys.argv)):
 		words.append(sys.argv[i])
-	print "Minimum max line spaces: " + str(minLineSpaces(words, lineSize))
+	printParagraph(words, lineSize)
+	minLineSpaces(words, lineSize)
 
 else:
 	# Run the printParagraph routine with some random data
-	print "Minimum max line spaces: " + str(minLineSpaces(["hello", "world", "by", "caw"], 10))
+	S = ["hsssso", "lwod", "by", "caw"]
+	M = 10
+	printParagraph(S, M)
+	minLineSpaces(S, M)
 
