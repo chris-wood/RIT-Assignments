@@ -93,27 +93,45 @@ def minLineSpaces(S, M):
 	return (spaces[n], indices)
 
 def formatWords(S, indices, n, M):
+	""" Format the words using the newline index locations according by recursively
+		backtracking and printing words indices[n] through n on one line, and then
+		words indices[indices[n] - 1] through indices[n] - 1 on the previous line,
+		and so on and so forth.
+	"""
 	start = indices[n]
 	end = n
 	maxLine = 0
-	if (start != 1):
+	
+	# Check to see if we've reached the start of the words, in which case
+	# we stop the recursion and start printing the lines.
+	if (start == 1):
+		maxLine = printLine(S, start, end, M)
+	else:
 		result = formatWords(S, indices, start - 1, M)
 		val = printLine(S, start, end, M)
 		maxLine = max(result, val)
-	else:
-		maxLine = printLine(S, start, end, M)
+
+	# Return the maximum number of line spaces seen so far (this is 
+	# done as a test against the result of the DP algorithm) 
 	return maxLine
 
 def printLine(S, i, j, M):
+	""" Print the words from index i through j on a single line.
+		Then, return the number of spaces at the end of this line.
+	"""
 	index = i - 1
 	for index in range(i - 1, j):
 		print S[index],
 	print ""
+	
+	# Compute and return the extra spaces.
 	return numLineEndSpaces(S, i - 1, j - 1, len(S) - 1, M)
 
-# TODO
 def printParagraph(S, M):
-	""" TODO: describe
+	""" Print the paragraph by first minimizing the maximum number
+		of extra spaces over all lines of any one line (while recording
+		the location of newline characters during this optimal computation),
+		and then actually displaying the resulting formatted paragraph.
 	"""
 	# Minimize the maximum number of extra spaces on any one line
 	result = minLineSpaces(S, M)
@@ -138,7 +156,7 @@ if (len(sys.argv) > 2):
 
 else:
 	# Run the printParagraph routine with some random data
-	S = ["hsssso", "lwod", "by", "caw"]
+	S = ["testing", "123", "12", "1234"]
 	M = 10
 	printParagraph(S, M)
 	minLineSpaces(S, M)
