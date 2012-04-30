@@ -1,4 +1,4 @@
-function f = sboxbnobj(S)
+function f = sboxbnobj(X)
 %SBOXBNOBJ: TODO
 
 [n, ~] = bn(S, 4);
