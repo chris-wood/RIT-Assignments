@@ -457,7 +457,11 @@ Yes, this problem does exhibit optimal substructure. As with the minimization ve
 \begin{prob}{3}
 \end{prob}
 \begin{sol}
-TODO - describe the algorithm here and the approach taken - insert code - show correctness
+The printParagraph procedure is composed of two internal procedure calls. Namely, minLineSpaces and formatWords, which are implemented to minimize the maximum amount of white space on any one line (excluding the last), while recording the optimal newline indices, and then print the resulting paragraph based on these newline positions, respectively. Analyzing the minLineSpaces routine shows that it runs in $O(n^2)$ time, due to the fact that it considers all word sequences $i$ through $j$ starting from the beginning of S and terminating at the end. This time complexity is possible because we pre-compute the number of line endings for the sequence $S$ by realizing that the equation for the number of extra white spaces is an arithmetic progression, and we can simply store the compounded result of this progression for all $i,i+1$ pairs of words in $O(n)$ time before the main work of the minLineSpaces algorithm starts.
+
+Then, examining the formatWords routine indicates that it runs in $O(n)$ time, since it always makes one recursive call (in all cases except when the first word is reached) with a index decrement of at least 1 (meaning that in the worst case we will have one recursive call per word in $S$, which results in an upper bound of $O(n)$).
+
+Now, putting the time complexity of these two routines together, we have the time T(n) for printParagraph equal to: $O(n)$ (line space precomputation) + $O(n^2)$ (DP algorithm) + $O(n)$ (format words) and we conclude that printParagraph thus runs in $O(n^2)$ time.
 \end{sol}
 
 \end{document}

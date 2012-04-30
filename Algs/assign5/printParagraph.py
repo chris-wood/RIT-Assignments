@@ -11,9 +11,35 @@ import sys
 
 ##########################################################################
 #
-# 5-3: TODO - take from discussion in paper copy
+# 5-3: The printParagraph procedure is composed of two internal procedure
+# calls. Namely, minLineSpaces and formatWords, which are implemented to
+# minimize the maximum amount of white space on any one line (excluding the
+# last), while recording the optimal newline indices, and then print the 
+# resulting paragraph based on these newline positions, respectively. 
+# Analyzing the minLineSpaces routine shows that it runs in O(n^2) time,
+# due to the fact that it considers all word sequences i through j starting
+# from the beginning of S and terminating at the end. This time complexity
+# is possible because we pre-compute the number of line endings for the 
+# sequence S by realizing that the equation for the number of extra white
+# spaces is an arithmetic progression, and we can simply store the compounded
+# result of this progression for all i,i+1 pairs of words in O(n) time before
+# the main work of the minLineSpaces algorithm starts.
+#
+# Then, examining the formatWords routine indicates that it runs in O(n)
+# time, since it always makes one recursive call (in all cases except when
+# the first word is reached) with a index decrement of at least 1 (meaning that
+# in the worst case we will have one recursive call per word in S, which results
+# in an upper bound of O(n)).
+#
+# Now, putting the time complexity of these two routines together, we have 
+# the time T(n) for printParagraph equal to:
+#	O(n) (line space precomputation) + O(n^2) (DP algorithm) + O(n) (format words)
+# and we conclude that printParagraph thus runs in O(n^2) time.
 #
 ##########################################################################
+
+# Precomputed line spaces
+wordSpaces = list()
 
 def numLineEndSpaces(S, i, j, n, M):
 	""" Compute the number of additional line spaces at the end
@@ -24,10 +50,7 @@ def numLineEndSpaces(S, i, j, n, M):
 		ending with the last word receives no additional spaces.
 	"""
 	# Compute the number of additional spaces at the end of this line
-	sum = 0
-	for index in range(i, j + 1):
-		sum = sum + len(S[index])
-	num = M - j + i - sum
+	num = M - j + i - (wordSpaces[j + 1] - wordSpaces[i])
 
 	# Determine which value to return
 	if (num < 0):
@@ -55,6 +78,11 @@ def minLineSpaces(S, M):
 	for i in range(0, n + 1): 
 		spaces.append(0)
 		indices.append(0)
+	
+	# Pre-compute the line spaces
+	wordSpaces.append(0)
+	for i in range(1, n + 1):
+		wordSpaces.append(wordSpaces[i - 1] + len(S[i - 1]))
 
 	# Base case: assume that we have no maximal number of spaces
 	# when there are no words yet added to any lines.
