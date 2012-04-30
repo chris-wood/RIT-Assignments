@@ -1,5 +1,5 @@
-function [pVector] = avalanche(S, n)
-%AVALANCHE: TODO DESCRIBE THIS BITCH
+function [pVector] = sac(S, n)
+%SAC: TODO DESCRIBE THIS BITCH
 
 % Get the number of bits for field elements
 bits = log2(n);
@@ -15,12 +15,12 @@ max = bits * (2^(bits - 1));
 for i = 1:bits
     sum = 0;
     for x = 1:n
-        sum = sum + wt(xor(S(x), S(xor(x - 1, 2^(i - 1)) + 1)), bits); % handle matlab +1 vector base indices
+        sum = sum + wt(xor(S(x), S(xor(x - 1, 2^(i - 1)) + 1)), bits);
     end
     
     % Store the result
     pVector(i) = sum / max;
 end
 
-end % avalanche
+end % sac
 
