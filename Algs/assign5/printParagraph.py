@@ -89,25 +89,24 @@ def minLineSpaces(S, M):
 	spaces[0] = 0
 
 	# Iteratively start adding words to the lines and re-calculating the
-	# maximum number of spaces at each step, varying the newline positions 
-	# accordingly so as to always yield a minimum number after the addition
-	# of every word.
+	# maximum number of spaces at each step, using the previous optimal
+	# value when determining where newline character should be placed.
 	for j in range(1, n + 1):
 		
 		# Infinity - special marker.
 		spaces[j] = sys.maxint
 		
-		# Try all possible line combinations less than the current word index
-		# in order to find the optimal value, relying on previously computed 
-		# values.
+		# Compare the new line possibilities with past optimal values
+		# in search of the new maximum (champion algorithm)
 		for i in range(1, j + 1): # So we go up to j
 			
-			# Compute the number of spaces for this new line (i and j are 
-			# offset by 1).
+			# Compute the number of spaces for this new line (note: i and j 
+			# are offset by 1).
 			numSpaces = numLineEndSpaces(S, i - 1, j - 1, n - 1, M)
 			
 			# Determine which line (the previous or current one) yields
-			# the maximum line spaces after appending the word.
+			# the maximum line spaces after putting the word i on the 
+			# the current line or the next line.
 			newMax = max(numSpaces, spaces[i - 1])
 			
 			# Check to see if we reached a new maximum, and if so set

@@ -251,21 +251,25 @@ $m$ and $c$ tables for $l = 6$\\
 
 Now, using these values, we conclude that the minimum number of multiplications needed to evaluate this sequence of matrices is 2010. Since the sequence $<5, 10, 3, 12, 5, 50, 6>$ corresponds to the matrices $A_1$ (5 x 10), $A_2$ (10 x 3), $A_3$ (3 x 12), $A_4$ (12 x 5), $A_5$ (5 x 50), $A_6$ (50 x 6), respectively, we can now find the optimal parenthesization using the resulting $c$ matrix, which yields the following result: \\ 
 
-$((A_1A_2)(A_3A_4)(A_5A_6))$
+$((A_1A_2)((A_3A_4)(A_5A_6)))$\\
+
+Since the set of matrices was relatively small, we could have easily found this result using trial and error, but using the algorithm shows the inefficiency of this approach when dealing with larger matrix chains.
 
 \end{sol}
 
 \begin{prob}{1-b}
-Show that a fully parenthesization of an $n$-element expression has exactly $n-1$ pairs of parentheses.
+Show that a full parenthesization of an $n$-element expression has exactly $n-1$ pairs of parentheses.
 \end{prob}
 \begin{sol}
-We can prove this fact using induction on the number of matrices in a matrix chain. \\
+
+By definition, an $n$-element expression is fully parenthesized if it is either a single element or the product of two fully parenthesized elements, surrounded by parentheses. We can now prove the fact that an $n$-element expression has exactly $n-1$ pairs of parentheses using induction on the number of elements in the expression. \\
 \textbf{Base \#1:} $n = 1$ \\
 By definition, an expression is fully parenthesized if it is a single element. Therefore, since $n=1$ corresponds to an expression of a single element (a single matrix), then we know it is fully parenthesized with no parentheses. Thus, we have $(1-1) = 0$ parentheses for a $n = 1$ element expression.\\
 \textbf{Base \#2:} $n = 2$ \\
 By definition, a $2$-element expression is fully parenthesized if it is the product of the two fully parenthesized elements surrounded by a single pair of parenthesis. Since single elements are fully parenthesized by themselves with no addition parenthesis, we know that an $2$-element expression is fully parenthesized if we write it as the product of the two elements surrounded by parentheses. Thus, with this $2$-element expression, we can make it fully parenthesized with $2-1 = 1$ pair of parentheses. \\
-\textbf{Induction:} $n = 2$ \\
-Assume that a full parenthesization of a $k$-element expression has exactly $k-1$ pairs of parentheses. Now, let $[A_1, A_2, ..., A_{k}]A_{k+1}$ be a $k+1$-element expression. By the induction hypothesis, we know that $[A_1, A_2, ..., A_{k}]$ is fully parenthesized with $k-1$ parentheses. Now, since $A_{k+1}$ is a single matrix we know that it is also fully parenthesized with $0$ parentheses, so we can make the full expression $[A_1, A_2, ..., A_{k}]A_{k+1}$ by rewriting it as $([A_1, A_2, ..., A_{k}]A_{k+1})$ (since it is the product of two fully parenthesized expressions). Now, since $[A_1, A_2, ..., A_{k}]$ contributed $k-1$ parentheses and we have just added one more pair of parentheses, the total is now $k$, which is equal to exactly $(k+1) - 1$. \\ \\
+\textbf{Induction:} $n > 2$ \\
+Assume that a full parenthesization of a $n$-element expression has exactly $(n-1)$ pairs of parentheses, and let $PE = (A_1, A_2, ..., A_{n})$ be such a $n$-element expression that is fully parenthesized. Now, assume we add an additional element $A_{n+1}$ to $PE$, yielding $(A_1, A_2, ..., A_{n})A_{n+1}$, which is a $(n+1)$-element expression. Since $A_{n+1}$ is a single element, we know that it is already fully parenthesized, and since $PE$ is fully parenthesized as well, we can make the new expression fully parenthesized by surrounding the product of these two terms with a single pair of parentheses, resulting in $PE' = ((A_1, A_2, ..., A_{n})A_{n+1})$. Thus, since $PE = (A_1, A_2, ..., A_{n})$ has $(n - 1)$ pairs of parentheses, and we only added one more pair of parentheses to form $PE'$, the resulting $(n+1)$-element expression $PE'$ has $(n - 1) + 1 = n$ pairs of parentheses. \\ 
+
 Thus, we can see that a fully parenthesization of an $n$-element expression has exactly $n-1$ pairs of parentheses. This can also be argued by observing that a pair of parentheses always wraps two operands with a single operator, and since there are $n-1$ operators in an $n$-element expression, there must also be $n-1$ parentheses if it is fully parenthesized.
 \end{sol}
 
@@ -311,7 +315,7 @@ T(n) & = & 1 + 3T(n-1) \\
 & < & \frac{1}{2}(3^{n-2} + n(3^{n-1}) - 1) \\
 & = & O(n3^{n-1})
 \end{eqnarray*}
-Thus, since $T(n) = O(n3^{n-1})$ and the enumeration approach has a time complexity of $\Omega(\frac{4^n}{n^{3/2}})$, we can conclude that the RECURSIVE-MATRIX-CHAIN does indeed run more efficiently. 
+Thus, since $T(n) = O(n3^{n-1})$ and the enumeration approach has a time complexity of $\Omega(\frac{4^n}{n^{3/2}})$, we can conclude that the RECURSIVE-MATRIX-CHAIN does indeed run more efficiently (due to the fact that the base of the exponential term is $3$ for the RECURSIVE-MATRIX-CHAIN algorithm and $4$ for the enumeration approach). 
 \end{sol}
 
 \begin{prob}{2-b}
@@ -442,16 +446,22 @@ This same recursion tree can be shown explicitly using arrays instead, as depict
 	\includegraphics[width=150mm]{msort16.jpg}
 \end{center}
 
-One can see that there is no overlap in the sorting subproblems for this specific input array to mergesort, meaning that there is not an instance where two identitical sub-arrays are passed into mergesort (i.e. MERGE-SORT tries to sort the same sub-array twice). 
+One can see that there is no overlap in the sorting subproblems for this specific input array to mergesort, meaning that there is no instance where two identitical sub-arrays are passed into mergesort (i.e. MERGE-SORT tries to sort the same sub-array twice). 
 
-Based on this observation and on the design of all design-and-conquer algorithms, memoization fails to speed up such algorithms because there are no overlapping subproblems. Memoization is most beneficial when the results of subproblems that are computed in a top-down approach can be saved in a table and then recalled when they are encountered at later recursive calls in the recursion tree. As shown by the merge-sort recursion tree above, there are no overlapping subproblems (or identical sub-arrays that are passed into MERGE-SORT), so we will never attempt to sort the same sub-arrays more than once. Thus, we would never make use of the sorted sub-arrays that have been stored, and will consequently not see any speedup. Other well-designed divide-and-conquer algorithms yield the same results, because the subproblems that are solved recursively are chosen such that they are maximally independent and overlap in as few places as possible. 
+Based on this observation and on the design of all design-and-conquer algorithms, memoization fails to speed up such designs because there are rarely cases of overlapping subproblems. Memoization is most beneficial when the results of subproblems that are computed in a top-down approach can be saved in a table and then recalled when they are encountered at later recursive calls in the recursion tree. However, as shown by the merge-sort recursion tree above, there are no overlapping subproblems (or identical sub-arrays that are passed into MERGE-SORT) for this specific input array, so we will never attempt to sort the same sub-arrays more than once. Thus, we would never make use of the sorted sub-arrays that have been stored, and will consequently not see any speedup. Other well-designed divide-and-conquer algorithms yield the same results, because the subproblems that are solved recursively are chosen such that they are maximally independent and overlap in as few places as possible. 
 \end{sol}
 
 \begin{prob}{2-c}
-Consider a variant of the matrix-chain multiplication problem in which the goal is to parenthesize the sequence of matrices so as to maximize, rahter than minimize, the number of scalar multiplications. Does this problem exhibit optimal substructure?
+Consider a variant of the matrix-chain multiplication problem in which the goal is to parenthesize the sequence of matrices so as to maximize, rather than minimize, the number of scalar multiplications. Does this problem exhibit optimal substructure?
 \end{prob}
 \begin{sol}
-Yes, this problem does exhibit optimal substructure. As with the minimization version of the problem, the optimal solution entails making a choice among two subproblems (the two partitions of the matrix-chain) as to which should be used to yield the maximum number of scalar multiplications. In addition, because matrix multiplication is not commutative, we are forced to maintain the same order of the matrix chain, and thus both partitions that represent the two subproblems involved in the optimal calculation are independent. In other words, the optimal solution to the left partition of the matrix-chain (the optimal number of scalar multiplications) does not affect the optimal solution to the right partition of the matrix-chain. Therefore, since the optimal value is obtained by making a choice among two subproblems that are independent, we can conclude that this problem variant yields optimal substructure.
+Yes, this problem does exhibit optimal substructure. As with the minimization version of the problem, the optimal solution entails partitioning a matrix chain $A_{i}A_{i+1}...A_{j}$ into two separate chains $A_iA_{i+1}...A_k$ and $A_{k+1}A_{k+2}...A_{j}$, where $k$ is the optimal partition index that results in the maximum number of scalar multiplications among the two smaller matrix chains. Now, by the "copy-and-paste" argument described in the textbook, we know that the solution to both partitions must be optimal as well. Consider the case where one of the partitions was not optimal. In such a case, it must be possible to find another parenthesization of such partition, "cut" it out of that partition, and "paste" it in the original matrix chain $A_{i}A_{i+1}...A_{j}$, which would yield a new optimum solution. This contradicts the fact that our $k$-index split was the optimum choice. 
+
+Now, using the fact that the we can solve for the optimal parenthesization for the two smaller matrix chains, we can combine these together to yield an optimal result for the original matrix chain $A_{i}A_{i+1}...A_{j}$ (i.e. utilize the optimal substructure). In other words, the optimal parenthesization for $A_{i}A_{i+1}...A_{j}$ is the result of two optimal subproblems. This implies that solving for the optimal parenthesization of $A_{i}A_{i+1}...A_{j}$ means we have to divide the matrix chain into subproblems, which can be solved to find subproblem optimal solutions, and then combine these optimal values together to yield the optimal value for the original problem. 
+
+In addition, because matrix multiplication is not commutative, we are forced to maintain the same order of the matrix chain, and thus both partitions that represent the two subproblems involved in the optimal partition calculation are independent. In other words, the optimal solution to the left partition of the matrix-chain (the optimal number of scalar multiplications) does not affect the optimal solution to the right partition of the matrix-chain. 
+
+Thus, because we must solve for optimal values of two subproblems in order solve for the optimal value of a given matrix chain, and because the solutions to these subproblems are independent by the properties of matrix multiplication, we can conclude that this problem variant does indeed exhibit optimal substructure.
 \end{sol}
 
 \begin{prob}{3}

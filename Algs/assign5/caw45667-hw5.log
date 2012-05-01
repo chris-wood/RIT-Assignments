@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  29 APR 2012 21:09
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  1 MAY 2012 10:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1046,56 +1046,61 @@ Underfull \hbox (badness 10000) in paragraph at lines 252--253
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--270
+Underfull \hbox (badness 10000) in paragraph at lines 254--255
 
  []
 
-[2] [3]
-Overfull \hbox (5.80113pt too wide) in paragraph at lines 288--289
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 265--272
+
+ []
+
+[3]
+Overfull \hbox (5.80113pt too wide) in paragraph at lines 292--293
 []\OT1/cmr/m/n/10.95 (-20) This is from the ob-ser-va-tion that the com-par-i-s
 on and mul-ti-pli-ca-tion op-er-a-tions in the RECURSIVE-
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 322--323
+Underfull \hbox (badness 10000) in paragraph at lines 326--327
 
  []
 
 
-LaTeX Warning: \oval, \circle, or \line size unavailable on input line 437.
+LaTeX Warning: \oval, \circle, or \line size unavailable on input line 441.
 
 
-Overfull \hbox (4.02734pt too wide) in paragraph at lines 437--438
+Overfull \hbox (4.02734pt too wide) in paragraph at lines 441--442
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--438
+Underfull \hbox (badness 10000) in paragraph at lines 441--442
 
  []
 
-<msort16.jpg, id=36, 1146.2825pt x 697.60625pt>
+[5] <msort16.jpg, id=40, 1146.2825pt x 697.60625pt>
 File: msort16.jpg Graphic file (type jpg)
  <use msort16.jpg>
-Package pdftex.def Info: msort16.jpg used on input line 442.
+Package pdftex.def Info: msort16.jpg used on input line 446.
 (pdftex.def)             Requested size: 426.79134pt x 259.73889pt.
- [5] [6 <./msort16.jpg>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 467.
- [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 467.
+ [6 <./msort16.jpg>] [7]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 477.
+ [8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 477.
  (./caw45667-hw5.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 467.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 467.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 477.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 477.
 Package rerunfilecheck Info: File `caw45667-hw5.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 467.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 477.
  ) 
 Here is how much of TeX's memory you used:
- 21088 strings out of 493633
- 385076 string characters out of 3143378
- 634182 words of memory out of 3000000
+ 21091 strings out of 493633
+ 385098 string characters out of 3143378
+ 633426 words of memory out of 3000000
  23863 multiletter control sequences out of 15000+200000
- 13407 words of font info for 85 fonts, out of 3000000 for 9000
+ 13458 words of font info for 86 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  63i,15n,58p,1555b,1382s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -1111,10 +1116,10 @@ exlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
 xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texl
 ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texli
 ve/2011/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb>
-Output written on caw45667-hw5.pdf (7 pages, 221011 bytes).
+Output written on caw45667-hw5.pdf (8 pages, 224029 bytes).
 PDF statistics:
- 97 PDF objects out of 1000 (max. 8388607)
- 73 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
+ 101 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
+ 9 named destinations out of 1000 (max. 500000)
  12818 words of extra memory for PDF output out of 14400 (max. 10000000)
 
