@@ -60,6 +60,72 @@ def numLineEndSpaces(S, i, j, n, M):
 	else:
 		return num
 
+def minLineSpacesBack(S, M):
+	""" Utilize the dynamic programming algorithm described (but backwards)
+		to determine the minimum number of maximum spaces at the end
+		of any line, while at the same time recording the line
+		positions (newline characters) that were found to yield
+		the optimal result.
+	"""
+	n = len(S)
+	
+	# Create the DP table and newline index container
+	spaces = list()
+	indices = list()
+	
+	# Initialize the tables (we go to n+1 because we treat the base
+	# case n = 0 special)
+	for i in range(0, n + 1): 
+		spaces.append(0)
+		indices.append(0)
+	
+	# Pre-compute the line spaces
+	wordSpaces.append(0)
+	for i in range(1, n + 1):
+		wordSpaces.append(wordSpaces[i - 1] + len(S[i - 1]))
+	
+	# Base case: assume that we have no maximal number of spaces
+	# when there are no words yet added to any lines.
+	spaces[n] = 0
+	
+	# Iteratively start adding words to the lines and re-calculating the
+	# maximum number of spaces at each step, using the previous optimal
+	# value when determining where newline character should be placed.
+	i = n - 1
+	while i >= 0:
+		
+		# Infinity - special marker.
+		spaces[i] = sys.maxint
+		
+		# Compare the new line possibilities with past optimal values
+		# in search of the new maximum (champion algorithm)
+		j = i
+		while j < n:
+			
+			# Compute the number of spaces for this new line (note: i and j 
+			# are offset by 1).
+			numSpaces = numLineEndSpaces(S, i, j, n - 1, M)
+			
+			# Determine which line (the previous or current one) yields
+			# the maximum line spaces after putting the word i on the 
+			# the current line or the next line.
+			newMax = max(numSpaces, spaces[j + 1])
+			
+			# Check to see if we reached a new maximum, and if so set
+			# the value and update the newline character appropriately.
+			if (numSpaces > -1 and newMax < spaces[i]):
+				spaces[i] = newMax
+				indices[i] = j
+			
+			j = j + 1
+		
+		# Decrement the start index
+		i = i - 1
+	
+	# Return the minimum number of maximal spaces and the index locations
+	# that can be used to re-build this optimal value.
+	return (spaces[0], indices)
+
 def minLineSpaces(S, M):
 	""" Utilize the dynamic programming algorithm described above to
 		determine the minimum number of maximum spaces at the end
