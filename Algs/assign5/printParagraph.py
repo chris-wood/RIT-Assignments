@@ -36,6 +36,10 @@ import sys
 #	O(n) (line space precomputation) + O(n^2) (DP algorithm) + O(n) (format words)
 # and we conclude that printParagraph thus runs in O(n^2) time.
 #
+# Note that this program offers two functions, minLineSpaces and minLineSpacesBack,
+# that compute the same minimum number of extra spaces using dynamic programming
+# both forwards and backwards.
+#
 ##########################################################################
 
 # Precomputed line spaces
@@ -117,6 +121,7 @@ def minLineSpacesBack(S, M):
 				spaces[i] = newMax
 				indices[i] = j
 			
+			# Increment the back index
 			j = j + 1
 		
 		# Decrement the start index
