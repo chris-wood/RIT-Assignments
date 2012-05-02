@@ -1,0 +1,26 @@
+MINLP-B&B: version 20020415
+MINLP - BB exited with ifail =     0
+ f* =   7.6672    
+===============================================
+ T I M I N G S   F O R   M I N L P   S O L V E 
+===============================================
+
+Total CPU time              =      0.00
+Number of NLPs solved       =      1
+Number of NLPs generated    =      2
+Total number of QPs solved  =      3
+CPU time for NLPs           =      0.00
+Percentage of NLPs solved   =     50.00
+Average #QPs solved per NLP =      1.00
+Average CPU time for NLPs   =      0.00
+
+===============================
+ACCUMULATIVE NLP ERROR MESSAGES
+===============================
+ Number of NLP terminated with rho < eps (ifail=5):           0
+ Number of NLP terminated with iter > max_iter (ifail=6):           0
+No. of function evaluations =     4
+No. of constraint evaluatns =     4
+No. of gradient evaluations =     4
+No. of QP problems solved   =     3
+    ... of which SOC QPs    =     0

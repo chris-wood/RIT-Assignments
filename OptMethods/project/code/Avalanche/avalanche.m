@@ -1,4 +1,4 @@
-function [pVector] = avalanche(S, n)
+function pVector = avalanche(S, n)
 %AVALANCHE: TODO DESCRIBE THIS BITCH
 
 % Get the number of bits for field elements

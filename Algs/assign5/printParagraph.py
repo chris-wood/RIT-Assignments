@@ -16,10 +16,13 @@ import sys
 # minimize the maximum amount of white space on any one line (excluding the
 # last), while recording the optimal newline indices, and then print the 
 # resulting paragraph based on these newline positions, respectively. 
-# Analyzing the minLineSpaces routine shows that it runs in O(n^2) time,
+# 
+# Analyzing the minLineSpaces routine shows that it runs in O(nM) time,
 # due to the fact that it considers all word sequences i through j starting
-# from the beginning of S and terminating at the end. This time complexity
-# is possible because we pre-compute the number of line endings for the 
+# from the beginning of S and terminating at the end (where i and only starts
+# at valid positions that will allow words to fit on a line - thus at most 
+# M calculations for every word). This time complexity is possible 
+# because we pre-compute the number of line endings for the 
 # sequence S by realizing that the equation for the number of extra white
 # spaces is an arithmetic progression, and we can simply store the compounded
 # result of this progression for all i,i+1 pairs of words in O(n) time before
@@ -33,8 +36,8 @@ import sys
 #
 # Now, putting the time complexity of these two routines together, we have 
 # the time T(n) for printParagraph equal to:
-#	O(n) (line space precomputation) + O(n^2) (DP algorithm) + O(n) (format words)
-# and we conclude that printParagraph thus runs in O(n^2) time.
+#	O(n) (line space precomputation) + O(nM) (DP algorithm) + O(n) (format words)
+# and we conclude that printParagraph thus runs in O(nM) time.
 #
 # Note that this program offers two functions, minLineSpaces and minLineSpacesBack,
 # that compute the same minimum number of extra spaces using dynamic programming
@@ -168,8 +171,14 @@ def minLineSpaces(S, M):
 		spaces[j] = sys.maxint
 		
 		# Compare the new line possibilities with past optimal values
-		# in search of the new maximum (champion algorithm)
-		for i in range(1, j + 1): # So we go up to j
+		# in search of the new maximum (champion algorithm).
+		#
+		# We can shorten this computation by observing that only 
+		# M characters can fit on a line, so make sure we add only 
+		# start our line at the greatest position (this avoids many 
+		# negative line spaces because we look at too many words on a line)
+		start = max(1, j + 1 - ((M + 1) / 2))
+		for i in range(start, j + 1): # So we go up to j
 			
 			# Compute the number of spaces for this new line (note: i and j 
 			# are offset by 1).
