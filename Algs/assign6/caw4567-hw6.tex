@@ -1,0 +1,70 @@
+\documentclass[11pt]{article}
+
+\usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype,
+	    graphicx, verbatim, listings, color, fancybox}
+\usepackage[pdftex]{hyperref}
+%\usepackage[margin=1in]{geometry}
+\usepackage{cawsty}
+\usepackage{fullpage}
+\usepackage{pseudocode}
+\usepackage{verbatim}
+\usepackage{multicol}
+
+\usepackage{fancybox}
+\usepackage{tikz}
+
+\newcommand{\tlg}{\text{lg}}
+\newcommand{\tln}{\text{ln}}
+\newcommand{\tlog}{\text{log}}
+
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}% http://ctan.org/pkg/algorithmicx
+\usepackage{lipsum}% http://ctan.org/pkg/lipsum
+\usepackage{xifthen}% http://ctan.org/pkg/xifthen
+\usepackage{needspace}% http://ctan.org/pkg/needspace
+\usepackage{hyperref}% http://ctan.org/pkg/hyperref
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,%
+                shapes,positioning}
+
+\tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=0pt]
+\tikzstyle{selected vertex} = [vertex, fill=red!24]
+\tikzstyle{edge} = [draw,thick,-]
+\tikzstyle{weight} = [font=\small]
+\tikzstyle{selected edge} = [draw,line width=5pt,-,red!50]
+\tikzstyle{ignored edge} = [draw,line width=5pt,-,black!20]
+
+\allowdisplaybreaks[1]
+
+% ================ ALGORITHM ENVIRONMENT ================
+\newcounter{numberedAlg}% Algorithm counter
+\newenvironment{numberedAlg}[1][]%
+  {% \begin{numberedAlg}[#1]
+    \needspace{2\baselineskip}% At least 2\baselineskip required, otherwise break
+    \noindent \rule{\linewidth}{1pt} \endgraf% Top rule
+    \refstepcounter{numberedAlg}% For correct reference of algorithm
+    \centering \textsc{Algorithm}~\thenumberedAlg%
+    \ifthenelse{\isempty{#1}}{}{:\ #1}% Typeset name (if provided)
+  }{% \end{numberedAlg}
+  \noindent \rule{\linewidth}{1pt}% Bottom rule
+  }%
+
+%\setlength{\parindent}{0pt}
+
+\linespread{1.2}
+
+\begin{document}
+\cawtitle{4005-800 Algorithms}{Homework 5}
+
+\begin{prob}{1-a}
+\end{prob}
+\begin{sol}
+TODO
+\end{sol}
+
+\end{document}
