@@ -59,24 +59,79 @@
 \linespread{1.2}
 
 \begin{document}
-\cawtitle{4005-800 Algorithms}{Homework 5}
+\cawtitle{4005-800 Algorithms}{Homework 6}
 
-\begin{prob}{1}
+\begin{prob}{1 - 16.1-2}
+
+Suppose that instead of always selecting the first activity to finish, we instead select the last activity to start that is compatible with all previously selected activities. Describe how this approach is a greedy algorithm, and prove that it yields an optimal solution.
 \end{prob}
 \begin{sol}
+
+In the context of the activity selection problem, the notion of a greedy algorithm is one that chooses an activity at each iteration such that we are left with as much resources (time) for other activities as possible. Thus, by choosing the last activity $a_k$ to start (assuming that all activities are sorted in monotonically decreasing order by start time), we are guaranteed to leave as much time for other compatible activities as possible that be selected before the start of $a_k$. This is because choosing an activity with an earler start time would consume more resources, and therefore is not greedy. 
+
+We can also show that this approach yields an optimal solution to the original problem solution. Consider, for example, any non-empty subsequence of activities $S' = <a_1, a_2, ..., a_n>$, which is in monotonically decreasing order based on start times. We now prove that the largest set of compatible activities for $S'$ is $1 + $(the largest set of compatible activities in $<a_2, a_3,..., a_n>$). In other words, $a_1$ is included in some maximum-size subsequence of mutually compatible activities of $S'$.
+
+\begin{proof}
+Let $A$ be the largest set of mutually compatble activities in $S'$, and let $a_j$ be the activitiy with the latest start time. If $a_j = a_1$, then the result follows immediately. If $a_j \not= a_1$, then consider $A' = (A - \{a_j\}) \cup \{a_1\}$. Note that $A'$ is a mutually compatible set of activities since $s_1 \geq s_j$. That is, there is more time before $a_1$, and by picking $a_j$ there is nothing after (since $a_j$ has the latest start time). Now, since $|A'| = |A|$, the result follows immediately.
+\end{proof}
+
+%TODO: should more be added?
+
+\end{sol}
+
+\begin{prob}{2 - 26.1-4}
+
+Let $f$ be a flow in a network, and let $\alpha$ be a real number. The \textbf{scalar flow product}, denoted $\alpha f$, is a function $V \times V \to \mathbb{R}$ defined by
+\begin{eqnarray*}
+(\alpha f)(u,v) = \alpha \times f(u,v)
+\end{eqnarray*}
+Prove that the flows in a network form a \textbf{convex set}. That is, show that if $f_1$ and $f_2$ are flows, then so is $\alpha f_1 + (1 - \alpha)f_2$ for all $\alpha$ in the range $0 \leq \alpha \leq 1$.
+\end{prob}
+\begin{sol}
+
+To show that flows in a network form a \textbf{convex set}, we consider the expresion of scalar flow products $\alpha f_1 + (1 - \alpha)f_2$, assuming that $f_1$ and $f_2$ are valid flows in the same network. Manipulating this expression yields the following:
+\begin{eqnarray*}
+\alpha f_1 + (1 - \alpha)f_2 & = & \alpha f_1 - \alpha f_2 + f_2 \\
+& = & \alpha(f_1 - f_2) + f_2
+\end{eqnarray*}
+Now, we consider this expression on a case-by-case basis.\\
+
+%% TODO: show substitution step explicitly instead of just assuming they can follow the math
+
+\textbf{Case 1:} $\alpha = 0$ \\
+When $\alpha = 0$, the expression $\alpha(f_1 - f_2) + f_2$ reduces to $f_2$, which is known to be a valid flow. 
+
+\textbf{Case 2:} $\alpha = 1$ \\
+When $\alpha = 1$, the expression $\alpha(f_1 - f_2) + f_2$ reduces to $f_1$, which is known to be a valid flow. 
+
+\textbf{Case 3:} $0 < \alpha  < 1$ \\
 TODO
 \end{sol}
 
-\begin{prob}{2}
-\end{prob}
-\begin{sol}
-TODO
-\end{sol}
+\begin{prob}{3 - 26.2-2}
 
-\begin{prob}{3}
+In Figure $26.1(b)$, what is the flow across the cut $(\{s, v_2, v_4\}, \{v_1, v_3, t\})$? What is the capacity of this cut?
 \end{prob}
 \begin{sol}
-TODO
+The graph in Figure $26.1(b)$ is shown below.
+
+\begin{center}
+	\includegraphics[width=90mm]{graphpic.png}
+\end{center}
+
+By considering the cut $(\{s, v_2, v_4\}, \{v_1, v_3, t\})$, we know the edges that cross the cut boundary are $\{(u,v) : u \in S, v \in T, (u,v) \in E\} = \{(s, v_1), (v_2, v_1), (v_3, v_2), (v_4, v_3), (v_4, t)\}$. The net flow of this $s-t$-cut is then as follows:
+\begin{eqnarray*}
+f(S, T) & = & f(s, v_1) + f(v_2, v_1) + f(v_3, v_2) + f(v_4, v_3) + f(v_4, t) \\
+& = & 11 + 1 + (-4) + 7 + 4 \\
+& = & 19
+\end{eqnarray*}
+Since the capacity of the cut is defined as the sum of the edge capacities from all vertices $u \in S$ to $v \in T$, we have the following capacity:
+\begin{eqnarray*}
+c(S, T) & = & c(s,v1_) + c(v_2, v_1) + c(v_4, v_3), c(v_4, t) \\
+& = & 16 + 4 + 7 + 4 \\
+& = & 31
+\end{eqnarray*}
+
 \end{sol}
 
 \end{document}

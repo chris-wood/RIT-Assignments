@@ -15,7 +15,7 @@ for i = 1:bits
     sum = sum + pVector(i);
 end
 
-fitness = -sum;
+fitness = sum;
 
 end
 
