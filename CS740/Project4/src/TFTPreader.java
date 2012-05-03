@@ -34,7 +34,7 @@ public class TFTPreader
 	/**
 	 * The default TFTP port.
 	 */
-	private static final int DEFAULT_PORT = 69;
+	private static final int DEFAULT_PORT = 7000;
 	
 	/**
 	 * Validate the parameters used to retrieve the file from the TFTP server.
@@ -238,18 +238,22 @@ public class TFTPreader
 	public static void main(String[] args)
 	{
 		// Verify that the correct number of parameters was provided
-		if (args.length != 3)
-		{
-			displayUsage();
-		}
-		else
+		//if (args.length != 3)
+		//{
+		//	displayUsage();
+		//}
+		//else
 		{
 			TFTPreader reader = new TFTPreader();
-			if (reader.validateParameters(args[1], args[0]))
+			if (reader.validateParameters("viking.cs.rit.edu", "netascii")) //args[1], args[0]
 			{
-				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode(args[0]);
-				reader.receiveFile(mode, args[1], args[2]);
-			}		
+				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode("netascii"); //args[0]
+				reader.receiveFile(mode, "viking.cs.rit.edu", "motd"); //args[1], args[2]
+			}
+			BCHDecoder3116 decoder = new BCHDecoder3116();
+			
+			int code = 1496973312;
+			System.out.println(decoder.correct(code));
 		}
 	}
 	
