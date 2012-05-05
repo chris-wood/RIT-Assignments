@@ -287,15 +287,20 @@ public class TFTPreader
 			BCHDecoder3121 dec2 = new BCHDecoder3121();
 			BCHDecoder3116.InitializeDecoder();
 			
-			System.out.println("Test 1496973312");
-			int code = 1496973312;
+			System.out.println("Test 1496973312 (1) - should be 0");
+			int code1 = 1073741824;
 			int code2 = 1342177280;
-			System.out.println("3116: " + BCHDecoder3116.correct(code));
-			System.out.println("3121: " + dec2.correct(code));
+			int code3 = 1476395008;
+			System.out.println("3116: " + BCHDecoder3116.correct(code1));
+			System.out.println("3121: " + dec2.correct(code1));
 			
-			System.out.println("Test 1342177280");
+			System.out.println("Test 1342177280 (2) - should be 0");
 			System.out.println("3116: " + BCHDecoder3116.correct(code2));
 			System.out.println("3121: " + dec2.correct(code2));
+			
+			System.out.println("Test: 1476395008 (3) - should be 0");
+			System.out.println("3116: " + BCHDecoder3116.correct(code3));
+			System.out.println("3121: " + dec2.correct(code3));
 		}
 	}
 	

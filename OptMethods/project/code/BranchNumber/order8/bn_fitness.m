@@ -3,8 +3,8 @@ function fitness = avalanche_fitness( X )
 %   Detailed explanation goes here
 
 % Debug stuff
-disp('inside fitness function')
-SBOX_SIZE = length(X)
+%disp('inside fitness function')
+SBOX_SIZE = length(X);
 [n,pair] = bn(X, SBOX_SIZE);
 fitness = n;
 
