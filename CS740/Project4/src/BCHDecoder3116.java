@@ -26,12 +26,21 @@ public class BCHDecoder3116
         InitializeDecoder();
 	}
 	
-	void InitializeDecoder()
+	static void InitializeDecoder()
     {
-        GenerateGf(); // Generate the galois Field GF(2**m) 
+		m = 5;
+		n = 31;
+		t = 3;
+        
+		// Primitive polynomial of degree 7
+        // x^7 + x^3 + 1
+        p[7] = p[3] = p[0] = 1;
+        p[6] = p[5] = p[4] = p[2] = p[1] = 0;
+		
+        GenerateGf(); // Generate the Galois Field GF(2**m) 
     }
 
-    void GenerateGf()
+    static void GenerateGf()
     {
     	/*
          * generate GF(2**m) from the irreducible polynomial p(X) in p[0]..p[m]
@@ -43,48 +52,44 @@ public class BCHDecoder3116
          * alpha = 2 is the primitive element of GF(2**m) 
          */
 
-         int i, mask;
-         mask = 1;
-         GF[m] = 0;
+    	int i, mask;
+        mask = 1;
+        GF[m] = 0;
 
-         for (i = 0; i < m; i++)
-         {
-             GF[i] = mask;
+        for (i = 0; i < m; i++)
+        {
+            GF[i] = mask;
 
-             GF_rev[GF[i]] = i;
+            GF_rev[GF[i]] = i;
 
-             if (p[i] != 0)
-                 GF[m] ^= mask;
+            if (p[i] != 0)
+                GF[m] ^= mask;
 
-             mask <<= 1;
-         }
+            mask <<= 1;
+        }
 
-         GF_rev[GF[m]] = m;
+        GF_rev[GF[m]] = m;
 
-         mask >>= 1;
+        mask >>= 1;
 
-         for (i = m + 1; i < n; i++)
-         {
-             if (GF[i - 1] >= mask)
-             {
-                 GF[i] = GF[m] ^ ((GF[i - 1] ^ mask) << 1);
-             }
-             else
-             {
-                 GF[i] = GF[i - 1] << 1;
-             }
+        for (i = m + 1; i < n; i++)
+        {
+            if (GF[i - 1] >= mask)
+                GF[i] = GF[m] ^ ((GF[i - 1] ^ mask) << 1);
+            else
+                GF[i] = GF[i - 1] << 1;
 
-             GF_rev[GF[i]] = i;
-         }
+            GF_rev[GF[i]] = i;
+        }
 
-         GF_rev[0] = -1;
+        GF_rev[0] = -1;
         
-         /*
+         
         System.out.println("i - alpha_to - index_to");
         for (i = 0; i < Math.pow(2, m); i++)
         {
         	System.out.println(i + " - " + GF[i] + " - " + GF_rev[i]);
-        }*/
+        }
     }
 
     private static int[] calcSyndrom(int codeword)
@@ -108,7 +113,7 @@ public class BCHDecoder3116
     {
     	int[] S = new int[] { 0, 0, 0, 0, 0, 0 };
         int s3 = 0;
-        int[] C = new int[] { 0, 0, 0 };
+        int[] C = new int[] { 0, 0, 0, 0, 0 };
         int[] loc = new int[] { 0, 0, 0 };
         int tmp = 0;
         boolean error = false;
@@ -121,7 +126,7 @@ public class BCHDecoder3116
         S = calcSyndrom(codeword);
         for (int i = 0; i < S.length; i++)
         {
-            if (i != -1)
+            if (S[i] != -1)
             {
                 error = true;
                 break;
@@ -130,13 +135,13 @@ public class BCHDecoder3116
 
         if (!error)
         {
+        	System.out.println("WTF");
             return "initialCW: " + initialCW + "   cw: " + codeword + "   nbCorr: " + nbCorr + "    good: " + good;
         }
 
-        System.out.println("Trying to correct.");
         if (S[0] != -1)
         {
-        	s3 = (S[0] * 3) % n;
+            s3 = (S[0] * 3) % n;
 
             // Is there only one error?
             if (S[2] == s3)
@@ -146,6 +151,7 @@ public class BCHDecoder3116
             }
             else
             {
+            	System.out.println("n >=2 errors");
                 // There are (hopefully) only two errors
                 // Solve for the coefficients of C(X) for the error locator
                 // polynomial
@@ -155,11 +161,13 @@ public class BCHDecoder3116
                     tmp ^= GF[S[2]];
                 }
 
-                C[0] = 0;
+                C[0] = (S[2] - GF_rev[tmp] + n) % n; // was 0
                 C[1] = (S[1] - GF_rev[tmp] + n) % n;
                 C[2] = (S[0] - GF_rev[tmp] + n) % n;
+                //C[3] = (S[0] - GF_rev[tmp] + n) % n;
+                //C[4] = (S[0] - GF_rev[tmp] + n) % n;
 
-                //# Get the roots of C(x) using Chien-Search
+                // Get the roots of C(x) using Chien-Search
                 errors = 0;
                 for (int i = 0; i < n; i++)
                 {
@@ -171,7 +179,6 @@ public class BCHDecoder3116
                             C[j] = (C[j] + j) % n;
                             tmp ^= GF[C[j]];
                         }
-
                     }
                     if (tmp == 0)
                     {
@@ -179,13 +186,8 @@ public class BCHDecoder3116
                         errors += 1;
                     }
                 }
-                System.out.println("errors = " + errors);
-                for (int i = 0; i < loc.length; i++)
-                {
-                	System.out.print(loc[i] + " ");
-                }
-                System.out.println();
 
+                System.out.println("#errors = " + errors);
                 if (errors == 2)
                 {
                     codeword ^= (1 << (loc[0] + 1));
@@ -197,7 +199,6 @@ public class BCHDecoder3116
                     codeword ^= (1 << (loc[1] + 1));
                     codeword ^= (1 << (loc[2] + 1));
                 }
-
             }
         }
         S = calcSyndrom(codeword);
@@ -205,7 +206,7 @@ public class BCHDecoder3116
 
         for (int i = 0; i < S.length; i++)
         {
-            if (i != -1)
+            if (S[i] != -1)
             {
                 error = true;
                 break;

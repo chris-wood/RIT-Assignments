@@ -77,7 +77,7 @@ public class BCHDecoder3121
 
     private int[] calcSyndrom(int codeword)
     {
-        int[] result = new int[] { 0, 0, 0, 0 };
+    	int[] result = new int[] { 0, 0, 0, 0 };
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < n; j++)
@@ -94,7 +94,7 @@ public class BCHDecoder3121
 
     public String correct(int codeword)
     {
-        int[] S = new int[] { 0, 0, 0, 0 };
+    	int[] S = new int[] { 0, 0, 0, 0 };
         int s3 = 0;
         int[] C = new int[] { 0, 0, 0 };
         int[] loc = new int[] { 0, 0, 0 };
@@ -109,7 +109,7 @@ public class BCHDecoder3121
         S = calcSyndrom(codeword);
         for (int i = 0; i < S.length; i++)
         {
-            if (i != -1)
+            if (S[i] != -1)
             {
                 error = true;
                 break;
@@ -180,7 +180,7 @@ public class BCHDecoder3121
 
         for (int i = 0; i < S.length; i++)
         {
-            if (i != -1)
+            if (S[i] != -1)
             {
                 error = true;
                 break;

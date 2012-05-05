@@ -278,22 +278,24 @@ public class TFTPreader
 		//}
 		//else
 		{
-			TFTPreader reader = new TFTPreader();
+			/*TFTPreader reader = new TFTPreader();
 			if (reader.validateParameters("viking.cs.rit.edu", "netascii")) //args[1], args[0]
 			{
 				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode("netascii"); //args[0]
 				reader.receiveFile(mode, "viking.cs.rit.edu", "motd", false); //args[1], args[2]
-			}
-			BCHDecoder3116 decoder = new BCHDecoder3116();
+			}*/
 			BCHDecoder3121 dec2 = new BCHDecoder3121();
+			BCHDecoder3116.InitializeDecoder();
 			
-			System.out.println("Test");
+			System.out.println("Test 1496973312");
 			int code = 1496973312;
 			int code2 = 1342177280;
-			System.out.println(decoder.correct(code));
-			System.out.println(dec2.correct(code));
-			System.out.println(decoder.correct(code2));
-			System.out.println(dec2.correct(code2));
+			System.out.println("3116: " + BCHDecoder3116.correct(code));
+			System.out.println("3121: " + dec2.correct(code));
+			
+			System.out.println("Test 1342177280");
+			System.out.println("3116: " + BCHDecoder3116.correct(code2));
+			System.out.println("3121: " + dec2.correct(code2));
 		}
 	}
 	
