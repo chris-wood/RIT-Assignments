@@ -142,7 +142,6 @@ public class BCHDecoder3121
                     tmp ^= GF[S[2]];
                 }
 
-
                 C[0] = 0;
                 C[1] = (S[1] - GF_rev[tmp] + n) % n;
                 C[2] = (S[0] - GF_rev[tmp] + n) % n;

@@ -20,13 +20,18 @@ public abstract class TFTPmessage
 	public static final byte MESSAGE_PAD = 0;
 	
 	/**
+	 * Number of bytes in each data block received.
+	 */
+	public static final int BYTE_PER_BLOCK = 4;
+	
+	/**
 	 * This enumeration defines the different opcodes (message types)
 	 * supported by the TFTP protocol.
 	 */
 	public static enum Opcode
 	{
 		RRQ(1), 
-		WRQ(2), 
+		CRRQ(2), 
 		DATA(3), 
 		ACK(4), 
 		ERROR(5);
@@ -72,7 +77,7 @@ public abstract class TFTPmessage
 	 * A fixed array containing references to the appropriate enumeration
 	 * type, which is used when reconstructing messages from the server.
 	 */
-	public static final Opcode[] codes = {Opcode.RRQ, Opcode.WRQ, Opcode.DATA, 
+	public static final Opcode[] codes = {Opcode.RRQ, Opcode.CRRQ, Opcode.DATA, 
 		Opcode.ACK, Opcode.ERROR};
 	
 	/**

@@ -1,31 +1,26 @@
 public class BCHDecoder3116 
 {
-	int m, n, t;
-	int[] p = new int[6];
-	int[] GF = new int[32];
-	int[] GF_rev = new int[32];
+	static int m, n, t;
+	static int[] p = new int[8]; 
+	static int[] GF = new int[32];
+	static int[] GF_rev = new int[32];
 	
 	public BCHDecoder3116()
 	{
 		m = 5;
 		n = 31;
 		t = 3;
-	
-		// Zero out the polynomial array
-		/*for (int i = 0; i < p.length; i++)
-		{
-			p[i] = 0;
-		}
-		
-		// Initialize p with a primitive polynomial of degree 15
-        // 		x15+x11+x10+x9+x8+x7+x5+x3+x2+x+1
-        p[15] = p[11] = p[10] = p[9] = p[8] = p[7] = p[5] = p[3] = p[2] = p[1] = p[0] = 1;*/
         
+		// Primitive polynomial of degree 7
+        // x^7 + x^3 + 1
+        p[7] = p[3] = p[0] = 1;
+        p[6] = p[5] = p[4] = p[2] = p[1] = 0;
+		
 		// Primitive polynomial of degree 5
         // x^5 + x^2 + 1
-        // polynomial is indivisible, ie: 10101 = 21, which is prime, therefore indivisible
-        p[0] = p[2] = p[5] = 1;
-        p[1] = p[3] = p[4] = 0;
+        // polynomial is indivisible, ie: 10101 = 21, which is prime, therefore invisisible
+        //p[0] = p[2] = p[5] = 1;
+        //p[1] = p[3] = p[4] = 0;
         
         // Initialize the decoder using this generator polynomial
         InitializeDecoder();
@@ -84,14 +79,15 @@ public class BCHDecoder3116
 
          GF_rev[0] = -1;
         
+         /*
         System.out.println("i - alpha_to - index_to");
         for (i = 0; i < Math.pow(2, m); i++)
         {
         	System.out.println(i + " - " + GF[i] + " - " + GF_rev[i]);
-        }
+        }*/
     }
 
-    private int[] calcSyndrom(int codeword)
+    private static int[] calcSyndrom(int codeword)
     {
         int[] result = new int[] { 0, 0, 0, 0, 0, 0 };
         for (int i = 0; i < 6; i++)
@@ -108,9 +104,9 @@ public class BCHDecoder3116
         return result;
     }
 
-    public String correct(int codeword)
+    public static String correct(int codeword)
     {
-        int[] S = new int[] { 0, 0, 0, 0 };
+    	int[] S = new int[] { 0, 0, 0, 0, 0, 0 };
         int s3 = 0;
         int[] C = new int[] { 0, 0, 0 };
         int[] loc = new int[] { 0, 0, 0 };
@@ -137,9 +133,10 @@ public class BCHDecoder3116
             return "initialCW: " + initialCW + "   cw: " + codeword + "   nbCorr: " + nbCorr + "    good: " + good;
         }
 
+        System.out.println("Trying to correct.");
         if (S[0] != -1)
         {
-            s3 = (S[0] * 3) % n;
+        	s3 = (S[0] * 3) % n;
 
             // Is there only one error?
             if (S[2] == s3)
@@ -157,7 +154,6 @@ public class BCHDecoder3116
                 {
                     tmp ^= GF[S[2]];
                 }
-
 
                 C[0] = 0;
                 C[1] = (S[1] - GF_rev[tmp] + n) % n;
@@ -183,11 +179,23 @@ public class BCHDecoder3116
                         errors += 1;
                     }
                 }
+                System.out.println("errors = " + errors);
+                for (int i = 0; i < loc.length; i++)
+                {
+                	System.out.print(loc[i] + " ");
+                }
+                System.out.println();
 
                 if (errors == 2)
                 {
                     codeword ^= (1 << (loc[0] + 1));
                     codeword ^= (1 << (loc[1] + 1));
+                }
+                else if (errors == 3)
+                {
+                	codeword ^= (1 << (loc[0] + 1));
+                    codeword ^= (1 << (loc[1] + 1));
+                    codeword ^= (1 << (loc[2] + 1));
                 }
 
             }

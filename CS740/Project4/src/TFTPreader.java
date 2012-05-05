@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,8 +79,11 @@ public class TFTPreader
 	 * @param mode - the transfer mode to use for the file reception.
 	 * @param host - the host server name where the TFTP program is located.
 	 * @param fileName - the file to receive.
+	 * @param corrupt - boolean flag indicating whether or not we are dealing 
+	 * 					with corrpt data
 	 */
-	public void receiveFile(TFTPmessage.TransferMode mode, String host, String fileName)
+	public void receiveFile(TFTPmessage.TransferMode mode, String host, 
+			String fileName, boolean corrupt)
 	{
 		TFTPclient client = new TFTPclient();
 		Map<Integer, byte[]> dataBlocks = new HashMap<Integer, byte[]>();
@@ -103,10 +107,19 @@ public class TFTPreader
 		
 		try 
 		{
-			// Send a request for a new file to the client
-			TFTPmessage result = client.sendAndReceiveMessage(new 
-					RequestMessage(fileName, TFTPmessage.Opcode.RRQ, mode), 
-					DEFAULT_PORT, RETRY_TIMES);
+			// Send the appropriate request
+			TFTPmessage result = null;
+			if (!corrupt)
+			{
+				// Send a request for a new file to the client
+				result = client.sendAndReceiveMessage(new RequestMessage(fileName, TFTPmessage.Opcode.RRQ, mode), 
+						DEFAULT_PORT, RETRY_TIMES);
+			}
+			else
+			{
+				result = client.sendAndReceiveMessage(new RequestMessage(fileName, TFTPmessage.Opcode.CRRQ, mode), 
+						DEFAULT_PORT, RETRY_TIMES);
+			}
 
 			// Continue reading data until we reach a non-full block
 			boolean transferComplete = false;
@@ -152,7 +165,7 @@ public class TFTPreader
 			}
 			
 			// Finally, write the file contents to the disk and clean up.
-			writeFile(fileName, dataBlocks);
+			writeFile(fileName, dataBlocks, corrupt);
 			client.close();
 		} 
 		catch (SocketTimeoutException e)
@@ -199,18 +212,39 @@ public class TFTPreader
 	 * 
 	 * @param file - the file to store the data.
 	 * @param data - the file data, partitioned by block number.
+	 * @param corrupt - boolean flag indicating if the data is potentially corrupt
 	 */
-	private void writeFile(String file, Map<Integer, byte[]> data)
+	private void writeFile(String file, Map<Integer, byte[]> data, boolean corrupt)
 	{
 		try 
 		{
 			// Create (overwrite, if already present) the new file
 			FileOutputStream fos = new FileOutputStream(file, false);
 			
-			// Iterate across the entire data set and write the bytes (start at block 1)
-			for (int i = 1; i <= data.size(); i++)
+			// Decode the data if it is corrupt
+			if (corrupt)
 			{
-				fos.write(data.get(i));
+				ArrayList<Byte> correctData = new ArrayList<Byte>();
+				int index = 0;
+				for (int i = 1; i <= data.size(); i += TFTPmessage.BYTE_PER_BLOCK)
+				{
+					int word = 0;
+					for (int j = 0; j < TFTPmessage.BYTE_PER_BLOCK; j++)
+					{
+						//word |= (data.get(i + j) << ((TFTPmessage.BYTE_PER_BLOCK - (j + 1)) * 8);
+					}
+					//int correctWord = BCHDecoder3116.correct(word);
+					// shift over 16 bits and then store in correctData
+				}
+				
+			}
+			else
+			{
+				// Iterate across the entire data set and write the bytes (start at block 1)
+				for (int i = 1; i <= data.size(); i++)
+				{
+					fos.write(data.get(i));
+				}
 			}
 			
 			// Flush and close the stream to finish
@@ -248,12 +282,18 @@ public class TFTPreader
 			if (reader.validateParameters("viking.cs.rit.edu", "netascii")) //args[1], args[0]
 			{
 				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode("netascii"); //args[0]
-				reader.receiveFile(mode, "viking.cs.rit.edu", "motd"); //args[1], args[2]
+				reader.receiveFile(mode, "viking.cs.rit.edu", "motd", false); //args[1], args[2]
 			}
 			BCHDecoder3116 decoder = new BCHDecoder3116();
+			BCHDecoder3121 dec2 = new BCHDecoder3121();
 			
+			System.out.println("Test");
 			int code = 1496973312;
+			int code2 = 1342177280;
 			System.out.println(decoder.correct(code));
+			System.out.println(dec2.correct(code));
+			System.out.println(decoder.correct(code2));
+			System.out.println(dec2.correct(code2));
 		}
 	}
 	
