@@ -113,7 +113,7 @@ public class BCHDecoder3116
     {
     	int[] S = new int[] { 0, 0, 0, 0, 0, 0 };
         int s3 = 0;
-        int[] C = new int[] { 0, 0, 0, 0, 0 };
+        int[] C = new int[] { 0, 0, 0, 0 };
         int[] loc = new int[] { 0, 0, 0 };
         int tmp = 0;
         boolean error = false;
@@ -126,17 +126,17 @@ public class BCHDecoder3116
         S = calcSyndrom(codeword);
         for (int i = 0; i < S.length; i++)
         {
+        	System.out.println(S[i]);
             if (S[i] != -1)
             {
                 error = true;
-                break;
+                //break;
             }
         }
 
         if (!error)
         {
-        	System.out.println("WTF");
-            return "initialCW: " + initialCW + "   cw: " + codeword + "   nbCorr: " + nbCorr + "    good: " + good;
+            return "NONE - initialCW: " + initialCW + "   cw: " + codeword + "   nbCorr: " + nbCorr + "    good: " + good;
         }
 
         if (S[0] != -1)
@@ -161,9 +161,10 @@ public class BCHDecoder3116
                     tmp ^= GF[S[2]];
                 }
 
-                C[0] = (S[2] - GF_rev[tmp] + n) % n; // was 0
+                C[0] = 0; // was 0
                 C[1] = (S[1] - GF_rev[tmp] + n) % n;
                 C[2] = (S[0] - GF_rev[tmp] + n) % n;
+                C[3] = (S[2] - GF_rev[tmp] + n) % n;
                 //C[3] = (S[0] - GF_rev[tmp] + n) % n;
                 //C[4] = (S[0] - GF_rev[tmp] + n) % n;
 

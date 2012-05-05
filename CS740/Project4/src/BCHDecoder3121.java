@@ -146,7 +146,7 @@ public class BCHDecoder3121
                 C[1] = (S[1] - GF_rev[tmp] + n) % n;
                 C[2] = (S[0] - GF_rev[tmp] + n) % n;
 
-                //# Get the roots of C(x) using Chien-Search
+                // Get the roots of C(x) using Chien-Search
                 errors = 0;
                 for (int i = 0; i < n; i++)
                 {
