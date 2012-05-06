@@ -15,7 +15,7 @@ max = bits * (2^(bits - 1)); % don't do probabilities
 for i = 1:bits
     sum = 0;
     for x = 1:n
-        sum = sum + wt(xor(S(x), S(xor(x - 1, 2^(i - 1)) + 1)), bits); % handle matlab +1 vector base indices
+        sum = sum + wt(bitxor(S(x), S(bitxor(x - 1, 2^(i - 1)) + 1)), bits); % handle matlab +1 vector base indices
     end
     
     % Store the result

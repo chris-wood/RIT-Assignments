@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Change this parameter to modify the S-box behavior
-SBOX_SIZE = 4;
+SBOX_SIZE = 16; %2^4
 bits = log2(SBOX_SIZE);
 
 % Initialize the S-box matrix here
