@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  10 APR 2012 22:08
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  5 MAY 2012 20:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -523,7 +523,11 @@ Package: needspace 2010/09/12 v1.3c reserve vertical space
 )
 \c@numberedAlg=\count142
 
-(./nr.aux)
+(./nr.aux
+
+LaTeX Warning: Label `fig:Onion' multiply defined.
+
+)
 \openout1 = `nr.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
@@ -612,13 +616,13 @@ LaTeX Info: Redefining \nameref on input line 39.
  [1
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for U+msa on input line 91.
+LaTeX Font Info:    Try loading font information for U+msa on input line 89.
  (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 ) (/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 91.
+LaTeX Font Info:    Try loading font information for U+msb on input line 89.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -626,68 +630,90 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 (/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 91.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 89.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
-)
+) [2] [3]
 
-LaTeX Warning: Citation `ATTACKS' on page 2 undefined on input line 126.
+LaTeX Warning: Reference `Definitions' on page 4 undefined on input line 158.
 
-[2]
+<edge_attacks.png, id=78, 538.01pt x 314.17375pt>
+File: edge_attacks.png Graphic file (type png)
+ <use edge_attacks.png>
+Package pdftex.def Info: edge_attacks.png used on input line 171.
+(pdftex.def)             Requested size: 234.8775pt x 137.15823pt.
 
-LaTeX Warning: Reference `Definitions' on page 3 undefined on input line 159.
+[4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+has been already used, duplicate ignored
 
-[3]
-
-LaTeX Warning: Citation `ATTACKS' on page 4 undefined on input line 161.
-
-
-LaTeX Warning: Citation `ATTACKS' on page 4 undefined on input line 172.
-
-[4] <Onion.jpg, id=92, 452.69125pt x 441.65pt>
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.178 
+       <./edge_attacks.png>] [5] <Onion.jpg, id=101, 452.69125pt x 441.65pt>
 File: Onion.jpg Graphic file (type jpg)
- <use Onion.jpg>
-Package pdftex.def Info: Onion.jpg used on input line 209.
+
+<use Onion.jpg>
+Package pdftex.def Info: Onion.jpg used on input line 206.
 (pdftex.def)             Requested size: 234.8775pt x 229.14714pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[5] (./nr.bbl
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no © in font cmr10!
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no © in font cmr10!
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 242.
- [6pdfTeX warning (ext4): destination with the same identifier (name{figure.1})
+ [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.242 \end{document}
-                     <./Onion.jpg>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 242.
+l.227 \begin{eqnarray*}
+                        <./Onion.jpg>]
+
+LaTeX Warning: Reference `RandomResults' on page 7 undefined on input line 241.
+
+
+<random_results.png, id=115, 591.20876pt x 532.99126pt>
+File: random_results.png Graphic file (type png)
+
+<use random_results.png>
+Package pdftex.def Info: random_results.png used on input line 246.
+(pdftex.def)             Requested size: 234.8775pt x 211.74509pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[7] (./nr.bbl
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+ [8pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.19 
+      <./random_results.png>])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 269.
+ [9]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 269.
  (./nr.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 242.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 242.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 269.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 269.
 Package rerunfilecheck Info: File `nr.out' has not changed.
-(rerunfilecheck)             Checksum: 1089FDF0CFF903D41237B4AF292D516C;798.
+(rerunfilecheck)             Checksum: F7D16CDFD97704EDAACF50B2DC042B37;685.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 242.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 269.
  ) 
 Here is how much of TeX's memory you used:
- 10659 strings out of 493633
- 157308 string characters out of 3143378
- 361438 words of memory out of 3000000
- 13651 multiletter control sequences out of 15000+200000
- 14792 words of font info for 91 fonts, out of 3000000 for 9000
+ 10701 strings out of 493633
+ 157777 string characters out of 3143378
+ 361638 words of memory out of 3000000
+ 13662 multiletter control sequences out of 15000+200000
+ 15353 words of font info for 102 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 33i,7n,51p,675b,488s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,7n,51p,1068b,456s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
@@ -704,10 +730,10 @@ e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
 /2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
 011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/20
 11/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on nr.pdf (6 pages, 327638 bytes).
+Output written on nr.pdf (9 pages, 497071 bytes).
 PDF statistics:
- 169 PDF objects out of 1000 (max. 8388607)
- 143 compressed objects within 2 object streams
- 27 named destinations out of 1000 (max. 500000)
- 19054 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 196 PDF objects out of 1000 (max. 8388607)
+ 161 compressed objects within 2 object streams
+ 33 named destinations out of 1000 (max. 500000)
+ 19048 words of extra memory for PDF output out of 20736 (max. 10000000)
 

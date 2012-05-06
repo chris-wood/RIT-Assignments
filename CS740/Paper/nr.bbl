@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{RandomStudy}
+R.~{Albert}, H.~{Jeong}, and A.-L. {Barab{\'a}si}.
+\newblock {Error and attack tolerance of complex networks}.
+\newblock 406:378--382, July 2000.
+
 \bibitem{Bernard_networkrobustness}
 Anthony~Dekker Bernard.
 \newblock Network robustness and graph topology.
@@ -16,5 +21,15 @@ Hans~J Herrmann, Christian~M Schneider, André~A Moreira, José S~Andrade Jr,
 Petter Holme, Beom~Jun Kim, Chang~No Yoon, and Seung~Kee Han.
 \newblock Attack vulnerability of complex networks.
 \newblock {\em Phys. Rev. E}, 65:056109, May 2002.
+
+\bibitem{GraphThesis}
+E~Jenelius.
+\newblock Graph models of infrastructures and the robustness of power grids.
+\newblock M. sc. thesis, KTH Royal Institute of Technology, 2004.
+
+\bibitem{NRMalicious}
+A.~{Zeng} and W.~{Liu}.
+\newblock {Enhancing network robustness for malicious attacks}.
+\newblock {\em ArXiv e-prints}, March 2012.
 
 \end{thebibliography}

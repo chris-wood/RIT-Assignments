@@ -3,44 +3,46 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: nr.aux
 The style file: plain.bst
 Database file #1: nr.bib
-You've used 3 entries,
+Warning--empty journal in RandomStudy
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            517 strings with 4511 characters,
-and the built_in function-call counts, 987 in all, are:
-= -- 86
-> -- 58
+            537 strings with 4913 characters,
+and the built_in function-call counts, 1774 in all, are:
+= -- 163
+> -- 96
 < -- 0
-+ -- 23
-- -- 20
-* -- 76
-:= -- 176
-add.period$ -- 8
-call.type$ -- 3
-change.case$ -- 19
++ -- 38
+- -- 32
+* -- 126
+:= -- 320
+add.period$ -- 17
+call.type$ -- 6
+change.case$ -- 35
 chr.to.int$ -- 0
-cite$ -- 3
-duplicate$ -- 29
-empty$ -- 74
-format.name$ -- 20
-if$ -- 195
+cite$ -- 7
+duplicate$ -- 58
+empty$ -- 131
+format.name$ -- 32
+if$ -- 352
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 2
-newline$ -- 17
-num.names$ -- 6
-pop$ -- 19
+int.to.str$ -- 6
+missing$ -- 4
+newline$ -- 32
+num.names$ -- 12
+pop$ -- 34
 preamble$ -- 1
-purify$ -- 16
+purify$ -- 28
 quote$ -- 0
-skip$ -- 24
+skip$ -- 44
 stack$ -- 0
-substring$ -- 51
-swap$ -- 3
+substring$ -- 87
+swap$ -- 4
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
-warning$ -- 0
-while$ -- 8
-width$ -- 4
-write$ -- 31
+type$ -- 24
+warning$ -- 1
+while$ -- 15
+width$ -- 7
+write$ -- 62
+(There was 1 warning)
