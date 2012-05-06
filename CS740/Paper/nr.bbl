@@ -27,6 +27,11 @@ E~Jenelius.
 \newblock Graph models of infrastructures and the robustness of power grids.
 \newblock M. sc. thesis, KTH Royal Institute of Technology, 2004.
 
+\bibitem{AttacksWavesRandom}
+T.~Tanizawa, G.~Paul, R.~Cohen, S.~Havlin, and H.~E. Stanley.
+\newblock {Optimization of Network Robustness to Waves of Targeted and Random
+  Attack}, June 2004.
+
 \bibitem{LargeNetworkRobustness-PVM}
 P.~Van~Mieghem.
 \newblock Robustness of large networks.
