@@ -27,6 +27,12 @@ E~Jenelius.
 \newblock Graph models of infrastructures and the robustness of power grids.
 \newblock M. sc. thesis, KTH Royal Institute of Technology, 2004.
 
+\bibitem{LargeNetworkRobustness-PVM}
+P.~Van~Mieghem.
+\newblock Robustness of large networks.
+\newblock In {\em Systems, Man and Cybernetics, 2005 IEEE International
+  Conference on}, volume~3, pages 2372 -- 2377 Vol. 3, oct. 2005.
+
 \bibitem{NRMalicious}
 A.~{Zeng} and W.~{Liu}.
 \newblock {Enhancing network robustness for malicious attacks}.

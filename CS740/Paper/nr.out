@@ -1,11 +1,14 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Fundamentals}{}% 2
+\BOOKMARK [1][-]{section.2}{Fundamentals and Notation}{}% 2
 \BOOKMARK [1][-]{section.3}{Network Functionality}{}% 3
 \BOOKMARK [1][-]{section.4}{Attack Models}{}% 4
 \BOOKMARK [2][-]{subsection.4.1}{Random Failures}{section.4}% 5
 \BOOKMARK [1][-]{section.5}{Network Robustness}{}% 6
 \BOOKMARK [2][-]{subsection.5.1}{Robustness Measurements}{section.5}% 7
-\BOOKMARK [1][-]{section.6}{Network Topologies and Robustness Measures}{}% 8
-\BOOKMARK [2][-]{subsection.6.1}{Random Networks and Scale-Free Networks}{section.6}% 9
-\BOOKMARK [1][-]{section.7}{Attack Countermeasures}{}% 10
-\BOOKMARK [2][-]{subsection.7.1}{Load Balancing Algorithms}{section.7}% 11
+\BOOKMARK [1][-]{section.6}{Robustness in Random Graphs}{}% 8
+\BOOKMARK [2][-]{subsection.6.1}{Types of Random Graphs}{section.6}% 9
+\BOOKMARK [3][-]{subsubsection.6.1.1}{Erd\366s-R\350nyi Graphs}{subsection.6.1}% 10
+\BOOKMARK [3][-]{subsubsection.6.1.2}{Scale-Free Graphs}{subsection.6.1}% 11
+\BOOKMARK [3][-]{subsubsection.6.1.3}{Graphs with Bimodal Degree Distribution}{subsection.6.1}% 12
+\BOOKMARK [2][-]{subsection.6.2}{Random Networks and Scale-Free Networks}{section.6}% 13
+\BOOKMARK [1][-]{section.7}{Attack Countermeasures}{}% 14

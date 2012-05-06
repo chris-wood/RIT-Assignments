@@ -84,37 +84,42 @@ network engineering that have been employed to help networks deal with topology 
 Lastly, it will discuss avenues for future research and open problems that have been posed by 
 researchers in the field.
 
-\section{Fundamentals}
+\section{Fundamentals and Notation}
 
-It is natural to model any communication network as an undirected graph $G$, which has a fixed 
-set of vertices (nodes) $V(G)$ and edges (links) $E(G)$ that represent physical connections between such vertices. For conveniene, we let $N = |V(G)|$ and $M = |E(G)|$. The topology of a network
-can thus be visualized graphically using elements from these two sets. For the remainder of this paper,
-we use the term vertex as a synonom for node and edge as a synonom for communication link. As an example of a graph representing a network, consider a completely connected network with $n$ nodes in which every node can directly communicate with every other 
-node can be seen as $K_{n}$, the complete graph on $n$ vertices (that is, $|V(G)|$ $= n$). In such a network, every node $v$ can
-communicate with exactly $n-1$ other nodes, which means that its degree $deg(v) = n-1$. 
+It is natural to model any communication network as a weighted undirected graph $G$, which has a fixed 
+set of vertices (nodes) $V(G)$ and edges (links) $E(G)$ that represent physical connections between such vertices, and weight for each link. For conveniene, we let $N = |V(G)|$ and $M = |E(G)|$. The topology of a network can thus be visualized graphically using elements from these two sets. For the remainder of this paper, we use the term vertex as a synonom for node and edge as a synonom for communication link. 
 
-In order to discuss the connectivity of networks, it is necessary to define the connectivity of such
-graphs in terms of both the vertices and edges. We introduce the following terms to use throughout 
-the remainder of this paper.
+As an example of a graph representing a network, consider a completely connected network with $n$ nodes in which every node can directly communicate with every other node can be seen as $K_{n}$, the complete graph on $n$ vertices (that is, $|V(G)|$ $= n$). In such a network, every node $v$ can communicate with exactly $n-1$ other nodes, which means that its degree $deg(v) = n-1$. 
 
-% graph connectivity
+In order to discuss the connectivity of networks, it is necessary to define the connectivity of such graphs in terms of both the vertices and edges. We introduce the following terms to use throughout the remainder of this paper.
+
 \begin{define}
-A graph $G$ is said to be \textbf{connected} if and only if $\forall u,v \in V(G)$ there exists a path between $u$ and $v$.
+The \textbf{degree} of a vertex $u \in V(G)$ for any graph $G$ is said to be the total number of edges incidenct to $u$. In other words, $deg(u) = \sum_{(u,v) \in E(G)} 1$ for all $v \in V(G)$. We denote the minimum degree over all vertices in a graph $G$ as $\delta(G)$. In network analysis it is common to utilize the degree distribution of a graph as the basis for many measurements. As such, we denote $k$ as the average degree distribution for a graph $G$.
 \end{define}
 
-% graph, vertex, edge, degree,
-% path
-% vertex connectivity
-% edge connectivity
-% component
+%Component
+\begin{define}
+A \textbf{component} of a graph $G$ is a subgraph $G'$ in which there exists a path between all vertices $u, v \in V(G')$. Further, a graph $G$ is said to be \textbf{connected} if and only if there is at most $1$ conneted component in $G$ (i.e. the entire graph). If a graph is not connected, then it is \textbf{disconnected}.
+\end{define}
+
+% vertex and edge connectivity
+\begin{define}
+The \textbf{vertex connectivity} of a graph $G$, denoted $\kappa(G)$, is defined as the minimum number of nodes whose deletion will leave the graph disconnected. Similarly, the \textbf{edge connectivity} of a graph $G$, denoted $\lambda(G)$, is defined as the minimum number of edges whose deletion will leave the graph disconnected.
+\end{define}
+
+\begin{define}
+The \textbf{distance} between any two vertices $u, v \in V(G)$ is defined as the sum of the link weights along the edges that correspond to the shortest path between $u$ and $v$.
+\end{define}
 
 \section{Network Functionality}
 \label{NetworkFunctionality}
 
-Network engineers strive for high performance networks that exhibit high throughput and low 
-latency between any two nodes in the same network. Several mathematical metrics based on
-the corresponding graph that represents a network have been proposed to reflect this need. 
-For example, metrics such as the average geodesic path length between any two nodes in a network, which equates to the average shortest path) and vertex and edge betweeness (which are essentially measures of centralities located within a graph). 
+Network engineers strive for high performance networks that exhibit high throughput and low latency between any two nodes in the same network. Other similar quality metrics include the number of hops between nodes, the distance between two nodes, the jitter on the transmission medium, the loss rate, and the bandwidth (or capacity) of the channel \cite{LargeNetworkRobustness-PVM}. These quality paremeters are often used to assign weights to the links in a network in order to determine the optimal network designs using mathematical analysis. 
+
+%TODO: Unfortunately, in real-world networks, these weights are not always fixed.
+% should this be mentioned?
+
+In this paper, we refer to the weight of communication links as an arbitrary linear combination of such quality metrics that can be modified by the author during analysis of the underlying weighted graph that represents a network with certain quality metrics. Several mathematical metrics based on the corresponding graph that represents a network have been proposed to reflect this need. For example, metrics such as the average geodesic path length between any two nodes in a network, which equates to the average shortest path) and vertex and edge betweeness (which are essentially measures of centralities located within a graph). 
 
 The average geodesic length $L$ can be defined as follows,
 \begin{eqnarray*}
@@ -234,11 +239,29 @@ Due to the typical attacks that are launched on networks, such as large-scale DD
 Q = \frac{1}{M}\sum_{step  = 1}^{M}S(step)
 \end{eqnarray*}
 
-\section{Network Topologies and Robustness Measures}
+\section{Robustness in Random Graphs}
 % look at: http://web.mit.edu/medard/www/rls.pdf ???
 
+\subsection{Types of Random Graphs}
+There are many different models of random graphs that can be used to model real-world networks, including the Erd\H{o}s
+
+\subsubsection{Erd\"{o}s-R\`{e}nyi Graphs}
+TODO: description
+
+\subsubsection{Scale-Free Graphs}
+Scale-free graphs are special types of random graphs in that the distribution of node degrees asymptotically follows a power law (i.e. $P(d) \approx d^{-\gamma}$, for some degree $k$ of a vertex $u \in V(G)$)
+
+\subsubsection{Graphs with Bimodal Degree Distribution}
+TODO
+
 \subsection{Random Networks and Scale-Free Networks}
-Following the insight that hostile vertex attacks that target important nodes with large degrees tend to cause the most significant damage to a network, Albert et al. performed extensive studies on the robustness of random and scale-free graphs. Random graphs, as the name suggests, are graphs with no specific node or edge distribution. On the other hand, scale-free graphs are special types of graphs in that the distribution of node degrees asymptotically follows a power law (i.e. $P(d) \approx d^{-\gamma}$, for some degree $k$ of a vertex $u \in V(G)$). By examining each of these classes of graphs in the context of random vertex deletions and targeted vertex attacks, it has been shown that random graphs are more robust against intentional vertex attacks, whereas the scale-free graphs are more robust against random deletions. This can be seen in Figure \ref{RandomResults}, where the breaking point of the largest component of the graphs $S$ drops off quicker for random graphs when attacked randomly \cite{GraphThesis}. 
+
+%Assume that channel links have equal weight (that is, equal quality metrics, as described in functionality section)
+
+Following the insight that hostile vertex attacks that target important nodes with large degrees tend to cause the most significant damage to a network, Albert et al. performed extensive studies on the robustness of random and scale-free graphs. Random graphs, as the name suggests, are graphs with no specific node or edge distribution. On the other hand, 
+
+
+By examining each of these classes of graphs in the context of random vertex deletions and targeted vertex attacks, it has been shown that random graphs are more robust against intentional vertex attacks, whereas the scale-free graphs are more robust against random deletions. This can be seen in Figure \ref{RandomResults}, where the breaking point of the largest component of the graphs $S$ drops off quicker for random graphs when attacked randomly \cite{GraphThesis}. 
 
 \begin{figure}[h!]
 	\label{fig:RandomResults}
@@ -254,12 +277,14 @@ Structuring and organizing networks according to a certain topology will only pr
 
 % Obvious is to organize network with most ideal topology (i.e. one that yields the highest robustness)
 
+\begin{comment}
 \subsection{Load Balancing Algorithms}
 %TODO: discuss this technique, with pictures? and examples?
 
 Responding to network attacks or failures often requires the traffic load and flow patterns for a given network to change to maintain similar measures of throughput and resource utilization. This adaption technique is known as load balancing, and is commonly employed in situations where workload characteristics for given nodes in a network cannot be predetermined. 
 
 Variations of load balancing algorithms include 
+\end{comment}
 
 % Here is the bibliography
 \bibliographystyle{plain}
