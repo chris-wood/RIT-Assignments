@@ -69,41 +69,30 @@ Military and civilian communications have seen two common trends in rencent year
 
 The physical properties of networks (i.e. the channel bandwidth, routing protocols, transmission media) have an a significant effect on the measure of robustness of a network. However, recent research efforts have approached this problem from the topological domain and studied it using analytical methods from graph theory and statistics in order to solve more general questions about the relationship between the structure of a graph and its robustness. 
 
-In this paper we focus on recent research that has been centered around the theoretical analysis of graph topology and its impact on the robustness of a network. We also discuss some of 
-
-In doing so, we also discuss some of the common sources of topology changes (e.g. attacks and failures). 
-
-This paper will focus on recent research efforts centered around both of these branches of 
-mathematical theory and their application to network design. It will also present practical methods of
-network engineering that have been employed to help networks deal with topology changes dynamically.
-Lastly, it will discuss avenues for future research and open problems that have been posed by 
-researchers in the field.
+In this paper we focus on recent research that has been centered around the theoretical analysis of graph topology and its impact on the robustness of a network. We also discuss some of optimization techniques that have been applied to further such results about the topology of specific graphs. In doing so, we also discuss some of the common sources of topology changes (e.g. attacks and failures). 
 
 \section{Fundamentals and Notation}
 
-It is natural to model any communication network as a weighted undirected graph $G$, which has a fixed 
-set of vertices (nodes) $V(G)$ and edges (links) $E(G)$ that represent physical connections between such vertices, and weight for each link. For conveniene, we let $N = |V(G)|$ and $M = |E(G)|$. The topology of a network can thus be visualized graphically using elements from these two sets. For the remainder of this paper, we use the term vertex as a synonom for node and edge as a synonom for communication link. 
+It is natural to model a communication network as a weighted undirected graph $G = (V,E)$, which has a fixed set of vertices (nodes) $V$ and edges (links) $E$ that represent physical connections between such vertices, and weight for each link. For conveniene, we let $N = |V|$ and $M = |E|$. The topology of a network can thus be visualized graphically using elements from these two sets. For the remainder of this paper, we use the term vertex as a synonom for node and edge as a synonom for communication link. 
 
-As an example of a graph representing a network, consider a completely connected network with $n$ nodes in which every node can directly communicate with every other node can be seen as $K_{n}$, the complete graph on $n$ vertices (that is, $|V(G)|$ $= n$). In such a network, every node $v$ can communicate with exactly $n-1$ other nodes, which means that its degree $deg(v) = n-1$. 
-
-In order to discuss the connectivity of networks, it is necessary to define the connectivity of such graphs in terms of both the vertices and edges. We introduce the following terms to use throughout the remainder of this paper.
+In order to discuss the measures of network robustness and analytical techniques used to study the network robustness in the topological domain, it is necessary to introduce the following definitions.
 
 \begin{define}
-The \textbf{degree} of a vertex $u \in V(G)$ for any graph $G$ is said to be the total number of edges incidenct to $u$. In other words, $deg(u) = \sum_{(u,v) \in E(G)} 1$ for all $v \in V(G)$. We denote the minimum degree over all vertices in a graph $G$ as $\delta(G)$. In network analysis it is common to utilize the degree distribution of a graph as the basis for many measurements. As such, we denote $k$ as the average degree distribution for a graph $G$.
+The \textbf{degree} of a vertex $u \in V$ for any graph $G = (V,E)$ is said to be the total number of edges incidenct to $u$. In other words, $deg(u) = \sum_{(u,v) \in E} 1$ for all $v \in V$. We denote the minimum degree over all vertices in a graph $G$ as $\delta(G)$. In network analysis it is common to utilize the degree distribution of a graph as the basis for many measurements. As such, we denote $k$ as the average degree distribution for a graph $G$.
 \end{define}
 
 %Component
 \begin{define}
-A \textbf{component} of a graph $G$ is a subgraph $G'$ in which there exists a path between all vertices $u, v \in V(G')$. Further, a graph $G$ is said to be \textbf{connected} if and only if there is at most $1$ conneted component in $G$ (i.e. the entire graph). If a graph is not connected, then it is \textbf{disconnected}.
+A \textbf{component} of a graph $G = (V,E)$ is a subgraph $G' = (V',E')$ in which there exists a path between all vertices $u, v \in V'$. Further, a graph $G$ is said to be \textbf{connected} if and only if there is at most $1$ conneted component in $G$ (i.e. the entire graph). If a graph is not connected, then it is \textbf{disconnected}.
 \end{define}
 
 % vertex and edge connectivity
 \begin{define}
-The \textbf{vertex connectivity} of a graph $G$, denoted $\kappa(G)$, is defined as the minimum number of nodes whose deletion will leave the graph disconnected. Similarly, the \textbf{edge connectivity} of a graph $G$, denoted $\lambda(G)$, is defined as the minimum number of edges whose deletion will leave the graph disconnected.
+The \textbf{vertex connectivity} of a graph $G = (V,E)$, denoted $\kappa(G)$, is defined as the minimum number of nodes whose deletion will leave the graph disconnected. Similarly, the \textbf{edge connectivity} of a graph $G$, denoted $\lambda(G)$, is defined as the minimum number of edges whose deletion will leave the graph disconnected.
 \end{define}
 
 \begin{define}
-The \textbf{distance} between any two vertices $u, v \in V(G)$ is defined as the sum of the link weights along the edges that correspond to the shortest path between $u$ and $v$.
+The \textbf{distance} between any two vertices $u, v \in V$ in a graph $G = (V,E)$ is defined as the sum of the link weights along the edges that correspond to the shortest path between $u$ and $v$.
 \end{define}
 
 \section{Network Functionality}
@@ -165,7 +154,7 @@ In general, most focused attacks fall under one of the following four categories
 	\label{fig:Onion}
 	\centering
 		\includegraphics[width=0.5\textwidth]{edge_attacks.png}
-	\caption{Various edge-centric attacks for a fixed graph structure.}
+	\caption{Various edge-centric attacks for a fixed graph topology.}
 \end{figure}
 
 RD and RB attacks on vertices yield the optimal results because they take a greedy approach to decrease the target metric. However, the implication of these attacks is that there exists an efficient and tractable way to measure these metrics after every change, which isn't always the case (especially when the topology of the network is unknown). Therefore, ID and IB attacks are more realistic, but they also assume some prior knowledge of the network infrastructure before the attack begins. Attacks that do not rely on this knowledge are referred to as random attacks, and are discussed in section~\ref{RandomFailures}.
@@ -174,14 +163,15 @@ Furthermore, it should be noted that both the ID and RD attacks are computationa
 
 \subsection{Random Failures}
 \label{RandomFailures}
-A common way to model attacks on a network is assume that each node and link has a fixed probability $p$ and $q$ of failing, where the exact cause of the failure is not know and is not important. Furthermore, failures are typically seen as independent events \cite{RandomStudy}. Such models are useful when analyzing complex networks such as the Internet and other related military communication networks. 
+While targeted attacks model common scenarios in the real-world, it is often useful to disregard the source of and victim of such attacks and generalize the problem of network failures to encompass both random node and link failures. By doing so, we assume that each node and link has a fixed probability $p$ and $q$ of failing, where the exact cause of the failure is not know and is not important. Furthermore, failures are typically seen as independent events \cite{RandomStudy}. Such models are useful when analyzing complex networks such as the Internet and other related military communication networks. 
 
 \section{Network Robustness}
 %http://arxiv.org/pdf/1203.2982v1.pdf
 
-Many different measures for network robustness have been proposed in recent years. All of which tend
-to use the notion of densely connected components in the corresponding graph. In this section we present
-a two unique instances of such measurements, one of which is based entirely on node topology and the other that is based on both nodes and their respective edges, and summarize their accuracy when applied to real networks.
+Many different measures for network robustness have been proposed in recent years, all of which tend
+to use the notion of densely connected components in the corresponding graph. 
+
+%TODO: need more of an introduction here
 
 \subsection{Robustness Measurements}
 
@@ -208,27 +198,41 @@ Due to the typical attacks that are launched on networks, such as large-scale DD
 Q = \frac{1}{M}\sum_{step  = 1}^{M}S(step)
 \end{eqnarray*}
 
-\section{Robustness in Random Graphs}
+\section{Random Graph Topologies}
 % look at: http://web.mit.edu/medard/www/rls.pdf ???
 
-\subsection{Types of Random Graphs}
-There are many different models of random graphs that can be used to model real-world networks, including the Erd\H{o}s
+%\subsection{Types of Random Graphs}
+%There are many different models of random graphs that can be used to model real-world networks, %including the Erd\H{o}s
 
-\subsubsection{Erd\"{o}s-R\`{e}nyi Graphs}
-Erd\"{o}s-R\`{e}nyi graphs are the most simple random graphs that are defined by assigning a probabilistic uniform random variable to each edge. In other words, for each vertex $u, v \in V(G)$, where $G$ is a Erd\"{o}s-R\`{e}nyi graph, the edge $(u,v)$ exists in $E(G)$ with probability $p$, where $p$ is derived from a uniform random distribution, and each edge probability $p$ is independnt from the rest \cite{LargeNetworkRobustness-PVM}. When simulated using computers, it is not uncommon to derive the edge probabilities $p$ from an exponential distribution, simply due to its simplicity.
+\subsection{Erd\"{o}s-R\`{e}nyi Graphs}
+Erd\"{o}s-R\`{e}nyi graphs are the most simple random graphs that are defined by assigning a probabilistic uniform random variable to each edge. In other words, for each vertex $u, v \in V(G)$, where $G$ is a Erd\"{o}s-R\`{e}nyi graph, the edge $(u,v)$ exists in $E(G)$ with probability $p$, where $p$ is derived from a uniform random distribution, and each edge probability $p$ is independnt from the rest \cite{LargeNetworkRobustness-PVM}. When simulated using computers, it is not uncommon to derive the edge probabilities $p$ from an exponential distribution, due to its simplicity and similarity with the real-world. Another important element of these graphs is that they tend to have Poisson degree distributions, simply due to the random construction nature of the graph \cite{bimodal}.
 
-\subsubsection{Scale-Free Graphs}
-Scale-free graphs are special types of random graphs in that the distribution of node degrees $\langle k \rangle$ asymptotically follows a power law (i.e. $P(k) \approx k^{-\gamma}$. Many real-world networks have been found to have structures similar to scale-free graphs, so they are naturally used as the basis for random graph analysis \cite{AttacksWavesRandom}. 
+%TODO: add a bit more about this.
 
-\subsubsection{Graphs with Bimodal Degree Distribution}
-TODO
+\subsection{Scale-Free Graphs}
+Scale-free graphs are special types of random graphs in that the distribution of node degrees $\langle k \rangle$ asymptotically follows a power law (i.e. $P(k) \approx k^{-\gamma})$. Many real-world networks have been found to have structures similar to scale-free graphs, so they are naturally used as the basis for random graph analysis \cite{AttacksWavesRandom}. 
 
-\subsection{Random Networks and Scale-Free Networks}
+%TODO: add a bit more about this.
+
+\subsection{Graphs with Bimodal Degree Distribution}
+%TODO: http://www.springerlink.com/content/3621163544501342/fulltext.pdf
+
+Given the average degree $k$ for a graph $G = (V,E)$, we say that a graph has a bimodal degree distribution if its nodes fall under one of two categories \cite{bimodal}:
+\begin{itemize}
+	\item The local mean degree ($k_{loc}$) of a vertex $v$ is greater than the average degree distribution. That is, $k_{loc} > k$ for small. Such vertices are often referred to as "super-peers".
+	\item The local mean degree ($k_{loc}$) of a vertex $v$ is less than or equal to the average degree distribution. That is, $k_{loc} \leq k$ for small. Such vertices are often referred to as "peers".
+\end{itemize}
+It is interesting to note that as the number of vertex modes or categories for a graph goes from $2$ to $\infty$, the degree distribution among all vertices in the graphs, and the hierarchy of peers in the graph, will begin to resemble that of a scale-free graph. Therefore, one can think of bimodal graphs as a special case of scale-free graphs that are useful when the power-law nature of the degree distribution complicates analytical efforts.
+
+\section{Robustness Optimization}
+
+Due to the complexity that exists in the aforementioned random graphs, most optimization algorithms utilize some large-scale stochastic process (similar to a Monte Carlo simulation) to randomly make changes to graph topology and test its measure of robustness. The exact measurement that is used depends on the type of experiements or simulations being performed. In this section, we discuss a sample of such efforts and the results that were found.
+
+\subsection{Random and Scale-Free Graph Investigations}
 
 %Assume that channel links have equal weight (that is, equal quality metrics, as described in functionality section)
 
-Following the insight that hostile vertex attacks that target important nodes with large degrees tend to cause the most significant damage to a network, Albert et al. performed extensive studies on the robustness of random and scale-free graphs. Random graphs, as the name suggests, are graphs with no specific node or edge distribution. On the other hand, 
-
+Following the insight that hostile vertex attacks that target important nodes with large degrees tend to cause the most significant damage to a network, Albert et al. performed extensive studies on the robustness of random and scale-free graphs. 
 
 By examining each of these classes of graphs in the context of random vertex deletions and targeted vertex attacks, it has been shown that random graphs are more robust against intentional vertex attacks, whereas the scale-free graphs are more robust against random deletions. This can be seen in Figure \ref{RandomResults}, where the breaking point of the largest component of the graphs $S$ drops off quicker for random graphs when attacked randomly \cite{GraphThesis}. 
 
@@ -239,17 +243,40 @@ By examining each of these classes of graphs in the context of random vertex del
 	\caption{Results of the random and scale-free graphs varied as $f$, the fraction of nodes removed from each graph, is changed \cite{GraphThesis}. }
 \end{figure}
 
-%TODO: add one more section
-
-\section{Optimization Approaches}
-
-Examining 
+\subsection{Fractional Node Deletion Investigations}
 
 Finally, we introduce a metric that characterizes the number of nodes (or rather, a fraction of the total nodes) that need to be removed in order for the graph to become globally disconnected. Let $G$ be a graph with $N - q$ nodes of degree $1$. Then, the fraction of total nodes $f_c$ that need to be randomly removed before total connectivity is lost consists of $q = [(\langle k \rangle - 1) / \sqrt{\langle k \rangle}]\sqrt{N}$ nodes of degree $\sqrt{\langle k \rangle N}$. 
 
+Paul et al. studied the robustness of random graphs in the context of random node deletions. Their work was driven by Monte Carlo simulations that approximated the fraction of nodes $f_c$ that would need to be removed from random networks in order for the graph to become globally disconnected. Formally, $f_c$ can be defined as in terms of the number of "hub" nodes that must be removed $q$ follows:
+\begin{eqnarray*}
+q = \left[(\langle k \rangle - 1) / \sqrt{\langle k \rangle}\right]\sqrt{N},
+\end{eqnarray*}
+where each of these vertices have degree $\sqrt{\langle k \rangle N}$ \cite{asd}. Thus, for a graph with $G = (V,E)$ with $N$ vertices, $q$ "hubs" would need to be removed in order to make $G$ disconnected, and thus $f_c = q/N$.
+
+In terms of the design of a network, it is clear that network designers should strive for values of $q$ that imply high measures of robustness. Such a value of $q$ was determine empirically using a special degree distribution $P(k)$ that represents a network of $q$ hub nodes and $N-q$ leaf nodes, since this is a very general structure for such graphs. The simulation algorithm that was utilized to perform this caluclation is shown in Algorithm \ref{alg1} \cite{asd}. %http://polymer.bu.edu/hes/articles/pshs06.pdf 
+
+\begin{numberedAlg}[Monte-Carlo $q$ Determination]
+\label{alg1}
+\begin{algorithmic}[1]
+        \item Initialize a graph $G$ with $N$ vertices.
+	\item Randomly delete a node in the network and calculate $\kappa(G)$.
+	\item Increment $q$ by 1 node.
+	\item If $\kappa < 2$, $G$ has become disconnected, so terminate and return $q$. Otherwise, decrement $q$ by 1 and go to step 2.
+\end{algorithmic}
+\end{numberedAlg}
+
+\begin{figure}[h!]
+	\label{fig:Onion}
+	\centering
+		\includegraphics[width=0.5\textwidth]{fractional_results.png}
+	\caption{TODO}
+\end{figure}
+
 %TODO: read http://polymer.bu.edu/hes/articles/pshs06.pdf and discuss the metric here - devote entire section to it in the NR part
 
-%MONTE CARLO SIMULATIONS GALORE!!!! YIELDS ONION STRUCTURE AND YIELDS THE OTHER FRACTION RESULT!!!!
+\subsection{Fixed-Degree Distribution Investigations}
+
+%TODO: the work was done independently
 
 In their study of optimal graph structures that yield the highest resilience to such attacks, Herrmann et al found that most networks will exhibit onion topolgies, meaning that there are distinct layers of nodes that are connected, and that each layer $i$ has more connectivity than its parent layer $i+1$ \cite{Onion}. Another interesting property of the onion graph is that for almost every pair of vertices $u, v \in V(G)$ with the same degree, there exists a a path between $u$ and $v$ that does not contain any vertex of a higher degree. An example of such a graph with $124$ nodes and $366$ edges is shown in Figure~\ref{fig:Onion}.
 
@@ -264,30 +291,19 @@ Herrmann et al have also conducted research on optimization algorithms that incr
 
 % the re-structure algorithm
 \begin{numberedAlg}[Robustness Optimization]
-\label{alg1}
+\label{alg2}
 \begin{algorithmic}[1]
         \item Choose two random edges $(a,b)$ and $(c,d)$ from the graph $G$.
 	\item Replace these edges with $(a,c)$ and $(b,d)$.
-	\item If $R_{new} > R_{old}$, accept the swap and goto step 1. Otherwise, revert the swap and goto step 1. 
+	\item If $R_{new} > R_{old}$, accept the swap and go to step 1. Otherwise, revert the swap and goto step 1. 
 \end{algorithmic}
 \end{numberedAlg}
 
-Algorithm~\ref{alg1} is repeated for a very large number of iterations until an ideal level of robustness has been obtained, albiet at the sake of sometimes massive computations (as is the case with Monte-Carlo methods).
+Algorithm~\ref{alg2} is repeated for a very large number of iterations until an ideal level of robustness has been obtained, albiet at the sake of sometimes massive computations (as is the case with Monte-Carlo methods).
 
-\begin{comment}
-Structuring and organizing networks according to a certain topology will only prove to be so useful until either a successful attack is launched on the network or an internal error occurs that takes certain nodes or communiation links offline. In these instances, it is usually important for the entire network to maintain a relatively similar (albiet lower) measure of throughput. Since the topology of the network has changed due to unseen circumstances, the network must react accordingly, which is a technique known as load balancing. 
+%%%%%%%%%% Bimodal discussion, how they simulated and concluded that bimodal was the best
 
-% Obvious is to organize network with most ideal topology (i.e. one that yields the highest robustness)
-\end{comment}
-
-\begin{comment}
-\subsection{Load Balancing Algorithms}
-%TODO: discuss this technique, with pictures? and examples?
-
-Responding to network attacks or failures often requires the traffic load and flow patterns for a given network to change to maintain similar measures of throughput and resource utilization. This adaption technique is known as load balancing, and is commonly employed in situations where workload characteristics for given nodes in a network cannot be predetermined. 
-
-Variations of load balancing algorithms include 
-\end{comment}
+One more recent investigation of graphs with fixed degree distributions was performed by Sonawane et al \cite{bimodal}. 
 
 % Here is the bibliography
 \bibliographystyle{plain}

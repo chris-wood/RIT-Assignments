@@ -21,12 +21,12 @@ end
 
 % Set up for genetic algorithm
 LB = 0;
-UB = 2^bits;
+UB = 2^bits - 1;
 Bound = [LB;UB];
 options = gaoptimset('CreationFcn',@joint_creation,'MutationFcn',@joint_mutate,...
     'PopInitRange',Bound,'Display','diagnose','Generations',500,'PopulationSize',SBOX_SIZE,...
     'PlotFcns',{@gaplotpareto,@gaplotspread},'TolFun',1e-6,'StallGenLimit',2^SBOX_SIZE^2,...
-    'InitialPopulation',S,'CrossoverFraction',0.5,'CrossoverFcn',@crossoversinglepoint);
+    'InitialPopulation',S,'CrossoverFcn',@crossoversinglepoint);
 %'CrossoverFcn',@bn_crossover);
 
 % Run the genetic algorithm now!
