@@ -62,15 +62,11 @@ This simply means that $f(x) \oplus f(x \oplus c_i^n)$ is balanced for every ele
 \end{define}
 
 \begin{define}
-The \emph{degree of non-linearity} of a boolean function can be measured by a relation to the Walsh transform $\hat{F}$ of $\hat{f} : \field{F}_2^n \to \{-1, 1\}$ according to \cite{Kim90astudy}:
+The \emph{degree of non-linearity} of an $n \times n$-bit S-Box from $\field{F}_2^n \to \field{F}_2^n$ can be measured by
 \begin{eqnarray*}
-\delta(f)  = 2^{n-1} - \frac{1}{2}\text{max}_w|\hat{F}(w)|,
+	P_S = \text{max}_{0 \not= a, b}|\{x \in \field{F}_2^n : S(x + a) - S(x) = b\}|
 \end{eqnarray*}
-where $\hat{F}(w)$ is the Walsh transformation defined as follows:
-\begin{eqnarray*}
-W_f(a) = \sum_{x \in \field{F}_2^n} (-1)^{f(x) + <a,x>},
-\end{eqnarray*}
-where $<a,x>$ is the scalar product of $a$ and $x$ (if they are thought of as vectors).
+where $a, b \in \field{F}_2^n$.
 \end{define}
 
 Designers of cryptographically secure cryptographic primitives (e.g. block ciphers, hash functions, etc) use all of these measurements as a theoretical basis for their susceptibility to linear and differential cryptanalysis (among other attacks). Specifically, it has been shown that cryptographically secure symmetric-key algorithms utilize diffusion and confusion layers that provide the following characteristics:
@@ -81,6 +77,9 @@ Designers of cryptographically secure cryptographic primitives (e.g. block ciphe
 	\item High degree of nonlinearity
 \end{enumerate}
 However, in practice the additional constraints that fast and simple mathematical operations must be used to emulate represent such a bijective function $f$ that exhibits ideal values for all of these measurements.
+
+\section{Exhaustive Search}
+%TODO: discuss time complexity of each operation, infeasibility for higher order S-boxes
 
 \section{Optimization Solution}
 %TODO: summarize genetic algorithm approach, state each optimization problem as a MINLP problem

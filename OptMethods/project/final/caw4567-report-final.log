@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  5 MAY 2012 20:33
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  6 MAY 2012 22:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -576,16 +576,13 @@ LaTeX Warning: Citation `Mar_newanalysis' on page 1 undefined on input line 28.
 [1
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: Citation `Kim90astudy' on page 2 undefined on input line 65.
-
 [2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 91.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 96.
  [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 91.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 96.
  (./caw4567-report-final.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 91.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 91.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 96.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 96.
 
 
 Package rerunfilecheck Warning: File `caw4567-report-final.out' has changed.
@@ -593,45 +590,39 @@ Package rerunfilecheck Warning: File `caw4567-report-final.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `caw4567-report-final.out':
-(rerunfilecheck)             Before: F0992E77DE49B68652AE4035529C3DBA;404
-(rerunfilecheck)             After:  5A586418FA81FF711499499C43DF66A6;260.
+(rerunfilecheck)             Before: 5A586418FA81FF711499499C43DF66A6;260
+(rerunfilecheck)             After:  A9161A71AD0FA50A2A8E52023EF09B70;259.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 91.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 96.
  ) 
 Here is how much of TeX's memory you used:
- 9663 strings out of 493633
- 143555 string characters out of 3143378
+ 9655 strings out of 493633
+ 143465 string characters out of 3143378
  276008 words of memory out of 3000000
- 12733 multiletter control sequences out of 15000+200000
- 13546 words of font info for 76 fonts, out of 3000000 for 9000
+ 12731 multiletter control sequences out of 15000+200000
+ 13387 words of font info for 74 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  33i,8n,51p,1259b,418s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{subsection.1.3} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.1.2} has been referenced but does not ex
-ist, replaced by a fixed one
-
-</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><
-/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
-usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></
-usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/
-local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/lo
-cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loca
-l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/t
-exlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texl
-ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
-ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive
-/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
-2011/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on caw4567-report-final.pdf (3 pages, 151279 bytes).
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
+/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
+usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></us
+r/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/
+local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
+cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local
+/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
+xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
+live/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
+ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texliv
+e/2011/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on caw4567-report-final.pdf (3 pages, 148823 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 96 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
- 16433 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 107 PDF objects out of 1000 (max. 8388607)
+ 87 compressed objects within 1 object stream
+ 18 named destinations out of 1000 (max. 500000)
+ 16417 words of extra memory for PDF output out of 17280 (max. 10000000)
 

@@ -65,18 +65,13 @@ its importance in modern communication systems, with a specific focus on wireles
 
 \section{Introduction}
 
-Military and civilian communications have seen two common trends in rencent years: an 
-increase in network-oriented operations and an increase in high-risk threats to
-such networks \cite{Bernard_networkrobustness}. These operational efforts place
-high reliance on the underlying network infrastructure for communication, so it is vital
-that this communication medium is protected against emerging attacks that focus on
-specific nodes in the network or communication lines that join nodes together. In this context
-the type of network attacks are irrelevant; the focus is more aligned with the optimal topology
-of networks and technological aids that can be utilized to help handle any changes in this topology. 
+Military and civilian communications have seen two common trends in rencent years: an increase in network-oriented operations and an increase in high-risk malicious attacks against networks that facilitate such operations \cite{Bernard_networkrobustness}. In order to sustain this growth pattern such operations, it is vital they their underlying network infrastructure can defend against emerging attacks that focus on specific nodes or links in the network or random failures that occur throughout the network. The measure of resilience to such attacks or failures is referred to as the robustness of a network, and is a topic that has been analytically and experimentally studied extensively in recent years.
 
-This focus can be seen by a significant increase in research oriented around robust network design that provides high throughput and connectivitiy among all nodes in the network, especially when specific nodes are intentionally or unintentionally deleted from the network. Subsequently, the robustness of such networks can be viewed as a qualitative or quantitative measure of the network's resilience to such topology changes.
+The physical properties of networks (i.e. the channel bandwidth, routing protocols, transmission media) have an a significant effect on the measure of robustness of a network. However, recent research efforts have approached this problem from the topological domain and studied it using analytical methods from graph theory and statistics in order to solve more general questions about the relationship between the structure of a graph and its robustness. 
 
-The problem of designing such networks has lent itself as a useful application of both graph theory and percolation theory. Graph theory has been applied to mathematically analyze the robustness of networks represented as undirected graphs based on their levels of vertex and edge connectivity. Similarly, percolation theory has been applied to study the behavior of connected clusters in undirected network graphs. 
+In this paper we focus on recent research that has been centered around the theoretical analysis of graph topology and its impact on the robustness of a network. We also discuss some of 
+
+In doing so, we also discuss some of the common sources of topology changes (e.g. attacks and failures). 
 
 This paper will focus on recent research efforts centered around both of these branches of 
 mathematical theory and their application to network design. It will also present practical methods of
