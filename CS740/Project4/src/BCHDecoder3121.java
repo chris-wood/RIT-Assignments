@@ -1,13 +1,12 @@
 public class BCHDecoder3121 
 {
-	int m, n;
-	int[] p = new int[6];
-	int[] GF = new int[32];
-	int[] GF_rev = new int[32];
-	int[] g = new int[11];
-	int[] recd = new int[32];
-	int[] data = new int[11];
-	int[] Mr = new int[31];
+	public static final int DATA_BYTES = 3;
+	public static final int CKSUM_BYTES = 1;
+	
+	static int m, n;
+	static int[] p = new int[6];
+	static int[] GF = new int[32];
+	static int[] GF_rev = new int[32];
 	
 	public BCHDecoder3121()
 	{
@@ -21,12 +20,12 @@ public class BCHDecoder3121
         InitializeDecoder();
 	}
 	
-	void InitializeDecoder()
+	private void InitializeDecoder()
     {
         GenerateGf();					// Generate the Galois Field GF(2**m) 
     }
 
-    void GenerateGf()
+    private void GenerateGf()
     {
         /*
         * generate GF(2**m) from the irreducible polynomial p(X) in p[0]..p[m]
@@ -92,7 +91,7 @@ public class BCHDecoder3121
         return result;
     }
 
-    public String correct(int codeword)
+    public byte[] correct(int codeword)
     {
     	int[] S = new int[] { 0, 0, 0, 0 };
         int s3 = 0;
@@ -101,10 +100,6 @@ public class BCHDecoder3121
         int tmp = 0;
         boolean error = false;
         int errors = 0;
-
-        int initialCW = codeword;
-        int nbCorr = 0;
-        boolean good = true;
 
         S = calcSyndrom(codeword);
         for (int i = 0; i < S.length; i++)
@@ -118,7 +113,7 @@ public class BCHDecoder3121
 
         if (!error)
         {
-            return "initialCW: " + initialCW + "   cw: " + codeword + "   nbCorr: " + nbCorr + "    good: " + good;
+            return splitWord(codeword);
         }
 
         if (S[0] != -1)
@@ -130,6 +125,7 @@ public class BCHDecoder3121
             {
                 codeword ^= 1 << (S[0] + 1);
                 errors = 1;
+                System.out.println("1 error!");
             }
             else
             {
@@ -166,6 +162,7 @@ public class BCHDecoder3121
                         errors += 1;
                     }
                 }
+                System.out.println("errors = " + errors);
 
                 if (errors == 2)
                 {
@@ -183,19 +180,28 @@ public class BCHDecoder3121
             if (S[i] != -1)
             {
                 error = true;
+                System.out.println("not fixed!!!");
                 break;
             }
         }
 
-        if (!error)
-        {
-            nbCorr = errors;
-        }
-        else
-        {
-            good = false;
-        }
-
-        return "initialCW: " + initialCW + "   cw: " + codeword + "   nbCorr: " + nbCorr + "    good: " + good;
+        return splitWord(codeword);
+    }
+    
+    /**
+     * Split the codeword appropriately and return the DATA_BYTES block
+     * byte array that contains the appropriate data.
+     * 
+     * @param codeword - the correct (31,21) codeword.
+     * @return a DATA_BYTES byte array containing only the data.
+     */
+    private byte[] splitWord(int codeword)
+    {
+    	byte[] data = new byte[DATA_BYTES];
+    	for (int i = 0; i < data.length; i++)
+    	{
+    		data[i] =  (byte)((codeword >> (8 * (DATA_BYTES - i))) & 0xFF); // TODO: magic numbers 
+    	}
+    	return data;
     }
 }

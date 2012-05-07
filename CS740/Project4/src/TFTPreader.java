@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class TFTPreader
 	/**
 	 * The default TFTP port.
 	 */
-	private static final int DEFAULT_PORT = 7000;
+	private static final int DEFAULT_PORT = 7001;
 	
 	/**
 	 * Validate the parameters used to retrieve the file from the TFTP server.
@@ -224,19 +225,59 @@ public class TFTPreader
 			// Decode the data if it is corrupt
 			if (corrupt)
 			{
+				// Initialize the decoder and storage for the file data
+				BCHDecoder3121 decoder = new BCHDecoder3121();
+				ArrayList<Byte> byteData = new ArrayList<Byte>();
 				ArrayList<Byte> correctData = new ArrayList<Byte>();
-				int index = 0;
-				for (int i = 1; i <= data.size(); i += TFTPmessage.BYTE_PER_BLOCK)
+				
+				System.out.println("bad things are happening!");
+				
+				// Break up the 512 blocks into one contiguous list
+				for (int i = 1; i <= data.size(); i++)
 				{
+					for (int j = 0; j < data.get(i).length; j++)
+					{
+						byteData.add(data.get(i)[j]);
+					}
+				}
+				
+				// Iterate over each block 32 bits at a time, correct the words,
+				// and then throw them in the corrected list
+				for (int i = 0; i < byteData.size(); i += TFTPmessage.BYTE_PER_BLOCK)
+				{
+					/*
 					int word = 0;
 					for (int j = 0; j < TFTPmessage.BYTE_PER_BLOCK; j++)
 					{
-						//word |= (data.get(i + j) << ((TFTPmessage.BYTE_PER_BLOCK - (j + 1)) * 8);
+						word |= ((byteData.get(i + j)) << ((TFTPmessage.BYTE_PER_BLOCK - (j + 1)) * 8));
+						System.out.print(Integer.toHexString(byteData.get(i + j)) + " (" + Integer.toHexString(word) + ") ");
 					}
-					//int correctWord = BCHDecoder3116.correct(word);
-					// shift over 16 bits and then store in correctData
+					System.out.println("\nResulting word = " + Integer.toHexString(word) + "\n");
+					*/
+					byte[] wordData = new byte[TFTPmessage.BYTE_PER_BLOCK];
+					for (int j = 0; j < TFTPmessage.BYTE_PER_BLOCK; j++)
+					{
+						System.out.print(Integer.toHexString(byteData.get(i + j)) + " ");
+						wordData[j] = byteData.get(i + j);
+					}
+					//int word = toInt(wordData, 0);
+					//int word = ByteBuffer.wrap(wordData).getInt();
+					int word = TFTPmessage.byteArrayToInt(wordData, 0, TFTPmessage.BYTE_PER_BLOCK);
+					System.out.println("\nWord = " + Integer.toHexString(word) + "\n");
+					
+					// Decode the word and then throw the data bits into the new list
+					byte[] decoded = decoder.correct(word);
+					for (int j = 0; j < decoded.length; j++)
+					{
+						correctData.add(decoded[j]);
+					}
 				}
 				
+				// Finally, write the data to a file
+				for (int i = 0; i < correctData.size(); i++)
+				{
+					fos.write(correctData.get(i));
+				}
 			}
 			else
 			{
@@ -278,12 +319,13 @@ public class TFTPreader
 		//}
 		//else
 		{
-			/*TFTPreader reader = new TFTPreader();
+			TFTPreader reader = new TFTPreader();
 			if (reader.validateParameters("viking.cs.rit.edu", "netascii")) //args[1], args[0]
 			{
 				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode("netascii"); //args[0]
-				reader.receiveFile(mode, "viking.cs.rit.edu", "motd", false); //args[1], args[2]
-			}*/
+				reader.receiveFile(mode, "viking.cs.rit.edu", "motd", true); //args[1], args[2]
+			}
+			
 			BCHDecoder3121 dec2 = new BCHDecoder3121();
 			BCHDecoder3116.InitializeDecoder();
 			
@@ -301,6 +343,9 @@ public class TFTPreader
 			System.out.println("Test: 1476395008 (3) - should be 0");
 			System.out.println("3116: " + BCHDecoder3116.correct(code3));
 			System.out.println("3121: " + dec2.correct(code3));
+			
+			int test2 = 0x96b34929;
+			System.out.println("3121: " + dec2.correct(test2));
 		}
 	}
 	

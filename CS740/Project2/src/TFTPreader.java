@@ -34,7 +34,7 @@ public class TFTPreader
 	/**
 	 * The default TFTP port.
 	 */
-	private static final int DEFAULT_PORT = 69;
+	private static final int DEFAULT_PORT = 7001; //69
 	
 	/**
 	 * Validate the parameters used to retrieve the file from the TFTP server.
