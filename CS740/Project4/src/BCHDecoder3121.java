@@ -10,11 +10,11 @@ public class BCHDecoder3121
 	
 	public BCHDecoder3121()
 	{
-		m = 5;
+		m = 5; 
 		n = 31;
-		// Primitive polynomial of degree 5
+        // Primitive polynomial of degree 5
         // x^5 + x^2 + 1
-        // polynomial is indivisible, ie: 10101 = 21, which is prime, therefore invisisible
+        // polynomial is indivisible, ie: 100101 = 21, which is prime, therefore indivisible
         p[0] = p[2] = p[5] = 1;
         p[1] = p[3] = p[4] = 0;
         InitializeDecoder();
@@ -37,41 +37,37 @@ public class BCHDecoder3121
         * alpha = 2 is the primitive element of GF(2**m) 
         */
 
-        int i, mask;
-        mask = 1;
-        GF[m] = 0;
+    	 int i, mask;
+         mask = 1;
+         GF[m] = 0;
 
-        for (i = 0; i < m; i++)
-        {
-            GF[i] = mask;
+         for (i = 0; i < m; i++)
+         {
+             GF[i] = mask;
 
-            GF_rev[GF[i]] = i;
+             GF_rev[GF[i]] = i;
 
-            if (p[i] != 0)
-                GF[m] ^= mask;
+             if (p[i] != 0)
+                 GF[m] ^= mask;
 
-            mask <<= 1;
-        }
+             mask <<= 1;
+         }
 
-        GF_rev[GF[m]] = m;
+         GF_rev[GF[m]] = m;
 
-        mask >>= 1;
+         mask >>= 1;
 
-        for (i = m + 1; i < n; i++)
-        {
-            if (GF[i - 1] >= mask)
-            {
-                GF[i] = GF[m] ^ ((GF[i - 1] ^ mask) << 1);
-            }
-            else
-            {
-                GF[i] = GF[i - 1] << 1;
-            }
+         for (i = m + 1; i < n; i++)
+         {
+             if (GF[i - 1] >= mask)
+                 GF[i] = GF[m] ^ ((GF[i - 1] ^ mask) << 1);
+             else
+                 GF[i] = GF[i - 1] << 1;
 
-            GF_rev[GF[i]] = i;
-        }
+             GF_rev[GF[i]] = i;
+         }
 
-        GF_rev[0] = -1;
+         GF_rev[0] = -1;
     }
 
     private int[] calcSyndrom(int codeword)
@@ -101,6 +97,10 @@ public class BCHDecoder3121
         boolean error = false;
         int errors = 0;
 
+        int initialCW = codeword;
+        int nbCorr = 0;
+        boolean good = true;
+
         S = calcSyndrom(codeword);
         for (int i = 0; i < S.length; i++)
         {
@@ -125,7 +125,6 @@ public class BCHDecoder3121
             {
                 codeword ^= 1 << (S[0] + 1);
                 errors = 1;
-                System.out.println("1 error!");
             }
             else
             {
@@ -138,11 +137,12 @@ public class BCHDecoder3121
                     tmp ^= GF[S[2]];
                 }
 
+
                 C[0] = 0;
                 C[1] = (S[1] - GF_rev[tmp] + n) % n;
                 C[2] = (S[0] - GF_rev[tmp] + n) % n;
 
-                // Get the roots of C(x) using Chien-Search
+                //# Get the roots of C(x) using Chien-Search
                 errors = 0;
                 for (int i = 0; i < n; i++)
                 {
@@ -162,13 +162,13 @@ public class BCHDecoder3121
                         errors += 1;
                     }
                 }
-                System.out.println("errors = " + errors);
 
                 if (errors == 2)
                 {
                     codeword ^= (1 << (loc[0] + 1));
                     codeword ^= (1 << (loc[1] + 1));
                 }
+
             }
         }
         S = calcSyndrom(codeword);
@@ -179,7 +179,7 @@ public class BCHDecoder3121
             if (S[i] != -1)
             {
                 error = true;
-                System.out.println("not fixed!!!");
+                System.out.println("NOT FIXED");
                 break;
             }
         }

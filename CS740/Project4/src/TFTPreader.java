@@ -223,14 +223,12 @@ public class TFTPreader
 			FileOutputStream fos = new FileOutputStream(file, false);
 			
 			// Decode the data if it is corrupt
-			if (corrupt)
+			//if (corrupt)
 			{
 				// Initialize the decoder and storage for the file data
 				BCHDecoder3121 decoder = new BCHDecoder3121();
 				ArrayList<Byte> byteData = new ArrayList<Byte>();
 				ArrayList<Integer> correctData = new ArrayList<Integer>();
-				
-				System.out.println("bad things are happening!");
 				
 				// Break up the 512 blocks into one contiguous list
 				for (int i = 1; i <= data.size(); i++)
@@ -257,8 +255,9 @@ public class TFTPreader
 					byte[] wordData = new byte[TFTPmessage.BYTE_PER_BLOCK];
 					for (int j = 0; j < TFTPmessage.BYTE_PER_BLOCK; j++)
 					{
-						System.out.print(Integer.toHexString(byteData.get(i + j)) + " ");
-						wordData[j] = byteData.get(i + j);
+						System.out.print(Integer.toBinaryString((byteData.get(i + j) & 0xFF)) + " ");
+						//System.out.print(Integer.toBinaryString(byteData.get(i + j)) + " ");
+						wordData[j] = (byte)(byteData.get(i + j) & 0xFF);
 					}
 					//int word = toInt(wordData, 0);
 					//int word = ByteBuffer.wrap(wordData).getInt();
@@ -279,14 +278,14 @@ public class TFTPreader
 				
 				// todo
 			}
-			else
+			/*else
 			{
 				// Iterate across the entire data set and write the bytes (start at block 1)
 				for (int i = 1; i <= data.size(); i++)
 				{
 					fos.write(data.get(i));
 				}
-			}
+			}*/
 			
 			// Flush and close the stream to finish
 			fos.flush();
@@ -319,13 +318,14 @@ public class TFTPreader
 		//}
 		//else
 		{
-			/*TFTPreader reader = new TFTPreader();
-			if (reader.validateParameters("viking.cs.rit.edu", "netascii")) //args[1], args[0]
+			TFTPreader reader = new TFTPreader();
+			if (reader.validateParameters("viking.cs.rit.edu", "octet")) //args[1], args[0]
 			{
-				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode("netascii"); //args[0]
-				reader.receiveFile(mode, "viking.cs.rit.edu", "motd", true); //args[1], args[2]
+				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode("octet"); //args[0]
+				reader.receiveFile(mode, "viking.cs.rit.edu", "motd", false); //args[1], args[2]
 			}
 			
+			/*
 			BCHDecoder3121 dec2 = new BCHDecoder3121();
 			BCHDecoder3116.InitializeDecoder();
 			
@@ -347,6 +347,7 @@ public class TFTPreader
 			int test2 = 0x96b34929;
 			System.out.println("3121: " + dec2.correct(test2));*/
 			
+			/*
 			int test = 7340032; // 2^20 + 2^21 + 2^22
 			ArrayList<Integer> correctData = new ArrayList<Integer>();
 			for (int i = 0; i < 100; i++)
@@ -405,6 +406,7 @@ public class TFTPreader
 				System.out.println((byte)((int)b & 0x000000FF));
 				//finalData[index++] = (byte) (b & 0xFF);
 			}
+			*/
 		}
 	}
 	
