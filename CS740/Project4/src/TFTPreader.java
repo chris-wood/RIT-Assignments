@@ -228,7 +228,7 @@ public class TFTPreader
 				// Initialize the decoder and storage for the file data
 				BCHDecoder3121 decoder = new BCHDecoder3121();
 				ArrayList<Byte> byteData = new ArrayList<Byte>();
-				ArrayList<Byte> correctData = new ArrayList<Byte>();
+				ArrayList<Integer> correctData = new ArrayList<Integer>();
 				
 				System.out.println("bad things are happening!");
 				
@@ -263,21 +263,21 @@ public class TFTPreader
 					//int word = toInt(wordData, 0);
 					//int word = ByteBuffer.wrap(wordData).getInt();
 					int word = TFTPmessage.byteArrayToInt(wordData, 0, TFTPmessage.BYTE_PER_BLOCK);
-					System.out.println("\nWord = " + Integer.toHexString(word) + "\n");
+					System.out.println("\nWord = " + Integer.toHexString(word));
 					
 					// Decode the word and then throw the data bits into the new list
-					byte[] decoded = decoder.correct(word);
+					int decoded = decoder.correct(word);
+					correctData.add(decoded);
+					// TODO: this is a 21-bit data value
+					/*
 					for (int j = 0; j < decoded.length; j++)
 					{
 						correctData.add(decoded[j]);
 					}
+					*/
 				}
 				
-				// Finally, write the data to a file
-				for (int i = 0; i < correctData.size(); i++)
-				{
-					fos.write(correctData.get(i));
-				}
+				// todo
 			}
 			else
 			{
@@ -319,7 +319,7 @@ public class TFTPreader
 		//}
 		//else
 		{
-			TFTPreader reader = new TFTPreader();
+			/*TFTPreader reader = new TFTPreader();
 			if (reader.validateParameters("viking.cs.rit.edu", "netascii")) //args[1], args[0]
 			{
 				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode("netascii"); //args[0]
@@ -345,7 +345,66 @@ public class TFTPreader
 			System.out.println("3121: " + dec2.correct(code3));
 			
 			int test2 = 0x96b34929;
-			System.out.println("3121: " + dec2.correct(test2));
+			System.out.println("3121: " + dec2.correct(test2));*/
+			
+			int test = 7340032; // 2^20 + 2^21 + 2^22
+			ArrayList<Integer> correctData = new ArrayList<Integer>();
+			for (int i = 0; i < 100; i++)
+			{
+				correctData.add(test);
+			}
+			
+			// Finally, write the data to a file
+			int bitIndex = 0;
+			int maxIndices = 21;
+			byte tempBits = 0;
+			ArrayList<Byte> bytes = new ArrayList<Byte>();
+			boolean overflow = false;
+			for (int i = 0; i < correctData.size(); i++)
+			{
+				// Detect overflow in bit conversion
+				if (overflow)
+				{
+					byte tmp = (byte)((correctData.get(i) >> (32 - bitIndex)) & 0xFF);
+					tempBits = (byte)(tempBits | tmp);
+					bytes.add((byte)(tempBits & 0xFF));
+					System.out.println("adding new overflow byte - block " + i + ", " + Integer.toBinaryString(tempBits));
+					overflow = false;
+					//bitIndex = (bitIndex + 8) % maxIndices;
+				}
+				
+				while (bitIndex + 8 < 21)
+				{
+					System.out.println(Integer.toBinaryString((correctData.get(i) >> (32 - (bitIndex + 8))) & 0xFF));
+					tempBits = 0;
+					tempBits = (byte)((correctData.get(i) >> (32 - (bitIndex + 8))) & 0xFF);
+					//System.out.println(Integer.toBinaryString(tempBits & 0xFF));
+					System.out.println(Integer.toBinaryString(tempBits & 0xFF));
+					bytes.add((byte)(tempBits & 0xFF));
+					System.out.println(Integer.toBinaryString(bytes.get(bytes.size() - 1)));
+					System.out.println("adding new byte - block " + i + ", " + Integer.toBinaryString(tempBits));
+					bitIndex = (bitIndex + 8) % maxIndices;
+					tempBits = 0;
+				}
+				
+				// Handle the overflow
+				tempBits = 0;
+				byte tmp = (byte)((correctData.get(i) >> 11) & 0xFF);
+				tempBits = (byte)(tmp & (2^(21 - bitIndex) - 1));
+				tempBits = (byte)(tempBits << (8 - (21 - bitIndex)));
+				overflow = true;
+				bitIndex = (bitIndex + 8) % maxIndices;
+				//System.out.println("overflow on block " + i + " is " + tempBits);
+			}
+			
+			System.out.println("Converted to the following:");
+			byte[] finalData = new byte[bytes.size()];
+			int index = 0;
+			for (Byte b : bytes)
+			{
+				System.out.println((byte)((int)b & 0x000000FF));
+				//finalData[index++] = (byte) (b & 0xFF);
+			}
 		}
 	}
 	

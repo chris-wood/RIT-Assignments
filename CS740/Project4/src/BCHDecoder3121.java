@@ -91,7 +91,7 @@ public class BCHDecoder3121
         return result;
     }
 
-    public byte[] correct(int codeword)
+    public int correct(int codeword)
     {
     	int[] S = new int[] { 0, 0, 0, 0 };
         int s3 = 0;
@@ -113,7 +113,7 @@ public class BCHDecoder3121
 
         if (!error)
         {
-            return splitWord(codeword);
+            return codeword; // TODO
         }
 
         if (S[0] != -1)
@@ -169,7 +169,6 @@ public class BCHDecoder3121
                     codeword ^= (1 << (loc[0] + 1));
                     codeword ^= (1 << (loc[1] + 1));
                 }
-
             }
         }
         S = calcSyndrom(codeword);
@@ -185,7 +184,7 @@ public class BCHDecoder3121
             }
         }
 
-        return splitWord(codeword);
+        return codeword; // TODO
     }
     
     /**
