@@ -8,7 +8,7 @@ namespace Test
 		{
 			Console.WriteLine ("Hello World!");
 			BCHDecoder3121 decoder = new BCHDecoder3121();
-			String hex = "0xB66E4A73";
+			String hex = "0x65604a73";
 			int codeword = System.Convert.ToInt32(hex, 16);
 			Console.WriteLine(decoder.correct(codeword));
 		}

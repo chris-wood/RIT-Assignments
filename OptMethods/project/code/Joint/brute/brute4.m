@@ -37,10 +37,6 @@ for x1 = 1:SBOX_SIZE
     end
 end
 
-disp(ax_opt)
-disp(af_opt)
-disp(bx_opt)
-disp(bf_opt)
 plot(results'); %, ones(1, factorial(SBOX_SIZE)), bresults, ones(1, factorial(SBOX_SIZE)))
 %plot(bresults)
 

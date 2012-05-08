@@ -243,40 +243,86 @@ public class TFTPreader
 				// and then throw them in the corrected list
 				for (int i = 0; i < byteData.size(); i += TFTPmessage.BYTE_PER_BLOCK)
 				{
-					/*
-					int word = 0;
-					for (int j = 0; j < TFTPmessage.BYTE_PER_BLOCK; j++)
-					{
-						word |= ((byteData.get(i + j)) << ((TFTPmessage.BYTE_PER_BLOCK - (j + 1)) * 8));
-						System.out.print(Integer.toHexString(byteData.get(i + j)) + " (" + Integer.toHexString(word) + ") ");
-					}
-					System.out.println("\nResulting word = " + Integer.toHexString(word) + "\n");
-					*/
 					byte[] wordData = new byte[TFTPmessage.BYTE_PER_BLOCK];
 					for (int j = 0; j < TFTPmessage.BYTE_PER_BLOCK; j++)
 					{
-						System.out.print(Integer.toBinaryString((byteData.get(i + j) & 0xFF)) + " ");
+						//System.out.print(Integer.toBinaryString((byteData.get(i + j) & 0xFF)) + " ");
 						//System.out.print(Integer.toBinaryString(byteData.get(i + j)) + " ");
 						wordData[j] = (byte)(byteData.get(i + j) & 0xFF);
 					}
+					
+					// Swap because of network byte ordering
+					/*byte tmp = wordData[0];
+					wordData[0] = wordData[3];
+					wordData[3] = tmp;
+					tmp = wordData[1];
+					wordData[1] = wordData[2];
+					wordData[2] = tmp;*/
 					//int word = toInt(wordData, 0);
 					//int word = ByteBuffer.wrap(wordData).getInt();
-					int word = TFTPmessage.byteArrayToInt(wordData, 0, TFTPmessage.BYTE_PER_BLOCK);
-					System.out.println("\nWord = " + Integer.toHexString(word));
+					int word = Integer.reverseBytes(TFTPmessage.byteArrayToInt(wordData, 0, TFTPmessage.BYTE_PER_BLOCK));
+					//System.out.println("\nWord = " + Integer.toHexString(word));
 					
 					// Decode the word and then throw the data bits into the new list
 					int decoded = decoder.correct(word);
+					System.out.println("Comparing!: " + Integer.toBinaryString(decoded) + " " + Integer.toBinaryString(word));
 					correctData.add(decoded);
-					// TODO: this is a 21-bit data value
-					/*
-					for (int j = 0; j < decoded.length; j++)
-					{
-						correctData.add(decoded[j]);
-					}
-					*/
 				}
 				
-				// todo
+				// Group the 21-bit integers into valid bytes to write to the file 
+				int bitIndex = 0;
+				int maxIndices = 21;
+				byte tempBits = 0;
+				ArrayList<Byte> bytes = new ArrayList<Byte>();
+				boolean overflow = false;
+				for (int i = 0; i < correctData.size(); i++)
+				{
+					System.out.println("Working with: " + Integer.toHexString(correctData.get(i)));
+					System.out.println("Flipped around is: " + Integer.toHexString(Integer.reverse(correctData.get(i))));
+					// Detect overflow in bit conversion
+					if (overflow)
+					{
+						byte tmp = (byte)((correctData.get(i) >> (32 - bitIndex)) & 0xFF);
+						tempBits = (byte)(tempBits | tmp);
+						bytes.add((byte)(tempBits & 0xFF));
+						//System.out.println("adding new overflow byte - block " + i + ", " + Integer.toBinaryString(tempBits));
+						overflow = false;
+						//bitIndex = (bitIndex + 8) % maxIndices;
+					}
+					
+					while (bitIndex + 8 < 21)
+					{
+						//System.out.println(Integer.toBinaryString((correctData.get(i) >> (32 - (bitIndex + 8))) & 0xFF));
+						tempBits = 0;
+						tempBits = (byte)((correctData.get(i) >> (32 - (bitIndex + 8))) & 0xFF);
+						//System.out.println(Integer.toBinaryString(tempBits & 0xFF));
+						//System.out.println(Integer.toBinaryString(tempBits & 0xFF));
+						bytes.add((byte)(tempBits & 0xFF));
+						//System.out.println(Integer.toBinaryString(bytes.get(bytes.size() - 1)));
+						//System.out.println("adding new byte - block " + i + ", " + Integer.toBinaryString(tempBits));
+						bitIndex = (bitIndex + 8) % maxIndices;
+						tempBits = 0;
+					}
+					
+					// Handle the overflow
+					tempBits = 0;
+					byte tmp = (byte)((correctData.get(i) >> 11) & 0xFF);
+					tempBits = (byte)(tmp & (2^(21 - bitIndex) - 1));
+					tempBits = (byte)(tempBits << (8 - (21 - bitIndex)));
+					overflow = true;
+					bitIndex = (bitIndex + 8) % maxIndices;
+					//System.out.println("overflow on block " + i + " is " + tempBits);
+				}
+				
+				System.out.println("Converted to the following:");
+				byte[] finalData = new byte[bytes.size()];
+				int index = 0;
+				for (Byte b : bytes)
+				{
+					System.out.println((byte)((int)b & 0x000000FF));
+					//finalData[index++] = (byte) (b & 0xFF);
+					fos.write(b);
+				}
 			}
 			/*else
 			{

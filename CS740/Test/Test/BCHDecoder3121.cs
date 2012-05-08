@@ -201,7 +201,5 @@ using System.Text;
             return "initialCW: " + initialCW + "   cw: " + codeword + "   nbCorr: " + nbCorr + "    good: " + good;
 
         }
-
-
     }
     
