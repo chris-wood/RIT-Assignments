@@ -286,21 +286,26 @@ public class TFTPreader
 				for (int i = 0; i < correctData.size(); i++)
 				{	
 					System.out.println("Working with: " + Integer.toHexString(correctData.get(i)));
+					System.out.println("In binary... " + Integer.toBinaryString(correctData.get(i)));
 					
 					// 1. 
 					int word = Integer.reverse(correctData.get(i));
 					
 					// 2. 
-					word = (word << 11) & (int)(Math.pow(2,32) - Math.pow(2, 11));
+					System.out.println("Shift before and = " + Integer.toBinaryString(word << 11));
+					word = (word << 11) & 0xfffff800; //(int)(Math.pow(2,32) - Math.pow(2, 11));
 					System.out.println("Flipped: " + Integer.toHexString(word));
+					System.out.println("In binary..." + Integer.toBinaryString(word));
 					
 					//System.out.println("Flipped around is: " + Integer.toHexString(Integer.reverse(correctData.get(i))));
 					// 2.5
 					// Detect overflow in bit conversion
 					if (overflow)
 					{
-						byte tmp = (byte)((word >> (32 - bitIndex)) & 0xFF);
-						tempBits = (byte)(tempBits | tmp);
+						byte tmp = (byte)((word >> (32 - bitIndex)) & (int)(Math.pow(2, bitIndex) - 1)); // & 2^bitIndex - 1 // was 0xFF
+						tempBits = (byte)((tempBits | tmp) & 0xFF);
+						System.out.println("Shifted down... = " + Integer.toBinaryString((word >> (32 - bitIndex)) & (int)(Math.pow(2, bitIndex) - 1)));
+						System.out.println("bitIndex = " + bitIndex);
 						System.out.println("tmp = " + Integer.toBinaryString(tmp) + ", other = " + Integer.toBinaryString(tempBits));
 						//bytes.add((byte)(tempBits & 0xFF));
 						bytes.add((byte)((Integer.reverse((byte) (tempBits & 0xFF)) >> 24) & 0xFF));
@@ -509,7 +514,7 @@ public class TFTPreader
 			if (reader.validateParameters("viking.cs.rit.edu", "octet")) //args[1], args[0]
 			{
 				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode("octet"); //args[0]
-				reader.receiveFile(mode, "viking.cs.rit.edu", "motd", false); //args[1], args[2]
+				reader.receiveFile(mode, "viking.cs.rit.edu", "motd", true); //args[1], args[2]
 			}
 			
 			/*
