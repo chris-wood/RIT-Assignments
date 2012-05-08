@@ -24,6 +24,8 @@ The cryptographic security of symmetric-key block ciphers and other related prim
 \section{Problem Description}
 Cryptographic algorithms are deemed secure if they are resistant to known attacks (including brute force collision searches). Therefore, it is important to understand such attacks in order to construct cryptographically secure S-boxes for use in practice. This section introduces the two most common forms of cryptanalysis techniques that are used to guage the strength of symmetric-key block cipher designs. It then introduces several mathematical definitions that can be used to measure the security of S-boxes based on the goal of such cryptanalysis techniques, which subsequently become the target objective functions for this optimization project.
 
+TODO: discuss cryptanalysis efforts and how it can break s-boxes
+
 \subsection{Cryptographic Strength of Substitution Layers}
 Mathematically, an S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In the context of cryptographic applications, such a function $f$ must be bijective in order to avoid bias towards any specific output element in the field. We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes \cite{Mar_newanalysis}.
 
@@ -78,10 +80,10 @@ Designers of cryptographically secure cryptographic primitives (e.g. block ciphe
 \end{enumerate}
 However, in practice the additional constraints that fast and simple mathematical operations must be used to emulate represent such a bijective function $f$ that exhibits ideal values for all of these measurements.
 
-\section{Exhaustive Search}
+\section{Optimization Candidate and Problem Formation}
 %TODO: discuss time complexity of each operation, infeasibility for higher order S-boxes
-
-\section{Optimization Solution}
+%TODO: discuss why exhaustive search is best (cryptographic strength, might be just one global max for joint computations)
+%TODO: include brute force results for order4 here (separate and joint)
 %TODO: summarize genetic algorithm approach, state each optimization problem as a MINLP problem
 %1. state need to exhaust entire solution, but that's infeasible.
 %2. state optimization problems for each one separately
@@ -91,13 +93,59 @@ However, in practice the additional constraints that fast and simple mathematica
 
 The design goals for S-boxes used inside cryptographic algorithms can easily be represented using mixed integer nonlinear opitmization problems as follows:
 
+They are mixed-integer nonlinear optimization problems.
 
+\textbf{Minimize}
+\begin{eqnarray*}
+BN'(X) = -BN(X) = -\text{min}_{i, j\not=i}(\text{wt}(i \oplus j) + \text{wt}(X(i) \oplus X(j))),
+\end{eqnarray*}
+subject to the constraints
+\begin{eqnarray*}
+0 \leq X(i) \leq 2^{n} - 1,
+\end{eqnarray*}
+where $n$ is the number of design variables.
+
+\textbf{Minimize}
+\begin{eqnarray*}
+A'(X) = -A(X) = -\sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus c_{i}^{n})),
+\end{eqnarray*}
+subject to the constraints
+\begin{eqnarray*}
+0 \leq X(i) \leq 2^{n} - 1,
+\end{eqnarray*}
+where $n$ is the number of design variables.
+
+\textbf{Minimize}
+\begin{eqnarray*}
+BN'(X) = -BN(X) = -\text{min}_{i, j\not=i}(\text{wt}(i \oplus j) + \text{wt}(X(i) \oplus X(j))),
+\end{eqnarray*}
+subject to the constraints
+\begin{eqnarray*}
+0 \leq X(i) \leq 2^{n} - 1,
+\end{eqnarray*}
+where $n$ is the number of design variables.
+
+\section{MINLP Algorithms}
+%1. GA description - TODO: write up some characteristics of this algorithm
+%2. BB description - TODO: write up some characteristics of this algorithm
+
+This is a discrete optimization problem. 
+
+Due to the nature of the solutions to these objective functions, 
+
+Some common constrained mixed-integer nonlinear optimization problem solver algorithms include the branch and bound and genetic algorithms. 
 
 \section{Optimization Results}
 %TODO: compare GA results against exhaustive search and BB algorithm
-%1. prsent individual and joint results
+%1. prsent individual and joint results for order 8 and 16  (3-bit and 4-bit S-boxes)
 %2. discuss how close they got to optimal results
 %3. discuss usefulness of GA
-%4. discuss why BB algorithm didn't work (converged too early and didn't exhaust, GA was good because it generated populations and did psuedo brute force thing)
+%4. discuss why BB algorithm didn't work (converged too early and didn't exhaust, too many local minimums for every objective function, GA was good because it generated populations and did psuedo brute force thing)
+
+\section{Conclusions and Future Work}
+%TODO: GA was most promising - similar to BF approach
+%TODO: results were closest to brute force, and presumed to be close to actual values
+%TODO: joint computations using GA were ineffective, exhaustive searches would be better, contradicting functions caused too great penalties and little change in design variabes
+%TODO:  GA work - tweak crossover and mutation functions, run on large scale hardware
 
 \end{document}

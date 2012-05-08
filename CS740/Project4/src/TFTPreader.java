@@ -265,7 +265,7 @@ public class TFTPreader
 					
 					// Decode the word and then throw the data bits into the new list
 					int decoded = decoder.correct(word);
-					System.out.println("Comparing!: " + Integer.toBinaryString(decoded) + " " + Integer.toBinaryString(word));
+					//System.out.println("Comparing!: " + Integer.toBinaryString(decoded) + " " + Integer.toBinaryString(word));
 					correctData.add(decoded);
 				}
 				
@@ -279,6 +279,103 @@ public class TFTPreader
 				
 				// Group the 21-bit integers into valid bytes to write to the file 
 				int bitIndex = 0;
+				int maxIndices = 21;
+				byte tempBits = 0;
+				ArrayList<Byte> bytes = new ArrayList<Byte>();
+				boolean overflow = false;
+				for (int i = 0; i < correctData.size(); i++)
+				{	
+					System.out.println("Working with: " + Integer.toHexString(correctData.get(i)));
+					
+					// 1. 
+					int word = Integer.reverse(correctData.get(i));
+					
+					// 2. 
+					word = (word << 11) & (int)(Math.pow(2,32) - Math.pow(2, 11));
+					System.out.println("Flipped: " + Integer.toHexString(word));
+					
+					//System.out.println("Flipped around is: " + Integer.toHexString(Integer.reverse(correctData.get(i))));
+					// 2.5
+					// Detect overflow in bit conversion
+					if (overflow)
+					{
+						byte tmp = (byte)((word >> (32 - bitIndex)) & 0xFF);
+						tempBits = (byte)(tempBits | tmp);
+						System.out.println("tmp = " + Integer.toBinaryString(tmp) + ", other = " + Integer.toBinaryString(tempBits));
+						//bytes.add((byte)(tempBits & 0xFF));
+						bytes.add((byte)((Integer.reverse((byte) (tempBits & 0xFF)) >> 24) & 0xFF));
+						System.out.println("adding new overflow byte - block " + i + ", " + Integer.toBinaryString(bytes.get(bytes.size() - 1)));
+						overflow = false;
+						//bitIndex = (bitIndex + 8) % maxIndices;
+					}
+					
+					// 3/4
+					// We will only read in at most two bits here
+					while (bitIndex + 8 < 21)
+					{
+						//System.out.println(Integer.toBinaryString((correctData.get(i) >> (32 - (bitIndex + 8))) & 0xFF));
+						tempBits = 0;
+						tempBits = (byte)((word >> (32 - (bitIndex + 8))) & 0xFF);
+						//System.out.println(Integer.toBinaryString(tempBits & 0xFF));
+						//System.out.println(Integer.toBinaryString(tempBits & 0xFF));
+						
+						// Add the stripped out byte to a bin
+						//bytes.add((byte)(tempBits & 0xFF));
+						bytes.add((byte)((Integer.reverse((byte) (tempBits & 0xFF)) >> 24) & 0xFF));
+						System.out.println("Added: " + Integer.toBinaryString((byte)((Integer.reverse((byte) (tempBits & 0xFF)) >> 24) & 0xFF)));
+						
+						//System.out.println(Integer.toBinaryString(bytes.get(bytes.size() - 1)));
+						System.out.println("adding new byte - block " + i + ", " + Integer.toBinaryString(bytes.get(bytes.size() - 1)));
+						bitIndex = (bitIndex + 8) % maxIndices;
+						tempBits = 0;
+					}
+					
+					// Handle the overflow
+					tempBits = 0;
+					byte tmp = (byte)((word >> 11) & 0xFF);
+					System.out.println(Integer.toBinaryString((byte)((word >> 11) & 0xFF)));
+					tempBits = (byte)(tmp & ((int)Math.pow(2, 21 - bitIndex) - 1));
+					System.out.println(Integer.toBinaryString(tempBits));
+					tempBits = (byte)(tempBits << (8 - (21 - bitIndex)));
+					overflow = true;
+					bitIndex = (bitIndex + 8) % maxIndices;
+					
+					System.out.println("overflow on block " + i + " is " + Integer.toBinaryString(tempBits));
+				}
+				
+				//System.out.println("Converted to the following:");
+				byte[] finalData = new byte[bytes.size()];
+				int index = 0;
+				for (Byte b : bytes)
+				{
+					//System.out.println("\nswappage...");
+					//System.out.println((byte)((int)b & 0x000000FF));
+					//System.out.print(Integer.toBinaryString((byte) (b & 0xFF)) + " ");
+					//finalData[index++] = (byte)((Integer.reverse((byte) (b & 0xFF)) >> 24) & 0xFF);
+					finalData[index++] = b;
+					//System.out.println(Integer.toBinaryString(finalData[index - 1]));
+					//fos.write(b);
+				}
+				
+				// Perform the final byte swap and then we should be done
+				/*System.out.println("even or odd?" + (finalData.length % 2));
+				for (int i = 0; i < finalData.length / 2; i++)
+				{
+					byte tmp = finalData[i];
+					finalData[i] = finalData[finalData.length - 1 - i];
+					finalData[finalData.length - 1 - i] = tmp;
+				}*/
+				
+				// WRITE IT OUT
+				System.out.println("final bytes...");
+				for (int i = 0; i < finalData.length; i++)
+				{
+					System.out.println(Integer.toHexString(finalData[i]));
+					fos.write(finalData[i]);
+				}
+				
+				// Group the 21-bit integers into valid bytes to write to the file 
+				/*int bitIndex = 0;
 				int maxIndices = 21;
 				byte tempBits = 0;
 				ArrayList<Byte> bytes = new ArrayList<Byte>();
@@ -349,7 +446,7 @@ public class TFTPreader
 					finalData[index++] = b;
 					//System.out.println(Integer.toBinaryString(finalData[index - 1]));
 					//fos.write(b);
-				}
+				}*/
 				
 				// Perform the final byte swap and then we should be done
 				/*System.out.println("even or odd?" + (finalData.length % 2));
@@ -361,12 +458,12 @@ public class TFTPreader
 				}*/
 				
 				// WRITE IT OUT
-				System.out.println("final bytes...");
+				/*System.out.println("final bytes...");
 				for (int i = 0; i < finalData.length; i++)
 				{
 					System.out.println(Integer.toHexString(finalData[i]));
 					fos.write(finalData[i]);
-				}
+				}*/
 			}
 			/*else
 			{
