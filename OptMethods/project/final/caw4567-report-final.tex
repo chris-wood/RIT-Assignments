@@ -135,12 +135,19 @@ Due to the nature of the solutions to these objective functions,
 
 Some common constrained mixed-integer nonlinear optimization problem solver algorithms include the branch and bound and genetic algorithms. 
 
+In the context of cryptography, evolutionary algorithms are the most common optimization solutions that are used to explore the design space for cryptographic algorithms. 
+
+Genetic algorithms are commonly utilized in the context of cryptography to explore the design space for cryptographic functions. They serve as an intelligence optimization method that can ease the computational efforts of performing brute force searches among the design space, which is crucial for functions with larger domains. 
+
 \section{Optimization Results}
 %TODO: compare GA results against exhaustive search and BB algorithm
 %1. prsent individual and joint results for order 8 and 16  (3-bit and 4-bit S-boxes)
 %2. discuss how close they got to optimal results
 %3. discuss usefulness of GA
 %4. discuss why BB algorithm didn't work (converged too early and didn't exhaust, too many local minimums for every objective function, GA was good because it generated populations and did psuedo brute force thing)
+
+% http://www.reveresecurity.com/_pdfs/s4x4Analysis.pdf
+% says that BN must be at least 2 for bijective S-boxes
 
 \section{Conclusions and Future Work}
 %TODO: GA was most promising - similar to BF approach

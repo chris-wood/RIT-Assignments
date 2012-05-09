@@ -1,5 +1,6 @@
 \BOOKMARK [1][-]{section.1}{Problem Description}{}% 1
 \BOOKMARK [2][-]{subsection.1.1}{Cryptographic Strength of Substitution Layers}{section.1}% 2
-\BOOKMARK [1][-]{section.2}{Exhaustive Search}{}% 3
-\BOOKMARK [1][-]{section.3}{Optimization Solution}{}% 4
+\BOOKMARK [1][-]{section.2}{Optimization Candidate and Problem Formation}{}% 3
+\BOOKMARK [1][-]{section.3}{MINLP Algorithms}{}% 4
 \BOOKMARK [1][-]{section.4}{Optimization Results}{}% 5
+\BOOKMARK [1][-]{section.5}{Conclusions and Future Work}{}% 6

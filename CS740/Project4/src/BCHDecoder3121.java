@@ -1,17 +1,45 @@
+/*
+ * BCHDecoder3121.java
+ * 
+ * Version: 3/20/12
+ */
+
+/**
+ * This class is responsible for handling the BCH(31,21) decoding of
+ * 32-bit codewords as they are retrieved from the server. 
+ * 
+ * @author Jeremey Brown
+ * @Contributor Christopher Wood (caw4567@rit.edu)
+ */
 public class BCHDecoder3121 
 {
+	/**
+	 * Some useful constants for this form of BCH encoding/decoding
+	 */
 	public static final int DATA_BYTES = 3;
 	public static final int CKSUM_BYTES = 1;
 	
-	static int m, n;
-	static int[] p = new int[6];
-	static int[] GF = new int[32];
-	static int[] GF_rev = new int[32];
+	/**
+	 * Constants for the order of the Galois field.
+	 */
+	private int FIELD_POWER = 5;
+	private int FIELD_ORDER = 31;
 	
+	/**
+	 * The members for the BCH decoder that store the order and values 
+	 * of the Galois field used for decoding, as well as the primitive
+	 * polynomial used for reduction.
+	 */
+	private int[] p = new int[6];
+	private int[] GF = new int[32];
+	private int[] GF_rev = new int[32];
+	
+	/**
+	 * Constructor that initializes the primitive polynomial and
+	 * then the Galois field.
+	 */
 	public BCHDecoder3121()
-	{
-		m = 5; 
-		n = 31;
+	{	
         // Primitive polynomial of degree 5
         // x^5 + x^2 + 1
         // polynomial is indivisible, ie: 100101 = 21, which is prime, therefore indivisible
@@ -20,47 +48,52 @@ public class BCHDecoder3121
         InitializeDecoder();
 	}
 	
+	/**
+	 * Initialize the decoder by generating the Galois field GF(2**m).
+	 */
 	private void InitializeDecoder()
     {
-        GenerateGf();					// Generate the Galois Field GF(2**m) 
+        GenerateGf();
     }
 
+	/**
+     * Generate GF(2**m) from the irreducible polynomial p(X) in p[0]..p[m]
+     * lookup tables:  
+     * 
+     * index->polynomial form   GF[] contains j=alpha**i;
+     * polynomial form -> index form  GF_rev[j=alpha**i] = i
+     *  
+     * alpha = 2 is the primitive element of GF(2**m) 
+     */
     private void GenerateGf()
     {
-        /*
-        * generate GF(2**m) from the irreducible polynomial p(X) in p[0]..p[m]
-        * lookup tables:  
-        * 
-        * index->polynomial form   GF[] contains j=alpha**i;
-        * polynomial form -> index form  GF_rev[j=alpha**i] = i
-        *  
-        * alpha = 2 is the primitive element of GF(2**m) 
-        */
-
-    	 int i, mask;
+    	 int i;
+    	 int mask;
+    	 
+    	 // Initialization
          mask = 1;
-         GF[m] = 0;
+         GF[FIELD_POWER] = 0;
 
-         for (i = 0; i < m; i++)
+         for (i = 0; i < FIELD_POWER; i++)
          {
              GF[i] = mask;
 
              GF_rev[GF[i]] = i;
 
              if (p[i] != 0)
-                 GF[m] ^= mask;
+                 GF[FIELD_POWER] ^= mask;
 
              mask <<= 1;
          }
 
-         GF_rev[GF[m]] = m;
+         GF_rev[GF[FIELD_POWER]] = FIELD_POWER;
 
          mask >>= 1;
 
-         for (i = m + 1; i < n; i++)
+         for (i = FIELD_POWER + 1; i < FIELD_ORDER; i++)
          {
              if (GF[i - 1] >= mask)
-                 GF[i] = GF[m] ^ ((GF[i - 1] ^ mask) << 1);
+                 GF[i] = GF[FIELD_POWER] ^ ((GF[i - 1] ^ mask) << 1);
              else
                  GF[i] = GF[i - 1] << 1;
 
@@ -70,16 +103,23 @@ public class BCHDecoder3121
          GF_rev[0] = -1;
     }
 
+    /**
+     * Calculate the syndrome for a codeword that contains information
+     * regarding the location of errors in such word.
+     * 
+     * @param codeword - the codeword to check against
+     * @return - the 2t element syndrome vector.
+     */
     private int[] calcSyndrom(int codeword)
     {
     	int[] result = new int[] { 0, 0, 0, 0 };
         for (int i = 0; i < 4; i++)
         {
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < FIELD_ORDER; j++)
             {
                 if (((codeword >> (j + 1)) & 1) != 0)
                 {
-                    result[i] ^= GF[(i + 1) * j % n];
+                    result[i] ^= GF[(i + 1) * j % FIELD_ORDER];
                 }
             }
             result[i] = GF_rev[result[i]];
@@ -87,6 +127,12 @@ public class BCHDecoder3121
         return result;
     }
 
+    /**
+     * Correct the specified codeword if it contains up to two codewords. 
+     * 
+     * @param codeword - the codeword to correct.
+     * @return - the correct codeword (or the same if no errors were present).
+     */
     public int correct(int codeword)
     {
     	int[] S = new int[] { 0, 0, 0, 0 };
@@ -96,10 +142,6 @@ public class BCHDecoder3121
         int tmp = 0;
         boolean error = false;
         int errors = 0;
-
-        int initialCW = codeword;
-        int nbCorr = 0;
-        boolean good = true;
 
         S = calcSyndrom(codeword);
         for (int i = 0; i < S.length; i++)
@@ -113,12 +155,12 @@ public class BCHDecoder3121
 
         if (!error)
         {
-            return codeword; // TODO
+            return codeword; 
         }
 
         if (S[0] != -1)
         {
-            s3 = (S[0] * 3) % n;
+            s3 = (S[0] * 3) % FIELD_ORDER;
 
             // Is there only one error?
             if (S[2] == s3)
@@ -139,26 +181,26 @@ public class BCHDecoder3121
 
 
                 C[0] = 0;
-                C[1] = (S[1] - GF_rev[tmp] + n) % n;
-                C[2] = (S[0] - GF_rev[tmp] + n) % n;
+                C[1] = (S[1] - GF_rev[tmp] + FIELD_ORDER) % FIELD_ORDER;
+                C[2] = (S[0] - GF_rev[tmp] + FIELD_ORDER) % FIELD_ORDER;
 
                 //# Get the roots of C(x) using Chien-Search
                 errors = 0;
-                for (int i = 0; i < n; i++)
+                for (int i = 0; i < FIELD_ORDER; i++)
                 {
                     tmp = 1;
                     for (int j = 1; j < 3; j++)
                     {
                         if (C[j] != -1)
                         {
-                            C[j] = (C[j] + j) % n;
+                            C[j] = (C[j] + j) % FIELD_ORDER;
                             tmp ^= GF[C[j]];
                         }
 
                     }
                     if (tmp == 0)
                     {
-                        loc[errors] = (i + 1) % n;
+                        loc[errors] = (i + 1) % FIELD_ORDER;
                         errors += 1;
                     }
                 }
@@ -184,23 +226,6 @@ public class BCHDecoder3121
             }
         }
 
-        return codeword; // TODO
+        return codeword; 
     }
-    
-    /**
-     * Split the codeword appropriately and return the DATA_BYTES block
-     * byte array that contains the appropriate data.
-     * 
-     * @param codeword - the correct (31,21) codeword.
-     * @return a DATA_BYTES byte array containing only the data.
-     */
-    private byte[] splitWord(int codeword)
-    {
-    	byte[] data = new byte[DATA_BYTES];
-    	for (int i = 0; i < data.length; i++)
-    	{
-    		data[i] =  (byte)((codeword >> (8 * (DATA_BYTES - i))) & 0xFF); // TODO: magic numbers 
-    	}
-    	return data;
-    }
-}
+} // BCHDecoder3121

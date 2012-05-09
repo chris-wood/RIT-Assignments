@@ -67,13 +67,15 @@ Suppose that instead of always selecting the first activity to finish, we instea
 \end{prob}
 \begin{sol}
 
-In the context of the activity selection problem, the notion of a greedy algorithm is one that chooses an activity at each iteration such that we are left with as much resources (time) for other activities as possible. Thus, by choosing the last activity $a_k$ to start (assuming that all activities are sorted in monotonically decreasing order by start time), we are guaranteed to leave as much time for other compatible activities as possible that be selected before the start of $a_k$, so this is a greedy approach. This is because choosing an activity with an earler start time would consume more resources, and therefore is not greedy. 
+By definition, greedy algorithms always make a locally optimal choice at each iteration, without considering any future effects of the choice. Now, let our approach be to select the last activity to start that is compatible with all previously selected activities. We can see that this new approach is the same as choosing a single activity with the latest start time, reducing the set of compatible activities to a single subproblem based on this selection, and then repeating the selection process based on this new subset until no more activities remain. Thus, since the choice of activity is based solely on what activity has the latest start time and does not consider the future effects of this choice, we can conclude that this is a greedy algorithm. 
 
-We can also show that this approach yields an optimal solution to the original problem. Consider, for example, any non-empty subsequence of activities $S' = <a_1, a_2, ..., a_n>$, which is in monotonically decreasing order based on start times. We now prove that the largest set of compatible activities for $S'$ is $1 + $(the largest set of compatible activities in $<a_2, a_3,..., a_n>$). In other words, $a_1$ is included in some maximum-size subsequence of mutually compatible activities of $S'$.
+We can also show that this approach yields an optimal solution. Consider, for example, any non-empty subsequence of activities $S' = <a_1, a_2, ..., a_n>$, which is in monotonically decreasing order based on start times (note that this is for convenience, and we could easily continue to work with a subsequence of activities that is in monotonically increasing order based on finish times). We now prove that the largest set of compatible activities for $S'$ is $1 + $(the largest set of compatible activities in $<a_2, a_3,..., a_n>$). In other words, $a_1$ is included in some maximum-size subsequence of mutually compatible activities of $S'$.
 
 \begin{proof}
 Let $A$ be the largest set of mutually compatble activities in $S'$, and let $a_j$ be the activitiy with the latest start time. If $a_j = a_1$, then the result follows immediately. If $a_j \not= a_1$, then consider $A' = (A - \{a_j\}) \cup \{a_1\}$. Note that $A'$ is a mutually compatible set of activities since $s_1 \geq s_j$. That is, there is more time before $a_1$, and by picking $a_j$ there is nothing after (since $a_j$ has the latest start time). Now, since $|A'| = |A|$, the result follows immediately.
 \end{proof}
+
+Thus, as a direct result of this theorem, we can repeatedly choose the activity with the latest start time first, keep only those remaining activities that are compatible with this choice, and then repeat the selection process until no more compatible activities are available. This will yield a maximally sized subset of compatible activities, and since this is exactly what this new approach describes, we conclude that this is an optimal solution to the activity selection problem.
 
 %TODO: should more be added?
 
@@ -89,7 +91,7 @@ Prove that the flows in a network form a \textbf{convex set}. That is, show that
 \end{prob}
 \begin{sol}
 
-To show that flows in a network form a \textbf{convex set}, we consider the expresion of scalar flow products $\alpha f_1 + (1 - \alpha)f_2$, assuming that $f_1$ and $f_2$ are valid flows in the same network. Manipulating this expression yields the following:
+To show that flows in a network form a \textbf{convex set}, we consider the expression of scalar flow products $\alpha f_1 + (1 - \alpha)f_2$, assuming that $f_1$ and $f_2$ are valid flows in the same network. Manipulating this expression yields the following:
 \begin{eqnarray}
 \alpha f_1 + (1 - \alpha)f_2 & = & \alpha f_1 - \alpha f_2 + f_2 \\
 & = & \alpha(f_1 - f_2) + f_2
@@ -105,20 +107,34 @@ When $\alpha = 0$, the expression $\alpha(f_1 - f_2) + f_2$ reduces to $f_2$, wh
 When $\alpha = 1$, the expression $\alpha(f_1 - f_2) + f_2$ reduces to $f_1$, which is known to be a valid flow. 
 
 \textbf{Case 3:} $0 < \alpha  < 1$ \\
-Since $f_1$ and $f_2$ are flows, we know they both satisfy the capacity constraint and flow conservation rules. Thus, we know that for all $u,v \in V$, $f_1(u,v) \leq c(u,v)$ and $f_2(u,v) \leq c(u,v)$. Using this relationship with the original convex criteria described above yields the following for all $u,v \in V$:
+Since $f_1$ and $f_2$ are flows, we know they satisfy the capacity constraint, skew symmetry, and flow conservation rules. Thus, we know that for all $u,v \in V$, $0 \leq f_1(u,v) \leq c(u,v)$ and $0 \leq f_2(u,v) \leq c(u,v)$. Using this relationship with the convex criteria described above yields the following lower bound for all $u,v \in V$:
+\begin{eqnarray*}
+\alpha f_1(u,v) + (1 - \alpha)f_2(u,v) & \geq & 0 \cdot \alpha f_1(u,v) + 0 \cdot (1 - \alpha)f_2(u,v) \\
+& = & 0
+\end{eqnarray*}
+This is because $\alpha \geq 0$ and $1 - \alpha \geq 0$ (the sum of the two terms is positive). Similarly, we can examine the original convex criteria described above to find an upper bound for all $u,v \in V$ as follows:
 \begin{eqnarray*}
 \alpha f_1(u,v) + (1 - \alpha)f_2(u,v) & \leq & \alpha c(u,v) + (1 - \alpha)c(u,v) \\
 & = & \alpha c(u,v) + c(u,v) - \alpha c(u,v) \\
 & = & c(u,v)
 \end{eqnarray*}
-Thus, we see that convex criteria expression satisfies the capacity constraint. We now consider this expression in terms of the flow conservation. Since $f_1$ and $f_2$ are flows, we know that for each pair of vertices $u, v \in V$, $f_1(u,v) = -f_1(v,u)$ and $f_2(u,v) = -f_2(v,u)$ by skew symmetry. Further, by flow conservation, we know that for all vertices $u \in V - \{s,t\}$ we have $\sum_{v \in V}f_1(u,v) = 0$ and  $\sum_{v \in V}f_2(u,v) = 0$. Now, using this fact, we examine the convex critera expression described above for all vertices $u \in V - \{s,t\}$ as follows:
+Thus, we see that the convex criteria expression satisfies the capacity constraint. 
+
+We now consider this expression in terms of skew symmetry (i.e. the net flow at a vertex). Since $f_1$ and $f_2$ are flows, we know that for each pair of vertices $u, v \in V$, $f_1(u,v) = -f_1(v,u)$ and $f_2(u,v) = -f_2(v,u)$ by skew symmetry. Therefore, we know the following for each pair of vertices $u, v \in V$:
+\begin{eqnarray*}
+\alpha f_1(u,v) + (1 - \alpha)f_2(u,v) & = & -\alpha f_1(v,u) - (1 - \alpha)f_2(v,u) \\
+& = & -(\alpha f_1(v,u) + (1 - \alpha)f_2(v,u))
+\end{eqnarray*}
+Thus, the original convex criteria expression satisfies the skew symmetry rule.
+
+Now, by flow conservation, we know that for all vertices $u \in V - \{s,t\}$ we have $\sum_{v \in V}f_1(u,v) = 0$ and  $\sum_{v \in V}f_2(u,v) = 0$. Using this fact, we examine the convex critera expression described above for all vertices $u \in V - \{s,t\}$ as follows:
 \begin{eqnarray*}
 \sum_{v \in V}\alpha f_1(u,v) + (1 - \alpha)f_2(u,v) & = & \sum_{v \in V}\alpha f_1(u,v) + \sum_{v \in V}f_2(u,v) - \sum_{v \in V}\alpha f_2(u,v) \\
 & = & \sum_{v \in V}\alpha f_1(u,v) - \sum_{v \in V}\alpha f_2(u,v) \\
 & = & \alpha\sum_{v \in V} f_1(u,v) - \alpha\sum_{v \in V} f_2(u,v) \\
 & = & 0
 \end{eqnarray*}
-Thus, since the convex critera expression $\alpha f_1(u,v) + (1 - \alpha)f_2(u,v)$ satisfies both the capacity constraint and the flow constraint in this case, we conclude that it is also a flow.
+Thus, since the convex critera expression $\alpha f_1(u,v) + (1 - \alpha)f_2(u,v)$ satisfies the capacity constraint, skew symmetry, and flow constraint rules in this case, we conclude that it is also a flow. Therefore, we also conclude that flows in a network form a convex set.
 \end{sol}
 
 \begin{prob}{3 - 26.2-2}
