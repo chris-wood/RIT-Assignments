@@ -30,11 +30,11 @@ public abstract class TFTPmessage
 	 */
 	public static enum Opcode
 	{
-		RRQ(1), 
-		CRRQ(2), 
-		DATA(3), 
-		ACK(4), 
-		ERROR(5);
+		RRQ(1),   // Read request  
+		CRRQ(2),  // Encoded (corrupt) read request 
+		DATA(3),  // Data message
+		ACK(4),   // Acknowledgement message.
+		ERROR(5); // Error message
 		
 		/**
 		 * The value associated with this opcode

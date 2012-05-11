@@ -244,7 +244,7 @@ public class TFTPreader
 				// Shift down by 11 bits and store the remaining words
 				word = (word << BCHDecoder3121.CKSUM_BITS) & BCHDecoder3121.WORD_MASK; 
 				
-				// Detect overflow in bit conversion
+				// Handle previous work overflow by rebuilding the byte from partial bytes
 				if (overflow)
 				{
 					byte tmp = (byte)((word >> (BCHDecoder3121.WORD_BITS - bitIndex)) & 

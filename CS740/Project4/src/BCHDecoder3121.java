@@ -14,7 +14,7 @@
 public class BCHDecoder3121 
 {
 	/**
-	 * Some useful constants for this form of BCH encoding/decoding
+	 * Some useful constants for this form of BCH encoding/decoding.
 	 */
 	public static final int WORD_BITS = 32;
 	public static final int DATA_BYTES = 3;
@@ -34,9 +34,9 @@ public class BCHDecoder3121
 	 * of the Galois field used for decoding, as well as the primitive
 	 * polynomial used for reduction.
 	 */
-	private int[] p = new int[6];
-	private int[] GF = new int[32];
-	private int[] GF_rev = new int[32];
+	private int[] p = new int[FIELD_POWER + 1];
+	private int[] GF = new int[FIELD_ORDER + 1];
+	private int[] GF_rev = new int[FIELD_ORDER + 1];
 	
 	/**
 	 * Constructor that initializes the primitive polynomial and
@@ -85,7 +85,9 @@ public class BCHDecoder3121
              GF_rev[GF[i]] = i;
 
              if (p[i] != 0)
+             {
                  GF[FIELD_POWER] ^= mask;
+             }
 
              mask <<= 1;
          }
@@ -97,9 +99,13 @@ public class BCHDecoder3121
          for (i = FIELD_POWER + 1; i < FIELD_ORDER; i++)
          {
              if (GF[i - 1] >= mask)
+             {
                  GF[i] = GF[FIELD_POWER] ^ ((GF[i - 1] ^ mask) << 1);
+             }
              else
+             {
                  GF[i] = GF[i - 1] << 1;
+             }
 
              GF_rev[GF[i]] = i;
          }
@@ -182,7 +188,6 @@ public class BCHDecoder3121
                 {
                     tmp ^= GF[S[2]];
                 }
-
 
                 C[0] = 0;
                 C[1] = (S[1] - GF_rev[tmp] + FIELD_ORDER) % FIELD_ORDER;
