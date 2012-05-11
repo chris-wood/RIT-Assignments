@@ -41,11 +41,10 @@ public class TFTPreader
 	 * Validate the parameters used to retrieve the file from the TFTP server.
 	 * 
 	 * @param host - the specified host server.
-	 * @param mode - the specified transfer mode.
 	 * 
 	 * @return true if valid, false otherwise.
 	 */
-	public boolean validateParameters(String host, String mode)
+	public boolean validateParameters(String host)
 	{
 		boolean valid = false;
 		
@@ -53,16 +52,7 @@ public class TFTPreader
 		{
 			// Attempt to resolve this host name
 			InetAddress.getByName(host);
-			
-			// Attempt to resolve the transfer mode to a fixed type
-			if (TFTPmessage.buildTransferMode(mode) != null)
-			{
-				valid = true;
-			}
-			else
-			{
-				System.err.println("TFTPreader: Error: Invalid transfer mode.");
-			}
+			valid = true;
 		} 
 		catch (UnknownHostException e) 
 		{
@@ -79,11 +69,9 @@ public class TFTPreader
 	 * @param mode - the transfer mode to use for the file reception.
 	 * @param host - the host server name where the TFTP program is located.
 	 * @param fileName - the file to receive.
-	 * @param corrupt - boolean flag indicating whether or not we are dealing 
-	 * 					with corrpt data
 	 */
 	public void receiveFile(TFTPmessage.TransferMode mode, String host, 
-			String fileName, boolean corrupt)
+			String fileName)
 	{
 		TFTPclient client = new TFTPclient();
 		Map<Integer, byte[]> dataBlocks = new HashMap<Integer, byte[]>();
@@ -108,18 +96,8 @@ public class TFTPreader
 		try 
 		{
 			// Send the appropriate request
-			TFTPmessage result = null;
-			if (!corrupt)
-			{
-				// Send a request for a new file to the client
-				result = client.sendAndReceiveMessage(new RequestMessage(fileName, TFTPmessage.Opcode.RRQ, mode), 
-						DEFAULT_PORT, RETRY_TIMES);
-			}
-			else
-			{
-				result = client.sendAndReceiveMessage(new RequestMessage(fileName, TFTPmessage.Opcode.CRRQ, mode), 
-						DEFAULT_PORT, RETRY_TIMES);
-			}
+			TFTPmessage result = client.sendAndReceiveMessage(new RequestMessage(fileName, 
+					TFTPmessage.Opcode.CRRQ, mode), DEFAULT_PORT, RETRY_TIMES);
 
 			// Continue reading data until we reach a non-full block
 			boolean transferComplete = false;
@@ -165,7 +143,7 @@ public class TFTPreader
 			}
 			
 			// Finally, write the file contents to the disk and clean up.
-			writeFile(fileName, dataBlocks, corrupt);
+			writeFile(fileName, dataBlocks);
 			client.close();
 		} 
 		catch (SocketTimeoutException e)
@@ -212,9 +190,8 @@ public class TFTPreader
 	 * 
 	 * @param file - the file to store the data.
 	 * @param data - the file data, partitioned by block number.
-	 * @param corrupt - boolean flag indicating if the data is potentially corrupt
 	 */
-	private void writeFile(String file, Map<Integer, byte[]> data, boolean corrupt)
+	private void writeFile(String file, Map<Integer, byte[]> data)
 	{
 		try 
 		{
@@ -246,7 +223,8 @@ public class TFTPreader
 				}
 				
 				// Swap because of network byte ordering
-				int word = Integer.reverseBytes(TFTPmessage.byteArrayToInt(wordData, 0, TFTPmessage.BYTE_PER_BLOCK));
+				int word = Integer.reverseBytes(TFTPmessage.byteArrayToInt(wordData, 0, 
+						TFTPmessage.BYTE_PER_BLOCK));
 				
 				// Decode the word and then throw the data bits into the new list
 				int decoded = decoder.correct(word);
@@ -255,7 +233,6 @@ public class TFTPreader
 			
 			// Group the 21-bit integers into valid bytes to write to the file 
 			int bitIndex = 0;
-			int maxIndices = 21;
 			byte tempBits = 0;
 			ArrayList<Byte> bytes = new ArrayList<Byte>();
 			boolean overflow = false;
@@ -265,36 +242,39 @@ public class TFTPreader
 				int word = Integer.reverse(correctData.get(i));
 				
 				// Shift down by 11 bits and store the remaining words
-				word = (word << 11) & 0xfffff800; 
+				word = (word << BCHDecoder3121.CKSUM_BITS) & BCHDecoder3121.WORD_MASK; 
 				
 				// Detect overflow in bit conversion
 				if (overflow)
 				{
-					byte tmp = (byte)((word >> (32 - bitIndex)) & (int)(Math.pow(2, bitIndex) - 1)); // & 2^bitIndex - 1 // was 0xFF
+					byte tmp = (byte)((word >> (BCHDecoder3121.WORD_BITS - bitIndex)) & 
+						(int)(Math.pow(2, bitIndex) - 1)); 
 					tempBits = (byte)((tempBits | tmp) & 0xFF);
-					bytes.add((byte)((Integer.reverse((byte) (tempBits & 0xFF)) >> 24) & 0xFF));
+					bytes.add((byte)((Integer.reverse((byte) (tempBits & 0xFF)) >> 
+						(BCHDecoder3121.DATA_BYTES * 8)) & 0xFF));
 					overflow = false;
 				}
 				
 				// Read as many bits as possible until we need to the next word of data
-				while (bitIndex + 8 < 21)
+				while (bitIndex + 8 < BCHDecoder3121.DATA_BITS)
 				{
 					tempBits = 0;
-					tempBits = (byte)((word >> (32 - (bitIndex + 8))) & 0xFF);
+					tempBits = (byte)((word >> (BCHDecoder3121.WORD_BITS - (bitIndex + 8))) & 0xFF);
 					
 					// Add the stripped out byte to a bin and update the bit index
-					bytes.add((byte)((Integer.reverse((byte) (tempBits & 0xFF)) >> 24) & 0xFF));
-					bitIndex = (bitIndex + 8) % maxIndices;
+					bytes.add((byte)((Integer.reverse((byte) (tempBits & 0xFF)) >> 
+						(BCHDecoder3121.DATA_BYTES * 8)) & 0xFF));
+					bitIndex = (bitIndex + 8) % BCHDecoder3121.DATA_BITS;
 					tempBits = 0;
 				}
 				
 				// Handle the overflow into the next word
 				tempBits = 0;
 				byte tmp = (byte)((word >> 11) & 0xFF);
-				tempBits = (byte)(tmp & ((int)Math.pow(2, 21 - bitIndex) - 1));
-				tempBits = (byte)(tempBits << (8 - (21 - bitIndex)));
+				tempBits = (byte)(tmp & ((int)Math.pow(2, BCHDecoder3121.DATA_BITS - bitIndex) - 1));
+				tempBits = (byte)(tempBits << (8 - (BCHDecoder3121.DATA_BITS - bitIndex)));
 				overflow = true;
-				bitIndex = (bitIndex + 8) % maxIndices;
+				bitIndex = (bitIndex + 8) % BCHDecoder3121.DATA_BITS;
 			}
 			
 			// Write out the data
@@ -328,17 +308,16 @@ public class TFTPreader
 	public static void main(String[] args)
 	{
 		// Verify that the correct number of parameters was provided
-		if (args.length != 3)
+		if (args.length != 2)
 		{
 			displayUsage();
 		}
 		else
 		{
 			TFTPreader reader = new TFTPreader();
-			if (reader.validateParameters(args[1], args[0])) 
-			{
-				TFTPmessage.TransferMode mode = TFTPmessage.buildTransferMode(args[0]); 
-				reader.receiveFile(mode, args[1], args[2], true); 
+			if (reader.validateParameters(args[0])) 
+			{ 
+				reader.receiveFile(TFTPmessage.TransferMode.OCTET, args[0], args[1]); 
 			}
 		}
 	}
@@ -349,7 +328,7 @@ public class TFTPreader
 	 */
 	private static void displayUsage()
 	{
-		System.err.println("Usage: java TFTPreader [netascii|octet] tftp-host file");
+		System.err.println("Usage: java TFTPreader tftp-host file");
 	}
 }
 

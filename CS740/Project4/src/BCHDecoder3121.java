@@ -16,8 +16,12 @@ public class BCHDecoder3121
 	/**
 	 * Some useful constants for this form of BCH encoding/decoding
 	 */
+	public static final int WORD_BITS = 32;
 	public static final int DATA_BYTES = 3;
+	public static final int DATA_BITS = 21;
 	public static final int CKSUM_BYTES = 1;
+	public static final int CKSUM_BITS = 11;
+	public static final int WORD_MASK = 0xfffff800;
 	
 	/**
 	 * Constants for the order of the Galois field.
