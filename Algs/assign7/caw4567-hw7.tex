@@ -195,16 +195,41 @@ The \textbf{set-partition problem} takes as input a set $S$ of numbers. The ques
 In order to show that the set-partition problem, $Q$ is $NP$-complete, we show that it reduces to the subset-sum problem, $Q'$. That is, we prove $Q \leq_p Q'$. 
 \end{sol}
 
-\begin{prob}{6}
-TODO
+\begin{prob}{6-a}
+Write pseudo-code for a recursive solution to the variation on the 0-1 knapsack problem that computes the
+maximum value that can be placed in the knapsack.
 \end{prob}
 \begin{sol}
-\begin{numberedAlg}[RECURSIVE-KNAPSACK]
-\label{alg1}
+\begin{numberedAlg}[RECURSIVE 0-1 KNAPSACK]
+\label{alg2}
 \begin{algorithmic}[1]
-	\item TODO
+	\Function{RecursiveKnapsack}{$S, v, w, W$}
+		TODO
+	\EndFunction
 \end{algorithmic}
 \end{numberedAlg}
+\end{sol}
+
+\begin{prob}{6-b}
+Give a dynamic programming solution to the 0-1 knapsack problem that is based on the previous problem;
+this algorithm should return the items to be taken. Implement this algorithm and call it $knapsack$.
+\end{prob}
+\begin{sol}
+TODO
+\end{sol}
+
+\begin{prob}{6-c}
+What is the time complexity of your dynamic programming based algorithm?
+\end{prob}
+\begin{sol}
+TODO
+\end{sol}
+
+\begin{prob}{6-d}
+The knapsack decision problem is $NP$-complete. Does your analysis above prove that $P = NP$? Explain.
+\end{prob}
+\begin{sol}
+TODO
 \end{sol}
 
 \end{document}
