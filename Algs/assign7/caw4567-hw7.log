@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  11 MAY 2012 20:10
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  12 MAY 2012 11:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1048,30 +1048,30 @@ ier (name{table.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.183 
-      ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 203.
+l.180 		\State
+               \Return $False$]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 210.
  [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 203.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 210.
  (./caw4567-hw7.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 203.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 203.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 210.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 210.
 Package rerunfilecheck Info: File `caw4567-hw7.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 203.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 210.
  ) 
 Here is how much of TeX's memory you used:
- 20837 strings out of 493633
- 381543 string characters out of 3143378
+ 20848 strings out of 493633
+ 381670 string characters out of 3143378
  607334 words of memory out of 3000000
- 23652 multiletter control sequences out of 15000+200000
- 12066 words of font info for 63 fonts, out of 3000000 for 9000
+ 23657 multiletter control sequences out of 15000+200000
+ 12219 words of font info for 66 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 63i,9n,58p,532b,547s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 63i,9n,58p,622b,565s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pf
 b></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pf
@@ -1085,7 +1085,7 @@ l/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local
 /texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/t
 exlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/tex
 live/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on caw4567-hw7.pdf (4 pages, 187588 bytes).
+Output written on caw4567-hw7.pdf (4 pages, 192861 bytes).
 PDF statistics:
  91 PDF objects out of 1000 (max. 8388607)
  69 compressed objects within 1 object stream

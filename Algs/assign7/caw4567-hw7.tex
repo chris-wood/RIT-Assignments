@@ -162,22 +162,29 @@ We show that the problem of determining the satisfiability of boolean formulas i
 \label{alg2}
 \begin{algorithmic}[1]
 	\Function{SolveDNF}{$\psi$}
-		\ForAll{$v_{i} \in V(G_1)$}
-			\State vCount = 0 \Comment {Count number of times $v_i$ appears in $G_2$}
-			\ForAll{$v_j \in V(G_2)$}
-				\If{$m(v_i) == v_j$}
-					\State vCount = vCount + 1
-				\EndIf
+		\ForAll{Logical clauses $c_i \in \psi$}
+			\State $satisfiable = True$
+			\State $satList = makeQueue()$
+			\ForAll{Literals $l_j \in c_i$}
+				\ForAll{Literals $l_k \in satList$}
+					\If{$l_j == \lnot l_j$}
+						\State $satisfiable$ = False \Comment{Found the negation of $l_j$ in the queue}
+					\EndIf
+				\EndFor
+				\State $PUSH(satList, l_j)$ \Comment{Push this literal into the queue}
 			\EndFor
-			\If {vCount $\not= 1$} \Comment {$v_i$ should only appear once in $G_2$}
-				\State \Return False
+			\If{$satisfiable == True$}
+				\State \Return $True$
 			\EndIf
 		\EndFor
-\\
-		\State \Return True
+		\State \Return $False$
 	\EndFunction
 \end{algorithmic}
 \end{numberedAlg}
+
+Since DNF statements are composed of disjunctions (ORs) of conjunction clauses (ANDs), it is enough to check and see if only one conjunction clause can be satisfied. Therefore, this procedure simply traverses over every clause and checks to see if there is a literal and its negation in that clause, which indicates that the clause can never be true. If this is not the case, then the clause must be satisfiable, and thus the expression is satisfiable. 
+
+The time complexity of this algorithm is $O(mn^2)$, where $m$ is the number of clauses in $\psi$ and $n$ is the number of literals in the boolean expression. The reason for this is that for every clause we traverse over every literal in the clause, and for each element we perform a linear search with $satList$ that can be equal to the number of literals in the clause. Therefore, since the linear search runs in $O(n)$ time, the number of literals in a clause is $O(n)$, and the number of clauses in $\psi$ is $O(m)$, and each of these operations are nested, the resulting time complexity is $O(mn^2)$.
 
 \end{sol}
 
