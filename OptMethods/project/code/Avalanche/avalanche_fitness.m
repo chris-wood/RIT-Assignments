@@ -11,9 +11,10 @@ bits = log2(SBOX_SIZE);
 % Sum up the bit weights to obtain the avalanche number
 sum = 0;
 for i = 1:bits
-    sum = sum + pVector(i);
+    sum = sum + (pVector(i) - (bits * (2^(bits - 1))));
 end
 
+%pVector
 fitness = -sum;
 
 end

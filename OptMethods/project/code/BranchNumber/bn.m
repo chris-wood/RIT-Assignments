@@ -1,5 +1,5 @@
 function [n,pair,box] = bn(S, n)
-	minVal = n;
+	minVal = Inf;
 	pair = zeros(1,2);
 	bits = log2(n);
     
@@ -11,7 +11,7 @@ function [n,pair,box] = bn(S, n)
 	for a = 1:sc
 		for b = 1:sc
             if (a ~= b)
-                x = wt(bitxor(a, b), bits);
+                x = wt(bitxor(a - 1, b - 1), bits);
                 %bitxor(a, b)
                 y = wt(bitxor(S(a), S(b)), bits);
                 %xor(S(a), S(b))
