@@ -10,7 +10,7 @@ nFitness = nl_fitness(X);
 
 % Linear combination of all three algirithms
 X
-fitness = -((aFitness) + (bFitness * -(2^SBOX_SIZE)) + (nFitness * -(2^SBOX_SIZE)));
+fitness = -((aFitness) + (bFitness * -(2^(SBOX_SIZE / 2))) + (nFitness * -(2^(SBOX_SIZE / 2))));
 
 % Rotate for additional randomness
 %for i = 1:SBOX_SIZE

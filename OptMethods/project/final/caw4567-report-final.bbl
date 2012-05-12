@@ -33,4 +33,16 @@ H.~M. Heys, ``A tutorial on linear and differential cryptanalysis,'' Tech.
 P.~P. Mar and K.~M. Latt, ``New analysis methods on strict avalanche criterion
   of s- boxes.''
 
+\bibitem{MaxBN}
+\BIBentryALTinterwordspacing
+``On feistel structures using a diffusion switching mechanism.'' in \emph{Fast
+  Software Encryption, 13th International Workshop, FSE 2006}, 2006, pp.
+  41--56. [Online]. Available:
+  \url{http://www.iacr.org/cryptodb/archive/2006/FSE/3254/3254.pdf}
+\BIBentrySTDinterwordspacing
+
+\bibitem{ProvableSecurity}
+``{"Provable"} security against differential and linear cryptanalysis,'' in
+  \emph{Fast Software Encryption, 19th International Workshop, FSE 2012}, 2012.
+
 \end{thebibliography}

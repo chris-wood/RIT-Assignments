@@ -55,18 +55,18 @@ Let $f$ be a bijective function with range $\mathbb{R^*}$, where $|\mathbb{R^*}|
 
 \begin{define}
 The \emph{branch number} of an $n \times n$-bit S-Box is
-\begin{eqnarray*}
+\begin{eqnarray}
 BN = \text{min}_{a, b\not=a}(\text{wt}(a \oplus b) + \text{wt}(S(a) \oplus S(b))),
-\end{eqnarray*}
+\end{eqnarray}
 where $a, b \in \field{F}_2^n$.
 \end{define}
 
 \begin{define}
 A function $f : \field{F}_2^n \to \field{F}_2^n$ exhibits the \emph{avalanche effect} if and only if 
-\begin{eqnarray*}
+\begin{eqnarray}
 \sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus c_{i}^{n})) = n2^{n-1},
-\end{eqnarray*}
-for all $i (1 \leq i \leq n)$, where $c_{i}^{n} = [0, 0, ..., 1, ..., 0]$ (where a $1$ is in the $n$th position of the vector of cardinality $n$).
+\end{eqnarray}
+for all $i (1 \leq i \leq n)$, where $c_{i}^{n} = \langle 0, 0, ..., 1, ..., 0 \rangle$ (where a $1$ is in the $n$th position of the vector of cardinality $n$).
 \end{define}
 
 \begin{define}
@@ -79,9 +79,9 @@ This simply means that $f(x) \oplus f(x \oplus c_i^n)$ is balanced for every ele
 
 \begin{define}
 The \emph{degree of nonlinearity} of an $n \times n$-bit S-Box from $\field{F}_2^n \to \field{F}_2^n$ can be measured by
-\begin{eqnarray*}
+\begin{eqnarray}
 	P_S = \text{max}_{0 \not= a, b}|\{x \in \field{F}_2^n : S(x + a) - S(x) = b\}|
-\end{eqnarray*}
+\end{eqnarray}
 where $a, b \in \field{F}_2^n$, and a low measure for $P_S$ indicates a high degree of nonlinearity.
 \end{define}
 
@@ -212,9 +212,9 @@ Also, since the genetic algorithm sovler is a probabilistic algorithm that rando
 
 \subsection{Avalanche Number}
 
-Table (CITE) contains the optimal results for a $3$-bit S-box configuration that were collected over a variety of optimization runs. 
+%Calculate average bit flips and see how close each one of these got!
 
-Calculate average bit flips and see how close each one of these got!
+Based on Equation $2$ from Section 1.1, we can easily tell that the optimal value for the avalanche number is exactly $n2^{n-1}$, where $n$ is the number of bits needed to store the S-box values. Therefore, for $3$- and $4$-bit S-boxes, we conclude that the optimal values are $3 \cdot 3(2^2) = 3 \cdot 12 = 36$ and $4 \cdot 4(2^3) = 4 \cdot 32 = 128$, respectively, since we are concerned with the avalanche effect over every single bit. Now, compare these optimal values against those obtained from the optimization algorithm. Table \ref{avTable} contains the optimal results for a $3$-bit S-box configuration that were collected over a variety of optimization runs, and Figure \ref{av16} contains an illustration of the iteration pattern of the algorithm for a higher order $4$-bit S-box configuration.
 
 \begin{table}
 	\centering
@@ -237,7 +237,8 @@ Calculate average bit flips and see how close each one of these got!
     \end{tabular}
 \end{table}
 
-The optimization results for a single run on a $4$-bit S-box is shown in Figure \ref{av16}.
+Based on these results we can see that 
+
 \begin{figure}
 \centering
 	\includegraphics[scale=0.5]{images/avalanche_results16.eps} \\
@@ -248,6 +249,8 @@ The optimization results for a single run on a $4$-bit S-box is shown in Figure 
 \subsection{Branch Number}
 
 http://www.iacr.org/archive/fse2006/40470042/40470042.pdf - shows that branch number is maximum if q+1 (order of field + 1?) Give the equation and then show that this does not produce optimal results.
+
+\cite{MaxBN}
 
 \begin{table}
 	\centering
@@ -279,7 +282,7 @@ http://www.iacr.org/archive/fse2006/40470042/40470042.pdf - shows that branch nu
 
 \subsection{Nonlinearity Measurement}
 
-TODO: cite Nydberg FSE 2012, this is Almost Perfect Nonlinear (<= 2), very good result.
+TODO: cite Nydberg FSE 2012, this is Almost Perfect Nonlinear (<= 2), very good result. \cite{ProvableSecurity}
 
 \begin{table}
 	\centering
@@ -315,17 +318,11 @@ TODO: write the stuff here
 	\label{jointTable}
     \begin{tabular}{|l|l|l|l|l|}
         \hline
-        Avalanche Weight & Branch Weight & Nonlinearity Weight & Function Value & Design Variables\\ \hline
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\
+        Avalanche Weight & Branch Weight & Nonlinearity Weight & S-Box Configuration & Function Value Tuple\\ \hline
+        1 & $2^8$ & $2^8$ & 5     6     2     5     5     6     2     5 & TODO \\ 
+        1 & $2^4$ & $2^8$ & 4     3     3     6     2     5     5     4 & TODO \\ 
+        1 & $2^8$ & $2^4$ & 2     5     2     2     2     5     2     2 & TODO \\ 
+        1 & $2^4$ & $2^4$ & 3     5     4     2     3     5     4     2 & TODO \\ 
         \hline
     \end{tabular}
 \end{table}
