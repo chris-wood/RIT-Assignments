@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2011)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: caw4567-report-final.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: caw4567-report-final.bib
+-- IEEEtran.bst version 1.13 (2008/09/30) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty institution in Heys01atutorial
+
+Done.
+You've used 3 entries,
+            4039 wiz_defined-function locations,
+            823 strings with 7590 characters,
+and the built_in function-call counts, 1123 in all, are:
+= -- 71
+> -- 17
+< -- 0
++ -- 8
+- -- 4
+* -- 50
+:= -- 202
+add.period$ -- 6
+call.type$ -- 3
+change.case$ -- 3
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 97
+empty$ -- 106
+format.name$ -- 5
+if$ -- 220
+int.to.chr$ -- 0
+int.to.str$ -- 3
+missing$ -- 24
+newline$ -- 32
+num.names$ -- 3
+pop$ -- 63
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 83
+stack$ -- 0
+substring$ -- 3
+swap$ -- 54
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 3
+warning$ -- 1
+while$ -- 3
+width$ -- 4
+write$ -- 43
+(There was 1 warning)

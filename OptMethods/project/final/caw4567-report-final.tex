@@ -7,6 +7,7 @@
 \usepackage{cawsty}
 \usepackage{fullpage}
 \usepackage{pseudocode}
+\usepackage{fancybox, fancyvrb}
 
 \newcommand{\field}[1]{\mathbb{#1}} %requires amsfonts
 
@@ -22,44 +23,30 @@ The cryptographic security of symmetric-key block ciphers and other related prim
 \end{abstract}
 
 \section{Problem Description}
-Cryptographic algorithms are deemed secure if they are resistant to known attacks (including brute force collision searches). Therefore, it is important to understand such attacks in order to construct cryptographically secure S-boxes for use in practice. This section introduces the two most common forms of cryptanalysis techniques that are used to guage the strength of symmetric-key block cipher designs. It then introduces several mathematical definitions that can be used to measure the security of S-boxes based on the goal of such cryptanalysis techniques, which subsequently become the target objective functions for this optimization project.
-
-\subsection{Block Cipher Security and Attack Methodologies}
-
-Cryptographic algorithms are deemed secure if they are resistant to known attacks (including brute force collision searches). Therefore, it is important to understand such attacks in order to construct cryptographically secure S-boxes for use in practice. This section introduces the two most common forms of cryptanalysis techniques that are used to guage the strength of symmetric-key block cipher designs. It then introduces several mathematical definitions that can be used to measure the security of S-boxes based on the goal of such cryptanalysis techniques, which subsequently become the target objective functions for this optimization project.
-
-\subsubsection{Linear Cryptanalysis}
-Ever since the application of linear cryptanalysis on the FEAL and DES block ciphers in the early ninties, cryptanalysis research has increased exponentially and led to the need for high diffusion and confusion in secure symmetric-key cryptographic algorithm designs (especially block ciphers) \cite{Heys01atutorial}. Linear cryptanalysis is an attack that attempts to take advantage of high probability occurrences of linear expressions involving plaintext bits, ciphertext bits, and subkey bits. Mathematically, the attack is based on the idea of approximating the operation of a portion of the block cipher in question with an expression that is linear in terms of the input ($X$) and output ($Y$) bits involved, as shown below \cite{Heys01atutorial}:
+The strength of cryptographic algorithms is commonly measured by their resilience to common cryptanalysis attacks, such as linear and differential cryptanalysis. Linear cryptanalysis is is an attack that attempts to take advantage of high probability occurrences of linear expressions involving plaintext bits, ciphertext bits, and subkey bits. Mathematically, the attack is based on the idea of approximating the operation of a portion of the block cipher in question with an expression that is linear in terms of the input ($X$) and output ($Y$) bits involved, as shown below \cite{Heys01atutorial}:
 \begin{eqnarray*}
 X_{i_{1}} \oplus X_{i_{2}} ... \oplus X_{i_{r}} \oplus Y_{j_{1}} \oplus Y_{j_{2}} ... \oplus Y_{j_{s}} \oplus  = 0
 \end{eqnarray*}
 Using this expression, attackers can guage the amount of randomness introduced by the cipher. That is, if such an expression is satisfied frequently (with a relatively high probability), then we know that the probability of the expression holding for any two values $a,b\in \field{F}_2^n$ is approximately $\frac{1}{2}$. However, when this probability shifts away from $\frac{1}{2}$, the amount of known plaintexts required to determine the key (or key block) that was used to reproduce the output goes down dramatically. Such a deviation from the expected probability of $\frac{1}{2}$ for any expression of the form above, which is referred to as the \emph{linear bias}, determines the susceptibility of the block cipher to known plaintext attacks. Therefore, it is important to introduce non-linearity into the block cipher in order to defend against such attacks.
 
-Traditional block ciphers based on substitution-permutation networks (such as the DES and AES) use a specially tuned S(ubstitution)-box as the primary source of nonlinearity that is designed to thwart such cryptanalysis attacks. An S-box is a bijective function $f$ defined over $\field{F}_2^n$ that maps elements in its domain to distinct elements in the range. Rijndael, the AES algorithm, utilizes a unique S-box design based on a fixed, invertible affine transformation to achieve non-linearity. More specifically, the substitution of a single element $a \in \field{F}_2^n$ to another element $b \in \field{F}_2^n$ is computed by performing an affine transformation on $a^{-1}$ (the multiplicative inverse of $a$), meaning that $b = f(a)$. The affine transformation was carefully constructed to yield high resistance against known cryptanalytic attacks of the time, including both linear and differential cryptanalysis \cite{Daemen:2002:DRA}. 
-
-S-boxes are not the only proposed source of non-linearity, however. One other notable deisgn technique is based on the notion of modular ($2^n$) addition, bit-wise rotation, and XOR operations. Separate, these simple routines are very easy to invert and fit to a linear model. However, when brought together in the right way using information from the secret key as an operand, an artificial degree of non-linearity begins to emerge in the result. Threefish, the block cipher inside Skein (one of final candidates for the SHA-3 hash function competition), relies on the ARX operation for non-linear behavior between rounds of the cipher. However, such designs are also susceptible to similar cryptanalytic attacks, as was shown in \cite{Khovratovich:2010:RCA:1876089.1876116}. Therefore, the focus and scope of this project will be geared towards S-box design due to its simplicity and cryptographic maturity.
-
-\subsubsection{Differential Cryptanalysis}
-Linear cryptanalysis is not the only attack that threatens existing block ciphers. Differential cryptanalysis is a very powerful attack technique that attempts to break symmetric key ciphers by exploiting high probability of certain occurrences of plaintext differences and ciphertext differences \cite{Heys01atutorial}. To illustrate this attack technique, consider the input of a block cipher to be represented by the vector $[X_1, X_2,..., X_n]$ and the corresponding output to be $[Y_1, Y_2, ..., Y_n]$, where each element $X_i$ and $Y_i$ corresponds to a single bit in the input and output, respectively. With this definition, we can represent the input difference of any two input vectors ($\Delta X$) and any two output vectors ($\Delta Y$) as follows:
+Differential cryptanalysis is a very powerful attack technique that attempts to break symmetric key ciphers by exploiting high probability of certain occurrences of plaintext differences and ciphertext differences \cite{Heys01atutorial}. To illustrate this attack technique, consider the input of a block cipher to be represented by the vector $[X_1, X_2,..., X_n]$ and the corresponding output to be $[Y_1, Y_2, ..., Y_n]$, where each element $X_i$ and $Y_i$ corresponds to a single bit in the input and output, respectively. With this definition, we can represent the input difference of any two input vectors ($\Delta X$) and any two output vectors ($\Delta Y$) as follows:
 \begin{eqnarray*}
-\Delta X = [\Delta X_1 \oplus \Delta X_2 \oplus ... \oplus \Delta X_n]
-\end{eqnarray*}
-\begin{eqnarray*}
+\Delta X = [\Delta X_1 \oplus \Delta X_2 \oplus ... \oplus \Delta X_n]  \\
 \Delta Y= [\Delta Y_1 \oplus \Delta Y_2 \oplus ... \oplus \Delta Y_n]
 \end{eqnarray*}
 where $\Delta X_i = X_{i,1} \oplus X_{i,2}$ and $\Delta Y_i = Y_{i,1} \oplus Y_{i,2}$. It is an ideal block cipher the output different $\Delta Y$ for a specific input different $\Delta X$ will occur with a probability of approximately $\frac{1}{2^n}$ (i.e. it produces random output based on every input block). Note that it is common to represent the input and output difference pairs as $(\Delta X, \Delta Y)$ (which are referred to as differentials).
 
-With the idea of differential pairs in mind, we define differential cryptanalysis as the process of finding differentials that occur with a probability much higher than $\frac{1}{2^n}$, which subsequently gives rise to a statistical correlation between the relationship between the input and output of a block cipher and can allow one to deduce the private key used in the cipher. Therefore, it is ideal to maximize the amount of randomness introduced by the block cipher through each iteration. Clearly, this necessity can be traced back to the need for high diffusion levels in block ciphers.
+With the idea of differential pairs in mind, we define differential cryptanalysis as the process of finding differentials that occur with a probability much higher than $\frac{1}{2^n}$, which subsequently gives rise to a statistical correlation between the relationship between the input and output of a block cipher and can allow one to deduce the private key used in the cipher. Therefore, it is ideal to maximize the amount of randomness introduced by the block cipher through each iteration. Clearly, this necessity can be traced back to the need for high diffusion and confusion levels in block ciphers.
 
-Intuitively, there is no single universal mathematical operation that results in optimal randomness of a block cipher. The differential probabilities are highly dependent on the entire construction of the cryptographic algorithm in question, which is driven by the existing cryptanalysis attacks used at the time of creation. However, one step towards achieving ideal levels of randomness is to optimize the confusion and diffusion properties of the cipher, which can be improved by further optimizing the construction of the S-box that is used within the cipher.
+The efficiency of both of these attacks relate to the measures of confusion and diffusion within a cipher and the extent to which they can be exploited. Confusion is typically referred to as the complexity of the relationship between the secret-key and ciphertext, and diffusion is commonly referred to as the degree to which the influence of a single input bit is spread throughout the resulting ciphertext. In the context of cryptographic algorithms, these characteristics are usually realized through a unique combination of linear and nonlinear operations. It is clear that the nonlinear operations in the algorithms contribute more to the security of the corresponding algorithm than the other components. The most common source of nonlinearity in symmetric-key cryptographic algorithms is from a S(ubstitution)-box, which is a function with an equal sized domain and range that is configured to yield optimal confusion and diffusion between each input and output pair. As such, S-boxes (as the substitution layer in cryptographic algorithms) will be the focus of this project. 
 
 \subsection{Cryptographic Strength of Substitution Layers}
-Mathematically, an S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In the context of cryptographic applications, such a function $f$ must be bijective in order to avoid bias towards any specific output element in the field. We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes \cite{Mar_newanalysis}.
+Mathematically, an S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In the context of cryptographic applications, such a function $f$ should be bijective in order to avoid bias towards any specific output element in the field. We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes \cite{Mar_newanalysis}.
 
 %TODO: http://www.waset.org/journals/waset/v48/v48-24.pdf && thesis work
 
 \begin{define}
-The \emph{Hamming weight} of an element $x \in \field{F}_2^n$ is defined as wt$(x) = \sum x_i$.
+The \emph{Hamming weight} of an element $x \in \field{F}_2^n$ is defined as wt$(x) = \sum x_i$, where $x_i$ refers to the $i$th bit in $x$.
 \end{define}
 
 \begin{define}
@@ -91,14 +78,14 @@ This simply means that $f(x) \oplus f(x \oplus c_i^n)$ is balanced for every ele
 \end{define}
 
 \begin{define}
-The \emph{degree of non-linearity} of an $n \times n$-bit S-Box from $\field{F}_2^n \to \field{F}_2^n$ can be measured by
+The \emph{degree of nonlinearity} of an $n \times n$-bit S-Box from $\field{F}_2^n \to \field{F}_2^n$ can be measured by
 \begin{eqnarray*}
 	P_S = \text{max}_{0 \not= a, b}|\{x \in \field{F}_2^n : S(x + a) - S(x) = b\}|
 \end{eqnarray*}
-where $a, b \in \field{F}_2^n$.
+where $a, b \in \field{F}_2^n$, and a low measure for $P_S$ indicates a high degree of nonlinearity.
 \end{define}
 
-Designers of cryptographically secure cryptographic primitives (e.g. block ciphers, hash functions, etc) use all of these measurements as a theoretical basis for their susceptibility to linear and differential cryptanalysis (among other attacks). Specifically, it has been shown that cryptographically secure symmetric-key algorithms utilize diffusion and confusion layers that provide the following characteristics:
+Designers of cryptographically secure cryptographic primitives (e.g. block ciphers, hash functions, etc) use all of these measurements as a basis for the degrees of confusion and diffusion within a cipher, and thus for their susceptibility to linear and differential cryptanalysis (among other attacks). Specifically, it has been shown that cryptographically secure symmetric-key algorithms utilize substitution layers that provide the following characteristics:
 \begin{enumerate}
 	\item Low differential propagation probability
 	\item High branch number
@@ -126,8 +113,10 @@ Due to the application of S-boxes inside cryptographic algorithms, it is ideal t
 The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables. 
 \end{center}
 
-Such exhaustive searches have a time complexity of $O(n^n)$ and thus are only feasible for small order S-boxes. However, recent research has advanced the upper bound on these exhaustive searches to include $4$-bit S-boxes, which were run in TODO: DETAILS (CITE cryptanalysis of 4x4 bit sboxes). Furthermore, due to the instability of each function over the design variable permutation space, it is clear that a probabilistic optimization algorithm would be best suited to optimizing each of these metrics. Before such an algorithm can be applied, however, we must formalize each objective function for these metrics as standard optimization problems. Treating each objective function as a mixed-integer nonlinear optimization problem yields the following problem definitions.
+Such exhaustive searches have a time complexity of $O(n^n)$ and thus are only feasible for small order S-boxes. However, recent research has advanced the upper bound on these exhaustive searches to include $4$-bit S-boxes, which were run in TODO: DETAILS (CITE cryptanalysis of 4x4 bit sboxes). Furthermore, due to the instability of each function over the design variable permutation space, it is clear that a probabilistic optimization algorithm would be best suited to optimizing each of these metrics. Before such an algorithm can be applied, however, we must formalize each objective function for these metrics as standard optimization problems. Treating each objective function as a mixed-integer nonlinear optimization problem yields the following problem definitions. \\
 
+\shadowbox{%
+\parbox{15cm}{% 
 \textbf{Minimize}
 \begin{eqnarray*}
 BN'(X) = -BN(X) = -\text{min}_{i, j\not=i}(\text{wt}(i \oplus j) + \text{wt}(X(i) \oplus X(j))),
@@ -136,8 +125,11 @@ subject to the constraints
 \begin{eqnarray*}
 0 \leq X(i) \leq 2^{n} - 1,
 \end{eqnarray*}
-where $n$ is the number of design variables. \\
+where $n$ is the number of design variables.
+}}
 
+\shadowbox{%
+\parbox{15cm}{% 
 \textbf{Minimize}
 \begin{eqnarray*}
 A'(X) = -A(X) = -\sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus c_{i}^{n})),
@@ -147,7 +139,10 @@ subject to the constraints
 0 \leq X(i) \leq 2^{n} - 1,
 \end{eqnarray*}
 where $n$ is the number of design variables. \\
+}}
 
+\shadowbox{%
+\parbox{15cm}{% 
 \textbf{Minimize}
 \begin{eqnarray*}
 P_S(X) = \text{max}_{0 \not= a, b}|\{x \in \field{F}_2^n : S(x + a) - S(x) = b\}|
@@ -157,6 +152,7 @@ subject to the constraints
 0 \leq X(i) \leq 2^{n} - 1,
 \end{eqnarray*}
 where $n$ is the number of design variables. \\
+}}
 
 \section{Algorithm configuration}
 %1. GA description - TODO: write up some characteristics of this algorithm
@@ -259,5 +255,9 @@ TODO: write the stuff here
 %TODO: results were closest to brute force, and presumed to be close to actual values
 %TODO: joint computations using GA were ineffective, exhaustive searches would be better, contradicting functions caused too great penalties and little change in design variabes
 %TODO:  GA work - tweak crossover and mutation functions, run on large scale hardware/software systems
+
+\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{caw4567-report-final}
 
 \end{document}
