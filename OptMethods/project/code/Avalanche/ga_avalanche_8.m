@@ -17,22 +17,11 @@ indices = zeros(1, SBOX_SIZE);
 
 % Dumbly fill in the S-box contents
 for i = 1:SBOX_SIZE
-	S(i) = 0; %i - 1
+	S(i) = i - 1; %i - 1
     indices(i) = i;
 end
 S(1) = 1;
 S(SBOX_SIZE) = 1;
-
-% Attempt to calculate the BN for this S-box (simple setup)
-S
-avalanche(S, SBOX_SIZE)
-
-% Set up the options for the solver to make sure the interior-point 
-% algorithm is used.
-%options = optimset('Algorithm','interior-point','Display','iter-detailed','PlotFcns','optimplotfval');
-
-% Invoke the fmincon function to find the minimum.
-%[v1,v2] = fmincon('sboxavalancheobj',S,[],[],[],[],0,(2^SBOX_SIZE) - 1,'sboxcon',options);
 
 % Set up for genetic algorithm
 LB = 0;
@@ -40,7 +29,7 @@ UB = 2^bits - 1;
 Bound = [LB;UB];
 options = gaoptimset('CreationFcn', @avalanche_creation,'MutationFcn',@avalanche_mutate, ...
     'PopInitRange',Bound,'Display','iter','Generations',150,'PopulationSize',SBOX_SIZE,...
-    'PlotFcns',{@gaplotbestf,@gaplotbestindiv,@gaplotdistance,@gaplotselection});
+    'PlotFcns',{@gaplotbestf,@gaplotdistance});
 
 % Run the genetic algorithm now!
 [x, fval] = ga(@avalanche_fitness, SBOX_SIZE, options)

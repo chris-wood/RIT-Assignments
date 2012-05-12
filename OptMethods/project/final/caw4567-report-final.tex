@@ -107,11 +107,12 @@ However, in practice the additional constraints that fast and simple mathematica
 
 Due to the application of S-boxes inside cryptographic algorithms, it is ideal that such function configurations exhibit the globally maximum values for each of these metrics. The best way to achieve this assurance is to perform an exhaustive search over the S-box design space (i.e. consider all possible input and output values and find the one that yields the optimum results). The results from an exhaustive search for a $2$-bit S-box are shown in Figure \ref{bfjoint}
 
-\begin{center}
+\begin{figure}
+	\centering
 	\includegraphics[scale=0.75]{images/brute_joint.eps} \\
 	\label{bfjoint}
-The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables. 
-\end{center}
+\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables.}
+\end{figure}
 
 Such exhaustive searches have a worst case time complexity of $O(n^n)$ and thus are only feasible for very small order S-boxes. However, recent research efforts have advanced the upper bound on these exhaustive searches to include $4$-bit S-boxes, which were run in TODO: DETAILS (CITE cryptanalysis of 4x4 bit sboxes). However, measurements for each of the aforementioned metrics were not provided. Furthermore, due to the instability of each function over the design variable permutation space, it is clear that a probabilistic optimization algorithm would be best suited to optimizing each of these metrics. 
 
@@ -213,23 +214,25 @@ Also, since the genetic algorithm sovler is a probabilistic algorithm that rando
 
 Table (CITE) contains the optimal results for a $3$-bit S-box configuration that were collected over a variety of optimization runs. 
 
+Calculate average bit flips and see how close each one of these got!
+
 \begin{table}
 	\centering
 	\label{avTable}
 	\caption{TODO}
     \begin{tabular}{|l|l|l|}
         \hline
-        Canonical S-Box Configuration & Optimal Function Value & Generations Produced \\ \hline
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\
+        S-Box Configuration & Optimal Function Value & Generations Produced \\ \hline
+        6     1     3     6     3     6     4     1 & 26 & 57 \\ 
+        0     7     7     4     6     1     1     2 & 20 & 51 \\ 
+        5     3     2     5     2     5     5     2 & 30 & 59 \\ 
+        6     1     1     6     1     4     6     1 & 30 & 51 \\ 
+        6     1     5     6     1     6     2     1 & 28 & 58 \\ 
+        1     2     6     1     7     0     1     6 & 22 & 58 \\ 
+        1     6     6     1     6     5     1     6 & 30 & 51 \\ 
+        3     4     7     1     6     3     1     6 & 20 & 51 \\ 
+        6     3     3     4     2     5     5     2 & 22 & 63 \\ 
+        6     1     1     2     1     6     6     1 & 30 & 63 \\
         \hline
     \end{tabular}
 \end{table}
@@ -239,10 +242,12 @@ The optimization results for a single run on a $4$-bit S-box is shown in Figure 
 \centering
 	\includegraphics[scale=0.5]{images/avalanche_results16.eps} \\
 	\label{av16}
-	\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables. }
+	\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables.}
 \end{figure}
 
 \subsection{Branch Number}
+
+http://www.iacr.org/archive/fse2006/40470042/40470042.pdf - shows that branch number is maximum if q+1 (order of field + 1?) Give the equation and then show that this does not produce optimal results.
 
 \begin{table}
 	\centering
@@ -250,17 +255,17 @@ The optimization results for a single run on a $4$-bit S-box is shown in Figure 
 	\caption{TODO}
     \begin{tabular}{|l|l|l|}
         \hline
-        Canonical S-Box Configuration & Optimal Function Value & Generations Produced \\ \hline
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\
+        S-Box Configuration & Optimal Function Value & Generations Produced \\ \hline
+        3     4     0     7     5     2     6     1 & 3 & 500 \\ 
+	3     6     4     1     5     0     2     7 & 3 & 500 \\ 
+        4     7     6     1     2     1     5     6 & 2 & 500 \\ 
+        5     3     1     5     6     5     0     7 & 2 & 500 \\ 
+        1     3     0     2     7     2     6     3 & 2 & 500 \\ 
+        6     3     4     1     5     6     0     4 & 2 & 500 \\ 
+        3     1     5     4     2     6     4     1 & 2 & 500 \\ 
+        6     5     5     4     4     3     2     6 & 2 & 500 \\ 
+        2     6     6     2     4     3     2     1 & 2 & 500 \\ 
+        4     3     1     2     6     7     5     6 & 2 & 500 \\
         \hline
     \end{tabular}
 \end{table}
@@ -274,23 +279,20 @@ The optimization results for a single run on a $4$-bit S-box is shown in Figure 
 
 \subsection{Nonlinearity Measurement}
 
+TODO: cite Nydberg FSE 2012, this is Almost Perfect Nonlinear (<= 2), very good result.
+
 \begin{table}
 	\centering
 	\caption{TODO}
 	\label{nlTable}
     \begin{tabular}{|l|l|l|}
         \hline
-        Canonical S-Box Configuration & Optimal Function Value & Generations Produced \\ \hline
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\ 
-        ~ & ~ & ~ \\
+        S-Box Configuration & Optimal Function Value & Generations Produced \\ \hline
+        4     2     1     4     1     1     5     4 & 2 & 51 \\ 
+        6     3     6     5     1     5     5     1 & 2 & 51 \\ 
+        0     3     3     6     7     6     2     2 & 2 & 51 \\ 
+        3     4     1     5     4     0     6     6 & 2 & 51 \\ 
+        4     4     7     2     4     1     5     6 & 2 & 51 \\ 
         \hline
     \end{tabular}
 \end{table}

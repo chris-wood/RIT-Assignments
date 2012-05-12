@@ -40,7 +40,7 @@ UB = 2^bits - 1;
 Bound = [LB;UB];
 options = gaoptimset('CreationFcn', @avalanche_creation,'MutationFcn',@avalanche_mutate, ...
     'PopInitRange',Bound,'Display','iter','Generations',150,'PopulationSize',SBOX_SIZE,...
-    'PlotFcns',{@gaplotbestf,@gaplotbestindiv,@gaplotdistance,@gaplotselection});
+    'PlotFcns',{@gaplotbestf,@gaplotdistance});
 
 % Run the genetic algorithm now!
 [x, fval] = ga(@avalanche_fitness, SBOX_SIZE, options)

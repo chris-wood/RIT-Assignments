@@ -29,7 +29,7 @@ UB = 2^bits - 1;
 Bound = [LB;UB];
 options = gaoptimset('CreationFcn', @bn_creation,'MutationFcn',@bn_mutate, ...
     'PopInitRange',Bound,'Display','diagnose','Generations',500,'PopulationSize',SBOX_SIZE,...
-    'PlotFcns',{@gaplotbestf,@gaplotbestindiv,@gaplotdistance,@gaplotselection},'TolFun',1e-6,'StallGenLimit',2^SBOX_SIZE^2);
+    'PlotFcns',{@gaplotbestf,@gaplotdistance},'TolFun',1e-6,'StallGenLimit',2^SBOX_SIZE^2);
 
 % Run the genetic algorithm now!
 [x, fval] = ga(@bn_fitness, SBOX_SIZE, options)
