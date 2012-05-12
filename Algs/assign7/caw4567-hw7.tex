@@ -203,8 +203,14 @@ maximum value that can be placed in the knapsack.
 \begin{numberedAlg}[RECURSIVE 0-1 KNAPSACK]
 \label{alg2}
 \begin{algorithmic}[1]
-	\Function{RecursiveKnapsack}{$S, v, w, W$}
-		TODO
+	\Function{RecursiveKnapsack}{$n, v, w, W$}
+		\If{$W < 0$}
+			\State \Return $-1$ \Comment{The weight limit was passed, so decrease the value}
+		\ElsIf{$n == 0$}
+			\State \Return $0$ \Comment{There are no items to contribute weight or value}
+		\Else
+			\State \Return max($v[n]+RecursiveKnapsack(n-1, v, w, W-w[n])$, \\ $RecursiveKnapsack(n-1,v,w,W)$)
+		\EndIf
 	\EndFunction
 \end{algorithmic}
 \end{numberedAlg}
