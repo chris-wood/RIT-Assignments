@@ -192,7 +192,13 @@ The time complexity of this algorithm is $O(mn^2)$, where $m$ is the number of c
 The \textbf{set-partition problem} takes as input a set $S$ of numbers. The question is whether the numbers can be partitioned into two sets $A$ and $A' = S - A$ such that $\sum_{x \in A}x = \sum_{x \in A'} x$. Show that the set-partition problem is $NP$-complete.
 \end{prob}
 \begin{sol}
-In order to show that the set-partition problem, $Q$ is $NP$-complete, we show that it reduces to the subset-sum problem, $Q'$. That is, we prove $Q \leq_p Q'$. 
+In order to show that the set-partition problem, $Q$ is $NP$-complete, we show that it reduces to the subset-sum problem, $Q'$. That is, we prove $Q \leq_p Q'$ as follows:
+\begin{itemize}
+	\item Given instance of left, build instance to right
+	\item Show that right solves
+	\item Show that construction solves left
+	\item Show that construction can be done in polynomial time
+\end{itemize}
 \end{sol}
 
 \begin{prob}{6-a}
@@ -221,21 +227,27 @@ Give a dynamic programming solution to the 0-1 knapsack problem that is based on
 this algorithm should return the items to be taken. Implement this algorithm and call it $knapsack$.
 \end{prob}
 \begin{sol}
-TODO
+TODO: insert source code once finished.
 \end{sol}
 
 \begin{prob}{6-c}
 What is the time complexity of your dynamic programming based algorithm?
 \end{prob}
 \begin{sol}
-TODO
+The time complexity of this dynamic programming based algorithm depends on the computation of the $value$ table and identifying the items that were added to the knapsack. Since these procedures are run back-to-back, we consider their time complexity separately in order to determine the time complexity of the entire algorithm.
+
+The time complexity of the value computation depends on the initialization procedure in which the table is constructed and then the nested loops that perform the bottom-up computation. The initialization procedure generates a table that has dimensions $n \times W$, so it runs in $O(nW)$ time. Similarly, the table computation procedure performs a constant time table lookup (or returns a $0$ in the base case) when traversing across every possible knapsack capacity for every item, so we can conclude that this procedure runs in $O(nW)$ time as well.
+
+Analyzing the time complexity of the item identification procedure indicates that it runs in $O(n)$ time, because at every iteration through the main loop the item counter is decreased by $1$ until we consider all items in the knapsack. Hence, the linear time complexity of $O(n)$.
+
+Now, putting these two results together, the dynamic programming based algorithm that solves the 0-1 knapsack problem has a time complexity of $O(nW) + O(nW) + O(n)$, which can be reduced to $O(nW)$. 
 \end{sol}
 
 \begin{prob}{6-d}
 The knapsack decision problem is $NP$-complete. Does your analysis above prove that $P = NP$? Explain.
 \end{prob}
 \begin{sol}
-TODO
+TODO: no? it's just a fancy implementation...
 \end{sol}
 
 \end{document}
