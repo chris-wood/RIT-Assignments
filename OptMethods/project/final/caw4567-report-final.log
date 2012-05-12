@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  10 MAY 2012 10:57
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  11 MAY 2012 21:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -609,7 +609,7 @@ verted-to.pdf images/brute_joint.eps>
 (epstopdf)             \includegraphics on input line 124.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/brute_joint-eps-converted-to.pdf, id=86, 449.68pt x 338.26375pt>
+<images/brute_joint-eps-converted-to.pdf, id=102, 449.68pt x 338.26375pt>
 File: images/brute_joint-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/brute_joint-eps-converted-to.pdf>
@@ -632,34 +632,167 @@ Underfull \hbox (badness 10000) in paragraph at lines 158--160
  []
 
 [6] [7]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 227.
- [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 227.
- (./caw4567-report-final.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 227.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 227.
+Package epstopdf Info: Source file: <images/avalanche_results8.eps>
+(epstopdf)                    date: 2012-05-11 21:56:44
+(epstopdf)                    size: 19918 bytes
+(epstopdf)             Output file: <images/avalanche_results8-eps-converted-to
+.pdf>
+(epstopdf)             Command: <repstopdf --outfile=images/avalanche_results8-
+eps-converted-to.pdf images/avalanche_results8.eps>
+(epstopdf)             \includegraphics on input line 208.
+runsystem(repstopdf --outfile=images/avalanche_results8-eps-converted-to.pdf im
+ages/avalanche_results8.eps)...executed safely (allowed).
 
+Package epstopdf Info: Result file: <images/avalanche_results8-eps-converted-to
+.pdf>
+(epstopdf)                    date: 2012-05-11 21:58:39
+(epstopdf)                    size: 18672 bytes.
 
-Package rerunfilecheck Warning: File `caw4567-report-final.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+<images/avalanche_results8-eps-converted-to.pdf, id=130, 526.96875pt x 416.5562
+4pt>
+File: images/avalanche_results8-eps-converted-to.pdf Graphic file (type pdf)
+ <use images/avalanche_results8-eps-converted-to.pdf>
+Package pdftex.def Info: images/avalanche_results8-eps-converted-to.pdf used on
+ input line 208.
+(pdftex.def)             Requested size: 395.22559pt x 312.41641pt.
+Package epstopdf Info: Source file: <images/avalanche_results16.eps>
+(epstopdf)                    date: 2012-05-11 21:56:44
+(epstopdf)                    size: 20806 bytes
+(epstopdf)             Output file: <images/avalanche_results16-eps-converted-t
+o.pdf>
+(epstopdf)             Command: <repstopdf --outfile=images/avalanche_results16
+-eps-converted-to.pdf images/avalanche_results16.eps>
+(epstopdf)             \includegraphics on input line 214.
+runsystem(repstopdf --outfile=images/avalanche_results16-eps-converted-to.pdf i
+mages/avalanche_results16.eps)...executed safely (allowed).
 
-Package rerunfilecheck Info: Checksums for `caw4567-report-final.out':
-(rerunfilecheck)             Before: C9DC3E258DE13E5C5A12000FEF1E20C9;819
-(rerunfilecheck)             After:  BCC1139B222BD88C0FCE6B82C6754E55;1100.
+Package epstopdf Info: Result file: <images/avalanche_results16-eps-converted-t
+o.pdf>
+(epstopdf)                    date: 2012-05-11 21:58:39
+(epstopdf)                    size: 20360 bytes.
+
+<images/avalanche_results16-eps-converted-to.pdf, id=131, 528.97626pt x 416.556
+24pt>
+File: images/avalanche_results16-eps-converted-to.pdf Graphic file (type pdf)
+ <use images/avalanche_results16-eps-converted-to.pdf>
+Package pdftex.def Info: images/avalanche_results16-eps-converted-to.pdf used o
+n input line 214.
+(pdftex.def)             Requested size: 396.73122pt x 312.41641pt.
+ [8 <./images/avalanche_results8-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <images/bn_results8.eps>
+(epstopdf)                    date: 2012-05-11 21:56:50
+(epstopdf)                    size: 44667 bytes
+(epstopdf)             Output file: <images/bn_results8-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=images/bn_results8-eps-con
+verted-to.pdf images/bn_results8.eps>
+(epstopdf)             \includegraphics on input line 223.
+runsystem(repstopdf --outfile=images/bn_results8-eps-converted-to.pdf images/bn
+_results8.eps)...executed safely (allowed).
+
+Package epstopdf Info: Result file: <images/bn_results8-eps-converted-to.pdf>
+(epstopdf)                    date: 2012-05-11 21:58:40
+(epstopdf)                    size: 76669 bytes.
+
+<images/bn_results8-eps-converted-to.pdf, id=142, 526.96875pt x 416.55624pt>
+File: images/bn_results8-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/bn_results8-eps-converted-to.pdf>
+Package pdftex.def Info: images/bn_results8-eps-converted-to.pdf used on input 
+line 223.
+(pdftex.def)             Requested size: 395.22559pt x 312.41641pt.
+ [9 <./images/avalanche_results16-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <images/bn_results16.eps>
+(epstopdf)                    date: 2012-05-11 21:56:50
+(epstopdf)                    size: 44378 bytes
+(epstopdf)             Output file: <images/bn_results16-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=images/bn_results16-eps-co
+nverted-to.pdf images/bn_results16.eps>
+(epstopdf)             \includegraphics on input line 229.
+runsystem(repstopdf --outfile=images/bn_results16-eps-converted-to.pdf images/b
+n_results16.eps)...executed safely (allowed).
+
+Package epstopdf Info: Result file: <images/bn_results16-eps-converted-to.pdf>
+(epstopdf)                    date: 2012-05-11 21:58:41
+(epstopdf)                    size: 76503 bytes.
+
+<images/bn_results16-eps-converted-to.pdf, id=154, 528.97626pt x 416.55624pt>
+File: images/bn_results16-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/bn_results16-eps-converted-to.pdf>
+Package pdftex.def Info: images/bn_results16-eps-converted-to.pdf used on input
+ line 229.
+(pdftex.def)             Requested size: 396.73122pt x 312.41641pt.
+ [10 <./images/bn_results8-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <images/nl_results8.eps>
+(epstopdf)                    date: 2012-05-11 21:56:57
+(epstopdf)                    size: 20188 bytes
+(epstopdf)             Output file: <images/nl_results8-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=images/nl_results8-eps-con
+verted-to.pdf images/nl_results8.eps>
+(epstopdf)             \includegraphics on input line 238.
+runsystem(repstopdf --outfile=images/nl_results8-eps-converted-to.pdf images/nl
+_results8.eps)...executed safely (allowed).
+
+Package epstopdf Info: Result file: <images/nl_results8-eps-converted-to.pdf>
+(epstopdf)                    date: 2012-05-11 21:58:41
+(epstopdf)                    size: 18640 bytes.
+
+<images/nl_results8-eps-converted-to.pdf, id=164, 526.96875pt x 416.55624pt>
+File: images/nl_results8-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/nl_results8-eps-converted-to.pdf>
+Package pdftex.def Info: images/nl_results8-eps-converted-to.pdf used on input 
+line 238.
+(pdftex.def)             Requested size: 395.22559pt x 312.41641pt.
+ [11 <./images/bn_results16-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <images/nl_results16.eps>
+(epstopdf)                    date: 2012-05-11 21:56:57
+(epstopdf)                    size: 20693 bytes
+(epstopdf)             Output file: <images/nl_results16-eps-converted-to.pdf>
+(epstopdf)             Command: <repstopdf --outfile=images/nl_results16-eps-co
+nverted-to.pdf images/nl_results16.eps>
+(epstopdf)             \includegraphics on input line 244.
+runsystem(repstopdf --outfile=images/nl_results16-eps-converted-to.pdf images/n
+l_results16.eps)...executed safely (allowed).
+
+Package epstopdf Info: Result file: <images/nl_results16-eps-converted-to.pdf>
+(epstopdf)                    date: 2012-05-11 21:58:42
+(epstopdf)                    size: 19276 bytes.
+
+<images/nl_results16-eps-converted-to.pdf, id=174, 528.97626pt x 416.55624pt>
+File: images/nl_results16-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images/nl_results16-eps-converted-to.pdf>
+Package pdftex.def Info: images/nl_results16-eps-converted-to.pdf used on input
+ line 244.
+(pdftex.def)             Requested size: 396.73122pt x 312.41641pt.
+ [12 <./images/nl_results8-eps-converted-to.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 263.
+ [13 <./images/nl_results16-eps-converted-to.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 263.
+
+(./caw4567-report-final.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 263.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 263.
+Package rerunfilecheck Info: File `caw4567-report-final.out' has not changed.
+(rerunfilecheck)             Checksum: BCC1139B222BD88C0FCE6B82C6754E55;1100.
+
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 227.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 263.
  ) 
 Here is how much of TeX's memory you used:
- 9724 strings out of 493633
- 144304 string characters out of 3143378
+ 9763 strings out of 493633
+ 145627 string characters out of 3143378
  277008 words of memory out of 3000000
- 12746 multiletter control sequences out of 15000+200000
+ 12774 multiletter control sequences out of 15000+200000
  14260 words of font info for 90 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 33i,10n,51p,1259b,388s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,10n,51p,1259b,394s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -674,10 +807,10 @@ xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
 ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texliv
 e/2011/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on caw4567-report-final.pdf (8 pages, 182390 bytes).
+Output written on caw4567-report-final.pdf (13 pages, 396142 bytes).
 PDF statistics:
- 180 PDF objects out of 1000 (max. 8388607)
- 152 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 16478 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 254 PDF objects out of 1000 (max. 8388607)
+ 208 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 16540 words of extra memory for PDF output out of 17280 (max. 10000000)
 

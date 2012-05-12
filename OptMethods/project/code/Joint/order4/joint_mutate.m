@@ -15,9 +15,9 @@ children = repmat(lower, mutationPop, 1) + ...
     round(repmat(scale, mutationPop, 1) .* rand(mutationPop, GenomeLength));
 
 % Rotate for additional randomness
-for i = 1:mutationPop
-   children(i) = mod(children(i) + mutationPop, mutationPop); 
-end
+%for i = 1:mutationPop
+%   children(i) = mod(children(i) + (mutationPop * rand(mutationPop)), mutationPop); 
+%end
 
 end
 

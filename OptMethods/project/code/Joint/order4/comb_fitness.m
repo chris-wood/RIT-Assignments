@@ -9,7 +9,13 @@ bFitness = bn_fitness(X);
 nFitness = nl_fitness(X);
 
 % Linear combination of all three algirithms
-fitness = (aFitness) + (bFitness * -10) + (nFitness * -15);
+X
+fitness = ((aFitness) + (bFitness * -(2^SBOX_SIZE)) + (nFitness * -(2^SBOX_SIZE)));
+
+% Rotate for additional randomness
+%for i = 1:SBOX_SIZE
+%   X(i) = mod(X(i) + SBOX_SIZE, SBOX_SIZE); 
+%end
 
 end
 

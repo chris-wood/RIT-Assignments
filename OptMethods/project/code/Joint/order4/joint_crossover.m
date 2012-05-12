@@ -10,5 +10,10 @@ span = range(2,:) - lower;
 pop = repmat(lower, SBOX_SIZE,1) + ...
     round(repmat(span, SBOX_SIZE,1) .* rand(SBOX_SIZE, GenomeLength));
 
+% Rotate for additional randomness
+%for i = 1:mutationPop
+%   children(i) = mod(children(i) + mutationPop, mutationPop); 
+%end
+
 end
 

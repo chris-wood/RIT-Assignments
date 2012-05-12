@@ -1,4 +1,4 @@
-function pop = bn_creation( GenomeLength, FitnessFcn, options )
+function pop = joint_creation( GenomeLength, FitnessFcn, options )
 %AVALANCHE_CREATION Summary of this function goes here
 %   Detailed explanation goes here
 
