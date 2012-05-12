@@ -1,4 +1,4 @@
-function children = avalanche_mutate( parents, options, GenomeLength, FitnessFcn, state, thisScore, thisPopulation )
+function children = bn_mutate( parents, options, GenomeLength, FitnessFcn, state, thisScore, thisPopulation )
 %AVALANCHE_MUTATE Summary of this function goes here
 %   Detailed explanation goes here
 

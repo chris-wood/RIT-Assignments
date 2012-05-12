@@ -12,9 +12,7 @@ function [n,pair,box] = bn(S, n)
 		for b = 1:sc
             if (a ~= b)
                 x = wt(bitxor(a - 1, b - 1), bits);
-                %bitxor(a, b)
                 y = wt(bitxor(S(a), S(b)), bits);
-                %xor(S(a), S(b))
                 if (x + y < minVal)
                     minVal = x + y;
                     pair(1,1) = a - 1;

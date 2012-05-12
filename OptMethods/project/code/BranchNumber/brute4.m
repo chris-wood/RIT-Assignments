@@ -13,12 +13,14 @@ for x1 = 1:SBOX_SIZE
         for x3 = 1:SBOX_SIZE
             for x4 = 1:SBOX_SIZE
                 x = [x1 - 1, x2 - 1, x3 - 1, x4 - 1];
-                f = bn_fitness(x)
-                results(index) = f;
+                fitness = bn_fitness(x);
+                fitness
+                y = -(fitness(1))
+                results(index) = fitness;
                 index = index + 1;
-                if f > f_opt;
+                if fitness > f_opt;
                     x_opt = x;
-                    f_opt = f;
+                    f_opt = fitness;
                 end
             end
         end
