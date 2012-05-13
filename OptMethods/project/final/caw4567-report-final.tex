@@ -247,20 +247,21 @@ Based on Equation $2$ from Section 1.1, we can easily tell that the optimal valu
     \end{tabular}
 \end{table}
 
-Based on these results we can see that the genetic algorithm was able to reach an optimal value of $30$, which is approximately $16\%$ away from the global optimal value of $36$. Given the time complexity difference between the exhaustive search and the genetic algorithm solver, it is clear that this is an acceptable value. 
+Based on these results we can see that the genetic algorithm was able to reach an optimal value of $30$, which is approximately $16\%$ away from the global optimal value of $36$. Given the time complexity difference between the exhaustive search and the genetic algorithm solver, it is clear that this is an acceptable result. 
 
 \begin{figure}
 \centering
 	\includegraphics[scale=0.5]{images/avalanche_results16.eps} \\
 	\label{av16}
-	\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables.}
+	\caption{A single evolution of the optimal solution to the avalanche number of a $4$-bit S-box configuration with a maximum of $500$ generations.}
 \end{figure}
 
 \subsection{Branch Number}
 
-http://www.iacr.org/archive/fse2006/40470042/40470042.pdf - shows that branch number is maximum if q+1 (order of field + 1?) Give the equation and then show that this does not produce optimal results.
+%http://www.iacr.org/archive/fse2006/40470042/40470042.pdf - shows that branch number is maximum if %q+1 (order of field + 1?) Give the equation and then show that this does not produce optimal results.
+%\cite{MaxBN}
 
-\cite{MaxBN}
+It has been proven that the maximum branch number for a function $f : \field{F}_2^n \to \field{F}_2^n$ is equal to $n$ \cite{MaxBN}. Therefore, in the case of $3$- and $4$- bit S-boxes, we know that the maximum possible branch numbers are $3$ and $4$, respectively. Given the small permutation design space for the $3$-bit S-boxes, the genetic algorithm solver was able to obtain this optimal value in a small number of instances. The majority of the executions converged to the local optimal value of $2$.
 
 \begin{table}
 	\centering
@@ -283,14 +284,18 @@ http://www.iacr.org/archive/fse2006/40470042/40470042.pdf - shows that branch nu
     \end{tabular}
 \end{table}
 
+Extending the order of the S-box to $4$ bits made the solver even less effective at finding the optimal value of $4$. As shown in Figure \ref{bn16}, although each generation covered a large area of the state space (as indicated by the average bit-wise distance between parents and children), the optimal value still converged to the local optimum of $2$ even after $500$ generations. In fact, there was no execution of the solver that yielded a higher value for the branch number. This is an obvious result due to the instability of the branch number function over the permutation state space. Since there are so many local optimal values for the function that increases with the order of the S-box, the solver simply converges to the nearest optimal and then orbits around that value for each of the following generations. 
+
+Based on these results we conclude that the usage of a genetic algorithm is not particularly helpful when optimizing the branch number of S-boxes.
+
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.5]{images/bn_results16.eps} \\
 	\label{bn16}
-\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables.}
+\caption{A single evolution of the optimal solution to the branch number of a $4$-bit S-box configuration with a maximum of $500$ generations.}
 \end{figure}
 
-\subsection{Nonlinearity Measurement}
+\subsection{Degree of Nonlinearity}
 It has been shown that the most optimal value for $P_S$ is $1$, meaning that the S-box is "perfectly nonlinear" \cite{ProvableSecurity}. However, almost-perfect nonlinear (APN) S-boxes have also been studied extensively and are shown to be almost equally resistent to the most sophisticated differential cryptanalysis attacks, where APN S-boxes have a $P_S$ equal to exactly $2$. Therefore, as shown in Table \ref{nlTable}, the optimization algorithm was able to find a variety of S-box configurations qualify them as APN, which is an indication that the S-box is secure against common attacks. Unfortunately, the solver was not able to find a configuration that yielded the perfectly nonlinear configuation value of $P_S = 1$. 
 
 \begin{table}
@@ -315,7 +320,7 @@ Extending the order of the S-box to 16 elements and running the same test yielde
 	\centering
 	\includegraphics[scale=0.5]{images/nl_results16.eps} \\
 	\label{nl16}
-\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables.}
+\caption{A single evolution of the optimal solution to the nonlinearity degree of a $4$-bit S-box configuration with a maximum of $500$ generations.}
 \end{figure}
 
 \subsection{Multi-Objective Optimization}
@@ -342,22 +347,22 @@ where $n$ is the number of bits needed to represent the design variables and $w_
 
 \begin{table}
 	\centering
-	\caption{TODO}
+	\caption{Sample linear weights and the corresponding function value tuples for the avalanche number, branch number, and degree of nonlinearity for $3$-bit S-boxes.}
 	\label{jointTable}
     \begin{tabular}{|l|l|l|l|l|}
         \hline
-        $w_1$ & $w_2$ & $w_3$ & S-Box Configuration & Function Value Tuple\\ \hline
-        1 & $2^8$ & $2^8$ & 5     6     2     5     5     6     2     5 & TODO \\ 
-        1 & $2^4$ & $2^8$ & 4     3     3     6     2     5     5     4 & TODO \\ 
-        1 & $2^8$ & $2^4$ & 2     5     2     2     2     5     2     2 & TODO \\ 
-        1 & $2^4$ & $2^4$ & 3     5     4     2     3     5     4     2 & TODO \\ 
+        $w_1$ & $w_2$ & $w_3$ & S-Box Configuration & $(A_N, B_N, P_S)$ \\ \hline
+        1 & $2^8$ & $2^8$ & 5     6     2     5     5     6     2     5 & (40, 1, 8) \\ 
+        1 & $2^4$ & $2^8$ & 4     3     3     6     2     5     5     4 & (50, 1, 6) \\ 
+        1 & $2^8$ & $2^4$ & 2     5     2     2     2     5     2     2 & (24, 1, 8) \\ 
+        1 & $2^4$ & $2^4$ & 3     5     4     2     3     5     4     2 & (40, 1, 8) \\ 
         \hline
     \end{tabular}
 \end{table}
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.5]{images/joint8.eps} \\
+	\includegraphics[scale=0.5]{images/joint_results16.eps} \\
 	\label{joint8}
 \caption{Weights: $1, 2^8, 2^8$}
 \end{figure}
@@ -365,11 +370,17 @@ where $n$ is the number of bits needed to represent the design variables and $w_
 % http://www.reveresecurity.com/_pdfs/s4x4Analysis.pdf
 % says that BN must be at least 2 for bijective S-boxes
 
-\section{Conclusions and Future Work}
+\section{Conclusions}
 %TODO: GA was most promising - similar to BF approach
 %TODO: results were closest to brute force, and presumed to be close to actual values
 %TODO: joint computations using GA were ineffective, exhaustive searches would be better, contradicting functions caused too great penalties and little change in design variabes
 %TODO:  GA work - tweak crossover and mutation functions, run on large scale hardware/software systems
+
+Based on the results from the individual optimization problems and combination problem, we can conclude that the use of genetic algorithms (or any evolutionary algorithm) have very limited or specialized use in the context of cryptography. Most cryptographic functions (and even measurements of those functions) are truly random as across the function domain, and this seemingly random behavior leads to discontinuous and unstable functions with many local optimal solutions. While this rules our traditional optimization algorithms that rely on the smoothness of functions almost immediately, it still leaves some room for probabilistic evolutionary algorithms. 
+
+However, as was shown, the application of such evolutionary algorithms is only moderately useful when optimizing a single dimension (or measurement) of crypgoraphic algorithms; it is not effective when optimizing multiple dimensions at once. The reason for this is that when superimposing each of these functions on top of one another, we are left with a great deal of destructive interference. That is, the global optimal values rarely align for multiple measurement functions for cryptographic algorithms. 
+
+Since cryptographers seek to optimize multiple dimensions at once, the application of such optimization algorithms is likely yield little or no significant benefits to the designers. This conclusion supports the lack of research done in this problem in the field of cryptography. However, that is not to say that the application of all evolutionary algorithms should be ruled out altogether. Perhaps as researchers further refine the security measurements for symmetric-key cryptographic algorithms we may be able to define a multi-objective MINLP that can be optimized to find an optimal configuration for S-boxes. However, until that time, we are left with intuitive and mathematical derivations for S-box configurations.
 
 \bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
