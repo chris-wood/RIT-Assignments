@@ -13,7 +13,7 @@ for x1 = 1:SBOX_SIZE
         for x3 = 1:SBOX_SIZE
             for x4 = 1:SBOX_SIZE
                 x = [x1 - 1, x2 - 1, x3 - 1, x4 - 1];
-                f = avalanche_f(x, [])
+                f = -avalanche_fitness(x)
                 results(index) = f;
                 index = index + 1;
                 if f < f_opt;

@@ -16,29 +16,31 @@
 \linespread{1.2}
 
 \begin{document}
-\cawtitlelong{4040-849 Optimization Methods}{Optimizing Cryptographic Strength of Substitution}{Layers in Symmetric-Key Cryptosystems}
+\cawtitlelong{4040-849 Optimization Methods}{Optimizing Cryptographic Strength of Substitution}{Layers in Symmetric-Key Cryptographic Algorithms}
 
 \begin{abstract}
-The cryptographic security of symmetric-key block ciphers and other related primitives is based upon their adherence to Shannon's principles of confusion and diffusion \cite{Kim90astudy}. Confusion can be defined as the statistical relationship between the ciphertext and private key of a cipher, while diffusion refers to the statistical redundancy of plaintext bits in the ciphertext bits. Consequently, it is increasingly important to optimize these characteristics in order to make them less susceptible to attacks based on linear and differential cryptanalysis. S(ubstitution)-boxes are the most traditional mathematical structures that are used to improve the levels of diffusion and confusion within symmetric-key cryptographic algorithms. Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis. In this work, we attempt to formulate the problem of cryptographically strong substitution layers in symmetric-key block ciphers with S-box designs into a mixed integer programming problem that can be optimized to yield the high diffusion and confusion dividends in resulting cipher implementations.
+The cryptographic security of symmetric-key block algorithms and other related primitives is based upon their adherence to Shannon's principles of confusion and diffusion \cite{Kim90astudy}. Confusion can be defined as the statistical relationship between the ciphertext and private key of a cipher, while diffusion refers to the statistical redundancy of plaintext bits in the ciphertext bits. Consequently, it is increasingly important to optimize these characteristics in order to make them less susceptible to common attacks, such as linear and differential cryptanalysis. S(ubstitution)-boxes are the most traditional mathematical structures that are used to improve the levels of diffusion and confusion within symmetric-key cryptographic algorithms. Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis \cite{Kim90astudy}. In this work, we discuss the formulation of building cryptographically strong substitution layers in symmetric-key block algorithms with S-box designs into a mixed integer nonlinear programming (MINLP) problem that can be optimized to yield the high diffusion and confusion dividends in resulting algorithm definitions.
 \end{abstract}
 
 \section{Problem Description}
-The strength of cryptographic algorithms is commonly measured by their resilience to common cryptanalysis attacks, such as linear and differential cryptanalysis. Linear cryptanalysis is is an attack that attempts to take advantage of high probability occurrences of linear expressions involving plaintext bits, ciphertext bits, and subkey bits. Mathematically, the attack is based on the idea of approximating the operation of a portion of the block cipher in question with an expression that is linear in terms of the input ($X$) and output ($Y$) bits involved, as shown below \cite{Heys01atutorial}:
+The cryptographic security of symmetric-key block ciphers and other related primitives is based upon their adherence to Shannon's principles of confusion and diffusion \cite{Kim90astudy}. Confusion is typically referred to as the complexity of the relationship between the secret-key and ciphertext, and diffusion is commonly referred to as the degree to which the influence of a single input bit is spread throughout the resulting ciphertext. Consequently, it is increasingly important to optimize these characteristics in order to make symmetric-key cryptographic algorithms less susceptible to common attacks, such as linear and differential cryptanalysis.
+
+Linear cryptanalysis is an attack that attempts to take advantage of high probability occurrences of linear expressions involving plaintext bits, ciphertext bits, and subkey bits. Mathematically, the attack is based on the idea of approximating the operation of a portion of the block cipher in question with an expression that is linear in terms of the input ($X$) and output ($Y$) bits involved, as shown below \cite{Heys01atutorial}:
 \begin{eqnarray*}
 X_{i_{1}} \oplus X_{i_{2}} ... \oplus X_{i_{r}} \oplus Y_{j_{1}} \oplus Y_{j_{2}} ... \oplus Y_{j_{s}} \oplus  = 0
 \end{eqnarray*}
-Using this expression, attackers can guage the amount of randomness introduced by the cipher. That is, if such an expression is satisfied frequently (with a relatively high probability), then we know that the probability of the expression holding for any two values $a,b\in \field{F}_2^n$ is approximately $\frac{1}{2}$. However, when this probability shifts away from $\frac{1}{2}$, the amount of known plaintexts required to determine the key (or key block) that was used to reproduce the output goes down dramatically. Such a deviation from the expected probability of $\frac{1}{2}$ for any expression of the form above, which is referred to as the \emph{linear bias}, determines the susceptibility of the block cipher to known plaintext attacks. Therefore, it is important to introduce non-linearity into the block cipher in order to defend against such attacks.
+Using this expression, attackers can guage the amount of randomness introduced by the algorithm. That is, if such an expression is satisfied frequently (with a relatively high probability), then we know that the probability of the expression holding for any two values $a,b\in \field{F}_2^n$ is approximately $1/2$. However, when this probability shifts away from $1/2$, the amount of known plaintexts required to determine the key (or key block) that was used to reproduce the output goes down dramatically. Such a deviation from the expected probability of $1/2$ for any expression of the form above, which is referred to as the \emph{linear bias}, determines the susceptibility of the block cipher to known plaintext attacks. Therefore, it is important to introduce non-linearity into the block cipher in order to defend against such attacks.
 
-Differential cryptanalysis is a very powerful attack technique that attempts to break symmetric key ciphers by exploiting high probability of certain occurrences of plaintext differences and ciphertext differences \cite{Heys01atutorial}. To illustrate this attack technique, consider the input of a block cipher to be represented by the vector $[X_1, X_2,..., X_n]$ and the corresponding output to be $[Y_1, Y_2, ..., Y_n]$, where each element $X_i$ and $Y_i$ corresponds to a single bit in the input and output, respectively. With this definition, we can represent the input difference of any two input vectors ($\Delta X$) and any two output vectors ($\Delta Y$) as follows:
+Differential cryptanalysis is another powerful attack technique that attempts to break symmetric key ciphers by exploiting high probability of certain occurrences of plaintext differences and ciphertext differences \cite{Heys01atutorial}. To illustrate this attack technique, consider the input of a block cipher to be represented by the vector $\langle X_1, X_2,..., X_n \rangle$ and the corresponding output to be $\langle Y_1, Y_2, ..., Y_n \rangle$, where each element $X_i$ and $Y_i$ corresponds to a single bit in the input and output, respectively. With this definition, we can represent the input difference of any two input vectors ($\Delta X$) and any two output vectors ($\Delta Y$) as follows:
 \begin{eqnarray*}
-\Delta X = [\Delta X_1 \oplus \Delta X_2 \oplus ... \oplus \Delta X_n]  \\
-\Delta Y= [\Delta Y_1 \oplus \Delta Y_2 \oplus ... \oplus \Delta Y_n]
+\Delta X = \langle \Delta X_1 \oplus \Delta X_2 \oplus ... \oplus \Delta X_n \rangle  \\
+\Delta Y= \langle \Delta Y_1 \oplus \Delta Y_2 \oplus ... \oplus \Delta Y_n \rangle
 \end{eqnarray*}
-where $\Delta X_i = X_{i,1} \oplus X_{i,2}$ and $\Delta Y_i = Y_{i,1} \oplus Y_{i,2}$. It is an ideal block cipher the output different $\Delta Y$ for a specific input different $\Delta X$ will occur with a probability of approximately $\frac{1}{2^n}$ (i.e. it produces random output based on every input block). Note that it is common to represent the input and output difference pairs as $(\Delta X, \Delta Y)$ (which are referred to as differentials).
+where $\Delta X_i = X_{i,1} \oplus X_{i,2}$ and $\Delta Y_i = Y_{i,1} \oplus Y_{i,2}$. It is an ideal block cipher the output different $\Delta Y$ for a specific input different $\Delta X$ will occur with a probability of approximately $1/2^n$ (i.e. it produces random output based on every input block). Note that it is common to represent the input and output difference pairs as $(\Delta X, \Delta Y)$ (which are referred to as differentials).
 
-With the idea of differential pairs in mind, we define differential cryptanalysis as the process of finding differentials that occur with a probability much higher than $\frac{1}{2^n}$, which subsequently gives rise to a statistical correlation between the relationship between the input and output of a block cipher and can allow one to deduce the private key used in the cipher. Therefore, it is ideal to maximize the amount of randomness introduced by the block cipher through each iteration. Clearly, this necessity can be traced back to the need for high diffusion and confusion levels in block ciphers.
+With the idea of differential pairs in mind, we define differential cryptanalysis as the process of finding differentials that occur with a probability much higher than $1/2^n$, which subsequently gives rise to a statistical correlation between the relationship between the input and output of a block cipher and can allow one to deduce the private key used in the cipher. Therefore, it is ideal to maximize the amount of randomness introduced by the algorothm, which can be obtained from high diffusion and confusion levels. Thus, the efficiency of both of these attacks relate to the measures of confusion and diffusion within an algorithm and the extent to which they can be exploited. 
 
-The efficiency of both of these attacks relate to the measures of confusion and diffusion within a cipher and the extent to which they can be exploited. Confusion is typically referred to as the complexity of the relationship between the secret-key and ciphertext, and diffusion is commonly referred to as the degree to which the influence of a single input bit is spread throughout the resulting ciphertext. In the context of cryptographic algorithms, these characteristics are usually realized through a unique combination of linear and nonlinear operations. It is clear that the nonlinear operations in the algorithms contribute more to the security of the corresponding algorithm than the other components. The most common source of nonlinearity in symmetric-key cryptographic algorithms is from a S(ubstitution)-box, which is a function with an equal sized domain and range that is configured to yield optimal confusion and diffusion between each input and output pair. As such, S-boxes (as the substitution layer in cryptographic algorithms) will be the focus of this project. 
+Confusion and diffusion are usually realized through a unique combination of linear and nonlinear operations. It is understood that the nonlinear operations in the algorithms contribute more to the security of the corresponding algorithm than the other components. The most common source of nonlinearity in symmetric-key cryptographic algorithms is from a S(ubstitution)-box, which is a function with an equal sized domain and range that is configured to yield optimal confusion and diffusion between each input and output pair. As such, S-boxes, as the substitution layer in symmetric-key cryptographic algorithms, will be the focus of this project. 
 
 \subsection{Cryptographic Strength of Substitution Layers}
 Mathematically, an S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In the context of cryptographic applications, such a function $f$ should be bijective in order to avoid bias towards any specific output element in the field. We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes \cite{Mar_newanalysis}.
@@ -50,13 +52,9 @@ The \emph{Hamming weight} of an element $x \in \field{F}_2^n$ is defined as wt$(
 \end{define}
 
 \begin{define}
-Let $f$ be a bijective function with range $\mathbb{R^*}$, where $|\mathbb{R^*}| = m$. Let $n$ be the number of elements $x$ that satisfy $f(x \oplus \Delta_i) = f(x) \oplus \Delta_o$. Then, $\frac{n}{m}$ is the \emph{differential probability p} of the characteristic $f_D(\Delta_i \to \Delta_o)$.
-\end{define}
-
-\begin{define}
-The \emph{branch number} of an $n \times n$-bit S-Box is
+The \emph{branch number} of an $n \times n$-bit S-Box $S$ is
 \begin{eqnarray}
-BN = \text{min}_{a, b\not=a}(\text{wt}(a \oplus b) + \text{wt}(S(a) \oplus S(b))),
+B_N = \text{min}_{a, b\not=a}\left[\text{wt}(a \oplus b) + \text{wt}(S(a) \oplus S(b))\right],
 \end{eqnarray}
 where $a, b \in \field{F}_2^n$.
 \end{define}
@@ -66,15 +64,15 @@ A function $f : \field{F}_2^n \to \field{F}_2^n$ exhibits the \emph{avalanche ef
 \begin{eqnarray}
 \sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus c_{i}^{n})) = n2^{n-1},
 \end{eqnarray}
-for all $i (1 \leq i \leq n)$, where $c_{i}^{n} = \langle 0, 0, ..., 1, ..., 0 \rangle$ (where a $1$ is in the $n$th position of the vector of cardinality $n$).
+for all $i$ $(1 \leq i \leq n)$, where $c_{i}^{n} = \langle 0, 0, ..., 1, ..., 0 \rangle$ (where a $1$ is in the $n$th position of the vector of cardinality $n$).
 \end{define}
 
 \begin{define}
-A function $f : \field{F}_2^n \to \field{F}_2^n$ satisfies the \emph{Strict Avalanche Critertion (SAC)} if for all $i (1 \leq i \leq n)$ the following equations hold:
-\begin{eqnarray*}
-\sum_{x \in \field{F}_2^n} f(x) \oplus f(x \oplus c_i^n) = (2^{n-1}, 2^{n-1}, ..., 2^{n-1})
-\end{eqnarray*}
-This simply means that $f(x) \oplus f(x \oplus c_i^n)$ is balanced for every element in $\field{F}_2^n$ with Hamming distance of $1$. 
+The \emph{avalanche number} of a function $f : \field{F}_2^n \to \field{F}_2^n$ is defined as
+\begin{eqnarray}
+A_N = \sum_{i = 0}^{n - 1}\sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus 2^{i})),
+\end{eqnarray}
+where $a, b \in \field{F}_2^n$. This just sums of the weight for each bit $i$, where $1 \leq 1 \leq n$.
 \end{define}
 
 \begin{define}
@@ -85,14 +83,13 @@ The \emph{degree of nonlinearity} of an $n \times n$-bit S-Box from $\field{F}_2
 where $a, b \in \field{F}_2^n$, and a low measure for $P_S$ indicates a high degree of nonlinearity.
 \end{define}
 
-Designers of cryptographically secure cryptographic primitives (e.g. block ciphers, hash functions, etc) use all of these measurements as a basis for the degrees of confusion and diffusion within a cipher, and thus for their susceptibility to linear and differential cryptanalysis (among other attacks). Specifically, it has been shown that cryptographically secure symmetric-key algorithms utilize substitution layers that provide the following characteristics:
+Designers of cryptographically secure cryptographic algorithms use these measurements as a basis for the levels of confusion and diffusion within a symmetric-key algorithm, and thus for their susceptibility to linear and differential cryptanalysis (among other attacks). In particular, it has been shown that cryptographically secure symmetric-key algorithms utilize substitution layers that provide the following characteristics \cite{Kim90astudy}:
 \begin{enumerate}
-	\item Low differential propagation probability
 	\item High branch number
-	\item High satisfaction of the SAC criterion
+	\item Avalanche number of exactly $n^22^{n-1}$
 	\item High degree of nonlinearity
 \end{enumerate}
-However, in practice the additional constraints that fast and simple mathematical operations must be used to emulate represent such a bijective function $f$ that exhibits ideal values for all of these measurements.
+%However, in practice the additional constraints that fast and simple mathematical operations must be used %to emulate represent such a bijective function $f$ that exhibits ideal values for all of these measurements.
 
 \section{Optimization Candidate and Problem Formation}
 %TODO: discuss time complexity of each operation, infeasibility for higher order S-boxes
@@ -105,51 +102,59 @@ However, in practice the additional constraints that fast and simple mathematica
 %4. state solution is to use genetic algorithm and BB
 %5. discuss genetic algorithm crossover and mutation
 
-Due to the application of S-boxes inside cryptographic algorithms, it is ideal that such function configurations exhibit the globally maximum values for each of these metrics. The best way to achieve this assurance is to perform an exhaustive search over the S-box design space (i.e. consider all possible input and output values and find the one that yields the optimum results). The results from an exhaustive search for a $2$-bit S-box are shown in Figure \ref{bfjoint}
-
+Due to the application of S-boxes inside cryptographic algorithms, it is ideal that such function configurations exhibit globally optimal values for each of these metrics. The best way to achieve this assurance is to perform an exhaustive search over the S-box design space (i.e. consider all possible input and output values) and find a configuration that yields the optimum results. The results from an exhaustive search experiment for a $2$-bit S-box are shown in Figure \ref{bfjoint}.
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.75]{images/brute_joint.eps} \\
+	\includegraphics[scale=0.65]{images/brute_joint.eps} \\
 	\label{bfjoint}
-\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables.}
+	\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables.}
 \end{figure}
+Exhaustive searches over the entire S-box permutation design space have a time complexity of $O(n^n)$ and thus are only feasible for very small order S-boxes. However, recent research efforts have advanced the upper bound on these exhaustive searches to include $4$-bit S-boxes, which were run in \cite{Sbox4x4}. Unfortunately, measurements for each of the aforementioned metrics were not provided. 
 
-Such exhaustive searches have a worst case time complexity of $O(n^n)$ and thus are only feasible for very small order S-boxes. However, recent research efforts have advanced the upper bound on these exhaustive searches to include $4$-bit S-boxes, which were run in TODO: DETAILS (CITE cryptanalysis of 4x4 bit sboxes). However, measurements for each of the aforementioned metrics were not provided. Furthermore, due to the instability of each function over the design variable permutation space, it is clear that a probabilistic optimization algorithm would be best suited to optimizing each of these metrics. 
+%Furthermore, due to the instability of each function over the design variable permutation space, it is clear %that a probabilistic optimization algorithm would be best suited to optimizing each of these metrics. 
 
-Before such an algorithm can be applied, however, we must formalize each objective function for these metrics as standard optimization problems. Treating each objective function as a mixed-integer nonlinear programming (MINLP) problem yields the following problem definitions. \\
+As an alternative to performing these brute force searches, we consider the problem of optimizing the branch number, avalanche number, and degree of nonlinearity of symmetric-key cryptographic algorithm as MINLP problems, which can be formulated as shown in Figure \ref{problems}.
 
+\begin{figure}
+\centering
 \shadowbox{%
 \parbox{15cm}{% 
 \textbf{Branch Number - Minimize}
 \begin{eqnarray*}
-BN'(X) = -BN(X) = -\text{min}_{i, j\not=i}(\text{wt}(i \oplus j) + \text{wt}(X(i) \oplus X(j))),
+B_N'(X) = -B_N(X) = -\text{min}_{i, j\not=i}(\text{wt}(i \oplus j) + \text{wt}(X(i) \oplus X(j))),
+\end{eqnarray*}
+subject to the constraints
+\begin{eqnarray*}
+0 \leq X(i) & \leq & 2^{n} - 1 
+\end{eqnarray*}
+where $n$ is the number of bits needed to represent the design variables.
+}}
+%\end{figure}
+\vspace{0.5cm}
+
+%\begin{figure}
+%\centering
+\shadowbox{%
+\parbox{15cm}{% 
+\textbf{Avalanche Number - Minimize}
+\begin{eqnarray*}
+A_N'(X) = -A_N(X) = -\sum_{i = 0}^{n - 1}\sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus 2^{i}))
 \end{eqnarray*}
 subject to the constraints
 \begin{eqnarray*}
 0 \leq X(i) & \leq & 2^{n} - 1 \\
 \text{min}_{i, j\not=i}(\text{wt}(i \oplus j) + \text{wt}(X(i) \oplus X(j))) - n2^{n-1} & \leq & 0
 \end{eqnarray*}
-where $n$ is the number of bits needed to represent the design variables.
-}}
-\vspace{0.5cm}
-
-\shadowbox{%
-\parbox{15cm}{% 
-\textbf{Avalanche Number - Minimize}
-\begin{eqnarray*}
-A'(X) = -A(X) = -\sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus c_{i}^{n})),
-\end{eqnarray*}
-subject to the constraints
-\begin{eqnarray*}
-0 \leq X(i) \leq 2^{n} - 1,
-\end{eqnarray*}
 where $n$ is the number of bits needed to represent the design variables. \\
 }}
+%\end{figure}
 \vspace{0.5cm}
 
+%\begin{figure}
+%\centering
 \shadowbox{%
 \parbox{15cm}{% 
-\textbf{Nonlinearity Measurement - Minimize}
+\textbf{Degree of Nonlinearity - Minimize}
 \begin{eqnarray*}
 P_S(X) = \text{max}_{0 \not= a, b}|\{x \in \field{F}_2^n : S(x + a) - S(x) = b\}|,
 \end{eqnarray*}
@@ -159,47 +164,52 @@ subject to the constraints
 \end{eqnarray*}
 where $n$ is the number of bits needed to represent the design variables. \\
 }}
-
-It is important to note that the lack of additional constraints on these objective functions is intentional. Due to the nature of S-boxes and their application inside cryptographic algorithms, additional constraints might serve as additional information for attackers to exploit. 
+\label{problems}
+\caption{MINLP optimization problem definitions for the branch number, avalanche number, and nonlinearity degree measurements. It is important to note that the lack of additional constraints on these objective functions is intentional. Due to the nature of S-boxes and their application inside cryptographic algorithms, additional constraints might serve as additional information for attackers to exploit. }
+\end{figure}
 
 \section{Candidate Optimization Algorithms}
 %1. GA description - TODO: write up some characteristics of this algorithm
 %2. BB description - TODO: write up some characteristics of this algorithm
-\subsection{Genetic Algorithm}
 
-Given the instability of each of these functions over the permutation design variable space, it is natural to solve these MINLP problem using a probabilistic optimization algorithm. For the purposes of this project, the main results were derived using a highly probabilistic genetic algorithm that attempts to explore the permutation design space as much as possible in search for the global optimum values. Genetic algorithms are commonly utilized in the context of cryptography to explore the design space for cryptographic functions. They serve as an intelligence optimization method that can ease the computational efforts of performing brute force searches among the design space, which is crucial for functions with larger domains. (CITE SHA-3 CANDIDATE UPDATE).
+Analyzing the function values for the branch number, avalanche number, and degree of nonlinearity over the S-box permutation design space indicates that each function is highly unstable and discontinuous. Therefore, traditional optimization methods that rely on the continuity of the functions are likely to not be very effective when solving these optimization problems. In fact, the application of the famous Branch and Bound algorithm was applied to solve these problems and yielded very poor results. For that reason, we turn our focus to more evolutionary algorithms that have a probabilistic or random element to them as they explore the domain of the design variable space. 
+
+\subsection{Traditional Optimization Algorithms}
+%4. discuss why BB algorithm didn't work (converged too early and didn't exhaust, too many local minimums for every objective function, GA was good because it generated populations and did psuedo brute force thing)
+
+The \emph{Branch and Bound} algorithm is a very common optimization algorithm that is used to solve MINLP problems. However, this algorithm is not suitable in the context of this problem for a variety of reasons, as shown below.
+
+\begin{enumerate}
+	\item The branch and bound algorithm is greedy, in that it selects the appropriate decision branch to take to proceed towards the optimal value based on the current configuration. While this leads the algorithm towards an optimum value, it is usally a locally optimal solution. Furthermore, there is no penalty applied to the decision process that enables the design variables to change. 
+	\item As shown in Figure \ref{bfjoint}, there are many locally optimum values for each objective function even with small order S-boxes. The usefulness of the BNB algorithm will surely degrade as larger order S-boxes are considered, because the number of intermediate local optimum values will increase significantly as well. This would cause the algorithm to converge to an optimal value too quickly and terminate with very few iterations. 
+	%\item TODO: what else
+\end{enumerate}
+
+%OQNLP: stochastic process that relies on smoothness of function to approximate
+
+\subsection{Evolutionary Optimization Algorithms}
+
+Given the instability of each of these functions over the permutation design variable space, it is natural to solve these MINLP problem using a probabilistic optimization algorithm. For the purposes of this project, the main results were derived using a highly probabilistic genetic algorithm that attempts to explore the permutation design space as much as possible in search for the global optimum values. Genetic algorithms are commonly utilized in the context of cryptography to explore the design space for cryptographic functions. They serve as an intelligence optimization method that can ease the computational efforts of performing brute force searches among the design space, which is crucial for functions with larger domains \cite{Skein}.
 
 Since each of the aformentioned objective functions exhibit the same instable behavior, it is possible to apply the same genetic algorithm structure to solve each one of these. In particular, the genetic algorithm configuration for each of these problems used the following parameters.
 
 \begin{table}
 	\centering
+	\caption{Genetic algorithm configuration parameters.}
     \begin{tabular}{|l|l|}
         \hline
-        \textbf{Algorithm option} & \textbf{Configuration} \\ \hline
-        Population creation function & TODO: describe \\ 
-        Population mutation function & TODO: describe \\ 
+        \textbf{Algorithm Option} & \textbf{Configuration Description} \\ \hline
+        Population mutation function & Randomly scale each design variable based on the current generation \\ 
         Generations & $500$ \\ 
         Tolerance Function limit & $1 \times 10^{-6}$ from last function value change \\ 
         Stall generation limit & $2^{n^n}$ identical function values \\ 
         Initial population & S-box configuration $\langle 0, 1, ..., n \rangle$ \\
         \hline
     \end{tabular}
+	\label{configTable}
 \end{table}
 
-\subsection{Non-Probabilistic Optimization Algorithms}
-%4. discuss why BB algorithm didn't work (converged too early and didn't exhaust, too many local minimums for every objective function, GA was good because it generated populations and did psuedo brute force thing)
-
-The \emph{Branch and Bound} algorithm is another optimization algorithm commonly used to solve MINLP problems. However, this algorithm is not suitable in the context of this problem for a variety of reasons, as shown below.
-
-\begin{enumerate}
-	\item The branch and bound algorithm is greedy, in that it selects the appropriate decision branch to take to proceed towards the optimal value based on the current configuration. While this leads the algorithm towards an optimum value, it is usally a locally optimal solution. Furthermore, there is no penalty applied to the decision process that enables the design variables to change. 
-	\item As shown in Figure \ref{bfjoint}, there are many locally optimum values for each objective function even with small order S-boxes. The usefulness of the BNB algorithm will surely degrade as larger order S-boxes are considered, because the number of intermediate local optimum values will increase significantly as well. This would cause the algorithm to converge to an optimal value too quickly and terminate with very few iterations. 
-	\item TODO: what else
-\end{enumerate}
-
-OQNLP: stochastic process that relies on smoothness of function to approximate
-
-\section{Optimization Results}
+\section{Genetic Algorithm Optimization Results}
 %TODO: compare GA results against exhaustive search and BB algorithm
 %1. prsent individual and joint results for order 8 and 16  (3-bit and 4-bit S-boxes)
 %2. discuss how close they got to optimal results
@@ -219,25 +229,25 @@ Based on Equation $2$ from Section 1.1, we can easily tell that the optimal valu
 \begin{table}
 	\centering
 	\label{avTable}
-	\caption{TODO}
+	\caption{Some results from the genetic algorithm solver for the avalanche number of $3$-bit S-boxes.}
     \begin{tabular}{|l|l|l|}
         \hline
-        S-Box Configuration & Optimal Function Value & Generations Produced \\ \hline
-        6     1     3     6     3     6     4     1 & 26 & 57 \\ 
-        0     7     7     4     6     1     1     2 & 20 & 51 \\ 
+        S-Box Configuration & Optimal Function Value & Generations \\ \hline
+        6     1     1     2     1     6     6     1 & 30 & 63 \\
         5     3     2     5     2     5     5     2 & 30 & 59 \\ 
         6     1     1     6     1     4     6     1 & 30 & 51 \\ 
-        6     1     5     6     1     6     2     1 & 28 & 58 \\ 
-        1     2     6     1     7     0     1     6 & 22 & 58 \\ 
         1     6     6     1     6     5     1     6 & 30 & 51 \\ 
+        6     1     5     6     1     6     2     1 & 28 & 58 \\ 
+        6     1     3     6     3     6     4     1 & 26 & 57 \\ 
+	6     3     3     4     2     5     5     2 & 22 & 63 \\ 
+        1     2     6     1     7     0     1     6 & 22 & 58 \\ 
+        0     7     7     4     6     1     1     2 & 20 & 51 \\ 
         3     4     7     1     6     3     1     6 & 20 & 51 \\ 
-        6     3     3     4     2     5     5     2 & 22 & 63 \\ 
-        6     1     1     2     1     6     6     1 & 30 & 63 \\
         \hline
     \end{tabular}
 \end{table}
 
-Based on these results we can see that 
+Based on these results we can see that the genetic algorithm was able to reach an optimal value of $30$, which is approximately $16\%$ away from the global optimal value of $36$. Given the time complexity difference between the exhaustive search and the genetic algorithm solver, it is clear that this is an acceptable value. 
 
 \begin{figure}
 \centering
@@ -255,10 +265,10 @@ http://www.iacr.org/archive/fse2006/40470042/40470042.pdf - shows that branch nu
 \begin{table}
 	\centering
 	\label{bnTable}
-	\caption{TODO}
+	\caption{Some results from the genetic algorithm solver for the branch number of $3$-bit S-boxes.}
     \begin{tabular}{|l|l|l|}
         \hline
-        S-Box Configuration & Optimal Function Value & Generations Produced \\ \hline
+        S-Box Configuration & Optimal Function Value & Generations \\ \hline
         3     4     0     7     5     2     6     1 & 3 & 500 \\ 
 	3     6     4     1     5     0     2     7 & 3 & 500 \\ 
         4     7     6     1     2     1     5     6 & 2 & 500 \\ 
@@ -277,16 +287,15 @@ http://www.iacr.org/archive/fse2006/40470042/40470042.pdf - shows that branch nu
 	\centering
 	\includegraphics[scale=0.5]{images/bn_results16.eps} \\
 	\label{bn16}
-\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables. }
+\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables.}
 \end{figure}
 
 \subsection{Nonlinearity Measurement}
-
-TODO: cite Nydberg FSE 2012, this is Almost Perfect Nonlinear (<= 2), very good result. \cite{ProvableSecurity}
+It has been shown that the most optimal value for $P_S$ is $1$, meaning that the S-box is "perfectly nonlinear" \cite{ProvableSecurity}. However, almost-perfect nonlinear (APN) S-boxes have also been studied extensively and are shown to be almost equally resistent to the most sophisticated differential cryptanalysis attacks, where APN S-boxes have a $P_S$ equal to exactly $2$. Therefore, as shown in Table \ref{nlTable}, the optimization algorithm was able to find a variety of S-box configurations qualify them as APN, which is an indication that the S-box is secure against common attacks. Unfortunately, the solver was not able to find a configuration that yielded the perfectly nonlinear configuation value of $P_S = 1$. 
 
 \begin{table}
 	\centering
-	\caption{TODO}
+	\caption{Some results from the genetic algorithm solver for the degree of nonlinearity of $3$-bit S-boxes.}
 	\label{nlTable}
     \begin{tabular}{|l|l|l|}
         \hline
@@ -300,6 +309,8 @@ TODO: cite Nydberg FSE 2012, this is Almost Perfect Nonlinear (<= 2), very good 
     \end{tabular}
 \end{table}
 
+Extending the order of the S-box to 16 elements and running the same test yielded the same APN results, as shown in Figure \ref{nl16}. Therefore, we can conclude that the genetic algorithm is very well suited to finding the S-box configuration that achieves an acceptable degree of nonlinearity.
+
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.5]{images/nl_results16.eps} \\
@@ -308,9 +319,26 @@ TODO: cite Nydberg FSE 2012, this is Almost Perfect Nonlinear (<= 2), very good 
 \end{figure}
 
 \subsection{Multi-Objective Optimization}
-Based on the fact that cryptographers and mathematicians attempt to optimize all of these measurements together, it is ideal to find an optimal value among all of the objective functions simultaneously. The most common way to solve this is to re-write the optimization problem as a linear combination of all three objective functions. The benefit of this approach is that we can prioritize the influence that each objective function has on the overall solution by assigning weights to each value in this linear combination. For the purposes of this project, the following linear combination was used to construct the multi-objective MINLP problem.
+Based on the fact that cryptographers and mathematicians attempt to optimize all of these measurements together, it is ideal to find an optimal value among all of the objective functions simultaneously. The most common way to solve this is to re-write the optimization problem as a linear combination of all three objective functions. The benefit of this approach is that we can prioritize the influence that each objective function has on the overall solution by assigning weights to each value in this linear combination. For the purposes of this project, the linear combination shown in Figure \ref{jointProblem} was used to formalize the multi-objective MINLP problem.
 
-TODO: write the stuff here
+\begin{figure}
+\centering
+\shadowbox{%
+\parbox{15cm}{% 
+\textbf{Joint MINLP Problem - Minimize}
+\begin{eqnarray*}
+f(X) = w_1A_N'(X) + w_2B_N'(X) + w_3P_S(X),
+\end{eqnarray*}
+subject to the constraints
+\begin{eqnarray*}
+0 \leq X(i) & \leq & 2^{n} - 1 \\
+\text{min}_{i, j\not=i}(\text{wt}(i \oplus j) + \text{wt}(X(i) \oplus X(j))) - n2^{n-1} & \leq & 0,
+\end{eqnarray*}
+where $n$ is the number of bits needed to represent the design variables and $w_i$, where $1 \leq i \leq 3$, are \emph{not} design variables. \\
+}}
+\label{jointProblem}
+\caption{The joint MINLP problem formalization as a linear combination of all three objective functions under the same constraints.}
+\end{figure}
 
 \begin{table}
 	\centering
@@ -318,7 +346,7 @@ TODO: write the stuff here
 	\label{jointTable}
     \begin{tabular}{|l|l|l|l|l|}
         \hline
-        Avalanche Weight & Branch Weight & Nonlinearity Weight & S-Box Configuration & Function Value Tuple\\ \hline
+        $w_1$ & $w_2$ & $w_3$ & S-Box Configuration & Function Value Tuple\\ \hline
         1 & $2^8$ & $2^8$ & 5     6     2     5     5     6     2     5 & TODO \\ 
         1 & $2^4$ & $2^8$ & 4     3     3     6     2     5     5     4 & TODO \\ 
         1 & $2^8$ & $2^4$ & 2     5     2     2     2     5     2     2 & TODO \\ 

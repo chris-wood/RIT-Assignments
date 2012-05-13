@@ -2,9 +2,9 @@
 \BOOKMARK [2][-]{subsection.1.1}{Cryptographic Strength of Substitution Layers}{section.1}% 2
 \BOOKMARK [1][-]{section.2}{Optimization Candidate and Problem Formation}{}% 3
 \BOOKMARK [1][-]{section.3}{Candidate Optimization Algorithms}{}% 4
-\BOOKMARK [2][-]{subsection.3.1}{Genetic Algorithm}{section.3}% 5
-\BOOKMARK [2][-]{subsection.3.2}{Non-Probabilistic Optimization Algorithms}{section.3}% 6
-\BOOKMARK [1][-]{section.4}{Optimization Results}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Traditional Optimization Algorithms}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.2}{Evolutionary Optimization Algorithms}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Genetic Algorithm Optimization Results}{}% 7
 \BOOKMARK [2][-]{subsection.4.1}{Avalanche Number}{section.4}% 8
 \BOOKMARK [2][-]{subsection.4.2}{Branch Number}{section.4}% 9
 \BOOKMARK [2][-]{subsection.4.3}{Nonlinearity Measurement}{section.4}% 10

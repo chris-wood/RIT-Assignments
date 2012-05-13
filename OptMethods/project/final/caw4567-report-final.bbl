@@ -33,6 +33,15 @@ H.~M. Heys, ``A tutorial on linear and differential cryptanalysis,'' Tech.
 P.~P. Mar and K.~M. Latt, ``New analysis methods on strict avalanche criterion
   of s- boxes.''
 
+\bibitem{Sbox4x4}
+M.-J.~O. Saarinen, ``Cryptographic analysis of all 4 x 4 - bit s-boxes,''
+  Cryptology ePrint Archive, Report 2011/218, 2011,
+  \url{http://eprint.iacr.org/}.
+
+\bibitem{Skein}
+N.~Ferguson, S.~Lucks, B.~Schneier, D.~Whiting, M.~Bellare, T.~Kohno,
+  J.~Callas, and J.~Walker, ``The skein hask function family,'' 2009.
+
 \bibitem{MaxBN}
 \BIBentryALTinterwordspacing
 ``On feistel structures using a diffusion switching mechanism.'' in \emph{Fast
