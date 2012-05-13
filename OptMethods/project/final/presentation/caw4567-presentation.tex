@@ -1,0 +1,93 @@
+\documentclass[handout]{beamer}
+\usepackage{beamerthemesplit}
+\usepackage{pgfpages}
+\usepackage{verbatim}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,%
+                shapes,positioning}
+
+\tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=0pt]
+\tikzstyle{selected vertex} = [vertex, fill=red!24]
+\tikzstyle{edge} = [draw,thick,-]
+\tikzstyle{weight} = [font=\small]
+\tikzstyle{selected edge} = [draw,line width=5pt,-,red!50]
+\tikzstyle{ignored edge} = [draw,line width=5pt,-,black!20]
+
+\newcommand{\field}[1]{\mathbb{#1}} %requires amsfonts
+
+\usetheme{Antibes}
+\usecolortheme{beaver}
+\title[Optimizing Cryptographic Strength]{Optimizing Cryptographic Strength of Substitution\\ Layers in Symmetric-Key Cryptographic Algorithms}
+
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage[T1]{fontenc}
+
+%\pgfpagesuselayout{4 on 1}[letterpaper,border shrink=5mm]
+
+\institute[RIT]{}
+\date{\today}
+%\subtitle{}
+\author{Christopher A. Wood}
+%\institute[]{}
+\date{May 9, 2012}
+\begin{document}
+
+%%%%%
+%%
+%% Resource link: http://www.math-linux.com/spip.php?article77
+%%
+%%%%
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+	\frametitle{Agenda}
+	\tableofcontents
+\end{frame}
+
+\begin{frame}
+	\frametitle{Avalanche effect}
+A function $f : \field{F}_2^n \to \field{F}_2^n$ exhibits the \emph{avalanche effect} if and only if 
+	\begin{eqnarray*}
+		\sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus c_{i}^{n})) = n2^{n-1},*
+	\end{eqnarray*}
+	for all $i (1 \leq i \leq n)$, where $c_{i}^{n} = [0, 0, ..., 1, ..., 0]$ (where a $1$ is in the $n$th position of the vector of cardinality $n$). \\
+	%\vspace{0.25cm}
+	%This is a significantly stronger sufficient condition for high measures of diffusion.\\
+	\vspace{0.25cm}
+	*\emph{wt} indicates the Hamming Weight function
+\end{frame}
+
+\begin{frame}
+	\frametitle{Branch number}
+	The \emph{branch number} of an $n \times n$-bit S-Box is
+	\begin{eqnarray*}
+		BN = \text{min}_{a, b\not=a}(\text{wt}(a \oplus b) + \text{wt}(S(a) \oplus S(b))),
+	\end{eqnarray*}
+	where $a, b \in \field{F}_2^n$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{S-box specific nonlinear measurements}
+	The nonlinearity of an $n \times n$-bit S-Box from $\field{F}_2^n \to \field{F}_2^n$ can be measured by
+	\begin{eqnarray*}
+		P_S = \text{max}_{0 \not= a, b}|\{x \in \field{F}_2^n : S(x + a) - S(x) = b\}|
+	\end{eqnarray*}
+	where $a, b \in \field{F}_2^n$.
+\end{frame}
+
+\begin{comment}
+\begin{frame}
+	\frametitle{Mix Columns MDS Matrix}
+	\begin{center}
+      		\includegraphics[width=75mm]{images/mix_ops.png} %MDS matrix used for diffusion (why 4x4? other larger wide-pipe designs have been propsed, including 8x8 and 16x16)
+	\end{center}
+\end{frame}
+\end{comment}
+
+\end{document}
