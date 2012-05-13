@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  13 MAY 2012 13:30
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  13 MAY 2012 16:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -702,15 +702,8 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 389.
  (./caw4567-report-final.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 389.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 389.
-
-
-Package rerunfilecheck Warning: File `caw4567-report-final.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `caw4567-report-final.out':
-(rerunfilecheck)             Before: 5662E8DB50BC0A627DAFE830C1B83F90;877
-(rerunfilecheck)             After:  5940D6D7BAF6794F781DBF81BF2E570B;861.
+Package rerunfilecheck Info: File `caw4567-report-final.out' has not changed.
+(rerunfilecheck)             Checksum: 5940D6D7BAF6794F781DBF81BF2E570B;861.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 389.
  ) 
 Here is how much of TeX's memory you used:
@@ -735,7 +728,7 @@ xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
 ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texliv
 e/2011/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on caw4567-report-final.pdf (13 pages, 378784 bytes).
+Output written on caw4567-report-final.pdf (13 pages, 378774 bytes).
 PDF statistics:
  273 PDF objects out of 1000 (max. 8388607)
  231 compressed objects within 3 object streams
