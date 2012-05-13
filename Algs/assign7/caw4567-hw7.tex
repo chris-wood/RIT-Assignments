@@ -173,8 +173,8 @@ We show that the problem of determining the satisfiability of boolean formulas i
 				\EndFor
 				\State $PUSH(satList, l_j)$ \Comment{Push this literal into the queue}
 			\EndFor
-			\If{$satisfiable == True$}
-				\State \Return $True$
+			\If{$satisfiable == True$} 
+				\State \Return $True$ \Comment{Found one clause that can be satisfied}
 			\EndIf
 		\EndFor
 		\State \Return $False$
@@ -185,7 +185,6 @@ We show that the problem of determining the satisfiability of boolean formulas i
 Since DNF statements are composed of disjunctions (ORs) of conjunction clauses (ANDs), it is enough to check and see if only one conjunction clause can be satisfied. Therefore, this procedure simply traverses over every clause and checks to see if there is a literal and its negation in that clause, which indicates that the clause can never be true. If this is not the case, then the clause must be satisfiable, and thus the expression is satisfiable. 
 
 The time complexity of this algorithm is $O(mn^2)$, where $m$ is the number of clauses in $\psi$ and $n$ is the number of literals in the boolean expression. The reason for this is that for every clause we traverse over every literal in the clause, and for each element we perform a linear search with $satList$ that can be equal to the number of literals in the clause. Therefore, since the linear search runs in $O(n)$ time, the number of literals in a clause is $O(n)$, and the number of clauses in $\psi$ is $O(m)$, and each of these operations are nested, the resulting time complexity is $O(mn^2)$.
-
 \end{sol}
 
 \begin{prob}{5 - 34.5-5}
