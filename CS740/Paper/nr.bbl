@@ -1,46 +1,249 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{}
 
-\bibitem{RandomStudy}
-R.~{Albert}, H.~{Jeong}, and A.-L. {Barab{\'a}si}.
-\newblock {Error and attack tolerance of complex networks}.
-\newblock 406:378--382, July 2000.
+\bibitem[\protect\citeauthoryear{%
+{Albert}%
+, {Jeong}%
+\BCBL{}\ \BBA{} {Barab{\'a}si}%
+}{%
+{Albert}%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2000}}%
+}]{%
+RandomStudy}%
+\APACinsertmetastar{%
+RandomStudy}%
+{Albert}, R.%
+, {Jeong}, H.%
+\BCBL{}\ \BBA{} {Barab{\'a}si}, A\BHBI L.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2000}{July}{}.
+\newblock
+\BBOQ{}\APACrefatitle{{Error and attack tolerance of complex networks}}{{Error
+  and attack tolerance of complex networks}}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{}{406}{}{378-382}.
+\PrintBackRefs{\CurrentBib}
 
-\bibitem{Bernard_networkrobustness}
-Anthony~Dekker Bernard.
-\newblock Network robustness and graph topology.
+\bibitem[\protect\citeauthoryear{%
+Bernard%
+}{%
+Bernard%
+}{%
+{\protect\APACyear{{\protect\bibnodate{}}}}%
+}]{%
+Bernardnetworkrobustness}%
+\APACinsertmetastar{%
+Bernardnetworkrobustness}%
+Bernard, A\BPBI D.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{\bibnodate{}}{}{}.
+\newblock
+\APACrefbtitle{Network Robustness and Graph Topology.}{Network robustness and
+  graph topology.}
+\PrintBackRefs{\CurrentBib}
 
-\bibitem{Onion}
-Hans~J Herrmann, Christian~M Schneider, André~A Moreira, José S~Andrade Jr,
-  and Shlomo Havlin.
-\newblock Onion-like network topology enhances robustness against malicious
-  attacks.
-\newblock {\em Journal of Statistical Mechanics: Theory and Experiment},
-  2011(01):P01027, 2011.
+\bibitem[\protect\citeauthoryear{%
+Herrmann%
+, Schneider%
+, Moreira%
+, Jr%
+\BCBL{}\ \BBA{} Havlin%
+}{%
+Herrmann%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2011}}%
+}]{%
+Onion}%
+\APACinsertmetastar{%
+Onion}%
+Herrmann, H\BPBI J.%
+, Schneider, C\BPBI M.%
+, Moreira, A\BPBI A.%
+, Jr, J\BPBI S\BPBI A.%
+\BCBL{}\ \BBA{} Havlin, S.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Onion-like network topology enhances robustness against
+  malicious attacks}{Onion-like network topology enhances robustness against
+  malicious attacks}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Journal of Statistical Mechanics: Theory and
+  Experiment}{2011}{01}{P01027}.
+\newblock
+ \begin{APACrefURL} \url{http://stacks.iop.org/1742-5468/2011/i=01/a=P01027}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
 
-\bibitem{Attacks}
-Petter Holme, Beom~Jun Kim, Chang~No Yoon, and Seung~Kee Han.
-\newblock Attack vulnerability of complex networks.
-\newblock {\em Phys. Rev. E}, 65:056109, May 2002.
+\bibitem[\protect\citeauthoryear{%
+Holme%
+, Kim%
+, Yoon%
+\BCBL{}\ \BBA{} Han%
+}{%
+Holme%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2002}}%
+}]{%
+Attacks}%
+\APACinsertmetastar{%
+Attacks}%
+Holme, P.%
+, Kim, B\BPBI J.%
+, Yoon, C\BPBI N.%
+\BCBL{}\ \BBA{} Han, S\BPBI K.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2002}{May}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Attack vulnerability of complex networks}{Attack
+  vulnerability of complex networks}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Phys. Rev. E}{65}{}{056109}.
+\newblock
+ \begin{APACrefURL} \url{http://link.aps.org/doi/10.1103/PhysRevE.65.056109}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
 
-\bibitem{GraphThesis}
-E~Jenelius.
-\newblock Graph models of infrastructures and the robustness of power grids.
-\newblock M. sc. thesis, KTH Royal Institute of Technology, 2004.
+\bibitem[\protect\citeauthoryear{%
+Jenelius%
+}{%
+Jenelius%
+}{%
+{\protect\APACyear{2004}}%
+}]{%
+GraphThesis}%
+\APACinsertmetastar{%
+GraphThesis}%
+Jenelius, E.%
+%
+\unskip\
+\newblock
+\APACrefYear{2004}.
+\newblock
+\APACrefbtitle{Graph Models of Infrastructures and the Robustness of Power
+  Grids}{Graph models of infrastructures and the robustness of power grids}.
+\newblock
+M. sc. thesis, KTH Royal Institute of Technology.
+\PrintBackRefs{\CurrentBib}
 
-\bibitem{AttacksWavesRandom}
-T.~Tanizawa, G.~Paul, R.~Cohen, S.~Havlin, and H.~E. Stanley.
-\newblock {Optimization of Network Robustness to Waves of Targeted and Random
-  Attack}, June 2004.
+\bibitem[\protect\citeauthoryear{%
+{Sonawane, Abhijeet R.}%
+, {Bhattacharyay, A.}%
+, {Santhanam, M.S.}%
+\BCBL{}\ \BBA{} {Ambika, G.}%
+}{%
+{Sonawane, Abhijeet R.}%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2012}}%
+}]{%
+bimodal}%
+\APACinsertmetastar{%
+bimodal}%
+{Sonawane, Abhijeet R.}%
+, {Bhattacharyay, A.}%
+, {Santhanam, M.S.}%
+\BCBL{}\ \BBA{} {Ambika, G.}%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Evolving networks with bimodal degree
+  distribution}{Evolving networks with bimodal degree distribution}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Eur. Phys. J. B}{85}{4}{118}.
+\newblock
+ \begin{APACrefURL} \url{http://dx.doi.org/10.1140/epjb/e2012-30074-6}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
 
-\bibitem{LargeNetworkRobustness-PVM}
-P.~Van~Mieghem.
-\newblock Robustness of large networks.
-\newblock In {\em Systems, Man and Cybernetics, 2005 IEEE International
-  Conference on}, volume~3, pages 2372 -- 2377 Vol. 3, oct. 2005.
+\bibitem[\protect\citeauthoryear{%
+Tanizawa%
+, Paul%
+, Cohen%
+, Havlin%
+\BCBL{}\ \BBA{} Stanley%
+}{%
+Tanizawa%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2004}}%
+}]{%
+AttacksWavesRandom}%
+\APACinsertmetastar{%
+AttacksWavesRandom}%
+Tanizawa, T.%
+, Paul, G.%
+, Cohen, R.%
+, Havlin, S.%
+\BCBL{}\ \BBA{} Stanley, H\BPBI E.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2004}{{\APACmonth{06}}}{23}.
+\newblock
+\APACrefbtitle{{Optimization of Network Robustness to Waves of Targeted and
+  Random Attack}.}{{Optimization of Network Robustness to Waves of Targeted and
+  Random Attack}.}
+\newblock
+ \begin{APACrefURL} \url{http://arxiv.org/abs/cond-mat/0406567}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
 
-\bibitem{NRMalicious}
-A.~{Zeng} and W.~{Liu}.
-\newblock {Enhancing network robustness for malicious attacks}.
-\newblock {\em ArXiv e-prints}, March 2012.
+\bibitem[\protect\citeauthoryear{%
+Van~Mieghem%
+}{%
+Van~Mieghem%
+}{%
+{\protect\APACyear{2005}}%
+}]{%
+LargeNetworkRobustnessPVM}%
+\APACinsertmetastar{%
+LargeNetworkRobustnessPVM}%
+Van~Mieghem, P.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{oct.}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Robustness of large networks}{Robustness of large
+  networks}.\BBCQ{}
+\newblock
+\BIn{} \APACrefbtitle{Systems, Man and Cybernetics, 2005 IEEE International
+  Conference on}{Systems, man and cybernetics, 2005 ieee international
+  conference on}\ (\BVOL~3, \BPG~2372 - 2377 Vol. 3).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+{Zeng}%
+\ \BBA{} {Liu}%
+}{%
+{Zeng}%
+\ \BBA{} {Liu}%
+}{%
+{\protect\APACyear{2012}}%
+}]{%
+NRMalicious}%
+\APACinsertmetastar{%
+NRMalicious}%
+{Zeng}, A.%
+\BCBT{}\ \BBA{} {Liu}, W.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{{\APACmonth{03}}}{}.
+\newblock
+\BBOQ{}\APACrefatitle{{Enhancing network robustness for malicious
+  attacks}}{{Enhancing network robustness for malicious attacks}}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{ArXiv e-prints}{}{}{}.
+\PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}

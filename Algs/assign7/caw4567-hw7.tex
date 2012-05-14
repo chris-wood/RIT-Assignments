@@ -111,7 +111,7 @@ Note that $m$ denotes the bijective mapping (the permutation) from $V(G_1)$ to $
 Prove that if $NP \not= co$-$NP$, then $P \not= NP$.
 \end{prob}
 \begin{sol}
-If $NP \not= co$-$NP$, then we know there exists a problem $Q \in NP$ such that $Q \notin co$-$NP$.  Furthermore, by definition, we know that $P \in co$-$NP \cap NP$. Now, let $Q$ be a problem in $NP$ that is not in $co$-$NP$. By the definition of the set intersection, that means that $Q \notin co$-$NP \cap NP$, and thus we know that $Q \in NP$ and $Q \notin P$ (becuse $P$ is a subset of $co$-$NP \cap NP$). Therefore, since there exists a problem that is in $NP$ but not in $P$, we conclude that $P \not= NP$. 
+If $NP \not= co$-$NP$, then we know there exists a problem $Q \in NP$ such that $Q \notin co$-$NP$.  Furthermore, by definition, we know that $P \in co$-$NP \cap NP$. Now, let $Q$ be a problem in $NP$ that is not in $co$-$NP$. By the definition of the set intersection, that means that $Q \notin co$-$NP \cap NP$, and thus we know that $Q \in NP$ and $Q \notin P$ (because $P$ is a subset of $co$-$NP \cap NP$). Therefore, since there exists a problem that is in $NP$ but not in $P$, we conclude that $P \not= NP$. 
 \end{sol}
 
 \begin{prob}{3 - 34.3-1}
@@ -127,7 +127,7 @@ The logical equivalent expression for this circuit is as follows:
 ((x_1 \lor x_2) \land x_3) \land (x_3 \lor (x_1 \land x_2 \land \lnot x_3)) \land (x_1 \land x_2 \land \lnot x_3)
 \end{eqnarray*}
 
-To show that this circuit is unsatisfiable, we simply build a truth table for the boolean expression that considers all logical values for $x_1, x_2,$ and $x_3$, as shown in table \ref{thetable}:
+To show that this circuit is unsatisfiable, we simply build a truth table for the boolean expression that considers all logical values for $x_1, x_2,$ and $x_3$, as shown in Table \ref{thetable}:
 
 \begin{table}
 \centering
@@ -191,13 +191,25 @@ The time complexity of this algorithm is $O(mn^2)$, where $m$ is the number of c
 The \textbf{set-partition problem} takes as input a set $S$ of numbers. The question is whether the numbers can be partitioned into two sets $A$ and $A' = S - A$ such that $\sum_{x \in A}x = \sum_{x \in A'} x$. Show that the set-partition problem is $NP$-complete.
 \end{prob}
 \begin{sol}
-In order to show that the set-partition problem, $Q$ is $NP$-complete, we show that it reduces to the subset-sum problem, $Q'$. That is, we prove $Q \leq_p Q'$ as follows:
+In order to show that the set-partition problem $Q$ is $NP$-complete, we show that it can be reduced from the subset-sum problem $Q'$. That is, we prove $Q' \leq_p Q$ as follows:
+
+%x \in L_1 iff f(x) \in L_2 -> state this requirement for reducibility (taken from textbook)
+
 \begin{itemize}
-	\item Given instance of left, build instance to right
-	\item Show that right solves
-	\item Show that construction solves left
-	\item Show that construction can be done in polynomial time
+	\item First, we must show that $Q \in NP$. To do this, we show that an instance of $Q$ can be verified in polynomial time. Suppse for an instance of $Q$ we have two partite subsets $A$ and $A'$ of an input set $S$ of numbers. We can easily compute the sum of all elements in both $A$ and $A'$ in $O(n)$ time and then compare if these sums are equivalent in constant time. Thus, the instance of $Q$ can be verified in polynomial time ($O(n)$), and so we conclude that $Q \in NP$. 
+
+	\item Now we need to show that $Q' \leq_p Q$. Consider an instance of $Q'$ that consists of a set of numbers $S$ and an integer target value $t$, where some the sum of all elements in a subset $S' \subseteq S$ adds to $t$. If we denote $s = \sum_{x \in S}x$, then we also know that $\sum_{x \in S - S'}x  = s - t$. Now, we can create a new augmented set $S^* = S \cup \{s - 2t\}$, which results in $\sum_{x \in S^*}x = (s + (s - 2t)) = 2s - 2t = 2(s - t)$. Therefore, we know that there are exactly two partite sets in $S$ that sum to exactly $s - t$, and thus $S^*$ is an instance of $Q'$ that also satisfies $Q$. 
+
+Now, consider an instance of $Q$ that consists of a set of numbers $S^*$ and two partite sets $A$ and $A'$, where $\sum_{x \in A}x = \sum_{x \in A'}x = (s - t)$. By our construction technique, we know that one of these partite sets contains the number $m = s - 2t$, and if we remove that number from the corresponding set we are left with $s - t - (s - 2t) = t$. Therefore, since $S^* - \{m\} = S$ and there is a subset in $S$ that now sums to $t$, we conclude that this instance of $Q$ also satisfies $Q'$.
+
+%http://web.njit.edu/~marvin/cs341/hw/hwsoln13.pdf
+
+%$\sum_{x \in S^*}x = 2(s - t) = 2s - 2t = s + (s - 2t)$. Therefore, we know that there is subset of $S' \subseteq S^*$ such that $\sum_{x \in S'}x = s - 2t$. Now, if we consider the set $S = S^* - S'$, then we know that $\sum_{x \in S}x = s + (s - 2t) - (s - 2t) = s$. 
+
+	\item Finally, we show that the construction of $S^*$ can be done in polynomial time from an instance of $Q'$ by computing the sum $s - 2t$ and including it in the set $S$. 
 \end{itemize}
+
+Thus, since we defined a polynomial time construction $f$ that builds instances of $Q$ from $Q'$, and such instances satisfy both $Q$ and $Q'$, we conclude that $Q' \leq_p Q$. Now, since $Q'$ is $NP$-complete, we can also conclude that $Q$ is $NP$-complete.
 \end{sol}
 
 \begin{prob}{6-a}
@@ -209,11 +221,11 @@ maximum value that can be placed in the knapsack.
 \label{alg2}
 \begin{algorithmic}[1]
 	\Function{RecursiveKnapsack}{$n, v, w, W$}
-		\If{$W < 0$}
-			\State \Return $-1$ \Comment{The weight limit was passed, so decrease the value}
-		\ElsIf{$n == 0$}
-			\State \Return $0$ \Comment{There are no items to contribute weight or value}
-		\Else
+		\If{$n == 0$} \Comment{There are no items to contribute weight or value}
+			\State \Return $0$ 
+		\ElsIf{$W - w[n] < 0$} \Comment{This item is too heavy, so don't include it}
+			\State \Return $RecursiveKnapsack(n-1, v, w, W)$
+		\Else 
 			\State \Return max($v[n]+RecursiveKnapsack(n-1, v, w, W-w[n])$, \\ $RecursiveKnapsack(n-1,v,w,W)$)
 		\EndIf
 	\EndFunction
@@ -246,7 +258,9 @@ Now, putting these two results together, the dynamic programming based algorithm
 The knapsack decision problem is $NP$-complete. Does your analysis above prove that $P = NP$? Explain.
 \end{prob}
 \begin{sol}
-TODO: no? it's just a fancy implementation...
+%TODO: http://en.wikipedia.org/wiki/Knapsack_problem
+%http://stackoverflow.com/questions/3907545/how-to-understand-the-knapsack-problem-is-np-complete
+No, this analysis does not prove that $P = NP$, because the $O(nW)$ time complexity comes from the number of bits that are used to represent $W$, not the value of $W$. As the weight capacity of the knapsack increases the number of individual items that can be stored in $W$ increases by individual items as well, and if we treat $W$ as a binary number then we also say that the number of bits used to store $W$ increases by 1. However, by increasing the number of bits in $W$ in a linear manner, we increase the value of $W$ exponentially. Thus, we can conclude that this dynamic programming problem runs in psuedo-polynomial time, which means that it ultimately runs in exponential time complexity. Therefore, this solution is still in $NP$, so we cannot conclude that $P = NP$.
 \end{sol}
 
 \end{document}

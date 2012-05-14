@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[doc]{apa}%can be jou (for journal), man (manuscript) or doc (document)
 
 \usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype,
 	    graphicx, verbatim, listings, color, fancybox}
@@ -32,15 +32,30 @@
   \noindent \rule{\linewidth}{1pt}% Bottom rule
   }%
 
-%\setlength{\parindent}{0pt}
 
-\linespread{1.2}
+%
+%
+%these next packages extend the apa class to allow for including statistical and graphic commands
+\usepackage{url}   %this allows us to cite URLs in the text
+\usepackage{graphicx}  %allows for graphic to float when doing jou or doc style
+\usepackage{amssymb}  %use formatting tools  for math symbols
+% type setting of functions, packages, and R follows a particular style
+\let\proglang=\textsf
+\newcommand{\R}{\proglang{R}}
+\newcommand{\pkg}[1]{{\normalfont\fontseries{b}\selectfont #1}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}} 
+\newcommand{\fun}[1]{{\texttt{#1}}} 
+\newcommand{\Robject}[1]{{\texttt{#1}}} 
+%
+%
+%Here is where we start the important APA stuff
 
-\begin{document}
-\arltitle{Engineering Networks for Optimal Robustness}{Data Communication and Networks I [4005-700]}
+\title{Engineering Networks for Optimal Robustness}
+\author{Christopher A. Wood}
+\affiliation{Department of Computer Science \\ Rochester Institute of Technology}
 
-\begin{abstract}
-Due to the growing pervasiveness of civilian and 
+
+\abstract{Due to the growing pervasiveness of civilian and 
 military networks for the transmission of safety-critical and real-time data, 
 it is critically important that they are resistant to selective and random network 
 node deletions. Network robustness is a measure of the performance and 
@@ -51,8 +66,31 @@ can be utilized to design and construct optimally robust networks in order to yi
 the best performance in the event of node deletions.
 
 This paper presents some background information on network robustness and
-its importance in modern communication systems, with a specific focus on wireless sensor networks, presents some recent advances made in the topic, and concludes with avenues of future work that can be explored by researchers in the field. 
-\end{abstract}
+its importance in modern communication systems, with a specific focus on wireless sensor networks, presents some recent advances made in the topic, and concludes with avenues of future work that can be explored by researchers in the field. }
+
+\acknowledgements{Adapted (and at times just copied) from a similar document by Athanassios Protopapas who is at the 
+Institute for Language \& Speech Processing Athens, Greece. (email: protopap@ilsp.gr) 
+
+William Revelle may be contacted at \url{email:revelle@northwestern.edu)}}
+
+\shorttitle{APA style manuscript}
+\rightheader{APA style manuscript}
+\leftheader{William Revelle}
+
+\begin{document}
+\maketitle   
+
+%\setlength{\parindent}{0pt}
+
+\begin{comment}
+
+%\documentclass[11pt]{article}
+
+\linespread{1.2}
+\begin{document}
+\arltitle{}{Data Communication and Networks I [4005-700]}
+
+\end{comment}
 
 % http://crpit.com/confpapers/CRPITV26Dekker.pdf
 % http://en.wikipedia.org/wiki/Percolation_theory
@@ -65,7 +103,7 @@ its importance in modern communication systems, with a specific focus on wireles
 
 \section{Introduction}
 
-Military and civilian communications have seen two common trends in rencent years: an increase in network-oriented operations and an increase in high-risk malicious attacks against networks that facilitate such operations \cite{Bernard_networkrobustness}. In order to sustain this growth pattern such operations, it is vital they their underlying network infrastructure can defend against emerging attacks that focus on specific nodes or links in the network or random failures that occur throughout the network. The measure of resilience to such attacks or failures is referred to as the robustness of a network, and is a topic that has been analytically and experimentally studied extensively in recent years.
+Military and civilian communications have seen two common trends in rencent years: an increase in network-oriented operations and an increase in high-risk malicious attacks against networks that facilitate such operations \cite{Bernardnetworkrobustness}. In order to sustain this growth pattern such operations, it is vital they their underlying network infrastructure can defend against emerging attacks that focus on specific nodes or links in the network or random failures that occur throughout the network. The measure of resilience to such attacks or failures is referred to as the robustness of a network, and is a topic that has been analytically and experimentally studied extensively in recent years.
 
 The physical properties of networks (i.e. the channel bandwidth, routing protocols, transmission media) have an a significant effect on the measure of robustness of a network. However, recent research efforts have approached this problem from the topological domain and studied it using analytical methods from graph theory and statistics in order to solve more general questions about the relationship between the structure of a graph and its robustness. 
 
@@ -98,7 +136,7 @@ The \textbf{distance} between any two vertices $u, v \in V$ in a graph $G = (V,E
 \section{Network Functionality}
 \label{NetworkFunctionality}
 
-Network engineers strive for high performance networks that exhibit high throughput and low latency between any two nodes in the same network. Other similar quality metrics include the number of hops between nodes, the distance between two nodes, the jitter on the transmission medium, the loss rate, and the bandwidth (or capacity) of the channel \cite{LargeNetworkRobustness-PVM}. These quality paremeters are often used to assign weights to the links in a network in order to determine the optimal network designs using mathematical analysis. 
+Network engineers strive for high performance networks that exhibit high throughput and low latency between any two nodes in the same network. Other similar quality metrics include the number of hops between nodes, the distance between two nodes, the jitter on the transmission medium, the loss rate, and the bandwidth (or capacity) of the channel \cite{LargeNetworkRobustnessPVM}. These quality paremeters are often used to assign weights to the links in a network in order to determine the optimal network designs using mathematical analysis. 
 
 %TODO: Unfortunately, in real-world networks, these weights are not always fixed.
 % should this be mentioned?
@@ -240,7 +278,7 @@ By examining each of these classes of graphs in the context of random vertex del
 	\label{fig:RandomResults}
 	\centering
 		\includegraphics[width=0.5\textwidth]{random_results.png}
-	\caption{Results of the random and scale-free graphs varied as $f$, the fraction of nodes removed from each graph, is changed \cite{GraphThesis}. }
+	\caption{Results of the random and scale-free graphs varied as $f$, the fraction of nodes removed from each graph, is changed . } %\cite{GraphThesis}
 \end{figure}
 
 \subsection{Fractional Node Deletion Investigations}
@@ -284,7 +322,7 @@ In their study of optimal graph structures that yield the highest resilience to 
 	\label{fig:Onion}
 	\centering
 		\includegraphics[width=0.5\textwidth]{Onion.jpg}
-	\caption{An example of a graph with $124$ nodes and $366$ edges that exhibits the onion-like topology \cite{Onion}}
+	\caption{An example of a graph with $124$ nodes and $366$ edges that exhibits the onion-like topology } %\cite{Onion}
 \end{figure}
 
 Herrmann et al have also conducted research on optimization algorithms that increase this robustness measure while at the same time maintaining the distribution of vertex degrees throughout the network. Their proposed algorithm seeks to re-arrange node edges and connections to improve the resilience of the host network to any kinds of attacks using Monte-Carlo simulations. This algorithm can be described as follows:
@@ -306,7 +344,7 @@ Algorithm~\ref{alg2} is repeated for a very large number of iterations until an 
 One more recent investigation of graphs with fixed degree distributions was performed by Sonawane et al \cite{bimodal}. 
 
 % Here is the bibliography
-\bibliographystyle{plain}
+%\bibliographystyle{plain}
 \bibliography{nr}
 
 % That's all folks
