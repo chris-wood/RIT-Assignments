@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  13 MAY 2012 21:53
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  14 MAY 2012 14:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -556,7 +556,7 @@ LaTeX Info: Redefining \nameref on input line 18.
 \@outlinefile=\write5
 \openout5 = `caw4567-report-final.out'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 28.
+LaTeX Font Info:    Try loading font information for U+msa on input line 32.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
@@ -564,7 +564,7 @@ File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 (/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 28.
+LaTeX Font Info:    Try loading font information for U+msb on input line 32.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -572,7 +572,7 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 (/usr/local/texlive/2011/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 28.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 32.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -587,32 +587,32 @@ Package epstopdf Info: Source file: <images/brute_joint.eps>
 (epstopdf)                    size: 9189 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/brute_joint-eps-con
 verted-to.pdf images/brute_joint.eps>
-(epstopdf)             \includegraphics on input line 108.
+(epstopdf)             \includegraphics on input line 97.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/brute_joint-eps-converted-to.pdf, id=89, 449.68pt x 338.26375pt>
+<images/brute_joint-eps-converted-to.pdf, id=93, 449.68pt x 338.26375pt>
 File: images/brute_joint-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/brute_joint-eps-converted-to.pdf>
 Package pdftex.def Info: images/brute_joint-eps-converted-to.pdf used on input 
-line 108.
+line 97.
 (pdftex.def)             Requested size: 292.28853pt x 219.86882pt.
+ [3 <./images/brute_joint-eps-converted-to.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 136--136
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--149
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 153--153
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--166
-
- []
-
-[3] [4 <./images/brute_joint-eps-converted-to.pdf>] [5]
-Overfull \hbox (28.42465pt too wide) in paragraph at lines 199--210
+Overfull \hbox (28.42465pt too wide) in paragraph at lines 186--197
  [][] 
  []
 
-[6]
+[4] [5]
 Package epstopdf Info: Source file: <images/avalanche_results16.eps>
 (epstopdf)                    date: 2012-05-12 18:33:31
 (epstopdf)                    size: 16553 bytes
@@ -622,17 +622,17 @@ o.pdf>
 (epstopdf)                    size: 18003 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/avalanche_results16
 -eps-converted-to.pdf images/avalanche_results16.eps>
-(epstopdf)             \includegraphics on input line 254.
+(epstopdf)             \includegraphics on input line 241.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/avalanche_results16-eps-converted-to.pdf, id=135, 531.9875pt x 416.5562
+<images/avalanche_results16-eps-converted-to.pdf, id=129, 531.9875pt x 416.5562
 4pt>
 File: images/avalanche_results16-eps-converted-to.pdf Graphic file (type pdf)
  <use images/avalanche_results16-eps-converted-to.pdf>
 Package pdftex.def Info: images/avalanche_results16-eps-converted-to.pdf used o
-n input line 254.
+n input line 241.
 (pdftex.def)             Requested size: 265.9931pt x 208.2776pt.
- [7]
+ [6] [7 <./images/avalanche_results16-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <images/bn_results16.eps>
 (epstopdf)                    date: 2012-05-12 17:54:37
 (epstopdf)                    size: 40964 bytes
@@ -641,15 +641,15 @@ Package epstopdf Info: Source file: <images/bn_results16.eps>
 (epstopdf)                    size: 78461 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/bn_results16-eps-co
 nverted-to.pdf images/bn_results16.eps>
-(epstopdf)             \includegraphics on input line 293.
+(epstopdf)             \includegraphics on input line 280.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/bn_results16-eps-converted-to.pdf, id=145, 531.9875pt x 416.55624pt>
+<images/bn_results16-eps-converted-to.pdf, id=153, 531.9875pt x 416.55624pt>
 File: images/bn_results16-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/bn_results16-eps-converted-to.pdf>
 Package pdftex.def Info: images/bn_results16-eps-converted-to.pdf used on input
- line 293.
+ line 280.
 (pdftex.def)             Requested size: 265.9931pt x 208.2776pt.
 Package epstopdf Info: Source file: <images/nl_results16.eps>
 (epstopdf)                    date: 2012-05-12 17:21:16
@@ -659,18 +659,19 @@ Package epstopdf Info: Source file: <images/nl_results16.eps>
 (epstopdf)                    size: 16459 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/nl_results16-eps-co
 nverted-to.pdf images/nl_results16.eps>
-(epstopdf)             \includegraphics on input line 321.
+(epstopdf)             \includegraphics on input line 308.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/nl_results16-eps-converted-to.pdf, id=149, 531.9875pt x 416.55624pt>
+<images/nl_results16-eps-converted-to.pdf, id=157, 531.9875pt x 416.55624pt>
 File: images/nl_results16-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/nl_results16-eps-converted-to.pdf>
 Package pdftex.def Info: images/nl_results16-eps-converted-to.pdf used on input
- line 321.
+ line 308.
 (pdftex.def)             Requested size: 265.9931pt x 208.2776pt.
- [8 <./images/avalanche_results16-eps-converted-to.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 343--343
+ [8 <./images/bn_results16-eps-converted-to.pdf>] [9 <./images/nl_results16-eps
+-converted-to.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 330--330
 
  []
 
@@ -683,41 +684,36 @@ f>
 (epstopdf)                    size: 81099 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/joint_results16-eps
 -converted-to.pdf images/joint_results16.eps>
-(epstopdf)             \includegraphics on input line 365.
+(epstopdf)             \includegraphics on input line 352.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/joint_results16-eps-converted-to.pdf, id=165, 531.9875pt x 416.55624pt>
+<images/joint_results16-eps-converted-to.pdf, id=182, 531.9875pt x 416.55624pt>
 File: images/joint_results16-eps-converted-to.pdf Graphic file (type pdf)
 <use images/joint_results16-eps-converted-to.pdf>
 Package pdftex.def Info: images/joint_results16-eps-converted-to.pdf used on in
-put line 365.
+put line 352.
 (pdftex.def)             Requested size: 265.9931pt x 208.2776pt.
- [9 <./images/bn_results16-eps-converted-to.pdf>] [10 <./images/nl_results16-ep
-s-converted-to.pdf>]
+ [10]
 (./caw4567-report-final.bbl [11 <./images/joint_results16-eps-converted-to.pdf>
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 389.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 376.
  [12]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 389.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 376.
  (./caw4567-report-final.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 389.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 389.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 376.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 376.
 Package rerunfilecheck Info: File `caw4567-report-final.out' has not changed.
 (rerunfilecheck)             Checksum: 5940D6D7BAF6794F781DBF81BF2E570B;861.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 389.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 376.
  ) 
 Here is how much of TeX's memory you used:
- 10141 strings out of 493633
- 151091 string characters out of 3143378
+ 10131 strings out of 493633
+ 151015 string characters out of 3143378
  282008 words of memory out of 3000000
  13114 multiletter control sequences out of 15000+200000
- 14725 words of font info for 98 fonts, out of 3000000 for 9000
+ 14413 words of font info for 93 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 33i,12n,51p,1302b,451s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,12n,51p,1263b,457s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -732,7 +728,7 @@ xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
 ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texliv
 e/2011/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on caw4567-report-final.pdf (12 pages, 378628 bytes).
+Output written on caw4567-report-final.pdf (12 pages, 375670 bytes).
 PDF statistics:
  268 PDF objects out of 1000 (max. 8388607)
  227 compressed objects within 3 object streams

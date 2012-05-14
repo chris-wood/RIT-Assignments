@@ -19,31 +19,24 @@
 \cawtitlelong{4040-849 Optimization Methods}{Optimizing Cryptographic Strength of Substitution}{Layers in Symmetric-Key Cryptographic Algorithms}
 
 \begin{abstract}
-The cryptographic security of symmetric-key block algorithms and other related primitives is based upon their adherence to Shannon's principles of confusion and diffusion \cite{Kim90astudy}. Confusion can be defined as the statistical relationship between the ciphertext and private key of a cipher, while diffusion refers to the statistical redundancy of plaintext bits in the ciphertext bits. Consequently, it is increasingly important to optimize these characteristics in order to make them less susceptible to common attacks, such as linear and differential cryptanalysis. S(ubstitution)-boxes are the most traditional mathematical structures that are used to improve the levels of diffusion and confusion within symmetric-key cryptographic algorithms. Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis \cite{Kim90astudy}. In this work, we discuss the formulation of building cryptographically strong substitution layers in symmetric-key block algorithms with S-box designs into a mixed integer nonlinear programming (MINLP) problem that can be optimized to yield the high diffusion and confusion dividends in resulting algorithm definitions.
+The cryptographic security of symmetric-key encryption algorithms is commonly based Shannon's principles of confusion and diffusion \cite{Kim90astudy}. Confusion can be defined as the statistical relationship between the ciphertext and private key of a cipher, while diffusion refers to the statistical redundancy of plaintext bits in the ciphertext bits. Consequently, it is increasingly important to optimize these characteristics in order to make them less susceptible to common attacks, such as linear and differential cryptanalysis. S(ubstitution)-boxes are the most traditional mathematical structures that are used to improve the levels of diffusion and confusion within symmetric-key cryptographic algorithms. Recent research efforts have revealed practical measurements of S-box constructions that indicate their susceptibility to linear and differential cryptanalysis \cite{Kim90astudy}. In this work, we discuss the formulation of building cryptographically strong substitution layers in symmetric-key block algorithms with S-box designs into a mixed integer nonlinear programming (MINLP) problem that can be optimized to yield the high diffusion and confusion dividends in resulting algorithm definitions.
 \end{abstract}
 
 \section{Problem Description}
-The cryptographic security of symmetric-key block ciphers and other related primitives is based upon their adherence to Shannon's principles of confusion and diffusion \cite{Kim90astudy}. Confusion is typically referred to as the complexity of the relationship between the secret-key and ciphertext, and diffusion is commonly referred to as the degree to which the influence of a single input bit is spread throughout the resulting ciphertext. Consequently, it is increasingly important to optimize these characteristics in order to make symmetric-key cryptographic algorithms less susceptible to common attacks, such as linear and differential cryptanalysis.
+The cryptographic security of symmetric-key encryption algorithms is based upon Shannon's principles of confusion and diffusion \cite{Kim90astudy}. Confusion can be defined as the complexity of the relationship between the secret-key and ciphertext, and diffusion is commonly referred to as the degree to which the influence of a single input plaintext bit is spread throughout the resulting ciphertext. When designing new cryptographic algorithms, it is increasingly important to optimize these characteristics in order to make them less susceptible to common attacks, such as linear and differential cryptanalysis.
 
-Linear cryptanalysis is an attack that attempts to take advantage of high probability occurrences of linear expressions involving plaintext bits, ciphertext bits, and subkey bits. Mathematically, the attack is based on the idea of approximating the operation of a portion of the block cipher in question with an expression that is linear in terms of the input ($X$) and output ($Y$) bits involved, as shown below \cite{Heys01atutorial}:
-\begin{eqnarray*}
-X_{i_{1}} \oplus X_{i_{2}} ... \oplus X_{i_{r}} \oplus Y_{j_{1}} \oplus Y_{j_{2}} ... \oplus Y_{j_{s}} \oplus  = 0
-\end{eqnarray*}
-Using this expression, attackers can guage the amount of randomness introduced by the algorithm. That is, if such an expression is satisfied frequently (with a relatively high probability), then we know that the probability of the expression holding for any two values $a,b\in \field{F}_2^n$ is approximately $1/2$. However, when this probability shifts away from $1/2$, the amount of known plaintexts required to determine the key (or key block) that was used to reproduce the output goes down dramatically. Such a deviation from the expected probability of $1/2$ for any expression of the form above, which is referred to as the \emph{linear bias}, determines the susceptibility of the block cipher to known plaintext attacks. Therefore, it is important to introduce non-linearity into the block cipher in order to defend against such attacks.
+Linear cryptanalysis is a popular attack technique that attempts to approximate the secret key used within a symmetric-key encryption algorithm using a set of known plaintexts. Mathematically, it is defined as the formulation of a linear expression that is composed of the input and output bits for a function within the algorithm (or the entire algorithm itself) that is satisfied with high probability (which is an indication of bit patterns generated by the target function). This expression is then cross-checked with a large set of known plaintexts in order to deduce the secret encryption key \cite{Heys01atutorial}.
 
-Differential cryptanalysis is another powerful attack technique that attempts to break symmetric key ciphers by exploiting high probability of certain occurrences of plaintext differences and ciphertext differences \cite{Heys01atutorial}. To illustrate this attack technique, consider the input of a block cipher to be represented by the vector $\langle X_1, X_2,..., X_n \rangle$ and the corresponding output to be $\langle Y_1, Y_2, ..., Y_n \rangle$, where each element $X_i$ and $Y_i$ corresponds to a single bit in the input and output, respectively. With this definition, we can represent the input difference of any two input vectors ($\Delta X$) and any two output vectors ($\Delta Y$) as follows:
-\begin{eqnarray*}
-\Delta X = \langle \Delta X_1 \oplus \Delta X_2 \oplus ... \oplus \Delta X_n \rangle  \\
-\Delta Y= \langle \Delta Y_1 \oplus \Delta Y_2 \oplus ... \oplus \Delta Y_n \rangle
-\end{eqnarray*}
-where $\Delta X_i = X_{i,1} \oplus X_{i,2}$ and $\Delta Y_i = Y_{i,1} \oplus Y_{i,2}$. It is an ideal block cipher the output different $\Delta Y$ for a specific input different $\Delta X$ will occur with a probability of approximately $1/2^n$ (i.e. it produces random output based on every input block). Note that it is common to represent the input and output difference pairs as $(\Delta X, \Delta Y)$ (which are referred to as differentials).
+Differential cryptanalysis is another powerful attack technique that attempts to break symmetric key ciphers by exploiting high probability of certain occurrences of plaintext differences and ciphertext differences \cite{Heys01atutorial}. By increasing the level of nonlinearity of a cipher, the probability of the occurrences of these differences decreases significantly, thus thwarting attacks that use this information to uncover the secret encryption key. 
 
-With the idea of differential pairs in mind, we define differential cryptanalysis as the process of finding differentials that occur with a probability much higher than $1/2^n$, which subsequently gives rise to a statistical correlation between the relationship between the input and output of a block cipher and can allow one to deduce the private key used in the cipher. Therefore, it is ideal to maximize the amount of randomness introduced by the algorothm, which can be obtained from high diffusion and confusion levels. Thus, the efficiency of both of these attacks relate to the measures of confusion and diffusion within an algorithm and the extent to which they can be exploited. 
+Collectively, linear and differential cryptanalysis lose their effectiveness as the levels of confusion and diffusion within a symmetric-key encryption algorithm are increased. Therefore, it is a fundamental design goal of such algorithms to incorporate mathematical elements that exhibit high measures of confusion and diffusion when composed together. Combinations of linear and nonlinear operations are the most common means by which these characteristics are realized in symmetric-key encryption algorithms, with the S(ubstitution)-box being the most popular nonlinear component available to cryptographic designers. An S-box is a well-defined function that maps elements in the domain $\field{F}_2^n$ to elements in the range $\field{F}_2^n$. With this notion, we consider a configuration of an S-box to be a set of input and output pairs. Furthermore, we denote the canonical form of an S-box configuration as an integer sequence of length $2^n$ ordered by the input elements that contains the output elements in $\field{F}_2^n$.
 
-Confusion and diffusion are usually realized through a unique combination of linear and nonlinear operations. It is understood that the nonlinear operations in the algorithms contribute more to the security of the corresponding algorithm than the other components. The most common source of nonlinearity in symmetric-key cryptographic algorithms is from a S(ubstitution)-box, which is a function with an equal sized domain and range that is configured to yield optimal confusion and diffusion between each input and output pair. As such, S-boxes, as the substitution layer in symmetric-key cryptographic algorithms, will be the focus of this project. 
+The mathematical design and cryptographic strength of S-boxes, which are commonly referred to as the substitution layers within symmetric-key encryption algorithms, has been the focus of extensive research in recent years (CITE). However, there is a lack of work in the literature that formulates the problem of S-box construction as a constrained optimization problem. Therefore, we address this lack of focus and attempt to state the S-box construction problem as a set of mixed-integer nonlinear programming problems with individual and multiple objective functions that can be solved to yield the optimum S-box configuration. The rest of this report is dedicated to the discussion of this effort.
 
 \subsection{Cryptographic Strength of Substitution Layers}
-Mathematically, an S-box can be represented as a function $f$ that maps input values $a$ to output values $b$ such that $a,b \in \field{F}_2^n$. In the context of cryptographic applications, such a function $f$ should be bijective in order to avoid bias towards any specific output element in the field. We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes \cite{Mar_newanalysis}.
+Mathematically, an S-box can be represented as a function $f$ that maps input values $a \in \field{F}_2^n$ to output values $b \in \field{F}_2^n$. In the context of symmetric-key cryptographic algorithms, such a function $f$ should ideally be bijective in order to avoid bias towards any specific output element in the field. 
+
+We now present a series of definitions that are pertinent to the design of cryptographically strong S-Boxes \cite{Mar_newanalysis}.
 
 %TODO: http://www.waset.org/journals/waset/v48/v48-24.pdf && thesis work
 
@@ -56,7 +49,7 @@ The \emph{branch number} of an $n \times n$-bit S-Box $S$ is
 \begin{eqnarray}
 B_N = \text{min}_{a, b\not=a}\left[\text{wt}(a \oplus b) + \text{wt}(S(a) \oplus S(b))\right],
 \end{eqnarray}
-where $a, b \in \field{F}_2^n$.
+where $a, b \in \field{F}_2^n$ (CITE).
 \end{define}
 
 \begin{define}
@@ -64,7 +57,7 @@ A function $f : \field{F}_2^n \to \field{F}_2^n$ exhibits the \emph{avalanche ef
 \begin{eqnarray}
 \sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus c_{i}^{n})) = n2^{n-1},
 \end{eqnarray}
-for all $i$ $(1 \leq i \leq n)$, where $c_{i}^{n} = \langle 0, 0, ..., 1, ..., 0 \rangle$ (where a $1$ is in the $n$th position of the vector of cardinality $n$).
+for all $i$ $(1 \leq i \leq n)$, where $c_{i}^{n} = \langle 0, 0, ..., 1, ..., 0 \rangle$ (where a $1$ is in the $n$th position of the vector of cardinality $n$) (CITE).
 \end{define}
 
 \begin{define}
@@ -80,10 +73,10 @@ The \emph{degree of nonlinearity} of an $n \times n$-bit S-Box from $\field{F}_2
 \begin{eqnarray}
 	P_S = \text{max}_{0 \not= a, b}|\{x \in \field{F}_2^n : S(x + a) - S(x) = b\}|
 \end{eqnarray}
-where $a, b \in \field{F}_2^n$, and a low measure for $P_S$ indicates a high degree of nonlinearity.
+where $a, b \in \field{F}_2^n$, and a low measure for $P_S$ indicates a high degree of nonlinearity (CITE).
 \end{define}
 
-Designers of cryptographically secure cryptographic algorithms use these measurements as a basis for the levels of confusion and diffusion within a symmetric-key algorithm, and thus for their susceptibility to linear and differential cryptanalysis (among other attacks). In particular, it has been shown that cryptographically secure symmetric-key algorithms utilize substitution layers that provide the following characteristics \cite{Kim90astudy}:
+Cryptographers and mathematicians commonly use these measurements as a basis for the levels of confusion and diffusion within a symmetric-key encryption algorithm, which in turns correlates to an approximation of their susceptibility to linear and differential cryptanalysis (among other attacks). In particular, it has been shown that cryptographically secure symmetric-key algorithms utilize substitution layers that provide the following characteristics \cite{Kim90astudy}:
 \begin{enumerate}
 	\item High branch number
 	\item Avalanche number of exactly $n^22^{n-1}$
@@ -92,26 +85,20 @@ Designers of cryptographically secure cryptographic algorithms use these measure
 %However, in practice the additional constraints that fast and simple mathematical operations must be used %to emulate represent such a bijective function $f$ that exhibits ideal values for all of these measurements.
 
 \section{Optimization Candidate and Problem Formation}
-%TODO: discuss time complexity of each operation, infeasibility for higher order S-boxes
-%TODO: discuss why exhaustive search is best (cryptographic strength, might be just one global max for joint computations)
-%TODO: include brute force results for order4 here (separate and joint)
-%TODO: summarize genetic algorithm approach, state each optimization problem as a MINLP problem
 %1. state need to exhaust entire solution, but that's infeasible.
 %2. state optimization problems for each one separately
 %3. state optimization problem together as joint
 %4. state solution is to use genetic algorithm and BB
 %5. discuss genetic algorithm crossover and mutation
 
-Due to the application of S-boxes inside cryptographic algorithms, it is ideal that such function configurations exhibit globally optimal values for each of these metrics. The best way to achieve this assurance is to perform an exhaustive search over the S-box design space (i.e. consider all possible input and output values) and find a configuration that yields the optimum results. The results from an exhaustive search experiment for a $2$-bit S-box are shown in Figure \ref{bfjoint}.
+The best way to find optimal S-box configurations is to perform an exhaustive search over the permutation design space (i.e. consider all configurations) and find one that yields the optimum results. The results from an exhaustive search experiment for a $2$-bit S-box are shown in Figure \ref{bfjoint}.
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.65]{images/brute_joint.eps} \\
 	\label{bfjoint}
-	\caption{The results for the branch number, avalanche, and nonlinearity measurements for a $2$-bit S-box over all possible permutations in the design variables.}
+	\caption{The results for the branch number, avalanche number, and degree of nonlinearity for a $2$-bit S-box over all possible permutations in the design variables. Note that there are $4^4 = 256$ possible permutations over the S-box configuration design space because each element $x \in \field{F}_2^2$ can map to any output value $y \in \field{F}_2^2$.}
 \end{figure}
-Exhaustive searches over the entire S-box permutation design space have a time complexity of $O(n^n)$ and thus are only feasible for very small order S-boxes. However, recent research efforts have advanced the upper bound on these exhaustive searches to include $4$-bit S-boxes, which were run in \cite{Sbox4x4}. Unfortunately, measurements for each of the aforementioned metrics were not provided. 
-
-%Furthermore, due to the instability of each function over the design variable permutation space, it is clear %that a probabilistic optimization algorithm would be best suited to optimizing each of these metrics. 
+Exhaustive searches over the entire S-box permutation design space have a time complexity of $O(n^n)$ and thus are only feasible for very small order S-boxes. However, recent research efforts have advanced the upper bound on these exhaustive searches to include $4$-bit S-boxes, which were run in \cite{Sbox4x4}. Unfortunately, measurements for the branch number, avalanche number, and nonlinearity degree were not provided. 
 
 As an alternative to performing these brute force searches, we consider the problem of optimizing the branch number, avalanche number, and degree of nonlinearity of symmetric-key cryptographic algorithm as MINLP problems, which can be formulated as shown in Figure \ref{problems}.
 
