@@ -37,18 +37,18 @@ def knapsack(n, values, weights, capacity):
 	# Consider all possible items and knapsack capacitities
 	# in a bottom-up fashion
 	for i in range(0, n):
-		for j in range(0, capacity + 1):
+		for w in range(0, capacity + 1):
 			# Check to see if this item can be included in the knapsack.
 			# If not, then we exclude it from the value calculation. If
 			# yes, then the value for this item is the max of choosing
 			# to include it or not in the knapsack (which is computed
 			# using previous values).
-			if (weights[i] > j):
-				table[i][j] = table[i - 1][j]
+			if (weights[i] > w):
+				table[i][w] = table[i - 1][w]
 			else:
-				vIn = values[i] + table[i - 1][j - weights[i]]
-				vOut = table[i - 1][j]
-				table[i][j] = max(vIn, vOut)
+				vIn = values[i] + table[i - 1][w - weights[i]]
+				vOut = table[i - 1][w]
+				table[i][w] = max(vIn, vOut)
 
 	# Return the computation 
 	return getItemIndices(table, n, weights, capacity)

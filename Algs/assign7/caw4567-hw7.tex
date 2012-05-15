@@ -164,7 +164,7 @@ We show that the problem of determining the satisfiability of boolean formulas i
 			\State $satList = makeQueue()$
 			\ForAll{Literals $l_j \in c_i$}
 				\ForAll{Literals $l_k \in satList$}
-					\If{$l_j == \lnot l_j$}
+					\If{$l_k == \lnot l_j$}
 						\State $satisfiable$ = False \Comment{Found the negation of $l_j$ in the queue}
 					\EndIf
 				\EndFor
@@ -195,20 +195,27 @@ In order to show that the set-partition problem $Q$ is $NP$-complete, we show th
 \begin{itemize}
 	\item First, we must show that $Q \in NP$. To do this, we show that a certicate of $Q$ can be verified in polynomial time. Suppse such a certificate of $Q$ contains two partite subsets $A$ and $A'$ of an input set $S$ of numbers. We can easily compute the sum of all elements in both $A$ and $A'$ in $O(n)$ time and then compare if these sums are equivalent in constant time. Thus, the certficate of $Q$ can be verified in polynomial time ($O(n)$), and so we conclude that $Q \in NP$. 
 
-	\item Now we need to show that $Q' \leq_p Q$. To do so, we define a construction function that translates instances of $Q'$ to instances of $Q$ as follows. Let $S$ be a set of numbers that contains a subset $S' \subseteq S$ that sum to the integer target $t$. We denote $s = \sum{x \in S}x$, and with this we construct a new set $S^*$ as $S \cup \{s - 2t\}$. 
+	\item Now we need to show that $Q' \leq_p Q$. To do so, we define a construction technique that translates instances of $Q'$ to instances of $Q$ as follows. Let $S$ be a set of numbers that contains a subset $S' \subseteq S$ that sum to the integer target $t$. We denote $s = \sum_{x \in S}x$, and with this we construct a new set $S^*$ as $S \cup \{s - 2t\}$. The reasoning behind this construction is that the set $S'' = S - S'$ has a sum of $s - t$, and so if we add the number $s - 2t$ to $S$ we are guaranteed that by including this number in $S'$ we are left with a total sum of $t + s - 2t = s - t$. Thus, there will be two partite sets that sum to exactly $s - t$.
 
-	\item Suppose we have an instance of $Q'$ that consists of a set of numbers $S$ and a subset of $S' \subseteq S$ that sums to an integer target $t$. Applying the construction technique described above, we are left with a new set $S^*$, where $\sum_{x \in S^*}x = (s + (s - 2t)) = 2s - 2t = 2(s - t)$. Therefore, we know that there are exactly two partite sets in $S$ that sum to exactly $s - t$, and thus $S^*$ is an instance of $Q'$ that also satisfies $Q$.
+	\item Suppose we have a satisfiable instance of $Q'$ that consists of a set of numbers $S$ and a subset of $S' \subseteq S$ that sums to an integer target $t$. Applying the construction technique described above, we are left with a new set $S^*$, where we have the following:
+\begin{eqnarray*}
+\sum_{x \in S^*}x &=& (s + (s - 2t))\\
+& = & (t + (s - t) + (s - 2t) \text{ (Split up the subsets in $S$ that sum to $s$ and $s - t$}\\
+& = & (s - t) + (s - 2t + t) \text{ (Include $s - 2t$ in $S'$)}\\
+& = & 2(s - t)
+\end{eqnarray*}
+Therefore, we know that there are exactly two partite sets in $S$ that sum to exactly $s - t$, and thus $S$ is an instance of $Q'$ that can be used to construct $S^*$, which also satisfies $Q$.
 
-	\item Now, suppose we have an instance of $Q$ that contains two partitite sets $A$ and $A'$, where $\sum_{x \in A}x = \sum_{x \in A'}x = (s - t)$. By our construction technique, we know that one of these partite sets contains the number $m = s - 2t$, and if we remove that number from the corresponding set we are left with $s - t - (s - 2t) = t$. Therefore, since $S^* - \{m\} = S$ and there is a subset in $S$ that now sums to $t$, we conclude that this instance of $Q$ also satisfies $Q'$.
+	\item Now, suppose we have a satisfiable instance of $Q$ that contains two partitite sets $A$ and $A'$, where $\sum_{x \in A}x = \sum_{x \in A'}x = (s - t)$. By our construction technique, we know that one of these partite sets contains the number $m = s - 2t$, and if we remove that number from the corresponding set we are left with $s - t - (s - 2t) = t$. Therefore, since $S^* - \{m\} = S$ and there is a subset in $S$ that now sums to $t$, we conclude that this instance of $Q$ also satisfies $Q'$.
 
 %http://web.njit.edu/~marvin/cs341/hw/hwsoln13.pdf
 
 %$\sum_{x \in S^*}x = 2(s - t) = 2s - 2t = s + (s - 2t)$. Therefore, we know that there is subset of $S' \subseteq S^*$ such that $\sum_{x \in S'}x = s - 2t$. Now, if we consider the set $S = S^* - S'$, then we know that $\sum_{x \in S}x = s + (s - 2t) - (s - 2t) = s$. 
 
-	\item Finally, we show that the construction of $S^*$ can be done in polynomial time from an instance of $Q'$ by computing the sum $s - 2t$ and including it in the set $S$. 
+	\item Finally, we show that the construction of $S^*$ can be done in polynomial time from an instance of $Q'$ simply by computing the sum $s - 2t$, which is done in $O(n)$ time by traversing over all of the elements in $S$, and then including it in the set $S$ in constant time. 
 \end{itemize}
 
-Thus, since we defined a polynomial time construction $f$ that builds instances of $Q$ from $Q'$, and such instances satisfy both $Q$ and $Q'$, we conclude that $Q' \leq_p Q$. Now, since $Q'$ is $NP$-complete, we can also conclude that $Q$ is $NP$-complete.
+Thus, since we defined a polynomial time construction that transforms satisfiable instances of $Q'$ to $Q$, and such instances satisfy both $Q$ and $Q'$, we conclude that $Q' \leq_p Q$. Now, since $Q'$ is $NP$-complete, we can also conclude that $Q$ (the set-partition problem) is $NP$-complete.
 \end{sol}
 
 \begin{prob}{6-a}
@@ -222,7 +229,7 @@ maximum value that can be placed in the knapsack.
 	\Function{RecursiveKnapsack}{$n, v, w, W$}
 		\If{$n == 0$} \Comment{There are no items to contribute weight or value}
 			\State \Return $0$ 
-		\ElsIf{$W - w[n] < 0$} \Comment{This item is too heavy, so don't include it}
+		\ElsIf{$W < w[n]$} \Comment{This item is too heavy, so don't include it}
 			\State \Return $RecursiveKnapsack(n-1, v, w, W)$
 		\Else 
 			\State \Return max($v[n]+RecursiveKnapsack(n-1, v, w, W-w[n])$, \\ $RecursiveKnapsack(n-1,v,w,W)$)
@@ -237,7 +244,40 @@ Give a dynamic programming solution to the 0-1 knapsack problem that is based on
 this algorithm should return the items to be taken. Implement this algorithm and call it $knapsack$.
 \end{prob}
 \begin{sol}
-TODO: insert source code once finished.
+The source code for the dynamic programming solution to the 0-1 knapsack problem is given below.
+
+\begin{lstlisting}
+def knapsack(n, values, weights, capacity):
+	table = list() 
+	for i in range(0, n):
+		rowList = list()
+		for j in range(0, capacity + 1):
+			rowList.append(0)
+		table.append(rowList)		
+	for i in range(0, n):
+		for w in range(0, capacity + 1):
+			if (weights[i] > w):
+				table[i][w] = table[i - 1][w]
+			else:
+				vIn = values[i] + table[i - 1][w - weights[i]]
+				vOut = table[i - 1][w]
+				table[i][w] = max(vIn, vOut)
+	return getItemIndices(table, n, weights, capacity)
+
+def getItemIndices(values, n, w, capacity):
+	i = len(values) - 1
+	weight = capacity
+	indices = []	
+	for i in range(0, n):
+		indices.append(0)
+	while i >= 0 and weight >= 0:
+		if ((i == 0 and values[i][weight] > 0) or 
+			(values[i][weight] != values[i - 1][weight])):
+			indices[i] = 1
+			weight = weight - w[i]
+		i = i - 1
+	return indices
+\end{lstlisting}
 \end{sol}
 
 \begin{prob}{6-c}
