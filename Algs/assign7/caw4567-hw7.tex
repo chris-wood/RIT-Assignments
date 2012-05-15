@@ -65,7 +65,7 @@
 Consider the language GRAPH-ISOMORPHISM = $\{\langle G_1, G_2 \rangle : G_1$ and $G_2$ are isomorphic graphs $\}$. Prove that GRAPH-ISOMORPHISM $\in NP$ by describing a polynomial-time algorithm to verify the language.
 \end{prob}
 \begin{sol}
-By the defintion of graph isomorphism, two graphs $G_1$ and $G_2$ are isomorphic if and only if there exists a bijection $m : V(G_1) \to V(G_2)$ such that any two vertices $v_i$ and $v_j$ of $G_1$ are adjacent in $G_1$ if and only if $m(v_i)$ and $m(v_j)$ are adjacent in $G_2$. In other words, the mapping $m$ is a defines a permutation from $V(G_1) \to V(G_2)$, and we can check to see if this is a valid permutation by checking that for every $v_j \in G_2$, there is exactly one $v_i \in G_1$ such that $m(v_i) = v_j$. We can then check to see that for every edge $(v_i, v_j) \in E(G_1)$, we also have $(m(v_i), m(v_j)) \in E(G_2)$. With these definitions in mind, we can easily devise a polynomial-time algorithm to verify that $m$ is a valid isomorphic mapping as follows:
+By the defintion of graph isomorphism, two graphs $G_1$ and $G_2$ are isomorphic if and only if there exists a bijection $m : V(G_1) \to V(G_2)$ such that any two vertices $v_i$ and $v_j$ of $G_1$ are adjacent in $G_1$ if and only if $m(v_i)$ and $m(v_j)$ are adjacent in $G_2$. In other words, the mapping $m$ is a defines a permutation from $V(G_1) \to V(G_2)$, and we can check to see if this is a valid permutation by checking that for every $v_j \in V(G_2)$, there is exactly one $v_i \in V(G_1)$ such that $m(v_i) = v_j$. We can then check to see that for every edge $(v_i, v_j) \in E(G_1)$, we also have $(m(v_i), m(v_j)) \in E(G_2)$. With these definitions in mind, we can easily devise a polynomial-time algorithm to verify that $m$ is a valid isomorphic mapping as follows:
 
 \begin{numberedAlg}[GRAPH-ISOMORPHISM-VERIFIER]
 \label{alg1}
@@ -188,16 +188,18 @@ The time complexity of this algorithm is $O(mn^2)$, where $m$ is the number of c
 The \textbf{set-partition problem} takes as input a set $S$ of numbers. The question is whether the numbers can be partitioned into two sets $A$ and $A' = S - A$ such that $\sum_{x \in A}x = \sum_{x \in A'} x$. Show that the set-partition problem is $NP$-complete.
 \end{prob}
 \begin{sol}
-In order to show that the set-partition problem $Q$ is $NP$-complete, we show that it can be reduced from the subset-sum problem $Q'$. That is, we prove $Q' \leq_p Q$ as follows:
+In order to show that the set-partition problem $Q$ is $NP$-complete, we show that it can be reduced from the subset-sum problem $Q'$, which is also $NP$-complete. That is, we prove $Q' \leq_p Q$ as follows:
 
 %x \in L_1 iff f(x) \in L_2 -> state this requirement for reducibility (taken from textbook)
 
 \begin{itemize}
-	\item First, we must show that $Q \in NP$. To do this, we show that an instance of $Q$ can be verified in polynomial time. Suppse for an instance of $Q$ we have two partite subsets $A$ and $A'$ of an input set $S$ of numbers. We can easily compute the sum of all elements in both $A$ and $A'$ in $O(n)$ time and then compare if these sums are equivalent in constant time. Thus, the instance of $Q$ can be verified in polynomial time ($O(n)$), and so we conclude that $Q \in NP$. 
+	\item First, we must show that $Q \in NP$. To do this, we show that a certicate of $Q$ can be verified in polynomial time. Suppse such a certificate of $Q$ contains two partite subsets $A$ and $A'$ of an input set $S$ of numbers. We can easily compute the sum of all elements in both $A$ and $A'$ in $O(n)$ time and then compare if these sums are equivalent in constant time. Thus, the certficate of $Q$ can be verified in polynomial time ($O(n)$), and so we conclude that $Q \in NP$. 
 
-	\item Now we need to show that $Q' \leq_p Q$. Consider an instance of $Q'$ that consists of a set of numbers $S$ and an integer target value $t$, where some the sum of all elements in a subset $S' \subseteq S$ adds to $t$. If we denote $s = \sum_{x \in S}x$, then we also know that $\sum_{x \in S - S'}x  = s - t$. Now, we can create a new augmented set $S^* = S \cup \{s - 2t\}$, which results in $\sum_{x \in S^*}x = (s + (s - 2t)) = 2s - 2t = 2(s - t)$. Therefore, we know that there are exactly two partite sets in $S$ that sum to exactly $s - t$, and thus $S^*$ is an instance of $Q'$ that also satisfies $Q$. 
+	\item Now we need to show that $Q' \leq_p Q$. To do so, we define a construction function that translates instances of $Q'$ to instances of $Q$ as follows. Let $S$ be a set of numbers that contains a subset $S' \subseteq S$ that sum to the integer target $t$. We denote $s = \sum{x \in S}x$, and with this we construct a new set $S^*$ as $S \cup \{s - 2t\}$. 
 
-Now, consider an instance of $Q$ that consists of a set of numbers $S^*$ and two partite sets $A$ and $A'$, where $\sum_{x \in A}x = \sum_{x \in A'}x = (s - t)$. By our construction technique, we know that one of these partite sets contains the number $m = s - 2t$, and if we remove that number from the corresponding set we are left with $s - t - (s - 2t) = t$. Therefore, since $S^* - \{m\} = S$ and there is a subset in $S$ that now sums to $t$, we conclude that this instance of $Q$ also satisfies $Q'$.
+	\item Suppose we have an instance of $Q'$ that consists of a set of numbers $S$ and a subset of $S' \subseteq S$ that sums to an integer target $t$. Applying the construction technique described above, we are left with a new set $S^*$, where $\sum_{x \in S^*}x = (s + (s - 2t)) = 2s - 2t = 2(s - t)$. Therefore, we know that there are exactly two partite sets in $S$ that sum to exactly $s - t$, and thus $S^*$ is an instance of $Q'$ that also satisfies $Q$.
+
+	\item Now, suppose we have an instance of $Q$ that contains two partitite sets $A$ and $A'$, where $\sum_{x \in A}x = \sum_{x \in A'}x = (s - t)$. By our construction technique, we know that one of these partite sets contains the number $m = s - 2t$, and if we remove that number from the corresponding set we are left with $s - t - (s - 2t) = t$. Therefore, since $S^* - \{m\} = S$ and there is a subset in $S$ that now sums to $t$, we conclude that this instance of $Q$ also satisfies $Q'$.
 
 %http://web.njit.edu/~marvin/cs341/hw/hwsoln13.pdf
 

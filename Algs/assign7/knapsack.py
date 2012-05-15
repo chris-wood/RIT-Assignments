@@ -6,10 +6,14 @@
 #
 ##########################################################################
 
-# For command line arguments and maximum integer
+# For command line arguments 
 import sys
 
 ##########################################################################
+#
+# 6-a: TODO
+#
+# 6-b: TODO
 #
 # 6-c: TODO
 #
@@ -17,62 +21,62 @@ import sys
 #
 ##########################################################################
 
-def knapsack(n, v, w, W):
-	""" TODO
+def knapsack(n, values, weights, capacity):
+	""" Compute the item indices that correspond to which items
+		should be placed in the knapsack to yield the maximum
+		value under with weight capacity constraint.
 	"""
 	# Construct the DP table and item index list
-	indexList = list()
-	value = list() #value is table of [item][capacity]
-	for i in range(0, n + 1):
+	table = list() # table is matrix of [item][capacity]
+	for i in range(0, n):
 		rowList = list()
-		for j in range(0, W + 1):
+		for j in range(0, capacity + 1):
 			rowList.append(0)
-		value.append(rowList)
-		indexList.append(rowList)
+		table.append(rowList)
 		
-	# Do the DP part now
-	for i in range(0, n + 1):
-		for j in range(0, W + 1):
-			if (i == 0 or j == 0):
-				# Both base cases handled this way
-				value[i][j] = 0
-			elif (w[i - 1] > j):
-				# Check to see if this item can be included in the knapsack.
-				# If not, then we exclude it from the value calculation.
-				value[i][j] = value[i - 1][j]
+	# Consider all possible items and knapsack capacitities
+	# in a bottom-up fashion
+	for i in range(0, n):
+		for j in range(0, capacity + 1):
+			# Check to see if this item can be included in the knapsack.
+			# If not, then we exclude it from the value calculation. If
+			# yes, then the value for this item is the max of choosing
+			# to include it or not in the knapsack (which is computed
+			# using previous values).
+			if (weights[i] > j):
+				table[i][j] = table[i - 1][j]
 			else:
-				# Check to see if we gain more value by including this element
-				# or not
-				vIn = v[i - 1] + value[i - 1][j - w[i - 1]]
-				vOut = value[i - 1][j]
-				if (vIn >= vOut):
-					value[i][j] = vIn
-					#indexList[i - 1] = 1 # Include this in the list
-					indexList[i][j] = i
-				else:
-					value[i][j] = vOut
-					#indexList[i - 1] = 0 # Don't include this in the list
+				vIn = values[i] + table[i - 1][j - weights[i]]
+				vOut = table[i - 1][j]
+				table[i][j] = max(vIn, vOut)
 
-	return getItemIndices(value, n, w, W)
+	# Return the computation 
+	return getItemIndices(table, n, weights, capacity)
 
-def getItemIndices(values, n, w, W):
-	""" TODO
+def getItemIndices(values, n, w, capacity):
+	""" Determine the indices that correspond to the elements
+		that were added to the knapsack that yielded the 
+		maximum value.
 	"""
-	# Initialize the final index and weight values and then 
-	# traverse towards the front of the sequence, checking to see
-	# which items were included in the knapsack or not.
-	i = n
-	j = W
-	indices = list()
-	while i > 0:
+	i = len(values) - 1
+	weight = capacity
+	indices = []
+	
+	# Zero out the index of every element to start
+	for i in range(0, n):
+		indices.append(0)
+	
+	# Now mark those that were actually included
+	while i >= 0 and weight >= 0:
 		# If the values for this item and the previous differ, then this
 		# item was included in the knapsack, so mark it as such
-		if (values[i][j] != values[i - 1][j]):
-			indices.append(i - 1)
+		if ((i == 0 and values[i][weight] > 0) or 
+			(values[i][weight] != values[i - 1][weight])):
+			indices[i] = 1
+			weight = weight - w[i]
 		
 		# Go down in the list of items
 		i = i - 1
-		j = j - w[i]
 
 	# Return the resulting positions
 	return indices
@@ -83,7 +87,10 @@ def getItemIndices(values, n, w, W):
 	set, else run the program with some fixed numbers.
 """
 if (len(sys.argv) > 2):
-	print "TODO"
+	print "Not implemented"
 else:
-	print knapsack(3, [60,100,120], [10,20,30], 50)
-
+	V = [60,100,5000,10,50,20,30,10]
+	W = [10,20,50,61,120,36,50,21]
+	print V
+	print W
+	print knapsack(8, V, W, 60)
