@@ -1,0 +1,147 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\citeauthoryear{%
+{American Psychological Association}%
+}{%
+{American Psychological Association}%
+}{%
+{\protect\APACyear{2001}}%
+}]{%
+apa}%
+\APACinsertmetastar{%
+apa}%
+{American Psychological Association}.%
+%
+\unskip\
+\newblock
+\APACrefYear{2001}.
+\newblock
+\APACrefbtitle{Publication manual of the American Psychological
+  Association}{Publication manual of the american psychological association}\
+  (\PrintOrdinal{5th}\ \BEd).
+\newblock
+\APACaddressPublisher{Washington, DC}{American Psychological Association}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Killeen%
+}{%
+Killeen%
+}{%
+{\protect\APACyear{2005}}%
+}]{%
+killeen}%
+\APACinsertmetastar{%
+killeen}%
+Killeen, P.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{An alternative to Null-Hypothesis Significance Tests}{An
+  alternative to null-hypothesis significance tests}.\BBCQ{}
+\newblock
+\APACjournalVolNumPages{Psychological Science}{16}{}{345-353}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Leary%
+}{%
+Leary%
+}{%
+{\protect\APACyear{2007}}%
+}]{%
+leary}%
+\APACinsertmetastar{%
+leary}%
+Leary, M\BPBI R.%
+%
+\unskip\
+\newblock
+\APACrefYear{2007}.
+\newblock
+\APACrefbtitle{Introduction to Behavioral Research Methods}{Introduction to
+  behavioral research methods}\ (\PrintOrdinal{5}\ \BEd).
+\newblock
+\APACaddressPublisher{Needham Heights, Ma.}{Allyn and Bacon}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Protopapas%
+}{%
+Protopapas%
+}{%
+{\protect\APACyear{2005}}%
+}]{%
+apa.cls}%
+\APACinsertmetastar{%
+apa.cls}%
+Protopapas, A.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{}{}.
+\newblock
+\APACrefbtitle{Example of an APA-style maunscript: a guide to using
+  apa.cls.}{Example of an apa-style maunscript: a guide to using apa.cls.}
+\newblock
+\APACaddressPublisher{}{Retrieved August 20, 2007, from
+  http://www.ilsp.gr/homepages/protopapas/apacls.html}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+{R Development Core Team}%
+}{%
+{R Development Core Team}%
+}{%
+{\protect\APACyear{2007}}%
+}]{%
+R}%
+\APACinsertmetastar{%
+R}%
+{R Development Core Team}.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2007}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{R: A Language and Environment for Statistical
+  Computing}{R: A language and environment for statistical computing}\BBCQ{}\
+  [\bibcomputersoftwaremanual].
+\newblock
+\APACaddressPublisher{Vienna, Austria}{}.
+\newblock
+ \begin{APACrefURL} \url{http://www.R-project.org} \end{APACrefURL}
+\newblock
+\APACrefnote{{ISBN} 3-900051-07-0}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Revelle%
+}{%
+Revelle%
+}{%
+{\protect\APACyear{2007}}%
+}]{%
+rev:ea07}%
+\APACinsertmetastar{%
+rev:ea07}%
+Revelle, W.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2007}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Experimental Approaches to the Study of
+  Personality}{Experimental approaches to the study of personality}.\BBCQ{}
+\newblock
+\BIn{} R.~Robins, R\BPBI C.~Fraley\BCBL{}\ \BBA{} R\BPBI F.~Krueger\ (\BEDS),
+  \APACrefbtitle{Handbook of research methods in personality
+  psychology.}{Handbook of research methods in personality psychology.}\
+  (\BPG~37-61).
+\newblock
+\APACaddressPublisher{New York}{Guilford}.
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}
