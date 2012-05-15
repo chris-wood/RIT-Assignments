@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  13 MAY 2012 16:46
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  15 MAY 2012 13:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1173,70 +1173,76 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 ] [3
 
 ]
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 72
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 74
 .
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 72
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 74
 .
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 72
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 74
 .
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 72.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 74.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 72.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 74.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 72.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 74.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 72.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 74.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 72.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 74.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 9.85492pt on input line 72.
+(Font)              scaled to size 9.85492pt on input line 74.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 72.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 74.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 7.19995pt on input line 72.
+(Font)              scaled to size 7.19995pt on input line 74.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 72.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 74.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 5.39996pt on input line 72.
+(Font)              scaled to size 5.39996pt on input line 74.
+
+<images/sub_layer.jpg, id=69, 339.51843pt x 130.98938pt>
+File: images/sub_layer.jpg Graphic file (type jpg)
+
+<use images/sub_layer.jpg>
+Package pdftex.def Info: images/sub_layer.jpg used on input line 74.
+(pdftex.def)             Requested size: 203.71262pt x 78.59422pt.
  [4
 
-]
+ <./images/sub_layer.jpg>]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 91.
+(Font)              scaled to size 8.99994pt on input line 93.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 91.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 91.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 93.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 6.65994pt on input line 91.
+(Font)              scaled to size 6.65994pt on input line 93.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 91.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 93.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 91.
+(Font)              scaled to size 8.99994pt on input line 93.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7.4> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 91.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 93.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 6.65994pt on input line 91.
+(Font)              scaled to size 6.65994pt on input line 93.
  [5
 
-]
-[6
+] [6
 
 ]
 Package epstopdf Info: Source file: <images/brute_joint.eps>
@@ -1247,66 +1253,67 @@ Package epstopdf Info: Source file: <images/brute_joint.eps>
 (epstopdf)                    size: 9189 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/brute_joint-eps-con
 verted-to.pdf images/brute_joint.eps>
-(epstopdf)             \includegraphics on input line 142.
+(epstopdf)             \includegraphics on input line 144.
 Package epstopdf Info: Output file is already uptodate.
- <images/brute_joint-eps-converted-to.pdf, id=98, 449.68pt x 338.26375pt>
+
+<images/brute_joint-eps-converted-to.pdf, id=99, 449.68pt x 338.26375pt>
 File: images/brute_joint-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/brute_joint-eps-converted-to.pdf>
 Package pdftex.def Info: images/brute_joint-eps-converted-to.pdf used on input 
-line 142.
+line 144.
 (pdftex.def)             Requested size: 224.83945pt x 169.13145pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 144.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <14.4> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 142.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 144.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 12.9599pt on input line 142.
+(Font)              scaled to size 12.9599pt on input line 144.
  [7
 
  <./images/brute_joint-eps-converted-to.pdf>]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 161.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 163.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 9.85492pt on input line 161.
+(Font)              scaled to size 9.85492pt on input line 163.
 
-Overfull \hbox (16.49042pt too wide) in paragraph at lines 161--161
+Overfull \hbox (16.49042pt too wide) in paragraph at lines 163--163
  [] 
  []
 
 [8
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 181--181
+Underfull \hbox (badness 10000) in paragraph at lines 183--183
 
  []
 
 
-Overfull \hbox (16.49042pt too wide) in paragraph at lines 181--181
+Overfull \hbox (16.49042pt too wide) in paragraph at lines 183--183
  [] 
  []
 
 [9
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 200--200
+Underfull \hbox (badness 10000) in paragraph at lines 202--202
 
  []
 
 
-Overfull \hbox (16.49042pt too wide) in paragraph at lines 200--200
+Overfull \hbox (16.49042pt too wide) in paragraph at lines 202--202
  [] 
  []
 
 [10
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 219--219
+Underfull \hbox (badness 10000) in paragraph at lines 221--221
 
  []
 
 
-Overfull \hbox (16.49042pt too wide) in paragraph at lines 219--219
+Overfull \hbox (16.49042pt too wide) in paragraph at lines 221--221
  [] 
  []
 
@@ -1315,7 +1322,7 @@ Overfull \hbox (16.49042pt too wide) in paragraph at lines 219--219
 ] [12
 
 ]
-Overfull \hbox (18.05594pt too wide) in paragraph at lines 252--252
+Overfull \hbox (18.05594pt too wide) in paragraph at lines 254--254
  [] 
  []
 
@@ -1331,18 +1338,18 @@ o.pdf>
 (epstopdf)                    size: 18003 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/avalanche_results16
 -eps-converted-to.pdf images/avalanche_results16.eps>
-(epstopdf)             \includegraphics on input line 260.
+(epstopdf)             \includegraphics on input line 262.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/avalanche_results16-eps-converted-to.pdf, id=174, 531.9875pt x 416.5562
+<images/avalanche_results16-eps-converted-to.pdf, id=175, 531.9875pt x 416.5562
 4pt>
 File: images/avalanche_results16-eps-converted-to.pdf Graphic file (type pdf)
  <use images/avalanche_results16-eps-converted-to.pdf>
 Package pdftex.def Info: images/avalanche_results16-eps-converted-to.pdf used o
-n input line 260.
+n input line 262.
 (pdftex.def)             Requested size: 265.9931pt x 208.2776pt.
 
-Overfull \vbox (23.16533pt too high) detected at line 260
+Overfull \vbox (23.16533pt too high) detected at line 262
  []
 
 [14
@@ -1356,18 +1363,18 @@ Package epstopdf Info: Source file: <images/bn_results16.eps>
 (epstopdf)                    size: 78461 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/bn_results16-eps-co
 nverted-to.pdf images/bn_results16.eps>
-(epstopdf)             \includegraphics on input line 268.
+(epstopdf)             \includegraphics on input line 270.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/bn_results16-eps-converted-to.pdf, id=190, 531.9875pt x 416.55624pt>
+<images/bn_results16-eps-converted-to.pdf, id=191, 531.9875pt x 416.55624pt>
 File: images/bn_results16-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/bn_results16-eps-converted-to.pdf>
 Package pdftex.def Info: images/bn_results16-eps-converted-to.pdf used on input
- line 268.
+ line 270.
 (pdftex.def)             Requested size: 265.9931pt x 208.2776pt.
 
-Overfull \vbox (23.16533pt too high) detected at line 268
+Overfull \vbox (23.16533pt too high) detected at line 270
  []
 
 [15
@@ -1381,18 +1388,18 @@ Package epstopdf Info: Source file: <images/nl_results16.eps>
 (epstopdf)                    size: 16459 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/nl_results16-eps-co
 nverted-to.pdf images/nl_results16.eps>
-(epstopdf)             \includegraphics on input line 276.
+(epstopdf)             \includegraphics on input line 278.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/nl_results16-eps-converted-to.pdf, id=206, 531.9875pt x 416.55624pt>
+<images/nl_results16-eps-converted-to.pdf, id=207, 531.9875pt x 416.55624pt>
 File: images/nl_results16-eps-converted-to.pdf Graphic file (type pdf)
 
 <use images/nl_results16-eps-converted-to.pdf>
 Package pdftex.def Info: images/nl_results16-eps-converted-to.pdf used on input
- line 276.
+ line 278.
 (pdftex.def)             Requested size: 265.9931pt x 208.2776pt.
 
-Overfull \vbox (23.16533pt too high) detected at line 276
+Overfull \vbox (23.16533pt too high) detected at line 278
  []
 
 [16
@@ -1407,17 +1414,17 @@ f>
 (epstopdf)                    size: 81099 bytes
 (epstopdf)             Command: <repstopdf --outfile=images/joint_results16-eps
 -converted-to.pdf images/joint_results16.eps>
-(epstopdf)             \includegraphics on input line 285.
+(epstopdf)             \includegraphics on input line 287.
 Package epstopdf Info: Output file is already uptodate.
 
-<images/joint_results16-eps-converted-to.pdf, id=221, 531.9875pt x 416.55624pt>
+<images/joint_results16-eps-converted-to.pdf, id=222, 531.9875pt x 416.55624pt>
 File: images/joint_results16-eps-converted-to.pdf Graphic file (type pdf)
 <use images/joint_results16-eps-converted-to.pdf>
 Package pdftex.def Info: images/joint_results16-eps-converted-to.pdf used on in
-put line 285.
+put line 287.
 (pdftex.def)             Requested size: 265.9931pt x 208.2776pt.
 
-Overfull \vbox (23.16533pt too high) detected at line 285
+Overfull \vbox (23.16533pt too high) detected at line 287
  []
 
 [17
@@ -1436,21 +1443,21 @@ Overfull \vbox (23.16533pt too high) detected at line 285
 \tf@snm=\write9
 \openout9 = `caw4567-presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 314.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 314.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 316.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 316.
 
 (./caw4567-presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 314.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 314.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 316.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 316.
 Package rerunfilecheck Info: File `caw4567-presentation.out' has not changed.
 (rerunfilecheck)             Checksum: 90A1348EEB11C4BDFC30511482FDE1B8;284.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 314.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 316.
  ) 
 Here is how much of TeX's memory you used:
- 20621 strings out of 493633
- 414359 string characters out of 3143378
- 517889 words of memory out of 3000000
- 23323 multiletter control sequences out of 15000+200000
+ 20627 strings out of 493633
+ 414475 string characters out of 3143378
+ 517891 words of memory out of 3000000
+ 23327 multiletter control sequences out of 15000+200000
  75270 words of font info for 113 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  49i,16n,56p,438b,444s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1464,10 +1471,10 @@ xlive/2011/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2
 011/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2011/tex
 mf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2011/texmf-dis
 t/fonts/type1/urw/symbol/usyr.pfb>
-Output written on caw4567-presentation.pdf (19 pages, 270680 bytes).
+Output written on caw4567-presentation.pdf (19 pages, 293839 bytes).
 PDF statistics:
- 299 PDF objects out of 1000 (max. 8388607)
+ 300 PDF objects out of 1000 (max. 8388607)
  233 compressed objects within 3 object streams
  45 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -33,7 +33,7 @@
 %\subtitle{}
 \author{Christopher A. Wood}
 %\institute[]{}
-\date{May 9, 2012}
+\date{May 17, 2012}
 \begin{document}
 
 %%%%%
@@ -63,12 +63,14 @@
 
 %TODO: insert frame that defines S-box
 \begin{frame}
-	\frametitle{S(ubstitution)-box}
-	A S-box is a common source for nonlinearity in symmetric-key cryptographic algorithms. It can be defined as follows:
-	\begin{itemize}
-		\item A function $f : \field{F}_2^n \to \field{F}_2^n$, where $n$ is the number of bits needed to represent each element in the field.
-		\item 
-	\end{itemize}
+	\frametitle{The substitution layer}
+	A S-box is a common source for nonlinearity in symmetric-key cryptographic algorithms. It can be defined as function $f : \field{F}_2^n \to \field{F}_2^n$, where $n$ is the number of bits needed to represent each element in the field.
+
+\begin{figure}
+\centering
+\includegraphics[scale = 0.6]{images/sub_layer.jpg}
+\end{figure}
+
 \end{frame}
 
 \section{Security Measurements}
