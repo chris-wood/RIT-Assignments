@@ -11,13 +11,57 @@ import sys
 
 ##########################################################################
 #
-# 6-a: TODO
+# 6-a: Here is the pseudocode for the recursive solution
 #
-# 6-b: TODO
+# function RecursiveKnapsack(n, v, w, W)
+#	if (n == 0)
+#     return 0
+#   else if (W < w[n])
+#     return RecursiveKnapsack(n - 1, v, w, W)
+#   else
+#     return max(v[n] + RecursiveKnapsack(n - 1, v, w, W - w[n]),
+#                RecursiveKnapsack(n - 1, v, w, W))
 #
-# 6-c: TODO
+# 6-b: The dynamic programming solution to this problem is 
+# implemented below.
 #
-# 6-d: TODO
+# 6-c: The time complexity of this dynamic programming based algorithm 
+# depends on the computation of the $value$ table and identifying the 
+# items that were added to the knapsack. Since these procedures are 
+# run back-to-back, we consider their time complexity separately in 
+# order to determine the time complexity of the entire algorithm.
+#
+# The time complexity of the value computation depends on the 
+# initialization procedure in which the table is constructed and 
+# then the nested loops that perform the bottom-up computation. The 
+# initialization procedure generates a table that has dimensions (n x W)
+# so it runs in O(nW) time. Similarly, the table computation procedure
+# performs a constant time table lookup (or returns a 0 in the base case) 
+# when traversing across every possible knapsack capacity for every item, 
+# so we can conclude that this procedure runs in O(nW) time as well.
+#
+# Analyzing the time complexity of the item identification procedure 
+# indicates that it runs in O(n) time, because at every iteration 
+# through the main loop the item counter is decreased by 1 until 
+# we consider all items in the knapsack. Hence, the linear time 
+# complexity of O(n).
+#
+# Now, putting these two results together, the dynamic programming 
+# based algorithm that solves the 0-1 knapsack problem has a time 
+# complexity of O(nW) + O(nW) + O(n), which can be reduced to O(nW). 
+#
+# 6-d: No, this analysis does not prove that P = NP, because the O(nW)
+# time complexity depends on the value of $W$, not the size of W. 
+# Time complexity measurements consider the size of the input of an 
+# algorithm (i.e. the number of bits if the input is a numeric value), 
+# and since W = 2^{lg W}, where lgW is the number of bits in 
+# W, we can see that the resulting time complexity is thus O(n2^{lg W})
+# in terms of the size of W. This means that this dynamic programming 
+# solution is a pseudo-polynomial time algorithm in that it is 
+# polynomial with respect to the value of the input, but exponential 
+# with respect to the size of the input, and thus is not polynomial 
+# in the traditional sense. Therefore, we can see that this does 
+# \emph{not} prove that P = NP.
 #
 ##########################################################################
 
@@ -91,6 +135,8 @@ if (len(sys.argv) > 2):
 else:
 	V = [60,100,5000,10,50,20,30,10]
 	W = [10,20,50,61,120,36,50,21]
-	print V
-	print W
-	print knapsack(8, V, W, 60)
+	cap = 60
+	print "Values: " + str(V)
+	print "Weights: " + str(W)
+	print "Knapsack capacity: " + str(cap)
+	print "Optimal Indices: " + str(knapsack(8, V, W, cap))
