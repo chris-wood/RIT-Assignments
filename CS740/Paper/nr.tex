@@ -65,60 +65,57 @@ communication systems, with a specific focus on wireless sensor networks,
 presents some recent advances made in the topic, and concludes with avenues
  of future work that can be explored by researchers in the field.}
 
-\shorttitle{APA style manuscript}
-\rightheader{APA style manuscript}
-\leftheader{William Revelle}
+\shorttitle{Engineering Networks for Optimal Robustness}
+\rightheader{Engineering Networks for Optimal Robustness}
+\leftheader{Christopher Wood}
 
 \begin{document}
 \maketitle   
 
-
 \section{Introduction}
 
-Military and civilian communications have seen two common trends in rencent years: an increase in network-oriented operations and an increase in high-risk malicious attacks against networks that facilitate such operations \cite{Bernardnetworkrobustness}. In order to sustain this growth pattern such operations, it is vital they their underlying network infrastructure can defend against emerging attacks that focus on specific nodes or links in the network or random failures that occur throughout the network. The measure of resilience to such attacks or failures is referred to as the robustness of a network, and is a topic that has been analytically and experimentally studied extensively in recent years.
+Military and civilian communications have seen two common trends in rencent years: an increase in network-oriented operations and an increase in high-risk malicious attacks against networks that facilitate such operations \cite{Bernardnetworkrobustness}. It is vital that the underlying network infrastructure for such operations can defend against such emerging attacks that focus on specific nodes or links in the network or random failures that occur throughout. This requirement has stimulated research in two separate directions: the stability of communication protocols to handle such attacks and failures, as well as the analysis of the networks resilience to such attacks in the topology domain. The measure of resilience to such attacks or failures is referred to as the robustness of a network, and is a topic that has been studied analytically and experimentally extensively in recent years.
 
-The physical properties of networks (i.e. the channel bandwidth, routing protocols, transmission media) have an a significant effect on the measure of robustness of a network. However, recent research efforts have approached this problem from the topological domain and studied it using analytical methods from graph theory and statistics in order to solve more general questions about the relationship between the structure of a graph and its robustness. 
+The physical properties of networks (i.e. the channel bandwidth, routing protocols, transmission media) have a significant effect on the measure of robustness of a network, and thus warrant a study on their own. However, recent research efforts have approached this problem from the topological domain. Such an analysis calls on methods from graph theory and statistics in order to solve more general questions about the relationship between the structure of a graph and its robustness. 
 
-In this paper we focus on recent research that has been centered around the theoretical analysis of graph topology and its impact on the robustness of a network. We also discuss some of optimization techniques that have been applied to further such results about the topology of specific graphs. In doing so, we also discuss some of the common sources of topology changes (e.g. attacks and failures). 
+In this paper we survey recent research that has been centered around the theoretical analysis of graph topology and its impact on the measure of robustness. In doing so, we also discuss some common sources of topology changes in networks (i.e. targeted attack models and failures), techniques to measure the robustness of a network, and methods that have been utilized to study and optimize network robustness for random arbitrary networks.
+
+\begin{comment}
+We also discuss some of optimization techniques that have been applied to further such results about the topology of specific graphs. In doing so, we also discuss some of the common sources of topology changes (e.g. attacks and failures). 
+\end{comment}
 
 \section{Fundamentals and Notation}
 
-It is natural to model a communication network as a weighted undirected graph $G = (V,E)$, which has a fixed set of vertices (nodes) $V$ and edges (links) $E$ that represent physical connections between such vertices, and weight for each link. For conveniene, we let $N = |V|$ and $M = |E|$. The topology of a network can thus be visualized graphically using elements from these two sets. For the remainder of this paper, we use the term vertex as a synonom for node and edge as a synonom for communication link. 
+It is natural to model a communication network as a weighted undirected graph $G = (V,E)$, which has a fixed set of vertices (nodes) $V$ and edges (links) $E$ that represent physical connections between such vertices. We also assign weights $w \in \mathbb{R}$ for each edge, where unweighted edges receive a weight of $0$. For convenience, we let $N = |V|$ and $M = |E|$. The topology of a network can thus be visualized graphically using elements from these two sets. 
 
-In order to discuss the measures of network robustness and analytical techniques used to study the network robustness in the topological domain, it is necessary to introduce the following definitions.
+In order to discuss the measures of network robustness and analytical techniques used to study the network robustness in the topological domain, it is necessary to introduce the following definitions. \\
 
-\textbf{Definition 1}
+\textbf{Definition 1:}
 The \textbf{degree} of a vertex $u \in V$ for any graph $G = (V,E)$ is said to be the total number of edges incidenct to $u$. In other words, $deg(u) = \sum_{(u,v) \in E} 1$ for all $v \in V$. We denote the minimum degree over all vertices in a graph $G$ as $\delta(G)$. In network analysis it is common to utilize the degree distribution of a graph as the basis for many measurements. As such, we denote $k$ as the average degree distribution for a graph $G$.\\
 
 %Component
-\textbf{Definition 2}
+\textbf{Definition 2:}
 A \textbf{component} of a graph $G = (V,E)$ is a subgraph $G' = (V',E')$ in which there exists a path between all vertices $u, v \in V'$. Further, a graph $G$ is said to be \textbf{connected} if and only if there is at most $1$ conneted component in $G$ (i.e. the entire graph). If a graph is not connected, then it is \textbf{disconnected}.\\
 
 % vertex and edge connectivity
-\textbf{Definition 3}
+\textbf{Definition 3:}
 The \textbf{vertex connectivity} of a graph $G = (V,E)$, denoted $\kappa(G)$, is defined as the minimum number of nodes whose deletion will leave the graph disconnected. Similarly, the \textbf{edge connectivity} of a graph $G$, denoted $\lambda(G)$, is defined as the minimum number of edges whose deletion will leave the graph disconnected.\\
 
-\textbf{Definition 4}
+\textbf{Definition 4:}
 The \textbf{distance} between any two vertices $u, v \in V$ in a graph $G = (V,E)$ is defined as the sum of the link weights along the edges that correspond to the shortest path between $u$ and $v$.
-
 
 \section{Network Functionality}
 \label{NetworkFunctionality}
 
-Network engineers strive for high performance networks that exhibit high throughput and low latency between any two nodes in the same network. Other similar quality metrics include the number of hops between nodes, the distance between two nodes, the jitter on the transmission medium, the loss rate, and the bandwidth (or capacity) of the channel \cite{LargeNetworkRobustnessPVM}. These quality paremeters are often used to assign weights to the links in a network in order to determine the optimal network designs using mathematical analysis. 
+In general, high performance networks that exhibit high throughput and low latency between any two nodes in the same network. Other quality metrics include the number of hops between nodes, the distance between two nodes, the jitter on the transmission medium, the channel loss rate, and the channel bandwidth (or capacity) \cite{LargeNetworkRobustnessPVM}. These measurements are often used to assign weights to the links in a network in order to analytically determine the optimal network designs. In particular, the weight of communication links are usually parameterized as a linear combination of such quality metrics that can be modified to reflect the real-world nature of the networks. However, when considering the topology of a network, it is common to assign uniform weights of $1$ to all link edges. By doing so, we need to transform the performance measurements to the topology domain.
 
-%TODO: Unfortunately, in real-world networks, these weights are not always fixed.
-% should this be mentioned?
-
-In this paper, we refer to the weight of communication links as an arbitrary linear combination of such quality metrics that can be modified by the author during analysis of the underlying weighted graph that represents a network with certain quality metrics. Several mathematical metrics based on the corresponding graph that represents a network have been proposed to reflect this need. For example, metrics such as the average geodesic path length between any two nodes in a network, which equates to the average shortest path) and vertex and edge betweeness (which are essentially measures of centralities located within a graph). 
-
-The average geodesic length $L$ can be defined as follows,
+Perhaps the most natural topology-based measurement for performance is the average geodesic path length between any two nodes in a network. This measurement equates to the average shortest path) and vertex and edge betweeness (which are essentially measures of centralities located within a graph). Mathematically, the average geodesic length $L$ can be defined as follows:
 \begin{eqnarray*}
 L(d(v,w)) = \frac{1}{N(N-1)}\sum_{v \in V(G)}\sum_{w \not= v \in V(G)} d(v,w),
 \end{eqnarray*}
 where $d(v,w)$ is the distance of the shortest path between vertices $v$ and $w$, and $N(N-1)$ is the total number of pairs of vertices, independent of whether or not each pair represents an edge in $E(G)$. The most immediate result from this measurement is that large values for $L$ indicate that the average length between any two nodes in the network is long, and thus the latency between two nodes will be proportionally large as well. 
 
-Another important metric that measures the functionality of a network is the measure of vertex and edge centrality in the network. Although a high measure of centrality may indicate more traffic funnels through a vertex or an edge, it also implies that any attacks on this vertex or edge would most likely have an negative impact on the traffic in the network by increasing the load on neighboring nodes and increasing the average geodesic path length. Although there is not a single definition for this metric, Holme et al \cite{Attacks} propose the use of the following definitions for vertex, $C_{B}(v)$ and edge $C_{B}(e)$ centrality.
+Another important metric that measures the functionality of a network is the measure of vertex and edge centrality in the network. Since a high measure of centrality may indicate more traffic funnels through a vertex or an edge, it also implies that any attacks on this vertex or edge would most likely have an negative impact on the traffic in the network by increasing the load on neighboring nodes and increasing the average geodesic path length. Although there is not a single definition for this metric, Holme et al \cite{Attacks} propose the use of the following definitions for vertex, $C_{B}(v)$ and edge $C_{B}(e)$ centrality.
 \begin{eqnarray*}
 C_{B}(v) = \sum_{w \not= x \in V(G)} \frac{\sigma_{wx}(v)}{\sigma_{wx}},
 \end{eqnarray*}
@@ -128,7 +125,7 @@ C_{B}(v) = \sum_{w \not= x \in V(G)} \frac{\sigma_{wx}(e)}{\sigma_{wx}}
 \end{eqnarray*}
 As in the centrality measure for vertices, $\sigma_{wx}(e)$ is the number of paths between $w$ and $x$ that contain $e$ and $\sigma_{wx}$ is total of paths from $w$ to $x$ (notice again that $\sigma_{wx}(e) \leq \sigma_{wx}$).
 
-It is important to note that the centrality of a vertex and its measure of centrality are not the same metrics. In fact, as will be shown in section~\ref{AttackStrategies}, network attacks can vary based on the measure an adversary is trying to reduce. 
+It is important to note that the centrality of a vertex and an edge are not the same metrics. In fact, as will be shown in section~\ref{AttackStrategies}, network attacks can vary based on the measure an adversary is trying to reduce. 
 
 %\section{Network Attacks}
 %HDA - high degree adaptiveness - onion
@@ -142,35 +139,36 @@ It is important to note that the centrality of a vertex and its measure of centr
 
 \section{Attack Models}
 \label{AttackStrategies}
-%TODO: vertex/edge based attacks, degree or betweeness attacks
-Attacks on large scale networks are not usually ad-hoc; they are based on a logical and structured strategy for dereasing the connectivity of the network by taking as little action as possible. Clearly, if one was to delete all nodes from a network, then that would yield the maximum decrease in connectivity. However, such attacks are not practical, so these strategies must be considered at a smaller scale. 
+Attacks on large scale networks are not usually ad-hoc; they are based on a logical and structured strategy for dereasing the connectivity of the network by taking as little action as possible. Clearly, deleting all nodes from a network, then that would yield the maximum decrease in connectivity. However, such attacks are not practical, so these strategies must be considered at a smaller scale. 
 
-From a general perspective, practical attacks are theoretically focused on the objective of decreasing the number of total links in the network or the average geodesic length (or both). Consider, for example, the situations of cutting communication cables or performing a DDOS attack on a node or server with a high measure of centrality. Such attacks would decrease the number of edges in the network graph and increase the average geodesic path length, respectively. 
+Practical attacks are theoretically focused on the objective of decreasing the number of total links in the network or the average geodesic length (or both). Consider, for example, the situations of cutting communication cables or performing a DDOS attack on a node or server with a high measure of centrality. Such attacks would decrease the number of edges in the network graph and increase the average geodesic path length, respectively, but both would decrease performance by some factor.
 
-From the definitions presented in section~\ref{Definitions}, we can see that the number of edges in the network is directly related to the degree of each vertex (in fact, we know that $2|E(G)| =\sum_{v \in V(G)}deg(v)$). On the other hand, the measure of centrality of a vertex or edge is more related to the average geodesic path length in the network. As such, we consider practical attack patterns that focus on decreasing both of these measurements by targeting individual vertices and/or edges, as well as randomized attacks that have no specific targets. 
+From the definitions presented in section \ref{Definitions}, we can see that the number of edges in the network is directly related to the degree of each vertex (in fact, we know that $2|E(G)| =\sum_{v \in V(G)}deg(v)$). On the other hand, the measure of centrality of a vertex or edge is more related to the average geodesic path length in the network. As such, we consider practical attack patterns that focus on decreasing both of these measurements by targeting individual vertices and/or edges, as well as randomized attacks that have no specific targets. 
 
-In general, most focused attacks fall under one of the following four categories \cite{Attacks}.
+In general, most targeted attacks fall under one of the following four categories \cite{Attacks}:
 \begin{itemize}
-	\item \textbf{ID removal} - initial degree distribution vertex/edge removal
-	\item \textbf{IB removal} - initial betweenness distribution vertex/edge removal
-	\item \textbf{RD removal} - recalculated degree distribution vertex/edge removal
-	\item \textbf{RB removal} - recalculated betweenness distribution vertex/edge removal
+	\item \textbf{ID removal} - initial degree distribution vertex or edge removal
+	\item \textbf{IB removal} - initial betweenness distribution vertex or edge removal
+	\item \textbf{RD removal} - recalculated degree distribution vertex or edge removal
+	\item \textbf{RB removal} - recalculated betweenness distribution vertex or edge removal
 \end{itemize}
 
+\begin{comment}
 \begin{figure}[h!]
-	\label{fig:Onion}
+	\label{fig:attackPics}
 	\centering
 		\includegraphics[width=0.5\textwidth]{edge_attacks.png}
 	\caption{Various edge-centric attacks for a fixed graph topology.}
 \end{figure}
+\end{comment}
 
-RD and RB attacks on vertices yield the optimal results because they take a greedy approach to decrease the target metric. However, the implication of these attacks is that there exists an efficient and tractable way to measure these metrics after every change, which isn't always the case (especially when the topology of the network is unknown). Therefore, ID and IB attacks are more realistic, but they also assume some prior knowledge of the network infrastructure before the attack begins. Attacks that do not rely on this knowledge are referred to as random attacks, and are discussed in section~\ref{RandomFailures}.
+RD and RB attacks on vertices yield the optimal results because they take a greedy approach to decrease the target metric. However, the implication of these attacks is that there exists an efficient and tractable way to measure these metrics after every change, which isn't always the case (especially when the topology of the network is unknown). Therefore, ID and IB attacks are more realistic, but they also assume some prior knowledge of the network infrastructure before the attack begins. 
 
-Furthermore, it should be noted that both the ID and RD attacks are computationally less taxing than IB and RB attacks \cite{Attacks}. In fact, the time complexity of a successful ID attack (and subsequently, an entire RD attack), runs in linear time with respect to N, whereas the time complexity of betweenness-based attacks has a time complexity of $O(NL)$. The implication of this is that the adversary must make tradeoffs based on their knowledge of the network infrastructure.
+Furthermore, it should be noted that both the ID and RD attacks are computationally less taxing than IB and RB attacks \cite{Attacks}. In fact, the time complexity of a successful ID attack (and subsequently, an entire RD attack), runs in linear time with respect to N, whereas the time complexity of betweenness-based attacks has a time complexity of $O(NL)$. The implication of this is that the adversary must make tradeoffs based on their knowledge of the network infrastructure when determining which attack to conduct.
 
 \subsection{Random Failures}
 \label{RandomFailures}
-While targeted attacks model common scenarios in the real-world, it is often useful to disregard the source of and victim of such attacks and generalize the problem of network failures to encompass both random node and link failures. By doing so, we assume that each node and link has a fixed probability $p$ and $q$ of failing, where the exact cause of the failure is not know and is not important. Furthermore, failures are typically seen as independent events \cite{RandomStudy}. Such models are useful when analyzing complex networks such as the Internet and other related military communication networks. 
+While targeted attacks model common scenarios in the real-world, it is often useful to disregard the source and victim of such attacks and generalize the problem of network failures to encompass both random node and link failures. By doing so, we assume that each node and link has a fixed probability $p$ and $q$ of failing, where the exact cause of the failure is not know and is not important. Furthermore, failures are typically seen as independent events \cite{RandomStudy}. Such models are useful when analyzing complex networks such as the Internet and other related military communication networks. 
 
 \section{Network Robustness}
 %http://arxiv.org/pdf/1203.2982v1.pdf
@@ -180,7 +178,7 @@ to use the notion of densely connected components in the corresponding graph.
 
 %TODO: need more of an introduction here
 
-\subsection{Robustness Measurements}
+\subsection{Static Robustness Measurements}
 
 A natural way to think of network robustness is from the perspective of individual nodes, since they are 
 usually the primary targets in malicious or non-malicious network attacks. Using this idea, Herrmann et al
@@ -205,14 +203,28 @@ Due to the typical attacks that are launched on networks, such as large-scale DD
 Q = \frac{1}{M}\sum_{step  = 1}^{M}S(step)
 \end{eqnarray*}
 
-\section{Random Graph Topologies}
+\subsection{Dynamic Robustness Measurement}
+%http://www.cs.berkeley.edu/~yaron/papers/dyner.pdf
+
+It is also possible to measure the robustness of a network by simulating artificial node or link failures and analyzing the effect on the underlying connection graph. One recently proposed method that follows this approach is called the Dynamic Network Robustness ($DYNER$) method \cite{singerdynamic}. The novel idea behind the $DYNER$ method is that it measures the robustness of a network in terms of the amount of available backup nodes or links that can replace nodes or links that fail sporadically. Naturally, the measurement of the robustness is also heavily based on the centrality of individual nodes and links, because nodes and links with a higher measure of centrality are more likely to have capable backups in the event of failure. 
+
+Mathematically, the $DYNER$ measure $\Gamma(G)$ for a graph $G$ is defined as follows:
+\begin{eqnarray*}
+\Gamma(G) = \left[\sum_{v \in V}\sum_{u \in V_v}\frac{1}{\sum_{w \in V_v}\delta(u,w)} - \frac{1}{\sum_{w \in V_v}\delta(u,w)}\right]^{-1},
+\end{eqnarray*}
+where $V_v$ is the set $V(G) - \{v\}$. It is clear that high values for $\Gamma$ indicate a high measure of robustness, simply because for networks with many backup nodes and links the summation $\sum_{w \in V_v}\delta(u,w)$ will remain relatively fixed. However, should the number of backup nodes or links decrease, we know that this summation will increase, meaning that the inverse of this term will decrease, and thus lead to a decrease in $\Gamma(G)$. The algorithmic procedure used to calculate $\Gamma(G)$ is presented in \cite{singerdynamic}.
+
+\section{Robustness Optimization}
+Significant research has been done to find optimal network topologies that maximize the measure of robustness. Much of this has been done analytically by simulating the robustness of various types of random graphs using Monte Carlo simulations. The usefulness of this approach is that, since it is generic and does not rely on any specific topological properties of a group of nodes, it can be applied to the formation of any arbitrary network. In this section we first present some of the graphs that were utilized as sources for these experiments, and then we discuss some of the optimization techniques and methods that were used to find optimal values of robustness for such networks.
+
+\subsection{Random Graph Topologies}
 % look at: http://web.mit.edu/medard/www/rls.pdf ???
 
 %\subsection{Types of Random Graphs}
 %There are many different models of random graphs that can be used to model real-world networks, %including the Erd\H{o}s
 
 \subsection{Erd\"{o}s-R\`{e}nyi Graphs}
-Erd\"{o}s-R\`{e}nyi graphs are the most simple random graphs that are defined by assigning a probabilistic uniform random variable to each edge. In other words, for each vertex $u, v \in V(G)$, where $G$ is a Erd\"{o}s-R\`{e}nyi graph, the edge $(u,v)$ exists in $E(G)$ with probability $p$, where $p$ is derived from a uniform random distribution, and each edge probability $p$ is independnt from the rest \cite{LargeNetworkRobustness-PVM}. When simulated using computers, it is not uncommon to derive the edge probabilities $p$ from an exponential distribution, due to its simplicity and similarity with the real-world. Another important element of these graphs is that they tend to have Poisson degree distributions, simply due to the random construction nature of the graph \cite{bimodal}.
+Erd\"{o}s-R\`{e}nyi graphs are the most simple random graphs that are defined by assigning a probabilistic uniform random variable to each in the cartesian product $V(G) \times V(G)$ that determines its presence in the graph. In other words, for each vertex $u, v \in V(G)$, where $G$ is a Erd\"{o}s-R\`{e}nyi graph, the edge $(u,v)$ exists in $E(G)$ with probability $p$, where $p$ is derived from a uniform random distribution, and each edge probability $p$ is independnt from the rest \cite{LargeNetworkRobustness-PVM}. When simulated using computers, it is not uncommon to derive the edge probabilities $p$ from an exponential distribution, due to its simplicity and similarity with the real-world. Another important element of these graphs is that they tend to exhibit Poisson degree distributions due to the random construction nature of the graph \cite{bimodal}.
 
 %TODO: add a bit more about this.
 
@@ -231,48 +243,41 @@ Given the average degree $k$ for a graph $G = (V,E)$, we say that a graph has a 
 \end{itemize}
 It is interesting to note that as the number of vertex modes or categories for a graph goes from $2$ to $\infty$, the degree distribution among all vertices in the graphs, and the hierarchy of peers in the graph, will begin to resemble that of a scale-free graph. Therefore, one can think of bimodal graphs as a special case of scale-free graphs that are useful when the power-law nature of the degree distribution complicates analytical efforts.
 
-\section{Robustness Optimization}
-
+\subsection{Optimization Techniques}
 Due to the complexity that exists in the aforementioned random graphs, most optimization algorithms utilize some large-scale stochastic process (similar to a Monte Carlo simulation) to randomly make changes to graph topology and test its measure of robustness. The exact measurement that is used depends on the type of experiements or simulations being performed. In this section, we discuss a sample of such efforts and the results that were found.
 
 \subsection{Random and Scale-Free Graph Investigations}
 
 %Assume that channel links have equal weight (that is, equal quality metrics, as described in functionality section)
 
-Following the insight that hostile vertex attacks that target important nodes with large degrees tend to cause the most significant damage to a network, Albert et al. performed extensive studies on the robustness of random and scale-free graphs. 
+Following the insight that hostile vertex attacks that target important nodes with large degrees tend to cause the most significant damage to a network, Albert et al. performed extensive studies on the robustness of random and scale-free graphs. By examining each of these classes of graphs in the context of random vertex deletions and targeted vertex attacks, it has been shown that random graphs are more robust against intentional vertex attacks, whereas the scale-free graphs are more robust against random deletions. This can be seen in Figure \ref{RandomResults}, where the breaking point of the largest component of the graphs $S$ drops off quicker for random graphs when attacked randomly \cite{GraphThesis}. 
 
-By examining each of these classes of graphs in the context of random vertex deletions and targeted vertex attacks, it has been shown that random graphs are more robust against intentional vertex attacks, whereas the scale-free graphs are more robust against random deletions. This can be seen in Figure \ref{RandomResults}, where the breaking point of the largest component of the graphs $S$ drops off quicker for random graphs when attacked randomly \cite{GraphThesis}. 
-
-\begin{figure}[h!]
+\begin{figure}[ht]
 	\label{fig:RandomResults}
 	\centering
 		\includegraphics[width=0.5\textwidth]{random_results.png}
-	\caption{Results of the random and scale-free graphs varied as $f$, the fraction of nodes removed from each graph, is changed . } %\cite{GraphThesis}
+	\caption{Results of the random and scale-free graphs varied as $f$, the fraction of nodes removed from each graph, is changed.} %\cite{GraphThesis}
 \end{figure}
 
-\subsection{Fractional Node Deletion Investigations}
-
-Finally, we introduce a metric that characterizes the number of nodes (or rather, a fraction of the total nodes) that need to be removed in order for the graph to become globally disconnected. Let $G$ be a graph with $N - q$ nodes of degree $1$. Then, the fraction of total nodes $f_c$ that need to be randomly removed before total connectivity is lost consists of $q = [(\langle k \rangle - 1) / \sqrt{\langle k \rangle}]\sqrt{N}$ nodes of degree $\sqrt{\langle k \rangle N}$. 
-
+\subsection{Fractional Node Deletion Investigations} 
 Paul et al. studied the robustness of random graphs in the context of random node deletions. Their work was driven by Monte Carlo simulations that approximated the fraction of nodes $f_c$ that would need to be removed from random networks in order for the graph to become globally disconnected. Formally, $f_c$ can be defined as in terms of the number of "hub" nodes that must be removed $q$ follows:
 \begin{eqnarray*}
 q = \left[(\langle k \rangle - 1) / \sqrt{\langle k \rangle}\right]\sqrt{N},
 \end{eqnarray*}
 where each of these vertices have degree $\sqrt{\langle k \rangle N}$ \cite{asd}. Thus, for a graph with $G = (V,E)$ with $N$ vertices, $q$ "hubs" would need to be removed in order to make $G$ disconnected, and thus $f_c = q/N$.
 
-In terms of the design of a network, it is clear that network designers should strive for values of $q$ that imply high measures of robustness. Such a value of $q$ was determine empirically using a special degree distribution $P(k)$ that represents a network of $q$ hub nodes and $N-q$ leaf nodes, since this is a very general structure for such graphs. The simulation algorithm that was utilized to perform this caluclation is shown in Algorithm \ref{alg1} \cite{asd}. %http://polymer.bu.edu/hes/articles/pshs06.pdf 
+In terms of the design of a network, it is clear that network designers should strive for values of $q$ that imply high measures of robustness. Such a value of $q$ was determine empirically using a special degree distribution $P(k)$ that represents a network of $q$ hub nodes and $N-q$ leaf nodes, since this is a very general structure for such graphs. The simulation algorithm that was utilized to perform this caluclation is shown in Algorithm \ref{alg1} \cite{asd}. %http://polymer.bu.edu/hes/articles/pshs06.pdf
 
-\begin{comment}
-\begin{numberedAlg}[Monte-Carlo $q$ Determination]
+\begin{algorithm}
+\caption{Monte Carlo $q$ Search}
 \label{alg1}
-\begin{algorithmic}[1]
-        \item Initialize a graph $G$ with $N$ vertices.
-	\item Randomly delete a node in the network and calculate $\kappa(G)$.
-	\item Increment $q$ by 1 node.
-	\item If $\kappa < 2$, $G$ has become disconnected, so terminate and return $q$. Otherwise, decrement $q$ by 1 and go to step 2.
+\begin{algorithmic}
+	\item 1. Initialize a graph $G$ with $N$ vertices.
+	\item 2. Randomly delete a node in the network and calculate $\kappa(G)$.
+	\item 3. Increment $q$ by 1 node.
+	\item 4. If $\kappa < 2$, $G$ has become disconnected, so terminate and return $q$. Otherwise, decrement $q$ by 1 and go to step 2.
 \end{algorithmic}
-\end{numberedAlg}
-\end{comment}
+\end{algorithm}
 
 \begin{figure}[h!]
 	\label{fig:Onion}
@@ -298,23 +303,24 @@ In their study of optimal graph structures that yield the highest resilience to 
 
 Herrmann et al have also conducted research on optimization algorithms that increase this robustness measure while at the same time maintaining the distribution of vertex degrees throughout the network. Their proposed algorithm seeks to re-arrange node edges and connections to improve the resilience of the host network to any kinds of attacks using Monte-Carlo simulations. This algorithm can be described as follows:
 
-% the re-structure algorithm
-\begin{comment}
-\begin{numberedAlg}[Robustness Optimization]
+\begin{algorithm}
+\caption{Robustness Optimization}
 \label{alg2}
-\begin{algorithmic}[1]
-        \item Choose two random edges $(a,b)$ and $(c,d)$ from the graph $G$.
-	\item Replace these edges with $(a,c)$ and $(b,d)$.
-	\item If $R_{new} > R_{old}$, accept the swap and go to step 1. Otherwise, revert the swap and goto step 1. 
+\begin{algorithmic}
+	\item 1. Choose two random edges $(a,b)$ and $(c,d)$ from the graph $G$.
+	\item 2. Replace these edges with $(a,c)$ and $(b,d)$.
+	\item 3. If $R_{new} > R_{old}$, accept the swap and go to step 1. Otherwise, revert the swap and goto step 1. 
 \end{algorithmic}
-\end{numberedAlg}
-\end{comment}
+\end{algorithm}
 
 Algorithm~\ref{alg2} is repeated for a very large number of iterations until an ideal level of robustness has been obtained, albiet at the sake of sometimes massive computations (as is the case with Monte-Carlo methods).
 
 %%%%%%%%%% Bimodal discussion, how they simulated and concluded that bimodal was the best
 
 One more recent investigation of graphs with fixed degree distributions was performed by Sonawane et al \cite{bimodal}. 
+
+\section{Conclusion}
+TODO
 
 \bibliography{test}
 

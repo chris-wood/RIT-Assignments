@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  16 MAY 2012 14:23
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  16 MAY 2012 16:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -266,9 +266,6 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
 
 LaTeX Warning: Label `fig:Onion' multiply defined.
 
-
-LaTeX Warning: Label `fig:Onion' multiply defined.
-
 )
 \openout1 = `nr.aux'.
 
@@ -365,76 +362,77 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 90--92
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--96
+Underfull \hbox (badness 10000) in paragraph at lines 93--95
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--100
+Underfull \hbox (badness 10000) in paragraph at lines 97--99
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 101--103
 
  []
 
 [2] [3]
 
-LaTeX Warning: Reference `Definitions' on page 4 undefined on input line 150.
+LaTeX Warning: Reference `Definitions' on page 4 undefined on input line 146.
 
-<edge_attacks.png, id=23, 538.01pt x 314.17375pt>
-File: edge_attacks.png Graphic file (type png)
- <use edge_attacks.png>
-Package pdftex.def Info: edge_attacks.png used on input line 163.
-(pdftex.def)             Requested size: 216.81pt x 126.60687pt.
 
-[4 <./edge_attacks.png>] [5]
+Underfull \vbox (badness 2680) has occurred while \output is active []
 
-LaTeX Warning: Citation `LargeNetworkRobustness-PVM' undefined on input line 21
-5.
+ [4]
+[5]
+
+LaTeX Warning: Citation `singerdynamic' undefined on input line 209.
+
+
+LaTeX Warning: Citation `LargeNetworkRobustness-PVM' undefined on input line 22
+7.
 
 [6]
 
-LaTeX Warning: Reference `RandomResults' on page 7 undefined on input line 244.
+LaTeX Warning: Reference `RandomResults' on page 7 undefined on input line 253.
 
 
-<random_results.png, id=38, 591.20876pt x 532.99126pt>
+<random_results.png, id=36, 591.20876pt x 532.99126pt>
 File: random_results.png Graphic file (type png)
 
 <use random_results.png>
-Package pdftex.def Info: random_results.png used on input line 249.
+Package pdftex.def Info: random_results.png used on input line 258.
 (pdftex.def)             Requested size: 216.81pt x 195.45512pt.
- [7 <./random_results.png>]
+ [7]
 
-LaTeX Warning: Citation `asd' undefined on input line 261.
+LaTeX Warning: Citation `asd' undefined on input line 267.
 
-
-LaTeX Warning: Reference `alg1' on page 8 undefined on input line 263.
-
-<fractional_results.png, id=44, 507.8975pt x 754.82pt>
+<fractional_results.png, id=42, 507.8975pt x 754.82pt>
 File: fractional_results.png Graphic file (type png)
 
 <use fractional_results.png>
-Package pdftex.def Info: fractional_results.png used on input line 280.
+Package pdftex.def Info: fractional_results.png used on input line 285.
 (pdftex.def)             Requested size: 216.81pt x 322.21669pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Onion.jpg, id=45, 452.69125pt x 441.65pt>
+[8 <./random_results.png>] <Onion.jpg, id=47, 452.69125pt x 441.65pt>
 File: Onion.jpg Graphic file (type jpg)
- <use Onion.jpg>
-Package pdftex.def Info: Onion.jpg used on input line 295.
+
+<use Onion.jpg>
+Package pdftex.def Info: Onion.jpg used on input line 300.
 (pdftex.def)             Requested size: 216.81pt x 211.51785pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-
-LaTeX Warning: Reference `alg2' on page 8 undefined on input line 313.
-
-(./nr.bbl [8]) [9 <./fractional_results.png>] [10 <./Onion.jpg>] (./nr.aux)
+[9 <./fractional_results.png>] (./nr.bbl [10 <./Onion.jpg>]) [11] (./nr.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -443,13 +441,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 4212 strings out of 493633
- 55081 string characters out of 3143378
- 123389 words of memory out of 3000000
- 7408 multiletter control sequences out of 15000+200000
+ 4213 strings out of 493633
+ 55075 string characters out of 3143378
+ 123453 words of memory out of 3000000
+ 7410 multiletter control sequences out of 15000+200000
  17975 words of font info for 66 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 38i,7n,24p,831b,293s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,8n,24p,941b,301s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
@@ -464,11 +462,12 @@ ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texliv
 e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
 /2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
 011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/20
-11/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on nr.pdf (10 pages, 553209 bytes).
+11/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/201
+1/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on nr.pdf (11 pages, 443022 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
+ 110 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

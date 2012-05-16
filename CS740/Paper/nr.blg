@@ -12,6 +12,7 @@ Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Database file #1: test.bib
 Warning--entry type for "AttacksWavesRandom" isn't style-file defined
 --line 15 of file test.bib
+Warning--I didn't find a database entry for "singerdynamic"
 Warning--I didn't find a database entry for "LargeNetworkRobustness-PVM"
 Warning--I didn't find a database entry for "asd"
 apacite.bst [2009/03/01 v4.05 APA bibliography style]
@@ -20,7 +21,7 @@ Warning--No publisher in LargeNetworkRobustnessPVM
 Warning--No address in LargeNetworkRobustnessPVM
 You've used 9 entries,
             6361 wiz_defined-function locations,
-            1245 strings with 11331 characters,
+            1246 strings with 11344 characters,
 and the built_in function-call counts, 17456 in all, are:
 = -- 2175
 > -- 182
@@ -59,4 +60,4 @@ warning$ -- 3
 while$ -- 107
 width$ -- 0
 write$ -- 299
-(There were 6 warnings)
+(There were 7 warnings)
