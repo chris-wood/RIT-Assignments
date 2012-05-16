@@ -106,9 +106,13 @@ Note that $m$ denotes the bijective mapping (the permutation) from $V(G_1)$ to $
 Prove that if $NP \not= co$-$NP$, then $P \not= NP$.
 \end{prob}
 \begin{sol}
+\begin{comment}
 If $NP \not= co$-$NP$, then we know there exists a problem $Q \in NP$ such that $Q \notin co$-$NP$. Therefore, by the definition of set intersection, this means that $Q \notin co$-$NP \cap NP$. Furthermore, it is known that $P \subseteq co$-$NP \cap NP$, which implies that $Q \notin P$. Thus, since $Q \in NP$ and $Q \notin P$ (because $P$ is a subset of $co$-$NP \cap NP$), we conclude that $P \not= NP$. 
 
 %We can also consider the contrapositive of this logical statement...
+\end{comment}
+
+Assume, for the sake of contradiction, that if $NP \not= co$-$NP$, then $P = NP$. Since $P$ is closed under complementation, we know that $P = co$-$P$. Therefore, since $P = NP$, we also know that $NP$ is closed under complementation, and thus $NP = co$-$NP$. However, this contradicts our assumption that $NP \not= co$-$NP$, so we conclude that if $NP \not= co$-$NP$ then $P \not= NP$.
 \end{sol}
 
 \begin{prob}{3 - 34.3-1}
@@ -195,24 +199,22 @@ In order to show that the set-partition problem $Q$ is $NP$-complete, we show th
 \begin{itemize}
 	\item First, we must show that $Q \in NP$. To do this, we show that a certicate of $Q$ can be verified in polynomial time. Suppse such a certificate of $Q$ contains two partite subsets $A$ and $A'$ of an input set $S$ of numbers. We can easily compute the sum of all elements in both $A$ and $A'$ in $O(n)$ time and then compare if these sums are equivalent in constant time. Thus, the certficate of $Q$ can be verified in polynomial time ($O(n)$), and so we conclude that $Q \in NP$. 
 
-	\item Now we need to show that $Q' \leq_p Q$. To do so, we define a construction technique that translates instances of $Q'$ to instances of $Q$ as follows. Let $S$ be a set of numbers that contains a subset $S' \subseteq S$ that sum to the integer target $t$. We denote $s = \sum_{x \in S}x$, and with this we construct a new set $S^*$ as $S \cup \{s - 2t\}$. The reasoning behind this construction is that the set $S'' = S - S'$ has a sum of $s - t$, and so if we add the number $s - 2t$ to $S$ we are guaranteed that by including this number in $S'$ we are left with a total sum of $t + s - 2t = s - t$. Thus, there will be two partite sets that sum to exactly $s - t$.
+	\item Now we need to show that $Q' \leq_p Q$. To do so, we define a construction technique that translates instances of $Q'$ to instances of $Q$ as follows. Let $S$ be a set of numbers that contains a subset $S' \subseteq S$ that sum to the integer target $t$. We denote $S_{sum} = \sum_{x \in S}x$, and with this we construct a new set $S^*$ as $S \cup \{S_{sum} - 2t\}$. The reasoning behind this construction is that the set $S'' = S - S'$ has a sum of $S_{sum}- t$, and so if we add the number $S_{sum} - 2t$ to $S$ we are guaranteed that by including this number in $S'$ we are left with another total sum of $t + S_{sum} - 2t = S_{sum} - t$. Thus, there will be two partite sets that sum to exactly $S_{sum} - t$.
 
-	\item Suppose we have a satisfiable instance of $Q'$ that consists of a set of numbers $S$ and a subset of $S' \subseteq S$ that sums to an integer target $t$. Applying the construction technique described above, we are left with a new set $S^*$, where we have the following:
+	\item Now, suppose we have a satisfiable instance of $Q'$ that consists of a set of numbers $S$ and a subset of $S' \subseteq S$ that sums to an integer target $t$. Applying the construction technique described above, we are left with a new set $S^*$, where we have the following:
 \begin{eqnarray*}
-\sum_{x \in S^*}x &=& (s + (s - 2t))\\
-& = & (t + (s - t) + (s - 2t) \text{ (Split up the subsets in $S$ that sum to $s$ and $s - t$}\\
-& = & (s - t) + (s - 2t + t) \text{ (Include $s - 2t$ in $S'$)}\\
-& = & 2(s - t)
+\sum_{x \in S^*}x &=& (S_{sum} + (S_{sum} - 2t))\\
+& = & (t + (S_{sum} - t) + (S_{sum} - 2t) \text{ (Split up the subsets in $S$ that sum to $S_{sum}$ and $S_{sum} - t$}\\
+& = & (S_{sum} - t) + (S_{sum} - 2t + t) \text{ (Include $S_{sum} - 2t$ in $S'$)}\\
+& = & 2(S_{sum} - t)
 \end{eqnarray*}
-Therefore, we know that there are exactly two partite sets in $S$ that sum to exactly $s - t$, and thus $S$ is an instance of $Q'$ that can be used to construct $S^*$, which also satisfies $Q$.
+Therefore, we know that there are exactly two partite sets in $S$ that sum to exactly $S_{sum} - t$, and thus $S$ is an instance of $Q'$ that can be used to construct $S^*$, which also satisfies $Q$.
 
-	\item Now, suppose we have a satisfiable instance of $Q$ that contains two partitite sets $A$ and $A'$, where $\sum_{x \in A}x = \sum_{x \in A'}x = (s - t)$. By our construction technique, we know that one of these partite sets contains the number $m = s - 2t$, and if we remove that number from the corresponding set we are left with $s - t - (s - 2t) = t$. Therefore, since $S^* - \{m\} = S$ and there is a subset in $S$ that now sums to $t$, we conclude that this instance of $Q$ also satisfies $Q'$.
-
-%http://web.njit.edu/~marvin/cs341/hw/hwsoln13.pdf
+	\item Now, suppose we have a satisfiable instance of $Q$ that contains two partitite sets $A$ and $A'$, where $\sum_{x \in A}x = \sum_{x \in A'}x = (S_{sum} - t)$. By our construction technique, we know that one of these partite sets contains the number $m = S_{sum} - 2t$, and if we remove that number from the corresponding set we are left with $S_{sum} - t - (S_{sum} - 2t) = t$. Therefore, since $S^* - \{m\} = S$ and there is a subset in $S$ that now sums to $t$, we conclude that this instance of $Q$ also satisfies $Q'$.
 
 %$\sum_{x \in S^*}x = 2(s - t) = 2s - 2t = s + (s - 2t)$. Therefore, we know that there is subset of $S' \subseteq S^*$ such that $\sum_{x \in S'}x = s - 2t$. Now, if we consider the set $S = S^* - S'$, then we know that $\sum_{x \in S}x = s + (s - 2t) - (s - 2t) = s$. 
 
-	\item Finally, we show that the construction of $S^*$ can be done in polynomial time from an instance of $Q'$ simply by computing the sum $s - 2t$, which is done in $O(n)$ time by traversing over all of the elements in $S$, and then including it in the set $S$ in constant time. 
+	\item Finally, we show that the construction of $S^*$ can be done in polynomial time from an instance of $Q'$ simply by computing the sum $S_{sum} - 2t$, which is done in $O(n)$ time by traversing over all of the elements in $S$, and then including it in the set $S$ in constant time. 
 \end{itemize}
 
 Thus, since we defined a polynomial time construction that transforms satisfiable instances of $Q'$ to $Q$, and such instances satisfy both $Q$ and $Q'$, we conclude that $Q' \leq_p Q$. Now, since $Q'$ is $NP$-complete, we can also conclude that $Q$ (the set-partition problem) is $NP$-complete.
@@ -297,8 +299,6 @@ Now, putting these two results together, the dynamic programming based algorithm
 The knapsack decision problem is $NP$-complete. Does your analysis above prove that $P = NP$? Explain.
 \end{prob}
 \begin{sol}
-%TODO: http://en.wikipedia.org/wiki/Knapsack_problem
-%http://stackoverflow.com/questions/3907545/how-to-understand-the-knapsack-problem-is-np-complete
 No, this analysis does not prove that $P = NP$, because the $O(nW)$ time complexity depends on the value of $W$, not the size of $W$. Time complexity measurements consider the size of the input of an algorithm (i.e. the number of bits if the input is a numeric value), and since $W = 2^{\tlg W}$, where $\tlg W$ is the number of bits in $W$, we can see that the resulting time complexity is thus $O(n2^{\tlg W})$ in terms of the size of $W$. This means that this dynamic programming solution is a pseudo-polynomial time algorithm in that it is polynomial with respect to the value of the input, but exponential with respect to the size of the input, and thus is not polynomial in the traditional sense. Therefore, we can see that this does \emph{not} prove that $P = NP$.
 
 \begin{comment}

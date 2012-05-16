@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  15 MAY 2012 10:04
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  15 MAY 2012 21:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1041,26 +1041,31 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 <circuit.png, id=22, 461.725pt x 272.01625pt>
 File: circuit.png Graphic file (type png)
  <use circuit.png>
-Package pdftex.def Info: circuit.png used on input line 119.
+Package pdftex.def Info: circuit.png used on input line 123.
 (pdftex.def)             Requested size: 230.86194pt x 136.00778pt.
  [2 <./circuit.png>] [3pdfTeX warning (ext4): destination with the same identif
 ier (name{table.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.183 
-      ] [4] [5]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 259.
+l.183 \end{algorithmic}
+                       ]
+Overfull \hbox (34.10065pt too wide) in alignment at lines 205--210
+ [][][] []
+ []
+
+[4] [5]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 261.
 
  (/usr/local/texlive/2011/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 259.
-
-[6]
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 261.
+ [6]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 309.
- [7]
+
+[7]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 309.
  (./caw4567-hw7.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 309.
@@ -1074,13 +1079,13 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 309.
  ) 
 Here is how much of TeX's memory you used:
- 21071 strings out of 493633
- 384253 string characters out of 3143378
+ 21067 strings out of 493633
+ 384225 string characters out of 3143378
  766334 words of memory out of 3000000
  23812 multiletter control sequences out of 15000+200000
- 14457 words of font info for 85 fonts, out of 3000000 for 9000
+ 14355 words of font info for 83 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 63i,11n,58p,818b,1239s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 63i,11n,58p,817b,1239s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2011/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
@@ -1097,7 +1102,7 @@ xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texl
 ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texliv
 e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
 /2011/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on caw4567-hw7.pdf (7 pages, 237518 bytes).
+Output written on caw4567-hw7.pdf (7 pages, 238083 bytes).
 PDF statistics:
  154 PDF objects out of 1000 (max. 8388607)
  126 compressed objects within 2 object streams
