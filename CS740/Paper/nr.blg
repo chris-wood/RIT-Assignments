@@ -9,9 +9,9 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-Database file #1: nr.bib
+Database file #1: test.bib
 Warning--entry type for "AttacksWavesRandom" isn't style-file defined
---line 16 of file nr.bib
+--line 15 of file test.bib
 Warning--I didn't find a database entry for "LargeNetworkRobustness-PVM"
 Warning--I didn't find a database entry for "asd"
 apacite.bst [2009/03/01 v4.05 APA bibliography style]
