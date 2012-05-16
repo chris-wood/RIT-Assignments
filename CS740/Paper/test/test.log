@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  15 MAY 2012 10:39
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  16 MAY 2012 14:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -120,21 +120,170 @@ Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
 ))
-(./test.aux)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks16
+\verbatim@line=\toks17
+\verbatim@in@stream=\read1
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/pseudocode/pseudocode.sty
+** 
+** Document Style `pseudocode' - environment 
+** by D.L. Kreher and D.R. Stinson 
+** 
+** The pseudocode environment was originally developed for the book
+** Combinatorial Algorithms: Enumeration, Generation, and Search
+** CRC Press, 1999. 
+Package: pseudocode 
+\pcode@width=\skip60
+(/usr/local/texlive/2011/texmf-dist/tex/latex/fancybox/fancybox.sty
+Package: fancybox 2010/05/15 1.4
+
+Style option: `fancybox' v1.4 <2010/05/15> (tvz)
+\@fancybox=\box27
+\shadowsize=\dimen105
+\@Sbox=\box28
+\do@VerbBox=\toks18
+\the@fancyput=\toks19
+\this@fancyput=\toks20
+\EndVerbatimTokens=\toks21
+\Verbatim@Outfile=\write3
+\Verbatim@Infile=\read2
+) (/usr/local/texlive/2011/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@pseudocode=\count91
+\c@pseudonum=\count92
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/algorithms/algorithm.sty
+Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
+nment
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count93
+\float@exts=\toks22
+\float@box=\box29
+\@float@everytoks=\toks23
+\@floatcapt=\box30
+)
+\@float@every@algorithm=\toks24
+\c@algorithm=\count94
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip61
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks25
+\ex@=\dimen106
+))
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+LaTeX Info: Redefining \boldsymbol on input line 54.
+\pmbraise@=\dimen107
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count95
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count96
+\leftroot@=\count97
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count98
+\DOTSCASE@=\count99
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box31
+\strutbox@=\box32
+\big@size=\dimen108
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count100
+\c@MaxMatrixCols=\count101
+\dotsspace@=\muskip11
+\c@parentequation=\count102
+\dspbrk@lvl=\count103
+\tag@help=\toks26
+\row@=\count104
+\column@=\count105
+\maxfields@=\count106
+\andhelp@=\toks27
+\eqnshift@=\dimen109
+\alignsep@=\dimen110
+\tagshift@=\dimen111
+\tagwidth@=\dimen112
+\totwidth@=\dimen113
+\lineht@=\dimen114
+\@envbody=\toks28
+\multlinegap=\skip62
+\multlinetaggap=\skip63
+\mathdisplay@stack=\toks29
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2009/07/02 v2.20.1
+\thm@style=\toks30
+\thm@bodyfont=\toks31
+\thm@headfont=\toks32
+\thm@notefont=\toks33
+\thm@headpunct=\toks34
+\thm@preskip=\skip64
+\thm@postskip=\skip65
+\thm@headsep=\skip66
+\dth@everypar=\toks35
+)
+(/usr/local/texlive/2011/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+
+(/usr/local/texlive/2011/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count107
+\c@ALG@rem=\count108
+\c@ALG@nested=\count109
+\ALG@tlm=\skip67
+\ALG@thistlm=\skip68
+\c@ALG@Lnr=\count110
+\c@ALG@blocknr=\count111
+\c@ALG@storecount=\count112
+\c@ALG@tmpcounter=\count113
+\ALG@tmplength=\skip69
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
+)
+\c@numberedAlg=\count114
+ (./test.aux
+
+LaTeX Warning: Label `fig:Onion' multiply defined.
+
+
+LaTeX Warning: Label `fig:Onion' multiply defined.
+
+)
 \openout1 = `test.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
-LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
  (/usr/local/texlive/2011/texmf-dist/tex/latex/apa/english.apa
 File: english.apa 2006/01/01
 )
@@ -146,17 +295,17 @@ LaTeX Info: Redefining \BHBI on input line 120.
 NOT AUSTRALIAN!!!
 ) (/usr/local/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count91
-\scratchdimen=\dimen105
-\scratchbox=\box27
-\nofMPsegments=\count92
-\nofMParguments=\count93
-\everyMPshowfont=\toks16
-\MPscratchCnt=\count94
-\MPscratchDim=\dimen106
-\MPnumerator=\count95
-\makeMPintoPDFobject=\count96
-\everyMPtoPDFconversion=\toks17
+\scratchcounter=\count115
+\scratchdimen=\dimen115
+\scratchbox=\box33
+\nofMPsegments=\count116
+\nofMParguments=\count117
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count118
+\MPscratchDim=\dimen116
+\MPnumerator=\count119
+\makeMPintoPDFobject=\count120
+\everyMPtoPDFconversion=\toks37
 ) (/usr/local/texlive/2011/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
 
@@ -204,47 +353,142 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 72.
+LaTeX Font Info:    Try loading font information for U+msa on input line 73.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 72.
+LaTeX Font Info:    Try loading font information for U+msb on input line 73.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
-{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
- (./test.bbl
-[4]) [5] (./test.aux) ) 
+{/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 90--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--96
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 98--100
+
+ []
+
+
+LaTeX Warning: Citation `LargeNetworkRobustnessPVM' undefined on input line 108
+.
+
+[2]
+
+LaTeX Warning: Citation `Attacks' undefined on input line 121.
+
+[3]
+
+LaTeX Warning: Reference `Definitions' on page 4 undefined on input line 150.
+
+<edge_attacks.png, id=23, 538.01pt x 314.17375pt>
+File: edge_attacks.png Graphic file (type png)
+ <use edge_attacks.png>
+Package pdftex.def Info: edge_attacks.png used on input line 163.
+(pdftex.def)             Requested size: 216.81pt x 126.60687pt.
+
+
+LaTeX Warning: Citation `RandomStudy' undefined on input line 173.
+
+[4 <./edge_attacks.png>]
+
+LaTeX Warning: Citation `Onion' undefined on input line 188.
+
+
+LaTeX Warning: Citation `NRMalicious' undefined on input line 197.
+
+[5]
+
+LaTeX Warning: Citation `LargeNetworkRobustness-PVM' undefined on input line 21
+5.
+
+
+LaTeX Warning: Citation `bimodal' undefined on input line 215.
+
+
+LaTeX Warning: Citation `AttacksWavesRandom' undefined on input line 220.
+
+[6]
+
+LaTeX Warning: Reference `RandomResults' on page 7 undefined on input line 244.
+
+
+
+LaTeX Warning: Citation `GraphThesis' undefined on input line 244.
+
+<random_results.png, id=38, 591.20876pt x 532.99126pt>
+File: random_results.png Graphic file (type png)
+
+<use random_results.png>
+Package pdftex.def Info: random_results.png used on input line 249.
+(pdftex.def)             Requested size: 216.81pt x 195.45512pt.
+ [7 <./random_results.png>]
+
+LaTeX Warning: Citation `asd' undefined on input line 261.
+
+
+LaTeX Warning: Reference `alg1' on page 8 undefined on input line 263.
+
+<fractional_results.png, id=44, 507.8975pt x 754.82pt>
+File: fractional_results.png Graphic file (type png)
+
+<use fractional_results.png>
+Package pdftex.def Info: fractional_results.png used on input line 280.
+(pdftex.def)             Requested size: 216.81pt x 322.21669pt.
+ [8 <./fractional_results.png>]
+<Onion.jpg, id=49, 452.69125pt x 441.65pt>
+File: Onion.jpg Graphic file (type jpg)
+ <use Onion.jpg>
+Package pdftex.def Info: Onion.jpg used on input line 295.
+(pdftex.def)             Requested size: 216.81pt x 211.51785pt.
+
+
+LaTeX Warning: Reference `alg2' on page 9 undefined on input line 313.
+
+(./test.bbl) [9 <./Onion.jpg>] (./test.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2641 strings out of 493633
- 34553 string characters out of 3143378
- 94042 words of memory out of 3000000
- 5880 multiletter control sequences out of 15000+200000
- 21743 words of font info for 80 fonts, out of 3000000 for 9000
+ 4197 strings out of 493633
+ 54822 string characters out of 3143378
+ 122314 words of memory out of 3000000
+ 7394 multiletter control sequences out of 15000+200000
+ 17807 words of font info for 65 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 37i,8n,24p,1006b,355s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/local/texlive/2011/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmb10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmbx10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr12.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr17.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr6.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r8.pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.
-pfb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.p
-fb></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pf
-b></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
-></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb><
-/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></
-usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on test.pdf (5 pages, 182808 bytes).
+ 38i,7n,24p,833b,268s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
+/usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></u
+sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
+/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
+ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
+al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
+/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
+xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
+ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texliv
+e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
+/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
+011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on test.pdf (9 pages, 531684 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 57 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

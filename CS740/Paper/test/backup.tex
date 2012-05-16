@@ -1,0 +1,171 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Original by                                   %
+% Athanassios Protopapas, October 2005 %
+% Mini-example for using apa.cls       %
+%                                      %
+% modified by William Revelle, August, 2007 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[doc]{apa}%can be jou (for journal), man (manuscript) or doc (document)
+%
+%
+%these next packages extend the apa class to allow for including statistical and graphic commands
+\usepackage{url}   %this allows us to cite URLs in the text
+\usepackage{graphicx}  %allows for graphic to float when doing jou or doc style
+\usepackage{amssymb}  %use formatting tools  for math symbols
+% type setting of functions, packages, and R follows a particular style
+\let\proglang=\textsf
+\newcommand{\R}{\proglang{R}}
+\newcommand{\pkg}[1]{{\normalfont\fontseries{b}\selectfont #1}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}} 
+\newcommand{\fun}[1]{{\texttt{#1}}} 
+\newcommand{\Robject}[1]{{\texttt{#1}}} 
+%
+%
+%Here is where we start the important APA stuff
+
+\title{Example of an APA-style manuscript for Research Methods in Psychology}
+\author{William Revelle}
+\affiliation{Department of Psychology \\ Northwestern University}
+%taken from AP's user notes
+% John Vokey uses something like this
+
+\ifapamodeman{%
+
+\note{\begin{flushleft}
+
+  William Revelle\\
+
+    Department of Psychology\\
+
+  Northwestern University\\
+
+ Evanston, Illinois\\
+
+	60201\\
+
+	e-mail: revelle@northwestern.edu\\
+
+   
+
+   \end{flushleft}}}
+
+{%else, i.e., in jou and doc mode 
+
+%\note{Draft of \today}
+}
+
+
+
+\abstract{This is an example of a minimal ``manuscript'' using the \LaTeX\ apa.cls document class to typeset manuscripts according to the Americal Psychological Association (APA) manual, fifth edition. It also takes advantage of the  \LaTeX\ apa.cite class.  It is modified only slightly from a superb example by Athanassios Protopapas.   The abstract should convey five points: 1) why is the problem interesting, 2) what you did, 3) who were the participants, 4) what you found, and 5) what does it mean?  All this and be less than 100 words! }
+
+\acknowledgements{Adapted (and at times just copied) from a similar document by Athanassios Protopapas who is at the 
+Institute for Language \& Speech Processing Athens, Greece. (email: protopap@ilsp.gr) 
+
+William Revelle may be contacted at \url{email:revelle@northwestern.edu)}}
+
+\shorttitle{APA style manuscript}
+\rightheader{APA style manuscript}
+\leftheader{William Revelle}
+
+\begin{document}
+\maketitle   
+%Although the structure of the paper is by AP, these first few paragraphs are by WR
+Writing an APA style paper is an exercise in frustration for most undergraduates taking Research Methods.  Besides learning a new language to describe research and how to write in a `scientific' rather than a `literary' style, they also are expected to master a very rigid style of formatting the manuscript.  
+
+This example article is meant to show three concepts: 1) What an APA paper looks like, 2) How and why to  format it in \LaTeX, and 3) How to include references using Bib\TeX.  Those who do not want to learn \LaTeX, should just  look at the format of the paper and the references.  For those who want to master the intricacies of an elegant type setting language, you should examine the associated folder available on the class syllabus (\url{http://personality-project.org/revelle/syllabi/205/apa.style.html}).   There you will find three versions of this document: 1)  the `manuscript' or how you should submit a paper,  2) a `published' version of the paper, or what it would look like in a journal, and 3) an alternative `published' version, or what it would look like in a book. You will also find links to download \LaTeX as well as to the apa document class developed by \citeA{apa.cls}. This example is adapted and extended from the example written by  \citeA{apa.cls}.  
+
+Your paper should basically follow an hour-glass design.  A broad beginning and ending with a much narrower methods and results section.  The beginning should capture the reader's attention and the conclusion should leave them seeing the broad implications of your study.  
+
+Following the hour glass metaphor, your first few paragraphs should be broad enough that someone who knows nothing about the problem will become interested and want to learn more. These first two paragraphs are vital, for if the reader looks at them and is not excited, the rest of the paper will not be read. The next few paragraphs are aimed at the reader who already knows something about the research area and wants to know why this particular paper is worth reading.  
+
+
+
+% The following comment, from Protopapas is included here as a comment that will not appear in the final text because it is aimed to the LaTeX user.
+          
+%Here goes the text of the article. Note that the content begins immediately after \texttt{maketitle} and there is no blank line between the title command and the article text. 
+
+This first section of the article is typically the introduction and, according to APA style, should not bear a section heading.\footnote{That is, there is no ``Introduction'' section.} Subsequent sections, however, are titled according to the psychological conventions. %from AP
+
+After several paragraphs of introduction to your research problem, it is useful  to give an overview of the specific questions you are addressing.  
+
+\emph{It is very important to compare the `manuscript' version of this document with the final `journal' view.  Using \LaTeX we can go back and forth between these two formats with ease.  Tables and Figures need to appear at the end of the manuscript version, even though they appear embedded in the middle of the printed version.  }
+
+\section{Experiment 1} 
+Manuscripts in APA style often contain descriptions of experiments.  The APA manual specifications for referring to experiments are to use a lowercase ``e'' when speaking generally, as in the previous phrase, but an uppercase ``E'' when mentioning a particular experiment (as in the following phrase), such as Experiment~1.  %AP
+
+%Putting in the occasional comment makes the text easier to read
+\subsection{Method}
+The ``method'' is a subsection of the experimental presentation in which all the details of setting up and conducting the experiment are described.  There are a number of more or less standard components to a method, shown below.  %from AP
+
+%
+\subsubsection{Participants}
+Psychological experiments are conducted with participants, usually humans. Note that these used to be called ``subjects'' but apparently APA now finds it inappropriate to refer to people with this term.  Here we mention how many participants there were, their ages and other information about them.  In particular, how many were male and how many were female.  How were they chosen? %mainly AP
+\subsubsection{Apparatus}
+Sometimes it is necessary to give the apparatus a special section.  This section can also be called `Materials'.
+
+The distinction between materials/apparatus and procedure may be thought of in terms of having two research assistants.  One gets the materials ready, the second runs the participants.  Everything that assistant 1 needs to get ready should be in materials/apparatus, everything that assistant  2 needs to do is in procedure.  There should be no surprises!  Assistant 2 should not be told to create a new questionnaire, this should have been done by Assistant 1. %by WR
+
+\subsubsection{Stimuli}
+What the subjects saw, heard, or felt. %AP
+Usually stimuli are part of the materials or apparatus, but if doing a psychophysics study, it is important to describe how the stimuli were generated and include such detail as screen decay rate and visual angle.
+\subsubsection{Procedure}
+What was done to the subjects.  This should be detailed enough that someone else could run the study following the procedures section. 
+\subsection{Results}
+In this subsection, one shows numbers and statistical analyses. Seasoned researchers often avoid reading the results section in the first reading, especially if the article is not of particular interest for their own research. %AP/WR
+
+Results should be stated first in words, then numbers, and then statistics.  E.g., participants in the relaxed condition (M= 5.1, sd = 1.66) did better than those in the stressed condition (M=2.8, sd = 1.93), t(38) = 2.85, $p< .05$, p-rep = .96.
+
+
+
+Note that the use of the p-rep (probability of a replication) statistic \cite{killeen} is now required by articles submitted to\emph{ Psychological Science}. This reflects a general appreciation that what is important is not rejection of the hypothesis that groups do not differ but rather an estimate of the particular parameter of interest.  (We do not say that the speed of light is not zero, we care about what it is, and with what error of estimate.)  The p-rep statistic is a beginning of this movement, for it forces us to think about the probability of getting a result in the same direction if we do the study again.  P-rep may be calculated using the \fun{p.rep} function in the \pkg{psych} package in \R{} \cite{R}. 
+
+\subsection{Discussion}
+If the results of the experiment mean anything, this is the place to talk about it.  If this is a two study paper, then this discussion is just about Experiment 1. No new numbers should appear in the discussion section. If you want to introduce a number, do it in the results section.
+
+\section{Experiment 2}
+Usually one experiment is not enough to convince anyone; you need additional control experiments to make your point.  Indeed, some articles will include many different experiments. %AP
+The introduction to experiment 2 could discuss what is missing from experiment 1 and how experiment 2 addresses the problem.
+
+
+\subsection{Method}
+The method can be the same as for the previous experiment, since here we are simply interested in showing the structure of the manuscript.  %AP
+If the methods do differ from Study 1 to Study 2, highlight how they differ.
+\subsection{Results}
+This is a good point to show an example of a table following APA conventions. Note that we don't use any vertical separators and that columns can be grouped with partial horizontal lines.  
+Also keep in mind that the caption must precede the table. The label is entirely optional, but useful for referring to the table in the text, for example this one would be Table~\ref{tab:tab1}. One of the trickies problems in \LaTeX is getting the figure or table to appear roughly where you want it.  This is not a problem in the `manuscript' version, for all tables and all figures are put at the end.  But if you are doing `jou' or `doc' formatting, the tables will appear at places that a not very clever  typesetter would put them, but not where you would necessarily put them.
+
+\begin{table}[tbp]
+\caption{Some numbers that could be experimental data.}
+\label{tab:tab1}
+\begin{tabular}{lcc}\hline
+          & \multicolumn{2}{c}{Factor 2} \\ \cline{2-3}
+Factor 1  & Condition A  & Condition B   \\ \hline
+First     & 586 (231)    & 649 (255)     \\
+          &    2.2       &    7.5        \\
+Second    & 590 (195)    & 623 (231)     \\
+          &    2.8       &    2.5        \\ \hline
+\end{tabular}
+\end{table}  
+%We can also try a wide table (Table~\ref{tab:tab2}) but this has complex formatting features in terms of how the two go together in the `journal' format.  
+
+
+
+%from AP
+\subsection{Discussion} 
+This is a discussion just of the second study.  
+
+\section{General Discussion}
+In psychological articles there is usually some point to the whole experimental exercise, and in the end we get to discuss how important it all is.  Although literature is supposed to have been covered in the introduction, for this example we can illustrate the use of bibliographic citations in this final section. The accompanying package ``apacite'' by Erik Meijer provides everything an APA-style writer needs for citations, such as in-text citations in which one can claim that \cite{leary} mentioned or failed to mention something. 
+%from AP
+
+It is important to note that books \cite{leary} are cited in the bibliography differently than chapters \cite{rev:ea07} or articles \cite{killeen}.  The specific rules for citations are complicated, but actually  are included in such bibliographic tools as the open source format BibTex (which can be used by \LaTeX using the  apa.cite commands) or the commercial program EndNote.  For Northwestern students, EndNote may be downloaded for personal use.  The official guide to how to include references is the APA style manual \cite{apa}, but ``cheat sheets" may be found on the web by searching for `APA style'. 
+
+Some important rules for those who choose not to use \LaTeX.  The manuscript needs to be double spaced throughout, with ragged right margins.  Tables appear on separate pages following the References.  Then comes a page of Figure Captions, then come the figures.  Examine the `manuscript' example on the web page very carefully.  
+%the references are stored in a separate file (examplebib in this case).  References can be entered there directly or can be copied from EndNote.
+
+%When using LaTex, you need to first typeset the article, then use BibTex to check the references, then typeset again (and probably again.)
+
+\bibliography{example}
+
+\end{document}

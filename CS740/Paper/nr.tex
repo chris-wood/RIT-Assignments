@@ -1,38 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Original by                                   %
+% Athanassios Protopapas, October 2005 %
+% Mini-example for using apa.cls       %
+%                                      %
+% modified by William Revelle, August, 2007 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \documentclass[doc]{apa}%can be jou (for journal), man (manuscript) or doc (document)
-
-\usepackage{thumbpdf, amssymb, amsmath, amsthm, microtype,
-	    graphicx, verbatim, listings, color, fancybox}
-\usepackage[pdftex]{hyperref}
-%\usepackage[margin=1in]{geometry}
-\usepackage{cawsty}
-\usepackage{fullpage}
-\usepackage{pseudocode}
-
-\usepackage{algorithm}
-%\usepackage{algorithmic}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{algpseudocode}
-\usepackage{algorithmicx}% http://ctan.org/pkg/algorithmicx
-\usepackage{lipsum}% http://ctan.org/pkg/lipsum
-\usepackage{xifthen}% http://ctan.org/pkg/xifthen
-\usepackage{needspace}% http://ctan.org/pkg/needspace
-\usepackage{hyperref}% http://ctan.org/pkg/hyperref
-
-% ================ ALGORITHM ENVIRONMENT ================
-\newcounter{numberedAlg}% Algorithm counter
-\newenvironment{numberedAlg}[1][]%
-  {% \begin{numberedAlg}[#1]
-    \needspace{2\baselineskip}% At least 2\baselineskip required, otherwise break
-    \noindent \rule{\linewidth}{1pt} \endgraf% Top rule
-    \refstepcounter{numberedAlg}% For correct reference of algorithm
-    \centering \textsc{Algorithm}~\thenumberedAlg%
-    \ifthenelse{\isempty{#1}}{}{:\ #1}% Typeset name (if provided)
-  }{% \end{numberedAlg}
-  \noindent \rule{\linewidth}{1pt}% Bottom rule
-  }%
-
-
 %
 %
 %these next packages extend the apa class to allow for including statistical and graphic commands
@@ -50,8 +24,30 @@
 %
 %Here is where we start the important APA stuff
 
+\usepackage{verbatim}
+\usepackage{pseudocode}
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{algpseudocode}
+\usepackage{algorithmicx}% http://ctan.org/pkg/algorithmicx
+
+% ================ ALGORITHM ENVIRONMENT ================
+\newcounter{numberedAlg}% Algorithm counter
+\newenvironment{numberedAlg}[1][]%
+  {% \begin{numberedAlg}[#1]
+    \needspace{2\baselineskip}% At least 2\baselineskip required, otherwise break
+    \noindent \rule{\linewidth}{1pt} \endgraf% Top rule
+    \refstepcounter{numberedAlg}% For correct reference of algorithm
+    \centering \textsc{Algorithm}~\thenumberedAlg%
+    \ifthenelse{\isempty{#1}}{}{:\ #1}% Typeset name (if provided)
+  }{% \end{numberedAlg}
+  \noindent \rule{\linewidth}{1pt}% Bottom rule
+  }%
+
 \title{Engineering Networks for Optimal Robustness}
-\author{Christopher A. Wood}
+\author{Christopher Wood}
 \affiliation{Department of Computer Science \\ Rochester Institute of Technology}
 
 
@@ -67,12 +63,7 @@ the best performance in the event of node deletions. This paper presents some
 background information on network robustness and its importance in modern 
 communication systems, with a specific focus on wireless sensor networks, 
 presents some recent advances made in the topic, and concludes with avenues
- of future work that can be explored by researchers in the field. }
-
-\acknowledgements{Adapted (and at times just copied) from a similar document by Athanassios Protopapas who is at the 
-Institute for Language \& Speech Processing Athens, Greece. (email: protopap@ilsp.gr) 
-
-William Revelle may be contacted at \url{email:revelle@northwestern.edu)}}
+ of future work that can be explored by researchers in the field.}
 
 \shorttitle{APA style manuscript}
 \rightheader{APA style manuscript}
@@ -81,26 +72,6 @@ William Revelle may be contacted at \url{email:revelle@northwestern.edu)}}
 \begin{document}
 \maketitle   
 
-%\setlength{\parindent}{0pt}
-
-\begin{comment}
-
-%\documentclass[11pt]{article}
-
-\linespread{1.2}
-\begin{document}
-\arltitle{}{Data Communication and Networks I [4005-700]}
-
-\end{comment}
-
-% http://crpit.com/confpapers/CRPITV26Dekker.pdf
-% http://en.wikipedia.org/wiki/Percolation_theory
-% http://arxiv.org/abs/cond-mat/0007300
-% http://www.research.ibm.com/people/r/rish/papers/PhysicaA_3_30.pdf
-% http://www.cs.berkeley.edu/~dawnsong/papers/coloring_ndss08_cr.pdf
-
-% robust routing and dynamic load balancing - the hw/sw solution to help deal with robustness and traffic changes
-% http://iie.fing.edu.uy/investigacion/grupos/artes/publicaciones/casas_drcn09.pdf
 
 \section{Introduction}
 
@@ -116,23 +87,20 @@ It is natural to model a communication network as a weighted undirected graph $G
 
 In order to discuss the measures of network robustness and analytical techniques used to study the network robustness in the topological domain, it is necessary to introduce the following definitions.
 
-\begin{define}
-The \textbf{degree} of a vertex $u \in V$ for any graph $G = (V,E)$ is said to be the total number of edges incidenct to $u$. In other words, $deg(u) = \sum_{(u,v) \in E} 1$ for all $v \in V$. We denote the minimum degree over all vertices in a graph $G$ as $\delta(G)$. In network analysis it is common to utilize the degree distribution of a graph as the basis for many measurements. As such, we denote $k$ as the average degree distribution for a graph $G$.
-\end{define}
+\textbf{Definition 1}
+The \textbf{degree} of a vertex $u \in V$ for any graph $G = (V,E)$ is said to be the total number of edges incidenct to $u$. In other words, $deg(u) = \sum_{(u,v) \in E} 1$ for all $v \in V$. We denote the minimum degree over all vertices in a graph $G$ as $\delta(G)$. In network analysis it is common to utilize the degree distribution of a graph as the basis for many measurements. As such, we denote $k$ as the average degree distribution for a graph $G$.\\
 
 %Component
-\begin{define}
-A \textbf{component} of a graph $G = (V,E)$ is a subgraph $G' = (V',E')$ in which there exists a path between all vertices $u, v \in V'$. Further, a graph $G$ is said to be \textbf{connected} if and only if there is at most $1$ conneted component in $G$ (i.e. the entire graph). If a graph is not connected, then it is \textbf{disconnected}.
-\end{define}
+\textbf{Definition 2}
+A \textbf{component} of a graph $G = (V,E)$ is a subgraph $G' = (V',E')$ in which there exists a path between all vertices $u, v \in V'$. Further, a graph $G$ is said to be \textbf{connected} if and only if there is at most $1$ conneted component in $G$ (i.e. the entire graph). If a graph is not connected, then it is \textbf{disconnected}.\\
 
 % vertex and edge connectivity
-\begin{define}
-The \textbf{vertex connectivity} of a graph $G = (V,E)$, denoted $\kappa(G)$, is defined as the minimum number of nodes whose deletion will leave the graph disconnected. Similarly, the \textbf{edge connectivity} of a graph $G$, denoted $\lambda(G)$, is defined as the minimum number of edges whose deletion will leave the graph disconnected.
-\end{define}
+\textbf{Definition 3}
+The \textbf{vertex connectivity} of a graph $G = (V,E)$, denoted $\kappa(G)$, is defined as the minimum number of nodes whose deletion will leave the graph disconnected. Similarly, the \textbf{edge connectivity} of a graph $G$, denoted $\lambda(G)$, is defined as the minimum number of edges whose deletion will leave the graph disconnected.\\
 
-\begin{define}
+\textbf{Definition 4}
 The \textbf{distance} between any two vertices $u, v \in V$ in a graph $G = (V,E)$ is defined as the sum of the link weights along the edges that correspond to the shortest path between $u$ and $v$.
-\end{define}
+
 
 \section{Network Functionality}
 \label{NetworkFunctionality}
@@ -294,6 +262,7 @@ where each of these vertices have degree $\sqrt{\langle k \rangle N}$ \cite{asd}
 
 In terms of the design of a network, it is clear that network designers should strive for values of $q$ that imply high measures of robustness. Such a value of $q$ was determine empirically using a special degree distribution $P(k)$ that represents a network of $q$ hub nodes and $N-q$ leaf nodes, since this is a very general structure for such graphs. The simulation algorithm that was utilized to perform this caluclation is shown in Algorithm \ref{alg1} \cite{asd}. %http://polymer.bu.edu/hes/articles/pshs06.pdf 
 
+\begin{comment}
 \begin{numberedAlg}[Monte-Carlo $q$ Determination]
 \label{alg1}
 \begin{algorithmic}[1]
@@ -303,6 +272,7 @@ In terms of the design of a network, it is clear that network designers should s
 	\item If $\kappa < 2$, $G$ has become disconnected, so terminate and return $q$. Otherwise, decrement $q$ by 1 and go to step 2.
 \end{algorithmic}
 \end{numberedAlg}
+\end{comment}
 
 \begin{figure}[h!]
 	\label{fig:Onion}
@@ -329,6 +299,7 @@ In their study of optimal graph structures that yield the highest resilience to 
 Herrmann et al have also conducted research on optimization algorithms that increase this robustness measure while at the same time maintaining the distribution of vertex degrees throughout the network. Their proposed algorithm seeks to re-arrange node edges and connections to improve the resilience of the host network to any kinds of attacks using Monte-Carlo simulations. This algorithm can be described as follows:
 
 % the re-structure algorithm
+\begin{comment}
 \begin{numberedAlg}[Robustness Optimization]
 \label{alg2}
 \begin{algorithmic}[1]
@@ -337,6 +308,7 @@ Herrmann et al have also conducted research on optimization algorithms that incr
 	\item If $R_{new} > R_{old}$, accept the swap and go to step 1. Otherwise, revert the swap and goto step 1. 
 \end{algorithmic}
 \end{numberedAlg}
+\end{comment}
 
 Algorithm~\ref{alg2} is repeated for a very large number of iterations until an ideal level of robustness has been obtained, albiet at the sake of sometimes massive computations (as is the case with Monte-Carlo methods).
 
@@ -344,9 +316,6 @@ Algorithm~\ref{alg2} is repeated for a very large number of iterations until an 
 
 One more recent investigation of graphs with fixed degree distributions was performed by Sonawane et al \cite{bimodal}. 
 
-% Here is the bibliography
-%\bibliographystyle{plain}
-\bibliography{nr}
+\bibliography{test}
 
-% That's all folks
 \end{document}
