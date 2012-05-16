@@ -19,7 +19,7 @@
 
 \usetheme{Antibes}
 \usecolortheme{beaver}
-\title[Optimizing Cryptographic Algorithm Strength]{Optimizing Cryptographic Strength of Substitution\\ Layers in Symmetric-Key Cryptographic Algorithms}
+\title[Optimizing Substitution Layer Security]{Optimizing Cryptographic Strength of Substitution\\ Layers in Symmetric-Key Cryptosystems}
 
 \usepackage{mathptmx}
 \usepackage[scaled=.90]{helvet}
@@ -51,15 +51,26 @@
 	\tableofcontents
 \end{frame}
 
-\section{Cryptographic Security}
+\section{Motivation}
 \begin{frame}
-	\frametitle{Elements of Cryptographic Security}
+	\frametitle{Motivation}
 	Cryptographic algorithm security is measured by:
 	\begin{itemize}
 		\item Levels of confusion and diffusion
+		\begin{itemize}
+			\item \emph{Confusion} - Complexity of the relationship between the secret-key and ciphertext
+			\item \emph{Diffusion} - Influence of single bit changes in the plaintext on the ciphertext
+		\end{itemize}
+		\pause
 		\item Resilience to common cryptanalytic attacks
+		\begin{itemize}
+			\item Linear cryptanalysis
+			\item Differential cryptanalysis
+		\end{itemize}
 	\end{itemize}
 \end{frame}
+
+%TODO: include slide about attacks and need for confusion and diffusion
 
 %TODO: insert frame that defines S-box
 \begin{frame}
@@ -70,24 +81,28 @@
 \centering
 \includegraphics[scale = 0.6]{images/sub_layer.jpg}
 \end{figure}
+\end{frame}
 
+\begin{frame}
+	\frametitle{S-box design}
+	Which S-box configurations yield the highest measures of diffusion and confusion?
 \end{frame}
 
 \section{Security Measurements}
 \begin{frame}
 	\frametitle{Security Measurements}
 	\begin{itemize}
-		\item Branch number
+		\item Branch number 
 		\begin{itemize}
-			\item Measures the number of "active" S-box bits that are touched for every input $x \in $
+			\item Measures lower bound on susceptibility to differential cryptanalysis
 		\end{itemize}
 		\item Avalanche number
 		\begin{itemize}
 			\item Measures the total number of bit changes for a single bit change in the input to the S-box
 		\end{itemize}
-		\item Nonlinearity degree
+		\item Nonlinearity degree 
 		\begin{itemize}
-			\item Measures how much nonlinear "behavior" the S-box exhibits
+			\item Measures how much nonlinear "behavior" the S-box exhibits by counting the number of output elements that are directly proportional to its input.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -125,14 +140,19 @@ A function $f : \field{F}_2^n \to \field{F}_2^n$ exhibits the \emph{avalanche ef
 \end{frame}
 \end{comment}
 
-\section{Optimization Problem Formulation}
 \begin{frame}
-	\frametitle{Algorithm Design Goals}
-	\begin{itemize}
-		\item High branch number
-		\item Avalanche number of exactly $n^22^{n-1}$
-		\item High degree of nonlinearity
-	\end{itemize}
+	\frametitle{Known optimal values}
+\begin{table}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Security Measurement} & \textbf{Theoretical Optimal Value} \\ \hline
+        Branch number ($B_N$) & $n$ \\ 
+        Avalanche number ($A_N$) & $n^22^{n-1}$ \\ 
+        Nonlinearity degree ($P_S$) & $1^*$ \\
+        \hline
+    \end{tabular}
+\end{table}
+*$P_S \leq 2$ indicates that the function is "almost perfectly nonlinear", which is also a good value
 \end{frame}
 
 \begin{frame}
@@ -143,6 +163,7 @@ A function $f : \field{F}_2^n \to \field{F}_2^n$ exhibits the \emph{avalanche ef
 \end{figure}
 \end{frame}
 
+\section{Optimization Problem Formulation}
 \begin{frame}
 	\frametitle{Branch number problem formulation}
 \begin{figure}
@@ -202,6 +223,18 @@ where $n$ is the number of bits needed to represent the design variables. \\
 \end{frame}
 
 \begin{frame}
+	\frametitle{Finding a shared solution}
+	\begin{itemize}
+		\item Create a linear combination of each objective function 
+		\item Assign variable weights that correspond to the overall influence of each objective function
+	\end{itemize}
+\begin{eqnarray*}
+f(X) = w_1A_N'(X) + w_2B_N'(X) + w_3P_S(X)
+\end{eqnarray*}
+\end{frame}
+	
+
+\begin{comment}
 \begin{figure}
 \centering
 \shadowbox{%
@@ -218,23 +251,25 @@ subject to the constraints
 where $n$ is the number of bits needed to represent the design variables and $w_i$, where $1 \leq i \leq 3$, are \emph{not} design variables. \\
 }}
 \end{figure}
-\end{frame}
+\end{comment}
 
 \section{Optimization Solution}
 \begin{frame}
 	\frametitle{MINLP algorithms}
 	\begin{itemize}
-		\item Traditional MINLP algorithms (e.g. Branch and Bound)
+		\item Traditional MINLP methods
 		\begin{itemize}
-			\item 
+			\item Branch and Bound (and all derivative) algorithms
 		\end{itemize}
-		\item Evolutionary algorithms (e.g. genetic algorithms)
+		\item Evolutionary methods
 		\begin{itemize}
-			\item 
+			\item \emph{Genetic algorithm optimization}
+			%\item Ant colony optimization
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
+\begin{comment}
 \begin{frame}
 	\frametitle{Genetic algorithm configuration}
 \begin{table}
@@ -252,6 +287,7 @@ where $n$ is the number of bits needed to represent the design variables and $w_
 	\label{configTable}
 \end{table}
 \end{frame}
+\end{comment}
 
 \begin{frame}
 	\frametitle{Avalanche number for $4$-bit S-box}
@@ -278,7 +314,7 @@ where $n$ is the number of bits needed to represent the design variables and $w_
 \end{frame}
 
 \begin{frame}
-	\frametitle{Multi-objective MINLP solution for $4$-bit S-box}
+	\frametitle{Multi-objective solution for $4$-bit S-box}
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.5]{images/joint_results16.eps} 
@@ -290,26 +326,30 @@ where $n$ is the number of bits needed to represent the design variables and $w_
 \begin{frame}
 	\frametitle{Solution Analysis}
 \begin{table}
-    \begin{tabular}{|l|l|}
+    \begin{tabular}{|l|p{6cm}|}
         \hline
         \textbf{Measurement} & \textbf{Results} \\ \hline
-        Branch number & BAD \\ 
-        Avalanche number & OKAY \\ 
-        Nonlinearity degree & GOOD \\
+        Branch number & Exponentially less effective with higher order S-boxes \\ 
+        Avalanche number & Logarithmically less effective with higher order S-boxes \\ 
+        Nonlinearity degree & Consistently effective with all order S-boxes  \\ \hline
+	Multi-objective & Ineffective \\
         \hline
     \end{tabular}
 \end{table}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Conclusion}
+	\frametitle{Conclusions}
 	\begin{itemize}
-		\item Evolutionary optimization algorithms are the most appropriate for cryptographic applications
+		\item Evolutionary optimization algorithms are appropriate for cryptographic applications
 		\begin{itemize}
 			\item Effectively finds solutions for some discontinuous and instable functions
-			\item Not very effective at finding solution for multi-objective problems due to WHAT?
+			\item Not effective at finding solution for multi-objective problems
 		\end{itemize}
-		\item TODO: what else?
+		\item Difficult to find optimal S-box configurations with high security assurances
+		\begin{itemize}
+			\item Does not replace hardened proofs of security
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 

@@ -1,6 +1,6 @@
 \beamer@endinputifotherversion {3.10pt}
-\beamer@sectionintoc {1}{Cryptographic Security}{3}{0}{1}
-\beamer@sectionintoc {2}{Security Measurements}{5}{0}{2}
-\beamer@sectionintoc {3}{Optimization Problem Formulation}{6}{0}{3}
-\beamer@sectionintoc {4}{Optimization Solution}{12}{0}{4}
+\beamer@sectionintoc {1}{Motivation}{3}{0}{1}
+\beamer@sectionintoc {2}{Security Measurements}{6}{0}{2}
+\beamer@sectionintoc {3}{Optimization Problem Formulation}{9}{0}{3}
+\beamer@sectionintoc {4}{Optimization Solution}{13}{0}{4}
 \beamer@sectionintoc {5}{Final remarks}{18}{0}{5}

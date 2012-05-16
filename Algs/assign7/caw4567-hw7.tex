@@ -65,7 +65,7 @@
 Consider the language GRAPH-ISOMORPHISM = $\{\langle G_1, G_2 \rangle : G_1$ and $G_2$ are isomorphic graphs $\}$. Prove that GRAPH-ISOMORPHISM $\in NP$ by describing a polynomial-time algorithm to verify the language.
 \end{prob}
 \begin{sol}
-By the defintion of graph isomorphism, two graphs $G_1$ and $G_2$ are isomorphic if and only if there exists a bijection $m : V(G_1) \to V(G_2)$ such that any two vertices $v_i$ and $v_j$ of $G_1$ are adjacent in $G_1$ if and only if $m(v_i)$ and $m(v_j)$ are adjacent in $G_2$. In other words, the mapping $m$ is a defines a permutation from $V(G_1) \to V(G_2)$, and we can check to see if this is a valid permutation by checking that for every $v_j \in V(G_2)$, there is exactly one $v_i \in V(G_1)$ such that $m(v_i) = v_j$. We can then check to see that for every edge $(v_i, v_j) \in E(G_1)$, we also have $(m(v_i), m(v_j)) \in E(G_2)$. With these definitions in mind, we can easily devise a polynomial-time algorithm to verify that $m$ is a valid isomorphic mapping as follows:
+By the defintion of graph isomorphism, two graphs $G_1$ and $G_2$ are isomorphic if and only if there exists a bijection $m : V(G_1) \to V(G_2)$ such that any two vertices $v_i$ and $v_j$ of $G_1$ are adjacent in $G_1$ if and only if $m(v_i)$ and $m(v_j)$ are adjacent in $G_2$. In other words, the mapping $m$ is a defines a permutation from $V(G_1) \to V(G_2)$, and we can check to see if this is a valid permutation by checking that for every $v_j \in V(G_2)$ there is exactly one $v_i \in V(G_1)$ such that $m(v_i) = v_j$, and for every $v_i \in V(G_1)$ there is exactly one $v_j \in V(G_2)$ such that $m(v_i) = v_j$. We can then check to see that for every edge $(v_i, v_j) \in E(G_1)$, we also have $(m(v_i), m(v_j)) \in E(G_2)$. With these definitions in mind, we can easily devise a polynomial-time algorithm to verify that $m$ is a valid isomorphic mapping as follows:
 
 \begin{numberedAlg}[GRAPH-ISOMORPHISM-VERIFIER]
 \label{alg1}
@@ -74,6 +74,18 @@ By the defintion of graph isomorphism, two graphs $G_1$ and $G_2$ are isomorphic
 		\ForAll{$v_{j} \in V(G_2)$} 
 			\State vCount = 0 \Comment {Count number of times $m(v_i)$ appears in $G_2$}
 			\ForAll{$v_i \in V(G_1)$}
+				\If{$m(v_i) == v_j$}
+					\State vCount = vCount + 1
+				\EndIf
+			\EndFor
+			\If {vCount $\not= 1$} \Comment {$v_i$ should only appear once in $G_2$}
+				\State \Return False
+			\EndIf
+		\EndFor
+\\
+		\ForAll{$v_{i} \in V(G_1)$} 
+			\State vCount = 0 \Comment {Count number of times $m(v_i)$ appears in $G_2$}
+			\ForAll{$v_j \in V(G_2)$}
 				\If{$m(v_i) == v_j$}
 					\State vCount = vCount + 1
 				\EndIf
@@ -185,7 +197,7 @@ We show that the problem of determining the satisfiability of boolean formulas i
 
 Since DNF statements are composed of disjunctions (ORs) of conjunction clauses (ANDs), it is enough to check and see if only one conjunction clause can be satisfied. Therefore, this procedure simply traverses over every clause and checks to see if there is a literal and its negation in that clause, which indicates that the clause can never be true. If this is not the case, then the clause must be satisfiable, and thus the expression is satisfiable. 
 
-The time complexity of this algorithm is $O(mn^2)$, where $m$ is the number of clauses in $\psi$ and $n$ is the number of literals in the boolean expression. The reason for this is that for every clause we traverse over every literal in the clause, and for each element we perform a linear search with $satList$ that can be equal to the number of literals in the clause. Therefore, since the linear search runs in $O(n)$ time, the number of literals in a clause is $O(n)$, and the number of clauses in $\psi$ is $O(m)$, and each of these operations are nested, the resulting time complexity is $O(mn^2)$.
+The time complexity of this algorithm is $O(mn^2)$, where $m$ is the number of clauses in $\psi$ and $n$ is the number of variables in the boolean expression. The reason for this is that for every clause we traverse over every literal in the clause, and for each literal we perform a linear search with $satList$ that can be equal to the number of literals in the clause. Therefore, since the linear search runs in $O(n)$ time, the number of literals in a clause is $O(n)$, and the number of clauses in $\psi$ is $O(m)$, and each of these operations are nested, the resulting time complexity is $O(mn^2)$.
 \end{sol}
 
 \begin{prob}{5 - 34.5-5}
@@ -302,7 +314,7 @@ The knapsack decision problem is $NP$-complete. Does your analysis above prove t
 No, this analysis does not prove that $P = NP$, because the $O(nW)$ time complexity depends on the value of $W$, not the size of $W$. Time complexity measurements consider the size of the input of an algorithm (i.e. the number of bits if the input is a numeric value), and since $W = 2^{\tlg W}$, where $\tlg W$ is the number of bits in $W$, we can see that the resulting time complexity is thus $O(n2^{\tlg W})$ in terms of the size of $W$. This means that this dynamic programming solution is a pseudo-polynomial time algorithm in that it is polynomial with respect to the value of the input, but exponential with respect to the size of the input, and thus is not polynomial in the traditional sense. Therefore, we can see that this does \emph{not} prove that $P = NP$.
 
 \begin{comment}
-time complexity comes from the number of bits that are used to represent $W$, not the value of $W$. As the weight capacity of the knapsack increases the number of individual items that can be stored in $W$ increases by individual items as well, and if we treat $W$ as a binary number then we also say that the number of bits used to store $W$ increases by 1. However, by increasing the number of bits in $W$ in a linear manner, we increase the value of $W$ exponentially. Thus, we can conclude that this dynamic programming problem runs in psuedo-polynomial time, which means that it ultimately runs in exponential time complexity. Therefore, this solution is still in $NP$, so we cannot conclude that $P = NP$.
+time complexity comes from the number of bits that are used to represent $W$, not the value of $W$. As the weight capacity of the knapsack increases the number of individual items that can be stored in $W$ increases by individual items as well, and if we treat $W$ as a binary number then we also say that the number of bits used to store $W$ increases by 1. However, by increasing the number of bits in $W$ in a linear manner, we increase the value of $W$ exponentially. Thus, we can conclude that this dynamic programming problem runs in psuedo-polynomial time, which means that it ultimately has an exponential time complexity. Therefore, this solution is still in $NP$ and upholds the fact that the knapsack decision problem is $NP$-complete, so we cannot conclude that $P = NP$.
 \end{comment}
 \end{sol}
 
