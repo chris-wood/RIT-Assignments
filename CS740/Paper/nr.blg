@@ -9,55 +9,54 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
-Database file #1: test.bib
+Database file #1: nr.bib
 Warning--entry type for "AttacksWavesRandom" isn't style-file defined
---line 15 of file test.bib
-Warning--I didn't find a database entry for "singerdynamic"
-Warning--I didn't find a database entry for "LargeNetworkRobustness-PVM"
-Warning--I didn't find a database entry for "asd"
+--line 31 of file nr.bib
 apacite.bst [2009/03/01 v4.05 APA bibliography style]
 Warning--No journal in RandomStudy
+Warning--No publisher in singerdynamic
+Warning--No address in singerdynamic
 Warning--No publisher in LargeNetworkRobustnessPVM
 Warning--No address in LargeNetworkRobustnessPVM
-You've used 9 entries,
+You've used 10 entries,
             6361 wiz_defined-function locations,
-            1246 strings with 11344 characters,
-and the built_in function-call counts, 17456 in all, are:
-= -- 2175
-> -- 182
-< -- 768
-+ -- 809
-- -- 26
-* -- 1079
-:= -- 3075
-add.period$ -- 38
-call.type$ -- 9
-change.case$ -- 58
+            1251 strings with 11552 characters,
+and the built_in function-call counts, 19369 in all, are:
+= -- 2388
+> -- 210
+< -- 839
++ -- 882
+- -- 28
+* -- 1214
+:= -- 3359
+add.period$ -- 44
+call.type$ -- 10
+change.case$ -- 63
 chr.to.int$ -- 0
-cite$ -- 21
-duplicate$ -- 466
-empty$ -- 678
-format.name$ -- 280
-if$ -- 3349
+cite$ -- 25
+duplicate$ -- 540
+empty$ -- 777
+format.name$ -- 321
+if$ -- 3738
 int.to.chr$ -- 0
-int.to.str$ -- 18
+int.to.str$ -- 20
 missing$ -- 0
-newline$ -- 231
-num.names$ -- 72
-pop$ -- 328
+newline$ -- 260
+num.names$ -- 80
+pop$ -- 379
 preamble$ -- 1
-purify$ -- 47
+purify$ -- 51
 quote$ -- 0
-skip$ -- 1170
+skip$ -- 1274
 stack$ -- 0
-substring$ -- 934
-swap$ -- 259
-text.length$ -- 53
+substring$ -- 1025
+swap$ -- 313
+text.length$ -- 61
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 920
-warning$ -- 3
-while$ -- 107
+type$ -- 1000
+warning$ -- 5
+while$ -- 122
 width$ -- 0
-write$ -- 299
-(There were 7 warnings)
+write$ -- 339
+(There were 6 warnings)

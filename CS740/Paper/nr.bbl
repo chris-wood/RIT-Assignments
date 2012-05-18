@@ -113,25 +113,60 @@ Holme, P.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
-Jenelius%
+Paul%
+, Sreenivasan%
+, Havlin%
+\BCBL{}\ \BBA{} Stanley%
 }{%
-Jenelius%
-}{%
-{\protect\APACyear{2004}}%
+Paul%
+\ \protect\BOthers{.}}{%
+{\protect\APACyear{2006}}%
 }]{%
-GraphThesis}%
+Paul}%
 \APACinsertmetastar{%
-GraphThesis}%
-Jenelius, E.%
+Paul}%
+Paul, G.%
+, Sreenivasan, S.%
+, Havlin, S.%
+\BCBL{}\ \BBA{} Stanley, H\BPBI E.%
 %
 \unskip\
 \newblock
-\APACrefYear{2004}.
+\APACrefYearMonthDay{2006}{}{}.
 \newblock
-\APACrefbtitle{Graph Models of Infrastructures and the Robustness of Power
-  Grids}{Graph models of infrastructures and the robustness of power grids}.
+\BBOQ{}\APACrefatitle{Optimization of network robustness to random
+  breakdowns}{Optimization of network robustness to random breakdowns}.\BBCQ{}
 \newblock
-M. sc. thesis, KTH Royal Institute of Technology.
+\APACjournalVolNumPages{Physica A: Statistical Mechanics and its
+  Applications}{370}{2}{854 - 862}.
+\newblock
+ \begin{APACrefURL}
+  \url{http://www.sciencedirect.com/science/article/pii/S0378437106002457}
+  \end{APACrefURL}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem[\protect\citeauthoryear{%
+Singer%
+}{%
+Singer%
+}{%
+{\protect\APACyear{2006}}%
+}]{%
+singerdynamic}%
+\APACinsertmetastar{%
+singerdynamic}%
+Singer, Y.%
+%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2006}{}{}.
+\newblock
+\BBOQ{}\APACrefatitle{Dynamic measure of network robustness}{Dynamic measure of
+  network robustness}.\BBCQ{}
+\newblock
+\BIn{} \APACrefbtitle{Electrical and Electronics Engineers in Israel, 2006 IEEE
+  24th Convention of}{Electrical and electronics engineers in israel, 2006 ieee
+  24th convention of}\ (\BPGS\ 366--370).
 \PrintBackRefs{\CurrentBib}
 
 \bibitem[\protect\citeauthoryear{%
