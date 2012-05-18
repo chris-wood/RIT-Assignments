@@ -19,7 +19,7 @@
 \cawtitlelong{4040-849 Optimization Methods}{Optimizing Cryptographic Strength of Substitution}{Layers in Symmetric-Key Cryptosystems}
 
 \begin{abstract}
-The cryptographic security of symmetric-key cryptosystems is based upon Shannon's principles of confusion and diffusion \cite{Kim90astudy}. Confusion can be defined as the complexity of the relationship between the secret-key and ciphertext, and diffusion is commonly referred to as the degree to which the influence of a single input plaintext bit is spread throughout the resulting ciphertext. When designing new cryptographic algorithms, it is increasingly important to optimize these characteristics in order to make the algorithms less susceptible to common attacks, such as linear and differential cryptanalysis. Collectively, linear and differential cryptanalysis become less effective as the levels of confusion and diffusion within a symmetric-key encryption algorithm are increased. Therefore, it is a fundamental design goal of such algorithms to incorporate mathematical elements that exhibit high measures of confusion and diffusion. Combinations of linear and nonlinear operations are the most common means by which these characteristics are realized in symmetric-key cryptosystems, with the S(ubstitution)-box being the most popular nonlinear component available to cryptographic designers. Currently, there is a lack of work in the literature that formulates the problem of S-box construction as a constrained optimization problem. Therefore, we address this shortcoming and attempt to state the S-box construction problem as a set of mixed-integer nonlinear programming problems with individual and multiple objective functions that can be solved to yield optimum S-box configurations. 
+The cryptographic security of symmetric-key cryptosystems is based upon Shannon's principles of confusion and diffusion \cite{Kim90astudy}. Confusion can be defined as the complexity of the relationship between the secret-key and ciphertext, and diffusion is commonly referred to as the degree to which the influence of a single input plaintext bit is spread throughout the resulting ciphertext. When designing new cryptographic algorithms, it is increasingly important to optimize these characteristics in order to make the algorithms less susceptible to common attacks, such as linear and differential cryptanalysis. Collectively, linear and differential cryptanalysis become less effective as the levels of confusion and diffusion within a symmetric-key encryption algorithm are increased. Therefore, it is a fundamental design goal of such algorithms to incorporate mathematical elements that exhibit high measures of confusion and diffusion. Combinations of linear and nonlinear operations are the most common means by which these characteristics are realized in symmetric-key cryptosystems, with the S(ubstitution)-box being the most popular nonlinear component available to cryptographic designers. Currently, there is a lack of work in the literature that formulates the problem of S-box construction as a constrained optimization problem. Therefore, we address this shortcoming and attempt to state the S-box construction problem as a set of mixed-integer nonlinear programming (MINLP) problems with individual and multiple objective functions that can be solved to yield optimum S-box configurations. 
 \end{abstract}
 
 \section{Problem Description}
@@ -29,7 +29,7 @@ Linear cryptanalysis is a popular attack technique that attempts to approximate 
 
 Differential cryptanalysis is another powerful attack technique that attempts to break symmetric key ciphers by exploiting high probability of certain occurrences of plaintext differences and ciphertext differences \cite{Heys01atutorial}. By increasing the level of nonlinearity of a cipher, the probability of the occurrences of these differences decreases significantly, thus thwarting attacks that use this information to uncover the secret encryption key. 
 
-Collectively, linear and differential cryptanalysis become less effective as the levels of confusion and diffusion within a symmetric-key cryptosystem are increased. Combinations of linear and nonlinear operations are the most common means by which high measures of confusion and diffusion are realized in symmetric-key cryptosystems, with the S(ubstitution)-box being the most popular nonlinear component utilized by cryptographers. An S-box is a well-defined function that maps elements in the domain $\field{F}_2^n$ to elements in the range $\field{F}_2^n$. With this notion, we consider a configuration of an S-box to be a set of input and output pairs. Furthermore, we denote the canonical form of an S-box configuration as an integer sequence of length $2^n$ ordered by the input elements that contains the output elements in $\field{F}_2^n$.
+Collectively, linear and differential cryptanalysis become less effective as the levels of confusion and diffusion within a symmetric-key cryptosystem are increased. Combinations of linear and nonlinear operations are the most common means by which high measures of confusion and diffusion are realized in symmetric-key cryptosystems, with the S(ubstitution)-box being the most popular nonlinear component utilized by cryptographers. An S-box is a well-defined function that maps elements in the domain $\field{F}_2^n$ to elements in the range $\field{F}_2^n$. With this notion, we consider a configuration of an S-box to be a set of input and output pairs. Furthermore, we denote the canonical form of an S-box configuration as an integer sequence of length $2^n$ ordered by the input elements that contains the output elements in $\field{F}_2^n$. In a way, this configuration can be viewed as the mapping of input elements to output elements.
 
 %CITE
 The mathematical design and cryptographic strength of S-boxes, which are commonly referred to as the substitution layers within symmetric-key cryptosystems (see Figure \ref{sublayer}), have been the focus of extensive research in recent years. However, there is a lack of work in the literature that formulates the problem of S-box construction as a constrained optimization problem. Therefore, we address this shortcoming and attempt to state the S-box construction problem as a set of mixed-integer nonlinear programming problems with individual and multiple objective functions that can be solved to yield optimum S-box configurations. The rest of this report is dedicated to the discussion of this effort.
@@ -38,7 +38,7 @@ The mathematical design and cryptographic strength of S-boxes, which are commonl
 \centering
 	\includegraphics[scale=0.75]{images/sub_layer.jpg} 
 	\label{sublayer}
-	\caption{The S-box as a substitution layer within a symmetric-key cryptosystem.}
+	\caption{The S-box as a substitution layer within a symmetric-key encryption algorithm, which is a type of cryptosystem.}
 \end{figure}
 
 \subsection{Cryptographic Strength of Substitution Layers}
@@ -112,7 +112,7 @@ The most effective way to find optimal S-box configurations is to perform an exh
 \end{figure}
 Exhaustive searches over the entire S-box permutation design space have a time complexity of $O(n^n)$ and thus are only feasible for very small order S-boxes. However, recent research efforts have advanced the upper bound on these exhaustive searches to include $4$-bit S-boxes, which were run in \cite{Sbox4x4}. Unfortunately, measurements for the branch number, avalanche number, and nonlinearity degree were not provided. 
 
-As an alternative to performing these brute force searches, we consider the problem of optimizing the branch number, avalanche number, and degree of nonlinearity of symmetric-key cryptographic algorithm as MINLP problems, which can be formulated as shown in Figure \ref{problems}.
+As an alternative to performing these brute force searches, we consider the problem of optimizing the branch number, avalanche number, and degree of nonlinearity of symmetric-key cryptographic algorithm as MINLP problems, which can be formulated as shown in Figure \ref{problems}. It is important to note that the design variables for these problems correspond to the S-box configuration (i.e. the mapping of the function).
 
 \begin{figure}[!ht]
 
@@ -143,7 +143,7 @@ A_N'(X) = -A_N(X) = -\sum_{i = 0}^{n - 1}\sum_{x \in \field{F}_2^n} \text{wt}(f(
 subject to the constraints
 \begin{eqnarray*}
 0 \leq X(i) & \leq & 2^{n} - 1 \\
-\text{min}_{i, j\not=i}(\text{wt}(i \oplus j) + \text{wt}(X(i) \oplus X(j))) - n2^{n-1} & \leq & 0
+\sum_{i = 0}^{n - 1}\sum_{x \in \field{F}_2^n} \text{wt}(f(x) \oplus f(x \oplus 2^{i})) - n^22^{n-1} & \leq & 0
 \end{eqnarray*}
 where $n$ is the number of bits needed to represent the design variables. 
 }}
@@ -168,23 +168,25 @@ where $n$ is the number of bits needed to represent the design variables.
 \label{problems}
 \end{figure}
 
-\section{Candidate Optimization Algorithms}
+\section{Candidate MINLP Optimization Algorithms}
 %1. GA description - TODO: write up some characteristics of this algorithm
 %2. BB description - TODO: write up some characteristics of this algorithm
 
 Analyzing the function values for the branch number, avalanche number, and degree of nonlinearity over the S-box permutation design space indicates that each function is highly unstable and discontinuous. Therefore, traditional optimization methods that rely on the continuity of the functions are not likely to be very effective when solving these optimization problems. This section discusses some potential optimization algorithm candidates and describes why a genetic algorithm was chosen as the desired solution approach.
 
-\subsection{Traditional MINLP Optimization Algorithms}
+\subsection{Traditional Optimization Algorithms}
 %4. discuss why BB algorithm didn't work (converged too early and didn't exhaust, too many local minimums for every objective function, GA was good because it generated populations and did psuedo brute force thing)
 
 The \emph{Branch and Bound} algorithm is a very common optimization algorithm that is used to solve MINLP problems. In essence, it enumerates all candidate solutions for a given objective function and then uses the constraints to discard large portions of this collection at each iteration. However, this method is not suitable in the context of this problem for a variety of reasons. Firstly, the branch and bound approach is greedy in that it selects the appropriate decision branch to take to proceed towards the optimal value based on the current configuration. While this leads the algorithm towards an optimum value, it is usually a locally optimal solution. Furthermore, there is no penalty applied to the decision process that enables the design variables to change. Secondly, as shown in Figure \ref{bfjoint}, there are many locally optimum values for each objective function even with small order S-boxes. The usefulness of the BNB algorithm will surely degrade as larger order S-boxes are considered, because the number of intermediate local optimum values will increase significantly as well. This would cause the algorithm to converge to an optimal value too quickly and terminate with very few iterations. 
 
 \subsection{Evolutionary Optimization Algorithms}
 
-Given the instability of each of these functions over the permutation design variable space, it is natural to solve these MINLP problem using a probabilistic optimization algorithm. For the purposes of this project, the main results were derived using a highly probabilistic genetic algorithm that attempts to explore the configuration permutation space as much as possible in search for the global optimum values. Genetic algorithms are commonly utilized in the context of cryptography to explore the design space for cryptographic functions. They serve as an intelligence optimization method that can ease the computational efforts of performing brute force searches among the design space, which is crucial for functions with larger domains \cite{Skein}.
+Given the instability of each of these functions over the permutation design variable space, it is natural to solve these MINLP problem using a probabilistic optimization algorithm. For the purposes of this project, the main results were derived using a highly probabilistic genetic algorithm that attempts to explore the configuration permutation space as much as possible in search for the global optimum values. Genetic algorithms are commonly utilized in the context of cryptography to explore the design space for cryptographic functions. This is primarily because they serve as an intelligent optimization method that can ease the computational efforts of performing brute force searches among the design space, which is crucial for functions with larger domains \cite{Skein}.
+
+In this project, the genetic algorithm was configured in a very particular way to yield the optimal S-box configurations. Specifically, each objective function was set to the solver fitness function. In addition, the population generation and mutation steps in the algorithm were randomized so as to avoid early convergence to local optimal solutions for each fitness function. Also, the crossover function was entirely removed from the solver, which meant that the only design variable change came from the mutation function. This was done so as to place more control over the population generation. 
 
 \begin{comment}
-Since each of the aforementioned objective functions exhibit the same unstable behavior, it is possible to apply the same genetic algorithm structure to solve each one of these. In particular, the genetic algorithm configuration for each of these problems used the following parameters.
+Since each of the aforementioned objective functions exhibit the same instable behavior, it is possible to apply the same genetic algorithm structure to solve each one of these. In particular, the genetic algorithm configuration for each of these problems used the following parameters.
 
 \begin{table}
 	\centering
@@ -210,7 +212,7 @@ Since each of the aforementioned objective functions exhibit the same unstable b
 %3. discuss usefulness of GA
 %4. discuss why BB algorithm didn't work (converged too early and didn't exhaust, too many local minimums for every objective function, GA was good because it generated populations and did psuedo brute force thing)
 
-We now present the optimization results for the three objective functions listed in the Section 2 for $3$- and $4$-bit S-box configurations. Each objective function is first optimized individually and then they are joined together as a multi-objective MINLP problem. 
+We now present the optimization results from the genetic algorithm solver for the three objective functions listed in the Section 2 for $3$- and $4$-bit S-box configurations. Each objective function is first optimized individually and then they are joined together as a multi-objective MINLP problem. 
 
 Also, since the genetic algorithm sovler is a probabilistic algorithm that randomizes the population at each generation, it is important to note that each algorithm was run many times to obtain the optimal results. Due to the highly unstable objective functions, it is not enough to run the algorithm once and conclude that the results are optimum. 
 
@@ -218,7 +220,7 @@ Also, since the genetic algorithm sovler is a probabilistic algorithm that rando
 
 From Section \ref{strength} we know that the optimal value for the avalanche number of an $n$-bit S-box is $n^22^{n-1}$. Therefore, for $3$- and $4$-bit S-boxes, we conclude that the optimal values are $3^2(2^2) = 9(4) = 36$ and $4^2(2^3) = 16(8) = 128$, respectively, since we are concerned with the avalanche effect over every single bit. Now, we compare these optimal values against those obtained from the optimization algorithm. Table \ref{avTable} contains the optimal results for a $3$-bit S-box configuration that were collected over a variety of optimization runs, and Figure \ref{av16} contains a diagram of the best iteration pattern of the algorithm for a higher order $4$-bit S-box configuration. 
 
-Based on these results we can see that the genetic algorithm was able to reach an optimal value of $30$ for the $3$-bit S-box, which is approximately $16\%$ away from the global optimal value of $36$. Similarly, the genetic algorithm was able to reach an optimal value of $96$, which is approximately $25\%$ away fro the global optimal. 
+Based on these results we can see that the genetic algorithm was able to reach an optimal value of $30$ for the $3$-bit S-box, which is approximately $16\%$ away from the global optimal value of $36$. Similarly, the genetic algorithm was able to reach an optimal value of $96$, which is approximately $25\%$ away from the global optimal. We also note that these results were achieved with relatively high coverage of the configuration space (as indicated by Figure \ref{av16}).
 
 Clearly, we see that the accuracy of the genetic algorithm decreases as the order of the S-box gets higher. This is most likely due to the fact that the function for the avalanche number is very unstable and contains many local optimal values, and even with a probabilistic population generation procedure it is difficult to explore beyond one of these local optimal values. However, given the time complexity difference between the exhaustive search and the genetic algorithm solver, this may be a reasonable compromise in terms of security if a better configuration cannot be found manually. 
 
@@ -269,7 +271,7 @@ It has been proven that the maximum branch number for an $n$-bit S-box is equal 
     \end{tabular}
 \end{table}
 
-Extending the order of the S-box to $4$ bits made the solver even less effective at finding the optimal value of $4$. As shown in Figure \ref{bn16}, although each generation covered a large area of the state space (as indicated by the average bit-wise distance between parents and children), the optimal value still converged to the local optimum of $2$ even after $500$ generations. In fact, there was no execution of the solver that yielded a higher value for the branch number. 
+Extending the order of the S-box to $4$ bits made the solver even less effective at finding the optimal value of $4$. As shown in Figure \ref{bn16}, although each generation covered a large area of the state space (as indicated by the average bit-wise distance between parents and children), the solution still converged to the local optimum of $2$ even after $500$ generations. In fact, there was no execution of the solver that yielded a higher value for the branch number, even with the high configuration space coverage (as indicated by the large variation in the average distance scatter plot).
 
 This is an obvious result due to the instability of the branch number function over the configuration permutation state space. Since there are so many local optimal values for the function that increases with the order of the S-box, the solver simply converges to the nearest optimal and then orbits around that value for each of the following generations. Based on these results we conclude that the usage of a genetic algorithm is not particularly helpful when optimizing the branch number of S-boxes.
 
@@ -277,7 +279,7 @@ This is an obvious result due to the instability of the branch number function o
 	\centering
 	\includegraphics[scale=0.5]{images/bn_results16.eps} 
 
-\caption{A single evolution of the optimal solution to the branch number of a $4$-bit S-box configuration with a maximum of $500$ generations.}
+\caption{A single evolution of the solution to the branch number of a $4$-bit S-box configuration with a maximum of $500$ generations, which covered a large amount of the configuration space.}
 	\label{bn16}
 \end{figure}
 
@@ -310,7 +312,7 @@ Extending the order of the S-box to 16 elements and running the same test yielde
 \end{figure}
 
 \subsection{Multi-Objective Optimization}
-Separately, the branch number, avalanche number, and degree of nonlinearity all contribute to the overall levels of confusion and diffusion of a symmetric-key cryptosystem. However, it is not enough to consider these problems separately because they are very likely to have functions that create a great deal of destructive interference when superimposed on top of one another. Therefore, it is ideal to find a shared solution S-box configuration that satisfies all three objective functions simultaneously. The most common way to solve this problem is to formulate the optimization problem as a linear combination of all three objective functions. The benefit of this approach is that we can prioritize the influence that each objective function has on the overall solution by assigning weights to each value in this linear combination. Such a linear combination is defined as $f(X) = w_1A_N'(X) + w_2B_N'(X) + w_3P_S(X)$, where $w_1, w_2$, and $w_3$ are not design variables. 
+Separately, the branch number, avalanche number, and degree of nonlinearity all contribute to the overall levels of confusion and diffusion of a symmetric-key cryptosystem. However, it is not enough to consider these problems separately because an optimal configuration for one measurement might not align with the optimal measurement for another. Therefore, it is ideal to find a shared solution S-box configuration that satisfies all three objective functions simultaneously. The most common way to solve this problem is to formulate the optimization problem as a linear combination of all three objective functions. The benefit of this approach is that we can prioritize the influence that each objective function has on the overall solution by assigning weights to each value in this linear combination. Such a linear combination is defined as $f(X) = w_1A_N'(X) + w_2B_N'(X) + w_3P_S(X)$, where $w_1, w_2$, and $w_3$ are not design variables. 
 
 \begin{comment}
 \begin{figure}[!ht]
@@ -350,14 +352,14 @@ Since the weighted priorities of each objective function in this linear combinat
     \end{tabular}
 \end{table}
 
-Based on these results, it is clear that each of the objective functions in this linear combination do interact destructively when combined to form the overall objective. This claim is supported by Figure \ref{bfjoint}. The immediate implication of this is that any change in the population is likely to improve one objective function at the expense of degrading another. As the simulation in Figure \ref{joint16} indicates, even with large significant changes in the children after every generation of the genetic algorithm, the joint objective function tends to stay at the same optimal value because of the degrading penalty suffered by such changes. Therefore, we conclude that the genetic algorithm is not an effective technique for exploring the configuration permutation space and trying to optimize all three objective functions together at once. 
+Based on these results, it is clear that each of the objective functions in this linear combination do in fact interact destructively when combined to form the overall objective function. This claim is supported by Figure \ref{bfjoint}. The immediate implication of this is that any change in the population is likely to improve one objective function at the expense of degrading another. As the simulation in Figure \ref{joint16} indicates, even with large significant changes in the children after every generation of the genetic algorithm, the joint objective function tends to stay at the same optimal value because of the degrading penalty suffered by such changes. Therefore, we conclude that the genetic algorithm is not an effective technique for exploring the configuration permutation space and trying to optimize all three objective functions together at once. 
 
 %\begin{comment}
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[scale=0.5]{images/joint_results16.eps} 
 	\label{joint16}
-\caption{Weights: $1, 2^8, 2^8$}
+\caption{A single evolution of the optimal solution to the joint objective fucntion of a $3$-bit S-box configuration with a maximum of $500$ generations, where the weights are $1$, $2^8$, and $2^8$, respectively.}
 	\label{joint16}
 \end{figure}
 %\end{comment}
@@ -371,11 +373,11 @@ Based on these results, it is clear that each of the objective functions in this
 %TODO: joint computations using GA were ineffective, exhaustive searches would be better, contradicting functions caused too great penalties and little change in design variabes
 %TODO:  GA work - tweak crossover and mutation functions, run on large scale hardware/software systems
 
-Based on the results from the individual optimization problems and combination problem, we can conclude that the use of genetic algorithms (or any evolutionary algorithm) have very limited or specialized use in the context of cryptography. Most cryptographic functions (and even measurements of those functions) are truly random as across the function domain, and this seemingly random behavior leads to discontinuous and unstable functions with many local optimal solutions. While this rules our traditional optimization algorithms that rely on the smoothness of functions almost immediately, it still leaves some room for probabilistic evolutionary algorithms. 
+Based on the results from the individual optimization problems and combination problem, we can conclude that the use of genetic algorithms (or any evolutionary algorithm) have very limited or specialized use in the context of cryptography. Most cryptographic functions (and even measurements of those functions) are truly random across the function domain, and this seemingly random behavior leads to discontinuous and instable functions with many local optimal solutions. While this rules our traditional optimization algorithms that rely on the smoothness of functions almost immediately, it still leaves some room for probabilistic evolutionary algorithms. 
 
-However, as was shown, the application of such evolutionary algorithms is only moderately useful when optimizing a single dimension (or measurement) of cryptographic algorithms; it is not effective when optimizing multiple dimensions at once. The reason for this is that when superimposing each of these functions on top of one another, we are left with a great deal of destructive interference. That is, the global optimal values rarely align for multiple measurement functions for cryptographic algorithms. 
+However, as was shown, the application of such evolutionary algorithms is only moderately useful when optimizing a single dimension (or measurement) of cryptographic algorithms; it is not effective when optimizing multiple dimensions at once. The reason for this is that when superimposing each of these functions on top of one another we are left with a great deal of destructive interference. That is, improvements in one objective function are very likely to degrade the value of another objective function.
 
-Since cryptographers seek to optimize multiple dimensions at once, the application of such optimization algorithms is likely yield little or no significant benefits to the designers. This conclusion supports the lack of research done in this problem in the field of cryptography. However, that is not to say that the application of all evolutionary algorithms should be ruled out altogether. Perhaps as researchers further refine the security measurements for symmetric-key cryptographic algorithms we may be able to define a multi-objective MINLP that can be optimized to find an optimal configuration for S-boxes. However, until that time, we are left with intuitive and mathematical derivations for S-box configurations.
+Since cryptographers seek to optimize multiple dimensions at once, the application of such optimization algorithms is likely yield little or no significant benefits. This conclusion supports the lack of research done in this problem in the field of cryptography. However, that is not to say that the application of all evolutionary algorithms should be ruled out altogether. Perhaps as researchers further refine the security measurements for symmetric-key cryptosystems we may be able to define a multi-objective MINLP that can be optimized to find an optimal configuration for S-boxes. However, until that time, we are left with intuition and mathematical derivations for optimal S-box configurations.
 
 \bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)

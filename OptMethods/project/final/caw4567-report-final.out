@@ -1,8 +1,8 @@
 \BOOKMARK [1][-]{section.1}{Problem Description}{}% 1
 \BOOKMARK [2][-]{subsection.1.1}{Cryptographic Strength of Substitution Layers}{section.1}% 2
 \BOOKMARK [1][-]{section.2}{Optimization Problem Formulation}{}% 3
-\BOOKMARK [1][-]{section.3}{Candidate Optimization Algorithms}{}% 4
-\BOOKMARK [2][-]{subsection.3.1}{Traditional MINLP Optimization Algorithms}{section.3}% 5
+\BOOKMARK [1][-]{section.3}{Candidate MINLP Optimization Algorithms}{}% 4
+\BOOKMARK [2][-]{subsection.3.1}{Traditional Optimization Algorithms}{section.3}% 5
 \BOOKMARK [2][-]{subsection.3.2}{Evolutionary Optimization Algorithms}{section.3}% 6
 \BOOKMARK [1][-]{section.4}{Genetic Algorithm Optimization Results}{}% 7
 \BOOKMARK [2][-]{subsection.4.1}{Avalanche Number}{section.4}% 8

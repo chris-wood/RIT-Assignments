@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  16 MAY 2012 16:26
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  18 MAY 2012 00:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -262,25 +262,21 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 Document Style - pseudocode environments for use with the `algorithmicx' style
 )
 \c@numberedAlg=\count114
- (./nr.aux
-
-LaTeX Warning: Label `fig:Onion' multiply defined.
-
-)
+ (./nr.aux)
 \openout1 = `nr.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
  (/usr/local/texlive/2011/texmf-dist/tex/latex/apa/english.apa
 File: english.apa 2006/01/01
 )
@@ -350,12 +346,12 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 73.
+LaTeX Font Info:    Try loading font information for U+msa on input line 72.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 73.
+LaTeX Font Info:    Try loading font information for U+msb on input line 72.
 
 (/usr/local/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -381,93 +377,71 @@ Underfull \hbox (badness 10000) in paragraph at lines 101--103
 
  []
 
-[2] [3]
+[2] [3] [4] [5]
 
-LaTeX Warning: Reference `Definitions' on page 4 undefined on input line 146.
-
-
-Underfull \vbox (badness 2680) has occurred while \output is active []
-
- [4]
-[5]
-
-LaTeX Warning: Citation `singerdynamic' undefined on input line 209.
+LaTeX Warning: Citation `singerdynamic' undefined on input line 203.
 
 
 LaTeX Warning: Citation `LargeNetworkRobustness-PVM' undefined on input line 22
-7.
+6.
 
-[6]
+[6] [7]
 
-LaTeX Warning: Reference `RandomResults' on page 7 undefined on input line 253.
+LaTeX Warning: Citation `asd' undefined on input line 277.
 
-
-<random_results.png, id=36, 591.20876pt x 532.99126pt>
-File: random_results.png Graphic file (type png)
-
-<use random_results.png>
-Package pdftex.def Info: random_results.png used on input line 258.
-(pdftex.def)             Requested size: 216.81pt x 195.45512pt.
- [7]
-
-LaTeX Warning: Citation `asd' undefined on input line 267.
-
-<fractional_results.png, id=42, 507.8975pt x 754.82pt>
+<fractional_results.png, id=40, 507.8975pt x 754.82pt>
 File: fractional_results.png Graphic file (type png)
 
 <use fractional_results.png>
-Package pdftex.def Info: fractional_results.png used on input line 285.
+Package pdftex.def Info: fractional_results.png used on input line 283.
 (pdftex.def)             Requested size: 216.81pt x 322.21669pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8 <./random_results.png>] <Onion.jpg, id=47, 452.69125pt x 441.65pt>
+<Onion.jpg, id=42, 452.69125pt x 441.65pt>
 File: Onion.jpg Graphic file (type jpg)
-
-<use Onion.jpg>
-Package pdftex.def Info: Onion.jpg used on input line 300.
+ <use Onion.jpg>
+Package pdftex.def Info: Onion.jpg used on input line 298.
 (pdftex.def)             Requested size: 216.81pt x 211.51785pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9 <./fractional_results.png>] (./nr.bbl [10 <./Onion.jpg>]) [11] (./nr.aux)
+[8] (./nr.bbl [9 <./fractional_results.png>]) [10 <./Onion.jpg>] (./nr.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 4213 strings out of 493633
- 55075 string characters out of 3143378
- 123453 words of memory out of 3000000
- 7410 multiletter control sequences out of 15000+200000
+ 4205 strings out of 493633
+ 54927 string characters out of 3143378
+ 124426 words of memory out of 3000000
+ 7403 multiletter control sequences out of 15000+200000
  17975 words of font info for 66 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 38i,8n,24p,941b,301s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,8n,24p,941b,297s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
 /usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></u
-sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
-/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
-al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local
-/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
-xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
-ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texliv
-e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
-/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2
-011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/20
-11/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/201
-1/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on nr.pdf (11 pages, 443022 bytes).
+sr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
+/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
+ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
+al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
+/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/t
+exlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texl
+ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
+/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/
+2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2
+011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/201
+1/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2011/
+texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on nr.pdf (10 pages, 412643 bytes).
 PDF statistics:
- 110 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
+ 109 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
