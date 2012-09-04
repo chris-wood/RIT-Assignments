@@ -19,7 +19,7 @@ public class Birch {
 	
 	// The supported commands by this Birch interpreter.
 	public static enum BirchCommand {
-		ADD, SUB, MUL, DIV, REM, EQ, GT, LT, IFZ, DUP, POP, SWAP, INVALID
+		ADD, SUB, MUL, DIV, REM, EQ, GT, LT, IFZ, DUP, POP, SWAP, REV, INVALID
 	}
 
 	/**
@@ -43,6 +43,7 @@ public class Birch {
 		commandMap.put("dup", BirchCommand.DUP);
 		commandMap.put("pop", BirchCommand.POP);
 		commandMap.put("swap", BirchCommand.SWAP);
+		commandMap.put("rev", BirchCommand.REV);
 	}
 
 	/**

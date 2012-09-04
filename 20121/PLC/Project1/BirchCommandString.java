@@ -2,7 +2,9 @@ import java.math.BigInteger;
 
 /**
  * A wrapper class for command sequences that are treated as data stack elements
- * used in Birch programs.
+ * used in Birch programs. The behavior for each command sequence is encapsulated here
+ * so as to separate it from the main interpreter. This promotes separation of concerns
+ * and allows one to easily add new commands and define their behavior.
  * 
  * @author Christopher Wood, caw4567@rit.edu
  */
@@ -55,8 +57,10 @@ public class BirchCommandString implements BirchElement {
 			handleLogic(Birch.BirchCommand.LT);
 			break;
 		case IFZ:
+			handleIfz();
 			break;
 		case DUP:
+			handleDup();
 			break;
 		case POP:
 			birch.stackPop();
@@ -64,17 +68,55 @@ public class BirchCommandString implements BirchElement {
 		case SWAP:
 			handleSwap();
 			break;
+		case REV:
+			birch.reverseStack();
+			break;
 		}
 		
 		return null;
 	}
 	
-	private void handleIfz() {
-		
+	/**
+	 * Handle the 'ifz' command.
+	 * 
+	 * @throws Exception - whenever a runtime processing exception occurs.
+	 */
+	private void handleIfz() throws Exception {
+		if (validBirchStackSize(3))
+		{
+			BigInteger topInteger = birch.stackPop().evaluate();
+			BirchElement element2 = birch.stackPop();
+			BirchElement element3 = birch.stackPop();
+			
+			if ((topInteger != null) && (topInteger.equals(BigInteger.ZERO))) {
+				birch.stackPush(element2);
+			} else {
+				birch.stackPush(element3);
+			}
+		} else {
+			throw new Exception("error");
+		}
 	}
 	
-	private void handleDup() {
-		
+	/**
+	 * Handle the 'dup' command.
+	 * 
+	 * @throws Exception - whenever a runtime processing exception occurs.
+	 */
+	private void handleDup() throws Exception {
+		if (validBirchStackSize(1))
+		{
+			BigInteger topInteger = birch.stackPop().evaluate();
+			if (topInteger != null) {
+				BigInteger copyInteger = new BigInteger(topInteger.toString());
+				birch.stackPush(new BirchInteger(topInteger));
+				birch.stackPush(new BirchInteger(copyInteger));
+			} else {
+				throw new Exception("error");
+			}
+		} else {
+			throw new Exception("error");
+		}
 	}
 	
 	/**
@@ -113,23 +155,23 @@ public class BirchCommandString implements BirchElement {
 				switch (cmd) {
 				case EQ:
 					if (op1.equals(op2)) {
-						result = BigInteger.valueOf(1);
+						result = BigInteger.ONE;
 					} else {
-						result = BigInteger.valueOf(0);
+						result = BigInteger.ZERO;
 					}
 					break;
 				case GT:
 					if (op1.longValue() > op2.longValue()) {
-						result = BigInteger.valueOf(1);
+						result = BigInteger.ONE;
 					} else {
-						result = BigInteger.valueOf(0);
+						result = BigInteger.ZERO;
 					}
 					break;
 				case LT:
 					if (op1.longValue() < op2.longValue()) {
-						result = BigInteger.valueOf(1);
+						result = BigInteger.ONE;
 					} else {
-						result = BigInteger.valueOf(0);
+						result = BigInteger.ZERO;
 					}
 					break;
 				}
