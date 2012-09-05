@@ -1,0 +1,8 @@
+15
+rev
+27 pack  1 pack pop  16 pack 0 dup 0 dup -2 dup exec 1 swap sub -3 dup exec -2 dup exec  2 dup 0 eq ifz exec
+5 pack  -1 dup exec 10 putc
+19 pack  1 pack pop  8 pack 42 putc 1 swap sub -1 dup exec  2 dup 0 eq ifz exec
+rev
+0 dup
+-3 dup exec

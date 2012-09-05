@@ -1,0 +1,1 @@
+7 0 dup 0 gt 2 pack 0 sub swap 0 pack swap ifz exec

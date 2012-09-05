@@ -1,0 +1,1 @@
+6 5 4 3 swap lt 1 pack add swap 1 pack mul swap ifz exec

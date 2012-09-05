@@ -1,0 +1,12 @@
+11
+rev
+23 pack 0 dup 1 lt
+        9 pack 0 dup 1 swap sub -1 dup exec mul
+        swap
+        2 pack pop 1
+        swap
+        ifz
+        exec
+rev
+-1 dup
+exec

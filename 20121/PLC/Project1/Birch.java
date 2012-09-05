@@ -88,10 +88,6 @@ public class Birch {
 			BirchElement element = commandSequence.get(0);
 			commandSequence.remove(0);
 			handleElement(element);
-			
-			System.out.println("---");
-			System.out.println("stack: " + stack);
-			System.out.println("sequence: " + commandSequence);
 		}
 
 		// Fetch the result from the stack
@@ -112,10 +108,10 @@ public class Birch {
 		Scanner stringScanner = new Scanner(sequenceString);
 		while (stringScanner.hasNext()) {
 			if (stringScanner.hasNextBigInteger()) {
-				commandSequence.add(new BirchInteger(stringScanner.next()));
+				commandSequence.add(0, new BirchInteger(stringScanner.next()));
 			} else {
 				String element = stringScanner.next();
-				commandSequence.add(new BirchCommandString(this, element, commandMap.get(element)));
+				commandSequence.add(0, new BirchCommandString(this, element, commandMap.get(element)));
 			} 
 		}
 	}
@@ -138,6 +134,25 @@ public class Birch {
 	}
 	
 	/**
+	 * Retrieve the nth element from the top of the stack (handling negatives).
+	 * 
+	 * @param n - the stack position from the top.
+	 * @return the nth element to retrieve from the top of the stack.
+	 */
+	public BirchElement stackGet(int n) {
+		BirchElement nthElement = null;
+		
+		if (n < 0 && Math.abs(n) <= stack.size()) {
+			n += stack.size();
+			nthElement = stack.get(n);
+		} else if (n >= 0 && n < stack.size()) {
+			nthElement = stack.get(n);
+		}
+		
+		return nthElement;
+	}
+	
+	/**
 	 * Push a new element onto the data stack.
 	 * 
 	 * @param element - the element to push.
@@ -151,8 +166,11 @@ public class Birch {
 	 * @return - the old top element on the stack.
 	 */
 	public BirchElement stackPop() {
-		BirchElement topElement = stack.get(0);
-		stack.remove(0);
+		BirchElement topElement = null;
+		if (!stack.isEmpty()) {
+			topElement = stack.get(0);
+			stack.remove(0);
+		}
 		return topElement;
 	}
 	

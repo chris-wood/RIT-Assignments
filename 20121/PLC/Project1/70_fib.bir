@@ -1,0 +1,25 @@
+27 
+rev
+30 pack 0 dup
+        1 lt
+        16 pack 0 dup
+                1
+                swap
+                sub
+                -1 dup
+                exec
+                swap
+                2
+                swap
+                sub
+                -1 dup
+                exec
+                add
+        swap
+        2 pack pop 1
+        swap
+        ifz
+        exec
+rev
+-1 dup
+exec

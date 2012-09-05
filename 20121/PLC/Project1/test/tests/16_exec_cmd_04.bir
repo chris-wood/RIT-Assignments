@@ -1,0 +1,1 @@
+2 -10 3 pack mul swap sub 3 pack 0 dup mul 3 dup swap exec swap exec

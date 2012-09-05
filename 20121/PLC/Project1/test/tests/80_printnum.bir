@@ -1,0 +1,7 @@
+-1073741824
+rev
+25 pack  0 pack  11 pack 0 dup 10 swap div -2 dup exec 10 swap rem  2 dup 10 swap lt ifz exec 48 add putc
+20 pack  4 pack 45 putc 0 sub  0 pack  2 dup 0 swap lt ifz exec -2 dup exec 10 putc
+rev
+0 dup
+-1 dup exec
