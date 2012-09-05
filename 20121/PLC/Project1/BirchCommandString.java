@@ -1,4 +1,6 @@
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A wrapper class for command sequences that are treated as data stack elements
@@ -12,6 +14,10 @@ public class BirchCommandString implements BirchElement {
 	private String stringForm; 
 	private Birch.BirchCommand birchCommand;
 	private Birch birch;
+	
+	// Constants for the putc command range
+	private final int MIN_PRINT = 0;
+	private final int MAX_PRINT = 250;
 
 	/**
 	 * Constructor to initialize the underlying list for the command sequence.
@@ -30,7 +36,6 @@ public class BirchCommandString implements BirchElement {
 	 */
 	@Override
 	public BigInteger evaluate() throws Exception {
-		
 		switch (birchCommand) {
 		case ADD:
 			handleMath(Birch.BirchCommand.ADD);
@@ -71,9 +76,100 @@ public class BirchCommandString implements BirchElement {
 		case REV:
 			birch.reverseStack();
 			break;
+		case PACK:
+			handlePack();
+			break;
+		case EXEC:
+			handleExec();
+			break;
+		case PUTC:
+			handlePutc();
+			break;
 		}
 		
+		// null indicates this is not a BirchInteger object being evaluated.
 		return null;
+	}
+	
+	/**
+	 * Determine the birch command type for special case operations (such as exec).
+	 * 
+	 * @return - the command string's underlying birch command ID.
+	 */
+	public Birch.BirchCommand getCommand() {
+		return birchCommand;
+	}
+	
+	/**
+	 * Handle the 'exec' command.
+	 * 
+	 * @throws Exception - whenever a runtime processing exception occurs.
+	 */
+	private void handleExec() throws Exception {
+		if (validBirchStackSize(1)) {
+			BirchElement topElement = birch.stackPop();
+			if (topElement instanceof BirchCommandString) {
+				// Determine if the top element is now a command sequence string
+				BirchCommandString commandString = (BirchCommandString)topElement;
+				if (commandString.getCommand() == Birch.BirchCommand.PACK) {
+					birch.sequencePush(commandString.toString());
+				} else {
+					errorException();
+				}
+			} else {
+				errorException();
+			}
+		} else {
+			errorException();
+		}
+	}
+	
+	/**
+	 * Handle the 'pack' command.
+	 * 
+	 * @throws Exception - whenever a runtime processing exception occurs.
+	 */
+	private void handlePack() throws Exception {
+		if (validBirchStackSize(1)) {
+			BigInteger topInteger = birch.stackPop().evaluate();
+			if (topInteger != null && validBirchSequenceSize(topInteger.intValue())) {
+				// Form the sub-command sequence
+				List<String> sequence = new ArrayList<String>();
+				for (int i = 0; i < topInteger.intValue(); i++) {
+					sequence.add(0, birch.sequencePop().toString());
+				}
+				StringBuilder builder = new StringBuilder();
+				for (int i = sequence.size() - 1; i >= 0; i--) {
+					builder.append(sequence.get(i) + " ");
+				}
+				
+				// Push it onto the data stack as a single element
+				BirchCommandString commandString = new BirchCommandString(birch, builder.toString(), Birch.BirchCommand.PACK);
+				birch.stackPush(commandString);
+			} else {
+				errorException();
+			}
+		} else {
+			errorException();
+		}
+	}
+	
+	/**
+	 * Handle the 'putc' command.
+	 * 
+	 * @throws Exception - whenever a runtime processing exception occurs.
+	 */
+	private void handlePutc() throws Exception {
+		if (validBirchStackSize(1)) {
+			BigInteger topInteger = birch.stackPop().evaluate();
+			if (topInteger != null && this.validPrintInteger(topInteger)) {
+				System.out.print((char)topInteger.intValue());
+			} else {
+				errorException();
+			}
+		} else {
+			errorException();
+		}
 	}
 	
 	/**
@@ -94,7 +190,7 @@ public class BirchCommandString implements BirchElement {
 				birch.stackPush(element3);
 			}
 		} else {
-			throw new Exception("error");
+			errorException();
 		}
 	}
 	
@@ -108,14 +204,15 @@ public class BirchCommandString implements BirchElement {
 		{
 			BigInteger topInteger = birch.stackPop().evaluate();
 			if (topInteger != null) {
+				// TODO: fix this method...
 				BigInteger copyInteger = new BigInteger(topInteger.toString());
 				birch.stackPush(new BirchInteger(topInteger));
 				birch.stackPush(new BirchInteger(copyInteger));
 			} else {
-				throw new Exception("error");
+				errorException();
 			}
 		} else {
-			throw new Exception("error");
+			errorException();
 		}
 	}
 	
@@ -132,7 +229,7 @@ public class BirchCommandString implements BirchElement {
 			birch.stackPush(element1);
 			birch.stackPush(element2);
 		} else {
-			throw new Exception("error");
+			errorException();
 		}
 	}
 	
@@ -178,10 +275,10 @@ public class BirchCommandString implements BirchElement {
 				
 				birch.stackPush(new BirchInteger(result));
 			} else {
-				throw new Exception("error");
+				errorException();
 			}
 		} else {
-			throw new Exception("error");
+			errorException();
 		}
 	}
 	
@@ -200,7 +297,7 @@ public class BirchCommandString implements BirchElement {
 			// Special case the division and remainder operations
 			if ((cmd == Birch.BirchCommand.DIV || cmd == Birch.BirchCommand.REM) && 
 					(op2.intValue() == 0)) {
-				throw new Exception("error");
+				errorException();
 			}
 			else if (op1 != null && op2 != null) {
 				BigInteger result = null;
@@ -225,10 +322,10 @@ public class BirchCommandString implements BirchElement {
 				
 				birch.stackPush(new BirchInteger(result));
 			} else {
-				throw new Exception("error");
+				errorException();
 			}
 		} else {
-			throw new Exception("error");
+			errorException();
 		}
 	}
 	
@@ -237,10 +334,40 @@ public class BirchCommandString implements BirchElement {
 	 * trying to process a command.
 	 * 
 	 * @param n - the number of elements needed on the stack
-	 * @return
+	 * @return true if the stack has at least n elements
 	 */
 	private boolean validBirchStackSize(int n) {
 		return birch.stackSize() >= n;
+	}
+	
+	/**
+	 * Helper method to verify the size of the birch sequence before
+	 * trying to process a command.
+	 * 
+	 * @param n - the number of elements needed in the sequence
+	 * @return true if the sequence has at least n elements
+	 */
+	private boolean validBirchSequenceSize(int n) {
+		return birch.sequenceSize() >= n;
+	}
+	
+	/**
+	 * Helper method to determine if the integer n is within the 
+	 * valid printable ASCII range. 
+	 *  
+	 * @param n - the number to check
+	 * @return true if within range
+	 */
+	private boolean validPrintInteger(BigInteger n) {
+		return (n.intValue() >= MIN_PRINT && n.intValue() <= MAX_PRINT); 
+	}
+	
+	/**
+	 * Helper method that encapsulates the logic to throw a runtime exception.
+	 * @throws Exception
+	 */
+	private void errorException() throws Exception {
+		throw new Exception("error");
 	}
 
 	/**
@@ -248,6 +375,6 @@ public class BirchCommandString implements BirchElement {
 	 */
 	@Override
 	public String toString() {
-		return "[" + stringForm + "]";
+		return stringForm;
 	}
 }

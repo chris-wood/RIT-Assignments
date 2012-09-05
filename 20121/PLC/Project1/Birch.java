@@ -19,7 +19,7 @@ public class Birch {
 	
 	// The supported commands by this Birch interpreter.
 	public static enum BirchCommand {
-		ADD, SUB, MUL, DIV, REM, EQ, GT, LT, IFZ, DUP, POP, SWAP, REV, INVALID
+		ADD, SUB, MUL, DIV, REM, EQ, GT, LT, IFZ, DUP, POP, SWAP, REV, PACK, EXEC, PUTC
 	}
 
 	/**
@@ -44,6 +44,9 @@ public class Birch {
 		commandMap.put("pop", BirchCommand.POP);
 		commandMap.put("swap", BirchCommand.SWAP);
 		commandMap.put("rev", BirchCommand.REV);
+		commandMap.put("pack", BirchCommand.PACK);
+		commandMap.put("exec", BirchCommand.EXEC);
+		commandMap.put("putc", BirchCommand.PUTC);
 	}
 
 	/**
@@ -64,6 +67,7 @@ public class Birch {
 		BigInteger result = null;
 
 		// Process the input by reading from the file and building up the command sequence.
+		// Syntax errors are detected here, before any interpretation is done.
 		Scanner fileStream = new Scanner(new File(fileName));
 		while (fileStream.hasNext()) {
 			// Try to handle the integers first
@@ -84,6 +88,10 @@ public class Birch {
 			BirchElement element = commandSequence.get(0);
 			commandSequence.remove(0);
 			handleElement(element);
+			
+			System.out.println("---");
+			System.out.println("stack: " + stack);
+			System.out.println("sequence: " + commandSequence);
 		}
 
 		// Fetch the result from the stack
@@ -93,6 +101,33 @@ public class Birch {
 		}
 
 		return result;
+	}
+	
+	/**
+	 * Push a new command string sequence onto the main executing command sequence.
+	 * 
+	 * @param sequenceString - the string to merge with the existing command sequeunce.
+	 */
+	public void sequencePush(String sequenceString) {
+		Scanner stringScanner = new Scanner(sequenceString);
+		while (stringScanner.hasNext()) {
+			if (stringScanner.hasNextBigInteger()) {
+				commandSequence.add(new BirchInteger(stringScanner.next()));
+			} else {
+				String element = stringScanner.next();
+				commandSequence.add(new BirchCommandString(this, element, commandMap.get(element)));
+			} 
+		}
+	}
+	
+	/**
+	 * Pop the top element off the command sequence.
+	 * @return - the old top element in the sequence.
+	 */
+	public BirchElement sequencePop() {
+		BirchElement topElement = commandSequence.get(0);
+		commandSequence.remove(0);
+		return topElement;
 	}
 	
 	/**
@@ -127,6 +162,14 @@ public class Birch {
 	 */
 	public int stackSize() {
 		return stack.size();
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int sequenceSize() {
+		return commandSequence.size();
 	}
 	
 	/**
