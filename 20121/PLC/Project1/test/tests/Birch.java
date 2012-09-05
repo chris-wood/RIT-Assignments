@@ -8,7 +8,7 @@ import java.math.BigInteger;
  * @author Christopher Wood, caw4567@rit.edu
  */
 public class Birch {
-	// The main data stack (containing BirchElement objects).
+	// The main data stack.
 	private List<BirchElement> stack;
 
 	// The main executable command sequence.
@@ -88,10 +88,6 @@ public class Birch {
 			BirchElement element = commandSequence.get(0);
 			commandSequence.remove(0);
 			handleElement(element);
-			
-//			System.out.println("---");
-//			System.out.println("stack: " + stack);
-//			System.out.println("sequence: " + commandSequence);
 		}
 
 		// Fetch the result from the stack
@@ -167,6 +163,7 @@ public class Birch {
 	
 	/**
 	 * Pop the top element off the data stack.
+	 * 
 	 * @return - the old top element on the stack.
 	 */
 	public BirchElement stackPop() {
@@ -180,6 +177,7 @@ public class Birch {
 	
 	/**
 	 * Determine the size of the data stack.
+	 * 
 	 * @return - the data stack size.
 	 */
 	public int stackSize() {
@@ -187,8 +185,9 @@ public class Birch {
 	}
 	
 	/**
+	 * Determine the size of the command sequence.
 	 * 
-	 * @return
+	 * @return - length of the command sequence.
 	 */
 	public int sequenceSize() {
 		return commandSequence.size();
@@ -213,6 +212,20 @@ public class Birch {
 		
 		return validCommand;
 	}
+	
+	/**
+	 * Hand off the Birch element to the appropriate handler
+	 * 
+	 * @param element
+	 * @throws Exception
+	 */
+	private void handleElement(BirchElement element) throws Exception {
+		if (element instanceof BirchInteger) {
+			stackPush(element);
+		} else {
+			element.evaluate();
+		}
+	}
 
 	/**
 	 * The main method that runs the Birch interpreter.
@@ -222,7 +235,7 @@ public class Birch {
 	 */
 	public static void main(String args[]) {
 		if (args.length != 1) {
-			System.err.println("usage: java Birch progName.bir");
+			error("usage: java Birch progName.bir");
 		} else {
 			try {
 				Birch birch = new Birch();
@@ -248,19 +261,5 @@ public class Birch {
 	 */
 	private static void error(String message) {
 		System.err.println(message);
-	}
-
-	/**
-	 * Hand off the Birch element to the appropriate handler
-	 * 
-	 * @param element
-	 * @throws Exception
-	 */
-	private void handleElement(BirchElement element) throws Exception {
-		if (element instanceof BirchInteger) {
-			stackPush(element);
-		} else {
-			element.evaluate();
-		}
 	}
 }

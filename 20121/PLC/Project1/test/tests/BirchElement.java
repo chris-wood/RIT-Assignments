@@ -7,7 +7,15 @@ import java.math.BigInteger;
  * @author Christopher Wood, caw4567@rit.edu
  *
  */
-public interface BirchElement {
-	public String toString();
-	public BigInteger evaluate() throws Exception;
+public abstract class BirchElement {
+	
+	// Enumeration to identify the element type when interpreting
+	public enum BirchElementType {
+		INT,
+		COMMAND
+	}
+	
+	// Abstract methods that all subclasses must provide
+	public abstract String toString();
+	public abstract BigInteger evaluate() throws Exception;
 }

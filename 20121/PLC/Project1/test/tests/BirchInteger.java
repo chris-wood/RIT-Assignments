@@ -6,7 +6,7 @@ import java.math.BigInteger;
  * 
  * @author Christopher Wood, caw4567@rit.edu
  */
-public class BirchInteger implements BirchElement {
+public class BirchInteger extends BirchElement {
 	private BigInteger integer; 
 
 	/**

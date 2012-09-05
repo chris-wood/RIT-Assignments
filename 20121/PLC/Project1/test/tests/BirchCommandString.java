@@ -10,7 +10,7 @@ import java.util.List;
  * 
  * @author Christopher Wood, caw4567@rit.edu
  */
-public class BirchCommandString implements BirchElement {
+public class BirchCommandString extends BirchElement {
 	private String stringForm; 
 	private Birch.BirchCommand birchCommand;
 	private Birch birch;
