@@ -246,7 +246,7 @@ public class Birch {
 					System.out.println(result);
 				}
 			} catch (FileNotFoundException ex1) {
-				error("File " + args[0] + " not found.");
+				error("No such file or directory");
 			} catch (Exception ex2) {
 				error(ex2.getMessage());
 			}
