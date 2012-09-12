@@ -10,10 +10,10 @@ import java.util.List;
  * 
  * @author Christopher Wood, caw4567@rit.edu
  */
-public class BirchCommandString implements BirchElement {
+public class BirchCommandString extends BirchElement {
 	private String stringForm; 
-	private Birch.BirchCommand birchCommand;
 	private Birch birch;
+	private Birch.BirchCommand birchCommand;
 	
 	// Constants for the putc command range
 	private final int MIN_PRINT = 0;
@@ -26,6 +26,7 @@ public class BirchCommandString implements BirchElement {
 	 *            - the string form of the sequence, whitespace separated.
 	 */
 	public BirchCommandString(Birch birch, String newString, Birch.BirchCommand command) {
+		super(BirchElement.BirchType.COMMANDSTRING);
 		stringForm = newString;
 		birchCommand = command;
 		this.birch = birch;
@@ -37,6 +38,7 @@ public class BirchCommandString implements BirchElement {
 	 * @param copy - the copy.
 	 */
 	public BirchCommandString(Birch birch, BirchCommandString copy) {
+		super(BirchElement.BirchType.COMMANDSTRING);
 		this.birch = birch;
 		this.birchCommand = copy.getCommand();
 		this.stringForm = copy.toString();
@@ -45,7 +47,6 @@ public class BirchCommandString implements BirchElement {
 	/**
 	 * Forward the evaluation to the appropriate handler, or handle in-line.
 	 */
-	@Override
 	public BigInteger evaluate() throws Exception {
 		switch (birchCommand) {
 		case ADD:
@@ -119,11 +120,11 @@ public class BirchCommandString implements BirchElement {
 	private void handleExec() throws Exception {
 		if (validBirchStackSize(1)) {
 			BirchElement topElement = birch.stackPop();
-			if (topElement instanceof BirchCommandString) {
+			if (topElement.getType() == BirchElement.BirchType.COMMANDSTRING) {
 				// Determine if the top element is now a command sequence string
 				BirchCommandString commandString = (BirchCommandString)topElement;
 				if (commandString.getCommand() == Birch.BirchCommand.PACK) {
-					birch.sequencePush(commandString.toString());
+					birch.sequencePush(topElement.toString());
 				} else {
 					errorException();
 				}
@@ -198,7 +199,7 @@ public class BirchCommandString implements BirchElement {
 			
 			// Many conditions for the top element 
 			if ((element1 != null) 
-					&& (element1 instanceof BirchInteger) 
+					&& (element1.getType() == BirchElement.BirchType.INTEGER) 
 					&& (((BirchInteger)element1).evaluate().equals(BigInteger.ZERO))) {
 				birch.stackPush(element2);
 			} else {
@@ -220,8 +221,8 @@ public class BirchCommandString implements BirchElement {
 			if (topInteger != null) {
 				BirchElement nthElement = birch.stackGet(topInteger.intValue());
 				if (nthElement != null) {
-					if (nthElement instanceof BirchInteger) {
-						birch.stackPush(new BirchInteger((BirchInteger)nthElement));
+					if (nthElement.getType() == BirchElement.BirchType.INTEGER) {
+						birch.stackPush(new BirchInteger(nthElement.toString()));
 					} else {
 						birch.stackPush(new BirchCommandString(birch, (BirchCommandString)nthElement));
 					}
@@ -393,7 +394,6 @@ public class BirchCommandString implements BirchElement {
 	/**
 	 * Format the command string for display
 	 */
-	@Override
 	public String toString() {
 		return stringForm;
 	}

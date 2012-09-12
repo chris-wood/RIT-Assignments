@@ -6,7 +6,7 @@ import java.math.BigInteger;
  * 
  * @author Christopher Wood, caw4567@rit.edu
  */
-public class BirchInteger implements BirchElement {
+public class BirchInteger extends BirchElement {
 	private BigInteger integer; 
 
 	/**
@@ -16,6 +16,7 @@ public class BirchInteger implements BirchElement {
 	 *			- string representation of the integer.
 	 */
 	public BirchInteger(String stringForm) {
+		super(BirchElement.BirchType.INTEGER);
 		integer = new BigInteger(stringForm);
 	}
 	
@@ -26,6 +27,7 @@ public class BirchInteger implements BirchElement {
 	 * 			- a copy of another integer for initialization.
 	 */
 	public BirchInteger(BigInteger copy) {
+		super(BirchElement.BirchType.INTEGER);
 		integer = new BigInteger(copy.toString());
 	}
 	
@@ -35,6 +37,7 @@ public class BirchInteger implements BirchElement {
 	 * @param copy - the copy object.
 	 */
 	public BirchInteger(BirchInteger copy) {
+		super(BirchElement.BirchType.INTEGER);
 		this.integer = new BigInteger(copy.toString());
 	}
 	
@@ -42,7 +45,6 @@ public class BirchInteger implements BirchElement {
 	 * Evaluate this integer by simply returning the instance.
 	 * @return the integer instance
 	 */
-	@Override
 	public BigInteger evaluate() throws Exception {
 		return integer;
 	}
@@ -50,7 +52,6 @@ public class BirchInteger implements BirchElement {
 	/**
 	 * Format the integer for display
 	 */
-	@Override
 	public String toString() {
 		return integer.toString();
 	}

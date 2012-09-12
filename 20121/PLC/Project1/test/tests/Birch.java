@@ -91,7 +91,7 @@ public class Birch {
 		}
 
 		// Fetch the result from the stack
-		if ((stack.size() > 0) && (stack.get(0) instanceof BirchInteger)) {
+		if ((stack.size() > 0) && (stack.get(0).getType() == BirchElement.BirchType.INTEGER)) {
 			BirchInteger resultElement = (BirchInteger)stack.get(0);
 			result = resultElement.evaluate();
 		}
@@ -105,14 +105,13 @@ public class Birch {
 	 * @param sequenceString - the string to merge with the existing command sequeunce.
 	 */
 	public void sequencePush(String sequenceString) {
-		Scanner stringScanner = new Scanner(sequenceString);
-		while (stringScanner.hasNext()) {
-			if (stringScanner.hasNextBigInteger()) {
-				commandSequence.add(0, new BirchInteger(stringScanner.next()));
-			} else {
-				String element = stringScanner.next();
-				commandSequence.add(0, new BirchCommandString(this, element, commandMap.get(element)));
-			} 
+		String[] split = sequenceString.trim().split(" ");
+		for (int i = 0; i < split.length; i++) {
+			if (commandMap.containsKey(split[i])) {
+				commandSequence.add(0, new BirchCommandString(this, split[i], commandMap.get(split[i])));
+			} else if (!split[i].isEmpty()){
+				commandSequence.add(0, new BirchInteger(split[i]));
+			}
 		}
 	}
 	
@@ -222,7 +221,7 @@ public class Birch {
 	 * @throws Exception
 	 */
 	private void handleElement(BirchElement element) throws Exception {
-		if (element instanceof BirchInteger) {
+		if (element.getType() == BirchElement.BirchType.INTEGER) {
 			stackPush(element);
 		} else {
 			element.evaluate();
