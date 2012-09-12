@@ -166,11 +166,13 @@ public class Birch {
 	 * 
 	 * @return - the old top element on the stack.
 	 */
-	public BirchElement stackPop() {
+	public BirchElement stackPop() throws Exception {
 		BirchElement topElement = null;
 		if (!stack.isEmpty()) {
 			topElement = stack.get(0);
 			stack.remove(0);
+		} else {
+			throw new Exception("error");
 		}
 		return topElement;
 	}
@@ -246,7 +248,7 @@ public class Birch {
 					System.out.println(result);
 				}
 			} catch (FileNotFoundException ex1) {
-				error("File " + args[0] + " not found.");
+				error("No such file or directory");
 			} catch (Exception ex2) {
 				error(ex2.getMessage());
 			}

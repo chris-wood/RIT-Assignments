@@ -166,11 +166,13 @@ public class Birch {
 	 * 
 	 * @return - the old top element on the stack.
 	 */
-	public BirchElement stackPop() {
+	public BirchElement stackPop() throws Exception {
 		BirchElement topElement = null;
 		if (!stack.isEmpty()) {
 			topElement = stack.get(0);
 			stack.remove(0);
+		} else {
+			throw new Exception("error");
 		}
 		return topElement;
 	}

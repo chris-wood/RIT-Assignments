@@ -10,7 +10,7 @@ import java.util.List;
  * 
  * @author Christopher Wood, caw4567@rit.edu
  */
-public class BirchCommandString extends BirchElement {
+public class BirchCommandString implements BirchElement {
 	private String stringForm; 
 	private Birch.BirchCommand birchCommand;
 	private Birch birch;
@@ -175,7 +175,7 @@ public class BirchCommandString extends BirchElement {
 		if (validBirchStackSize(1)) {
 			BigInteger topInteger = birch.stackPop().evaluate();
 			if (topInteger != null && this.validPrintInteger(topInteger)) {
-				System.out.print((char)topInteger.intValue());
+				System.out.print(String.valueOf(Character.toChars(topInteger.intValue())));
 			} else {
 				errorException();
 			}

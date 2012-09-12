@@ -175,7 +175,7 @@ public class BirchCommandString implements BirchElement {
 		if (validBirchStackSize(1)) {
 			BigInteger topInteger = birch.stackPop().evaluate();
 			if (topInteger != null && this.validPrintInteger(topInteger)) {
-				System.out.print((char)topInteger.intValue());
+				System.out.print(String.valueOf(Character.toChars(topInteger.intValue())));
 			} else {
 				errorException();
 			}
