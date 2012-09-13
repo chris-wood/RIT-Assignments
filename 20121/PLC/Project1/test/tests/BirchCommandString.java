@@ -255,7 +255,9 @@ public class BirchCommandString extends BirchElement {
 	}
 	
 	/**
-	 * Handle common logic operations.
+	 * Handle common logic operations. This is kept separate from the math 
+	 * operations just for separation of concerns (they could easily be merged
+	 * since they have very similar bodies).
 	 * 
 	 * @param cmd - the math operation to perform.
 	 * @throws Exception - whenever a runtime processing exception occurs.
