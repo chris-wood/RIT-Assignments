@@ -50,28 +50,16 @@ public class BirchCommandString extends BirchElement {
 	public BigInteger evaluate() throws Exception {
 		switch (birchCommand) {
 		case ADD:
-			handleMath(Birch.BirchCommand.ADD);
-			break;
 		case SUB:
-			handleMath(Birch.BirchCommand.SUB);
-			break;
 		case MUL:
-			handleMath(Birch.BirchCommand.MUL);
-			break;
 		case DIV:
-			handleMath(Birch.BirchCommand.DIV);
-			break;
 		case REM:
-			handleMath(Birch.BirchCommand.REM);
+			handleMath(birchCommand);
 			break;
 		case EQ:
-			handleLogic(Birch.BirchCommand.EQ);
-			break;
 		case GT:
-			handleLogic(Birch.BirchCommand.GT);
-			break;
 		case LT:
-			handleLogic(Birch.BirchCommand.LT);
+			handleLogic(birchCommand);
 			break;
 		case IFZ:
 			handleIfz();
@@ -255,9 +243,10 @@ public class BirchCommandString extends BirchElement {
 	}
 	
 	/**
-	 * Handle common logic operations. This is kept separate from the math 
-	 * operations just for separation of concerns (they could easily be merged
-	 * since they have very similar bodies).
+	 * Handle common logic operations. 
+	 * 
+	 * This is kept separate from the math operations just for separation of 
+	 * concerns (they could easily be merged since they have very similar bodies).
 	 * 
 	 * @param cmd - the math operation to perform.
 	 * @throws Exception - whenever a runtime processing exception occurs.
