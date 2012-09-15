@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{Hinsen}
+Konrad Hinsen.
+\newblock The promises of functional programming.
+\newblock {\em Computing in Science and Engg.}, 11(4):86--90, July 2009.
+
+\bibitem{Hughes}
+J.~Hughes.
+\newblock Why functional programming matters.
+\newblock {\em Comput. J.}, 32(2):98--107, April 1989.
+
+\end{thebibliography}
