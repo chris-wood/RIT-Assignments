@@ -208,14 +208,19 @@
 ;; list-sublist?
 ; DEFINE list-sublist? HERE
 (define (list-sublist? l1 l2)
-  (display l1)
-  (display '&)
-  (display l2)
-  (display '->)
   (cond 
     ((null? l2) #t) ; the empty list is always a sublist of a proper list, no matter what l1 is
     ((null? l1) #f) ; we cannot possibly have a sublist now
-    ((equal? (car l1) (car l2)) (list-sublist? (cdr l1) (cdr l2)))
+    ((equal? (car l1) (car l2))
+     (let 
+         ((newList1 (cdr l1))
+          (newList2 (cdr l2)))
+       (cond 
+         ((null? newList2) #t) ; the empty list is always a sublist of a proper list, no matter what l1 is
+         ((null? newList1) #f) ; we cannot possibly have a sublist now
+         (else (if (not (equal? (car (cdr l1)) (car (cdr l2)))) ; if we have a gap
+                   #f
+                   (list-sublist? (cdr l1) (cdr l2)))))))
     (else (list-sublist? (cdr l1) l2))))
     
 
@@ -297,7 +302,7 @@
         list-sublist?-test14
         list-sublist?-test15))
 ; Uncomment the following to test your list-sublist? procedure.
-;(run-tests list-sublist? equal? list-sublist?-tests)
+(run-tests list-sublist? equal? list-sublist?-tests)
 
 
 ;; list-permutation?
