@@ -219,7 +219,7 @@
          ((null? newList2) #t) ; the empty list is always a sublist of a proper list, no matter what l1 is
          ((null? newList1) #f) ; we cannot possibly have a sublist now
          (else (if (not (equal? (car (cdr l1)) (car (cdr l2)))) ; if we have a gap
-                   #f
+                   (list-sublist? (cdr l1) l2)
                    (list-sublist? (cdr l1) (cdr l2)))))))
     (else (list-sublist? (cdr l1) l2))))
     
