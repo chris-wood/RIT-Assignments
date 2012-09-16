@@ -207,6 +207,17 @@
 
 ;; list-sublist?
 ; DEFINE list-sublist? HERE
+(define (list-sublist? l1 l2)
+  (display l1)
+  (display '&)
+  (display l2)
+  (display '->)
+  (cond 
+    ((null? l2) #t) ; the empty list is always a sublist of a proper list, no matter what l1 is
+    ((null? l1) #f) ; we cannot possibly have a sublist now
+    ((equal? (car l1) (car l2)) (list-sublist? (cdr l1) (cdr l2)))
+    (else (list-sublist? (cdr l1) l2))))
+    
 
 ;; list-sublist? tests
 (define list-sublist?-test01
@@ -286,11 +297,16 @@
         list-sublist?-test14
         list-sublist?-test15))
 ; Uncomment the following to test your list-sublist? procedure.
-; (run-tests list-sublist? equal? list-sublist?-tests)
+;(run-tests list-sublist? equal? list-sublist?-tests)
 
 
 ;; list-permutation?
 ; DEFINE list-permutation? HERE
+(define (list-permutation? l1 l2)
+  (cond
+    ((not (equal? (length l1) (length l2))) #f)
+    ((and (null? l1) (null? l2)) #t)
+    (else (list-permutation? (cdr l1) (list-filter (lambda (x) (not (equal? x (car l1)))) l2)))))
 
 ;; list-permutation? tests
 (define list-permutation?-test01
@@ -375,11 +391,15 @@
         list-permutation?-test15
         list-permutation?-test16))
 ; Uncomment the following to test your list-permutation? procedure.
-; (run-tests list-permutation? equal? list-permutation?-tests)
+(run-tests list-permutation? equal? list-permutation?-tests)
 
 
 ;; list-permutations
 ; DEFINE list-permutations HERE
+#|(define (list-permutations l)
+  (if (null? l) null
+|#
+      
 
 ;; list-permutations tests
 (define list-permutations-test01
@@ -437,6 +457,19 @@
 
 ;; list-argmin
 ; DEFINE list-argmin HERE
+(define (list-argmin f l)
+  (if (null? l) 
+      #f ; the input list is empty, so return false
+      (if (equal? #f (list-argmin f (cdr l)))
+          (car l) ; pick the last element in the list by default
+          (let*   ; perform a comparison if the list is longer than one element
+              ((arg1 (car l))
+               (arg2 (list-argmin f (cdr l)))
+               (val1 (f arg1))
+               (val2 (f arg2)))
+            (if (<= val1 val2)
+                arg1
+                arg2)))))
 
 ;; list-argmin tests
 (define list-argmin-test01
@@ -476,4 +509,4 @@
         list-argmin-test06
         list-argmin-test07))
 ; Uncomment the following to test your list-argmin procedure.
-; (run-tests list-argmin equal? list-argmin-tests)
+(run-tests list-argmin equal? list-argmin-tests)
