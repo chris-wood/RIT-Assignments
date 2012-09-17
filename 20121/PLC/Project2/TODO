@@ -1,0 +1,3 @@
+B0: if length 0 - return null
+B1: if length 1 - return element
+B2: if length 2 - return (ab) and (ba)

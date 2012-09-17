@@ -110,12 +110,6 @@
 
 ;; btree-size
 ; DEFINE btree-size HERE
-(define (btree-size bt)
-  (if (null? bt)
-      0
-      (if (leaf? bt)
-          0
-          (+ 1 (btree-size (get-node-l bt)) (btree-size (get-node-r bt))))))
 
 ;; btree-size tests
 (define btree-size-test01
@@ -150,17 +144,11 @@
         btree-size-test05
         btree-size-test06))
 ; Uncomment the following to test your btree-size procedure.
-(run-tests btree-size equal? btree-size-tests)
+; (run-tests btree-size equal? btree-size-tests)
 
 
 ;; btree-height
 ; DEFINE btree-height HERE
-(define (btree-height bt)
-  (if (null? bt)
-      0
-      (if (leaf? bt)
-          0
-          (max (+ 1 (btree-height (get-node-l bt))) (+ 1 (btree-height (get-node-r bt)))))))
 
 ;; btree-height tests
 (define btree-height-test01
@@ -195,47 +183,11 @@
         btree-height-test05
         btree-height-test06))
 ; Uncomment the following to test your btree-height procedure.
-(run-tests btree-height equal? btree-height-tests)
+; (run-tests btree-height equal? btree-height-tests)
 
 
 ;; btree-deepest
 ; DEFINE btree-deepest HERE
-(define (btree-deepest bt)
-  (define (deepest tree)
-    (cond
-      ((and (node? (get-node-l tree)) (node? (get-node-r tree))) ; if they're both nodes, choose which one has the deepest element
-       (let
-           ((left (deepest (get-node-l tree)))
-            (right (deepest (get-node-r tree))))
-         (if (>= (cdr left) (cdr right)) ; choose the one that has the deepest element
-             (cons (car left) (+ 1 (cdr left)))
-             (cons (car right) (+ 1 (cdr right))))))
-      ((node? (get-node-l tree)) 
-       (cons (car (deepest (get-node-l tree))) (+ 1 (cdr (deepest (get-node-l tree)))))) ; pass up 1 + deepness of left
-      ((node? (get-node-r tree))
-       (cons (car (deepest (get-node-r tree))) (+ 1 (cdr (deepest (get-node-r tree)))))) ; pass up 1 + deepeness of right
-      (else 
-       (cons (get-node-x tree) 0)))) ; pass up data and 0 (we didn't go any deeper)
- (if (or (null? bt) (leaf? bt))
-      #f ; null tree or leaf returns false
-      (car (deepest bt))))
-  
-  #|
-  (define (deepest-element bt d)
-    (if (leaf? bt)
-        (list #f -1) ; pass up data to indicate not to pick this branch
-        (cond ; pass up the first element
-          ((and (node? (get-node-l bt)) (node? (get-node-r bt))) 
-           (if (>= (cdr (deepest-element (get-node-l bt) (+ 1 d))) d)
-               (list #f -1)
-               (deepest-element (get-node-l bt) (+ 1 d))))
-          ((node? (get-node-l bt)) (deepest-element (get-node-l bt) (+ 1 d)))
-          ((node? (get-node-r bt)) (deepest-element (get-node-r bt) (+ 1 d)))
-          (else (list (get-node-x bt) 0)))))
-  (if (null? bt)
-      #f
-      (car (deepest-element bt -1))))|#
-  
 
 ;; btree-deepest tests
 (define btree-deepest-test01
@@ -270,14 +222,11 @@
         btree-deepest-test05
         btree-deepest-test06))
 ; Uncomment the following to test your btree-deepest procedure.
-(run-tests btree-deepest equal? btree-deepest-tests)
+; (run-tests btree-deepest equal? btree-deepest-tests)
 
 
 ;; btree-subtree?
 ; DEFINE btree-subtree? HERE
-(define (btree-subtree? bt1 bt2)
-  (cond
-    ; TODO: what are the base cases?
 
 ;; btree-subtree? tests
 (define btree-subtree?-test01
