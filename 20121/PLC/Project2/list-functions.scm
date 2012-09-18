@@ -208,21 +208,19 @@
 ;; list-sublist?
 ; DEFINE list-sublist? HERE
 (define (list-sublist? l1 l2)
-  (cond 
-    ((null? l2) #t) ; the empty list is always a sublist of a proper list, no matter what l1 is
-    ((null? l1) #f) ; we cannot possibly have a sublist now
-    ((equal? (car l1) (car l2))
-     (let 
-         ((newList1 (cdr l1))
-          (newList2 (cdr l2)))
-       (cond 
-         ((null? newList2) #t) ; the empty list is always a sublist of a proper list, no matter what l1 is
-         ((null? newList1) #f) ; we cannot possibly have a sublist now
-         (else (if (not (equal? (car (cdr l1)) (car (cdr l2)))) ; if we have a gap
-                   (list-sublist? (cdr l1) l2)
-                   (list-sublist? (cdr l1) (cdr l2)))))))
-    (else (list-sublist? (cdr l1) l2))))
-    
+  (define (pop-stack l stack) ; function to pop the stack state off onto the second list parameter
+    (if (null? stack)
+        l ; return the end result
+        (pop-stack (cons (car stack) l) (cdr stack))))
+  (define (sublist l1 l2 stack) ; function to perform list-sublist? but maintain state so we can roll back if matches don't occur
+    (cond
+      ((null? l2) #t)
+      ((null? l1) #f)
+      ((equal? (car l1) (car l2))
+       (sublist (cdr l1) (cdr l2) (cons (car l1) stack)))
+      (else 
+       (sublist (cdr l1) (pop-stack l2 stack) null)))) ; reset the second list and reset the stack to null
+  (sublist l1 l2 null))  
 
 ;; list-sublist? tests
 (define list-sublist?-test01

@@ -112,7 +112,7 @@
 ; DEFINE btree-size HERE
 (define (btree-size bt)
   (if (null? bt)
-      0
+      -1 ; standard
       (if (leaf? bt)
           0
           (+ 1 (btree-size (get-node-l bt)) (btree-size (get-node-r bt))))))
@@ -157,7 +157,7 @@
 ; DEFINE btree-height HERE
 (define (btree-height bt)
   (if (null? bt)
-      0
+      -1 ; standard definition for tree height
       (if (leaf? bt)
           0
           (max (+ 1 (btree-height (get-node-l bt))) (+ 1 (btree-height (get-node-r bt)))))))
@@ -210,9 +210,9 @@
          (if (>= (cdr left) (cdr right)) ; choose the one that has the deepest element
              (cons (car left) (+ 1 (cdr left)))
              (cons (car right) (+ 1 (cdr right))))))
-      ((node? (get-node-l tree)) 
+      ((node? (get-node-l tree)) ; TODO: use let to store result from 1 function call
        (cons (car (deepest (get-node-l tree))) (+ 1 (cdr (deepest (get-node-l tree)))))) ; pass up 1 + deepness of left
-      ((node? (get-node-r tree))
+      ((node? (get-node-r tree)) ; TODO: use let to store result from 1 function call
        (cons (car (deepest (get-node-r tree))) (+ 1 (cdr (deepest (get-node-r tree)))))) ; pass up 1 + deepeness of right
       (else 
        (cons (get-node-x tree) 0)))) ; pass up data and 0 (we didn't go any deeper)
@@ -275,9 +275,39 @@
 
 ;; btree-subtree?
 ; DEFINE btree-subtree? HERE
+; TODO: copying from sublist? in lists file makes it work about 50% - need to figure out why the rest fail
+; TODO: there are a couple cases being omitted (what if one is node and other is not? etc etc)
 (define (btree-subtree? bt1 bt2)
-  (cond
-    ; TODO: what are the base cases?
+  (define (pop-stack bt stack) ; function to pop the stack state off onto the second list parameter
+    (if (null? stack)
+        bt ; return the end result
+        (pop-stack (cons (car stack) bt) (cdr stack))))
+  (define (subtree? bt1 bt2 stack) ; function to perform btree-subtree? but maintain state so we can roll back if matches don't occur - the stack is a stack of nodes that are visited on l/r basis
+    (cond
+      ((null? bt2) #t)
+      ((null? bt1) #f)
+      ((and (leaf? bt1) (leaf? bt2)) #t)
+      ((leaf? bt1) #f) 
+      ((leaf? bt2) 
+       (or 
+        (subtree? (get-node-l bt1) (pop-stack bt2 stack) null)
+        (subtree? (get-node-r bt1) (pop-stack bt2 stack) null)))
+      ((and (node? bt1) (node? bt2)) ; if they are both nodes and their values are equal, make sure l/r subtrees are subtrees too
+       (cond
+         ((equal? (get-node-x bt1) (get-node-x bt2))
+          (if (and (leaf? (get-node-l bt2)) (leaf? (get-node-r bt2))) ; if bt2 has an equal value but doesn't have any more leaves, then it is a subtree of bt1
+              #t
+              (and 
+               (subtree? (get-node-l bt1) (get-node-l bt2) (cons bt1 stack)) 
+               (subtree? (get-node-r bt1) (get-node-r bt2) (cons bt2 stack)))))
+         (else 
+          (or 
+           (subtree? (get-node-l bt1) (pop-stack bt2 stack) null)
+           (subtree? (get-node-r bt1) (pop-stack bt2 stack) null)))))
+      (else #f)))
+           ;(subtree? (cdr bt1) (pop-stack bt2 stack) null)))) ; reset the second list and reset the stack to null
+           
+  (subtree? bt1 bt2 null))
 
 ;; btree-subtree? tests
 (define btree-subtree?-test01
@@ -335,7 +365,7 @@
 (define btree-subtree?-test14
   (list "btree-subtree?-test14"
         (list btree-ex3 btree-ex2)
-        #f))
+        #t))
 (define btree-subtree?-test15
   (list "btree-subtree?-test15"
         (list btree-ex3 btree-ex3)
@@ -359,7 +389,7 @@
 (define btree-subtree?-test20
   (list "btree-subtree?-test20"
         (list btree-ex4 btree-ex2)
-        #f))
+        #t))
 (define btree-subtree?-test21
   (list "btree-subtree?-test21"
         (list btree-ex4 btree-ex3)
@@ -383,7 +413,7 @@
 (define btree-subtree?-test26
   (list "btree-subtree?-test26"
         (list btree-ex5 btree-ex2)
-        #f))
+        #t))
 (define btree-subtree?-test27
   (list "btree-subtree?-test27"
         (list btree-ex5 btree-ex3)
@@ -407,7 +437,7 @@
 (define btree-subtree?-test32
   (list "btree-subtree?-test32"
         (list btree-ex6 btree-ex2)
-        #f))
+        #t))
 (define btree-subtree?-test33
   (list "btree-subtree?-test33"
         (list btree-ex6 btree-ex3)
@@ -438,7 +468,7 @@
         btree-subtree?-test31 btree-subtree?-test32 btree-subtree?-test33
         btree-subtree?-test34 btree-subtree?-test35 btree-subtree?-test36))
 ; Uncomment the following to test your btree-subtree? procedure.
-; (run-tests btree-subtree? equal? btree-subtree?-tests)
+(run-tests btree-subtree? equal? btree-subtree?-tests)
 
 
 ;; btree-subtrees
