@@ -54,6 +54,10 @@
 (define btree-ex5 (node (node (node leaf 1 (node leaf "a" leaf)) 2 leaf) 3 (node (node leaf 4 leaf) 5 leaf)))
 (define btree-ex6 (node (node (node leaf 1 (node leaf "a" leaf)) 2 leaf) 3 (node (node (node (node leaf "b" leaf) "c" leaf) 4 leaf) 5 leaf)))
 
+; Some more test trees
+(define btree-caw-1 (node (node leaf 1 leaf) 2 leaf))
+(define btree-caw-2 (node leaf 2 (node leaf 3 leaf)))
+
 ; A leaf? predicate.
 (define (leaf? x) (equal? x leaf))
 ; A node? predicate.
@@ -284,27 +288,31 @@
         (pop-stack (cons (car stack) bt) (cdr stack))))
   (define (subtree? bt1 bt2 stack) ; function to perform btree-subtree? but maintain state so we can roll back if matches don't occur - the stack is a stack of nodes that are visited on l/r basis
     (cond
-      ((null? bt2) #t)
-      ((null? bt1) #f)
+      ;((null? bt2) #t) 
+      ;((null? bt1) #f)
       ((and (leaf? bt1) (leaf? bt2)) #t)
       ((leaf? bt1) #f) 
-      ((leaf? bt2) 
-       (or 
-        (subtree? (get-node-l bt1) (pop-stack bt2 stack) null)
-        (subtree? (get-node-r bt1) (pop-stack bt2 stack) null)))
-      ((and (node? bt1) (node? bt2)) ; if they are both nodes and their values are equal, make sure l/r subtrees are subtrees too
+      ((leaf? bt2) #t) ; this is okay, since we know that btrees are proper (they have leaves at terminating endpoints, so we can short-circuit here)
+       ;(or 
+        ;(subtree? (get-node-l bt1) (pop-stack bt2 stack) null)
+        ;(subtree? (get-node-r bt1) (pop-stack bt2 stack) null)))
+      (else ;(and (node? bt1) (node? bt2)) ; if they are both nodes and their values are equal, make sure l/r subtrees are subtrees too
        (cond
          ((equal? (get-node-x bt1) (get-node-x bt2))
+          ; need to do cases for one leaf on left and one leaf on right
           (if (and (leaf? (get-node-l bt2)) (leaf? (get-node-r bt2))) ; if bt2 has an equal value but doesn't have any more leaves, then it is a subtree of bt1
-              #t
+              ;#t ; TODO: remove this check, since i fixed the base case and no longer need to do it!
+              (and 
+               (subtree? (get-node-l bt1) (get-node-l bt2) (cons bt1 stack)) 
+               (subtree? (get-node-r bt1) (get-node-r bt2) (cons bt2 stack)))
               (and 
                (subtree? (get-node-l bt1) (get-node-l bt2) (cons bt1 stack)) 
                (subtree? (get-node-r bt1) (get-node-r bt2) (cons bt2 stack)))))
          (else 
           (or 
            (subtree? (get-node-l bt1) (pop-stack bt2 stack) null)
-           (subtree? (get-node-r bt1) (pop-stack bt2 stack) null)))))
-      (else #f)))
+           (subtree? (get-node-r bt1) (pop-stack bt2 stack) null)))))))
+      ;(else #f)))
            ;(subtree? (cdr bt1) (pop-stack bt2 stack) null)))) ; reset the second list and reset the stack to null
            
   (subtree? bt1 bt2 null))
