@@ -561,6 +561,19 @@
 
 ;; sbtree-find
 ; DEFINE sbtree-find HERE
+(define (sbtree-find sbt e)
+  (define (find bt comp e)
+    (cond 
+      ((null? bt) #f)
+      ((leaf? bt) #f)
+      (else 
+       (if (equal? e (get-node-x bt)) 
+            #t ; we found the element
+            (if (comp e (get-node-x bt)) ; run the comparison and check the right branch
+                (find (get-node-l bt) comp e)
+                (find (get-node-r bt) comp e))))))
+  (find (get-3rd sbt) (get-2nd sbt) e)) ; extract the comparison operator and tree and call the new find function
+            
 
 ;; sbtree-find tests
 (define sbtree-find-test01
@@ -695,11 +708,33 @@
         sbtree-find-test25
         sbtree-find-test26))
 ; Uncomment the following to test your sbtree-find procedure.
-; (run-tests sbtree-find equal? sbtree-find-tests)
+(run-tests sbtree-find equal? sbtree-find-tests)
 
 
 ;; sbtree-insert
 ; DEFINE sbtree-insert HERE
+(define (sbtree-insert sbt e)
+  (define (insert bt comp e)
+    (cond 
+      ;((null? bt) #f)
+      ((leaf? bt) (node leaf e leaf)) ; return the new leaf in the tree
+      (else 
+       (let 
+           ((left (insert (get-node-l bt) comp e)) ; store the resulting btree
+            (right (insert (get-node-r bt) comp e))) ; store the resulting btree
+         (if (equal? e (get-node-x bt)) 
+             bt ; we found a duplicate, so return a null element
+             (if (comp e (get-node-x bt)) ; run the comparison and check the correct branch
+                 ;(if (null? left)
+                    ; (get-node-l bt) ; return original left hand side
+                     (node left (get-node-x bt) (get-node-r bt))
+                 ;(if (null? right)
+                     ;(get-node-r bt) ; return original right hand side
+                     (node (get-node-l bt) (get-node-x bt) right)))))))
+                ;(node (insert (get-node-l bt) comp e) (get-node-x bt) (get-node-r bt))
+                ;(node (get-node-l bt) (get-node-x bt) (insert (get-node-r bt) comp e)))))))
+  (list 'sbtree (get-2nd sbt) (insert (get-3rd sbt) (get-2nd sbt) e))) ; extract the comparison operator and tree and call the new find function
+  
 
 ;; sbtree-insert tests
 (define sbtree-insert-test01
@@ -834,4 +869,4 @@
         sbtree-insert-test25
         sbtree-insert-test26))
 ; Uncomment the following to test your sbtree-insert procedure.
-; (run-tests sbtree-insert (lambda (sbt1 sbt2) (equal? (sbtree-getbtree sbt1) (sbtree-getbtree sbt2))) sbtree-insert-tests)
+(run-tests sbtree-insert (lambda (sbt1 sbt2) (equal? (sbtree-getbtree sbt1) (sbtree-getbtree sbt2))) sbtree-insert-tests)
