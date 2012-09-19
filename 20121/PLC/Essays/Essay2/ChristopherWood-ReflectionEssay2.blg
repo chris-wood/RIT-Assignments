@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: ChristopherWood-ReflectionEssay2.aux
 The style file: plain.bst
 Database file #1: ref.bib
-You've used 2 entries,
+You've used 4 entries,
             2118 wiz_defined-function locations,
-            517 strings with 4315 characters,
-and the built_in function-call counts, 593 in all, are:
-= -- 61
-> -- 14
-< -- 0
-+ -- 7
-- -- 4
-* -- 47
-:= -- 104
-add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 8
+            537 strings with 4690 characters,
+and the built_in function-call counts, 1331 in all, are:
+= -- 141
+> -- 40
+< -- 1
++ -- 18
+- -- 12
+* -- 99
+:= -- 220
+add.period$ -- 13
+call.type$ -- 4
+change.case$ -- 18
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 22
-empty$ -- 52
-format.name$ -- 4
-if$ -- 117
+cite$ -- 4
+duplicate$ -- 52
+empty$ -- 113
+format.name$ -- 12
+if$ -- 278
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 2
-newline$ -- 13
-num.names$ -- 4
-pop$ -- 4
+int.to.str$ -- 4
+missing$ -- 4
+newline$ -- 23
+num.names$ -- 8
+pop$ -- 12
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 14
 quote$ -- 0
-skip$ -- 14
+skip$ -- 36
 stack$ -- 0
-substring$ -- 52
-swap$ -- 2
-text.length$ -- 0
+substring$ -- 107
+swap$ -- 9
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
+type$ -- 16
 warning$ -- 0
-while$ -- 8
-width$ -- 3
-write$ -- 24
+while$ -- 17
+width$ -- 5
+write$ -- 49

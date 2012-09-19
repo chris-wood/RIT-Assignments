@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{MapReduce}
+Jeffrey Dean and Sanjay Ghemawat.
+\newblock Mapreduce: simplified data processing on large clusters.
+\newblock {\em Commun. ACM}, 51(1):107--113, January 2008.
+
 \bibitem{Hinsen}
 Konrad Hinsen.
 \newblock The promises of functional programming.
@@ -9,5 +14,12 @@ Konrad Hinsen.
 J.~Hughes.
 \newblock Why functional programming matters.
 \newblock {\em Comput. J.}, 32(2):98--107, April 1989.
+
+\bibitem{Visitor}
+Jens Palsberg and C.~Barry Jay.
+\newblock The essence of the visitor pattern.
+\newblock In {\em Proceedings of the 22nd International Computer Software and
+  Applications Conference}, COMPSAC '98, pages 9--15, Washington, DC, USA,
+  1998. IEEE Computer Society.
 
 \end{thebibliography}
