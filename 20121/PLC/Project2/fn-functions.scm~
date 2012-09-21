@@ -34,8 +34,6 @@
 
 ;; fn-or
 ; DEFINE fn-or HERE
-(define (fn-or f g)
-  (lambda (x) (or (f x) (g x))))
 
 ;; fn-or tests
 (define fn-or-test01
@@ -70,16 +68,11 @@
         fn-or-test05
         fn-or-test06))
 ; Uncomment the following to test your fn-or procedure.
-(run-tests (lambda (f g x) ((fn-or f g) x)) equal? fn-or-tests)
+; (run-tests (lambda (f g x) ((fn-or f g) x)) equal? fn-or-tests)
 
 
 ;; fn-repeat
 ; DEFINE fn-repeat HERE
-(define (fn-repeat f n)
-  (lambda (x)
-    (if (<= n 0)
-        x ; f applied 0 times to x is just x 
-        (f ((fn-repeat f (- n 1)) x)))))
 
 ;; fn-repeat tests
 (define fn-repeat-test01
@@ -144,19 +137,11 @@
         fn-repeat-test11
         fn-repeat-test12))
 ; Uncomment the following to test your fn-repeat procedure.
-(run-tests (lambda (f n x) ((fn-repeat f n) x)) equal? fn-repeat-tests)
+; (run-tests (lambda (f n x) ((fn-repeat f n) x)) equal? fn-repeat-tests)
 
 
 ;; fn-clamp
 ; DEFINE fn-clamp HERE
-(define (fn-clamp f low high)
-  (lambda (x)
-    (let
-        ((fVal (f x)))
-      (cond
-        ((< fVal low) low)
-        ((> fVal high) high)
-        (else fVal)))))
 
 ;; fn-clamp tests
 (define fn-ex1 (lambda (x) (+ x 1)))
@@ -212,14 +197,11 @@
         fn-clamp-test08
         fn-clamp-test09))
 ; Uncomment the following to test your fn-clamp procedure.
-(run-tests (lambda (f low high x) ((fn-clamp f low high) x)) equal? fn-clamp-tests)
+; (run-tests (lambda (f low high x) ((fn-clamp f low high) x)) equal? fn-clamp-tests)
 
 
 ;; fn-arg-swap
 ; DEFINE fn-arg-swap HERE
-(define (fn-arg-swap f)
-  (lambda (x y)
-    (f y x)))
 
 ;; fn-arg-swap tests
 (define fn-arg-swap-test01
@@ -239,7 +221,7 @@
         fn-arg-swap-test02
         fn-arg-swap-test03))
 ; Uncomment the following to test your fn-arg-swap procedure.
-(run-tests (lambda (f x y) ((fn-arg-swap f) x y)) equal? fn-arg-swap-tests)
+; (run-tests (lambda (f x y) ((fn-arg-swap f) x y)) equal? fn-arg-swap-tests)
 
 
 ;; fn-arg-rev
@@ -297,16 +279,7 @@
 
 
 ;; mk-cr-fn
-; DEFINE mk-cr-fn HERE
-(define (mk-cr-fn s)
-  (define (mk-cr-fn-list l)
-    (lambda (x)
-      (cond
-        ((equal? (car l) #\c) ((mk-cr-fn-list (cdr l)) x))
-        ((equal? (car l) #\a) (car ((mk-cr-fn-list (cdr l)) x))) 
-        ((equal? (car l) #\d) (cdr ((mk-cr-fn-list (cdr l)) x)))
-        (else x))))
-  (mk-cr-fn-list (string->list s)))
+; DEFINE mk-cf-fn HERE
 
 ; mk-cr-fn tests
 (define mk-cr-fn-test01
@@ -396,4 +369,4 @@
         mk-cr-fn-test16
         mk-cr-fn-test17))
 ; Uncomment the following to test your fn-arg-rev procedure.
-(run-tests (lambda (s l) ((mk-cr-fn s) l)) equal? mk-cr-fn-tests)
+; (run-tests (lambda (s l) ((mk-cr-fn s) l)) equal? mk-cr-fn-tests)

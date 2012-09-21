@@ -57,6 +57,7 @@
 ; Some more test trees
 (define btree-caw-1 (node (node leaf 1 leaf) 2 leaf))
 (define btree-caw-2 (node leaf 2 (node leaf 3 leaf)))
+(define btree-caw-3 (node (node leaf 2 leaf) 3 (node leaf 5 leaf)))
 
 ; A leaf? predicate.
 (define (leaf? x) (equal? x leaf))
