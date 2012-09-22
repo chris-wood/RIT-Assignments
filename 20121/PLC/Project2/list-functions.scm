@@ -398,7 +398,7 @@
 
 
 (define (list-rotate orig used)
-    (if (null? used)
+      (if (null? used)
         null
         (cons 
          (cons 
@@ -438,6 +438,11 @@
     (else 
      ;(display 'casetwo) 
      (merge-all (car l) (cdr l)))))
+
+(define (merge-subsublists master children)
+    (if (null? children)
+        master
+        (cons (cons master (car children)) (merge-subsublists master (cdr children)))))
  
 (define (list-merge-sublists l)
   ; assume l is of the form l = ((l1)(l2)), we want (l1 l2)
@@ -449,36 +454,47 @@
     (if (null? children)
         master
         (cons master (merge-sublists (car children) (cdr children)))))
+  
   ;(display (merge-sublists (car l) (cdr l)))
   ;(display '<-result)
-  (merge-sublists (car (car l)) (cdr l)))
+  (display 'merging)
+  (display l)
+  (if (number? (car (car l)))
+      l
+      ;(merge-sublists (car (car l)) (cdr l))))
+      (merge-sublists (merge-subsublists (car (car l)) (cdr (car l))) (cdr l))))
 
-  
+;(((1 2 3) (1 3 2)) ((2 1 3) (2 3 1)) ((3 1 2) (3 2 1)))
+
+(define (list-permutations-merge base children)
+  (display '--)
+  (display base)
+  (display children)
+  (cond 
+    ((null? children) null)
+    ;((number? children) (list base children))
+    (else 
+      (cons (list base (car children)) (list-permutations-merge base (cdr children))))))
+      ;(list-permutations-merge (cons base (car children)) (cdr children))))
 
 ;; list-permutations
 ; DEFINE list-permutations HERE
 (define (list-permutations l)
   ; Function to generate all rotations for a given list
+  ;TODO: put here
   
   ; Function to recursively invoke the permutations function on sublists
   (define (list-permutations-helper l)
-    ;(cons (car l) (list-map list-permutations (list-rotate (cdr l) (cdr l)))))
     (cond 
-      ((equal? (length l) 1) (cons l null))
-      ;((null? l) null)
+      ((equal? (length l) 1) (list l))
+      ;((null? l) l)
       (else 
-        ;(list-merge-sublists (list-map (lambda (x) (list-merge (cons (car l) x))) (list-permutations (cdr l))))))
-        (list-map (lambda (x) (list-append (car l) x)) (list-permutations (cdr l))))))
-    ;(cons (car l) (list-permutations (cdr l)))); (list-rotate (cdr l) (cdr l))))) 
-  ;(lambda (x) (cons (car l) x))
-    ;(cons (car l) (list-rotate (cdr l) (cdr l))))
+       (list-map (lambda (x) (cons (car l) x)) (list-permutations (cdr l))))))
+       ;(list-permutations-merge (car l) (list-permutations (cdr l))))))
   (cond
     ((null? l) null)
-    ;((equal? (length l) 1) (list l))
-    ;((equal? (length l) 2) (list (cons (get-1st l) (get-2nd l)) (cons (get-2nd l) (get-1st l))))
     (else 
      (list-map list-permutations-helper (list-rotate l l)))))
-  ;(list-rotate l l))
 
 ;(list-permutations '(1 2 3))
 
