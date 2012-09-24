@@ -498,18 +498,23 @@
     ((null? l) null)
     (else 
      (list-map list-permutations-helper (list-rotate l l)))))|#
+  ; Helper function that inserts an element elem into every spot in the list l
+  ; TODO: write my own insert everywhere function (to replace this one)
   (define (permutations-insert elem l)
     (define (permutations-insert-helper elem l1 l2) 
-      (if (null? l2) (cons (append l1 (cons elem null)) null)
-          (cons (append l1 (cons elem l2)) 
-                (permutations-insert-helper elem (append l1 (cons (car l2) null)) (cdr l2)))))
+      (if (null? l2) 
+          (cons (list-append l1 (cons elem null)) null) 
+          (cons (list-append l1 (cons elem l2)) 
+                (permutations-insert-helper elem (list-append l1 (cons (car l2) null)) (cdr l2)))))
     (permutations-insert-helper elem null l))
   
-  ; Function that is designed to 
+  ; Function that is designed to invoke the insert routine for every element in list l and 
+  ; return a list of the results
   (define (permutations-helper elem l)
     (if (null? l) 
         null
-        (list-append (permutations-insert elem (car l)) (permutations-helper elem (cdr l)))))
+        (list-append (permutations-insert elem (car l)) (permutations-helper elem (cdr l))))) ; Build up the list of permutations
+  
   ; Run the permutations helper function
   (if (null? l)
       '(()) ; short-circuit here so we avoid error with car/cdr later
