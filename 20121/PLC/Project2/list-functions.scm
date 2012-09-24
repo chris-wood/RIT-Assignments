@@ -487,7 +487,7 @@
   ;TODO: put here
   
   ; Function to recursively invoke the permutations function on sublists
-  (define (list-permutations-helper l)
+  #|(define (list-permutations-helper l)
     (cond 
       ((equal? (length l) 1) (list l))
       ;((null? l) l)
@@ -497,8 +497,24 @@
   (cond
     ((null? l) null)
     (else 
-     (list-map list-permutations-helper (list-rotate l l)))))
-
+     (list-map list-permutations-helper (list-rotate l l)))))|#
+  (define (permutations-insert elem l)
+    (define (permutations-insert-helper elem l1 l2) 
+      (if (null? l2) (cons (append l1 (cons elem null)) null)
+          (cons (append l1 (cons elem l2)) 
+                (permutations-insert-helper elem (append l1 (cons (car l2) null)) (cdr l2)))))
+    (permutations-insert-helper elem null l))
+  
+  ; Function that is designed to 
+  (define (permutations-helper elem l)
+    (if (null? l) 
+        null
+        (list-append (permutations-insert elem (car l)) (permutations-helper elem (cdr l)))))
+  ; Run the permutations helper function
+  (if (null? l)
+      '(()) ; short-circuit here so we avoid error with car/cdr later
+      (permutations-helper (car l) (list-permutations (cdr l)))))
+  
 ;(list-permutations '(1 2 3))
 
 ;; list-permutations tests
@@ -552,7 +568,7 @@
         list-permutations-test04
         list-permutations-test05))
 ; Uncomment the following to test your list-permutations procedure.
-; (run-tests list-permutations (lambda (l1 l2) (list-as-set-equal? equal? l1 l2)) list-permutations-tests)
+(run-tests list-permutations (lambda (l1 l2) (list-as-set-equal? equal? l1 l2)) list-permutations-tests)
 
 
 ;; list-argmin
