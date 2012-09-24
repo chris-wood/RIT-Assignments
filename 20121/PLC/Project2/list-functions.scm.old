@@ -34,7 +34,7 @@
 (define (list-reverse l)
   (define (list-reverse-aux l1 l2)
     (if (null? l1) l2
-        (list-reverse-aux (cdr l1) (cons (car l1) l2))))
+        (list-reverse-aux (list-permutations '(1 2 3))(cdr l1) (cons (car l1) l2))))
     (list-reverse-aux l '()))
 
 ; list append (using reverse)
@@ -86,6 +86,13 @@
 
 ;; list-uniquify
 ; DEFINE list-uniquify HERE
+(define (list-uniquify l)
+  (if (null? l) null
+      (cons 
+       (car l) 
+       (list-filter 
+        (lambda (x) (not (equal? x (car l)))) 
+        (list-uniquify (cdr l))))))
 
 ;; list-uniquify tests
 (define list-uniquify-test01
@@ -145,11 +152,17 @@
         list-uniquify-test10
         list-uniquify-test11))
 ; Uncomment the following to test your list-uniquify procedure.
-; (run-tests list-uniquify equal? list-uniquify-tests)
+(run-tests list-uniquify equal? list-uniquify-tests)
 
 
 ;; list-swizzle
 ; DEFINE list-swizzle HERE
+(define (list-swizzle l1 l2)
+  (cond
+    ((and (null? l1) (null? l2)) null)
+    ((null? l1) (cons (car l2) (list-swizzle l1 (cdr l2))))
+    ((null? l2) (cons (car l1) (list-swizzle l2 (cdr l1))))
+    (else (cons (car l1) (cons (car l2) (list-swizzle (cdr l1) (cdr l2)))))))
 
 ;; list-swizzle tests
 (define list-swizzle-test01
@@ -189,11 +202,25 @@
         list-swizzle-test06
         list-swizzle-test07))
 ; Uncomment the following to test your list-swizzle procedure.
-; (run-tests list-swizzle equal? list-swizzle-tests)
+(run-tests list-swizzle equal? list-swizzle-tests)
 
 
 ;; list-sublist?
 ; DEFINE list-sublist? HERE
+(define (list-sublist? l1 l2)
+  (define (pop-stack l stack) ; function to pop the stack state off onto the second list parameter
+    (if (null? stack)
+        l ; return the end result
+        (pop-stack (cons (car stack) l) (cdr stack))))
+  (define (sublist l1 l2 stack) ; function to perform list-sublist? but maintain state so we can roll back if matches don't occur
+    (cond
+      ((null? l2) #t)
+      ((null? l1) #f)
+      ((equal? (car l1) (car l2))
+       (sublist (cdr l1) (cdr l2) (cons (car l1) stack)))
+      (else 
+       (sublist (cdr l1) (pop-stack l2 stack) null)))) ; reset the second list and reset the stack to null
+  (sublist l1 l2 null))  
 
 ;; list-sublist? tests
 (define list-sublist?-test01
@@ -273,11 +300,16 @@
         list-sublist?-test14
         list-sublist?-test15))
 ; Uncomment the following to test your list-sublist? procedure.
-; (run-tests list-sublist? equal? list-sublist?-tests)
+(run-tests list-sublist? equal? list-sublist?-tests)
 
 
 ;; list-permutation?
 ; DEFINE list-permutation? HERE
+(define (list-permutation? l1 l2)
+  (cond
+    ((not (equal? (length l1) (length l2))) #f)
+    ((and (null? l1) (null? l2)) #t)
+    (else (list-permutation? (cdr l1) (list-filter (lambda (x) (not (equal? x (car l1)))) l2)))))
 
 ;; list-permutation? tests
 (define list-permutation?-test01
@@ -362,11 +394,109 @@
         list-permutation?-test15
         list-permutation?-test16))
 ; Uncomment the following to test your list-permutation? procedure.
-; (run-tests list-permutation? equal? list-permutation?-tests)
+(run-tests list-permutation? equal? list-permutation?-tests)
 
+
+(define (list-rotate orig used)
+      (if (null? used)
+        null
+        (cons 
+         (cons 
+          (car used) 
+          (list-filter 
+           (lambda (x) (not (equal? x (car used)))) 
+           orig))
+         (list-rotate orig (cdr used)))))
+
+(define (list-merge l)
+  ; assumes list is of the form (root (children))
+  (define (merge-all l l1)
+    ;(display 'here!)
+    (if (null? l1)
+        null
+        (cons 
+         (merge l (car l1))
+         (merge-all l (cdr l1)))))
+         ;(merge l (car l1)))))
+  (define (merge l1 l2)
+    ;(display '--)
+    ;(display l1)
+    ;(display ': )
+    ;(display l2)
+    (cond 
+      ((null? l2) (cons l1 null))
+      ;((equal? (length l2) 1) (cons l1 l2)) 
+      (else
+        (cons l1 (merge (car l2) (cdr l2))))))
+  ;(display 'merging )
+  ;(display l)
+  (cond  
+    ;((number? (cdr l)) (cons (car l) (cdr l)))
+    ((number? (cdr l)) (cons (cdr l) null))
+    ((number? (car (cdr l))) 
+     (cons (car l) (cdr l)))
+    (else 
+     ;(display 'casetwo) 
+     (merge-all (car l) (cdr l)))))
+
+(define (merge-subsublists master children)
+    (if (null? children)
+        master
+        (cons (cons master (car children)) (merge-subsublists master (cdr children)))))
+ 
+(define (list-merge-sublists l)
+  ; assume l is of the form l = ((l1)(l2)), we want (l1 l2)
+  (define (merge-sublists master children)
+    ;(display '--)
+    ;(display master)
+    ;(display ':)
+    ;(display children)
+    (if (null? children)
+        master
+        (cons master (merge-sublists (car children) (cdr children)))))
+  
+  ;(display (merge-sublists (car l) (cdr l)))
+  ;(display '<-result)
+  (display 'merging)
+  (display l)
+  (if (number? (car (car l)))
+      l
+      ;(merge-sublists (car (car l)) (cdr l))))
+      (merge-sublists (merge-subsublists (car (car l)) (cdr (car l))) (cdr l))))
+
+;(((1 2 3) (1 3 2)) ((2 1 3) (2 3 1)) ((3 1 2) (3 2 1)))
+
+(define (list-permutations-merge base children)
+  (display '--)
+  (display base)
+  (display children)
+  (cond 
+    ((null? children) null)
+    ;((number? children) (list base children))
+    (else 
+      (cons (list base (car children)) (list-permutations-merge base (cdr children))))))
+      ;(list-permutations-merge (cons base (car children)) (cdr children))))
 
 ;; list-permutations
 ; DEFINE list-permutations HERE
+(define (list-permutations l)
+  ; Function to generate all rotations for a given list
+  ;TODO: put here
+  
+  ; Function to recursively invoke the permutations function on sublists
+  (define (list-permutations-helper l)
+    (cond 
+      ((equal? (length l) 1) (list l))
+      ;((null? l) l)
+      (else 
+       (list-map (lambda (x) (cons (car l) x)) (list-permutations (cdr l))))))
+       ;(list-permutations-merge (car l) (list-permutations (cdr l))))))
+  (cond
+    ((null? l) null)
+    (else 
+     (list-map list-permutations-helper (list-rotate l l)))))
+
+;(list-permutations '(1 2 3))
 
 ;; list-permutations tests
 (define list-permutations-test01
@@ -424,6 +554,19 @@
 
 ;; list-argmin
 ; DEFINE list-argmin HERE
+(define (list-argmin f l)
+  (if (null? l) 
+      #f ; the input list is empty, so return false
+      (if (equal? #f (list-argmin f (cdr l)))
+          (car l) ; pick the last element in the list by default
+          (let*   ; perform a comparison if the list is longer than one element
+              ((arg1 (car l))
+               (arg2 (list-argmin f (cdr l)))
+               (val1 (f arg1))
+               (val2 (f arg2)))
+            (if (<= val1 val2)
+                arg1
+                arg2)))))
 
 ;; list-argmin tests
 (define list-argmin-test01
@@ -463,4 +606,4 @@
         list-argmin-test06
         list-argmin-test07))
 ; Uncomment the following to test your list-argmin procedure.
-; (run-tests list-argmin equal? list-argmin-tests)
+(run-tests list-argmin equal? list-argmin-tests)

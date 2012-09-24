@@ -208,19 +208,19 @@
 ;; list-sublist?
 ; DEFINE list-sublist? HERE
 (define (list-sublist? l1 l2)
-  (define (pop-stack l stack) ; function to pop the stack state off onto the second list parameter
+  (define (pop-stack-helper l stack) ; function to pop the stack state off onto the second list parameter
     (if (null? stack)
         l ; return the end result
-        (pop-stack (cons (car stack) l) (cdr stack))))
-  (define (sublist l1 l2 stack) ; function to perform list-sublist? but maintain state so we can roll back if matches don't occur
+        (pop-stack-helper (cons (car stack) l) (cdr stack))))
+  (define (sublist-helper l1 l2 stack) ; function to perform list-sublist? but maintain state so we can roll back if matches don't occur
     (cond
       ((null? l2) #t)
       ((null? l1) #f)
       ((equal? (car l1) (car l2))
-       (sublist (cdr l1) (cdr l2) (cons (car l1) stack)))
+       (sublist-helper (cdr l1) (cdr l2) (cons (car l1) stack))) ; pop off the front of each list and continue searching
       (else 
-       (sublist (cdr l1) (pop-stack l2 stack) null)))) ; reset the second list and reset the stack to null
-  (sublist l1 l2 null))  
+       (sublist-helper (cdr l1) (pop-stack-helper l2 stack) null)))) ; reset the second list to its original state the stack to null
+  (sublist-helper l1 l2 null)) ; invoke the helper
 
 ;; list-sublist? tests
 (define list-sublist?-test01
@@ -309,7 +309,10 @@
   (cond
     ((not (equal? (length l1) (length l2))) #f)
     ((and (null? l1) (null? l2)) #t)
-    (else (list-permutation? (cdr l1) (list-filter (lambda (x) (not (equal? x (car l1)))) l2)))))
+    (else 
+     (list-permutation? 
+      (cdr l1) 
+      (list-filter (lambda (x) (not (equal? x (car l1)))) l2))))) 
 
 ;; list-permutation? tests
 (define list-permutation?-test01

@@ -206,41 +206,31 @@
 ;; btree-deepest
 ; DEFINE btree-deepest HERE
 (define (btree-deepest bt)
-  (define (deepest tree)
+  ; Helper function for the deepest serach
+  (define (deepest-helper tree)
     (cond
       ((and (node? (get-node-l tree)) (node? (get-node-r tree))) ; if they're both nodes, choose which one has the deepest element
-       (let
-           ((left (deepest (get-node-l tree)))
-            (right (deepest (get-node-r tree))))
-         (if (>= (cdr left) (cdr right)) ; choose the one that has the deepest element
+       (let ; to reduce typing!
+           ((left (deepest-helper (get-node-l tree)))
+            (right (deepest-helper (get-node-r tree))))
+         (if (>= (cdr left) (cdr right)) ; choose the one that has the deepest element (with preference to the left)
              (cons (car left) (+ 1 (cdr left)))
              (cons (car right) (+ 1 (cdr right))))))
-      ((node? (get-node-l tree)) ; TODO: use let to store result from 1 function call
-       (cons (car (deepest (get-node-l tree))) (+ 1 (cdr (deepest (get-node-l tree)))))) ; pass up 1 + deepness of left
-      ((node? (get-node-r tree)) ; TODO: use let to store result from 1 function call
-       (cons (car (deepest (get-node-r tree))) (+ 1 (cdr (deepest (get-node-r tree)))))) ; pass up 1 + deepeness of right
+      ((node? (get-node-l tree)) ; if only the left is a node, pass up 1 + 
+       (let ; to reduce typing!
+           ((fVal (deepest-helper (get-node-l tree)))) 
+         (cons (car fVal) (+ 1 (cdr fVal))))) ; pass up 1 + deepness of left
+      ((node? (get-node-r tree)) 
+       (let ; to reduce typing!
+           ((fVal (deepest-helper (get-node-r tree))))
+         (cons (car fVal) (+ 1 (cdr fVal))))) ; pass up 1 + deepeness of right
       (else 
        (cons (get-node-x tree) 0)))) ; pass up data and 0 (we didn't go any deeper)
- (if (or (null? bt) (leaf? bt))
+  
+  ; Invoke the helper function
+  (if (or (null? bt) (leaf? bt))
       #f ; null tree or leaf returns false
-      (car (deepest bt))))
-  
-  #|
-  (define (deepest-element bt d)
-    (if (leaf? bt)
-        (list #f -1) ; pass up data to indicate not to pick this branch
-        (cond ; pass up the first element
-          ((and (node? (get-node-l bt)) (node? (get-node-r bt))) 
-           (if (>= (cdr (deepest-element (get-node-l bt) (+ 1 d))) d)
-               (list #f -1)
-               (deepest-element (get-node-l bt) (+ 1 d))))
-          ((node? (get-node-l bt)) (deepest-element (get-node-l bt) (+ 1 d)))
-          ((node? (get-node-r bt)) (deepest-element (get-node-r bt) (+ 1 d)))
-          (else (list (get-node-x bt) 0)))))
-  (if (null? bt)
-      #f
-      (car (deepest-element bt -1))))|#
-  
+      (car (deepest-helper bt))))
 
 ;; btree-deepest tests
 (define btree-deepest-test01
@@ -280,41 +270,28 @@
 
 ;; btree-subtree?
 ; DEFINE btree-subtree? HERE
-; TODO: copying from sublist? in lists file makes it work about 50% - need to figure out why the rest fail
-; TODO: there are a couple cases being omitted (what if one is node and other is not? etc etc)
 (define (btree-subtree? bt1 bt2)
   (define (pop-stack bt stack) ; function to pop the stack state off onto the second list parameter
     (if (null? stack)
         bt ; return the end result
         (pop-stack (cons (car stack) bt) (cdr stack))))
-  (define (subtree? bt1 bt2 stack) ; function to perform btree-subtree? but maintain state so we can roll back if matches don't occur - the stack is a stack of nodes that are visited on l/r basis
+  ; Function to perform btree-subtree? but maintain state so we can roll back if matches don't occur.
+  ; The stack is a stack of nodes that are visited on l/r basis
+  (define (subtree? bt1 bt2 stack) 
     (cond
-      ;((null? bt2) #t) 
-      ;((null? bt1) #f)
       ((and (leaf? bt1) (leaf? bt2)) #t)
-      ((leaf? bt1) #f) 
-      ((leaf? bt2) #t) ; this is okay, since we know that btrees are proper (they have leaves at terminating endpoints, so we can short-circuit here)
-       ;(or 
-        ;(subtree? (get-node-l bt1) (pop-stack bt2 stack) null)
-        ;(subtree? (get-node-r bt1) (pop-stack bt2 stack) null)))
-      (else ;(and (node? bt1) (node? bt2)) ; if they are both nodes and their values are equal, make sure l/r subtrees are subtrees too
+      ((leaf? bt1) #f) ; can't be a subtree of a leaf if we're not a leaf
+      ((leaf? bt2) #t) ; btrees are proper so we can short-circuit here
+      (else ; both trees are nodes
        (cond
-         ((equal? (get-node-x bt1) (get-node-x bt2))
-          ; need to do cases for one leaf on left and one leaf on right
-          (if (and (leaf? (get-node-l bt2)) (leaf? (get-node-r bt2))) ; if bt2 has an equal value but doesn't have any more leaves, then it is a subtree of bt1
-              ;#t ; TODO: remove this check, since i fixed the base case and no longer need to do it!
-              (and 
-               (subtree? (get-node-l bt1) (get-node-l bt2) (cons bt1 stack)) 
-               (subtree? (get-node-r bt1) (get-node-r bt2) (cons bt2 stack)))
-              (and 
-               (subtree? (get-node-l bt1) (get-node-l bt2) (cons bt1 stack)) 
-               (subtree? (get-node-r bt1) (get-node-r bt2) (cons bt2 stack)))))
-         (else 
-          (or 
+         ((equal? (get-node-x bt1) (get-node-x bt2)) ; if the nodes are equal, maintain the tree state and check both children
+          (and 
+           (subtree? (get-node-l bt1) (get-node-l bt2) (cons bt1 stack)) 
+           (subtree? (get-node-r bt1) (get-node-r bt2) (cons bt2 stack))))
+         (else ; if the nodes are not equal then reset the second tree operand and try both branches
+          (or
            (subtree? (get-node-l bt1) (pop-stack bt2 stack) null)
            (subtree? (get-node-r bt1) (pop-stack bt2 stack) null)))))))
-      ;(else #f)))
-           ;(subtree? (cdr bt1) (pop-stack bt2 stack) null)))) ; reset the second list and reset the stack to null
            
   (subtree? bt1 bt2 null))
 
@@ -717,24 +694,15 @@
 (define (sbtree-insert sbt e)
   (define (insert bt comp e)
     (cond 
-      ;((null? bt) #f)
       ((leaf? bt) (node leaf e leaf)) ; return the new leaf in the tree
       (else 
-       (let 
-           ((left (insert (get-node-l bt) comp e)) ; store the resulting btree
-            (right (insert (get-node-r bt) comp e))) ; store the resulting btree
-         (if (equal? e (get-node-x bt)) 
-             bt ; we found a duplicate, so return a null element
-             (if (comp e (get-node-x bt)) ; run the comparison and check the correct branch
-                 ;(if (null? left)
-                    ; (get-node-l bt) ; return original left hand side
-                     (node left (get-node-x bt) (get-node-r bt))
-                 ;(if (null? right)
-                     ;(get-node-r bt) ; return original right hand side
-                     (node (get-node-l bt) (get-node-x bt) right)))))))
-                ;(node (insert (get-node-l bt) comp e) (get-node-x bt) (get-node-r bt))
-                ;(node (get-node-l bt) (get-node-x bt) (insert (get-node-r bt) comp e)))))))
-  (list 'sbtree (get-2nd sbt) (insert (get-3rd sbt) (get-2nd sbt) e))) ; extract the comparison operator and tree and call the new find function
+       (if (equal? e (get-node-x bt)) 
+           bt ; we found a duplicate, so return the subtree
+           (if (comp e (get-node-x bt)) ; run the comparison and check the correct branch
+               (node (insert (get-node-l bt) comp e) (get-node-x bt) (get-node-r bt))
+               (node (get-node-l bt) (get-node-x bt) (insert (get-node-r bt) comp e)))))))
+  ; Extract the comparison operator and tree and call the new insert function
+  (list 'sbtree (get-2nd sbt) (insert (get-3rd sbt) (get-2nd sbt) e))) 
   
 
 ;; sbtree-insert tests
