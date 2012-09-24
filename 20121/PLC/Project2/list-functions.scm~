@@ -34,7 +34,7 @@
 (define (list-reverse l)
   (define (list-reverse-aux l1 l2)
     (if (null? l1) l2
-        (list-reverse-aux (cdr l1) (cons (car l1) l2))))
+        (list-reverse-aux (list-permutations '(1 2 3))(cdr l1) (cons (car l1) l2))))
     (list-reverse-aux l '()))
 
 ; list append (using reverse)

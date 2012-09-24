@@ -198,7 +198,7 @@
         (list fn-ex2 0 5 -99)
         5))
 (define fn-clamp-test09
-  (list "fn-clamp-test09" 
+  (list "fn-clamp-test09"
         (list fn-ex5 0 5 2)
         2))
 (define fn-clamp-tests
@@ -244,13 +244,6 @@
 
 ;; fn-arg-rev
 ; DEFINE fn-arg-rev HERE
-(define (list-reverse l) ; same function defined in list-functions.scm
-  (define (list-reverse-aux l1 l2)
-    (if (null? l1) l2
-        (list-reverse-aux (cdr l1) (cons (car l1) l2))))
-    (list-reverse-aux l '()))
-(define (fn-arg-rev f)
-  (lambda vars (apply f (list-reverse vars))))
 
 ;; fn-arg-rev tests
 (define fn-arg-rev-test01
@@ -300,7 +293,7 @@
         fn-arg-rev-test08
         fn-arg-rev-test09))
 ; Uncomment the following to test your fn-arg-rev procedure.
-(run-tests (lambda (f . z) (apply (fn-arg-rev f) z)) equal? fn-arg-rev-tests)
+; (run-tests (lambda (f . z) (apply (fn-arg-rev f) z)) equal? fn-arg-rev-tests)
 
 
 ;; mk-cr-fn
