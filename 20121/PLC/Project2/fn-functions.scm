@@ -244,12 +244,15 @@
 
 ;; fn-arg-rev
 ; DEFINE fn-arg-rev HERE
-(define (list-reverse l) ; same function defined in list-functions.scm
-  (define (list-reverse-aux l1 l2)
-    (if (null? l1) l2
-        (list-reverse-aux (cdr l1) (cons (car l1) l2))))
-    (list-reverse-aux l '()))
 (define (fn-arg-rev f)
+  ; Same function defined in list-functions.scm
+  (define (list-reverse l)  
+    (define (list-reverse-aux l1 l2)
+      (if (null? l1) l2
+          (list-reverse-aux (cdr l1) (cons (car l1) l2))))
+    (list-reverse-aux l '()))
+  
+  ; Apply the reverse of the argument list
   (lambda vars (apply f (list-reverse vars))))
 
 ;; fn-arg-rev tests
@@ -306,6 +309,7 @@
 ;; mk-cr-fn
 ; DEFINE mk-cr-fn HERE
 (define (mk-cr-fn s)
+  ; Helper function that appends the right amount of car/cdr calls based on the passed in list of characters
   (define (mk-cr-fn-list l)
     (lambda (x)
       (cond
@@ -313,6 +317,8 @@
         ((equal? (car l) #\a) (car ((mk-cr-fn-list (cdr l)) x))) 
         ((equal? (car l) #\d) (cdr ((mk-cr-fn-list (cdr l)) x)))
         (else x))))
+  
+  ; Convert the string into a list and then call the helper function
   (mk-cr-fn-list (string->list s)))
 
 ; mk-cr-fn tests

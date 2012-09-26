@@ -211,12 +211,12 @@
     (cond
       ((and (node? (get-node-l tree)) (node? (get-node-r tree))) ; if they're both nodes, choose which one has the deepest element
        (let ; to reduce typing!
-           ((leftVal (deepest-helper (get-node-l tree)))
-            (rightVal (deepest-helper (get-node-r tree))))
-         (if (>= (cdr leftVal) (cdr rightVal)) ; choose the one that has the deepest element (with preference to the left)
-             (cons (car leftVal) (+ 1 (cdr leftVal)))
-             (cons (car rightVal) (+ 1 (cdr rightVal))))))
-      ((node? (get-node-l tree)) 
+           ((left (deepest-helper (get-node-l tree)))
+            (right (deepest-helper (get-node-r tree))))
+         (if (>= (cdr left) (cdr right)) ; choose the one that has the deepest element (with preference to the left)
+             (cons (car left) (+ 1 (cdr left)))
+             (cons (car right) (+ 1 (cdr right))))))
+      ((node? (get-node-l tree)) ; if only the left is a node, pass up 1 + 
        (let ; to reduce typing!
            ((fVal (deepest-helper (get-node-l tree)))) 
          (cons (car fVal) (+ 1 (cdr fVal))))) ; pass up 1 + deepness of left
@@ -271,12 +271,10 @@
 ;; btree-subtree?
 ; DEFINE btree-subtree? HERE
 (define (btree-subtree? bt1 bt2)
-  ; Function to pop the stack state off onto the second list parameter
-  (define (pop-stack bt stack) 
+  (define (pop-stack bt stack) ; function to pop the stack state off onto the second list parameter
     (if (null? stack)
         bt ; return the end result
         (pop-stack (cons (car stack) bt) (cdr stack))))
-  
   ; Function to perform btree-subtree? but maintain state so we can roll back if matches don't occur.
   ; The stack is a stack of nodes that are visited on l/r basis
   (define (subtree? bt1 bt2 stack) 
@@ -295,7 +293,6 @@
            (subtree? (get-node-l bt1) (pop-stack bt2 stack) null)
            (subtree? (get-node-r bt1) (pop-stack bt2 stack) null)))))))
            
-  ; Invoke the subtree check function
   (subtree? bt1 bt2 null))
 
 ;; btree-subtree? tests
@@ -475,104 +472,16 @@
 (define btree-subtrees-test03
   (list "btree-subtrees-test03"
         (list btree-ex3)
-        (list btree-ex3 
-              (node (node leaf 1 leaf) 2 leaf)
-              (node leaf 1 leaf)
-              (node leaf 2 (node leaf 3 leaf))
-              (node leaf 2 leaf)
-              (node leaf 3 leaf)
-              leaf)))
+        (list btree-ex3 (node leaf 1 leaf) (node leaf 3 leaf) leaf)))
 (define btree-subtrees-test04
   (list "btree-subtrees-test04"
         (list btree-ex4)
-        (list btree-ex4 
-              (node (node (node leaf 1 leaf) 2 leaf) 3 (node leaf 5 leaf))
-              (node (node (node leaf 1 leaf) 2 leaf) 3 leaf)
-              (node (node leaf 1 leaf) 2 leaf)
-              (node (node leaf 2 leaf) 3 (node (node leaf 4 leaf) 5 leaf))
-              (node (node leaf 2 leaf) 3 (node leaf 5 leaf))
-              (node (node leaf 2 leaf) 3 leaf)
-              (node (node leaf 4 leaf) 5 leaf)
-              (node leaf 1 leaf)
-              (node leaf 2 leaf)
-              (node leaf 3 (node (node leaf 4 leaf) 5 leaf))
-              (node leaf 3 (node leaf 5 leaf))
-              (node leaf 3 leaf)
-              (node leaf 4 leaf)
-              (node leaf 5 leaf)
-              leaf)))
-(define btree-subtrees-test05
-  (list "btree-subtrees-test05"
-        (list btree-ex5)
-        (list btree-ex5
-              (node (node (node leaf 1 (node leaf "a" leaf)) 2 leaf) 3 (node leaf 5 leaf))
-              (node (node (node leaf 1 (node leaf "a" leaf)) 2 leaf) 3 leaf)
-              (node (node (node leaf 1 leaf) 2 leaf) 3 (node (node leaf 4 leaf) 5 leaf))
-              (node (node (node leaf 1 leaf) 2 leaf) 3 (node leaf 5 leaf))
-              (node (node (node leaf 1 leaf) 2 leaf) 3 leaf)
-              (node (node leaf 1 (node leaf "a" leaf)) 2 leaf)
-              (node (node leaf 1 leaf) 2 leaf)
-              (node (node leaf 2 leaf) 3 (node (node leaf 4 leaf) 5 leaf))
-              (node (node leaf 2 leaf) 3 (node leaf 5 leaf))
-              (node (node leaf 2 leaf) 3 leaf)
-              (node (node leaf 4 leaf) 5 leaf)
-              (node leaf "a" leaf)
-              (node leaf 1 (node leaf "a" leaf))
-              (node leaf 1 leaf)
-              (node leaf 2 leaf)
-              (node leaf 3 (node (node leaf 4 leaf) 5 leaf))
-              (node leaf 3 (node leaf 5 leaf))
-              (node leaf 3 leaf)
-              (node leaf 4 leaf)
-              (node leaf 5 leaf)
-              leaf)))
-(define btree-subtrees-test06
-  (list "btree-subtrees-test06"
-        (list btree-ex6)
-        (list btree-ex6
-              (node (node (node (node leaf "b" leaf) "c" leaf) 4 leaf) 5 leaf)
-              (node (node (node leaf "b" leaf) "c" leaf) 4 leaf)
-              (node (node (node leaf "c" leaf) 4 leaf) 5 leaf)
-              (node (node (node leaf 1 (node leaf "a" leaf)) 2 leaf) 3 (node (node (node leaf "c" leaf) 4 leaf) 5 leaf))
-              (node (node (node leaf 1 (node leaf "a" leaf)) 2 leaf) 3 (node (node leaf 4 leaf) 5 leaf))
-              (node (node (node leaf 1 (node leaf "a" leaf)) 2 leaf) 3 (node leaf 5 leaf))
-              (node (node (node leaf 1 (node leaf "a" leaf)) 2 leaf) 3 leaf)
-              (node (node (node leaf 1 leaf) 2 leaf) 3 (node (node (node (node leaf "b" leaf) "c" leaf) 4 leaf) 5 leaf))
-              (node (node (node leaf 1 leaf) 2 leaf) 3 (node (node (node leaf "c" leaf) 4 leaf) 5 leaf))
-              (node (node (node leaf 1 leaf) 2 leaf) 3 (node (node leaf 4 leaf) 5 leaf))
-              (node (node (node leaf 1 leaf) 2 leaf) 3 (node leaf 5 leaf))
-              (node (node (node leaf 1 leaf) 2 leaf) 3 leaf)
-              (node (node leaf "b" leaf) "c" leaf)
-              (node (node leaf "c" leaf) 4 leaf)
-              (node (node leaf 1 (node leaf "a" leaf)) 2 leaf)
-              (node (node leaf 1 leaf) 2 leaf)
-              (node (node leaf 2 leaf) 3 (node (node (node (node leaf "b" leaf) "c" leaf) 4 leaf) 5 leaf))
-              (node (node leaf 2 leaf) 3 (node (node (node leaf "c" leaf) 4 leaf) 5 leaf))
-              (node (node leaf 2 leaf) 3 (node (node leaf 4 leaf) 5 leaf))
-              (node (node leaf 2 leaf) 3 (node leaf 5 leaf))
-              (node (node leaf 2 leaf) 3 leaf)
-              (node (node leaf 4 leaf) 5 leaf)
-              (node leaf "a" leaf)
-              (node leaf "b" leaf)
-              (node leaf "c" leaf)
-              (node leaf 1 (node leaf "a" leaf))
-              (node leaf 1 leaf)
-              (node leaf 2 leaf)
-              (node leaf 3 (node (node (node (node leaf "b" leaf) "c" leaf) 4 leaf) 5 leaf))
-              (node leaf 3 (node (node (node leaf "c" leaf) 4 leaf) 5 leaf))
-              (node leaf 3 (node (node leaf 4 leaf) 5 leaf))
-              (node leaf 3 (node leaf 5 leaf))
-              (node leaf 3 leaf)
-              (node leaf 4 leaf)
-              (node leaf 5 leaf)
-              leaf)))
+        (list btree-ex4 (node (node leaf 1 leaf) 2 leaf) (node leaf 1 leaf) (node (node leaf 4 leaf) 5 leaf) (node leaf 4 leaf) leaf)))
 (define btree-subtrees-tests
   (list btree-subtrees-test01
         btree-subtrees-test02
         btree-subtrees-test03
-        btree-subtrees-test04
-        btree-subtrees-test05
-        btree-subtrees-test06))
+        btree-subtrees-test04))
 ; Uncomment the following to test your btree-subtrees procedure.
 ; (run-tests btree-subtrees (lambda (l1 l2) (list-as-set-equal? equal? l1 l2)) btree-subtrees-tests)
 
@@ -631,8 +540,7 @@
 ;; sbtree-find
 ; DEFINE sbtree-find HERE
 (define (sbtree-find sbt e)
-  ; Helper function that simply traverss the sbtree using the comp comparison
-  (define (sbtree-find-helper bt comp e)
+  (define (find bt comp e)
     (cond 
       ((null? bt) #f)
       ((leaf? bt) #f)
@@ -640,11 +548,9 @@
        (if (equal? e (get-node-x bt)) 
             #t ; we found the element
             (if (comp e (get-node-x bt)) ; run the comparison and check the right branch
-                (sbtree-find-helper (get-node-l bt) comp e)
-                (sbtree-find-helper (get-node-r bt) comp e))))))
-  
-  ; Extract the comparison operator and tree and call the new find function
-  (sbtree-find-helper (get-3rd sbt) (get-2nd sbt) e)) 
+                (find (get-node-l bt) comp e)
+                (find (get-node-r bt) comp e))))))
+  (find (get-3rd sbt) (get-2nd sbt) e)) ; extract the comparison operator and tree and call the new find function
             
 
 ;; sbtree-find tests
@@ -786,20 +692,17 @@
 ;; sbtree-insert
 ; DEFINE sbtree-insert HERE
 (define (sbtree-insert sbt e)
-  ; Helper function to traverse the tree using insert and check for the place to insert it
-  (define (sbtree-insert-helper bt comp e)
+  (define (insert bt comp e)
     (cond 
       ((leaf? bt) (node leaf e leaf)) ; return the new leaf in the tree
       (else 
        (if (equal? e (get-node-x bt)) 
            bt ; we found a duplicate, so return the subtree
            (if (comp e (get-node-x bt)) ; run the comparison and check the correct branch
-               (node (sbtree-insert-helper (get-node-l bt) comp e) (get-node-x bt) (get-node-r bt))
-               (node (get-node-l bt) (get-node-x bt) (sbtree-insert-helper (get-node-r bt) comp e)))))))
-  
+               (node (insert (get-node-l bt) comp e) (get-node-x bt) (get-node-r bt))
+               (node (get-node-l bt) (get-node-x bt) (insert (get-node-r bt) comp e)))))))
   ; Extract the comparison operator and tree and call the new insert function
-  ; Then build up the resulting sbtree when done...
-  (list 'sbtree (get-2nd sbt) (sbtree-insert-helper (get-3rd sbt) (get-2nd sbt) e))) 
+  (list 'sbtree (get-2nd sbt) (insert (get-3rd sbt) (get-2nd sbt) e))) 
   
 
 ;; sbtree-insert tests

@@ -399,128 +399,33 @@
 ; Uncomment the following to test your list-permutation? procedure.
 (run-tests list-permutation? equal? list-permutation?-tests)
 
-
-(define (list-rotate orig used)
-      (if (null? used)
-        null
-        (cons 
-         (cons 
-          (car used) 
-          (list-filter 
-           (lambda (x) (not (equal? x (car used)))) 
-           orig))
-         (list-rotate orig (cdr used)))))
-
-(define (list-merge l)
-  ; assumes list is of the form (root (children))
-  (define (merge-all l l1)
-    ;(display 'here!)
-    (if (null? l1)
-        null
-        (cons 
-         (merge l (car l1))
-         (merge-all l (cdr l1)))))
-         ;(merge l (car l1)))))
-  (define (merge l1 l2)
-    ;(display '--)
-    ;(display l1)
-    ;(display ': )
-    ;(display l2)
-    (cond 
-      ((null? l2) (cons l1 null))
-      ;((equal? (length l2) 1) (cons l1 l2)) 
-      (else
-        (cons l1 (merge (car l2) (cdr l2))))))
-  ;(display 'merging )
-  ;(display l)
-  (cond  
-    ;((number? (cdr l)) (cons (car l) (cdr l)))
-    ((number? (cdr l)) (cons (cdr l) null))
-    ((number? (car (cdr l))) 
-     (cons (car l) (cdr l)))
-    (else 
-     ;(display 'casetwo) 
-     (merge-all (car l) (cdr l)))))
-
-(define (merge-subsublists master children)
-    (if (null? children)
-        master
-        (cons (cons master (car children)) (merge-subsublists master (cdr children)))))
- 
-(define (list-merge-sublists l)
-  ; assume l is of the form l = ((l1)(l2)), we want (l1 l2)
-  (define (merge-sublists master children)
-    ;(display '--)
-    ;(display master)
-    ;(display ':)
-    ;(display children)
-    (if (null? children)
-        master
-        (cons master (merge-sublists (car children) (cdr children)))))
-  
-  ;(display (merge-sublists (car l) (cdr l)))
-  ;(display '<-result)
-  (display 'merging)
-  (display l)
-  (if (number? (car (car l)))
-      l
-      ;(merge-sublists (car (car l)) (cdr l))))
-      (merge-sublists (merge-subsublists (car (car l)) (cdr (car l))) (cdr l))))
-
-;(((1 2 3) (1 3 2)) ((2 1 3) (2 3 1)) ((3 1 2) (3 2 1)))
-
-(define (list-permutations-merge base children)
-  (display '--)
-  (display base)
-  (display children)
-  (cond 
-    ((null? children) null)
-    ;((number? children) (list base children))
-    (else 
-      (cons (list base (car children)) (list-permutations-merge base (cdr children))))))
-      ;(list-permutations-merge (cons base (car children)) (cdr children))))
-
 ;; list-permutations
 ; DEFINE list-permutations HERE
 (define (list-permutations l)
-  ; Function to generate all rotations for a given list
-  ;TODO: put here
-  
-  ; Function to recursively invoke the permutations function on sublists
-  #|(define (list-permutations-helper l)
-    (cond 
-      ((equal? (length l) 1) (list l))
-      ;((null? l) l)
-      (else 
-       (list-map (lambda (x) (cons (car l) x)) (list-permutations (cdr l))))))
-       ;(list-permutations-merge (car l) (list-permutations (cdr l))))))
-  (cond
-    ((null? l) null)
-    (else 
-     (list-map list-permutations-helper (list-rotate l l)))))|#
-  ; Helper function that inserts an element elem into every spot in the list l
-  ; TODO: write my own insert everywhere function (to replace this one)
+  ; Helper function that inserts an element elem at every spot in the list l, and stores each list in result
   (define (permutations-insert elem l)
-    (define (permutations-insert-helper elem l1 l2) 
-      (if (null? l2) 
-          (cons (list-append l1 (cons elem null)) null) 
-          (cons (list-append l1 (cons elem l2)) 
-                (permutations-insert-helper elem (list-append l1 (cons (car l2) null)) (cdr l2)))))
-    (permutations-insert-helper elem null l))
+    (define (permutations-insert-helper elem result firstHalf secondHalf)
+      (if (null? secondHalf)
+          ; Add the element to the end of the first half of the list, and then terminate the recursion
+          (list-append result (list (list-append firstHalf (list elem)))) 
+          ; Insert into the list up based on the halves, and then add the result of the recursive call with deeper split
+          (list-append result 
+                       (cons 
+                        (list-append firstHalf (cons elem secondHalf)) ; Insert into the split
+                        (permutations-insert-helper elem result (list-append firstHalf (list (car secondHalf))) (cdr secondHalf)))))) ; Deeper split
+    (permutations-insert-helper elem null null l))
   
   ; Function that is designed to invoke the insert routine for every element in list l and 
   ; return a list of the results
-  (define (permutations-helper elem l)
+  (define (permutations-builder elem l)
     (if (null? l) 
-        null
-        (list-append (permutations-insert elem (car l)) (permutations-helper elem (cdr l))))) ; Build up the list of permutations
+        null ; there are no more permutations for perform an insert on
+        (list-append (permutations-insert elem (car l)) (permutations-builder elem (cdr l))))) ; Build up the list of permutations
   
-  ; Run the permutations helper function
+  ; Run the permutations builder function
   (if (null? l)
       '(()) ; short-circuit here so we avoid error with car/cdr later
-      (permutations-helper (car l) (list-permutations (cdr l)))))
-  
-;(list-permutations '(1 2 3))
+      (permutations-builder (car l) (list-permutations (cdr l)))))
 
 ;; list-permutations tests
 (define list-permutations-test01
