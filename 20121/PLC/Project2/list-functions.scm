@@ -415,13 +415,6 @@
                         (permutations-insert-helper elem result (list-append firstHalf (list (car secondHalf))) (cdr secondHalf)))))) ; Deeper split
     (permutations-insert-helper elem null null l))
   
-  ; Function that is designed to invoke the insert routine for every element in list l and 
-  ; return a list of the results
-  (define (permutations-builder elem l)
-    (if (null? l) 
-        null ; there are no more permutations for perform an insert on
-        (list-append (permutations-insert elem (car l)) (permutations-builder elem (cdr l))))) ; Build up the list of permutations
-  
   ; Use the map routine to invoke the insert function everywhere
   (define (permutations-mapper l)
     (list-map
@@ -435,7 +428,7 @@
         null
         (list-append (car l) (permutations-merge (cdr l)))))
   
-  ; Run the permutations builder function
+  ; Merge the results of performing the result everywhere function on every sub-permutation
   (if (null? l)
       '(()) ; short-circuit here so we avoid error with car/cdr later
       (permutations-merge (permutations-mapper l))))
