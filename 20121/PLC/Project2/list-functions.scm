@@ -422,10 +422,23 @@
         null ; there are no more permutations for perform an insert on
         (list-append (permutations-insert elem (car l)) (permutations-builder elem (cdr l))))) ; Build up the list of permutations
   
+  ; Use the map routine to invoke the insert function everywhere
+  (define (permutations-mapper l)
+    (list-map
+     (lambda (pList)
+       (permutations-insert (car l) pList))
+     (list-permutations (cdr l))))
+  
+  ; Merge the result of the permutations insert map operation
+  (define (permutations-merge l)
+    (if (null? l)
+        null
+        (list-append (car l) (permutations-merge (cdr l)))))
+  
   ; Run the permutations builder function
   (if (null? l)
       '(()) ; short-circuit here so we avoid error with car/cdr later
-      (permutations-builder (car l) (list-permutations (cdr l)))))
+      (permutations-merge (permutations-mapper l))))
 
 ;; list-permutations tests
 (define list-permutations-test01
