@@ -1,5 +1,7 @@
 #lang scheme
 
+; Christopher Wood
+
 ;; Utility functions
 ; function composition
 (define (compose f g) (lambda (x) (f (g x))))
@@ -117,7 +119,7 @@
 ; DEFINE btree-size HERE
 (define (btree-size bt)
   (if (null? bt)
-      -1 ; standard
+      -1 ; null was never specified as an invalid tree or not, so I left this case in
       (if (leaf? bt)
           0
           (+ 1 (btree-size (get-node-l bt)) (btree-size (get-node-r bt))))))
@@ -162,7 +164,7 @@
 ; DEFINE btree-height HERE
 (define (btree-height bt)
   (if (null? bt)
-      -1 ; standard definition for tree height
+      -1 ; null was never specified as an invalid tree or not, so I left this case in
       (if (leaf? bt)
           0
           (max (+ 1 (btree-height (get-node-l bt))) (+ 1 (btree-height (get-node-r bt)))))))

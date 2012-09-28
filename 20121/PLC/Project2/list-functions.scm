@@ -208,11 +208,14 @@
 ;; list-sublist?
 ; DEFINE list-sublist? HERE
 (define (list-sublist? l1 l2)
-  (define (pop-stack-helper l stack) ; function to pop the stack state off onto the second list parameter
+  ; Function to pop the stack state off onto the second list parameter
+  (define (pop-stack-helper l stack) 
     (if (null? stack)
         l ; return the end result
         (pop-stack-helper (cons (car stack) l) (cdr stack))))
-  (define (sublist-helper l1 l2 stack) ; function to perform list-sublist? but maintain state so we can roll back if matches don't occur
+  
+  ; Function to perform list-sublist? but maintain state so we can roll back if matches don't occur
+  (define (sublist-helper l1 l2 stack) 
     (cond
       ((null? l2) #t)
       ((null? l1) #f)
@@ -220,7 +223,9 @@
        (sublist-helper (cdr l1) (cdr l2) (cons (car l1) stack))) ; pop off the front of each list and continue searching
       (else 
        (sublist-helper (cdr l1) (pop-stack-helper l2 stack) null)))) ; reset the second list to its original state the stack to null
-  (sublist-helper l1 l2 null)) ; invoke the helper
+  
+  ; Invoke the helper
+  (sublist-helper l1 l2 null)) 
 
 ;; list-sublist? tests
 (define list-sublist?-test01
