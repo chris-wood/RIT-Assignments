@@ -9,13 +9,28 @@ Reflective Essay \#3 \\
 \end{center}
 
 %Thesis:  \\
+% benefit: can yield more abstract encodings of problem solutions (say examples below)
+% can help quickly employ techniques from both paradigms to help devise and program solutions (leads to evolutionary development of software)
+
+% CURRY HAS BEST OF BOTH WORLDS MAINLY BY
 %1. benefit: nondeterminism joined with functional evaluation is extremely powerful
-% the example with regular expressions is very helpful, and a common problem that programmers face
+%	the example with regular expressions is very helpful, and a common problem that programmers face
+%	computations with incomplete information
 %2. benefit: search strategies for solving nondeterminism in equations increase declarative nature of programs
-% rely on rules of the program to determine functional evaluation with decision trees, not case expressions hand-coded by the programmer
-%3. benefit: can utilize either paradigm simply by omitting the other (don't include free variables in equations and logic programming aspect goes away)
-%4. bad: search strategies aren't able to keep up with modern parallelism (functional languages don't have this issue because they are deterministic)
-%	research is being done to make up for this...
+%	don't imperatively search for solutions, allow non-determinism 	
+%	you can define rules in terms of functional patterns
+% 	rely on rules of the program to determine functional evaluation with decision trees, not case expressions hand-coded by the programmer
+%3. good for prototyping (exploring search space)
+%	when algorithm is unknown, helps clarify problems, search for paths to solutions using constraints on the problem domain, achieved by completeness and soundness of search algorithm
+%4. can only use features from the paradigm that are desired (don't have free variables and multiple rules if we want pure functionality, and don't use functions if we want pure logic)
+
+% bad side for multiple paradigms: complexity of execution (example with search strategy), and available languages (we see features from both paradgims spilling over into 
+%4. bad: search strategies are inefficient and aren't able to keep up with modern parallelism (functional languages don't have this issue because they are deterministic)
+%	programmer needs to explicitly define rules in order to control search strategies (constructive guesses)
+%	of course, demand-driven evaluation of functions leads to more efficiency
+%	research is being done to make up for this, but no proof that it's more efficient yet
+
+% conclusion: functional composition (func) and nondeterminism (logic) combined are good, technology is picking up speed to catch up, and we will hopefully see adoption of this language or major influences on other languages from this research
 
 
 \bibliographystyle{plain}
