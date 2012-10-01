@@ -126,6 +126,13 @@ list_swizzle_tests :-
 
 %% list_partition
 % DEFINE list_partition HERE
+list_partition([],[]).
+list_partition([H1|T1],[H2|T2]) :- list_member(H1,H2), list_partition(T1,[H2|T2]).
+list_partition([H1|T1],[H2|T2]) :- list_member(H1,H2), !, list_partition(T1,T2).
+list_partition([H1|T1],[H2|T2]) :- list_partition([H1|T1],T2).
+% there exists a list L1 such that all sublists of L2 appended together yield L1
+
+%list_append(l1, l2, appended)
 
 %% list_partition tests
 list_partition_fwd_test(L,Solns) :-
