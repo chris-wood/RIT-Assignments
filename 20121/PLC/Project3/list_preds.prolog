@@ -71,6 +71,7 @@ list_sum_tests :-
 
 %% list_avg
 % DEFINE list_avg HERE
+list_avg(L,N) :- list_sum(L,M), list_length(L, LL), LL =\= 0, N is M/LL.
 
 %% list_avg tests
 list_avg_test(L,Solns) :-
@@ -94,6 +95,10 @@ list_avg_tests :-
 
 %% list_swizzle
 % DEFINE list_swizzle HERE
+list_swizzle([],[],[]).
+list_swizzle([H1|L1],[],[H3|L3]) :- list_swizzle(L1,[],L3), H1 = H3.
+list_swizzle([],[H2|L2],[H3|L3]) :- list_swizzle([],L2,L3), H2 = H3.
+list_swizzle([H1|L1],[H2|L2],[H13|[H23|L3]]) :- list_swizzle(L1,L2,L3), H1 = H13, H2 = H23.
 
 %% list_prod tests
 list_swizzle_fwd_test(L1,L2,Solns) :-
