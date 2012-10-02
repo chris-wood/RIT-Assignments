@@ -47,14 +47,15 @@ programming techniques from any supported language. For example, Curry gives pro
 make use of nondeterminism with free variables and multiple rule declarations, while at the same time 
 supporting functional composition to aid in algorithmic abstractions. The programmer is then left to 
 make use of both of these features at their leisure, depending on the specific problem they may be 
-trying to solve. Using them together can also prove to be very useful as well. Antoy and Hanus (cite) 
-present an example of encoding a regular expression matcher in Curry that uses the nondeterminism through
+trying to solve. Using them together can also prove to be very useful as well. Antoy and Hanus 
+\cite{Antoy2010} present an example of encoding a regular expression matcher in Curry that uses the nondeterminism through
 multiple rules and functional patterns to determine if a given input string matches an ended regular 
 expression. Fortunately, Curry's demand-driven search strategy limits the computational overhead of 
-the incorporating free variables into function parameters. However, the programmer can also modify
+the incorporating free variables into function parameters. In addition, the programmer can also modify
 the rules of the regular expression to place further constraints on the problem (such a technique is 
-referred to as ``constrained construction''). Put another way, the benefit of having these different 
-language features at your disposal is an attempt to make the language more declarative. 
+referred to as narrowing through ``constrained construction''). Put another way, the benefit of 
+having these different language features at your disposal is an attempt to make the language more 
+declarative. 
 
 In the context of Curry, another major benefit of its functional and logic juxtaposition is that 
 is enables programmers to more effectively prototype their software solutions to particular problems.
@@ -70,23 +71,34 @@ convenience factors that make software development easier. In Curry, the search 
 to intelligently search the state space of a free variable is motivated by demand-driven evaluations, 
 constrained construction, and the use of defitional trees to structure re-write rules. Even with
 these improvements, the search space of a free variable is still determined by the rule and equation
-constraints imposed by the programmer. If these are not very well known and the programmer wants to 
+constraints imposed by the programmer. If these are not very well defined and the programmer wants to 
 explore the search space for a solution, then the search strategy cannot optimize its behavior to yield
-acceptable performance. 
+acceptable performance. Thus, we see that an trade-off between performance and easy development arise
+in such situations.
 
-Furthermore, multi-language abstractions can also introduce conflicts with one of the languages, thus
-yielding negative effects when programs are run. As an example, Curry search strategies are not able to 
-keep up with processor-level parallelism. Strictly functional languages are very capable of making use
-of multiple cores because they are deterministic. The nondeterminism in Curry hinders the execution 
-from spreading across multiple cores because ***.
+Furthermore, multi-language abstractions may also introduce conflicts with one of the languages, thus
+yielding negative effects when programs are run. Although the search strategies and functional 
+composition of Curry both promote parallelism, it is not difficult to imagine cases where two 
+conflicting goals may be sought after. A simple example, consider the attributes of design 
+flexibility and code readability. While multi-paradigm languages may offer more flexibility in design
+and implementation decisions (simply because they lend more control to the programmer), the additional
+syntax and program semantics that come with this merge of two language paradigms can burden the 
+programmer and future code maintainers. From my experience in the industry, my usage of lambda 
+expressions in C\# code seemed foreign to my coworkers, often to the point where they would not
+pass my code through inspection unless I used the traditional imperative analogs. 
+
+%As an example, Curry search strategies are not able to 
+%keep up with processor-level parallelism. Strictly functional languages are very capable of making use
+%of multiple cores because they are deterministic. The nondeterminism in Curry hinders the execution 
+%from spreading across multiple cores because ***.
 
 Overall, we see that there are indeed many benefits and drawbacks to multi-language paradigms. Antoy and 
-Hanus have shown us many examples with their discussion of Curry. However, the biggest extrapolation 
-from their article is that it is extremely important to cosnider all of the implications of a 
+Hanus have shown us many examples with their discussion of Curry. However, the biggest implication 
+from their article is that it is extremely important to consider all of the implications of a 
 multi-language paradigm before readily adopting it for full-time use. There are many theoretical and 
-practical advantages and disadvantages to such technologies, and as with any programming language, 
-the target language is best chosen by examining its usefulness in the context of a specific problem at 
-hand. There is no ``one size fits all'' language that any merging of languages can solve.
+practical advantages and disadvantages to such paradigm, and as with any programming problem, 
+the ideal language is best chosen by examining its usefulness in the context of a specific task at 
+hand. There is no ``one size fits all'' language that any merging of paradigms can solve.
 
 
 \bibliographystyle{plain}
