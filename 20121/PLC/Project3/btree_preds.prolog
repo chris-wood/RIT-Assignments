@@ -50,6 +50,9 @@ btree_is_btree(node(BTL,_,BTR)) :-
 %%   BT -- input parameter, binary tree
 %%   D -- output parameter, integer height of BT
 % DEFINE btree_height HERE
+btree_height(BT,0) :- btree_is_btree(BT), BT = leaf.
+btree_height(BT,H) :- btree_is_btree(BT), BT = node(BTL,_,BTR), btree_height(BTL,HL), btree_height(BTR, HR), HL >= HR, H is 1 + HL.
+btree_height(BT,H) :- btree_is_btree(BT), BT = node(BTL,_,BTR), btree_height(BTL,HL), btree_height(BTR, HR), HR > HL, H is 1 + HR.
 
 %% btree_height tests
 btree_height_fwd_test(BT,Solns) :-
