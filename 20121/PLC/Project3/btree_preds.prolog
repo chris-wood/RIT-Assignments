@@ -94,6 +94,16 @@ btree_height_tests :-
 %%   X -- input/output paramter, element
 %% DEFINE btree_deepest HERE
 
+btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL = leaf, BTR = leaf, D is X.
+
+btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL = leaf, btree_deepest(BTR,DR), D is DR.
+
+btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTR = leaf, btree_deepest(BTL,DL), D is DL.
+
+btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTL,DL), btree_deepest(BTR,DR), HL >= HR, D is DL.
+
+btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTL,DL), btree_deepest(BTR,DR), HR >= HL, D is DR.
+
 %% btree_deepest tests
 btree_deepest_fwd_test(BT,Solns) :-
         test(btree_deepest(BT,X),X,'X',Solns).
