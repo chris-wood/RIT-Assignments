@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  1 OCT 2012 20:58
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  4 OCT 2012 13:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -122,7 +122,7 @@ LaTeX Font Info:    ... okay on input line 4.
 Here is how much of TeX's memory you used:
  737 strings out of 493488
  10381 string characters out of 3141326
- 68732 words of memory out of 3000000
+ 66732 words of memory out of 3000000
  4103 multiletter control sequences out of 15000+200000
  4891 words of font info for 18 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -131,7 +131,7 @@ Here is how much of TeX's memory you used:
 onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2012/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2012/texmf-dist/font
 s/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on ChristopherWood-ReflectionEssay3.pdf (2 pages, 42684 bytes).
+Output written on ChristopherWood-ReflectionEssay3.pdf (2 pages, 42600 bytes).
 PDF statistics:
  23 PDF objects out of 1000 (max. 8388607)
  15 compressed objects within 1 object stream
