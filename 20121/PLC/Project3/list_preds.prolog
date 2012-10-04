@@ -129,17 +129,16 @@ list_swizzle_tests :-
 list_partition([],[]).
 
 % Try it with concatenation...
-list_partition(T,[L1|L2]) :- list_is_list(T), list_append(P1,P2,T), list_is_list(P1), list_is_list(P2), P1 = L1, P2 = L2.
+list_partition(T,[L1|L2]) :- list_is_list(T), list_append(P1,P2,T), list_is_list(P1), list_is_list(P2), P1 = L1, P2 = L2, list_length(P1,P1L), list_length(P2,P2L), P1L >= 1, P2L >= 0.
+list_partition([H|T],[L1|L2]) :- list_is_list(T), list_append(P1,P2,T), list_is_list(P1), list_is_list(P2), P1 = L1, P2 = L2, list_length(P1,P1L), list_length(P2,P2L), P1L >= 1, P2L >= 0.
 
 %list_partition([],L) :- fail.
 %list_partition([H1|T1],[H2|T2]) :- list_member(H1,H2), !, list_partition(T1,[H2|T2]).
   %( list_partition(T1,[H2|T2]) ; list_partition(T1,T2) ).
-
 %list_partition([H1|T1],[H2|T2]) :- 
 %list_partition([H1|T1],[H2|T2]) :- not(list_member(H1,H2)), list_partition(T1,T2).
 %list_partition([H1|T1],[H2|T2]) :- list_partition([H1|T1],T2).
 % there exists a list L1 such that all sublists of L2 appended together yield L1
-
 %list_append(l1, l2, appended)
 
 %% list_partition tests
