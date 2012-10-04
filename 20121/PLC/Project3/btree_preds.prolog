@@ -94,19 +94,21 @@ btree_height_tests :-
 %%   X -- input/output paramter, element
 %% DEFINE btree_deepest HERE
 
+% Base case for leaf
 btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL = leaf, BTR = leaf, D is X, !.
 
+% Cases for one leaf and one node child
 btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL = leaf, btree_deepest(BTR,DR), D is DR.
-
 btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTR = leaf, btree_deepest(BTL,DL), D is DL.
 
-btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL \= leaf, BTR \= leaf, btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTL,DL), HL > HR, D is DL.
+% Cases for two node children
+btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL \= leaf, BTR \= leaf, btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTL,DL), HL >= HR, D is DL.
 
-btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL \= leaf, BTR \= leaf, btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTR,DR), HR > HL, D is DR.
+btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL \= leaf, BTR \= leaf, btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTR,DR), HR >= HL, D is DR.
 
-btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL \= leaf, BTR \= leaf, btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTL,DL), HR = HL, D is DL.
+%%%%btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL \= leaf, BTR \= leaf, btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTL,DL), HR = HL, D is DL.
 
-btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL \= leaf, BTR \= leaf, btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTR,DR), HR = HL, D is DR.
+%%%%btree_deepest(BT,D) :- btree_is_btree(BT), BT = node(BTL,X,BTR), BTL \= leaf, BTR \= leaf, btree_height(BTL,HL), btree_height(BTR,HR), btree_deepest(BTR,DR), HR = HL, D is DR.
 
 %% btree_deepest tests
 btree_deepest_fwd_test(BT,Solns) :-
