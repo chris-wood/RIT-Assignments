@@ -191,6 +191,12 @@ btree_balanced_tests :-
 %%   BTS -- input/output parameter, binary tree
 % DEFINE btree_subtree HERE
 
+% Rule for two leafs
+btree_subtree(BT1,BT2) :- btree_is_btree(BT1), btree_is_btree(BT2), BT1 = leaf, BT2 = leaf.
+
+% Other rules...
+btree_subtree(BT1,BT2) :- btree_is_btree(BT1), btree_is_btree(BT2), BT1 = node(BT1L,X1,BT1R), BT2 = node(BT2L,X2,BT2R), btree_subtree(BT1L,BT2L), btree_subtree(BT1R,BT2R), X1 = X2.
+
 %% btree_subtree tests
 btree_subtree_fwd_test(BT,Solns) :-
         test(btree_subtree(BT,BTS),BTS,'BTS',Solns).
