@@ -177,6 +177,6 @@ re_match_adv2_tests :-
 %%  re_reverse(RE,RRE)
 %%    RE -- input/output paramter, regular expression
 %%    RRE -- input/output paramter, reversed regular expression
-% DEFINE re_match HERE
+% DEFINE re_reverse HERE
 
 % NOTE: no re_reverse tests.
