@@ -27,3 +27,53 @@ empty_building(building(floor(_,_,_),floor(_,_,_),floor(_,_,_))).
 
 %% puzzle_soln
 % DEFINE puzzle_soln HERE
+
+% The location predicate is used to specify both floor and room number (for room, 1 = west, 2 = center, 3 = east)
+location(P,1,1,building(floor(P,_,_),_,_)).
+location(P,1,2,building(floor(_,P,_),_,_)).
+location(P,1,3,building(floor(_,_,P),_,_)).
+location(P,2,1,building(_,floor(P,_,_),_)).
+location(P,2,2,building(_,floor(_,P,_),_)).
+location(P,2,3,building(_,floor(_,_,P),_)).
+location(P,3,1,building(_,_,floor(P,_,_))).
+location(P,3,2,building(_,_,floor(_,P,_))).
+location(P,3,3,building(_,_,floor(_,_,P))).
+
+% Here is the solution predicate
+puzzle_soln(BLDG) :-
+	% Empty building to start
+	empty_building(BLDG), 
+
+	% Predicates for every student location
+	location(harold,HFN,HRN,BLDG), 
+	location(fred,FFN,FRN,BLDG), 
+	location(john,JFN,JRN,BLDG),
+	location(bret,BFN,BRN,BLDG),
+	location(eddie,EFN,ERN,BLDG),
+	location(derek,DFN,DRN,BLDG),
+	location(greg,GFN,GRN,BLDG),
+	location(chris,CFN,CRN,BLDG),
+
+	% Now come the rules for each student location
+	HFN \= 1, 				% harold does not live on the bottom floor
+	FFN is JFN + 1, 		% fred lives directly above john
+	FRN = JRN,
+	FRN is abs(FRN - BRN), 	% fred lives directly next to bret
+	FFN = BFN,
+	BRN is 1,				% bret lives in the west wing
+	ERN is 3,				% eddie lives in the east wing
+	EFN is FFN + 1,			% eddie lives one floor higher than fred
+	DFN is FFN + 1,			% derek lives directly above fred 
+	FRN = FRN,
+	GFN is CFN + 1,			% greg lives directly above chris
+	GRN = CRN,
+	true.
+
+	%location(cooper,CN,BLDG), CN \= 1,
+	%location(fletcher,FN,BLDG), FN \= 5, FN \= 1,
+	%location(smith,SN,BLDG),
+	%ADFS is abs(FN - SN), ADFS \= 1,
+	%ADFC is abs(FN - CN), ADFC \= 1,
+	%location(miller,MN,BLDG),
+	%MN > CN,
+	%true.
