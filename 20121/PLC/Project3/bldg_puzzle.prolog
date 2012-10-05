@@ -53,21 +53,22 @@ puzzle_soln(BLDG) :-
 	location(derek,DFN,DRN,BLDG),
 	location(greg,GFN,GRN,BLDG),
 	location(chris,CFN,CRN,BLDG),
+	location(alex,AFN,ARN,BLDG), 		% don't forget alex!
 
 	% Now come the rules for each student location
-	HFN \= 1, 				% harold does not live on the bottom floor
-	FFN is JFN + 1, 		% fred lives directly above john
+	HFN \= 1, 							% harold does not live on the bottom floor
+	FFN is JFN + 1, 					% fred lives directly above john
 	FRN = JRN,
-	FRN is abs(FRN - BRN), 	% fred lives directly next to bret
+	FRN is 2, 							% fred lives directly next to bret (bret lives in the west wing)
 	FFN = BFN,
-	BRN is 1,				% bret lives in the west wing
-	ERN is 3,				% eddie lives in the east wing
-	EFN is FFN + 1,			% eddie lives one floor higher than fred
-	DFN is FFN + 1,			% derek lives directly above fred 
-	FRN = FRN,
-	GFN is CFN + 1,			% greg lives directly above chris
-	GRN = CRN,
-	true.
+	BRN is 1,							% bret lives in the west wing
+	ERN is 3,							% eddie lives in the east wing
+	EFN is FFN + 1,						% eddie lives one floor higher than fred
+	DFN is FFN + 1,						% derek lives directly above fred 
+	DRN = FRN,
+	GFN is CFN + 1,						% greg lives directly above chris
+	GRN = CRN.
+	%true.
 
 	%location(cooper,CN,BLDG), CN \= 1,
 	%location(fletcher,FN,BLDG), FN \= 5, FN \= 1,
