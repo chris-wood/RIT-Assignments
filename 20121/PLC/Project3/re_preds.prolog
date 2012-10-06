@@ -30,6 +30,29 @@ test_grnd(Goal,S) :-
 %%    L -- input/output paramter, char list matched by RE
 % DEFINE re_match HERE
 
+% The epsilon match
+re_match(RE,L) :- RE = epsilon, L = [].
+
+% The char match (match the singleton list)
+re_match(RE,[H|T]) :- RE = char(A), length(T,N), N is 0, H = A.
+
+% The seq match
+%re_match_aux(RE,[H|L],LS) :- TODO: use this once the entire thing is working.
+re_match(RE,L) :- RE = seq(RE1,RE2), append(L1,L2,L), re_match(RE1,L1), re_match(RE2,L2).
+
+%dead code for seq match (not correct)
+%re_match(RE,[H|T]) :- RE = seq(RE1,RE2), append(L1,L2,T), re_match(RE1,L1), re_match(RE2,L2).
+
+% The alt match 
+re_match(RE,L) :- RE = alt(RE1,RE2), re_match(RE1,L).
+re_match(RE,L) :- RE = alt(RE1,RE2), re_match(RE2,L).
+
+% The start match
+re_match(RE,L) :- RE = star(RES), L = [].
+re_match(RE,L) :- RE = star(RES), append(L1,L2,L), re_match(RES,L1), re_match(RES,L2).
+re_match(RE,L) :- RE = star(RES), append(L1,L2,L), L1 = [], re_match(RES,L2).
+re_match(RE,L) :- RE = star(RES), append(L1,L2,L), L2 = [], re_match(RES,L1).
+
 % re_match tests
 range(L,H,L) :- L =< H.
 range(L,H,N) :- L < H, LX is L + 1, range(LX,H,N).
