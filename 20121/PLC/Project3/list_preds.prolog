@@ -129,8 +129,30 @@ list_swizzle_tests :-
 list_partition([],[]).
 
 % Try it with concatenation...
-list_partition(T,[L1|L2]) :- list_is_list(T), list_append(P1,P2,T), list_is_list(P1), list_is_list(P2), P1 = L1, P2 = L2, list_length(P1,P1L), list_length(P2,P2L), P1L >= 1, P2L >= 0.
-list_partition([H|T],[L1|L2]) :- list_is_list(T), list_append(P1,P2,T), list_is_list(P1), list_is_list(P2), P1 = L1, P2 = L2, list_length(P1,P1L), list_length(P2,P2L), P1L >= 1, P2L >= 0.
+list_partition(T,[L1|L2]) :- 
+  list_is_list(T), 
+  T = L1,
+  L2 = [],
+  list_length(T,TN),
+  TN \= 0,
+  list_length(L1,L1N),
+  L1N \= 0.
+  %list_length(L2,L2N), 
+  %L2N = 0. % end of the partition!
+
+list_partition([T1|T2],[L1|L2]) :- 
+  list_is_list([T1|T2]), 
+  %list_append(T1,T2,T), 
+  %list_append(L1,L2,L), % not a ground term, so infinite loop here...
+  T1 \= [], 
+  T2 \= [], 
+  L1 \= [], 
+  L2 \= [],
+  list_partition(T1,L1),
+  list_partition(T2,L2).
+
+%list_partition(T,[L1|L2]) :- list_is_list(T), list_append(P1,P2,T), P1 \= [], P2 =\ [], list_is_list(P1), list_is_list(P2), P1 = L1, P2 = L2.
+%list_partition([H|T],[L1|L2]) :- list_is_list(T), list_append(P1,P2,T), P1 \= [], P2 =\ [], list_is_list(P1), list_is_list(P2), P1 = L1, P2 = L2.
 
 %list_partition([],L) :- fail.
 %list_partition([H1|T1],[H2|T2]) :- list_member(H1,H2), !, list_partition(T1,[H2|T2]).
