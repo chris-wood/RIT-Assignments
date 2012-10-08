@@ -130,38 +130,37 @@ list_partition([],[]).
 
 % Try it with concatenation...
 list_partition(T,[L1|L2]) :- 
-  list_is_list(T), 
   T = L1,
   L2 = [],
-  list_length(T,TN),
-  TN \= 0,
-  list_length(L1,L1N),
-  L1N \= 0.
-  %list_length(L2,L2N), 
-  %L2N = 0. % end of the partition!
+  L1 \= [].
 
-list_partition([T1|T2],[L1|L2]) :- 
-  list_is_list([T1|T2]), 
-  %list_append(T1,T2,T), 
-  %list_append(L1,L2,L), % not a ground term, so infinite loop here...
-  T1 \= [], 
-  T2 \= [], 
-  L1 \= [], 
-  L2 \= [],
-  list_partition(T1,L1),
+  %list_length(L1,L1N),
+  %list_length(L2,L2N),
+  %L1N \= 0,
+  %L2N = 0.
+
+list_partition(T,[L1|L2]) :- 
+  %list_length(T1,T1N),
+  %list_length(T2,T2N),
+  %T1N \= 0,
+  %T2N \= 0,
+
+  list_append(T1,T2,T),
+  T1 \= [],
+  %list_length(T2,T2N),
+  %T2N \= 0,
+  T2 \= [],
+  T \= [],
+  L1 = T1,
   list_partition(T2,L2).
 
-%list_partition(T,[L1|L2]) :- list_is_list(T), list_append(P1,P2,T), P1 \= [], P2 =\ [], list_is_list(P1), list_is_list(P2), P1 = L1, P2 = L2.
-%list_partition([H|T],[L1|L2]) :- list_is_list(T), list_append(P1,P2,T), P1 \= [], P2 =\ [], list_is_list(P1), list_is_list(P2), P1 = L1, P2 = L2.
+%list_partition(L,[[a],[b],[c],[d]])
 
-%list_partition([],L) :- fail.
-%list_partition([H1|T1],[H2|T2]) :- list_member(H1,H2), !, list_partition(T1,[H2|T2]).
-  %( list_partition(T1,[H2|T2]) ; list_partition(T1,T2) ).
-%list_partition([H1|T1],[H2|T2]) :- 
-%list_partition([H1|T1],[H2|T2]) :- not(list_member(H1,H2)), list_partition(T1,T2).
-%list_partition([H1|T1],[H2|T2]) :- list_partition([H1|T1],T2).
-% there exists a list L1 such that all sublists of L2 appended together yield L1
-%list_append(l1, l2, appended)
+  %list_append(L1,L2,[T1|T2]),
+  %L1 \= [],  
+  %T1 \= [], 
+  %list_partition(T1,L1),
+  %list_partition(T2,L2).
 
 %% list_partition tests
 list_partition_fwd_test(L,Solns) :-
