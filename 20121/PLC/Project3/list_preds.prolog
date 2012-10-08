@@ -126,41 +126,24 @@ list_swizzle_tests :-
 
 %% list_partition
 % DEFINE list_partition HERE
+
+% Rule for empty list
 list_partition([],[]).
 
-% Try it with concatenation...
+% Rule that handles a single element second parameter 
 list_partition(T,[L1|L2]) :- 
   T = L1,
   L2 = [],
-  L1 \= [].
+  L1 = [_|_].
 
-  %list_length(L1,L1N),
-  %list_length(L2,L2N),
-  %L1N \= 0,
-  %L2N = 0.
-
+% Rule that handles a multiple element second parameter
 list_partition(T,[L1|L2]) :- 
-  %list_length(T1,T1N),
-  %list_length(T2,T2N),
-  %T1N \= 0,
-  %T2N \= 0,
-
-  list_append(T1,T2,T),
-  T1 \= [],
-  %list_length(T2,T2N),
-  %T2N \= 0,
-  T2 \= [],
-  T \= [],
   L1 = T1,
+  T1 = [_|_],
+  T2 = [_|_],
+  T = [_|_],
+  list_append(T1,T2,T),
   list_partition(T2,L2).
-
-%list_partition(L,[[a],[b],[c],[d]])
-
-  %list_append(L1,L2,[T1|T2]),
-  %L1 \= [],  
-  %T1 \= [], 
-  %list_partition(T1,L1),
-  %list_partition(T2,L2).
 
 %% list_partition tests
 list_partition_fwd_test(L,Solns) :-
