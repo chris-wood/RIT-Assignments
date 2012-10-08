@@ -196,23 +196,99 @@ btree_subtree(BT1,BT2) :-
     %BT1 = leaf,
     BT2 = leaf. % always true, no matter what BT1 is
 
-% Trees with at least one node...
+% Trees with two children...
 btree_subtree(BT1,BT2) :- 
     BT1 = node(BT1L,X1,BT1R), 
     BT2 = node(BT2L,X2,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    BT2L = node(_,_,_),
+    BT2R = node(_,_,_),
     btree_subtree(BT1L,BT2L),
     btree_subtree(BT1R,BT2R),
     X1 = X2.
 btree_subtree(BT1,BT2) :- 
     BT1 = node(BT1L,X1,BT1R), 
-    BT2 = node(BT2L,X2,BT2R), 
-    btree_subtree(BT1L,BT2),
-    X1 \= X2.
+    BT2 = node(leaf,X2,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    BT2R = node(_,_,_),
+    btree_subtree(BT1R,BT2R),
+    X1 = X2.
 btree_subtree(BT1,BT2) :- 
     BT1 = node(BT1L,X1,BT1R), 
-    BT2 = node(BT2L,X2,BT2R), 
-    btree_subtree(BT1R,BT2),
-    X1 \= X2.
+    BT2 = node(BT2L,X2,leaf),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    BT2L = node(_,_,_),
+    btree_subtree(BT1L,BT2L),
+    X1 = X2.
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X1,BT1R), 
+    BT2 = node(leaf,X2,leaf),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    X1 = X2.
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X1,BT1R), 
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    btree_subtree(BT1L,BT2).
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X1,BT1R), 
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    btree_subtree(BT1R,BT2).
+
+% Trees with one left child
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X1,leaf), 
+    BT2 = node(BT2L,X2,leaf),
+    BT1L = node(_,_,_),
+    BT2L = node(_,_,_),
+    btree_subtree(BT1L,BT2L),
+    X1 = X2.
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X1,leaf), 
+    BT2 = node(leaf,X2,leaf),
+    BT1L = node(_,_,_),
+    X1 = X2.
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X1,leaf), 
+    BT1L = node(_,_,_),
+    btree_subtree(BT1L,BT2).
+
+% Trees with one right child
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(leaf,X1,BT1R), 
+    BT2 = node(leaf,X2,BT2R),
+    BT1R = node(_,_,_),
+    BT2R = node(_,_,_),
+    btree_subtree(BT1R,BT2R),
+    X1 = X2.
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(leaf,X1,BT1R), 
+    BT2 = node(leaf,X2,leaf),
+    BT1R = node(_,_,_),
+    X1 = X2.
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(leaf,X1,BT1R), 
+    BT1R = node(_,_,_),
+    btree_subtree(BT1R,BT2).
+
+% Trees with no children
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(leaf,X1,leaf), 
+    BT2 = node(leaf,X2,leaf),
+    X1 = X2.
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X1,leaf), 
+    BT1L = leaf,
+    btree_subtree(BT1L, BT2).
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(leaf,X1,BT1R), 
+    BT1R = leaf,
+    btree_subtree(BT1R, BT2).
 
 % Test stuff
 %btree_subtree(BT1,BT2) :- 
