@@ -24,11 +24,8 @@ student(S) :-
 
 empty_building(building(floor(_,_,_),floor(_,_,_),floor(_,_,_))).
 
-
-%% puzzle_soln
-% DEFINE puzzle_soln HERE
-
-% The location predicate is used to specify both floor and room number (for room, 1 = west, 2 = center, 3 = east)
+%% location 
+%% Adapter from the class notes
 location(P,1,1,building(floor(P,_,_),_,_)).
 location(P,1,2,building(floor(_,P,_),_,_)).
 location(P,1,3,building(floor(_,_,P),_,_)).
@@ -39,7 +36,8 @@ location(P,3,1,building(_,_,floor(P,_,_))).
 location(P,3,2,building(_,_,floor(_,P,_))).
 location(P,3,3,building(_,_,floor(_,_,P))).
 
-% Here is the solution predicate
+%% puzzle_soln
+%% The puzzle solution predicate
 puzzle_soln(BLDG) :-
 	% Empty building to start
 	empty_building(BLDG), 

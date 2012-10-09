@@ -44,10 +44,13 @@ list_sorted([X1,X2|T]) :-
         X1 =< X2, list_sorted([X1|T]).
 
 
+
 %% list_sum
-% DEFINE list_sum HERE
+%% Sum of the elements in the list
 list_sum([],0).
-list_sum([X|T],N) :- list_sum(T,NN), N is NN+X.
+list_sum([X|T],N) :- 
+  list_sum(T,NN), 
+  N is NN+X.
 
 %% list_sum tests
 list_sum_test(L,Solns) :-
@@ -70,8 +73,12 @@ list_sum_tests :-
 
 
 %% list_avg
-% DEFINE list_avg HERE
-list_avg(L,N) :- list_sum(L,M), list_length(L, LL), LL =\= 0, N is M/LL.
+%% Average of the elements in the list
+list_avg(L,N) :- 
+  list_sum(L,M), 
+  list_length(L, LL), 
+  LL =\= 0, 
+  N is M/LL.
 
 %% list_avg tests
 list_avg_test(L,Solns) :-
@@ -94,11 +101,18 @@ list_avg_tests :-
 
 
 %% list_swizzle
-% DEFINE list_swizzle HERE
+%% Swizzle the elements in the list
 list_swizzle([],[],[]).
-list_swizzle([H1|L1],[],[H3|L3]) :- list_swizzle(L1,[],L3), H1 = H3.
-list_swizzle([],[H2|L2],[H3|L3]) :- list_swizzle([],L2,L3), H2 = H3.
-list_swizzle([H1|L1],[H2|L2],[H13|[H23|L3]]) :- list_swizzle(L1,L2,L3), H1 = H13, H2 = H23.
+list_swizzle([H1|L1],[],[H3|L3]) :- 
+  list_swizzle(L1,[],L3), 
+  H1 = H3.
+list_swizzle([],[H2|L2],[H3|L3]) :- 
+  list_swizzle([],L2,L3), 
+  H2 = H3.
+list_swizzle([H1|L1],[H2|L2],[H31,H32|L3]) :- 
+  list_swizzle(L1,L2,L3), 
+  H1 = H31, 
+  H2 = H32.
 
 %% list_prod tests
 list_swizzle_fwd_test(L1,L2,Solns) :-
@@ -125,18 +139,12 @@ list_swizzle_tests :-
 
 
 %% list_partition
-% DEFINE list_partition HERE
-
-% Rule for empty list
+%% Partition the list
 list_partition([],[]).
-
-% Rule that handles a single element second parameter 
 list_partition(T,[L1|L2]) :- 
   T = L1,
   L2 = [],
   L1 = [_|_].
-
-% Rule that handles a multiple element second parameter
 list_partition(T,[L1|L2]) :- 
   L1 = T1,
   T1 = [_|_],
@@ -167,40 +175,40 @@ list_partition_tests :-
 % ?- list_partition_tests.
 
 
+%% list_merge 
+%% Merge two lists together in a sorted fashion
+list_merge([],[],[]).
+list_merge([X],[],[Z]) :- 
+  X = Z.
+list_merge([],[Y],[Z]) :- 
+  Y = Z.
+list_merge([X|L1],[Y|L2],[Z|L3]) :-
+  X =< Y,
+  X = Z,
+  list_merge(L1,[Y|L2],L3).
+list_merge([X|L1],[Y|L2],[Z|L3]) :-
+  Y < X,
+  Y = Z,
+  list_merge([X|L1],L2,L3).
 
 %% list_mergesort
-% DEFINE list_mergesort HERE
+%% Run the mergesort algorithm
 list_mergesort([],[]).
-
-% A list of 1 element is sorted.
-list_mergesort([L1],[L2]) :-
+list_mergesort([L1],[L2]) :- 
   L1 = L2.
-
-% A partition of the empty list
-partition([],[],[]).
-partition([L1],[L2],[L3]) :-
-  L1 = [],
-  L2 = L3.
-
-%TODO: write the rest of the partition part and then the merge predicate, and then
-% use them all together in mergesort. It has a natural recursive definition.
-
-% Handle all other cases (which all eventually break down to lists of size 1)
 list_mergesort(L1,L2) :-
   % Partition L1 into 2 nonsorted lists
   NSL1 = [_|_],
-  NSL2 = [_|_].
+  NSL2 = [_|_],
   L1 = [_|_],
-  append(NSL1,NSL2,L1),
+  append(NSL1,NSL2,L1), 
 
   % Find a satisfying mergesort result for both partitions
   list_mergesort(NSL1,SL1),
   list_mergesort(NSL2,SL2),
 
-  % Ensure they're sorted.
-  list_sorted(SL1),
-  list_sorted(SL2),
-  list_append(SL1,SL2,L2).
+  % Find a merge that fits
+  list_merge(SL1,SL2,L2), !. % Don't keep looking if we met this goal.
 
 %% list_mergesort tests
 list_mergesort_test(L,Solns) :-

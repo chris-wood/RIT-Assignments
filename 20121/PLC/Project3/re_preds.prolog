@@ -28,7 +28,6 @@ test_grnd(Goal,S) :-
 %%  re_match(RE,L)
 %%    RE -- input paramter, regular expression
 %%    L -- input/output paramter, char list matched by RE
-% DEFINE re_match HERE
 
 % The epsilon match
 re_match(RE,L) :- 
