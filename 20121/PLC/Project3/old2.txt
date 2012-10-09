@@ -1,0 +1,46 @@
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT2L = node(_,_,_),
+    BT2R = node(_,_,_),
+    btree_subtree(BT1L,BT2),
+    X \= Y.
+
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT2L = node(_,_,_),
+    BT2R = node(_,_,_),
+    btree_subtree(BT1R,BT2),
+    X \= Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,leaf),
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,leaf),
+    btree_subtree(BT1L,leaf),
+    X \= Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,leaf),
+    btree_subtree(BT1R,leaf),
+    X \= Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,BT2R),
+    BT2R = node(_,_,_),
+    btree_subtree(BT1R,BT2R),
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,leaf),
+    BT2L = node(_,_,_),
+    btree_subtree(BT1L,BT2L),
+    X = Y.

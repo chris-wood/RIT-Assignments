@@ -1,0 +1,113 @@
+Shit below works for exact matches...
+
+btree_subtree(BT1,BT2) :- 
+    BT2 = leaf. % always true, no matter what BT1 is
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(_,_,_),
+    BT1 = BT2.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,_,_),
+    btree_subtree(BT1L,BT2),
+    BT1 \= BT2.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(_,_,BT1R),
+    btree_subtree(BT1R,BT2),
+    BT1 \= BT2.
+------
+btree_subtree(BT1,BT2) :-
+    BT1 = node(leaf,_,_),
+    BT2 = leaf.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(_,_,leaf),
+    BT2 = leaf.
+
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT2L = node(_,_,_),
+    BT2R = node(_,_,_),
+    btree_subtree(BT1L,BT2L),
+    btree_subtree(BT1R,BT2R),
+    X = Y.
+
+% Both children are nodes
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    BT1 = BT2.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    btree_subtree(BT1L,BT2),
+    BT1 \= BT2.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    btree_subtree(BT1R,BT2),
+    BT1 \= BT2.
+
+% Left child is a leaf
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = leaf,
+    BT1R = node(_,_,_),
+    BT1 = BT2.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = leaf,
+    BT1R = node(_,_,_),
+    btree_subtree(BT1R,BT2),
+    BT1 \= BT2.
+
+% Right child is a leaf
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1R = leaf,
+    BT1L = node(_,_,_),
+    BT1 = BT2.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1R = leaf,
+    BT1L = node(_,_,_),
+    btree_subtree(BT1L,BT2),
+    BT1 \= BT2.
+
+% Both children are leaves
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = leaf,
+    BT1R = leaf,
+    BT1 = BT2.
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = leaf,
+    BT1R = leaf,
+    btree_subtree(BT1L,BT2L),
+    X \= Y.
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = leaf,
+    BT1R = leaf,
+    btree_subtree(BT1R,BT2R),
+    X \= Y.

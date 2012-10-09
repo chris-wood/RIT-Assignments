@@ -1,3 +1,97 @@
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,BT2R),
+    btree_subtree(BT1R,BT2R),
+    X = Y.
+
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,leaf),
+    btree_subtree(BT1L,BT2L),
+    X = Y.
+
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,leaf),
+    X = Y.
+
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    btree_subtree(BT1L, BT2),
+    X \= Y.
+
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,_,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    btree_subtree(BT1R, BT2),
+    X \= Y.
+
+------
+
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,_,BT1R),
+    BT2 = node(BT2L,_,BT2R),
+    BT2L = node(_,_,_),
+    BT2R = node(_,_,_),
+    BT2 = BT1.
+
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,_,BT1R),
+    BT2 = node(BT2L,_,BT2R),
+    BT2L = node(_,_,_),
+    BT2R = node(_,_,_),
+    BT2 = BT1L.
+
+btree_subtree(BT1,BT2) :- 
+    BT1 = node(BT1L,_,BT1R),
+    BT2 = node(BT2L,_,BT2R),
+    BT2L = node(_,_,_),
+    BT2R = node(_,_,_),
+    BT2 = BT1R.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,_),
+    BT2 = BT1R,
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,_),
+    btree_subtree(BT1R,BT2),
+    X \= Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(_,Y,leaf),
+    BT2 = BT1L,
+    X = Y. 
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(_,Y,leaf),
+    btree_subtree(BT1L,BT2),
+    X \= Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,leaf),
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,leaf),
+    btree_subtree(BT1L,BT2),
+    X \= Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(leaf,Y,leaf),
+    btree_subtree(BT1R,BT2),
+    X \= Y.
+
+-------
 % Two leaves
 btree_subtree(BT1,BT2) :- 
     %BT1 = leaf,
