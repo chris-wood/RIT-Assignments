@@ -170,6 +170,34 @@ list_partition_tests :-
 
 %% list_mergesort
 % DEFINE list_mergesort HERE
+list_mergesort([],[]).
+
+% A list of 1 element is sorted.
+list_mergesort([L1],[L2]) :-
+  L1 = L2.
+
+% A partition of the empty list
+partition([],[]).
+partition([L1],[L2]) :-
+  
+
+
+% Handle all other cases (which all eventually break down to lists of size 1)
+list_mergesort(L1,L2) :-
+  % Partition L1 into 2 nonsorted lists
+  NSL1 = [_|_],
+  NSL2 = [_|_].
+  L1 = [_|_],
+  append(NSL1,NSL2,L1),
+
+  % Find a satisfying mergesort result for both partitions
+  list_mergesort(NSL1,SL1),
+  list_mergesort(NSL2,SL2),
+
+  % Ensure they're sorted.
+  list_sorted(SL1),
+  list_sorted(SL2),
+  list_append(SL1,SL2,L2).
 
 %% list_mergesort tests
 list_mergesort_test(L,Solns) :-

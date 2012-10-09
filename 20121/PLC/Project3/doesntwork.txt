@@ -1,0 +1,94 @@
+---- last timestamp that didn't really work ----
+
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    BT2L = BT1L,
+    BT2R = BT1R,
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = leaf,
+    BT2L = BT1L,
+    BT2R = BT1R,
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT1L = node(_,_,_),
+    BT1R = leaf,
+    btree_subtree(BT1L,BT2).
+    %BT2 = BT1L.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = leaf,
+    BT1R = node(_,_,_),
+    BT2L = BT1L,
+    BT2R = BT1R,
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT1L = leaf,
+    BT1R = node(_,_,_),
+    btree_subtree(BT1R,BT2).
+    %BT2 = BT1R.
+
+------
+
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    btree_subtree(BT1R,BT2R),
+    btree_subtree(BT1L,BT2L),
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = leaf,
+    BT1R = BT2R,
+    btree_subtree(BT1L,BT2L),
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1R = node(_,_,_),
+    BT1L = leaf,
+    BT1L = BT2L,
+    btree_subtree(BT1R,BT2R),
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = leaf,
+    BT1R = leaf,
+    BT2L = BT1L,
+    BT2R = BT1R,
+    X = Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT1L = leaf,
+    BT1R = leaf,
+    btree_subtree(BT1L,BT2).
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT1L = leaf,
+    BT1R = leaf,
+    btree_subtree(BT1L,BT2).

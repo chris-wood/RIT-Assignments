@@ -218,5 +218,13 @@ re_match_adv2_tests :-
 %%    RE -- input/output paramter, regular expression
 %%    RRE -- input/output paramter, reversed regular expression
 % DEFINE re_reverse HERE
+re_reverse([],[]).
+re_reverse(RE1,RE2) :-
+  between(0,10,N),
+  length(L1,N),
+  length(L2,N),
+  reverse(L1,L2),
+  re_match(RE1,L1),
+  re_match(RE2,L2).
 
 % NOTE: no re_reverse tests.

@@ -195,66 +195,45 @@ btree_balanced_tests :-
 btree_subtree(BT1,BT2) :- 
     BT2 = leaf. % always true, no matter what BT1 is
 
-%btree_subtree(BT1,BT2) :-
-%    BT1 = node(_,_,_),
-%    BT1 = BT2.
-
+% No children are leaves
 btree_subtree(BT1,BT2) :-
     BT1 = node(BT1L,X,BT1R),
     BT2 = node(BT2L,Y,BT2R),
-    BT2L = node(_,_,_),
-    BT2R = node(_,_,_),
+    BT1L = node(_,_,_),
+    BT1R = node(_,_,_),
+    btree_subtree(BT1L,BT2L),
+    btree_subtree(BT1R,BT2R),
+    X = Y.
+
+% Right child is a leaf
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = node(_,_,_),
+    BT1R = leaf,
+    btree_subtree(BT1L,BT2L),
+    btree_subtree(BT1R,BT2R),
+    X = Y.
+
+% Left child is a leaf
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT1L = leaf,
+    BT1R = node(_,_,_),
+    btree_subtree(BT1L,BT2L),
+    btree_subtree(BT1R,BT2R),
+    X = Y.
+
+% Both children are leaves
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,X,BT2R),
+    BT1L = leaf,
+    BT1R = leaf,
     BT2L = BT1L,
     BT2R = BT1R,
     X = Y.
-
-btree_subtree(BT1,BT2) :-
-    BT1 = node(BT1L,X,BT1R),
-    BT2 = node(BT2L,Y,BT2R),
-    BT2L = node(_,_,_),
-    BT2L = BT1L,
-    BT2R = leaf,
-    X = Y.
-
-btree_subtree(BT1,BT2) :-
-    BT1 = node(BT1L,X,BT1R),
-    BT2 = node(BT2L,Y,BT2R),
-    BT2R = node(_,_,_),
-    BT2L = leaf,
-    BT2R = BT1R,
-    X = Y.
-
-btree_subtree(BT1,BT2) :-
-    BT1 = node(BT1L,X,BT1R),
-    BT2 = node(BT2L,Y,BT2R),
-    BT2L = leaf,
-    BT2R = leaf,
-    X = Y.
-
-% Both are nodes
-%btree_subtree(BT1,BT2) :-
-%    BT1 = node(BT1L,X,BT1R),
-%    BT2 = node(BT2L,Y,BT1R),
-%    BT1L = node(_,_,_),
-%    BT1R = node(_,_,_),
-%    BT1 = BT2.
-
-%btree_subtree(BT1,BT2) :-
-%    BT1 = node(BT1L,X,BT1R),
-%    BT2 = node(BT2L,Y,BT1R),
-%    BT1L = leaf,
-%    BT1R = node(_,_,_),
-%    BT1 \= BT2.
-
-btree_subtree(BT1,BT2) :-
-    BT1 = node(BT1L,_,_),
-    btree_subtree(BT1L,BT2),
-    BT1 \= BT2.
-
-btree_subtree(BT1,BT2) :-
-    BT1 = node(_,_,BT1R),
-    btree_subtree(BT1R,BT2),
-    BT1 \= BT2.
 
 %% btree_subtree tests
 btree_subtree_fwd_test(BT,Solns) :-

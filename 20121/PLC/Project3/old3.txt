@@ -1,0 +1,87 @@
+% Two leaves
+btree_subtree(BT1,BT2) :- 
+    BT2 = leaf. % always true, no matter what BT1 is
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT2L = node(_,_,_),
+    BT2R = node(_,_,_),
+    btree_subtree(BT1R,BT2R),
+    btree_subtree(BT1L,BT2L),
+    X = Y.
+
+%btree_subtree(BT1,BT2) :-
+%    BT1 = node(BT1L,X,BT1R),
+%    BT2 = node(BT2L,Y,BT2R),
+%    BT2L = node(_,_,_),
+%    BT2R = node(_,_,_),
+%    btree_subtree(BT1R,BT2),
+%    X \= Y.
+
+%btree_subtree(BT1,BT2) :-
+%    BT1 = node(BT1L,X,BT1R),
+%    BT2 = node(BT2L,Y,BT2R),
+%    BT2L = node(_,_,_),
+%    BT2R = node(_,_,_),
+%    btree_subtree(BT1L,BT2),
+%    X \= Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT2L = node(_,_,_),
+    BT2R = leaf,
+    btree_subtree(BT1L,BT2L),
+    X = Y.
+
+%btree_subtree(BT1,BT2) :-
+%    BT1 = node(BT1L,X,BT1R),
+%    BT2 = node(BT2L,Y,BT2R),
+%    BT2L = node(_,_,_),
+%    BT2R = leaf,
+%    btree_subtree(BT1L,BT2),
+%    X \= Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT2R = node(_,_,_),
+    BT2L = leaf,
+    btree_subtree(BT1R,BT2R),
+    X = Y.
+
+%btree_subtree(BT1,BT2) :-
+%    BT1 = node(BT1L,X,BT1R),
+%    BT2 = node(BT2L,Y,BT2R),
+%    BT2R = node(_,_,_),
+%    BT2L = leaf,
+%    btree_subtree(BT1R,BT2),
+%    X \= Y.
+
+btree_subtree(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,Y,BT2R),
+    BT2L = leaf,
+    BT2R = leaf,
+    X = Y.
+
+%btree_subtree(BT1,BT2) :-
+%    BT1 = node(BT1L,X,BT1R),
+%    BT2 = leaf,
+%    btree_subtree(BT1L,BT2).
+
+%btree_subtree(BT1,BT2) :-
+%    BT1 = node(BT1L,X,BT1R),
+%    BT2 = leaf,
+%    btree_subtree(BT1R,BT2).
+
+% No-matches, so check left/right subtrees
+%btree_subtree(BT1,BT2) :-
+%    BT1 = node(BT1L,_,_),
+%    btree_subtree(BT1L,BT2),
+%    BT1 \= BT2.
+%btree_subtree(BT1,BT2) :-
+%    BT1 = node(_,_,BT1R),
+%    btree_subtree(BT1R,BT2),
+%    BT1 \= BT2.
