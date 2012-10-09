@@ -43,7 +43,7 @@ puzzle_soln(BLDG) :-
 	empty_building(BLDG), 
 
 	% Predicates for every student location
-	location(harold,HFN,HRN,BLDG), 
+	location(harold,HFN,_,BLDG), 
 	location(fred,FFN,FRN,BLDG), 
 	location(john,JFN,JRN,BLDG),
 	location(bret,BFN,BRN,BLDG),
@@ -51,7 +51,7 @@ puzzle_soln(BLDG) :-
 	location(derek,DFN,DRN,BLDG),
 	location(greg,GFN,GRN,BLDG),
 	location(chris,CFN,CRN,BLDG),
-	location(alex,AFN,ARN,BLDG), 		% don't forget alex!
+	location(alex,_,_,BLDG), 		% don't forget alex!
 
 	% Now come the rules for each student location
 	HFN \= 1, 							% harold does not live on the bottom floor

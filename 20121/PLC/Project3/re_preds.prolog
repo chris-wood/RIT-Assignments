@@ -50,15 +50,15 @@ re_match(RE,L) :-
 
 % The alt match 
 re_match(RE,L) :- 
-  RE = alt(RE1,RE2), 
+  RE = alt(RE1,_), 
   re_match(RE1,L).
 re_match(RE,L) :- 
-  RE = alt(RE1,RE2), 
+  RE = alt(_,RE2), 
   re_match(RE2,L).
 
 % The star match
 re_match(RE,L) :- 
-  RE = star(RES), 
+  RE = star(_), 
   L = [].
 re_match(RE,L) :- 
   RE = star(RES), 

@@ -117,13 +117,13 @@ btree_deepest(BT,D) :-
 % Rules for one leaf and one node child
 btree_deepest(BT,D) :- 
     btree_is_btree(BT), 
-    BT = node(BTL,X,BTR), 
+    BT = node(BTL,_,BTR), 
     BTL = leaf, 
     btree_deepest(BTR,DR), 
     D is DR.
 btree_deepest(BT,D) :- 
     btree_is_btree(BT),
-    BT = node(BTL,X,BTR), 
+    BT = node(BTL,_,BTR), 
     BTR = leaf, 
     btree_deepest(BTL,DL), 
     D is DL.
@@ -131,7 +131,7 @@ btree_deepest(BT,D) :-
 % Rules for two node children
 btree_deepest(BT,D) :- 
     btree_is_btree(BT), 
-    BT = node(BTL,X,BTR), 
+    BT = node(BTL,_,BTR), 
     BTL \= leaf, 
     BTR \= leaf, 
     btree_height(BTL,HL), 
@@ -141,7 +141,7 @@ btree_deepest(BT,D) :-
     D is DL.
 btree_deepest(BT,D) :- 
     btree_is_btree(BT), 
-    BT = node(BTL,X,BTR), 
+    BT = node(BTL,_,BTR), 
     BTL \= leaf, 
     BTR \= leaf, 
     btree_height(BTL,HL), 
@@ -253,7 +253,7 @@ btree_balanced_tests :-
 %%   BTS -- input/output parameter, binary tree
 
 % Two leaves
-btree_subtree(BT1,BT2) :- 
+btree_subtree(_,BT2) :- 
     BT2 = leaf. % always true, no matter what BT1 is
 
 % No children are leaves
@@ -289,7 +289,7 @@ btree_subtree(BT1,BT2) :-
 % Both children are leaves
 btree_subtree(BT1,BT2) :-
     BT1 = node(BT1L,X,BT1R),
-    BT2 = node(BT2L,X,BT2R),
+    BT2 = node(BT2L,Y,BT2R),
     BT1L = leaf,
     BT1R = leaf,
     BT2L = BT1L,
@@ -344,10 +344,22 @@ btree_subtree_tests :-
 %% btree_iso
 %% Binary tree isomorphisms; satisifed when the two paramters are
 %% isomorphic binary trees.
-%%  btree_is(BT1,BT2)
+%%  btree_iso(BT1,BT2)
 %%   BT1 -- input/output paramter, binary tree
 %%   BT2 -- input/output paramter, binary tree
-% DEFINE btree_iso HERE
+btree_iso(leaf,leaf).
+btree_iso(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,X,BT2R),
+    btree_iso(BT1L,BT2L),
+    btree_iso(BT1R,BT2R),
+    BT1 = BT2.
+btree_iso(BT1,BT2) :-
+    BT1 = node(BT1L,X,BT1R),
+    BT2 = node(BT2L,X,BT2R),
+    btree_iso(BT1L,BT2R),
+    btree_iso(BT1R,BT2L),
+    BT1 \= BT2.
 
 %% btree_iso tests
 btree_iso_fwd_test(BT1,Solns) :-
