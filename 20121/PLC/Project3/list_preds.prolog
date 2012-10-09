@@ -177,10 +177,13 @@ list_mergesort([L1],[L2]) :-
   L1 = L2.
 
 % A partition of the empty list
-partition([],[]).
-partition([L1],[L2]) :-
-  
+partition([],[],[]).
+partition([L1],[L2],[L3]) :-
+  L1 = [],
+  L2 = L3.
 
+%TODO: write the rest of the partition part and then the merge predicate, and then
+% use them all together in mergesort. It has a natural recursive definition.
 
 % Handle all other cases (which all eventually break down to lists of size 1)
 list_mergesort(L1,L2) :-
