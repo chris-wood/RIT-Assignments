@@ -1,3 +1,5 @@
+%% Christopher Wood
+
 %% Part 3: Logic puzzle
 
 % Alex, Bret, Chris, Derek, Eddie, Fred, Greg, Harold, and John are
