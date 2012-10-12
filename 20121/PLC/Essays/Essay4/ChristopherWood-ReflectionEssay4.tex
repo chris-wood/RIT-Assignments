@@ -20,6 +20,15 @@ today?
 Can you give a feature or application of a programming language that you consider harmful? Be sure to back up your claim with a reasoned argument.
 \end{questions}
 
+%% Points to hit: 
+%% 1. goto makes program sequencing difficult, but not impossible
+%% 2. i think dijkstra's argument is missing the fact that pointers can be inserted between goto statmenets and labels to depict the flow
+%% 3. however, it still obscures the control flow (jumps across threads of control instead of logical, sequential flow)
+%% 4. makes proving correctness difficult (can't rely on induction anymore because there is the notion of which "context" does this flow belong to)
+%% 5. Kind of relates to constructive programming - lack of goto is necessary for constructive program descriptions
+%% 6. it's not even needed! \lambda calc and turing machines let us accomplish the same task in different ways
+%% 7. doesn't mean that all uses of goto are harmful! only some uses that jump between control flows. using gotos for loops and iteration within the same flow of control does not obfuscate the cfg. also, as form of escape from code blocks (i.e. break) and ways to implement other common conditional statements. but, given the sophistication of high-level languages, it is clear that these are no longer valid use cases. There exists alternatives.
+
 \bibliographystyle{plain}
 \bibliography{ref}
 
