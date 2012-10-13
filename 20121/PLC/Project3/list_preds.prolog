@@ -192,13 +192,6 @@ list_merge([X|L1],[Y|L2],[Z|L3]) :-
   Y = Z,
   list_merge([X|L1],L2,L3).
 
-%% list_part
-%% Partition the list into two halves (different from the other partition predicate)
-list_part([],[],[]).
-list_part([X|L1],[],[X|L3]) :- list_part(L1,[],L3).
-list_part([],[Y|L2],[Y|L3]) :- list_part([],L2,L3).
-list_part([X|L1],[Y|L2],[X,Y|L3]) :- list_part(L1,L2,L3).
-
 %% list_mergesort
 %% Run the mergesort algorithm
 list_mergesort([],[]).
@@ -209,8 +202,7 @@ list_mergesort(L1,L2) :-
   NSL1 = [_|_],
   NSL2 = [_|_],
   L1 = [_|_],
-  %append(NSL1,NSL2,L1), % append did not give the right time complexity... so I had to make my own partition predicate
-  list_part(NSL1,NSL2,L1),
+  append(NSL1,NSL2,L1), 
 
   % Find a satisfying mergesort result for both partitions
   list_mergesort(NSL1,SL1),

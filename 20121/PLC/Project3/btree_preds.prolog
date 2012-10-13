@@ -51,17 +51,14 @@ btree_is_btree(node(BTL,_,BTR)) :-
 %%   BT -- input parameter, binary tree
 %%   D -- output parameter, integer height of BT
 btree_height(BT,0) :- 
-    btree_is_btree(BT), 
     BT = leaf.
-btree_height(BT,H) :- 
-    btree_is_btree(BT), 
+btree_height(BT,H) :-  
     BT = node(BTL,_,BTR), 
     btree_height(BTL,HL), 
     btree_height(BTR, HR), 
     HL >= HR, 
     H is 1 + HL.
 btree_height(BT,H) :- 
-    btree_is_btree(BT), 
     BT = node(BTL,_,BTR), 
     btree_height(BTL,HL), 
     btree_height(BTR, HR),
@@ -109,7 +106,6 @@ btree_height_tests :-
 
 % Rule for no children
 btree_deepest(BT,D) :-  
-    btree_is_btree(BT), 
     BT = node(BTL,X,BTR), 
     BTL = leaf, 
     BTR = leaf, 
@@ -117,13 +113,11 @@ btree_deepest(BT,D) :-
 
 % Rules for one leaf and one node child
 btree_deepest(BT,D) :- 
-    btree_is_btree(BT), 
     BT = node(BTL,_,BTR), 
     BTL = leaf, 
     btree_deepest(BTR,DR), 
     D is DR.
 btree_deepest(BT,D) :- 
-    btree_is_btree(BT),
     BT = node(BTL,_,BTR), 
     BTR = leaf, 
     btree_deepest(BTL,DL), 
@@ -131,7 +125,6 @@ btree_deepest(BT,D) :-
 
 % Rules for two node children
 btree_deepest(BT,D) :- 
-    btree_is_btree(BT), 
     BT = node(BTL,_,BTR), 
     BTL \= leaf, 
     BTR \= leaf, 
@@ -141,7 +134,6 @@ btree_deepest(BT,D) :-
     HL >= HR, 
     D is DL.
 btree_deepest(BT,D) :- 
-    btree_is_btree(BT), 
     BT = node(BTL,_,BTR), 
     BTL \= leaf, 
     BTR \= leaf, 
@@ -188,12 +180,10 @@ btree_deepest_tests :-
 
 % Rule for leaf
 btree_balanced(BT) :- 
-    btree_is_btree(BT), 
     BT = leaf.
 
 % Rule for other cases (taking into account height += 1 delta)
 btree_balanced(BT) :- 
-    btree_is_btree(BT), 
     BT = node(BTL,_,BTR), 
     btree_height(BTL,HL), 
     btree_height(BTR,HR), 
@@ -201,7 +191,6 @@ btree_balanced(BT) :-
     btree_balanced(BTL), 
     btree_balanced(BTR).
 btree_balanced(BT) :- 
-    btree_is_btree(BT), 
     BT = node(BTL,_,BTR), 
     btree_height(BTL,HL), 
     btree_height(BTR,HR), 
@@ -209,7 +198,6 @@ btree_balanced(BT) :-
     btree_balanced(BTL), 
     btree_balanced(BTR).
 btree_balanced(BT) :- 
-    btree_is_btree(BT),
     BT = node(BTL,_,BTR), 
     btree_height(BTL,HL), 
     btree_height(BTR,HR), 
