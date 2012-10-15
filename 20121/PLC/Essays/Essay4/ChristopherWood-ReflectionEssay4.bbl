@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{Dijkstra1968}
+Edsger~W. Dijkstra.
+\newblock Letters to the editor: go to statement considered harmful.
+\newblock {\em Commun. ACM}, 11(3):147--148, March 1968.
+
+\bibitem{Knuth1974}
+Donald~E. Knuth.
+\newblock Structured programming with go to statements.
+\newblock {\em ACM Comput. Surv.}, 6(4):261--301, December 1974.
+
+\end{thebibliography}

@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  13 OCT 2012 09:35
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  15 OCT 2012 15:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**ChristopherWood-ReflectionEssay4.tex
+**ChristopherWood-ReflectionEssay4
 (./ChristopherWood-ReflectionEssay4.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
@@ -120,26 +120,28 @@ LaTeX Font Info:    ... okay on input line 5.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-No file ChristopherWood-ReflectionEssay4.bbl.
 [1
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(./ChristopherWood-ReflectionEssay4.bbl) [2]
 (./ChristopherWood-ReflectionEssay4.aux) ) 
 Here is how much of TeX's memory you used:
- 759 strings out of 493488
- 10792 string characters out of 3141326
- 63354 words of memory out of 3000000
- 4126 multiletter control sequences out of 15000+200000
- 4107 words of font info for 16 fonts, out of 3000000 for 9000
+ 769 strings out of 493488
+ 10958 string characters out of 3141326
+ 68360 words of memory out of 3000000
+ 4131 multiletter control sequences out of 15000+200000
+ 5060 words of font info for 19 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 24i,4n,32p,485b,107s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 24i,4n,32p,481b,137s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2012/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2012/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on ChristopherWood-ReflectionEssay4.pdf (1 page, 16470 bytes).
+onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2012/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2012/texmf-dist/font
+s/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2012/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on ChristopherWood-ReflectionEssay4.pdf (2 pages, 47904 bytes).
 PDF statistics:
- 16 PDF objects out of 1000 (max. 8388607)
- 10 compressed objects within 1 object stream
+ 27 PDF objects out of 1000 (max. 8388607)
+ 18 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
