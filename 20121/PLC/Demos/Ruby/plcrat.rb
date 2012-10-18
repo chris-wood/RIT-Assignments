@@ -1,3 +1,7 @@
+# OO avoids copy paste, and gives us dynamic dispatch!
+# interfaces are useless/irrelevant in ruby because method existance is done at runtime... (dynamically typed)
+# mixins take precedence (see comparable for mixin)
+
 class PLCRational
 
 	# constructor 

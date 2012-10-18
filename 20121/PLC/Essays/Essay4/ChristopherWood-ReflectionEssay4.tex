@@ -36,63 +36,67 @@ Can you give a feature or application of a programming language that you conside
 
 The case against the {\tt goto} statement seems to be one of perspective. This language construct 
 grew in popularity because of its direct mapping to hardware behavior, but as programming languages
-and software engineering practices evolved, its usage has slowly withered. Based on the arguments
-presented by Dijkstra \cite{Dijkstra1968} and others, there are many reasons that contribute to the 
-fall of the {\tt goto} statement, most of which center on program correctness proofs through sequencing. 
-However, when considering the use of the {\tt goto} statement outside of this perspective, there were 
-some valid reasons for which it can a useful programming tool. However, historical trends show that these 
-additional perspectives do not carry as much weight as the one promoted by Dijkstra and have, to a large
-extent, become nonexistent. 
+and software engineering practices evolved its usage has slowly withered. Implementation
+benefits related to code quality and performance that come from the proper usage of the {\tt goto} 
+statement have been dwarfed by such advancements. In addition, based on the arguments
+presented by Dijkstra \cite{Dijkstra1968} and others, there are many other reasons that contribute to the 
+fall of the {\tt goto} statement. The most compelling of which centers on proofs of program correctness. 
+Therefore, in my opinion, what remains in support for the {\tt goto} statement are few scenarios 
+where skillful usage is needed to yield any benefits.
 
 At a behavioral level, the {\tt goto} statement enables programmers to introduce arbitrary jumps 
-across local and non-local control flows in a program. In an effort to verify the program's correctness
-by generating a sequence of statements that are executed to yeild a specific result, these jumps
-make the analysis stage very difficult (especially when loops and other iterative constructs were used). 
+across local and non-local control flows in a program. These jumps
+make the formal modeling of program behavior very difficult (especially when loops and other iterative constructs were used). 
 Not only does it obscure the control flow of a program by 
-branching from the traditional sequential flow of well-structured programs, but it requires the 
-context of a sequence index in a program to be considered in order to make guarantees about its
-behavior. This inclusion of this context invalidates the use of traditional induction as a 
-technique for proving program correctness. Induction traditionally relies on a well-defined 
-sequence of statements that made up a program, and the induction hypothesis for the behavior of a 
-program is formulated around the sequence index of a program. With multiple contexts for a given 
-sequence index, it is impossible to guarantee the correctness of the program for all such contexts.
-Therefore, either induction must be abandoned, or it must be modified (perhaps by formulating the
-correctness using double induction on the sequence index and context).
+branching from the traditional sequential flow of well-structured programming, but it requires the 
+context of program sequence index to be considered in order to make guarantees about its
+behavior \cite{Dijkstra1968}. The inclusion of this context invalidates the use of mathematical induction as a 
+technique for proving program correctness. Such proofs typically rely on a well-defined 
+sequence of statements that make up a program, and the induction hypothesis for the behavior of a 
+program is formulated around the sequence index of a program. 
+Unfortunately, it is difficult to formalize such a proof with this context variability. 
+Therefore, either induction must be abandoned or it must be modified (perhaps by formulating the
+correctness using double induction on the sequence index and context) if the {\tt goto} statement
+is permitted. 
 
-Other arguments against the {\tt goto} statement are not as substantial. For example, technically
-speaking, it is not needed in any programming context. Some may argue that programmer benefits such as the 
+Other arguments against the {\tt goto} statement are not as theoretically fundamental. For example, 
+some people may argue that programmer benefits such as the 
 ability to manually construct loops, break out of iterative constructs, and formulate 
 custom conditional statements are lost without the {\tt goto} statement, leading to a Turing Tarpit
 situation. However, programming languages have undergone significant evolution and introduced 
 more intuitive loop signatures, break or escape statements, and flexible conditional statements
 to address these issues. Therefore, one might say that the evolution of programming languages
-invalidates any claim that {\tt goto} statements provide specific implementation benefits. 
+invalidates any claim that {\tt goto} statements provide specific implementation quality benefits. 
+That is, by and large, {\tt goto}s used for these reasons are no longer needed, so it's best
+not to include them in modern languages.
 
 Furthermore, the primitive programming techniques that came with the {\tt goto} statement do not
-appear to be sound development practices and are frowned upon in the software 
+appear to be sound and respectable development practices in today's software 
 engineering community. In fact, one of my former managers at Intel once said, ``If you're using a 
 {\tt goto} statement, then you've got bigger issues to deal with than rewriting your function.'' 
 I believe he and the community are partially correct. There are certainly cases where the use of 
 {\tt goto} statements is a dying practice, and mixing it with modern development techniques only causes developer confusion and makes it much more difficult to maintain code and ensure its correctness. 
 However, consider the case where we have a simple procedure that performs some form of error checking to protect an internal block of code.
-The typical approach to protect the main body of the procedure from running without passing all of the error checks is to used nested {\tt if} statements. In this case though {\tt goto} statements would be perfectly acceptable
-because they would enable the developer to jump to a common error handling routine in the event of 
-an error, thus skipping all subsequent error checks and the loop body altogether. 
-
-This is an example of where the use of the {\tt goto} statement led to cleaner, smaller, and more
-efficient code. However, in his paper entitled ``Structured Programming with go to Statements,'' Donald 
+The typical approach to protect the main body of the procedure from running without passing all of the error checks is to use nested conditional statements. Depending on the level of nesting that is needed, such code will usually
+end up being difficult to read and maintain. In this case the {\tt goto} statement would be perfectly acceptable
+because it would enable the developer to jump to a common error handling block in the event of 
+an error, thus skipping all subsequent error checks and the protected body altogether. In addition, no 
+nesting would be needed with this design. This is just one example of where the use of the 
+{\tt goto} statement can lead to cleaner, smaller, and more efficient code. However, in his 
+paper entitled ``Structured Programming with go to Statements,'' Donald 
 Knuth was able to generate many different examples where the {\tt goto} statement actually increased code 
-size and decreased performance \cite{Knuth1974}. From this, and the aforementioned error-checking 
+size and decreased performance (e.g. hash code generation and tree searching) \cite{Knuth1974}. From this, and the aforementioned error-checking 
 example, we can conclude that careful usage of {\tt goto} statements can be beneficial in certain
 circumstances and harmful in others. 
 
-Collectively, there are several perspectives in which the {\tt goto} statement can be considered
-harmful. While old development practices might provide adequate reason to support the usage of
-this statement, the evolution of software engineering practices and programming languages 
-has started to invalidate these claims. To the experienced programmer, the {\tt goto} statement
-certainly has its benefits. However, as the software development field changes and this statement
-is phased out in modern languages, it is important that these benefits are abandoned in order
+In conclusion, while old development practices might provide adequate reason to support the usage of
+this statement, the evolution of software engineering practices (including the area of formal modeling) 
+and programming languages has started to refute these claims. To the experienced programmer, however, the {\tt goto} statement
+certainly has its benefits in certain scenarios. Unfortunately, it is necessary to abandon these benefits in order
 to establish a common set of development practices and techniques among all active developers. 
+Similar to the slow transition away from Windows XP in corporate America, such change
+is needed to enable the efficiencies and higher quality that comes with new technologies (which are, in this case,
+newer languages and development practices).
 
 %Formal modeling of software systems to ensure their correctness still carries the most weight against this aged way of development. 
 
