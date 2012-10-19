@@ -5,7 +5,6 @@ class Leaf
 
   # DEFINE initialize HERE
   def initialize
-
   end
 
   # DEFINE size HERE
@@ -20,7 +19,6 @@ class Leaf
 
   # DEFINE deepest HERE
   def deepest
-    return nil
   end
 
   # DEFINE to_s HERE
@@ -30,10 +28,11 @@ class Leaf
 
   # DEFINE each HERE
   def each 
-
   end
 
   # DEFINE tmap HERE
+  def tmap
+  end
 
 end
 
@@ -48,22 +47,55 @@ class BinaryNode
   end
 
   # DEFINE size HERE
+  def size
+    return 1 + @leftChild.size + @rightChild.size
+  end
 
   # DEFINE height HERE
   def height
-    #leftHeight = @leftChild.height
-    #rightHeight = @rightChild.height
-    #return # the max of the two
-    
+    leftHeight = @leftChild.height
+    rightHeight = @rightChild.height
+    if (leftHeight >= rightHeight)
+      return leftHeight + 1
+    else
+      return rightHeight + 1
+    end
   end
 
   # DEFINE deepest HERE
+  def deepest
+    if size == 0
+      return nil
+    elsif (height == 1)
+      return @element
+    else 
+      leftHeight = @leftChild.height
+      rightHeight = @rightChild.height
+
+      if (leftHeight == rightHeight)
+        return [@leftChild.deepest, @rightChild.deepest]
+      elsif (leftHeight > rightHeight)
+        return @leftChild.deepest
+      else # rightHeight > leftHeight)
+        return @rightChild.deepest
+      end
+    end
+  end
 
   # DEFINE to_s HERE
+  def to_s
+
+  end
 
   # DEFINE each HERE
+  def each
+
+  end
 
   # DEFINE tmap HERE
+  def tmap
+
+  end
 
 end
 
@@ -81,17 +113,40 @@ class NaryNode
   end
 
   # DEFINE size HERE
+  def size
+    sum = 1
+    @children.each {|x| sum = sum + x.size}
+    return sum
+  end
 
   # DEFINE height HERE
+  def height
+
+  end
 
   # DEFINE deepest HERE
+  def deepst
+
+  end
 
   # DEFINE to_s HERE
+  def to_s
+
+  end
 
   # DEFINE each HERE
+  def each
+
+  end
 
   # DEFINE tmap HERE
+  def tmap
+
+  end
 
 end
 
 # DEFINE tree_to_s HERE
+def tree_to_s t
+  t.to_s
+end
