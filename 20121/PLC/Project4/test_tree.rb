@@ -47,6 +47,7 @@ t9 = NaryNode.new("p",[NaryNode.new("r",[NaryNode.new("e",[NaryNode.new("i",[Lea
 test_tree 9, t9
 
 # Uncomment these to test the 'tmap' method.
+=begin
 t1x = t1.tmap {|z| z * 2}
 test_tree "1x", t1x
 t2x = t2.tmap {|z| z * 2}
@@ -65,3 +66,4 @@ t8x = t8.tmap {|z| z.swapcase}
 test_tree "8x", t8x
 t9x = t9.tmap {|z| z.swapcase}
 test_tree "9x", t9x
+=end

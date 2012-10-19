@@ -26,6 +26,9 @@ class Leaf
     return nil.to_s
   end
 
+  # As per assignment requirements
+  include Enumerable
+
   # DEFINE each HERE
   def each 
   end
@@ -84,12 +87,18 @@ class BinaryNode
 
   # DEFINE to_s HERE
   def to_s
-
+    return @element.to_s + @leftChild.to_s + @rightChild.to_s
   end
 
-  # DEFINE each HERE
-  def each
+  # As per assignment requirements
+  include Enumerable
 
+  # DEFINE each HERE
+  def each &block
+    yield @element
+    @leftChild.each &block
+    @rightChild.each &block
+    return self
   end
 
   # DEFINE tmap HERE
@@ -107,9 +116,8 @@ class NaryNode
     @element = element
 
     # Build the copy of the children array
-    #@children = []
-    #children.each {|x| @children << x}
-    @children = children.clone()
+    @children = []
+    children.each {|x| @children << x}
   end
 
   # DEFINE size HERE
@@ -121,22 +129,57 @@ class NaryNode
 
   # DEFINE height HERE
   def height
-
+    max = 0
+    @children.each {|c| 
+      childHeight = c.height
+      max = childHeight if childHeight >= max
+    }
+    return max + 1
   end
 
   # DEFINE deepest HERE
-  def deepst
+  def deepest
+    if height == 0
+      return nil
+    elsif height == 1
+      return @element
+    else 
+      max = 0
+      deepOnes = []
 
+      # Build up the deep ones 
+      @children.each {|x| 
+        if (x.height > max)
+          max = x.height
+          deepOnes = [x.deepest]
+        elsif (x.height == max)
+          deepOnes << x.deepest
+        end
+      }
+
+      if (deepOnes.length == 1)
+        return deepOnes[0]
+      else
+        return deepOnes
+      end
+    end
   end
 
   # DEFINE to_s HERE
   def to_s
-
+    result = @element.to_s
+    @children.each {|c| result = result + c.to_s}
+    return result
   end
 
-  # DEFINE each HERE
-  def each
+  # As per assignment requirements
+  include Enumerable
 
+  # DEFINE each HERE
+  def each &block
+    yield @element
+    @children.each {|c| c.each &block}
+    return self
   end
 
   # DEFINE tmap HERE
@@ -148,5 +191,7 @@ end
 
 # DEFINE tree_to_s HERE
 def tree_to_s t
-  t.to_s
+  result = ""
+  t.each {|c| result = result + c.to_s}
+  return result
 end

@@ -1,3 +1,5 @@
+# Christopher Wood
+
 module XArray
   include Comparable
   include Enumerable
@@ -26,10 +28,19 @@ module XArray
   end
 
   # DEFINE [] HERE
+  def []
+
+  end
 
   # DEFINE each HERE
+  def each 
+
+  end
 
   # DEFINE <=> HERE
+  def <=>
+
+  end
 
 end
 
