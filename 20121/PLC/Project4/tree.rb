@@ -190,6 +190,7 @@ class NaryNode
 end
 
 # DEFINE tree_to_s HERE
+# TODO: check with Fluet - is this what he had in mind?
 def tree_to_s t
   result = ""
   t.each {|c| result = result + c.to_s}

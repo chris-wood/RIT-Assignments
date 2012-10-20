@@ -28,18 +28,31 @@ module XArray
   end
 
   # DEFINE [] HERE
-  def []
-
+  def [] index
+    return @a[index] # TODO: this is not correct...
   end
 
   # DEFINE each HERE
-  def each 
-
+  def each &block
+    @a.each {|c| c.each &block}
   end
 
   # DEFINE <=> HERE
-  def <=>
+  def <=> otherArray
+    # Fetch the array lengths
+    length1 = @a.length - 1
+    length2 = otherArray.length - 1
 
+    val = 0
+    for i in 0..length1
+      if (i < length2)
+        if (@a[i] != otherArray[i])
+          return @a[i] <=> otherArray[i]  #TODO: not working correctly
+        end
+      else
+        return val
+      end
+    end
   end
 
 end
