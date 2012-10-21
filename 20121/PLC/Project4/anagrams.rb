@@ -30,6 +30,15 @@ class LetterCount
   end
 
   # DEFINE sum HERE
+  def sum othr
+    h = Hash.new 0
+
+    # Walk both hashes to make sure we get the union of the key sets
+    @hash.each {|k,v| h[k] = v + othr.hash[k]}
+    othr.hash.each {|k,v| h[k] = @hash[k] + v if not (h.has_key? k)}
+    
+    return LetterCount.new(h)
+  end
   
   private
   def str_to_count s
