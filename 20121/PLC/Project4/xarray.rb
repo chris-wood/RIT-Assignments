@@ -128,7 +128,7 @@ class RepeatXArray
   # DEFINE initialize HERE
   def initialize(a, n)
     @a = []
-    for i in 0..n
+    for i in 0..(n - 1)
       a.each {|x| @a << x}
     end
   end
