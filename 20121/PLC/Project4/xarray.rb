@@ -70,12 +70,18 @@ module XArray
     length1 = self.length - 1
     length2 = othr.length - 1
 
-    minVal = [length1, length2].min
+    maxVal = [length1, length2].max
     val = 0
-    for i in 0..(minVal - 1)
-      val = self.elem_at(i) <=> othr.elem_at(i)
-      if (val != 0)
-        return val
+    for i in 0..(maxVal - 1)
+      if (i < length1 && i < length2)
+        val = self.elem_at(i) <=> othr.elem_at(i)
+        if (val != 0)
+          return val
+        end
+      elsif (i < length1)
+        return 1
+      else 
+        return -1
       end
       #if (self.elem_at(i) != othr.elem_at(i))
       #  return self.elem_at(i) <=> othr.elem_at(i)  #TODO: not working correctly
