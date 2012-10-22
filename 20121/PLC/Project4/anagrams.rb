@@ -1,3 +1,5 @@
+# Christopher Wood
+
 class LetterCount
   attr_reader :hash
   protected :hash
@@ -61,5 +63,43 @@ def anagrams1(word,file_name)
 end
 
 # DEFINE anagrams2 HERE
+def anagrams2(word,file_name)
+  lc = LetterCount.new word
+  file = File.new(file_name, "r")
+
+  # Cache the line buffer
+  lineBuffer = []
+  file.each_line {|w| lineBuffer << w}
+  puts "test"
+
+  # Search for all single lines
+  lineBuffer.each {|w|
+    w = w.chop
+    wlc = LetterCount.new w
+    d = lc.difference wlc
+    if (d && d.all_zeros) then puts w end
+  }
+
+  # Search for all double lines
+  n = lineBuffer.length
+  for i in 0..(n - 2) # DECIPHER: the same line can be used twice to form an anagram
+    for j in (i + 1)..(n - 1)
+      #puts "trying " + i.to_s + " and " + j.to_s
+      w1 = lineBuffer[i].chop
+      w2 = lineBuffer[j].chop
+
+      w1lc = LetterCount.new w1
+      w2lc = LetterCount.new w2
+
+      d1 = lc.difference w1lc
+      d2 = lc.difference w2lc
+
+      if (d1 && d1.all_zeros) and (d2 && d2.all_zeros) then puts w end
+    end
+  end
+
+  # Close the file and return
+  file.close
+end
 
 # DEFINE anagrams HERE
