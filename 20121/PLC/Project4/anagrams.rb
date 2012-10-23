@@ -39,7 +39,7 @@ class LetterCount
     @hash.each {|k,v| h[k] = v + othr.hash[k]}
     othr.hash.each {|k,v| h[k] = @hash[k] + v if not (h.has_key? k)}
     
-    return LetterCount.new(h)
+    LetterCount.new h
   end
   
   private
@@ -67,10 +67,9 @@ def anagrams2(word,file_name)
   lc = LetterCount.new word
   file = File.new(file_name, "r")
 
-  # Cache the line buffer
+  # Cache the lines in the file so we don't keep walking it over and over again
   lineBuffer = []
   file.each_line {|w| lineBuffer << w}
-  puts lineBuffer
 
   # Search for all single lines
   lineBuffer.each {|w|
@@ -84,17 +83,16 @@ def anagrams2(word,file_name)
   n = lineBuffer.length
   for i in 0..(n - 2) # DECIPHER: the same line can be used twice to form an anagram (it just has an impact on the buffer bounds)
     for j in (i + 1)..(n - 1)
-      #puts "trying " + i.to_s + " and " + j.to_s
       w1 = lineBuffer[i].chop
       w2 = lineBuffer[j].chop
-      puts "trying " + w1.to_s + " and " + w2.to_s
 
       w1lc = LetterCount.new w1
       w2lc = LetterCount.new w2
 
-      d = lc.difference(w1lc.sum w2lc)
+      sum = w1lc.sum w2lc
+      d = lc.difference(sum)
 
-      if (d && d.all_zeros) then puts w end
+      if (d && d.all_zeros) then puts w1 + " " + w2 end
     end
   end
 

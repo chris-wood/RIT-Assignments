@@ -31,10 +31,12 @@ class Leaf
 
   # DEFINE each HERE
   def each 
+    self
   end
 
   # DEFINE tmap HERE
   def tmap
+    self
   end
 
 end
@@ -102,8 +104,13 @@ class BinaryNode
   end
 
   # DEFINE tmap HERE
-  def tmap
-
+  def tmap &block
+    if block_given?
+      @element = block.call(@element)
+      @leftChild.tmap  &block
+      @rightChild.tmap &block
+    end
+    self
   end
 
 end
@@ -183,8 +190,12 @@ class NaryNode
   end
 
   # DEFINE tmap HERE
-  def tmap
-
+  def tmap &block
+    if block_given?
+      @element = block.call(@element)
+      @children.each {|c| c.tmap &block}
+    end
+    self
   end
 
 end
