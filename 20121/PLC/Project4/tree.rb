@@ -19,6 +19,7 @@ class Leaf
 
   # DEFINE deepest HERE
   def deepest
+    nil
   end
 
   # DEFINE to_s HERE
@@ -81,7 +82,7 @@ class BinaryNode
         return [@leftChild.deepest, @rightChild.deepest]
       elsif (leftHeight > rightHeight)
         return @leftChild.deepest
-      else # rightHeight > leftHeight)
+      else 
         return @rightChild.deepest
       end
     end
@@ -121,10 +122,7 @@ class NaryNode
   # DEFINE initialize HERE
   def initialize(element, children)
     @element = element
-
-    # Build the copy of the children array
-    @children = []
-    children.each {|x| @children << x}
+    @children = children.clone
   end
 
   # DEFINE size HERE
@@ -201,7 +199,6 @@ class NaryNode
 end
 
 # DEFINE tree_to_s HERE
-# TODO: check with Fluet - is this what he had in mind? 
 def tree_to_s t
   result = ""
   t.each {|c| result = result + c.to_s}

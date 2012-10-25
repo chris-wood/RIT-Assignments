@@ -38,14 +38,11 @@ module XArray
     if (len == nil)
       return self.elem_at(start)
     else
-      # Make sure we don't run past the upper bound
-      #return nil if ((start + len - 1) >= self.length)
-
       # Build the resulting array
       result = []
       for i in start..(start + len - 1)
         if (i >= self.length)
-          return result # we reached the end of the array
+          return result # we have reached the end of the array
         else
           result << self.elem_at(i)
         end
@@ -55,12 +52,10 @@ module XArray
   end
 
   # DEFINE each HERE
-  def each #&block #caw
-    #print self.inspect
+  def each 
     for i in 0..(self.length - 1)
       yield self.elem_at(i)
     end
-    #self.each {|c| yield c} #c.each &block #caw
     self
   end
 
@@ -83,9 +78,6 @@ module XArray
       else 
         return -1
       end
-      #if (self.elem_at(i) != othr.elem_at(i))
-      #  return self.elem_at(i) <=> othr.elem_at(i)  #TODO: not working correctly
-      #end
     end
     return val
   end
@@ -120,21 +112,10 @@ class ConcatXArray
   def initialize(a1, a2)
     @a1 = a1.clone
     @a2 = a2.clone
-    #@a = a1.clone
-    #a2.each {|x| @a << x}
   end
 
   # DEFINE inspect HERE
   def inspect
-    #result = ""
-    #for i in 0..(@a1.length - 1)
-    #  result = result + @a1.elem_at(i).to_s
-    #end
-    #for i in 0..(@a2.length - 1)
-    #  result = result + @a2.elem_at(i).to_s
-    #end
-    #@a1.each {|x| result = result + x.to_s}
-    #@a2.each {|x| result = result + x.to_s}
     result = @a1.inspect + "," + @a2.inspect
     "ConcatXArray(#{result})"
   end
@@ -148,14 +129,10 @@ class ConcatXArray
   def elem_at i
     return nil if (i < 0 || i >= length)
     if (i < @a1.length)
-      #return @a1[i]
       return @a1.elem_at(i)
     else
-      #return @a2[i - @a1.length]
       return @a2.elem_at(i - @a1.length)
     end
-    #return nil if (i < 0 || i >= length)
-    #@a[i]
   end
 
 end
@@ -167,20 +144,10 @@ class RepeatXArray
   def initialize(a, n)
     @a = a.clone
     @n = n
-    #for i in 0..(n - 1)
-    #  a.each {|x| @a << x}
-    #end
   end
 
   # DEFINE inspect HERE
   def inspect
-    #result = ""
-    #for i in 0..(@n - 1)
-    #  for j in 0..(@a.length - 1)
-    #    result = result + @a.elem_at(j).to_s
-    #  end
-    #  #@a.each {|x| result = result + x.to_s}
-    #end
     result = @a.inspect + "," + @n.inspect
     "RepeatXArray(#{result})"
   end
@@ -204,17 +171,10 @@ class ReverseXArray
   # DEFINE initialize HERE
   def initialize(a)
     @a = a.clone
-    #@a = []
-    #a.each {|x| @a.insert(0, x)}
   end
 
   # DEFINE inspect HERE
   def inspect
-    #result = ""
-    #for i in 0..(@a.length - 1)
-    #  result = @a.elem_at(i).to_s + result
-    #end
-    #@a.each {|x| result = x.to_s + result}
     result = @a.inspect
     "ReverseXArray(#{result})"
   end
@@ -238,24 +198,10 @@ class PalindromeXArray
   # DEFINE initialize HERE
   def initialize(a)
     @a = a.clone()
-    #index = a.length
-    #a.each {|x| @a.insert(index, x)}
   end
 
   # DEFINE inspect HERE
   def inspect
-    #firstHalf = ""
-    #secondHalf = ""
-
-    #for i in 0..(@a.length - 1)
-    #  firstHalf = firstHalf + @a.elem_at(i).to_s
-    #end
-    #for i in 0..(@a.length - 1)
-    #  secondHalf = @a.elem_at(i).to_s + secondHalf
-    #end
-    #@a.each {|x| firstHalf = firstHalf + x.to_s}
-    #@a.each {|x| secondHalf = x.to_s + secondHalf}
-    #result = firstHalf + secondHalf
     result = @a.inspect
     "PalindromeXArray(#{result})"
   end
@@ -284,41 +230,12 @@ class SwizzleXArray
   def initialize(a1, a2)
     @a1 = a1.clone
     @a2 = a2.clone
-
-    #a1length = a1.length
-    #a2length = a2.length
-    #max = [a1length, a2length].max
-
-    #for i in 0..max
-    #  if (i < a1length)
-    #    @a << a1[i]
-    #  end
-    #  if (i < a2length)
-    #    @a << a2[i]
-    #  end
-    #end
   end
 
   # DEFINE inspect HERE
   def inspect
     result = ""
-
-    # Build up the swizzle representation
-    #a1length = @a1.length
-    #a2length = @a2.length
-    #max = [a1length, a2length].max
-
-    #for i in 0..(max - 1)
-    #  if (i < a1length)
-    #    result = result + @a1.elem_at(i).to_s
-    #  end
-    #  if (i < a2length)
-    #    result = result + @a2.elem_at(i).to_s
-    #  end
-    #end
-
     result = @a1.inspect + "," + @a2.inspect
-
     "SwizzleXArray(#{result})"
   end
 
@@ -358,18 +275,10 @@ class ProcXArray
   def initialize(n, p)
     @n = n
     @p = p
-    #@a = []
-    #for i in 0..n
-    #  @a << (p.call i)
-    #end
   end
 
   # DEFINE inspect HERE
   def inspect
-    #result = ""
-    #for i in 0..(@n - 1)
-    #  result = result + (@p.call i).to_s
-    #end
     result = @n.inspect + "," + @p.inspect
     "ProcXArray(#{result})"
   end

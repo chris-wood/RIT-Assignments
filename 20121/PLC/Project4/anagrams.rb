@@ -33,13 +33,9 @@ class LetterCount
 
   # DEFINE sum HERE
   def sum othr
-    h = Hash.new 0
-
-    # Walk both hashes to make sure we get the union of the key sets
-    @hash.each {|k,v| h[k] = v + othr.hash[k]}
-    othr.hash.each {|k,v| h[k] = @hash[k] + v if not (h.has_key? k)}
-    
-    LetterCount.new h
+    h = @hash.clone
+    othr.hash.each {|k,v| h[k] = h[k] + v}
+    LetterCount.new(h)
   end
   
   private
@@ -67,32 +63,23 @@ def anagrams2(word,file_name)
   lc = LetterCount.new word
   file = File.new(file_name, "r")
 
-  # Cache the lines in the file so we don't keep walking it over and over again
+  # Cache the lines in the file and the corresponding LetterCount objects
+  countBuffer = []
   lineBuffer = []
-  file.each_line {|w| lineBuffer << w}
-
-  # Search for all single lines
-  lineBuffer.each {|w|
-    w = w.chop
-    wlc = LetterCount.new w
-    d = lc.difference wlc
-    if (d && d.all_zeros) then puts w end
+  file.each_line {|w| 
+    countBuffer << LetterCount.new(w.chop)
+    lineBuffer << w.chop
   }
 
-  # Search for all double lines
-  n = lineBuffer.length
-  for i in 0..(n - 2) # DECIPHER: the same line can be used twice to form an anagram (it just has an impact on the buffer bounds)
-    for j in (i + 1)..(n - 1)
-      w1 = lineBuffer[i].chop
-      w2 = lineBuffer[j].chop
-
-      w1lc = LetterCount.new w1
-      w2lc = LetterCount.new w2
-
-      sum = w1lc.sum w2lc
-      d = lc.difference(sum)
-
-      if (d && d.all_zeros) then puts w1 + " " + w2 end
+  # Walk across each line to do the permutation check
+  for i in 0..(countBuffer.length - 1)
+    d = lc.difference(countBuffer[i])
+    if (d && d.all_zeros) then puts lineBuffer[i] end
+    if d # short-circuit if we can't possibly make the match
+      for j in i..(countBuffer.length - 1)
+        d2 = d.difference(countBuffer[j])
+        if (d2 && d2.all_zeros) then puts lineBuffer[i] + " " + lineBuffer[j] end
+      end
     end
   end
 
