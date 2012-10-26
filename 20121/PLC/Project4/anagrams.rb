@@ -74,8 +74,9 @@ def anagrams2(word,file_name)
   # Walk across each line to do the permutation check
   for i in 0..(countBuffer.length - 1)
     d = lc.difference(countBuffer[i])
-    if (d && d.all_zeros) then puts lineBuffer[i] end
-    if d # short-circuit if we can't possibly make the match
+    if (d && d.all_zeros) 
+      puts lineBuffer[i] 
+    elsif d # short-circuit if we can't possibly make the match
       for j in i..(countBuffer.length - 1)
         d2 = d.difference(countBuffer[j])
         if (d2 && d2.all_zeros) then puts lineBuffer[i] + " " + lineBuffer[j] end
@@ -88,3 +89,47 @@ def anagrams2(word,file_name)
 end
 
 # DEFINE anagrams HERE
+def anagramsHelper(lineBuffer,countBuffer,indices,diff)
+  for i in (indices[indices.length - 1] + 1)..(countBuffer.length - 1)
+    d2 = diff.difference(countBuffer[i])
+    if (d2 && d2.all_zeros)
+      line = ""
+      indices.each {|index| line = line + lineBuffer[index] + " "} 
+      line = line + lineBuffer[i]
+      puts line
+      return nil
+    elsif d2 
+      indices << i
+      anagramsHelper(lineBuffer, countBuffer, indices, d2)
+      indices.delete(i)
+    end
+  end
+end
+
+def anagrams(word,file_name)
+  lc = LetterCount.new word
+  file = File.new(file_name, "r")
+
+  # Cache the lines in the file and the corresponding LetterCount objects
+  countBuffer = []
+  lineBuffer = []
+  file.each_line {|w| 
+    countBuffer << LetterCount.new(w.chop)
+    lineBuffer << w.chop
+  }
+
+  # Walk across each line to do the permutation check
+  for i in 0..(countBuffer.length - 1)
+    d = lc.difference(countBuffer[i])
+    if (d && d.all_zeros) 
+      puts lineBuffer[i] 
+    elsif d 
+      indices = [i]
+      anagramsHelper(lineBuffer, countBuffer, indices, d)
+      indices = []
+    end
+  end
+
+  # Close the file and return
+  file.close
+end

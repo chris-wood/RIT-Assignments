@@ -1,45 +1,2223 @@
-anagrams2("matthew","words")
+anagrams("matthew","words")
+a e h mt t w
+a eh mt t w
+a et h m t w
+a et h mt w
+a h m t wet
+a h met t w
+a h mt t we
+a h mt wet
+a he mt t w
+a hew mt t
+a m t the w
+a m t whet
+a mt the w
+a mt whet
+a t them w
+ah e mt t w
+ah et m t w
+ah et mt w
+ah m t wet
+ah met t w
+ah mt t we
+ah mt wet
+am et h t w
+am h t wet
+am t the w
+am t whet
+at e h m t w
+at e h mt w
+at eh m t w
+at eh mt w
+at em h t w
+at et h m w
+at h m t we
+at h m wet
+at h me t w
+at h met w
+at h mew t
+at h mt we
+at he m t w
+at he mt w
+at hem t w
+at hew m t
+at hew mt
+at m the w
+at m whet
+at them w
+ate h m t w
+ate h mt w
+awe h mt t
+e h m t ta w
+e h m t twa
+e h m tat w
+e h m watt
+e h mat t w
+e h mt t wa
+e h mt ta w
+e h mt twa
+e h t tam w
+e ha mt t w
+e hat m t w
+e hat mt w
+e haw mt t
+e m t thaw
+e m that w
+e math t w
+e mt t wah
+e mt thaw
+eat h m t w
+eat h mt w
+eh m t ta w
+eh m t twa
+eh m tat w
+eh m watt
+eh mat t w
+eh mt t wa
+eh mt ta w
+eh mt twa
+eh t tam w
+em h t ta w
+em h t twa
+em h tat w
+em h watt
+em hat t w
+em t thaw
+em that w
+et h m t wa
+et h m ta w
+et h m twa
+et h ma t w
+et h mat w
+et h maw t
+et h mt wa
+et h tam w
+et ha m t w
+et ha mt w
+et ham t w
+et hat m w
+et haw m t
+et haw mt
+et m t wah
+et m thaw
+et math w
+et mt wah
+et t wham
+eta h m t w
+eta h mt w
+h m t ta we
+h m t tea w
+h m ta wet
+h m tat we
+h m tate w
+h m teat w
+h ma t wet
+h mat t we
+h mat wet
+h mate t w
+h matte w
+h me t ta w
+h me t twa
+h me tat w
+h me watt
+h meat t w
+h met t wa
+h met ta w
+h met twa
+h mew t ta
+h mew tat
+h mt ta we
+h mt tea w
+h t tam we
+h t tame w
+h t team w
+h tam wet
+ha m t wet
+ha met t w
+ha mt t we
+ha mt wet
+ham t wet
+hat m t we
+hat m wet
+hat me t w
+hat met w
+hat mew t
+hat mt we
+hate m t w
+hate mt w
+haw met t
+he m t ta w
+he m t twa
+he m tat w
+he m watt
+he mat t w
+he mt t wa
+he mt ta w
+he mt twa
+he t tam w
+heat m t w
+heat mt w
+hem t ta w
+hem t twa
+hem tat w
 hem watt
+hew m t ta
+hew m tat
+hew mat t
+hew mt ta
+hew t tam
+m t the wa
+m t thea w
+m t wheat
+m ta the w
+m ta whet
+m that we
+m the twa
+m theta w
+ma t the w
+ma t whet
+mat the w
 mat whet
+math t we
 math wet
 matthew
+maw t the
+me t thaw
+me that w
+met t wah
 met thaw
-met what
 mew that
+mt the wa
+mt thea w
 mt wheat
+t them wa
+ta them w
+tam the w
 tam whet
 them twa
 
-anagrams2("rochester","words")
+anagrams("rochester","words")
+c e eh or r s t
+c e eh or r st
+c e eh orr s t
+c e eh orr st
+c e eh r rot s
+c e eh r s tor
+c e eh r sort
+c e eh s torr
+c e eros h r t
+c e err h o s t
+c e err h o st
+c e err h s to
+c e err h so t
+c e err ho s t
+c e err ho st
+c e err host
+c e est h or r
+c e est h orr
+c e est r rho
+c e et h or r s
+c e et h orr s
+c e et r rho s
+c e h o r re s t
+c e h o r re st
+c e h o r rest
+c e h or r se t
+c e h or r set
+c e h or re s t
+c e h or re st
+c e h or rest
+c e h ore r s t
+c e h ore r st
+c e h orr se t
+c e h orr set
+c e h r re s to
+c e h r re so t
+c e h r ret so
+c e h r roe s t
+c e h r roe st
+c e h r rose t
+c e h r rot se
+c e h r rote s
+c e h r s tore
+c e h r se tor
+c e h r sore t
+c e h r store
+c e h re rot s
+c e h re s tor
+c e h re sort
+c e h resort
+c e he or r s t
+c e he or r st
+c e he orr s t
+c e he orr st
+c e he r rot s
+c e he r s tor
+c e he r sort
+c e he s torr
+c e her o r s t
+c e her o r st
+c e her or s t
+c e her or st
+c e her r s to
+c e her r so t
+c e her rot s
+c e her s tor
+c e her sort
+c e hero r s t
+c e hero r st
+c e herr o s t
+c e herr o st
+c e herr s to
+c e herr so t
+c e ho r re s t
+c e ho r re st
+c e ho r rest
+c e horse r t
+c e host r re
+c e hot r re s
+c e oh r re s t
+c e oh r re st
+c e oh r rest
+c e or r s the
+c e or r seth
+c e orr s the
+c e orr seth
+c e other r s
+c e r re shot
+c e r rho se t
+c e r rho set
+c e r rot she
+c e r roth se
+c e r se thor
+c e r she tor
+c e r shore t
+c e r throes
+c e re rho s t
+c e re rho st
+c e re roth s
+c e re s thor
+c e re short
+c e rest rho
+c e ret rho s
+c e she torr
+c eh eros r t
+c eh err o s t
+c eh err o st
+c eh err s to
+c eh err so t
+c eh est or r
+c eh est orr
+c eh et or r s
+c eh et orr s
+c eh o r re s t
+c eh o r re st
+c eh o r rest
+c eh or r se t
+c eh or r set
+c eh or re s t
+c eh or re st
+c eh or rest
+c eh ore r s t
+c eh ore r st
+c eh orr se t
+c eh orr set
+c eh r re s to
+c eh r re so t
+c eh r ret so
+c eh r roe s t
+c eh r roe st
+c eh r rose t
+c eh r rot se
+c eh r rote s
+c eh r s tore
+c eh r se tor
+c eh r sore t
+c eh r store
+c eh re rot s
+c eh re s tor
+c eh re sort
+c eh resort
+c ere h o r s t
+c ere h o r st
+c ere h or s t
+c ere h or st
+c ere h r s to
+c ere h r so t
+c ere h rot s
+c ere h s tor
+c ere h sort
+c ere ho r s t
+c ere ho r st
+c ere host r
+c ere hot r s
+c ere oh r s t
+c ere oh r st
+c ere r shot
+c ere rho s t
+c ere rho st
+c ere roth s
+c ere s thor
+c ere short
+c eros et h r
+c eros h re t
+c eros h ret
+c eros he r t
+c eros her t
+c eros r the
+c err est h o
+c err est ho
+c err et h o s
+c err et h so
+c err et ho s
+c err et oh s
+c err ethos
+c est h o r re
+c est h or re
+c est h ore r
+c est h r roe
+c est he or r
+c est he orr
+c est her o r
+c est her or
+c est hero r
+c est herr o
+c est ho r re
+c est oh r re
+c est re rho
+c ester h o r
+c ester h or
+c ester ho r
+c ester oh r
+c ester rho
+c esther o r
+c esther or
+c et h o r re s
+c et h or r se
+c et h or re s
+c et h ore r s
+c et h orr se
+c et h r re so
+c et h r roe s
+c et h r rose
+c et he or r s
+c et he orr s
+c et her o r s
+c et her or s
+c et her r so
+c et hero r s
+c et herr o s
+c et herr so
+c et ho r re s
+c et horse r
+c et oh r re s
+c et or r she
+c et orr she
+c et r rho se
+c et r shore
+c et re rho s
+c ether o r s
+c ether or s
+c ether r so
+c ethos r re
+c h o r re se t
+c h o r re set
+c h o r ret se
+c h o r s tree
+c h o r steer
+c h o re rest
+c h o s terre
+c h or r s tee
+c h or r see t
+c h or re se t
+c h or re set
+c h or ret se
+c h or s tree
+c h or steer
+c h ore r se t
+c h ore r set
+c h ore re s t
+c h ore re st
+c h ore rest
+c h orr s tee
+c h orr see t
+c h r re s toe
+c h r re se to
+c h r roe se t
+c h r roe set
+c h r rot see
+c h r rote se
+c h r se tore
+c h r see tor
+c h r so tree
+c h r stereo
+c h re ret so
+c h re roe s t
+c h re roe st
+c h re rose t
+c h re rot se
+c h re rote s
+c h re s tore
+c h re se tor
+c h re sore t
+c h re store
+c h rest roe
+c h ret roe s
+c h ret rose
+c h see torr
+c h so terre
+c he o r re s t
+c he o r re st
+c he o r rest
+c he or r se t
+c he or r set
+c he or re s t
+c he or re st
+c he or rest
+c he ore r s t
+c he ore r st
+c he orr se t
+c he orr set
+c he r re s to
+c he r re so t
+c he r ret so
+c he r roe s t
+c he r roe st
+c he r rose t
+c he r rot se
+c he r rote s
+c he r s tore
+c he r se tor
+c he r sore t
+c he r store
+c he re rot s
+c he re s tor
+c he re sort
+c he resort
+c her o r se t
+c her o r set
+c her o re s t
+c her o re st
+c her o rest
+c her or se t
+c her or set
+c her ore s t
+c her ore st
+c her r s toe
+c her r se to
+c her re s to
+c her re so t
+c her ret so
+c her roe s t
+c her roe st
+c her rose t
+c her rot se
+c her rote s
+c her s tore
+c her se tor
+c her sore t
+c her store
+c here o r s t
+c here o r st
+c here or s t
+c here or st
+c here r s to
+c here r so t
+c here rot s
+c here s tor
+c here sort
+c hereto r s
+c hero r se t
+c hero r set
+c hero re s t
+c hero re st
+c hero rest
+c heroes r t
+c herr o se t
+c herr o set
+c herr s toe
+c herr se to
+c hester o r
+c hester or
+c ho r re se t
+c ho r re set
+c ho r ret se
+c ho r s tree
+c ho r steer
+c ho re rest
+c ho s terre
+c hoe r re s t
+c hoe r re st
+c hoe r rest
+c horse re t
+c horse ret
+c hose r re t
+c hose r ret
+c hot r re se
+c o r re s the
+c o r re seth
+c o r ret she
+c o r s there
+c o r sheer t
+c oh r re se t
+c oh r re set
+c oh r ret se
+c oh r s tree
+c oh r steer
+c oh re rest
+c oh s terre
+c or r s thee
+c or r se the
+c or r sheet
+c or re s the
+c or re seth
+c or ret she
+c or s there
+c or sheer t
+c ore r s the
+c ore r seth
+c orr s thee
+c orr se the
+c orr sheet
+c other r se
+c other re s
+c r re she to
+c r re shoe t
+c r re so the
+c r re those
+c r ret shoe
+c r rho s tee
+c r rho see t
+c r roe s the
+c r roe seth
+c r rose the
+c r rote she
+c r roth see
+c r see thor
+c r she tore
+c r sheer to
+c r so there
+c r sore the
+c re rho se t
+c re rho set
+c re rot she
+c re roth se
+c re se thor
+c re she tor
+c re shore t
+c re throes
+c ret rho se
+c ret shore
+c rho s tree
+c rho steer
+c rot sheer
+c sheer tor
+ceres h o r t
+ceres h or t
+ceres h r to
+ceres h rot
+ceres ho r t
+ceres hot r
+ceres oh r t
+ceres rho t
 ceres roth
-ceres thor
+cheer o r s t
+cheer o r st
+cheer or s t
+cheer or st
+cheer r s to
+cheer r so t
+cheer rot s
+cheer s tor
 cheer sort
+chert e o r s
+chert e or s
+chert e r so
 chert eros
-chert rose
-chert sore
+chest e or r
+chest e orr
+chest err o
+chest o r re
+chest or re
+chest ore r
+chest r roe
+chester o r
 chester or
+chore e r s t
+chore e r st
+chore est r
+chore et r s
+chore r se t
+chore r set
+chore re s t
+chore re st
 chore rest
+chose err t
+chose r re t
+chose r ret
+co e err h s t
+co e err h st
+co e h r re s t
+co e h r re st
+co e h r rest
+co e her r s t
+co e her r st
+co e herr s t
+co e herr st
+co eh err s t
+co eh err st
+co eh r re s t
+co eh r re st
+co eh r rest
+co ere h r s t
+co ere h r st
+co err est h
+co err et h s
+co err h se t
+co err h set
+co err he s t
+co err he st
+co err s the
+co err seth
+co est h r re
+co est her r
+co est herr
+co ester h r
+co esther r
+co et h r re s
+co et her r s
+co et herr s
+co ether r s
+co h r re se t
+co h r re set
+co h r ret se
+co h r s tree
+co h r steer
+co h re rest
+co h s terre
+co he r re s t
+co he r re st
+co he r rest
+co her r se t
+co her r set
+co her re s t
+co her re st
+co her rest
+co here r s t
+co here r st
+co herr se t
+co herr set
+co hester r
+co r re s the
+co r re seth
+co r ret she
+co r s there
+co r sheer t
+cohere r s t
+cohere r st
+core e h r s t
+core e h r st
+core eh r s t
+core eh r st
+core est h r
+core et h r s
+core h r se t
+core h r set
+core h re s t
+core h re st
+core h rest
+core he r s t
+core he r st
+core her s t
+core her st
+core r s the
+core r seth
+corset e h r
+corset eh r
+corset h re
+corset he r
 corset her
+cos e err h t
+cos e h r re t
+cos e h r ret
+cos e her r t
+cos e herr t
+cos eh err t
+cos eh r re t
+cos eh r ret
+cos ere h r t
+cos err et h
+cos err he t
+cos err the
+cos et h r re
+cos et her r
+cos et herr
+cos ether r
+cos h r tree
+cos h re ret
+cos h terre
+cos he r re t
+cos he r ret
+cos her re t
+cos her ret
+cos here r t
+cos r re the
+cos r there
+coset err h
+coset h r re
+coset her r
 coset herr
+cosh e err t
+cosh e r re t
+cosh e r ret
+cosh ere r t
+cosh err et
+cosh et r re
+cosh r tree
+cosh re ret
 cosh terre
+cost e err h
+cost e h r re
+cost e her r
+cost e herr
+cost eh err
+cost ere h r
+cost err he
+cost he r re
+cost her re
+cost here r
+cot e err h s
+cot e h r re s
+cot e her r s
+cot e herr s
+cot eh err s
+cot eh r re s
+cot ere h r s
+cot err h se
+cot err he s
+cot err she
+cot h r re se
+cot he r re s
+cot her r se
+cot her re s
+cot here r s
+cot herr se
+cot r re she
+cot r sheer
+crest e h o r
+crest e h or
+crest e ho r
+crest e oh r
+crest e rho
+crest eh o r
+crest eh or
+crest h o re
+crest h ore
+crest he o r
+crest he or
+crest her o
 crest hero
+crete h o r s
+crete h or s
+crete h r so
+crete ho r s
+crete oh r s
+crete rho s
+crt e eh o r s
+crt e eh or s
+crt e eh r so
+crt e eros h
+crt e h o r se
+crt e h o re s
+crt e h or se
+crt e h ore s
+crt e h re so
+crt e h roe s
+crt e h rose
+crt e he o r s
+crt e he or s
+crt e he r so
+crt e her o s
+crt e her so
+crt e hero s
+crt e ho r se
+crt e ho re s
+crt e hoe r s
+crt e horse
+crt eh eros
+crt ere h o s
+crt ere h so
+crt ere ho s
+crt ere oh s
+crt eros he
+crt h o r see
+crt h o re se
+crt h or see
+crt h ore se
+crt h roe se
+crt he o r se
+crt he o re s
+crt he or se
+crt he ore s
+crt he re so
+crt he roe s
+crt he rose
+crt her o se
+crt here o s
+crt here so
+crt hero se
 crt heroes
+ct e eh or r s
+ct e eh orr s
+ct e eros h r
+ct e err h o s
+ct e err h so
+ct e err ho s
+ct e err oh s
+ct e h o r re s
+ct e h or r se
+ct e h or re s
+ct e h ore r s
+ct e h orr se
+ct e h r re so
+ct e h r roe s
+ct e h r rose
+ct e he or r s
+ct e he orr s
+ct e her o r s
+ct e her or s
+ct e her r so
+ct e hero r s
+ct e herr o s
+ct e herr so
+ct e ho r re s
+ct e horse r
+ct e oh r re s
+ct e or r she
+ct e orr she
+ct e r rho se
+ct e r shore
+ct e re rho s
+ct eh eros r
+ct eh err o s
+ct eh err so
+ct eh o r re s
+ct eh or r se
+ct eh or re s
+ct eh ore r s
+ct eh orr se
+ct eh r re so
+ct eh r roe s
+ct eh r rose
+ct ere h o r s
+ct ere h or s
+ct ere h r so
+ct ere ho r s
+ct ere oh r s
+ct ere rho s
+ct eros h re
+ct eros he r
+ct eros her
+ct err h o se
+ct err he o s
+ct err he so
+ct err ho se
+ct err hoe s
+ct err hose
+ct h o r re se
+ct h or r see
+ct h or re se
+ct h ore r se
+ct h ore re s
+ct h orr see
+ct h r roe se
+ct h re roe s
+ct h re rose
+ct he o r re s
+ct he or r se
+ct he or re s
+ct he ore r s
+ct he orr se
+ct he r re so
+ct he r roe s
+ct he r rose
+ct her o r se
+ct her o re s
+ct her or se
+ct her ore s
+ct her re so
+ct her roe s
+ct her rose
+ct here o r s
+ct here or s
+ct here r so
+ct hero r se
+ct hero re s
+ct heroes r
+ct herr o se
+ct ho r re se
+ct hoe r re s
+ct horse re
+ct hose r re
+ct o r re she
+ct o r sheer
+ct oh r re se
+ct or re she
+ct or sheer
+ct ore r she
+ct r re shoe
+ct r rho see
+ct r roe she
+ct re rho se
+ct re shore
+e eh or r sc t
+e eh orr sc t
+e eh r rot sc
+e eh r rotc s
+e eh r sc tor
+e eh sc torr
+e err h o sc t
+e err h oct s
+e err h sc to
+e err h scot
+e err ho sc t
+e err hoc s t
+e err hoc st
+e err hot sc
+e err oh sc t
+e escort h r
+e et h or r sc
+e et h orr sc
+e et r rho sc
+e etc h or r s
+e etc h orr s
+e etc r rho s
+e etch or r s
+e etch orr s
+e h o r re sc t
+e h o r ret sc
+e h oct r re s
+e h or r sec t
+e h or r sect
+e h or re sc t
+e h or ret sc
+e h ore r sc t
+e h orr sec t
+e h orr sect
+e h r re sc to
+e h r re scot
+e h r ret soc
+e h r roe sc t
+e h r rot sec
+e h r rotc se
+e h r rote sc
+e h r sc tore
+e h r score t
+e h r sec tor
+e h r sector
+e h re rot sc
+e h re rotc s
+e h re sc tor
+e h rector s
+e h sec torr
+e he or r sc t
+e he orr sc t
+e he r rot sc
+e he r rotc s
+e he r sc tor
+e he sc torr
+e hector r s
+e her o r sc t
+e her oct r s
+e her or sc t
+e her r sc to
+e her r scot
+e her rot sc
+e her rotc s
+e her sc tor
+e hero r sc t
+e herr o sc t
+e herr oct s
+e herr sc to
+e herr scot
+e ho r re sc t
+e ho r ret sc
+e hoc r re s t
+e hoc r re st
+e hoc r rest
+e hot r re sc
+e o r retch s
+e oh r re sc t
+e oh r ret sc
+e or r s tech
+e or r sc the
+e or retch s
+e orr s tech
+e orr sc the
+e other r sc
+e r retch so
+e r rho sec t
+e r rho sect
+e r rotc she
+e r roth sec
+e r se torch
+e r sec thor
+e re rho sc t
+e re roth sc
+e re s torch
+e re sc thor
+e ret rho sc
+echo err s t
+echo err st
+echo r re s t
+echo r re st
+echo r rest
+eh err o sc t
+eh err oct s
+eh err sc to
+eh err scot
+eh escort r
+eh et or r sc
+eh et orr sc
+eh etc or r s
+eh etc orr s
+eh o r re sc t
+eh o r ret sc
+eh oct r re s
+eh or r sec t
+eh or r sect
+eh or re sc t
+eh or ret sc
+eh ore r sc t
+eh orr sec t
+eh orr sect
+eh r re sc to
+eh r re scot
+eh r ret soc
+eh r roe sc t
+eh r rot sec
+eh r rotc se
+eh r rote sc
+eh r sc tore
+eh r score t
+eh r sec tor
+eh r sector
+eh re rot sc
+eh re rotc s
+eh re sc tor
+eh rector s
+eh sec torr
+ere h o r sc t
+ere h oct r s
+ere h or sc t
+ere h r sc to
+ere h r scot
+ere h rot sc
+ere h rotc s
+ere h sc tor
+ere ho r sc t
+ere hoc r s t
+ere hoc r st
+ere hot r sc
+ere oh r sc t
+ere rho sc t
+ere roth sc
+ere s torch
+ere sc thor
+erect h o r s
+erect h or s
+erect h r so
+erect ho r s
+erect oh r s
+erect rho s
+eros etc h r
+eros etch r
+eros r tech
 eros retch
+err est hoc
+err et h o sc
+err et h soc
+err et ho sc
+err et hoc s
+err et oh sc
+err etc h o s
+err etc h so
+err etc ho s
+err etc oh s
+err etch o s
+err etch so
+err h o sec t
+err h o sect
+err h oct se
+err h sc toe
+err h sec to
+err he o sc t
+err he oct s
+err he sc to
+err he scot
+err ho sec t
+err ho sect
+err hoc se t
+err hoc set
+err hoe sc t
+err hot sec
+err o s tech
+err o sc the
+err oct she
+err oh sec t
+err oh sect
+err so tech
+err soc the
+escort h re
+escort he r
 escort her
+est hoc r re
+ester hoc r
+et h o r re sc
+et h or r sec
+et h or re sc
+et h ore r sc
+et h orr sec
+et h r re soc
+et h r roe sc
+et h r score
+et he or r sc
+et he orr sc
+et her o r sc
+et her or sc
+et her r soc
+et hero r sc
+et herr o sc
+et herr soc
+et ho r re sc
+et hoc r re s
+et oh r re sc
+et r rho sec
+et re rho sc
+etc h o r re s
+etc h or r se
+etc h or re s
+etc h ore r s
+etc h orr se
+etc h r re so
+etc h r roe s
+etc h r rose
+etc he or r s
+etc he orr s
+etc her o r s
+etc her or s
+etc her r so
+etc hero r s
+etc herr o s
+etc herr so
+etc ho r re s
+etc horse r
+etc oh r re s
+etc or r she
+etc orr she
+etc r rho se
+etc r shore
+etc re rho s
+etch o r re s
+etch or r se
+etch or re s
+etch ore r s
+etch orr se
+etch r re so
+etch r roe s
+etch r rose
+ether o r sc
+ether or sc
+ether r soc
+h o r re sec t
+h o r re sect
+h o r ret sec
+h o r sc tree
+h o r secret
+h o re ret sc
+h o sc terre
+h oct r re se
+h or r sc tee
+h or re sec t
+h or re sect
+h or ret sec
+h or sc tree
+h or secret
+h ore r sec t
+h ore r sect
+h ore re sc t
+h ore ret sc
+h orr sc tee
+h r re sc toe
+h r re sec to
+h r roe sec t
+h r roe sect
+h r rotc see
+h r rote sec
+h r sec tore
+h r soc tree
+h re ret soc
+h re roe sc t
+h re rot sec
+h re rotc se
+h re rote sc
+h re sc tore
+h re score t
+h re sec tor
+h re sector
+h rector se
+h ret roe sc
+h ret score
+h soc terre
+he o r re sc t
+he o r ret sc
+he oct r re s
+he or r sec t
+he or r sect
+he or re sc t
+he or ret sc
+he ore r sc t
+he orr sec t
+he orr sect
+he r re sc to
+he r re scot
+he r ret soc
+he r roe sc t
+he r rot sec
+he r rotc se
+he r rote sc
+he r sc tore
+he r score t
+he r sec tor
+he r sector
+he re rot sc
+he re rotc s
+he re sc tor
+he rector s
+he sec torr
+hector r se
+hector re s
+her o r sec t
+her o r sect
+her o re sc t
+her o ret sc
+her oct r se
+her oct re s
+her or sec t
+her or sect
+her ore sc t
+her r sc toe
+her r sec to
+her re sc to
+her re scot
+her ret soc
+her roe sc t
+her rot sec
+her rotc se
+her rote sc
+her sc tore
+her score t
+her sec tor
 her sector
+here o r sc t
+here oct r s
+here or sc t
+here r sc to
+here r scot
+here rot sc
+here rotc s
+here sc tor
+hereto r sc
+hero r sec t
+hero r sect
+hero re sc t
+hero ret sc
+herr o sec t
+herr o sect
+herr oct se
+herr sc toe
+herr sec to
+ho r re sec t
+ho r re sect
+ho r ret sec
+ho r sc tree
+ho r secret
+ho re ret sc
+ho sc terre
+hoc r re se t
+hoc r re set
+hoc r ret se
+hoc r s tree
+hoc r steer
+hoc re rest
+hoc s terre
+hoe r re sc t
+hoe r ret sc
+hot r re sec
+o r re s tech
+o r re sc the
+o r retch se
+o r sc there
+o re retch s
+oct r re she
+oct r sheer
+oh r re sec t
+oh r re sect
+oh r ret sec
+oh r sc tree
+oh r secret
+oh re ret sc
+oh sc terre
+or r sc thee
+or r se tech
+or r sec the
+or re s tech
+or re sc the
+or retch se
+or sc there
+ore r s tech
+ore r sc the
+ore retch s
+orr sc thee
+orr se tech
+orr sec the
+other r sec
+other re sc
+r re so tech
+r re soc the
+r rho sc tee
+r roe s tech
+r roe sc the
+r rose tech
+r score the
+r see torch
+r soc there
+r sore tech
+re retch so
+re rho sec t
+re rho sect
+re rotc she
+re roth sec
+re se torch
+re sec thor
 rector she
+ret rho sec
+retch roe s
 retch rose
-retch sore
+rho sc tree
 rho secret
 rochester
 rotc sheer
 
-anagrams2("proglangs","words")
+anagrams("proglangs","words")
+a g gnp l o r s
+a g gnp l or s
+a g gnp l r so
+a g gnp lo r s
+a g gnp los r
+a g gnp r sol
+a g go l n p r s
+a g go l n pr s
+a g go n pl r s
+a g gop l n r s
+a g gpo l n r s
+a g l p r song
+a g l pong r s
+a g l pr song
+a g l prong s
+a g log n p r s
+a g log n pr s
+a g long p r s
+a g long pr s
+a g n p r slog
+a g n pr slog
+a g pl r song
+a gnp go l r s
+a gnp log r s
+a gnp r slog
+a gog l n p r s
+a gog l n pr s
+a gog n pl r s
+a gong l p r s
+a gong l pr s
+a gong pl r s
+ago g l n p r s
+ago g l n pr s
+ago g n pl r s
+ago gnp l r s
+al g gnp o r s
+al g gnp or s
+al g gnp r so
+al g go n p r s
+al g go n pr s
+al g gop n r s
+al g gpo n r s
+al g p r song
+al g pong r s
+al g pr song
+al g prong s
+al gnp go r s
+al gog n p r s
+al gog n pr s
+al gong p r s
+al gong pr s
+along g p r s
+along g pr s
+alp g go n r s
+alp g r song
+alp gog n r s
+alp gong r s
+alps g go n r
+alps gog n r
+alps gong r
+also g gnp r
+an g go l p r s
+an g go l pr s
+an g go pl r s
+an g gop l r s
+an g gpo l r s
+an g log p r s
+an g log pr s
+an g p r slog
+an g pr slog
+an gog l p r s
+an gog l pr s
+an gog pl r s
+anglo g p r s
+anglo g pr s
+apr g go l n s
+apr g l song
+apr g log n s
+apr g long s
+apr g n slog
+apr gog l n s
+apr gong l s
+aps g go l n r
+aps g log n r
+aps g long r
+aps gog l n r
+aps gong l r
+ar g gnp l o s
+ar g gnp l so
+ar g gnp lo s
+ar g gnp los
+ar g go l n p s
+ar g go n pl s
+ar g gop l n s
+ar g gpo l n s
+ar g l p song
+ar g l pong s
+ar g log n p s
+ar g long p s
+ar g n p slog
+ar g pl song
+ar gnp go l s
+ar gnp log s
+ar gnp slog
+ar gog l n p s
+ar gog n pl s
+ar gong l p s
+ar gong pl s
+argo g l n p s
+argo g n pl s
+argo gnp l s
+argon g l p s
+argon g pl s
+as g gnp l o r
+as g gnp l or
+as g gnp lo r
+as g go l n p r
+as g go l n pr
+as g go n pl r
+as g gop l n r
+as g gpo l n r
+as g l pong r
+as g l prong
+as g log n p r
+as g log n pr
+as g long p r
+as g long pr
+as gnp go l r
+as gnp log r
+as gog l n p r
+as gog l n pr
+as gog n pl r
+as gong l p r
+as gong l pr
+as gong pl r
+g ga l n o p r s
+g ga l n o pr s
+g ga l n or p s
+g ga l n p r so
+g ga l n po r s
+g ga l n pr so
+g ga l n pro s
+g ga l n r sop
+g ga l no p r s
+g ga l no pr s
+g ga l nor p s
+g ga l on p r s
+g ga l on pr s
+g ga l p r son
+g ga l p ron s
+g ga l pr son
+g ga lo n p r s
+g ga lo n pr s
+g ga lop n r s
+g ga los n p r
+g ga los n pr
+g ga n o pl r s
+g ga n or pl s
+g ga n p r sol
+g ga n pl r so
+g ga n pol r s
+g ga n pr sol
+g ga n r slop
+g ga no pl r s
+g ga nor pl s
+g ga on pl r s
+g ga pl r son
+g ga pl ron s
+g gal n o p r s
+g gal n o pr s
+g gal n or p s
+g gal n p r so
+g gal n po r s
+g gal n pr so
+g gal n pro s
+g gal n r sop
+g gal no p r s
+g gal no pr s
+g gal nor p s
+g gal on p r s
+g gal on pr s
+g gal p r son
+g gal p ron s
+g gal pr son
+g gao l n p r s
+g gao l n pr s
+g gao n pl r s
+g gap l n o r s
+g gap l n or s
+g gap l n r so
+g gap l no r s
+g gap l nor s
+g gap l on r s
+g gap l r son
+g gap l ron s
+g gap lo n r s
+g gap los n r
+g gap n r sol
+g gar l n o p s
+g gar l n p so
+g gar l n po s
+g gar l n sop
+g gar l no p s
+g gar l on p s
+g gar l p son
+g gar lo n p s
+g gar lop n s
+g gar los n p
+g gar n o pl s
+g gar n p sol
+g gar n pl so
+g gar n pol s
+g gar n slop
+g gar no pl s
+g gar on pl s
+g gar pl son
+g gas l n o p r
+g gas l n o pr
+g gas l n or p
+g gas l n po r
+g gas l n pro
+g gas l no p r
+g gas l no pr
+g gas l nor p
+g gas l on p r
+g gas l on pr
+g gas l p ron
+g gas lo n p r
+g gas lo n pr
+g gas lop n r
+g gas n o pl r
+g gas n or pl
+g gas n pol r
+g gas no pl r
+g gas nor pl
+g gas on pl r
+g gas pl ron
+g gasp l n o r
+g gasp l n or
+g gasp l no r
+g gasp l nor
+g gasp lo n r
+g glans o p r
+g glans o pr
+g glans or p
+g glans po r
+g glans pro
+g gnarl o p s
+g gnarl p so
+g gnarl po s
+g gnarl sop
+g gnp l o r sa
+g gnp l oar s
+g gnp l or sa
+g gnp l r sao
+g gnp l rosa
+g gnp la o r s
+g gnp la or s
+g gnp la r so
+g gnp lao r s
+g gnp laos r
+g gnp lars o
+g gnp lo r sa
+g gnp o r sal
+g gnp or sal
+g gnp oral s
+g gnp solar
+g go l n p r sa
+g go l n pa r s
+g go l n par s
+g go l n pr sa
+g go l n r sap
+g go l n rap s
+g go l n rasp
+g go l nap r s
+g go l p r san
+g go l p ran s
+g go l p rna s
+g go l pan r s
+g go l pr san
+g go l r snap
+g go la n p r s
+g go la n pr s
+g go lap n r s
+g go lars n p
+g go n p r sal
+g go n pal r s
+g go n pl r sa
+g go n pr sal
+g go n r slap
+g go p snarl
+g go pl r san
+g go pl ran s
+g go pl rna s
+g go plan r s
+g goa l n p r s
+g goa l n pr s
+g goa n pl r s
+g goal n p r s
+g goal n pr s
+g gop l n r sa
+g gop l r san
+g gop l ran s
+g gop l rna s
+g gop la n r s
+g gop lars n
+g gop n r sal
+g gop snarl
+g gpo l n r sa
+g gpo l r san
+g gpo l ran s
+g gpo l rna s
+g gpo la n r s
+g gpo lars n
+g gpo n r sal
+g gpo snarl
+g grasp l n o
+g grasp l no
+g grasp lo n
+g groan l p s
+g groan pl s
+g gsa l n o p r
+g gsa l n o pr
+g gsa l n or p
+g gsa l n po r
+g gsa l n pro
+g gsa l no p r
+g gsa l no pr
+g gsa l nor p
+g gsa l on p r
+g gsa l on pr
+g gsa l p ron
+g gsa lo n p r
+g gsa lo n pr
+g gsa lop n r
+g gsa n o pl r
+g gsa n or pl
+g gsa n pol r
+g gsa no pl r
+g gsa nor pl
+g gsa on pl r
+g gsa pl ron
+g l n o p r sag
+g l n o p rag s
+g l n o pr sag
+g l n or p sag
+g l n p r sago
+g l n p rag so
+g l n po r sag
+g l n po rag s
+g l n pr sago
+g l n pro sag
+g l n rag sop
+g l nag o p r s
+g l nag o pr s
+g l nag or p s
+g l nag p r so
+g l nag po r s
+g l nag pr so
+g l nag pro s
+g l nag r sop
+g l no p r sag
+g l no p rag s
+g l no pr sag
+g l nor p sag
+g l o p r sang
+g l o p rang s
+g l o pang r s
+g l o pr sang
+g l o sprang
+g l on p r sag
+g l on p rag s
+g l on pr sag
+g l or p sang
+g l or pang s
+g l organ p s
+g l p rag son
+g l p rang so
+g l p ron sag
+g l pa r song
+g l pang r so
+g l par song
+g l po r sang
+g l po rang s
+g l pong r sa
+g l pro sang
+g l prong sa
+g l rang sop
+g l rap song
+g la p r song
+g la pong r s
+g la pr song
+g la prong s
+g lag n o p r s
+g lag n o pr s
+g lag n or p s
+g lag n p r so
+g lag n po r s
+g lag n pr so
+g lag n pro s
+g lag n r sop
+g lag no p r s
+g lag no pr s
+g lag nor p s
+g lag on p r s
+g lag on pr s
+g lag p r son
+g lag p ron s
+g lag pr son
+g lagos n p r
+g lagos n pr
+g lang o p r s
+g lang o pr s
+g lang or p s
+g lang p r so
+g lang po r s
+g lang pr so
+g lang pro s
+g lang r sop
+g lap r song
+g lars pong
+g lo n p r sag
+g lo n p rag s
+g lo n pr sag
+g lo nag p r s
+g lo nag pr s
+g lo p r sang
+g lo p rang s
+g lo pang r s
+g lo pr sang
+g lo sprang
+g log n p r sa
+g log n pa r s
+g log n par s
+g log n pr sa
+g log n r sap
+g log n rap s
+g log n rasp
+g log nap r s
+g log p r san
+g log p ran s
+g log p rna s
+g log pan r s
+g log pr san
+g log r snap
+g logan p r s
+g logan pr s
+g long p r sa
+g long pa r s
+g long par s
+g long pr sa
+g long r sap
+g long rap s
+g long rasp
+g lop n r sag
+g lop n rag s
+g lop nag r s
+g lop r sang
+g lop rang s
+g los n p rag
+g los nag p r
+g los nag pr
+g los p rang
+g los pang r
+g n o p r slag
+g n o pl r sag
+g n o pl rag s
+g n o pr slag
+g n olga p r s
+g n olga pr s
+g n or p slag
+g n or pl sag
+g n p rag sol
+g n pa r slog
+g n par slog
+g n pl r sago
+g n pl rag so
+g n po r slag
+g n pol r sag
+g n pol rag s
+g n pro slag
+g n rag slop
+g n rap slog
+g nag o pl r s
+g nag or pl s
+g nag p r sol
+g nag pl r so
+g nag pol r s
+g nag pr sol
+g nag r slop
+g nap r slog
+g no p r slag
+g no pl r sag
+g no pl rag s
+g no pr slag
+g nor p slag
+g nor pl sag
+g o p r slang
+g o pl r sang
+g o pl rang s
+g o pr slang
+g on p r slag
+g on pl r sag
+g on pl rag s
+g on pr slag
+g or p slang
+g or pl sang
+g organ pl s
+g p r slogan
+g p ran slog
+g p rang sol
+g p rna slog
+g p ron slag
+g pal r song
+g pan r slog
+g pang r sol
+g pl rag son
+g pl rang so
+g pl ron sag
+g po r slang
+g pol r sang
+g pol rang s
+g pong r sal
+g pr slogan
+g pro slang
+g prong sal
+g rang slop
+ga gnp l o r s
+ga gnp l or s
+ga gnp l r so
+ga gnp lo r s
+ga gnp los r
+ga gnp r sol
+ga go l n p r s
+ga go l n pr s
+ga go n pl r s
+ga gop l n r s
+ga gpo l n r s
+ga l p r song
+ga l pong r s
+ga l pr song
+ga l prong s
+ga log n p r s
+ga log n pr s
+ga long p r s
+ga long pr s
+ga n p r slog
+ga n pr slog
+ga pl r song
+gag l n o p r s
+gag l n o pr s
+gag l n or p s
+gag l n p r so
+gag l n po r s
+gag l n pr so
+gag l n pro s
+gag l n r sop
+gag l no p r s
+gag l no pr s
+gag l nor p s
+gag l on p r s
+gag l on pr s
+gag l p r son
+gag l p ron s
+gag l pr son
+gag lo n p r s
+gag lo n pr s
+gag lop n r s
+gag los n p r
+gag los n pr
+gag n o pl r s
+gag n or pl s
+gag n p r sol
+gag n pl r so
+gag n pol r s
+gag n pr sol
+gag n r slop
+gag no pl r s
+gag nor pl s
+gag on pl r s
+gag pl r son
+gag pl ron s
+gal gnp o r s
+gal gnp or s
+gal gnp r so
+gal go n p r s
+gal go n pr s
+gal gop n r s
+gal gpo n r s
+gal p r song
+gal pong r s
+gal pr song
+gal prong s
+gang l o p r s
+gang l o pr s
+gang l or p s
+gang l p r so
+gang l po r s
+gang l pr so
+gang l pro s
+gang l r sop
+gang lo p r s
+gang lo pr s
+gang lop r s
+gang los p r
+gang los pr
+gang o pl r s
+gang or pl s
+gang p r sol
+gang pl r so
+gang pol r s
+gang pr sol
+gang r slop
+gao gnp l r s
+gap go l n r s
+gap l r song
+gap log n r s
+gap long r s
+gap n r slog
+gar gnp l o s
+gar gnp l so
+gar gnp lo s
+gar gnp los
+gar go l n p s
+gar go n pl s
+gar gop l n s
+gar gpo l n s
+gar l p song
+gar l pong s
+gar log n p s
+gar long p s
+gar n p slog
+gar pl song
+gas gnp l o r
+gas gnp l or
+gas gnp lo r
+gas go l n p r
+gas go l n pr
+gas go n pl r
+gas gop l n r
+gas gpo l n r
+gas l pong r
+gas l prong
+gas log n p r
+gas log n pr
+gas long p r
+gas long pr
+gasp go l n r
+gasp log n r
+gasp long r
+glans go p r
+glans go pr
+glans gop r
+glans gpo r
+gnarl go p s
+gnarl gop s
+gnarl gpo s
+gnp go l r sa
+gnp go la r s
+gnp go lars
+gnp goa l r s
+gnp goal r s
+gnp gsa l o r
+gnp gsa l or
+gnp gsa lo r
+gnp l o r sag
+gnp l o rag s
+gnp l or sag
+gnp l r sago
+gnp l rag so
+gnp lag o r s
+gnp lag or s
+gnp lag r so
+gnp lagos r
+gnp lo r sag
+gnp lo rag s
+gnp log r sa
+gnp los rag
+gnp o r slag
+gnp olga r s
+gnp or slag
+gnp rag sol
+go grasp l n
+go gsa l n p r
+go gsa l n pr
+go gsa n pl r
+go l n p r sag
+go l n p rag s
+go l n pr sag
+go l nag p r s
+go l nag pr s
+go l p r sang
+go l p rang s
+go l pang r s
+go l pr sang
+go l sprang
+go lag n p r s
+go lag n pr s
+go lang p r s
+go lang pr s
+go n p r slag
+go n pl r sag
+go n pl rag s
+go n pr slag
+go nag pl r s
+go p r slang
+go pl r sang
+go pl rang s
+go pr slang
+gog l n p r sa
+gog l n pa r s
+gog l n par s
+gog l n pr sa
+gog l n r sap
+gog l n rap s
+gog l n rasp
+gog l nap r s
+gog l p r san
+gog l p ran s
+gog l p rna s
+gog l pan r s
+gog l pr san
+gog l r snap
+gog la n p r s
+gog la n pr s
+gog lap n r s
+gog lars n p
+gog n p r sal
+gog n pal r s
+gog n pl r sa
+gog n pr sal
+gog n r slap
+gog p snarl
+gog pl r san
+gog pl ran s
+gog pl rna s
+gog plan r s
+gong l p r sa
+gong l pa r s
+gong l par s
+gong l pr sa
+gong l r sap
+gong l rap s
+gong l rasp
+gong la p r s
+gong la pr s
+gong lap r s
+gong lars p
+gong p r sal
+gong pal r s
+gong pl r sa
+gong pr sal
+gong r slap
+gop gsa l n r
+gop l n r sag
+gop l n rag s
+gop l nag r s
+gop l r sang
+gop l rang s
+gop lag n r s
+gop lang r s
+gop n r slag
+gop r slang
+gpo gsa l n r
+gpo l n r sag
+gpo l n rag s
+gpo l nag r s
+gpo l r sang
+gpo l rang s
+gpo lag n r s
+gpo lang r s
+gpo n r slag
+gpo r slang
+grasp log n
 grasp long
+gsa l pong r
+gsa l prong
+gsa log n p r
+gsa log n pr
+gsa long p r
+gsa long pr
+l p rag song
+l pong r sag
+l pong rag s
+l prong sag
+lag p r song
+lag pong r s
+lag pr song
+lag prong s
+log n p r sag
+log n p rag s
+log n pr sag
+log nag p r s
+log nag pr s
+log p r sang
+log p rang s
+log pang r s
+log pr sang
 log sprang
+long p r sag
+long p rag s
+long pr sag
+n p rag slog
+nag p r slog
+nag pr slog
+p rang slog
+pang r slog
+pl rag song
+pong r slag
 prong slag
 
-anagrams2("programming","words")
-programming
-
-anagrams("matthew","words")
