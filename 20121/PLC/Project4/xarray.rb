@@ -41,11 +41,8 @@ module XArray
       # Build the resulting array
       result = []
       for i in start..(start + len - 1)
-        if (i >= self.length)
-          return result # we have reached the end of the array
-        else
-          result << self.elem_at(i)
-        end
+        return result if i >= self.length # we have reached the end of the array
+        result << self.elem_at(i)
       end
       return result
     end
@@ -70,9 +67,7 @@ module XArray
     for i in 0..(maxVal - 1)
       if (i < length1 && i < length2)
         val = self.elem_at(i) <=> othr.elem_at(i)
-        if (val != 0)
-          return val
-        end
+        return val if val != 0
       elsif (i < length1)
         return 1
       else 

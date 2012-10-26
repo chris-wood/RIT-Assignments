@@ -37,7 +37,7 @@ class Leaf
 
   # DEFINE tmap HERE
   def tmap
-    self
+    Leaf.new
   end
 
 end
@@ -59,18 +59,12 @@ class BinaryNode
 
   # DEFINE height HERE
   def height
-    leftHeight = @leftChild.height
-    rightHeight = @rightChild.height
-    if (leftHeight >= rightHeight)
-      return leftHeight + 1
-    else
-      return rightHeight + 1
-    end
+    return [@leftChild.height + 1, @rightChild.height + 1].max
   end
 
   # DEFINE deepest HERE
   def deepest
-    if size == 0
+    if height == 0
       return nil
     elsif (height == 1)
       return @element
@@ -106,12 +100,15 @@ class BinaryNode
 
   # DEFINE tmap HERE
   def tmap &block
+    element = @element
+    leftChild = @leftChild.clone
+    rightChild = @rightChild.clone
     if block_given?
-      @element = block.call(@element)
-      @leftChild.tmap  &block
-      @rightChild.tmap &block
+      element = block.call(element)
+      leftChild = leftChild.tmap &block
+      rightChild = rightChild.tmap &block
     end
-    self
+    BinaryNode.new(element, leftChild, rightChild)
   end
 
 end
@@ -152,7 +149,7 @@ class NaryNode
       max = 0
       deepOnes = []
 
-      # Build up the deep ones 
+      # Build up the deep ones array
       @children.each {|x| 
         if (x.height > max)
           max = x.height
@@ -189,11 +186,14 @@ class NaryNode
 
   # DEFINE tmap HERE
   def tmap &block
+    element = @element
+    children = @children.clone
     if block_given?
-      @element = block.call(@element)
-      @children.each {|c| c.tmap &block}
+      element = block.call(element)
+      children = []
+      @children.each {|c| children << (c.tmap &block)}
     end
-    self
+    NaryNode.new(element, children)
   end
 
 end
