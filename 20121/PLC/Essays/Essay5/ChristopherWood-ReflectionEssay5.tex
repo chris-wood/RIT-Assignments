@@ -1,0 +1,107 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{verbatim}
+
+\begin{document}
+
+\begin{center}
+Christopher Wood \\
+Reflection Essay \#4 \\
+\end{center}
+
+\begin{comment}
+What are the most compelling arguments for the goto statement?
+
+What are the most compelling arguments against the goto statement?
+
+These papers were written approximately 40 years ago. Are there new arguments for or against the goto statement that are relevant 
+today?
+
+Can you give a feature or application of a programming language that you consider harmful? Be sure to back up your claim with a reasoned argument.
+\end{comment}
+
+%% Points to hit: 
+%% 1. goto makes program sequencing difficult, but not impossible
+%% 2. i think dijkstra's argument is missing the fact that pointers can be inserted between goto statmenets and labels to depict the flow
+%% 3. however, it still obscures the control flow (jumps across threads of control instead of logical, sequential flow)
+%% 4. makes proving correctness difficult (can't rely on induction anymore because there is the notion of which "context" does this flow belong to)
+%% 5. Kind of relates to constructive programming - lack of goto is necessary for constructive program descriptions
+%% 6. it's not even needed! \lambda calc and turing machines let us accomplish the same task in different ways
+%% 7. doesn't mean that all uses of goto are harmful! only some uses that jump between control flows. using gotos for loops and iteration within the same flow of control does not obfuscate the cfg. also, as form of escape from code blocks (i.e. break) and ways to implement other common conditional statements. but, given the sophistication of high-level languages, it is clear that these are no longer valid use cases. There exists alternatives.
+
+%TODO: add more content about induction and program correctness: google this
+%Some programmers, such as Linux Kernel designer and coder Linus Torvalds or software engineer and book author Steve McConnell, also object to Dijkstra's point of view, stating that GOTOs can be a useful language feature, improving program speed, size and code clearness, but only when used in a sensible way by a comparably sensible programmer.[7][8]
+%% Structured Programming with go to Statements - gotos can lead to larger code
+%TODO: improve conclusion
+
+The case against the {\tt goto} statement seems to be one of perspective. This language construct 
+grew in popularity because of its direct mapping to hardware behavior, but as programming languages
+and software engineering practices evolved its usage has slowly withered. Implementation
+benefits related to code quality and performance that come from the proper usage of the {\tt goto} 
+statement have been dwarfed by such advancements. In addition, based on the arguments
+presented by Dijkstra \cite{Dijkstra1968} and others, there are many other reasons that contribute to the 
+fall of the {\tt goto} statement. The most compelling of which centers on proofs of program correctness. 
+Therefore, in my opinion, what remains in support for the {\tt goto} statement are few scenarios 
+where skillful usage is needed to yield any benefits.
+
+At a behavioral level, the {\tt goto} statement enables programmers to introduce arbitrary jumps 
+across local and non-local control flows in a program. These jumps
+make the formal modeling of program behavior very difficult (especially when loops and other iterative constructs were used). 
+Not only does it obscure the control flow of a program by 
+branching from the traditional sequential flow of well-structured programming, but it requires the 
+context of program sequence index to be considered in order to make guarantees about its
+behavior \cite{Dijkstra1968}. The inclusion of this context invalidates the use of mathematical induction as a 
+technique for proving program correctness. Such proofs typically rely on a well-defined 
+sequence of statements that make up a program, and the induction hypothesis for the behavior of a 
+program is formulated around the sequence index of a program. 
+Unfortunately, it is difficult to formalize such a proof with this context variability. 
+Therefore, either induction must be abandoned or it must be modified (perhaps by formulating the
+correctness using double induction on the sequence index and context) if the {\tt goto} statement
+is permitted. 
+
+Other arguments against the {\tt goto} statement are not as theoretically fundamental. For example, 
+some people may argue that programmer benefits such as the 
+ability to manually construct loops, break out of iterative constructs, and formulate 
+custom conditional statements are lost without the {\tt goto} statement, leading to a Turing Tarpit
+situation. However, programming languages have undergone significant evolution and introduced 
+more intuitive loop signatures, break or escape statements, and flexible conditional statements
+to address these issues. Therefore, one might say that the evolution of programming languages
+invalidates any claim that {\tt goto} statements provide specific implementation quality benefits. 
+That is, by and large, {\tt goto}s used for these reasons are no longer needed, so it's best
+not to include them in modern languages.
+
+Furthermore, the primitive programming techniques that came with the {\tt goto} statement do not
+appear to be sound and respectable development practices in today's software 
+engineering community. In fact, one of my former managers at Intel once said, ``If you're using a 
+{\tt goto} statement, then you've got bigger issues to deal with than rewriting your function.'' 
+I believe he and the community are partially correct. There are certainly cases where the use of 
+{\tt goto} statements is a dying practice, and mixing it with modern development techniques only causes developer confusion and makes it much more difficult to maintain code and ensure its correctness. 
+However, consider the case where we have a simple procedure that performs some form of error checking to protect an internal block of code.
+The typical approach to protect the main body of the procedure from running without passing all of the error checks is to use nested conditional statements. Depending on the level of nesting that is needed, such code will usually
+end up being difficult to read and maintain. In this case the {\tt goto} statement would be perfectly acceptable
+because it would enable the developer to jump to a common error handling block in the event of 
+an error, thus skipping all subsequent error checks and the protected body altogether. In addition, no 
+nesting would be needed with this design. This is just one example of where the use of the 
+{\tt goto} statement can lead to cleaner, smaller, and more efficient code. However, in his 
+paper entitled ``Structured Programming with go to Statements,'' Donald 
+Knuth was able to generate many different examples where the {\tt goto} statement actually increased code 
+size and decreased performance (e.g. hash code generation and tree searching) \cite{Knuth1974}. From this, and the aforementioned error-checking 
+example, we can conclude that careful usage of {\tt goto} statements can be beneficial in certain
+circumstances and harmful in others. 
+
+In conclusion, while old development practices might provide adequate reason to support the usage of
+this statement, the evolution of software engineering practices (including the area of formal modeling) 
+and programming languages has started to refute these claims. To the experienced programmer, however, the {\tt goto} statement
+certainly has its benefits in certain scenarios. Unfortunately, it is necessary to abandon these benefits in order
+to establish a common set of development practices and techniques among all active developers. 
+Similar to the slow transition away from Windows XP in corporate America, such change
+is needed to enable the efficiencies and higher quality that comes with new technologies (which are, in this case,
+newer languages and development practices).
+
+%Formal modeling of software systems to ensure their correctness still carries the most weight against this aged way of development. 
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+
+\end{document}
