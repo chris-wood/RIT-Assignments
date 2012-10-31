@@ -6,7 +6,7 @@
 
 \begin{center}
 Christopher Wood \\
-Reflection Essay \#4 \\
+Reflection Essay \#5 \\
 \end{center}
 
 \begin{comment}
@@ -16,8 +16,10 @@ Is this a good "programming-languages problem"? That is, do you think that a pro
 Can you suggest another "programming-languages problem"? That is, can you suggest a programming or software development task that you think would allow you to identify "good" (e.g., "powerful") languages from "bad" (e.g., "weak") languages.
 \end{comment}
 
-The \emph{expression problem} describes the programming language design issue of being able to define a 
-datatype that has a set of cases and associated processes (or functions) that operate on the datatype.
+The \emph{expression problem} describes the programming language design issue of 
+being able to define a program (or subset of the program) 
+as a datatype that has a set of cases and associated processes (or functions) 
+that operate on the datatype \cite{zenger2004independently}.
 The datatype cases and supported processes should both be extensible while maintaining the strong
 static type safety of the datatype (i.e. processors are only allowed to use the datatype in the way
 described by their corresponding datatype variant/case). Furthermore, this extension should be 
@@ -25,11 +27,9 @@ supported after compilation in such a way that it does not affect any existing c
 
 %TODO: check with MTF - is this okay?
 As stated by Wadler, the ability for a language to solve the expression problem is a ``salient
-indicator of its capacity for expression'' (TODO: CITE). Thus, we see that the expression problem 
+indicator of its capacity for expression'' \cite{wadler1998expression}. Thus, we see that the expression problem 
 may be common in situations where users may need to extend the operations available on built-in 
-and compiled datatypes. 
-
-One example where this might occur is in the design and implementation of a graphical 
+and compiled datatypes. One example where this might occur is in the design and implementation of a graphical 
 editing software tool. Although I am not speaking from experience, I would imagine there are cases where
 a user may want to define new shapes and transformation functions for these shapes in order to create
 different images. Thus, if we represent shapes (or more specifically, polygons) as a datatype 
@@ -43,18 +43,28 @@ to solve the expression problem becomes a very important indicator of its abilit
 Programmers tend to think about problems in very abstract and tangible ways, and so it would be ideal
 to not constrain them to built-in types defined at compile time. We naturally attempt to solve problems
 by reusing solutions to smaller problems. Thus, software solutions may be (and usually are) 
-composed of expressions that solve similar problems; developers do not desire to ``reinvent the wheel''.
+composed of expressions that solve sub-problems (developers do not like to ``reinvent the wheel'').
 Granted, the developer could always revisit the software implementation and include any new
-datatypes or supported operations as needed. If this can be achieved at runtime with minimal computational
+datatypes or supported operations as needed. However, if this can be achieved at runtime with minimal computational
 overhead for resolving types and ensuring type safety, then we essentially lift the developer's 
 constraint to pre-defined datatypes and operations to solve specific problems. Consequently, 
 the language promotes more natural problem solving through free-form expression. 
 
-While my primary field of interest is not programming language design, I understand the important
-and merit of ``programming-languages problems'' similar to the expression problem. Software engineers
+When examined in the context of imperative and declarative languages, the \emph{expression problem}
+seems to have different solutions. Wadler's solution is beautifully crafted in the imperative object-oriented paradigm. 
+His application of the Visitor pattern, combined with generics, made it easy to add new cases
+to the datatype, but the addition of operations is somewhat convoluted. This seems to contradict the 
+solutions presented in the declarative functional domain (such as those implemented in Scala), 
+which tend to provide easy ways to extend the processors for a datatype but make it difficult to include new cases. 
+This key difference seems to provide further support for the fundamental differences between these two paradigms.
+Although both techniques present viable solutions to the problem, they both have their own implementation
+benefits, as is the usual case between imperative and declarative languages. 
+
+While my primary field of interest is not programming language design, I understand the importance
+and merit of ``programming-languages problems'' similar to the \emph{expression problem}. Software engineers
 are often trained to solve problems within the context of a set of tools, but with novel solutions
 to these fundamental language design problems we can train future generations of engineers to
-think in terms of the problem at hand, and then simply find the best tool that does the job. 
+think in terms of the problem at hand, and then simply find the best tool that fits the job. 
 
 \bibliographystyle{plain}
 \bibliography{ref}

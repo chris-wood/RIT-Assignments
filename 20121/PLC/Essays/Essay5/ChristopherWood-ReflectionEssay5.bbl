@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{wadler1998expression}
+P.~Wadler.
+\newblock The expression problem.
+\newblock {\em java-genericity Mailing List}, 1998.
+
+\bibitem{zenger2004independently}
+M.~Zenger and M.~Odersky.
+\newblock Independently extensible solutions to the expression problem.
+\newblock {\em URL http://scala. epfl. ch/docu/related. html}, 2004.
+
+\end{thebibliography}
