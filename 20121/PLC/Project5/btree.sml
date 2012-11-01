@@ -11,14 +11,32 @@ fun btree_reduce f b bt =
 
 (* DEFINE btree_size HERE *)
 (* btree_size : 'a btree -> int *)
+fun btree_size bt = 
+  let 
+    fun nodeAdd (l, x, r) = 1 + l + r
+  in
+    btree_reduce nodeAdd 0 bt
+  end
 
 
 (* DEFINE btree_height HERE *)
 (* btree_height : 'a btree -> int *)
+fun btree_height bt = 
+  let 
+    fun nodeMax (l, x, r) = 1 + Int.max (l, r)
+  in
+    btree_reduce nodeMax 0 bt
+  end
 
 
 (* DEFINE btree_deepest HERE *)
 (* btree_deepest : 'a btree -> 'a list *)
+  let 
+    fun nodeDeepest (l, x, r) = 
+      
+  in
+
+  end
 
 
 (* DEFINE btree_max HERE *)
@@ -139,8 +157,8 @@ val btree_size_test40 = ("btree_size_test40", bt40, 81)
 val btree_size_testsS = [btree_size_test01,btree_size_test02,btree_size_test03,btree_size_test04,btree_size_test05,btree_size_test06,btree_size_test07,btree_size_test08,btree_size_test09,btree_size_test10,btree_size_test11,btree_size_test12,btree_size_test13,btree_size_test14,btree_size_test15,btree_size_test16,btree_size_test17,btree_size_test18,btree_size_test19,btree_size_test20]
 val btree_size_testsI = [btree_size_test21,btree_size_test22,btree_size_test23,btree_size_test24,btree_size_test25,btree_size_test26,btree_size_test27,btree_size_test28,btree_size_test29,btree_size_test30,btree_size_test31,btree_size_test32,btree_size_test33,btree_size_test34,btree_size_test35,btree_size_test36,btree_size_test37,btree_size_test38,btree_size_test39,btree_size_test40]
 (* Uncomment the following to test your btree_size function. *)
-(* val _ = run_tests btree_size int_equal btree_size_testsS *)
-(* val _ = run_tests btree_size int_equal btree_size_testsI *)
+val _ = run_tests btree_size int_equal btree_size_testsS 
+val _ = run_tests btree_size int_equal btree_size_testsI 
 
 
 (* btree_height tests *)
@@ -187,8 +205,8 @@ val btree_height_test40 = ("btree_height_test40", bt40, 7)
 val btree_height_testsS = [btree_height_test01,btree_height_test02,btree_height_test03,btree_height_test04,btree_height_test05,btree_height_test06,btree_height_test07,btree_height_test08,btree_height_test09,btree_height_test10,btree_height_test11,btree_height_test12,btree_height_test13,btree_height_test14,btree_height_test15,btree_height_test16,btree_height_test17,btree_height_test18,btree_height_test19,btree_height_test20]
 val btree_height_testsI = [btree_height_test21,btree_height_test22,btree_height_test23,btree_height_test24,btree_height_test25,btree_height_test26,btree_height_test27,btree_height_test28,btree_height_test29,btree_height_test30,btree_height_test31,btree_height_test32,btree_height_test33,btree_height_test34,btree_height_test35,btree_height_test36,btree_height_test37,btree_height_test38,btree_height_test39,btree_height_test40]
 (* Uncomment the following to test your btree_height function. *)
-(* val _ = run_tests btree_height int_equal btree_height_testsS *)
-(* val _ = run_tests btree_height int_equal btree_height_testsI *)
+val _ = run_tests btree_height int_equal btree_height_testsS
+val _ = run_tests btree_height int_equal btree_height_testsI
 
 
 (* btree_deepest tests *)
