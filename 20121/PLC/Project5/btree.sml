@@ -33,9 +33,14 @@ fun btree_height bt =
 (* btree_deepest : 'a btree -> 'a list *)
   let 
     fun nodeDeepest (l, x, r) = 
-      
+      (case (l, r) of 
+          (([], 0), ([], 0)) => ([x], 1) (* leaves on both sides, so we're the deepest *)
+        | (('l, d), ('r, d)) => ('l @ 'r, d + 1)
+        | (([], 0), ('r, d2)) => ('r, d2 + 1)
+        | (('l, d1), ([], 0)) => ('l, d1 + 1))
   in
-
+  (* base = ([], 0) *)
+    btree_reduce nodeDeepest ([], 0) bt
   end
 
 
