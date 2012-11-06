@@ -31,22 +31,55 @@ fun btree_height bt =
 
 (* DEFINE btree_deepest HERE *)
 (* btree_deepest : 'a btree -> 'a list *)
+fun btree_deepest bt =
   let 
     fun nodeDeepest (l, x, r) = 
       (case (l, r) of 
           (([], 0), ([], 0)) => ([x], 1) (* leaves on both sides, so we're the deepest *)
-        | (('l, d), ('r, d)) => ('l @ 'r, d + 1)
-        | (([], 0), ('r, d2)) => ('r, d2 + 1)
-        | (('l, d1), ([], 0)) => ('l, d1 + 1))
+        | ((l1, d1), (r1, d2)) => 
+		if d1 = d2 then 
+			(l1 @ r1, d1 + 1)
+		else if d1 > d2 then
+			(l1, d1 + 1)
+		else
+			(r1, d2 + 1))
+  (*      | (([], 0), ('r, d2)) => ('r, d2 + 1)
+        | (('l, d1), ([], 0)) => ('l, d1 + 1)) *)
   in
   (* base = ([], 0) *)
-    btree_reduce nodeDeepest ([], 0) bt
+    #1 (btree_reduce nodeDeepest ([], 0) bt)
   end
 
 
 (* DEFINE btree_max HERE *)
 (* btree_max : ('a * 'a -> order) -> 'a btree -> 'a option *)
+fun btree_max comp bt = 
+	let
+		fun pickMax (leftMax, rightMax) = 
+			(case (leftMax, rightMax) of 
+				(SOME l, SOME r) =>
+					(case comp (l, r) of 
+						LESS => SOME r
+						| EQUAL => SOME r
+						| GREATER => SOME l)
+				| (SOME l, NONE) => SOME l
+				| (NONE, SOME r) => SOME r
+				| (NONE, NONE) => NONE)
 
+		fun nodeMaxHelper (l, x, r) = 
+			(case (l, r) of 
+				(NONE, NONE) => SOME x (* we reached a leaf node so we're the max *)
+				| (l', r') => 
+					(case pickMax (l', r') of
+						SOME x' => 
+							(case comp (x, x') of
+								LESS => SOME x'
+								| EQUAL => SOME x'
+								| GREATER => SOME x)
+						| NONE => SOME x))
+	in
+		btree_reduce nodeMaxHelper NONE bt
+	end
 
 
 ;
@@ -258,8 +291,8 @@ val btree_deepest_test40 = ("btree_deepest_test40", bt40, [1002,603,~470,156,~13
 val btree_deepest_testsS = [btree_deepest_test01,btree_deepest_test02,btree_deepest_test03,btree_deepest_test04,btree_deepest_test05,btree_deepest_test06,btree_deepest_test07,btree_deepest_test08,btree_deepest_test09,btree_deepest_test10,btree_deepest_test11,btree_deepest_test12,btree_deepest_test13,btree_deepest_test14,btree_deepest_test15,btree_deepest_test16,btree_deepest_test17,btree_deepest_test18,btree_deepest_test19,btree_deepest_test20]
 val btree_deepest_testsI = [btree_deepest_test21,btree_deepest_test22,btree_deepest_test23,btree_deepest_test24,btree_deepest_test25,btree_deepest_test26,btree_deepest_test27,btree_deepest_test28,btree_deepest_test29,btree_deepest_test30,btree_deepest_test31,btree_deepest_test32,btree_deepest_test33,btree_deepest_test34,btree_deepest_test35,btree_deepest_test36,btree_deepest_test37,btree_deepest_test38,btree_deepest_test39,btree_deepest_test40]
 (* Uncomment the following to test your btree_deepest function. *)
-(* val _ = run_tests btree_deepest (list_equal string_equal) btree_deepest_testsS *)
-(* val _ = run_tests btree_deepest (list_equal int_equal) btree_deepest_testsI *)
+val _ = run_tests btree_deepest (list_equal string_equal) btree_deepest_testsS
+val _ = run_tests btree_deepest (list_equal int_equal) btree_deepest_testsI
 
 
 (* btree_max tests *)
@@ -306,8 +339,8 @@ val btree_max_test40 = ("btree_max_test40", bt40, SOME(1002))
 val btree_max_testsS = [btree_max_test01,btree_max_test02,btree_max_test03,btree_max_test04,btree_max_test05,btree_max_test06,btree_max_test07,btree_max_test08,btree_max_test09,btree_max_test10,btree_max_test11,btree_max_test12,btree_max_test13,btree_max_test14,btree_max_test15,btree_max_test16,btree_max_test17,btree_max_test18,btree_max_test19,btree_max_test20]
 val btree_max_testsI = [btree_max_test21,btree_max_test22,btree_max_test23,btree_max_test24,btree_max_test25,btree_max_test26,btree_max_test27,btree_max_test28,btree_max_test29,btree_max_test30,btree_max_test31,btree_max_test32,btree_max_test33,btree_max_test34,btree_max_test35,btree_max_test36,btree_max_test37,btree_max_test38,btree_max_test39,btree_max_test40]
 (* Uncomment the following to test your btree_max function. *)
-(* val _ = run_tests (btree_max String.compare) (option_equal string_equal) btree_max_testsS *)
-(* val _ = run_tests (btree_max Int.compare) (option_equal int_equal) btree_max_testsI *)
+val _ = run_tests (btree_max String.compare) (option_equal string_equal) btree_max_testsS
+val _ = run_tests (btree_max Int.compare) (option_equal int_equal) btree_max_testsI
 
 in
 end

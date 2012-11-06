@@ -27,14 +27,40 @@ fun formula_equal (f1, f2) =
 
 (* DEFINE varsOf_formula HERE. *)
 (* varsOf_formula : fmla -> string list *)
+fun varsOf_formula fmla = 
+	let 
+		(* Strip out duplicates in the list l *)
+		fun uniquify l = 
+			(case l of
+				[] => []
+				| h::t => h::(List.filter (fn x => x <> h) (uniquify t)))
+		
+		(* Build a list containing every instance of variables in the formula *)
+		fun buildVarList fmla = 
+			case fmla of 
+				F_Var s => [s]
+				| F_Not f => buildVarList(f)
+				| F_And (fa1, fa2) => buildVarList(fa1) @ buildVarList(fa2)
+				| F_Or (fo1, fo2) => buildVarList(fo1) @ buildVarList(fo2)
+	in
+		(* Uniquify the list of all variables from the formula *)
+		uniquify (buildVarList fmla)
+	end
 
 
 (* DEFINE eval_formula HERE. *)
 (* eval_formula : (string -> bool) -> fmla -> bool *)
+fun eval_formula varMap fmla = 
+	case fmla of 
+		F_Var s => varMap(s)
+		| F_Not f => not (eval_formula varMap f)
+		| F_And (fa1, fa2) => (eval_formula varMap fa1) andalso (eval_formula varMap fa2)
+		| F_Or (fo1, fo2) => (eval_formula varMap fo1) orelse (eval_formula varMap fo2)
 
 
 (* DEFINE tautology_formula HERE. *)
 (* tautology_formula : fmla -> bool *)
+(* try to do some inner function that gets all variables, defines a map, and then flips the value of every map*)
 
 
 (* The datatype representing a token. *)
@@ -153,12 +179,79 @@ fun string_to_tokenList (s: string) : tok list option =
 
 (* DEFINE tokenList_to_parseTree HERE. *)
 (* tokenList_to_parseTree : tok list -> p_pt option *)
+fun tokenList_to_parseTree ts = 
+	let
+		fun parseY (ts : tok list) : (y_pt * tok list) option = 
+			case ts of
+				T_And::ts1' => 
+					(case ts1' of 
+						T_RParen::ts2' => SOME (Y_Y1, ts2')
+						| _ => NONE)
+				| T_Or::ts1' =>
+					(case ts1' of 
+						T_RParen::ts2' => SOME (Y_Y2, ts2')
+						| _ => NONE)
+				| _ => NONE				
+
+(*T_Var(s)::ts' => SOME (Y_Y1, ts')*)
+(* some dead code left over from old stuff*)
+(*SOME (Z_Z1, [T_RParen])*)
+
+		and parseZ (ts : tok list) : (z_pt * tok list) option = 
+			case ts of 
+				T_Not::ts1' => 
+					(case ts1' of 
+						T_RParen::ts2' => SOME (Z_Z1, ts2')
+						| _ => NONE)
+				| _ => 
+					(case parseP ts of
+						SOME (pt, ts1') => 
+							(case parseY ts1' of 
+								SOME (yt, ts2') => SOME (Z_Z2 (pt, yt), ts2') (* here is the result *)
+								| _ => NONE)
+						| _ => NONE)
+
+		and parseP (ts : tok list) : (p_pt * tok list) option = 
+			case ts of 
+				T_Var(s)::ts' => SOME ((P_P1 s), ts') (* adding a list to the end of sum to make the tuple works... *)
+				| T_LParen::ts' => (case parseP ts' of
+							SOME (pt, ts1') => (case parseZ ts1' of 
+								SOME (zt, ts2') => SOME (P_P2 (pt, zt), ts2') (* here is the result... *)
+								| _ => NONE)
+							| _ => NONE)
+				| _ => NONE
+	in
+		(* Need to check the token list returned from the result of this function *)
+		case parseP (ts) of
+			SOME (pt, []) => SOME pt
+			| _ => NONE
+	end
 
 
 (* DEFINE parseTree_to_formula HERE. *)
 (* parseTree_to_formula : p_pt -> fmla *)
+fun parseTree_to_formula pt = 
+	case pt of
+		P_P1 (s) => F_Var (s)
+		| P_P2 (pt', zt') => (case zt' of 
+			Z_Z1 => F_Not (parseTree_to_formula pt')
+			| Z_Z2 (pt2', yt') => (case yt' of
+				Y_Y1 => F_And ((parseTree_to_formula pt'), (parseTree_to_formula pt2'))
+				| Y_Y2 => F_Or ((parseTree_to_formula pt'), (parseTree_to_formula pt2'))))
+		(*
+		T_LParen::(parseTree_to_formula pt')::(case zt' of
+			Z_Z1 => F_Not (*T_Not::T_RParen*)
+			| Z_Z2 (pt2', yt') => (parseTree_to_formula pt2')::(case yt' of
+				Y_Y1 => F_And (*T_And::T_RParen*)
+				| Y_Y2 => T_Or::T_RParen))*)
+		(*| Z_Z1 => T_Not::T_RParen
+		| Z_Z2 (pt', yt') => (parseTree_to_formula pt')::(case yt' of
+			Y_Y1 => T_And::T_RParen
+			| Y_Y2 => T_Or::T_RParen)
+		| Y_Y1 => T_And::T_RParen
+		| Y_Y2 => T_Or::T_RParen*)
 
-
+(* break it up into cases for each one, and then simply do a find/replace on all of the symbols *)
 
 ;
 
@@ -365,7 +458,7 @@ val varsOf_formula_test31 = ("varsOf_formula_test31", f31, ["a"])
 val varsOf_formula_test32 = ("varsOf_formula_test32", f32, ["a","c","d","g"])
 val varsOf_formula_tests = [varsOf_formula_test01,varsOf_formula_test02,varsOf_formula_test03,varsOf_formula_test04,varsOf_formula_test05,varsOf_formula_test06,varsOf_formula_test07,varsOf_formula_test08,varsOf_formula_test09,varsOf_formula_test10,varsOf_formula_test11,varsOf_formula_test12,varsOf_formula_test13,varsOf_formula_test14,varsOf_formula_test15,varsOf_formula_test16,varsOf_formula_test17,varsOf_formula_test18,varsOf_formula_test19,varsOf_formula_test20,varsOf_formula_test21,varsOf_formula_test22,varsOf_formula_test23,varsOf_formula_test24,varsOf_formula_test25,varsOf_formula_test26,varsOf_formula_test27,varsOf_formula_test28,varsOf_formula_test29,varsOf_formula_test30,varsOf_formula_test31,varsOf_formula_test32]
 (* Uncomment the following to test your varsOf_formula function. *)
-(* val _ = run_tests varsOf_formula (list_equal_as_set string_equal) varsOf_formula_tests *)
+val _ = run_tests varsOf_formula (list_equal_as_set string_equal) varsOf_formula_tests
 
 
 (* eval_formula tests *)
@@ -499,7 +592,7 @@ val eval_formula_test3203 = ("eval_formula_test3203", (v03, f32), true)
 val eval_formula_test3204 = ("eval_formula_test3204", (v04, f32), true)
 val eval_formula_tests = [eval_formula_test0101,eval_formula_test0102,eval_formula_test0103,eval_formula_test0104,eval_formula_test0201,eval_formula_test0202,eval_formula_test0203,eval_formula_test0204,eval_formula_test0301,eval_formula_test0302,eval_formula_test0303,eval_formula_test0304,eval_formula_test0401,eval_formula_test0402,eval_formula_test0403,eval_formula_test0404,eval_formula_test0501,eval_formula_test0502,eval_formula_test0503,eval_formula_test0504,eval_formula_test0601,eval_formula_test0602,eval_formula_test0603,eval_formula_test0604,eval_formula_test0701,eval_formula_test0702,eval_formula_test0703,eval_formula_test0704,eval_formula_test0801,eval_formula_test0802,eval_formula_test0803,eval_formula_test0804,eval_formula_test0901,eval_formula_test0902,eval_formula_test0903,eval_formula_test0904,eval_formula_test1001,eval_formula_test1002,eval_formula_test1003,eval_formula_test1004,eval_formula_test1101,eval_formula_test1102,eval_formula_test1103,eval_formula_test1104,eval_formula_test1201,eval_formula_test1202,eval_formula_test1203,eval_formula_test1204,eval_formula_test1301,eval_formula_test1302,eval_formula_test1303,eval_formula_test1304,eval_formula_test1401,eval_formula_test1402,eval_formula_test1403,eval_formula_test1404,eval_formula_test1501,eval_formula_test1502,eval_formula_test1503,eval_formula_test1504,eval_formula_test1601,eval_formula_test1602,eval_formula_test1603,eval_formula_test1604,eval_formula_test1701,eval_formula_test1702,eval_formula_test1703,eval_formula_test1704,eval_formula_test1801,eval_formula_test1802,eval_formula_test1803,eval_formula_test1804,eval_formula_test1901,eval_formula_test1902,eval_formula_test1903,eval_formula_test1904,eval_formula_test2001,eval_formula_test2002,eval_formula_test2003,eval_formula_test2004,eval_formula_test2101,eval_formula_test2102,eval_formula_test2103,eval_formula_test2104,eval_formula_test2201,eval_formula_test2202,eval_formula_test2203,eval_formula_test2204,eval_formula_test2301,eval_formula_test2302,eval_formula_test2303,eval_formula_test2304,eval_formula_test2401,eval_formula_test2402,eval_formula_test2403,eval_formula_test2404,eval_formula_test2501,eval_formula_test2502,eval_formula_test2503,eval_formula_test2504,eval_formula_test2601,eval_formula_test2602,eval_formula_test2603,eval_formula_test2604,eval_formula_test2701,eval_formula_test2702,eval_formula_test2703,eval_formula_test2704,eval_formula_test2801,eval_formula_test2802,eval_formula_test2803,eval_formula_test2804,eval_formula_test2901,eval_formula_test2902,eval_formula_test2903,eval_formula_test2904,eval_formula_test3001,eval_formula_test3002,eval_formula_test3003,eval_formula_test3004,eval_formula_test3101,eval_formula_test3102,eval_formula_test3103,eval_formula_test3104,eval_formula_test3201,eval_formula_test3202,eval_formula_test3203,eval_formula_test3204]
 (* Uncomment the following to test your eval_formula function. *)
-(* val _ = run_tests (fn (v, f) => eval_formula v f) bool_equal eval_formula_tests *)
+val _ = run_tests (fn (v, f) => eval_formula v f) bool_equal eval_formula_tests
 
 
 (* tautology_formula tests *)
@@ -607,7 +700,7 @@ val tokenList_to_parseTree_test32 = ("tokenList_to_parseTree_test32", ts32, SOME
 val tokenList_to_parseTree_test32x = ("tokenList_to_parseTree_test32x", ts32x, NONE)
 val tokenList_to_parseTree_tests = [tokenList_to_parseTree_test01,tokenList_to_parseTree_test01x,tokenList_to_parseTree_test02,tokenList_to_parseTree_test02x,tokenList_to_parseTree_test03,tokenList_to_parseTree_test03x,tokenList_to_parseTree_test04,tokenList_to_parseTree_test04x,tokenList_to_parseTree_test05,tokenList_to_parseTree_test05x,tokenList_to_parseTree_test06,tokenList_to_parseTree_test06x,tokenList_to_parseTree_test07,tokenList_to_parseTree_test07x,tokenList_to_parseTree_test08,tokenList_to_parseTree_test08x,tokenList_to_parseTree_test09,tokenList_to_parseTree_test09x,tokenList_to_parseTree_test10,tokenList_to_parseTree_test10x,tokenList_to_parseTree_test11,tokenList_to_parseTree_test11x,tokenList_to_parseTree_test12,tokenList_to_parseTree_test12x,tokenList_to_parseTree_test13,tokenList_to_parseTree_test13x,tokenList_to_parseTree_test14,tokenList_to_parseTree_test14x,tokenList_to_parseTree_test15,tokenList_to_parseTree_test15x,tokenList_to_parseTree_test16,tokenList_to_parseTree_test16x,tokenList_to_parseTree_test17,tokenList_to_parseTree_test17x,tokenList_to_parseTree_test18,tokenList_to_parseTree_test18x,tokenList_to_parseTree_test19,tokenList_to_parseTree_test19x,tokenList_to_parseTree_test20,tokenList_to_parseTree_test20x,tokenList_to_parseTree_test21,tokenList_to_parseTree_test21x,tokenList_to_parseTree_test22,tokenList_to_parseTree_test22x,tokenList_to_parseTree_test23,tokenList_to_parseTree_test23x,tokenList_to_parseTree_test24,tokenList_to_parseTree_test24x,tokenList_to_parseTree_test25,tokenList_to_parseTree_test25x,tokenList_to_parseTree_test26,tokenList_to_parseTree_test26x,tokenList_to_parseTree_test27,tokenList_to_parseTree_test27x,tokenList_to_parseTree_test28,tokenList_to_parseTree_test28x,tokenList_to_parseTree_test29,tokenList_to_parseTree_test29x,tokenList_to_parseTree_test30,tokenList_to_parseTree_test30x,tokenList_to_parseTree_test31,tokenList_to_parseTree_test31x,tokenList_to_parseTree_test32,tokenList_to_parseTree_test32x]
 (* Uncomment the following to test your tokenList_to_parseTree function. *)
-(* val _ = run_tests tokenList_to_parseTree (option_equal parseTree_equal) tokenList_to_parseTree_tests *)
+val _ = run_tests tokenList_to_parseTree (option_equal parseTree_equal) tokenList_to_parseTree_tests
 
 
 (* parseTree_to_formula tests *)
@@ -645,7 +738,7 @@ val parseTree_to_formula_test31 = ("parseTree_to_formula_test31", p31, f31)
 val parseTree_to_formula_test32 = ("parseTree_to_formula_test32", p32, f32)
 val parseTree_to_formula_tests = [parseTree_to_formula_test01,parseTree_to_formula_test02,parseTree_to_formula_test03,parseTree_to_formula_test04,parseTree_to_formula_test05,parseTree_to_formula_test06,parseTree_to_formula_test07,parseTree_to_formula_test08,parseTree_to_formula_test09,parseTree_to_formula_test10,parseTree_to_formula_test11,parseTree_to_formula_test12,parseTree_to_formula_test13,parseTree_to_formula_test14,parseTree_to_formula_test15,parseTree_to_formula_test16,parseTree_to_formula_test17,parseTree_to_formula_test18,parseTree_to_formula_test19,parseTree_to_formula_test20,parseTree_to_formula_test21,parseTree_to_formula_test22,parseTree_to_formula_test23,parseTree_to_formula_test24,parseTree_to_formula_test25,parseTree_to_formula_test26,parseTree_to_formula_test27,parseTree_to_formula_test28,parseTree_to_formula_test29,parseTree_to_formula_test30,parseTree_to_formula_test31,parseTree_to_formula_test32]
 (* Uncomment the following to test your parseTree_to_formula function. *)
-(* val _ = run_tests parseTree_to_formula formula_equal parseTree_to_formula_tests *)
+val _ = run_tests parseTree_to_formula formula_equal parseTree_to_formula_tests
 
 in
 end

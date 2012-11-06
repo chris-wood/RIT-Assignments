@@ -30,16 +30,19 @@ indicator of its capacity for expression'' \cite{wadler1998expression}.
 Based on this description, we can see that this type of problem arises in  
 situations where users may need to extend the operations applicable to built-in 
 and user-defined datatypes. One example where this might occur is in the design and implementation of a graphics 
-editing software tool. Although I am not speaking from experience, I would imagine there are cases where
-a user may want to define new shapes and transformation functions for these shapes in order to create
-different images. Thus, if we represent shapes (or more specifically, polygons) as a datatype 
-with various cases in which it may be used, and then enable the user to specify new processors (i.e.
-transformation functions) that operate on this datatype, the user is free to ``express'' graphical
-images in novel ways. As an example, the user may want to define a processor for the polygon
-that treats it as a circle and transforms it into a semi-circle. We might also
-have a semi-circle polygon variant to which a user can define a duplicate processor, which
-in turn recreates a full circle from this semi-circle. 
-There are undoubtedly many more examples where this problem comes into play in practical
+editing software tool that uses existing code from two separate graphics libraries. 
+Although I am not speaking from experience, I would imagine there are cases where
+a developer may want to define new shapes with corresponding transformation functions in order to create
+different images within the tool. In order to accomplish this task, the developer must add new processors
+for the types supplied by the two graphical libraries without changing how they are
+implemented (there may be other code in the graphics library that is dependent their implementation). 
+As an example, the developer may want to use a square type from the first library (represented as a collection of points
+in a 2D plane) and a triangle type from the second library (represented as a collection
+of vectors in a 3D plane) to draw a ``house'' shape. The developer cannot change the triangle code to 
+project the 3D image onto a 2D plane to draw this house because its internal implementation may have many 
+other dependencies. The developer must therefore come up with a way to define the new house shape 
+by extending the underlying types without recompilation, all while ensuring type-safety when using them. Thus, this is a clear example of the 
+expression problem, and there are undoubtedly many more examples where this problem comes into play in practical
 software development projects.
 
 The utility of studying this problem depends on the perspective in which we view programming languages. 
@@ -53,7 +56,8 @@ Granted, the developer could always revisit the software implementation and add 
 datatype variants or supported operations as needed. However, if this can be achieved at runtime with minimal computational
 overhead for resolving types and ensuring type safety, then we essentially lift the developer's 
 constraint to pre-defined datatypes and operations to solve specific problems. Consequently, 
-the language promotes more natural problem solving through free-form expression. 
+the language promotes more natural problem solving through free-form expression, which might 
+make it a ``better'' language to use in the long run.
 
 Finally, it is interesting to note the \emph{expression problem} solution differences in both the 
 imperative and declarative programming language domains.
