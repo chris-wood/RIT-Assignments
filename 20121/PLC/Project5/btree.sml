@@ -25,7 +25,7 @@ fun btree_height bt = btree_reduce (fn (l, x, r) => 1 + Int.max(l, r)) 0 bt
 (* btree_deepest : 'a btree -> 'a list *)
 fun btree_deepest bt =
 	let 
-		(* Return the deepest element list for the current node *)
+		(* Return the deepest element list and its depth for the current node *)
 		fun nodeDeepest (l, x, r) = 
 			(case (l, r) of 
 				(([], 0), ([], 0)) => ([x], 1) (* leaves on both sides, so we're the deepest *)
@@ -45,7 +45,7 @@ fun btree_deepest bt =
 (* btree_max : ('a * 'a -> order) -> 'a btree -> 'a option *)
 fun btree_max comp bt = 
 	let
-		(* Choose the maximum value from two node children *)
+		(* Choose the maximum value from a pair *)
 		fun pickMax (leftMax, rightMax) = 
 			(case (leftMax, rightMax) of 
 				(SOME l, SOME r) =>

@@ -215,8 +215,10 @@ fun tokenList_to_parseTree ts =
 		and parseP (ts : tok list) : (p_pt * tok list) option = 
 			case ts of 
 				T_Var(s)::ts' => SOME ((P_P1 s), ts')
-				| T_LParen::ts' => (case parseP ts' of
-							SOME (pt, ts1') => (case parseZ ts1' of 
+				| T_LParen::ts' => 
+					(case parseP ts' of
+						SOME (pt, ts1') => 
+							(case parseZ ts1' of 
 								SOME (zt, ts2') => SOME (P_P2 (pt, zt), ts2') 
 								| _ => NONE)
 							| _ => NONE)
@@ -234,11 +236,13 @@ fun tokenList_to_parseTree ts =
 fun parseTree_to_formula pt = 
 	case pt of
 		P_P1 (s) => F_Var (s)
-		| P_P2 (pt', zt') => (case zt' of 
-			Z_Z1 => F_Not (parseTree_to_formula pt')
-			| Z_Z2 (pt2', yt') => (case yt' of
-				Y_Y1 => F_And ((parseTree_to_formula pt'), (parseTree_to_formula pt2'))
-				| Y_Y2 => F_Or ((parseTree_to_formula pt'), (parseTree_to_formula pt2'))))
+		| P_P2 (pt', zt') => 
+			(case zt' of 
+				Z_Z1 => F_Not (parseTree_to_formula pt')
+				| Z_Z2 (pt2', yt') => 
+					(case yt' of
+						Y_Y1 => F_And ((parseTree_to_formula pt'), (parseTree_to_formula pt2'))
+						| Y_Y2 => F_Or ((parseTree_to_formula pt'), (parseTree_to_formula pt2'))))
 ;
 
 local
