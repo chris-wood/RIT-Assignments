@@ -56,21 +56,8 @@ fun btree_max comp bt =
 				| (SOME l, NONE) => SOME l
 				| (NONE, SOME r) => SOME r
 				| (NONE, NONE) => NONE)
-
-		(* Return the maximum value for the given node *)
-		fun nodeMaxHelper (l, x, r) = 
-			(case (l, r) of 
-				(NONE, NONE) => SOME x (* we reached a leaf node so we're the max *)
-				| (l', r') => 
-					(case pickMax (l', r') of
-						SOME x' => 
-							(case comp (x, x') of
-								LESS => SOME x'
-								| EQUAL => SOME x'
-								| GREATER => SOME x)
-						| NONE => SOME x))
 	in
-		btree_reduce nodeMaxHelper NONE bt
+		btree_reduce (fn (l, x, r) => pickMax (SOME x, pickMax (l, r))) NONE bt
 	end
 
 
