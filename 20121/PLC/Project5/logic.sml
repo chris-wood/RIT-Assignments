@@ -1,3 +1,5 @@
+(* Christopher Wood *)
+
 (* The datatype representing a formula. *)
 datatype fmla =
    F_Var of string
@@ -181,6 +183,7 @@ fun string_to_tokenList (s: string) : tok list option =
 (* tokenList_to_parseTree : tok list -> p_pt option *)
 fun tokenList_to_parseTree ts = 
 	let
+		(* Parse function for Y tokens *)
 		fun parseY (ts : tok list) : (y_pt * tok list) option = 
 			case ts of
 				T_And::ts1' => 
@@ -192,11 +195,8 @@ fun tokenList_to_parseTree ts =
 						T_RParen::ts2' => SOME (Y_Y2, ts2')
 						| _ => NONE)
 				| _ => NONE				
-
-(*T_Var(s)::ts' => SOME (Y_Y1, ts')*)
-(* some dead code left over from old stuff*)
-(*SOME (Z_Z1, [T_RParen])*)
-
+		
+		(* Parse function for Z tokens *)
 		and parseZ (ts : tok list) : (z_pt * tok list) option = 
 			case ts of 
 				T_Not::ts1' => 
@@ -207,21 +207,22 @@ fun tokenList_to_parseTree ts =
 					(case parseP ts of
 						SOME (pt, ts1') => 
 							(case parseY ts1' of 
-								SOME (yt, ts2') => SOME (Z_Z2 (pt, yt), ts2') (* here is the result *)
+								SOME (yt, ts2') => SOME (Z_Z2 (pt, yt), ts2') 
 								| _ => NONE)
 						| _ => NONE)
 
+		(* Parse function for P tokens *)
 		and parseP (ts : tok list) : (p_pt * tok list) option = 
 			case ts of 
-				T_Var(s)::ts' => SOME ((P_P1 s), ts') (* adding a list to the end of sum to make the tuple works... *)
+				T_Var(s)::ts' => SOME ((P_P1 s), ts')
 				| T_LParen::ts' => (case parseP ts' of
 							SOME (pt, ts1') => (case parseZ ts1' of 
-								SOME (zt, ts2') => SOME (P_P2 (pt, zt), ts2') (* here is the result... *)
+								SOME (zt, ts2') => SOME (P_P2 (pt, zt), ts2') 
 								| _ => NONE)
 							| _ => NONE)
 				| _ => NONE
 	in
-		(* Need to check the token list returned from the result of this function *)
+		(* Need to check the token list returned from the result of parseP *)
 		case parseP (ts) of
 			SOME (pt, []) => SOME pt
 			| _ => NONE
@@ -238,21 +239,6 @@ fun parseTree_to_formula pt =
 			| Z_Z2 (pt2', yt') => (case yt' of
 				Y_Y1 => F_And ((parseTree_to_formula pt'), (parseTree_to_formula pt2'))
 				| Y_Y2 => F_Or ((parseTree_to_formula pt'), (parseTree_to_formula pt2'))))
-		(*
-		T_LParen::(parseTree_to_formula pt')::(case zt' of
-			Z_Z1 => F_Not (*T_Not::T_RParen*)
-			| Z_Z2 (pt2', yt') => (parseTree_to_formula pt2')::(case yt' of
-				Y_Y1 => F_And (*T_And::T_RParen*)
-				| Y_Y2 => T_Or::T_RParen))*)
-		(*| Z_Z1 => T_Not::T_RParen
-		| Z_Z2 (pt', yt') => (parseTree_to_formula pt')::(case yt' of
-			Y_Y1 => T_And::T_RParen
-			| Y_Y2 => T_Or::T_RParen)
-		| Y_Y1 => T_And::T_RParen
-		| Y_Y2 => T_Or::T_RParen*)
-
-(* break it up into cases for each one, and then simply do a find/replace on all of the symbols *)
-
 ;
 
 local

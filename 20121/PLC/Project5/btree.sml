@@ -1,3 +1,5 @@
+(* Christopher Wood *)
+
 (* Binary tree datatype. *)
 datatype 'a btree = Leaf | Node of 'a btree * 'a * 'a btree
 
@@ -11,50 +13,39 @@ fun btree_reduce f b bt =
 
 (* DEFINE btree_size HERE *)
 (* btree_size : 'a btree -> int *)
-fun btree_size bt = 
-  let 
-    fun nodeAdd (l, x, r) = 1 + l + r
-  in
-    btree_reduce nodeAdd 0 bt
-  end
+fun btree_size bt = btree_reduce (fn (l, x, r) => 1 + l + r) 0 bt
 
 
 (* DEFINE btree_height HERE *)
 (* btree_height : 'a btree -> int *)
-fun btree_height bt = 
-  let 
-    fun nodeMax (l, x, r) = 1 + Int.max (l, r)
-  in
-    btree_reduce nodeMax 0 bt
-  end
+fun btree_height bt = btree_reduce (fn (l, x, r) => 1 + Int.max(l, r)) 0 bt
 
 
 (* DEFINE btree_deepest HERE *)
 (* btree_deepest : 'a btree -> 'a list *)
 fun btree_deepest bt =
-  let 
-    fun nodeDeepest (l, x, r) = 
-      (case (l, r) of 
-          (([], 0), ([], 0)) => ([x], 1) (* leaves on both sides, so we're the deepest *)
-        | ((l1, d1), (r1, d2)) => 
-		if d1 = d2 then 
-			(l1 @ r1, d1 + 1)
-		else if d1 > d2 then
-			(l1, d1 + 1)
-		else
-			(r1, d2 + 1))
-  (*      | (([], 0), ('r, d2)) => ('r, d2 + 1)
-        | (('l, d1), ([], 0)) => ('l, d1 + 1)) *)
-  in
-  (* base = ([], 0) *)
-    #1 (btree_reduce nodeDeepest ([], 0) bt)
-  end
+	let 
+		(* Return the deepest element list for the current node *)
+		fun nodeDeepest (l, x, r) = 
+			(case (l, r) of 
+				(([], 0), ([], 0)) => ([x], 1) (* leaves on both sides, so we're the deepest *)
+				| ((l1, d1), (r1, d2)) =>
+					if d1 = d2 then 
+						(l1 @ r1, d1 + 1)
+					else if d1 > d2 then
+						(l1, d1 + 1)
+					else
+						(r1, d2 + 1))
+	in
+		#1 (btree_reduce nodeDeepest ([], 0) bt)
+	end
 
 
 (* DEFINE btree_max HERE *)
 (* btree_max : ('a * 'a -> order) -> 'a btree -> 'a option *)
 fun btree_max comp bt = 
 	let
+		(* Choose the maximum value from two node children *)
 		fun pickMax (leftMax, rightMax) = 
 			(case (leftMax, rightMax) of 
 				(SOME l, SOME r) =>
@@ -66,6 +57,7 @@ fun btree_max comp bt =
 				| (NONE, SOME r) => SOME r
 				| (NONE, NONE) => NONE)
 
+		(* Return the maximum value for the given node *)
 		fun nodeMaxHelper (l, x, r) = 
 			(case (l, r) of 
 				(NONE, NONE) => SOME x (* we reached a leaf node so we're the max *)
