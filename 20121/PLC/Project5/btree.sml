@@ -37,7 +37,7 @@ fun btree_deepest bt =
 					else
 						(r1, d2 + 1))
 	in
-		#1 (btree_reduce nodeDeepest ([], 0) bt)
+		(fn (l, h) => l)  (btree_reduce nodeDeepest ([], 0) bt)
 	end
 
 
