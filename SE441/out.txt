@@ -1,0 +1,235 @@
+d 14 has 0 allocated!
+Thread 14 requesting 3 units.
+Claims: {13=4, 14=5}
+Allocations: {13=0, 14=0}
+Thread Client_1 requests 3 units.
+
+Doing safety check for 3 with 5 available
+Claims: {13=4, 14=5}
+Temp allocations: {13=0, 14=3}
+Actual allocations: {13=0, 14=0}
+
+Client 14 can be satisfied
+safe
+Thread Client_1 has 3 allocated.
+Allocated: {13=0, 14=3}
+Thread 13 has 0 allocated!
+Thread 13 requesting 3 units.
+Claims: {13=4, 14=5}
+Allocations: {13=0, 14=3}
+Thread Client_0 requests 3 units.
+
+Doing safety check for 3 with 2 available
+Claims: {13=4, 14=5}
+Temp allocations: {13=3, 14=3}
+Actual allocations: {13=0, 14=3}
+
+unsafe
+Thread 15 has 0 allocated!
+Thread 15 requesting 2 units.
+Claims: {13=4, 14=5, 15=4}
+Allocations: {13=0, 14=3, 15=0}
+Thread Client_2 requests 2 units.
+
+Doing safety check for 2 with 2 available
+Claims: {13=4, 14=5, 15=4}
+Temp allocations: {13=0, 14=3, 15=2}
+Actual allocations: {13=0, 14=3, 15=0}
+
+unsafe
+Thread 16 has 0 allocated!
+Thread 16 requesting 1 units.
+Claims: {16=5, 13=4, 14=5, 15=4}
+Allocations: {16=0, 13=0, 14=3, 15=0}
+Thread Client_3 requests 1 units.
+
+Doing safety check for 1 with 2 available
+Claims: {16=5, 13=4, 14=5, 15=4}
+Temp allocations: {16=1, 13=0, 14=3, 15=0}
+Actual allocations: {16=0, 13=0, 14=3, 15=0}
+
+unsafe
+Thread 17 has 0 allocated!
+Thread 17 requesting 1 units.
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Allocations: {17=0, 16=0, 13=0, 14=3, 15=0}
+Thread Client_4 requests 1 units.
+
+Doing safety check for 1 with 2 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=1, 16=0, 13=0, 14=3, 15=0}
+Actual allocations: {17=0, 16=0, 13=0, 14=3, 15=0}
+
+Client 17 can be satisfied
+safe
+Thread Client_4 has 1 allocated.
+Allocated: {17=1, 16=0, 13=0, 14=3, 15=0}
+Thread 17 has 0 remaining!
+Thread 17 trying to release 1
+Allocated: {17=1, 16=0, 13=0, 14=3, 15=0}
+Thread Client_4 releases 1 units.
+Thread Client_3 awakened in request.
+Thread Client_3 requests 1 units.
+
+Doing safety check for 1 with 2 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+Actual allocations: {17=0, 16=0, 13=0, 14=3, 15=0}
+
+Client 17 can be satisfied
+safe
+Thread Client_3 has 1 allocated.
+Allocated: {17=0, 16=1, 13=0, 14=3, 15=0}
+Thread Client_2 awakened in request.
+Thread Client_2 requests 2 units.
+
+Doing safety check for 2 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=0, 14=3, 15=2}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread Client_0 awakened in request.
+Thread Client_0 requests 3 units.
+
+Doing safety check for 3 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=3, 14=3, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread 14 randomly requesting : 1
+Thread 14 requesting 1 units.
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+Thread Client_1 requests 1 units.
+
+Doing safety check for 1 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=0, 14=4, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread 17 has 0 allocated!
+Thread 17 requesting 1 units.
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+Thread Client_4 requests 1 units.
+
+Doing safety check for 1 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=1, 16=1, 13=0, 14=3, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+Client 17 can be satisfied
+safe
+Thread Client_4 has 1 allocated.
+Allocated: {17=1, 16=1, 13=0, 14=3, 15=0}
+Thread 16 randomly requesting : 2
+Thread 16 requesting 2 units.
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Allocations: {17=1, 16=1, 13=0, 14=3, 15=0}
+Thread Client_3 requests 2 units.
+
+Doing safety check for 2 with 0 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=1, 16=3, 13=0, 14=3, 15=0}
+Actual allocations: {17=1, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread 17 has 0 remaining!
+Thread 17 trying to release 1
+Allocated: {17=1, 16=1, 13=0, 14=3, 15=0}
+Thread Client_4 releases 1 units.
+Thread Client_3 awakened in request.
+Thread Client_3 requests 2 units.
+
+Doing safety check for 2 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=3, 13=0, 14=3, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread Client_1 awakened in request.
+Thread Client_1 requests 1 units.
+
+Doing safety check for 1 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=0, 14=4, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread Client_0 awakened in request.
+Thread Client_0 requests 3 units.
+
+Doing safety check for 3 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=3, 14=3, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread Client_2 awakened in request.
+Thread Client_2 requests 2 units.
+
+Doing safety check for 2 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=0, 14=3, 15=2}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread 17 has 0 allocated!
+Thread 17 requesting 1 units.
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+Thread Client_4 requests 1 units.
+
+Doing safety check for 1 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=1, 16=1, 13=0, 14=3, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+Client 17 can be satisfied
+safe
+Thread Client_4 has 1 allocated.
+Allocated: {17=1, 16=1, 13=0, 14=3, 15=0}
+Thread 17 trying to release 1
+Allocated: {17=1, 16=1, 13=0, 14=3, 15=0}
+Thread Client_4 releases 1 units.
+Client terminating.
+Thread Client_2 awakened in request.
+Thread Client_2 requests 2 units.
+
+Doing safety check for 2 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=0, 14=3, 15=2}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread Client_0 awakened in request.
+Thread Client_0 requests 3 units.
+
+Doing safety check for 3 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=3, 14=3, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread Client_1 awakened in request.
+Thread Client_1 requests 1 units.
+
+Doing safety check for 1 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=1, 13=0, 14=4, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+Thread Client_3 awakened in request.
+Thread Client_3 requests 2 units.
+
+Doing safety check for 2 with 1 available
+Claims: {17=1, 16=5, 13=4, 14=5, 15=4}
+Temp allocations: {17=0, 16=3, 13=0, 14=3, 15=0}
+Actual allocations: {17=0, 16=1, 13=0, 14=3, 15=0}
+
+unsafe
+
