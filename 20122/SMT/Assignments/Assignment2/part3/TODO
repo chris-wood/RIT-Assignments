@@ -2,3 +2,11 @@ START=$(date +%s.%N)
 command
 END=$(date +%s.%N)
 DIFF=$(echo "$END - $START" | bc)
+
+TODO: 
+- Make passwords for step 2 in the assignment
+- Test against those passwords
+
+WedgeTODO:
+- Clean up the code (make it more modular with different files?) and comments
+- Capture time information

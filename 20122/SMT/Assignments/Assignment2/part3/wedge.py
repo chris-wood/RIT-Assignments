@@ -22,7 +22,7 @@ targetUser = ""
 hashFormat = "md5"
 
 # The hard-coded dictionary (that can be changed)
-DICTIONARY = "words.txt"
+DICTIONARY = "cain.txt"
 
 #def checkPassword(password):
 #    m = md5.new(password)
@@ -31,7 +31,7 @@ DICTIONARY = "words.txt"
 #        print "match [" + password + "]"
 #        sys.exit()
 
-def recurse(width, position, baseString):
+#def recurse(width, position, baseString):
     # current position
     for char in easyRange:
         if (position < width - 1):
@@ -216,6 +216,7 @@ def main():
             else:
                 password = read_password()
                 digest = generateHash(password, hashFormat)
+                print("Hashed password: " + str(digest))
                 crack_password(hashFormat, digest)
         except IOError as e:
             raise Exception("File (" + str(hashFile) + ") as does not exist.")
