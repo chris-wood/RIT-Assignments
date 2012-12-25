@@ -33,10 +33,10 @@ DICTIONARY = "cain.txt"
 
 #def recurse(width, position, baseString):
     # current position
-    for char in easyRange:
-        if (position < width - 1):
-            recurse(width, position + 1, baseString + "%c" % char)
-        checkPassword(baseString + "%c" % char)
+    #for char in easyRange:
+    #    if (position < width - 1):
+    #        recurse(width, position + 1, baseString + "%c" % char)
+    #    checkPassword(baseString + "%c" % char)
 
 def print_banner():
     ''' Simply print the banner for Wedge.
