@@ -1,0 +1,174 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+\usepackage[left=2cm,top=1cm,right=2cm,nohead,nofoot]{geometry}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{listings}
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+%\allsectionsfont{\normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{*0}{*0}
+\titlespacing{\subsection}{0pt}{*0}{*0}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parsep}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\topmargin}{0pt}
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+
+%\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+%\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+%\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Parallel Computing I, Graduate Team Project} \\ % Your university, school and/or department name(s)
+\horrule{2pt} \\[0.4cm] % Thin top horizontal rule
+\vspace{-1.5em}
+\huge Exhaustive Search Algorithms for $3$-$SAT$ \\ 
+\Large Team Proposal \\
+\vspace{-0.5em}
+\horrule{2pt}
+}
+\author{Christopher Wood, Eitan Romanoff, Ankur Bajoria \\
+Team Satisfaction\\
+Website: {\tt http://ear7631.github.com/RIT-Parallel3Sat} } % Your name
+\date{\large \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\vspace{-2em}
+\section{Problem Description}
+For our project we choose $3$-$SAT$ (or, more formally, $3$-$CNF$-$SAT$), which 
+is an NP-complete decision problem \cite{algs}. $3$-$SAT$ takes as input 
+a $3$-$CNF$ Boolean formula and returns YES if the formula is 
+satisfiable, and NO otherwise. A 3-CNF formula $\phi_n$ on $n$ variables
+is expressed as the conjunction (Boolean AND) of arbitrarily many clauses, 
+where each clause is the disjunction (Boolean OR) of exactly three literals (a 
+literal is a Boolean variable or its negation). A formula $\phi_n$ 
+is said to be satisfiable if and only if there exists an 
+assignment of truth values to the $n$ variables such that substituting them 
+into the literals of $\phi$ will cause it to evaluate to true. 
+Expressed as a formal language, we have 
+$3$-$SAT = \{\langle \phi \rangle : \phi \text{ is a satisfiable }3\text{-}CNF\text{ formula} \}$
+(i.e. the set of all $3$-$CNF$ formula strings that are accepted by the 
+$3$-$SAT$ language if they are satisfiable).
+
+\section{Exhaustive Search Algorithm for $3$-$SAT$}
+An exhaustive search algorithm for solving the $3$-$SAT$ 
+problem with input $\phi_n$ iterates over 
+all $2^n$ configurations of variable truth values, and for each 
+configuration, assigns the truth value of each variable 
+to the appropriate literal in $\phi_n$, and then evaluates $\phi_n$ to determine if it is true. If for 
+every possible variable configuration $\phi_n$ does not evaluate to 
+true, then the exhaustive $3$-$SAT$ algorithm returns NO. Otherwise, 
+some satisfiable truth value configuration must exist, and so the exhaustive $3$-$SAT$ algorithm 
+returns YES. 
+
+\section{Programs and Performance Metrics}
+The sequential and parallel programs we will deliver will take as input 
+a $3$-$CNF$ formula $\phi_n$, encoded using the DIMACS $CNF$ format \cite{dimacs}, 
+and output a Boolean truth value indicating whether or not the 
+formula is satisfiable. The $3$-$CNF$ formula will be entered at the command 
+line or it will be read from a file to facilitate our experiments. Based on 
+the $3$-$SAT$ problem, the only restriction is that each clause must have 
+exactly three literals. Therefore, our programs will enable the 
+number of clauses and the number of variables 
+to be parameters defined in the DIMACS $CNF$ format. An example of the 
+$3$-$CNF$ formula $(x_1 \lor x_2 \lor \lnot x_3)$, which has one clause and three 
+variables, encoded using DIMACS is shown below.
+\begin{center}
+\begin{lstlisting}[frame=single]
+p cnf 3 1
+1 2 -3 0
+\end{lstlisting}
+\end{center}
+\vspace{-1em}
+There are two main parts of the programs that implement the exhaustive search algorithm outlined
+in Section 2. First, the program must read in the $3$-$CNF$ formula $\phi_n$ and set up 
+the appropriate data structures. Second, the program must traverse 
+and assign all possible configurations of variable truth 
+values into $\phi_n$ to then check for satisfiability. Both the 
+sequential and parallel programs will share the first part, which
+is an inherently sequential task, so as to set up 
+the shared data structures containing the $3$-$CNF$ formula.
+
+The second part of the program can be done sequentially or in parallel. 
+In a parallel program, this part is an instance of an agenda parallel problem, where each 
+task evaluates a single truth value assignment for a variable configuration to $\phi_n$ and returns the Boolean result.
+At the end of the program we are only concerned with the summary of the task results (i.e. whether or not
+one task returned true). 
+Furthermore, since there are no sequential dependencies that exist between each agenda task, we can divvy 
+up the execution of these $2^n$ tasks among $2^n$ virtual processors. When 
+implemented, we will clump the execution of many tasks together on a single 
+processor because we will not have $2^n$ processors available for computation for large $n$. 
+
+Finally, since $3$-$SAT$ is both an interesting problem in academia and often arises in 
+the industry, we will be measuring the metrics of speedup and sizeup as functions
+of the program running time $T$, problem size $N$, and number of processors $K$. In addition, we will also measure 
+the efficiency and sizeup efficiency metrics. To compute the speedup and efficiency metrics, we will
+measure the execution time of the sequential ($T_{seq}(N,K), K = 1$) and parallel ($T_{par}(N,K)$) programs. We will also experimentally determine the sequential fraction of 
+the program using these execution time values. Similarly, to compute the sizeup and sizeup efficiency metrics,
+we will measure the problem size for the sequential ($N_{seq}(T,K)$) and parallel ($N_{seq}(T,K)$)
+programs. However, as recognized by Gustafson, the First Problem Size Law for $N(T,K)$ is
+merely an approximation made under the assumption that the sequential fraction 
+of the program execution time is constant for all problem sizes $N$, which is not necessarily true. Therefore, we 
+will compute the sizeup and sizeup efficiency by measuring $N(T,K)$ under the Second Problem Size Law \cite{parallelComputing}.
+
+\section{Literature Survey and Additional Resources}
+As part of the graduate requirement, we will analyze \cite{paper1}, \cite{paper2},
+and \cite{paper3} in our literature survey. In addition, we will use the information and resources made available
+on the International $SAT$ Competition web site \cite{satCompetition}, as well
+as the book by Drechsler et al. on advanced $SAT$ solving techniques \cite{satBook}. 
+
+%%%%% REFERENCES %%%%%
+
+\begin{thebibliography}{9}
+
+\bibitem{algs} Gormen, Thomas H., Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. Introduction to Algorithms. MIT Press 44 (1990), 97-138.
+
+\bibitem{dimacs} Satisfiability: Suggested Format, 1993. Available online at \\
+{\tt http://people.sc.fsu.edu/\~jburkardt/pdf/dimacs\_cnf.pdf}. Accessed: 3/9/13.
+
+\bibitem{paper1} Meyer, Quirin, Fabian Sch\"{o}nfeld, Marc Stamminger, and Rolf Wanka. 3-SAT on CUDA: Towards a Massively Parallel SAT Solver. \emph{2010 International Conference on High Performance Computing and Simulation (HPCS)}, IEEE (2010).
+
+\bibitem{paper2} Hamadi, Youssef, Said Jabbour, and Lakhdar Sais. ManySAT: A Parallel SAT Solver. \emph{Journal on Satisfiability, Boolean Modeling and Computation}, 6.4 (2009), 245-262.
+
+\bibitem{paper3} Zhang, Hantao, Maria Paola Bonacina, and Jieh Hsiang. PSATO: A Distributed Propositional Prover and its Application to Quasigroup Problems. \emph{Journal of Symbolic Computation} 21.4 (1996), 543-560.
+
+\bibitem{satBook} Drechsler, Rolf and Stephan Eggersgl\"{u}b. High Quality Test Pattern Generation and Boolean Satisfiability. \emph{Springer}, 2012.
+
+\bibitem{satCompetition} The International SAT Competitions Web Page. {\tt http://www.satcompetition.org/}. Accessed: 3/9/2013.
+
+\bibitem{parallelComputing} Kaminsky, Alan. Building Parallel Programs: SMPs, Clusters, and Java. Cengage Course Technology, 2010. ISBN 1-4239-0198-3.
+
+\end{thebibliography}
+
+\end{document}

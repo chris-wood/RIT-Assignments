@@ -1,0 +1,185 @@
+\RequirePackage{textcomp}
+\RequirePackage{setspace}
+\RequirePackage{amsbsy,amsmath,amsfonts,amsthm,dsfont,latexsym,amssymb,alltt,array}
+
+%\setlength{\parindent}{0pt}
+
+\newcommand{\caw}{Christopher Wood}
+\newcommand{\spr}{Stanis{\l}aw Radziszowski}
+\newcommand{\rit}{Rochester Institute of Technology}
+
+\newcommand{\cawtitle}[2]{
+  \centerline{\bf \sc \LARGE #1}
+  \vspace{.5pc}
+  \centerline{\sc \large #2}
+  \vspace{.5pc}
+  \centerline{\small Christopher Wood}
+  \centerline{\small\today}
+  \vspace{1pc}
+}
+
+\newcommand{\cawtitlelong}[3]{
+  \centerline{\bf \sc \LARGE #1}
+  \vspace{.5pc}
+  \centerline{\sc \large #2}
+  \vspace{.5pc}
+  \centerline{\sc \large #3}
+  \vspace{.5pc}
+  \centerline{\small Christopher Wood}
+  \centerline{\small\today}
+  \vspace{1pc}
+}
+
+\newcommand{\boxwidth}{.9\linewidth}
+\newcommand{\boxspace}{\hspace{1em}}
+\newcommand{\boxlr}[2]{
+   \begin{tabular*}{\boxwidth}{@{\extracolsep{\fill}} @{\boxspace}l r@{\boxspace}}
+     #1 & #2
+   \end{tabular*}
+}
+\newcommand{\boxtitle}[4]{
+  \begin{center}
+    \framebox[\boxwidth]{
+      \vbox{
+        \boxlr{#1}{\today}\\
+        \vspace*{-.5em}\boxlr{#2}{}\\
+        \vspace{.5em}{\Large #3}
+        \boxlr{\small \it \arl}{\small \it#4}\\
+      }
+    }
+  \end{center}
+}
+
+\newenvironment{enumbold}{\begin{enumerate}
+    \renewcommand{\theenumi}{{\bf \arabic{enumi}}.}
+    \renewcommand{\labelenumi}{\theenumi}
+    }{\end{enumerate}}
+
+\newenvironment{enumnum}{\begin{enumerate}
+    \renewcommand{\theenumi}{\arabic{enumi}.}
+    \renewcommand{\labelenumi}{\theenumi}
+    }{\end{enumerate}}
+
+\newenvironment{boldroman}{\begin{enumerate}
+    \renewcommand{\theenumi}{{\bf\roman{enumi}}.}
+    \renewcommand{\labelenumi}{\theenumi}
+    }{\end{enumerate}}
+
+\newenvironment{prob}[1]{\noindent{\bf PROBLEM #1}.\it}{\vskip 6pt}
+\newenvironment{sol}{\noindent\textbf{Solution}.}{\vskip 16pt}
+
+\newcommand{\ans}{{\small \sc Solution}.\hspace*{.5pc}}
+
+\renewcommand{\theenumii}{\footnotesize (\arabic{enumii})}
+\renewcommand{\labelenumii}{\theenumii}
+
+%%%% better implies for align
+\newcommand{\imp}{\implies \quad}
+
+%%%% easier triangles
+\newcommand{\tri}{\triangle}
+\newcommand{\tris}{\triangle\text{s}}
+
+%%%% Linear Algebra
+\newcommand{\vecs}[2][k]{\vec{{#2}_1},\vec{{#2}_2},\dots,\vec{{#2}_{#1}}} %easier vectors
+\newcommand{\laspan}{\mathsf{span}}
+\newenvironment{bmatrixr}[1]{ \left[\begin{array}{*{#1}{r}} }
+{\end{array}\right]}
+
+%%%% outline for notes
+\newenvironment{notelist}
+{\begin{list}{\bt}{\partopsep=0pt \topsep=2pt \leftmargin=1.5em \parskip=0pt}}
+{\end{list}}
+
+\newcommand{\bt}{$\bullet$ }
+
+%%%% override default values for listings
+%\def\lstbasicfont{\fontfamily{pcr}\selectfont}
+\lstset{ 
+language=C,             
+basicstyle=\scriptsize, 
+commentstyle=\color[RGB]{30,30,30}\itshape, 
+numbers=left,            
+%numberstyle=\footnotesize,    
+stepnumber=1,                 
+numbersep=10pt,           
+showspaces=false,  
+showstringspaces=false,   
+showtabs=false,                 
+%frame=single,                 
+tabsize=8,            
+captionpos=t,        
+breaklines=true,        
+breakatwhitespace=false,      
+title=\tt\lstname,                                   
+escapeinside={\%*}{*)},        
+morekeywords={string,*,...},  
+upquote=true,
+framexleftmargin=2pt,
+%backgroundcolor=\color[rgb]{.9,.9,.9}  
+%linewidth=1ex
+}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Below are commands I use which I stole from Professor Agarwals's sty file
+% http://people.rit.edu/axasma/teaching.html
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bbZ}{\mathds{Z}}
+\newcommand{\bbR}{\mathds{R}}
+\newcommand{\bbN}{\mathds{N}}
+\newcommand{\bbQ}{\mathds{Q}}
+\newcommand{\bbC}{\mathds{C}}
+\newcommand{\polyZ}[1][x]{\mathds{Z}\left[#1\right]} %%for polynomial ring over integers
+\newcommand{\bbZw}{\mathds{Z}[\omega]} %% eisenstein integers
+\newcommand{\bbZi}{\mathds{Z}[i]} %%gaussian integers
+\newcommand{\bbZp}{\mathds{Z}_p} %%prime field
+\newcommand{\bbF}{\mathds{F}} %%field
+\newcommand{\abs}[1]{\lvert #1 \rvert} %%for absolute value sign, better than ||
+\newcommand{\norm}[1]{\lVert #1 \rVert} %% for norms, better than || ||
+\newcommand{\ndv}{\mathbin\nmid} %% for non divisible, \mathbin adds space before and after the symbol
+\newcommand{\dv}{\mathbin\mid} %% for divide also \mathbin makes it binary symbol
+\newcommand{\iso}{\cong} %%isomorphism
+\newcommand{\niso}{\ncong} %%not isomorphic
+\newcommand{\power}[1][]{\mathcal{P}(#1)} %%power set
+\newcommand{\rel}[1][R]{\ensuremath{\mathcal{#1}}}
+\newcommand{\nZ}[1][n]{\ensuremath{\mathds{Z}/#1\mathds{Z}}}  %%quotient Z over nZ
+\newcommand{\Zn}[1][p]{\mathds{Z}_{#1}}
+\newcommand{\cyc}[1][]{\ensuremath{\left\langle #1 \right\rangle}}
+\newcommand{\Id}[1][]{\ensuremath{\langle #1 \rangle}}
+\newcommand{\Ker}[1][]{\ensuremath{\text{Ker}(#1)}}
+\newcommand{\floor}[1][]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\ceil}[1][]{\ensuremath{\left\lceil #1 \right\rceil}}
+
+
+%These make formatting your homework a little easier.
+\newenvironment{problem}[1]{\noindent\textbf{Problem #1}.}{\vskip 6pt}
+\newenvironment{solution}{\noindent\textsf{Solution}.}{\vskip 12pt}
+\newenvironment{enumalph}{\begin{enumerate}\renewcommand{\labelenumi}{\textnormal{(\alph{enumi})}}}{\end{enumerate}}
+\newenvironment{enumroman}{\begin{enumerate}\renewcommand{\labelenumi}{\textnormal{(\roman{enumi})}}}{\end{enumerate}}
+
+\renewcommand{\qedsymbol}{\ensuremath{\blacksquare}}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\inn}{Inn}
+\DeclareMathOperator{\Deg}{Deg}
+\DeclareMathOperator{\Det}{det}
+\DeclareMathOperator{\Hom}{Hom}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem*{main}{Main Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{define}{Definition}
+\theoremstyle{remark}
+\newtheorem*{notation}{Notation}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\theoremstyle{remark}
+\newtheorem{example}{\textbf{Example}}%[section]
