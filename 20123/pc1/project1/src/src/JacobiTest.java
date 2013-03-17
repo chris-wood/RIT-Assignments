@@ -23,6 +23,12 @@ public class JacobiTest
 	 */
 	public static void main(String[] args) 
 	{
+		// Check the command line arguments.
+		if (args.length != 2)
+		{
+			showUsage();
+		}
+		
 		// Run the hard-coded test cases.
 		test1();
 		test2();
@@ -37,8 +43,10 @@ public class JacobiTest
 		    double[][] A = new double[n][n];
 		    double[] b = new double[n];
 		    Random prng = Random.getInstance(seed);
-		    for (int i = 0; i < n; ++ i) {
-		        for (int j = 0; j < n; ++ j) {
+		    for (int i = 0; i < n; ++ i) 
+		    {
+		        for (int j = 0; j < n; ++ j) 
+		        {
 		        	A[i][j] = (prng.nextDouble() * 9.0) + 1.0;
 		        }
 		        A[i][i] += 10.0 * n;
@@ -158,5 +166,17 @@ public class JacobiTest
 	    }
 	    
 	    System.out.println("Test 2: pass");
+	}
+	
+	/**
+	 * Display the program usage message and terminate abnormally.
+	 * 
+	 * @param none
+	 * @return void
+	 */
+	public static void showUsage() 
+	{
+		System.err.println("Usage: java -Xmx2000m JacobiSeq <n> <seed>");
+		System.exit(-1);
 	}
 }
