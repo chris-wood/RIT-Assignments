@@ -1,3 +1,6 @@
+// TODO: tests should be hard-coded into separate files that create instances of JacobiSeq and JacobiSmp,
+// use the methods within for testing purposes.
+
 /*
 		    A = new double[3][3];
 		    A[0][0] = 8.0;

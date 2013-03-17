@@ -1,11 +1,10 @@
 /**
- * This class implements a sequential version of the Jacobi linear
- * system solving algorithm. 
+ * This class implements a sequential version of the Jacobi 
+ * algorithm for solving a system of linear equations.
  * 
  * @author Christopher Wood, caw4567@rit.edu
  */
 
-import java.io.IOException;
 import edu.rit.pj.Comm;
 import edu.rit.util.Random;
 
@@ -58,7 +57,8 @@ public class JacobiSeq
 		
 		// Parse the command line arguments
 		Long start = System.currentTimeMillis();
-		try {
+		try 
+		{
 			int n = Integer.parseInt(args[0]);
 			long seed = Long.parseLong(args[1]);
 			
@@ -66,8 +66,10 @@ public class JacobiSeq
 		    double[][] A = new double[n][n];
 		    double[] b = new double[n];
 		    Random prng = Random.getInstance(seed);
-		    for (int i = 0; i < n; ++ i) {
-		        for (int j = 0; j < n; ++ j) {
+		    for (int i = 0; i < n; ++ i) 
+		    {
+		        for (int j = 0; j < n; ++ j) 
+		        {
 		        	A[i][j] = (prng.nextDouble() * 9.0) + 1.0;
 		        }
 		        A[i][i] += 10.0 * n;
@@ -78,23 +80,44 @@ public class JacobiSeq
 		    double[] x = solve(A, b, n);
 		    Long end = System.currentTimeMillis();
 		    
-		    // Display the results.
-		    if (n <= 100)
-		    	for (int i = 0; i < n; ++ i)
-		        	System.out.printf ("%d %g%n", i, x[i]);
-		    else
-		    {
-		    	for (int i = 0; i <= 49; ++ i)
-		        	System.out.printf ("%d %g%n", i, x[i]);
-		        for (int i = n - 50; i < n; ++ i)
-		        	System.out.printf ("%d %g%n", i, x[i]);
-		    }
-		    System.out.printf ("%d msec%n", (end - start)); 
-		    
-		} catch (NumberFormatException ex1) {
+		    // Display the solution.
+		    printSolution(start, end, x);
+		} 
+		catch (NumberFormatException ex1) 
+		{
 			System.err.println("Error parsing command line arguments.");
 			ex1.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Display the solution vector and program runtime.
+	 * 
+	 * @param start - start time for program run
+	 * @param end - end time for program run
+	 * @param x[] - the solution vector
+	 */
+	public static void printSolution(Long start, Long end, double[] x) 
+	{
+	    if (n <= 100)
+	    {
+	    	for (int i = 0; i < n; ++ i)
+	    	{
+	        	System.out.printf ("%d %g%n", i, x[i]);
+	    	}
+	    }
+	    else
+	    {
+	    	for (int i = 0; i <= 49; ++ i)
+	    	{
+	        	System.out.printf ("%d %g%n", i, x[i]);
+	    	}
+	        for (int i = n - 50; i < n; ++ i)
+	        {
+	        	System.out.printf ("%d %g%n", i, x[i]);
+	        }
+	    }
+	    System.out.printf ("%d msec%n", (end - start)); 
 	}
 	
 	/**
