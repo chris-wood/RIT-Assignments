@@ -81,7 +81,7 @@ public class JacobiSeq
 		    Long end = System.currentTimeMillis();
 		    
 		    // Display the solution.
-		    printSolution(start, end, x);
+		    printSolution(start, end, n, x);
 		} 
 		catch (NumberFormatException ex1) 
 		{
@@ -97,7 +97,7 @@ public class JacobiSeq
 	 * @param end - end time for program run
 	 * @param x[] - the solution vector
 	 */
-	public static void printSolution(Long start, Long end, double[] x) 
+	public static void printSolution(Long start, Long end, int n, double[] x) 
 	{
 	    if (n <= 100)
 	    {
