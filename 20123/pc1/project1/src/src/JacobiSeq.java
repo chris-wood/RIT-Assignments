@@ -5,6 +5,8 @@
  * @author Christopher Wood, caw4567@rit.edu
  */
 
+import java.io.IOException;
+
 import edu.rit.pj.Comm;
 import edu.rit.util.Random;
 
@@ -40,14 +42,14 @@ public class JacobiSeq
 	public static void main(String[] args) 
 	{
 		// Set up the communication with the job server.
-//		try 
-//		{
-//			Comm.init(args);
-//		} 
-//		catch (IOException e) 
-//		{
-//			e.printStackTrace();
-//		}
+		try 
+		{
+			Comm.init(args);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 		
 		// Verify the command-line arguments. 
 		if (args.length != 2) 

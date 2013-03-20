@@ -44,14 +44,14 @@ public class JacobiSmp {
 	public static void main(String[] args) 
 	{
 		// Set up the communication with the job server.
-//		try 
-//		{
-//			Comm.init(args);
-//		} 
-//		catch (IOException e) 
-//		{
-//			e.printStackTrace();
-//		}
+		try 
+		{
+			Comm.init(args);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 		
 		// Verify the command-line arguments. 
 		if (args.length != 2) 
