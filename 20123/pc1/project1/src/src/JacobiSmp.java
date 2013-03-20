@@ -6,6 +6,8 @@
  */
 
 import java.io.IOException;
+
+import edu.rit.pj.BarrierAction;
 import edu.rit.pj.Comm;
 import edu.rit.pj.IntegerForLoop;
 import edu.rit.pj.ParallelRegion;
@@ -165,49 +167,80 @@ public class JacobiSmp {
 					
 					public void run() throws Exception 
 					{
+						while (!converged) {
+							region().barrier();
+						
+							if (!converged) {
 						execute(0, n - 1, new IntegerForLoop()
 						{
 							public void run(int first, int last)
 							{
 								//System.out.println("asdasd");
 								//iterSuccess = true;
-								for (int i = first; i <= last; i++) // TODO: parallel team integer for loop here
-							    {
-							    	// Compute the upper and lower matrix product, omitting
-							    	// the element at index i
-							    	double sum1 = 0.0; 
-							    	double sum2 = 0.0;
-							    	for (int j = 0; j < i; j++) 
-							    	{
-							    		sum1 += (A[i][j] * x[j]);
-							    	}
-							    	for (int j = i + 1; j < n; j++) 
-							    	{
-							    		sum2 += (A[i][j] * x[j]);
-							    	}
-							    	
-							    	// Compute and store the y[] value
-							    	//y[i] = (b[i] - sum1 - sum2) / A[i][i];
-							    	//double tmp = x[i];
-							    	
-							    	y[i] = (b[i] - sum1 - sum2) / A[i][i];
-							    	
-							    	
-							    	// Check to see if the algorithm converged for this
-							    	// particular row in the matrix.
-							    	if (!(Math.abs((2 * (x[i] - y[i])) / 
-							    			(x[i] + y[i])) < epsilon)) 
-							    	{
-							    		//System.out.println("x[i], y[i] = " + x[i] + " " + y[i]);
-							    		//boolean oldVal = iterSuccess && false;
-							    		iterSuccess = false; // JVM guarantees atomic set of this variable
-							    	}
-							    }
+								//while (!converged) 
+								//{
+								//System.out.println("running " + first + " " + last);
+									for (int i = first; i <= last; i++) // TODO: parallel team integer for loop here
+								    {
+								    	// Compute the upper and lower matrix product, omitting
+								    	// the element at index i
+								    	double sum1 = 0.0; 
+								    	double sum2 = 0.0;
+								    	for (int j = 0; j < i; j++) 
+								    	{
+								    		sum1 += (A[i][j] * x[j]);
+								    	}
+								    	for (int j = i + 1; j < n; j++) 
+								    	{
+								    		sum2 += (A[i][j] * x[j]);
+								    	}
+								    	
+								    	// Compute and store the y[] value
+								    	//y[i] = (b[i] - sum1 - sum2) / A[i][i];
+								    	//double tmp = x[i];
+								    	
+								    	y[i] = (b[i] - sum1 - sum2) / A[i][i];
+								    	
+								    	// Check to see if the algorithm converged for this
+								    	// particular row in the matrix.
+								    	if (!(Math.abs((2 * (x[i] - y[i])) / 
+								    			(x[i] + y[i])) < epsilon)) 
+								    	{
+								    		//System.out.println("x[i], y[i] = " + x[i] + " " + y[i]);
+								    		//boolean oldVal = iterSuccess && false;
+								    		iterSuccess = false; // JVM guarantees atomic set of this variable
+								    	}
+								   // }
+									
+									// Explicitly wait at the barrier.
+									//System.out.println("waiting");
+									
+									//System.out.println("gogogo");
+								
+								}
 								//iterSuccess = true;
 							}
+						},
+						new BarrierAction()
+						{
+							public void run() throws Exception
+							{
+								//System.out.println("converging");
+								for (int i = 0; i < n; i++) 
+							    { 
+							    	double tmp = x[i];
+						    		x[i] = y[i];
+						    		y[i] = tmp;
+						    	}
+								converged = iterSuccess; // set flag for continuation
+								//System.out.println("converged = " + converged);
+								iterSuccess = true; // reset
+							}
 						});
+						}
+						}
 					}
-					public void finish() // swap here after all threads have computed their values
+					/**public void finish() // swap here after all threads have computed their values
 					{
 						for (int i = 0; i < n; i++) 
 					    { 
@@ -216,7 +249,7 @@ public class JacobiSmp {
 				    		y[i] = tmp;
 				    	}
 						converged = iterSuccess;
-					}
+					}*/
 				});
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

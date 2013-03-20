@@ -1,0 +1,191 @@
+running 0 2
+running 6 7
+running 8 9
+running 3 5
+converging
+converged = false
+running 0 2
+running 6 7
+running 3 5
+running 8 9
+converging
+converged = false
+running 0 2
+running 3 5
+running 6 7
+running 8 9
+converging
+converged = false
+running 0 2
+running 6 7
+running 8 9
+running 3 5
+converging
+converged = false
+running 8 9
+running 0 2
+running 3 5
+running 6 7
+converging
+converged = false
+running 0 2
+running 6 7
+running 3 5
+running 8 9
+converging
+converged = false
+running 0 2
+running 8 9
+running 3 5
+running 6 7
+converging
+converged = false
+running 0 2
+running 8 9
+running 6 7
+running 3 5
+converging
+converged = false
+running 0 2
+running 3 5
+running 6 7
+running 8 9
+converging
+converged = false
+running 8 9
+running 6 7
+running 3 5
+running 0 2
+converging
+converged = false
+running 0 2
+running 8 9
+running 6 7
+running 3 5
+converging
+converged = false
+running 0 2
+running 6 7
+running 3 5
+running 8 9
+converging
+converged = false
+running 0 2
+running 6 7
+running 3 5
+running 8 9
+converging
+converged = false
+running 0 2
+running 8 9
+running 6 7
+running 3 5
+converging
+converged = false
+running 6 7
+running 0 2
+running 8 9
+running 3 5
+converging
+converged = false
+running 0 2
+running 3 5
+running 6 7
+running 8 9
+converging
+converged = false
+running 0 2
+running 8 9
+running 6 7
+running 3 5
+converging
+converged = false
+running 0 2
+running 6 7
+running 3 5
+running 8 9
+converging
+converged = false
+running 0 2
+running 6 7
+running 8 9
+running 3 5
+converging
+converged = false
+running 0 2
+running 8 9
+running 6 7
+running 3 5
+converging
+converged = false
+running 0 2
+running 6 7
+running 3 5
+running 8 9
+converging
+converged = false
+running 0 2
+running 3 5
+running 8 9
+running 6 7
+converging
+converged = false
+running 8 9
+running 0 2
+running 3 5
+running 6 7
+converging
+converged = false
+running 6 7
+running 8 9
+running 0 2
+running 3 5
+converging
+converged = false
+running 0 2
+running 8 9
+running 6 7
+running 3 5
+converging
+converged = false
+running 0 2
+running 8 9
+running 3 5
+running 6 7
+converging
+converged = false
+running 0 2
+running 6 7
+running 8 9
+running 3 5
+converging
+converged = false
+running 0 2
+running 8 9
+running 6 7
+running 3 5
+converging
+converged = false
+running 0 2
+running 3 5
+running 8 9
+running 6 7
+converging
+converged = false
+running 0 2
+running 8 9
+running 3 5
+running 6 7
+converging
+converged = true
+0 0.0491672
+1 0.0303627
+2 -0.00118927
+3 0.0164499
+4 0.0549195
+5 0.0488867
+6 0.0676799
+7 0.0518632
+8 0.0124594
+9 0.0346075
+54 msec
