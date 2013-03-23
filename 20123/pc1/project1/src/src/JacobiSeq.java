@@ -151,6 +151,7 @@ public class JacobiSeq
 	    boolean converged = false;
 	    while (!converged) 
 	    {
+	    	boolean iterSuccess = true;
 		    for (int i = 0; i < n; i++) 
 		    {
 		    	// Compute the upper and lower matrix product, omitting
@@ -167,6 +168,13 @@ public class JacobiSeq
 		    	
 		    	// Compute and store the y[] value
 		    	y[i] = (b[i] - sum1 - sum2) / A[i][i];
+		    	
+		    	// Check for convergence.
+		    	if (!(Math.abs((2 * (x[index] - y[index])) / 
+		    			(x[index] + y[index])) < epsilon)) 
+		    	{
+		    		iterSuccess &= false;
+		    	}
 		    }
 		    
 		    // Swap x[] and y[]
@@ -180,16 +188,16 @@ public class JacobiSeq
 		    // Check to see if the algorithm has converged by taking
 		    // the relative difference between x[] and y[] for
 		    // all indices i and comparing it against epsilon
-		    index = 0;
-		    for (index = 0; index < n; index++) 
-		    {
-		    	if (!(Math.abs((2 * (x[index] - y[index])) / 
-		    			(x[index] + y[index])) < epsilon)) 
-		    	{
-		    		break;
-		    	}
-		    }
-		    converged = index < n ? false : true;
+//		    index = 0;
+//		    for (index = 0; index < n; index++) 
+//		    {
+//		    	if (!(Math.abs((2 * (x[index] - y[index])) / 
+//		    			(x[index] + y[index])) < epsilon)) 
+//		    	{
+//		    		break;
+//		    	}
+//		    }
+		    converged = iterSuccess;
 	    }
 		
 		return x;
