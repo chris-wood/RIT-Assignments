@@ -139,7 +139,7 @@ public class JacobiSmp {
 	//static boolean iterSuccess = true;
 	static double[] y;
 	static double[] x;
-	static double[] z;
+	//static double[] z;
 	//static boolean converged = false;
 	public static double[] solve(final double[][] A, final double[] b, final int n) 
 	{	
@@ -147,7 +147,7 @@ public class JacobiSmp {
 		x = new double[n];
 		//final double[] localX = new double[n];
 		y = new double[n];
-		z = new double[n];
+		//z = new double[n];
 		//final boolean[] cr = new boolean[n];
 		//int index = 0;
 		
@@ -250,7 +250,7 @@ public class JacobiSmp {
 							    	// Save the y coordinate value.
 							    	//y[i * 4] = yVal; - or go back to the old swapping routine...
 							    	y[i] = yVal; // xVal
-							    	z[i] = xVal; // yVal
+							    	//z[i] = xVal; // yVal
 							   // }
 								
 								// Explicitly wait at the barrier.
@@ -290,10 +290,10 @@ public class JacobiSmp {
 								//x = newX;
 								double[] tmpX = x;
 								double[] tmpY = y;
-								double[] tmpZ = z;
-								y = tmpZ;
+								//double[] tmpZ = z;
+								y = tmpX;
 								x = tmpY;
-								z = tmpX;
+								//z = tmpX;
 								//itrs++;
 								//ping = true; // pong
 							}
