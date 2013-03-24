@@ -147,6 +147,7 @@ public class JacobiSmp {
 	    for (int i = 0; i < n; i++) 
 	    {
 	    	x[i] = 1.0;
+	    	y[i] = 1.0;
 	    	//localX[i] = 1.0;
 	    }
 	    
@@ -168,9 +169,9 @@ public class JacobiSmp {
 				public void run() throws Exception 
 				{
 					while (!converged) {
-						region().barrier();
+						
 					
-						if (!converged) {
+						//if (!converged) {
 					execute(0, n - 1, new IntegerForLoop()
 					{
 						public void run(int first, int last)
@@ -180,29 +181,31 @@ public class JacobiSmp {
 							//while (!converged) 
 							//{
 							//System.out.println("running " + first + " " + last);
+							double sum1;
+							double sum2;
+							long p0, p1, p2, p3, p4, p5, p6, p7;
+		                    long p8, p9, pa, pb, pc, pd, pe, pf;
 								for (int i = first; i <= last; i++) // TODO: parallel team integer for loop here
 							    {
 							    	// Compute the upper and lower matrix product, omitting
 							    	// the element at index i
-							    	double sum1 = 0.0;
-							    	double sum2 = 0.0;
+									double[] A_i = A[first];
+							    	sum1 = 0.0;
+							    	sum2 = 0.0;
 							    	// pad the variables
 							    	//long p0, p1, p2, p3, p4, p5, p6, p7;
 							    	//long p8, p9, pA, pB, pC, pD, pE, pF;
 							    	for (int j = 0; j < i; j++) 
 							    	{
-							    		sum1 += (A[i][j] * x[j]);
+							    		sum1 += (A_i[j] * x[j]);
 							    	}
 							    	for (int j = i + 1; j < n; j++) 
 							    	{
-							    		sum2 += (A[i][j] * x[j]);
+							    		sum2 += (A_i[j] * x[j]);
 							    	}
 							    	
-							    	// Compute and store the y[] value
-							    	//y[i] = (b[i] - sum1 - sum2) / A[i][i];
-							    	//double tmp = x[i];
-							    	
-							    	y[i] = (b[i] - sum1 - sum2) / A[i][i];
+							    	// Compute and store the y[] coordinate value.
+							    	y[i] = (b[i] - sum1 - sum2) / A_i[i];
 							    	
 							    	// Check to see if the algorithm converged for this
 							    	// particular row in the matrix.
@@ -240,8 +243,10 @@ public class JacobiSmp {
 							iterSuccess = true; // reset
 						}
 					});
+					//}
 					}
-					}
+					
+					region().barrier();
 				}
 				/**public void finish() // swap here after all threads have computed their values
 				{
