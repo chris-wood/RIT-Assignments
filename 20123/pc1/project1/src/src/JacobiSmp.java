@@ -61,7 +61,8 @@ public class JacobiSmp {
 		
 		// Parse the command line arguments
 		Long start = System.currentTimeMillis();
-		try {
+		try 
+		{
 			int n = Integer.parseInt(args[0]);
 			long seed = Long.parseLong(args[1]);
 			
@@ -69,8 +70,10 @@ public class JacobiSmp {
 		    double[][] A = new double[n][n];
 		    double[] b = new double[n];
 		    Random prng = Random.getInstance(seed);
-		    for (int i = 0; i < n; ++ i) {
-		        for (int j = 0; j < n; ++ j) {
+		    for (int i = 0; i < n; ++ i) 
+		    {
+		        for (int j = 0; j < n; ++ j) 
+		        {
 		        	A[i][j] = (prng.nextDouble() * 9.0) + 1.0;
 		        }
 		        A[i][i] += 10.0 * n;
@@ -132,15 +135,15 @@ public class JacobiSmp {
 	 * @return x[] - the solution vector
 	 */
 	//static boolean iterSuccess = true;
-	static double[] y;
-	static double[] x;
+	//static double[] y;
+	//static double[] x;
 	static boolean converged = false;
 	public static double[] solve(final double[][] A, final double[] b, final int n) 
 	{	
 		// Allocate space for the solution and temporary variables
-		x = new double[n];
+		final double[] x = new double[n];
 		//final double[] localX = new double[n];
-		y = new double[n];
+		final double[] y = new double[n];
 		//int index = 0;
 		
 		// Initialize the x[] vector to 1
@@ -152,7 +155,6 @@ public class JacobiSmp {
 	    }
 	    
 	    // Run until we converge
-	    converged = false;
 	    //while (!converged)
 	    	// new parallel teams will be spawned for every iteration? does PJ support the ability to handle this better?
 	    	// worried that overhead of setup/teardown for every repetition will be bad
@@ -164,6 +166,7 @@ public class JacobiSmp {
     	{
 			new ParallelTeam().execute(new ParallelRegion() 
 			{
+				boolean converged = false;
 				boolean iterSuccess = true;
 				
 				public void run() throws Exception 
@@ -175,12 +178,16 @@ public class JacobiSmp {
 					execute(0, n - 1, new IntegerForLoop()
 					{
 						
-//						double[] thread_y = new double[n + 1 + 32];
+//						double[] thread_x = new double[n + 1 + 32];
 //	                    long p0, p1, p2, p3, p4, p5, p6, p7;
 //	                    long p8, p9, pa, pb, pc, pd, pe, pf;
-//						
+////						
 						public void run(int first, int last)
 						{
+//							
+//							for (int i = 0; i < n; i++)
+//								thread_x[i] = x[i];
+							
 							//System.out.println("asdasd");
 							//iterSuccess = true;
 							//while (!converged) 
@@ -196,6 +203,7 @@ public class JacobiSmp {
 							    	// the element at index i
 									double[] A_i = A[i];
 									double xVal = x[i];
+									double yVal = b[i];
 							    	sum1 = 0.0;
 							    	sum2 = 0.0;
 							    	// pad the variables
@@ -203,15 +211,15 @@ public class JacobiSmp {
 							    	//long p8, p9, pA, pB, pC, pD, pE, pF;
 							    	for (int j = 0; j < i; j++) 
 							    	{
-							    		sum1 += (A_i[j] * x[j]);
+							    		yVal -= (A_i[j] * x[j]);
 							    	}
 							    	for (int j = i + 1; j < n; j++) 
 							    	{
-							    		sum2 += (A_i[j] * x[j]);
+							    		yVal -= (A_i[j] * x[j]);
 							    	}
 							    	
 							    	// Compute and the y[] coordinate value.
-							    	double yVal = (b[i] - sum1 - sum2) / A_i[i];  
+							    	yVal /= A_i[i];  
 							    	
 							    	// Check to see if the algorithm converged for this
 							    	// particular row in the matrix.
@@ -238,10 +246,10 @@ public class JacobiSmp {
 						}
 						
 						// Reduce per-thread histogram into global histogram.
-	                    public void finish() throws Exception
-	                    {
-	                    	
-	                    }
+//	                    public void finish() throws Exception
+//	                    {
+//	                    	
+//	                    }
 					},
 					new BarrierAction()
 					{
@@ -309,7 +317,7 @@ public class JacobiSmp {
 	 */
 	public static void showUsage() 
 	{
-		System.err.println("Usage: java -Xmx2000m JacobiSeq <n> <seed>");
+		System.err.println("Usage: java -Xmx2000m JacobiSmp <n> <seed>");
 		System.exit(-1);
 	}
 }
