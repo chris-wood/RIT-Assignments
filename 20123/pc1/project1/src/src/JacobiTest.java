@@ -113,6 +113,7 @@ public class JacobiTest
 	    boolean allEqual = true;
 	    for (int i = 0; i < n; i++)
 	    {
+	    	//System.out.println(xSeq[i] + " " + xSmp[i]);
 	    	allEqual = xSeq[i] == xSmp[i] ? allEqual : false;
 	    	allEqual = Math.abs(xSeq[i] - x[i]) < epsilon ? allEqual : false;
 	    	allEqual = Math.abs(xSmp[i] - x[i]) < epsilon ? allEqual : false;

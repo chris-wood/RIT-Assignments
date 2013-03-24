@@ -148,6 +148,7 @@ public class JacobiSeq
 	    }
 	    
 	    // Run until we converge
+	    int itrs = 0;
 	    boolean converged = false;
 	    while (!converged) 
 	    {
@@ -198,7 +199,10 @@ public class JacobiSeq
 //		    	}
 //		    }
 		    converged = iterSuccess;
+		    itrs++;
 	    }
+	    
+	    //System.out.println("seq itrs = " + itrs);
 		
 		return x;
 	}

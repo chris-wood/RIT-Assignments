@@ -139,7 +139,7 @@ public class JacobiSmp {
 	//static boolean iterSuccess = true;
 	static double[] y;
 	static double[] x;
-	static double[] newX;
+	static double[] z;
 	//static boolean converged = false;
 	public static double[] solve(final double[][] A, final double[] b, final int n) 
 	{	
@@ -147,7 +147,7 @@ public class JacobiSmp {
 		x = new double[n];
 		//final double[] localX = new double[n];
 		y = new double[n];
-		newX = new double[n];
+		z = new double[n];
 		//final boolean[] cr = new boolean[n];
 		//int index = 0;
 		
@@ -174,14 +174,15 @@ public class JacobiSmp {
 			{
 				boolean converged = false;
 				boolean iterSuccess = true;
-				boolean ping = false;
+				//boolean ping = false;
+				//int itrs = 0;
 				
 				public void run() throws Exception 
 				{
 					while (!converged) {
-						region().barrier();
+						//region().barrier();
 					
-						if (!converged) {
+						//if (!converged) {
 					execute(0, n - 1, new IntegerForLoop()
 					{
 //						public IntegerSchedule schedule()
@@ -248,8 +249,8 @@ public class JacobiSmp {
 							    	
 							    	// Save the y coordinate value.
 							    	//y[i * 4] = yVal; - or go back to the old swapping routine...
-							    	y[i] = xVal;
-							    	newX[i] = yVal;
+							    	y[i] = yVal; // xVal
+							    	z[i] = xVal; // yVal
 							   // }
 								
 								// Explicitly wait at the barrier.
@@ -271,19 +272,51 @@ public class JacobiSmp {
 					{
 						public void run() throws Exception
 						{
-							//System.out.println("converging");
-							if (ping)
+//							for (int i = 0; i < n; i++) {
+//							System.out.println("x = " + x[i]);
+//							
+//							}
+//							for (int i = 0; i < n; i++)
+//							{
+//								System.out.println("y = " + y[i]);
+//							}
+//							for (int i = 0; i < n; i++)
+//							{
+//								System.out.println("z = " + z[i]);
+//							}
+							//if (ping)
+							if (iterSuccess == false)
 							{
-								x = newX;
-								y = x;
-								ping = true; // pong
+								//x = newX;
+								double[] tmpX = x;
+								double[] tmpY = y;
+								double[] tmpZ = z;
+								y = tmpZ;
+								x = tmpY;
+								z = tmpX;
+								//itrs++;
+								//ping = true; // pong
 							}
-							else
-							{
-								x = y;
-								y = newX;
-								ping = false; // ping
-							}
+							
+//							System.out.println("AFTERF SWAP");
+//							for (int i = 0; i < n; i++) {
+//								System.out.println("x = " + x[i]);
+//								
+//								}
+//								for (int i = 0; i < n; i++)
+//								{
+//									System.out.println("y = " + y[i]);
+//								}
+//								for (int i = 0; i < n; i++)
+//								{
+//									System.out.println("z = " + z[i]);
+//								}
+//							else
+//							{
+//								x = y;
+//								y = z;
+//								ping = false; // ping
+//							}
 //							for (int i = 0; i < n; i++) 
 //						    { 
 //						    	double tmp = x[i];
@@ -295,10 +328,13 @@ public class JacobiSmp {
 							//System.out.println("converged = " + converged);
 							//iterSuccess.set(true); // reset
 							iterSuccess = true; // reset
+							//System.out.println(itrs);
 						}
 					});
 					}
-					}
+					//}
+					
+					region().barrier();
 				}
 				/**public void finish() // swap here after all threads have computed their values
 				{
