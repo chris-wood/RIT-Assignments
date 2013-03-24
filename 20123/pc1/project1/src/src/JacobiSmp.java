@@ -10,8 +10,10 @@ import java.io.IOException;
 import edu.rit.pj.BarrierAction;
 import edu.rit.pj.Comm;
 import edu.rit.pj.IntegerForLoop;
+import edu.rit.pj.IntegerSchedule;
 import edu.rit.pj.ParallelRegion;
 import edu.rit.pj.ParallelTeam;
+import edu.rit.pj.reduction.SharedBoolean;
 import edu.rit.util.Random;
 
 public class JacobiSmp {
@@ -135,15 +137,18 @@ public class JacobiSmp {
 	 * @return x[] - the solution vector
 	 */
 	//static boolean iterSuccess = true;
-	//static double[] y;
-	//static double[] x;
-	static boolean converged = false;
+	static double[] y;
+	static double[] x;
+	static double[] newX;
+	//static boolean converged = false;
 	public static double[] solve(final double[][] A, final double[] b, final int n) 
 	{	
 		// Allocate space for the solution and temporary variables
-		final double[] x = new double[n];
+		x = new double[n];
 		//final double[] localX = new double[n];
-		final double[] y = new double[n];
+		y = new double[n];
+		newX = new double[n];
+		//final boolean[] cr = new boolean[n];
 		//int index = 0;
 		
 		// Initialize the x[] vector to 1
@@ -151,6 +156,7 @@ public class JacobiSmp {
 	    {
 	    	x[i] = 1.0;
 	    	y[i] = 1.0;
+	    	//cr[i] = false;
 	    	//localX[i] = 1.0;
 	    }
 	    
@@ -168,6 +174,7 @@ public class JacobiSmp {
 			{
 				boolean converged = false;
 				boolean iterSuccess = true;
+				boolean ping = false;
 				
 				public void run() throws Exception 
 				{
@@ -177,7 +184,11 @@ public class JacobiSmp {
 						if (!converged) {
 					execute(0, n - 1, new IntegerForLoop()
 					{
-						
+//						public IntegerSchedule schedule()
+//                        {
+//							return IntegerSchedule.guided();
+//                        }
+//						
 //						double[] thread_x = new double[n + 1 + 32];
 //	                    long p0, p1, p2, p3, p4, p5, p6, p7;
 //	                    long p8, p9, pa, pb, pc, pd, pe, pf;
@@ -193,8 +204,8 @@ public class JacobiSmp {
 							//while (!converged) 
 							//{
 							//System.out.println("running " + first + " " + last);
-							double sum1;
-							double sum2;
+//							double sum1;
+//							double sum2;
 							//long p0, p1, p2, p3, p4, p5, p6, p7;
 		                    //long p8, p9, pa, pb, pc, pd, pe, pf;
 								for (int i = first; i <= last; i++) // TODO: parallel team integer for loop here
@@ -204,8 +215,8 @@ public class JacobiSmp {
 									double[] A_i = A[i];
 									double xVal = x[i];
 									double yVal = b[i];
-							    	sum1 = 0.0;
-							    	sum2 = 0.0;
+							    	//sum1 = 0.0;
+							    	//sum2 = 0.0;
 							    	// pad the variables
 							    	//long p0, p1, p2, p3, p4, p5, p6, p7;
 							    	//long p8, p9, pA, pB, pC, pD, pE, pF;
@@ -223,17 +234,22 @@ public class JacobiSmp {
 							    	
 							    	// Check to see if the algorithm converged for this
 							    	// particular row in the matrix.
-							    	if (!(Math.abs((2 * (xVal - yVal)) / 
-							    			(xVal + yVal)) < epsilon)) 
+							    	if (!((Math.abs((2 * (xVal - yVal)) / (xVal + yVal))) < epsilon)) 
 							    	{
 							    		//System.out.println("x[i], y[i] = " + x[i] + " " + y[i]);
 							    		//boolean oldVal = iterSuccess && false;
 							    		//System.out.println("didn't converge");
-							    		iterSuccess = false; // JVM guarantees atomic set of this variable
+							    		
+							    		//iterSuccess.set(false); // JVM guarantees atomic set of this variable
+							    		iterSuccess = false;
+							    		
+							    		//cr[i] = false;
 							    	}
 							    	
 							    	// Save the y coordinate value.
-							    	y[i] = yVal;
+							    	//y[i * 4] = yVal; - or go back to the old swapping routine...
+							    	y[i] = xVal;
+							    	newX[i] = yVal;
 							   // }
 								
 								// Explicitly wait at the barrier.
@@ -256,14 +272,28 @@ public class JacobiSmp {
 						public void run() throws Exception
 						{
 							//System.out.println("converging");
-							for (int i = 0; i < n; i++) 
-						    { 
-						    	double tmp = x[i];
-					    		x[i] = y[i];
-					    		y[i] = tmp;
-					    	}
-							converged = iterSuccess; // set flag for continuation
+							if (ping)
+							{
+								x = newX;
+								y = x;
+								ping = true; // pong
+							}
+							else
+							{
+								x = y;
+								y = newX;
+								ping = false; // ping
+							}
+//							for (int i = 0; i < n; i++) 
+//						    { 
+//						    	double tmp = x[i];
+//					    		x[i] = y[i];
+//					    		y[i] = tmp;
+//					    	}
+							//converged = new SharedBoolean(iterSuccess.get()); // set flag for continuation
+							converged = iterSuccess;
 							//System.out.println("converged = " + converged);
+							//iterSuccess.set(true); // reset
 							iterSuccess = true; // reset
 						}
 					});
