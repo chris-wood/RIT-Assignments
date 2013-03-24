@@ -169,11 +169,16 @@ public class JacobiSmp {
 				public void run() throws Exception 
 				{
 					while (!converged) {
-						
+						region().barrier();
 					
-						//if (!converged) {
+						if (!converged) {
 					execute(0, n - 1, new IntegerForLoop()
 					{
+						
+//						double[] thread_y = new double[n + 1 + 32];
+//	                    long p0, p1, p2, p3, p4, p5, p6, p7;
+//	                    long p8, p9, pa, pb, pc, pd, pe, pf;
+//						
 						public void run(int first, int last)
 						{
 							//System.out.println("asdasd");
@@ -183,13 +188,14 @@ public class JacobiSmp {
 							//System.out.println("running " + first + " " + last);
 							double sum1;
 							double sum2;
-							long p0, p1, p2, p3, p4, p5, p6, p7;
-		                    long p8, p9, pa, pb, pc, pd, pe, pf;
+							//long p0, p1, p2, p3, p4, p5, p6, p7;
+		                    //long p8, p9, pa, pb, pc, pd, pe, pf;
 								for (int i = first; i <= last; i++) // TODO: parallel team integer for loop here
 							    {
 							    	// Compute the upper and lower matrix product, omitting
 							    	// the element at index i
-									double[] A_i = A[first];
+									double[] A_i = A[i];
+									double xVal = x[i];
 							    	sum1 = 0.0;
 							    	sum2 = 0.0;
 							    	// pad the variables
@@ -204,18 +210,22 @@ public class JacobiSmp {
 							    		sum2 += (A_i[j] * x[j]);
 							    	}
 							    	
-							    	// Compute and store the y[] coordinate value.
-							    	y[i] = (b[i] - sum1 - sum2) / A_i[i];
+							    	// Compute and the y[] coordinate value.
+							    	double yVal = (b[i] - sum1 - sum2) / A_i[i];  
 							    	
 							    	// Check to see if the algorithm converged for this
 							    	// particular row in the matrix.
-							    	if (!(Math.abs((2 * (x[i] - y[i])) / 
-							    			(x[i] + y[i])) < epsilon)) 
+							    	if (!(Math.abs((2 * (xVal - yVal)) / 
+							    			(xVal + yVal)) < epsilon)) 
 							    	{
 							    		//System.out.println("x[i], y[i] = " + x[i] + " " + y[i]);
 							    		//boolean oldVal = iterSuccess && false;
+							    		//System.out.println("didn't converge");
 							    		iterSuccess = false; // JVM guarantees atomic set of this variable
 							    	}
+							    	
+							    	// Save the y coordinate value.
+							    	y[i] = yVal;
 							   // }
 								
 								// Explicitly wait at the barrier.
@@ -226,6 +236,12 @@ public class JacobiSmp {
 							}
 							//iterSuccess = true;
 						}
+						
+						// Reduce per-thread histogram into global histogram.
+	                    public void finish() throws Exception
+	                    {
+	                    	
+	                    }
 					},
 					new BarrierAction()
 					{
@@ -243,10 +259,8 @@ public class JacobiSmp {
 							iterSuccess = true; // reset
 						}
 					});
-					//}
 					}
-					
-					region().barrier();
+					}
 				}
 				/**public void finish() // swap here after all threads have computed their values
 				{
