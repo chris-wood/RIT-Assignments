@@ -6,7 +6,6 @@
  */
 
 import java.io.IOException;
-
 import edu.rit.pj.Comm;
 import edu.rit.util.Random;
 
@@ -49,7 +48,7 @@ public class JacobiSeq
 		}
 		
 		// Parse the command line arguments
-		Long start = System.currentTimeMillis();
+		long start = System.currentTimeMillis();
 		try 
 		{
 			int n = Integer.parseInt(args[0]);
@@ -89,7 +88,7 @@ public class JacobiSeq
 	 * @param n - the length of the solution vector.
 	 * @param x[] - the solution vector
 	 */
-	public static void printSolution(Long start, int n, double[] x) 
+	public static void printSolution(long start, int n, double[] x) 
 	{
 	    if (n <= 100)
 	    {
@@ -109,7 +108,7 @@ public class JacobiSeq
 	        	System.out.printf ("%d %g%n", i, x[i]);
 	        }
 	    }
-	    Long end = System.currentTimeMillis();
+	    long end = System.currentTimeMillis();
 	    System.out.printf ("%d msec%n", (end - start)); 
 	}
 	
@@ -135,28 +134,32 @@ public class JacobiSeq
 	    	x[i] = 1.0;
 	    }
 	    
-	    // Run until we converge
+	    // Run until we converge to a solution.
 	    boolean converged = false;
+	    boolean iterSuccess;
 	    while (!converged) 
 	    {
-	    	boolean iterSuccess = true;
-		    for (int i = 0; i < n; i++) 
+	    	iterSuccess = true;
+		    for (int i = 0; i < n; i++)
 		    {
 		    	// Compute the upper and lower matrix product, omitting
 		    	// the element at index i
-		    	double yVal = b[i];
+		    	double yVal = 0.0;
 		    	double xVal = x[i];
+		    	double sum1 = 0.0;
+		    	double sum2 = 0.0;
 		    	for (int j = 0; j < i; j++) 
 		    	{
-		    		yVal-= (A[i][j] * x[j]);
+		    		sum1 += (A[i][j] * x[j]);
 		    	}
 		    	for (int j = i + 1; j < n; j++) 
 		    	{
-		    		yVal -= (A[i][j] * x[j]);
+		    		sum2 += (A[i][j] * x[j]);
 		    	}
 		    	
 		    	// Compute and store the y[] value
-		    	yVal = yVal / A[i][i];
+		    	yVal = (b[i] - sum1 - sum2) / A[i][i];
+		    	y[i] = yVal;
 		    	
 		    	// Check for convergence.
 		    	if (!(Math.abs((2 * (xVal - yVal)) / 
@@ -164,18 +167,12 @@ public class JacobiSeq
 		    	{
 		    		iterSuccess = false;
 		    	}
-		    	
-		    	// Store the new y[] coordinate
-		    	y[i] = yVal;
 		    }
 		    
 		    // Swap the x[] and y[] vectors.
-		    for (int i = 0; i < n; i++) 
-		    { 
-		    	double tmp = x[i];
-	    		x[i] = y[i];
-	    		y[i] = tmp;
-	    	}
+		    double[] tmp = x;
+		    x = y;
+		    y = tmp;
 		    
 		    // Reset the iteration variables.
 		    converged = iterSuccess;

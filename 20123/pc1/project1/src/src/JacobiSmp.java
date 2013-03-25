@@ -59,22 +59,42 @@ public class JacobiSmp
 		Long start = System.currentTimeMillis();
 		try 
 		{
-			int n = Integer.parseInt(args[0]);
-			long seed = Long.parseLong(args[1]);
+			final int n = Integer.parseInt(args[0]);
+			final long seed = Long.parseLong(args[1]);
 			
 			// Create a random matrix
-		    double[][] A = new double[n][n];
-		    double[] b = new double[n];
-		    Random prng = Random.getInstance(seed);
-		    for (int i = 0; i < n; ++ i) 
-		    {
-		        for (int j = 0; j < n; ++ j) 
-		        {
-		        	A[i][j] = (prng.nextDouble() * 9.0) + 1.0;
-		        }
-		        A[i][i] += 10.0 * n;
-		        b[i] = (prng.nextDouble() * 9.0) + 1.0;
-	        }
+		    final double[][] A = new double[n][n];
+		    final double[] b = new double[n];
+		    
+		    // Generate the matrix data in parallel using multiple threads. 
+		    new ParallelTeam().execute(new ParallelRegion() 
+			{	
+				public void run() throws Exception 
+				{
+					execute(0, n - 1, new IntegerForLoop()
+					{
+						// Set up per-thread PRNG.
+	                    Random prng_thread = Random.getInstance(seed);
+	                    
+						public void run(int first, int last)
+						{
+							// Skip the PRNG ahead to the right place in the sequence.
+							// Each iteration gets (n + 1) values 
+							prng_thread.setSeed(seed); 
+	                        prng_thread.skip ((n + 1) * first);
+	                        for (int i = first; i <= last; ++ i) 
+	                        {
+								for (int j = 0; j < n; ++ j)
+						        {
+						        	A[i][j] = (prng_thread.nextDouble() * 9.0) + 1.0;
+						        }
+						        A[i][i] += 10.0 * n;
+						        b[i] = (prng_thread.nextDouble() * 9.0) + 1.0;
+	                        }
+						}
+					});
+				}
+			});
 		    
 		    // Solve the system and gather the timing results.
 		    double[] x = solve(A, b, n);
@@ -85,6 +105,10 @@ public class JacobiSmp
 		catch (NumberFormatException ex1) 
 		{
 			System.err.println("Error parsing command line arguments.");
+			ex1.printStackTrace();
+		}
+		catch (Exception ex1) 
+		{
 			ex1.printStackTrace();
 		}
 	}
@@ -164,18 +188,21 @@ public class JacobiSmp
 							    	// the element at index i.
 									double[] A_i = A[i];
 									double xVal = x[i];
-									double yVal = b[i];
+									double yVal = 0.0;
+									double sum1 = 0.0;
+									double sum2 = 0.0;
 							    	for (int j = 0; j < i; j++) 
 							    	{
-							    		yVal -= (A_i[j] * x[j]);
+							    		sum1 += (A_i[j] * x[j]);
 							    	}
 							    	for (int j = i + 1; j < n; j++) 
 							    	{
-							    		yVal -= (A_i[j] * x[j]);
+							    		sum2 += (A_i[j] * x[j]);
 							    	}
 							    	
-							    	// Compute and the y[] coordinate value.
-							    	yVal /= A_i[i];
+							    	// Compute and store the y[] coordinate value.
+							    	yVal = (b[i] - sum1 - sum2) / A_i[i];
+							    	y[i] = yVal;
 							    	
 							    	// Check to see if the algorithm converged for this
 							    	// particular row in the matrix.
@@ -183,9 +210,6 @@ public class JacobiSmp
 							    	{
 							    		iterSuccess = false; // JVM guarantees atomic set of this variable
 							    	}
-							    	
-							    	// Save the y coordinate value.
-							    	y[i] = yVal;
 								}
 							}
 						},
@@ -195,10 +219,9 @@ public class JacobiSmp
 							{
 								if (iterSuccess == false)
 								{
-									double[] tmpX = x;
-									double[] tmpY = y;
-									y = tmpX;
-									x = tmpY;
+									double[] tmp = x;
+									x = y;
+									y = tmp;
 								}
 								converged = iterSuccess;
 								iterSuccess = true; // reset
