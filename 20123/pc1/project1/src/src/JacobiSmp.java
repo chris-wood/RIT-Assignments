@@ -6,7 +6,6 @@
  */
 
 import java.io.IOException;
-
 import edu.rit.pj.BarrierAction;
 import edu.rit.pj.Comm;
 import edu.rit.pj.IntegerForLoop;
@@ -14,8 +13,8 @@ import edu.rit.pj.ParallelRegion;
 import edu.rit.pj.ParallelTeam;
 import edu.rit.util.Random;
 
-public class JacobiSmp {
-
+public class JacobiSmp 
+{
 	// The data structures to hold the calculation data structures.
 	static double[] y;
 	static double[] x;
@@ -140,8 +139,7 @@ public class JacobiSmp {
 		// Initialize the x[] and y[] vectors to 1
 	    for (int i = 0; i < n; i++) 
 	    {
-	    	x[i] = 1.0;
-	    	y[i] = 1.0;
+	    	x[i] = y[i] = 1.0;
 	    }
 	    
     	try 
@@ -157,7 +155,7 @@ public class JacobiSmp {
 					while (!converged) 
 					{
 						execute(0, n - 1, new IntegerForLoop()
-						{		
+						{
 							public void run(int first, int last)
 							{
 								for (int i = first; i <= last; i++) 
@@ -177,7 +175,7 @@ public class JacobiSmp {
 							    	}
 							    	
 							    	// Compute and the y[] coordinate value.
-							    	yVal /= A_i[i];  
+							    	yVal /= A_i[i];
 							    	
 							    	// Check to see if the algorithm converged for this
 							    	// particular row in the matrix.
@@ -187,12 +185,11 @@ public class JacobiSmp {
 							    	}
 							    	
 							    	// Save the y coordinate value.
-							    	y[i] = yVal; 
-								
+							    	y[i] = yVal;
 								}
 							}
 						},
-						new BarrierAction()
+						new BarrierAction() // perform the sequential swap at the end of the for loop
 						{
 							public void run() throws Exception
 							{
@@ -208,10 +205,6 @@ public class JacobiSmp {
 							}
 						});
 					}
-					
-					// Force each thread to wait at the barrier (swapping
-					// the x[] and y[] vectors is a sequential dependency).
-					region().barrier();
 				}
 			});
 		} 

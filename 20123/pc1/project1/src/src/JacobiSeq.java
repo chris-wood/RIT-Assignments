@@ -11,18 +11,9 @@ import edu.rit.pj.Comm;
 import edu.rit.util.Random;
 
 public class JacobiSeq 
-{
-	// The data structures to hold the data in the linear system.
-	private static double[][] A;
-	private static double[] b;
-	
-	// The dimension of the solution (x) vector.
-	private static int n;
-	
+{	
 	// The convergence cutoff delta value.
 	private static double epsilon = 0.00000008;
-	
-	// TODO: implement test cases (external to the class)
 
 	/**
 	 * The main entry point for the JacobiSeq program.
@@ -80,10 +71,9 @@ public class JacobiSeq
 		    
 		    // Solve the system and gather the timing results.
 		    double[] x = solve(A, b, n);
-		    Long end = System.currentTimeMillis();
 		    
 		    // Display the solution.
-		    printSolution(start, end, n, x);
+		    printSolution(start, n, x);
 		} 
 		catch (NumberFormatException ex1) 
 		{
@@ -96,10 +86,10 @@ public class JacobiSeq
 	 * Display the solution vector and program runtime.
 	 * 
 	 * @param start - start time for program run
-	 * @param end - end time for program run
+	 * @param n - the length of the solution vector.
 	 * @param x[] - the solution vector
 	 */
-	public static void printSolution(Long start, Long end, int n, double[] x) 
+	public static void printSolution(Long start, int n, double[] x) 
 	{
 	    if (n <= 100)
 	    {
@@ -119,6 +109,7 @@ public class JacobiSeq
 	        	System.out.printf ("%d %g%n", i, x[i]);
 	        }
 	    }
+	    Long end = System.currentTimeMillis();
 	    System.out.printf ("%d msec%n", (end - start)); 
 	}
 	
@@ -135,11 +126,8 @@ public class JacobiSeq
 	public static double[] solve(double[][] A, double[] b, int n) 
 	{	
 		// Allocate space for the solution and temporary variables
-		double sum1 = 0.0;
-    	double sum2 = 0.0;
 		double[] x = new double[n];
 		double[] y = new double[n];
-		int index = 0;
 		
 		// Initialize the x[] vector to 1
 	    for (int i = 0; i < n; i++) 
@@ -148,7 +136,6 @@ public class JacobiSeq
 	    }
 	    
 	    // Run until we converge
-	    int itrs = 0;
 	    boolean converged = false;
 	    while (!converged) 
 	    {
@@ -157,28 +144,32 @@ public class JacobiSeq
 		    {
 		    	// Compute the upper and lower matrix product, omitting
 		    	// the element at index i
-		    	sum1 = sum2 = 0.0;
+		    	double yVal = b[i];
+		    	double xVal = x[i];
 		    	for (int j = 0; j < i; j++) 
 		    	{
-		    		sum1 += (A[i][j] * x[j]);
+		    		yVal-= (A[i][j] * x[j]);
 		    	}
 		    	for (int j = i + 1; j < n; j++) 
 		    	{
-		    		sum2 += (A[i][j] * x[j]);
+		    		yVal -= (A[i][j] * x[j]);
 		    	}
 		    	
 		    	// Compute and store the y[] value
-		    	y[i] = (b[i] - sum1 - sum2) / A[i][i];
+		    	yVal = yVal / A[i][i];
 		    	
 		    	// Check for convergence.
-		    	if (!(Math.abs((2 * (x[index] - y[index])) / 
-		    			(x[index] + y[index])) < epsilon)) 
+		    	if (!(Math.abs((2 * (xVal - yVal)) / 
+		    			(xVal + yVal)) < epsilon)) 
 		    	{
-		    		iterSuccess &= false;
+		    		iterSuccess = false;
 		    	}
+		    	
+		    	// Store the new y[] coordinate
+		    	y[i] = yVal;
 		    }
 		    
-		    // Swap x[] and y[]
+		    // Swap the x[] and y[] vectors.
 		    for (int i = 0; i < n; i++) 
 		    { 
 		    	double tmp = x[i];
@@ -186,23 +177,10 @@ public class JacobiSeq
 	    		y[i] = tmp;
 	    	}
 		    
-		    // Check to see if the algorithm has converged by taking
-		    // the relative difference between x[] and y[] for
-		    // all indices i and comparing it against epsilon
-//		    index = 0;
-//		    for (index = 0; index < n; index++) 
-//		    {
-//		    	if (!(Math.abs((2 * (x[index] - y[index])) / 
-//		    			(x[index] + y[index])) < epsilon)) 
-//		    	{
-//		    		break;
-//		    	}
-//		    }
+		    // Reset the iteration variables.
 		    converged = iterSuccess;
-		    itrs++;
+		    iterSuccess = true;
 	    }
-	    
-	    //System.out.println("seq itrs = " + itrs);
 		
 		return x;
 	}
