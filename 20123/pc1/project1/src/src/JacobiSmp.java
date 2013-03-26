@@ -56,7 +56,7 @@ public class JacobiSmp
 		}
 		
 		// Parse the command line arguments
-		Long start = System.currentTimeMillis();
+		long start = System.currentTimeMillis();
 		try 
 		{
 			final int n = Integer.parseInt(args[0]);
@@ -120,7 +120,7 @@ public class JacobiSmp
 	 * @param n - the number of entries in the vector x[]
 	 * @param x[] - the solution vector
 	 */
-	public static void printSolution(Long start, int n, double[] x) 
+	public static void printSolution(long start, int n, double[] x) 
 	{
 	    if (n <= 100)
 	    {
@@ -140,7 +140,7 @@ public class JacobiSmp
 	        	System.out.printf ("%d %g%n", i, x[i]);
 	        }
 	    }
-	    Long end = System.currentTimeMillis();
+	    long end = System.currentTimeMillis();
 	    System.out.printf ("%d msec%n", (end - start)); 
 	}
 	
