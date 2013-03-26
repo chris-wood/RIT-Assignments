@@ -1,3 +1,7 @@
+echo "Compiling the code"
+export CLASSPATH=/home/fac/ark/public_html/pj.jar:.
+javac -source 1.5 -target 1.5 *.java
+
 echo "Running test data"
 java -Xmx2000m JacobiSeq 5000 142857 > testSeq-1
 java -Xmx2000m JacobiSeq 5000 142857 > testSeq-2
@@ -77,5 +81,3 @@ java -Xmx2000m -Dpj.nt=4 JacobiSmp 7500 714285 > d3_4-3
 java -Xmx2000m -Dpj.nt=8 JacobiSmp 7500 714285 > d3_8-1
 java -Xmx2000m -Dpj.nt=8 JacobiSmp 7500 714285 > d3_8-2
 java -Xmx2000m -Dpj.nt=8 JacobiSmp 7500 714285 > d3_8-3
-
-
