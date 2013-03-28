@@ -55,18 +55,19 @@ public class JacobiSmp
 			showUsage();
 		}
 		
-		// Parse the command line arguments
+		// Parse the command line arguments.
 		long start = System.currentTimeMillis();
 		try 
 		{
 			final int n = Integer.parseInt(args[0]);
 			final long seed = Long.parseLong(args[1]);
 			
-			// Create a random matrix
+			// Create a random matrix.
 		    final double[][] A = new double[n][n];
 		    final double[] b = new double[n];
 		    
-		    // Generate the matrix data in parallel using multiple threads. 
+		    // Generate the matrix data in parallel using multiple threads.
+		    // Otherwise this becomes a significant part of the seq. fraction.
 		    new ParallelTeam().execute(new ParallelRegion() 
 			{	
 				public void run() throws Exception 
@@ -96,11 +97,9 @@ public class JacobiSmp
 				}
 			});
 		    
-		    // Solve the system and gather the timing results.
+		    // Solve the system and display the solution.
 		    double[] x = solve(A, b, n);
-		    
-		    // Display the solution.
-		    printSolution(start, n, x);
+		    printSolution(start, x, n);
 		}
 		catch (NumberFormatException ex1) 
 		{
@@ -109,6 +108,7 @@ public class JacobiSmp
 		}
 		catch (Exception ex1) 
 		{
+			System.err.println("Error in the ParallelRegion run() method.");
 			ex1.printStackTrace();
 		}
 	}
@@ -117,31 +117,31 @@ public class JacobiSmp
 	 * Display the solution vector and program runtime.
 	 * 
 	 * @param start - start time for program run
-	 * @param n - the number of entries in the vector x[]
 	 * @param x[] - the solution vector
+	 * @param n - the number of entries in the vector x[]
 	 */
-	public static void printSolution(long start, int n, double[] x) 
+	public static void printSolution(long start, double[] x, int n) 
 	{
 	    if (n <= 100)
 	    {
 	    	for (int i = 0; i < n; ++ i)
 	    	{
-	        	System.out.printf ("%d %g%n", i, x[i]);
+	        	System.out.printf("%d %g%n", i, x[i]);
 	    	}
 	    }
 	    else
 	    {
 	    	for (int i = 0; i <= 49; ++ i)
 	    	{
-	        	System.out.printf ("%d %g%n", i, x[i]);
+	        	System.out.printf("%d %g%n", i, x[i]);
 	    	}
 	        for (int i = n - 50; i < n; ++ i)
 	        {
-	        	System.out.printf ("%d %g%n", i, x[i]);
+	        	System.out.printf("%d %g%n", i, x[i]);
 	        }
 	    }
 	    long end = System.currentTimeMillis();
-	    System.out.printf ("%d msec%n", (end - start)); 
+	    System.out.printf("%d msec%n", (end - start)); 
 	}
 	
 	/**
@@ -206,7 +206,8 @@ public class JacobiSmp
 							    	
 							    	// Check to see if the algorithm converged for this
 							    	// particular row in the matrix.
-							    	if (!((Math.abs((2 * (xVal - yVal)) / (xVal + yVal))) < epsilon)) 
+							    	if (iterSuccess && 
+							    		!((Math.abs((2 * (xVal - yVal)) / (xVal + yVal))) < epsilon)) 
 							    	{
 							    		iterSuccess = false; // JVM guarantees atomic set of this variable
 							    	}

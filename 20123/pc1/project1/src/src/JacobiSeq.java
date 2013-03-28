@@ -51,16 +51,16 @@ public class JacobiSeq
 		long start = System.currentTimeMillis();
 		try 
 		{
-			int n = Integer.parseInt(args[0]);
-			long seed = Long.parseLong(args[1]);
+			final int n = Integer.parseInt(args[0]);
+			final long seed = Long.parseLong(args[1]);
 			
 			// Create a random matrix
-		    double[][] A = new double[n][n];
-		    double[] b = new double[n];
+		    final double[][] A = new double[n][n];
+		    final double[] b = new double[n];
 		    Random prng = Random.getInstance(seed);
-		    for (int i = 0; i < n; ++ i) 
+		    for (int i = 0; i < n; i++) 
 		    {
-		        for (int j = 0; j < n; ++ j) 
+		        for (int j = 0; j < n; j++) 
 		        {
 		        	A[i][j] = (prng.nextDouble() * 9.0) + 1.0;
 		        }
@@ -68,11 +68,9 @@ public class JacobiSeq
 		        b[i] = (prng.nextDouble() * 9.0) + 1.0;
 	        }
 		    
-		    // Solve the system and gather the timing results.
+		    // Solve the system and display the solution.
 		    double[] x = solve(A, b, n);
-		    
-		    // Display the solution.
-		    printSolution(start, n, x);
+		    printSolution(start, x, n);
 		} 
 		catch (NumberFormatException ex1) 
 		{
@@ -85,31 +83,31 @@ public class JacobiSeq
 	 * Display the solution vector and program runtime.
 	 * 
 	 * @param start - start time for program run
-	 * @param n - the length of the solution vector.
 	 * @param x[] - the solution vector
+	 * @param n - the length of the solution vector.
 	 */
-	public static void printSolution(long start, int n, double[] x) 
+	public static void printSolution(long start, double[] x, int n) 
 	{
 	    if (n <= 100)
 	    {
 	    	for (int i = 0; i < n; ++ i)
 	    	{
-	        	System.out.printf ("%d %g%n", i, x[i]);
+	        	System.out.printf("%d %g%n", i, x[i]);
 	    	}
 	    }
 	    else
 	    {
 	    	for (int i = 0; i <= 49; ++ i)
 	    	{
-	        	System.out.printf ("%d %g%n", i, x[i]);
+	        	System.out.printf("%d %g%n", i, x[i]);
 	    	}
 	        for (int i = n - 50; i < n; ++ i)
 	        {
-	        	System.out.printf ("%d %g%n", i, x[i]);
+	        	System.out.printf("%d %g%n", i, x[i]);
 	        }
 	    }
 	    long end = System.currentTimeMillis();
-	    System.out.printf ("%d msec%n", (end - start)); 
+	    System.out.printf("%d msec%n", (end - start)); 
 	}
 	
 	/**
@@ -137,6 +135,8 @@ public class JacobiSeq
 	    // Run until we converge to a solution.
 	    boolean converged = false;
 	    boolean iterSuccess;
+	    double sum1;
+    	double sum2;
 	    while (!converged) 
 	    {
 	    	iterSuccess = true;
@@ -144,25 +144,25 @@ public class JacobiSeq
 		    {
 		    	// Compute the upper and lower matrix product, omitting
 		    	// the element at index i
+		    	double[] A_i = A[i];
 		    	double yVal = 0.0;
 		    	double xVal = x[i];
-		    	double sum1 = 0.0;
-		    	double sum2 = 0.0;
-		    	for (int j = 0; j < i; j++) 
+		    	sum1 = sum2 = 0.0;
+		    	for (int j = 0; j < i; j++)
 		    	{
-		    		sum1 += (A[i][j] * x[j]);
+		    		sum1 += (A_i[j] * x[j]);
 		    	}
-		    	for (int j = i + 1; j < n; j++) 
+		    	for (int j = i + 1; j < n; j++)
 		    	{
-		    		sum2 += (A[i][j] * x[j]);
+		    		sum2 += (A_i[j] * x[j]);
 		    	}
 		    	
 		    	// Compute and store the y[] value
-		    	yVal = (b[i] - sum1 - sum2) / A[i][i];
+		    	yVal = (b[i] - sum1 - sum2) / A_i[i];
 		    	y[i] = yVal;
 		    	
 		    	// Check for convergence.
-		    	if (!(Math.abs((2 * (xVal - yVal)) / 
+		    	if (iterSuccess && !(Math.abs((2 * (xVal - yVal)) / 
 		    			(xVal + yVal)) < epsilon)) 
 		    	{
 		    		iterSuccess = false;
