@@ -12,12 +12,12 @@ import edu.rit.util.Random;
 public class JacobiSeq
 {
 	// The convergence cutoff delta value.
-	private static double epsilon = 0.00000008;
+	private static double epsilon = 0.00000001;
 
 	// Global timing variables.
 	private static long startTime = 0;
 	private static long endTime = 0;
-
+	
 	/**
 	 * The main entry point for the JacobiSeq program.
 	 * 
@@ -38,8 +38,8 @@ public class JacobiSeq
 		// Set up the communication with the job server.
 		try
 		{
-			Comm.init(args);
 			startTime = System.currentTimeMillis();
+			Comm.init(args);
 		}
 		catch (IOException e)
 		{
@@ -72,47 +72,36 @@ public class JacobiSeq
 				b[i] = (prng.nextDouble() * 9.0) + 1.0;
 			}
 
-			// Solve the system and display the solution.
+			// Solve the system.
 			double[] x = solve(A, b, n);
-			printSolution(x, n);
+			
+			// Display the solution and time.
+			if (n <= 100)
+			{
+				for (int i = 0; i < n; ++i)
+				{
+					System.out.printf("%d %g%n", i, x[i]);
+				}
+			}
+			else
+			{
+				for (int i = 0; i <= 49; ++i)
+				{
+					System.out.printf("%d %g%n", i, x[i]);
+				}
+				for (int i = n - 50; i < n; ++i)
+				{
+					System.out.printf("%d %g%n", i, x[i]);
+				}
+			}
+			endTime = System.currentTimeMillis();
+			System.out.printf("%d msec%n", (endTime - startTime));
 		}
 		catch (NumberFormatException ex1)
 		{
 			System.err.println("Error parsing command line arguments.");
 			ex1.printStackTrace();
 		}
-	}
-
-	/**
-	 * Display the solution vector and program runtime.
-	 * 
-	 * @param x
-	 *            [] - the solution vector
-	 * @param n
-	 *            - the length of the solution vector.
-	 */
-	public static void printSolution(double[] x, int n)
-	{
-		if (n <= 100)
-		{
-			for (int i = 0; i < n; ++i)
-			{
-				System.out.printf("%d %g%n", i, x[i]);
-			}
-		}
-		else
-		{
-			for (int i = 0; i <= 49; ++i)
-			{
-				System.out.printf("%d %g%n", i, x[i]);
-			}
-			for (int i = n - 50; i < n; ++i)
-			{
-				System.out.printf("%d %g%n", i, x[i]);
-			}
-		}
-		endTime = System.currentTimeMillis();
-		System.out.printf("%d msec%n", (endTime - startTime));
 	}
 
 	/**
@@ -143,8 +132,7 @@ public class JacobiSeq
 		// Run until we converge to a solution.
 		boolean converged = false;
 		boolean iterSuccess;
-		double sum1;
-		double sum2;
+		double sum;
 		while (!converged)
 		{
 			iterSuccess = true;
@@ -155,18 +143,18 @@ public class JacobiSeq
 				double[] A_i = A[i];
 				double yVal = 0.0;
 				double xVal = x[i];
-				sum1 = sum2 = 0.0;
+				sum = 0.0;
 				for (int j = 0; j < i; j++)
 				{
-					sum1 += (A_i[j] * x[j]);
+					sum += (A_i[j] * x[j]);
 				}
 				for (int j = i + 1; j < n; j++)
 				{
-					sum2 += (A_i[j] * x[j]);
+					sum += (A_i[j] * x[j]);
 				}
 
-				// Compute and store the y[] value
-				yVal = (b[i] - sum1 - sum2) / A_i[i];
+				// Compute and store the y[] value.
+				yVal = (b[i] - sum) / A_i[i];
 				y[i] = yVal;
 
 				// Check for convergence.
