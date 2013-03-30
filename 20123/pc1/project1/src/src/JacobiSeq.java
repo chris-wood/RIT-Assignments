@@ -84,11 +84,10 @@ public class JacobiSeq
 
 			// Run until we converge to a solution.
 			boolean converged = false;
-			boolean iterSuccess;
+			boolean iterSuccess = true;
 			double sum;
 			while (!converged)
 			{
-				iterSuccess = true;
 				for (int i = 0; i < n; i++)
 				{
 					// Compute the upper and lower matrix product, omitting

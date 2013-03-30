@@ -109,9 +109,11 @@ public class JacobiSmp
 					// Populate the test matrix and equation vector.
 					execute(0, n - 1, new IntegerForLoop()
 					{
-						// Use a guided schedule because some FLOPS
-						// may take longer than others (we don't 
-						// necessarily have a balanced load).
+						/**
+						 *  Use a guided schedule because some FLOPS
+						 *  may take longer than others (we don't
+						 *  necessarily have a balanced load).
+						 */
 						public IntegerSchedule schedule() 
 						{
 							return IntegerSchedule.guided();
@@ -120,6 +122,9 @@ public class JacobiSmp
 						// Set up per-thread PRNG.
 						Random prng_thread = Random.getInstance(seed);
 
+						/**
+						 * Run the initialization task.
+						 */
 						public void run(int first, int last)
 						{
 							// Skip the PRNG ahead to the right place in the
@@ -139,7 +144,7 @@ public class JacobiSmp
 						}
 					});
 					
-					// Solve the system.
+					// Solve the system (loop until convergence).
 					converged = false;
 					iterSuccess = true;
 					while (converged == false)
@@ -148,22 +153,29 @@ public class JacobiSmp
 						{
 							double[] A_i;
 							double xVal, yVal, sum;
+							boolean t_iterSuccess;
 							
 							// Padding to avoid cache interference.
 							long p0, p1, p2, p3, p4, p5, p6, p7;
 							long p8, p9, pa, pb, pc, pd, pe, pf;
 							
-							// Use a guided schedule because some FLOPS
-							// may take longer than others (we don't 
-							// necessarily have a balanced load).
+							/** 
+							 * Use a guided schedule because some FLOPS
+							 * may take longer than others (we don't 
+							 * necessarily have a balanced load).
+							 */
 							public IntegerSchedule schedule() 
 							{
 								return IntegerSchedule.guided();
 							}
 							
+							/**
+							 * Run the solution task.
+							 */
 							public void run(int first, int last) 
 									throws Exception
 							{
+								t_iterSuccess = true;
 								for (int i = first; i <= last; i++)
 								{
 									// Compute the upper and lower matrix
@@ -191,11 +203,23 @@ public class JacobiSmp
 										/ (xVal + yVal))) < epsilon))
 									{
 										// JVM guarantees atomic set 
-										iterSuccess = false; 
+										t_iterSuccess = false; 
 									}
 									
 									// Store the y[] coordinate.
 									y[i] = yVal;
+								}
+							}
+							
+							/**
+							 * Copy the thread-local flag into the 
+							 * shared variable.
+							 */
+							public void finish()
+							{
+								if (t_iterSuccess == false) 
+								{
+									iterSuccess = t_iterSuccess;
 								}
 							}
 						}, action); // Sequential swap barrier action.
