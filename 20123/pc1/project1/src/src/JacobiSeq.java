@@ -58,7 +58,7 @@ public class JacobiSeq
 			final int n = Integer.parseInt(args[0]);
 			final long seed = Long.parseLong(args[1]);
 
-			// Create a random matrix
+			// Create a random matrix.
 			final double[][] A = new double[n][n];
 			final double[] b = new double[n];
 			Random prng = Random.getInstance(seed);
@@ -72,8 +72,62 @@ public class JacobiSeq
 				b[i] = (prng.nextDouble() * 9.0) + 1.0;
 			}
 
-			// Solve the system.
-			double[] x = solve(A, b, n);
+			// Allocate space for the solution and temporary variables.
+			double[] x = new double[n];
+			double[] y = new double[n];
+
+			// Initialize the x[] vector to 1.
+			for (int i = 0; i < n; i++)
+			{
+				x[i] = 1.0;
+			}
+
+			// Run until we converge to a solution.
+			boolean converged = false;
+			boolean iterSuccess;
+			double sum;
+			while (!converged)
+			{
+				iterSuccess = true;
+				for (int i = 0; i < n; i++)
+				{
+					// Compute the upper and lower matrix product, omitting
+					// the element at index i
+					double[] A_i = A[i];
+					double yVal = 0.0;
+					double xVal = x[i];
+					sum = 0.0;
+					for (int j = 0; j < i; j++)
+					{
+						sum += (A_i[j] * x[j]);
+					}
+					for (int j = i + 1; j < n; j++)
+					{
+						sum += (A_i[j] * x[j]);
+					}
+
+					// Compute and store the y[] value.
+					yVal = (b[i] - sum) / A_i[i];
+					y[i] = yVal;
+
+					// Check for convergence.
+					if (iterSuccess && 
+						!(Math.abs((2 * (xVal - yVal)) 
+								/ (xVal + yVal)) < epsilon))
+					{
+						iterSuccess = false;
+					}
+				}
+
+				// Swap the x[] and y[] vectors.
+				double[] tmp = x;
+				x = y;
+				y = tmp;
+
+				// Reset the iteration variables.
+				converged = iterSuccess;
+				iterSuccess = true;
+			}
 			
 			// Display the solution and time.
 			if (n <= 100)
@@ -103,81 +157,7 @@ public class JacobiSeq
 			ex1.printStackTrace();
 		}
 	}
-
-	/**
-	 * Attempt to solve the system of linear equations defined by Ax = b, where
-	 * x is the solution vector.
-	 * 
-	 * @param A
-	 *            - the matrix of system coefficients
-	 * @param b
-	 *            - the vector of system equation results
-	 * @param n
-	 *            - the dimension of the solution vector
-	 * 
-	 * @return x[] - the solution vector
-	 */
-	public static double[] solve(double[][] A, double[] b, int n)
-	{
-		// Allocate space for the solution and temporary variables
-		double[] x = new double[n];
-		double[] y = new double[n];
-
-		// Initialize the x[] vector to 1
-		for (int i = 0; i < n; i++)
-		{
-			x[i] = 1.0;
-		}
-
-		// Run until we converge to a solution.
-		boolean converged = false;
-		boolean iterSuccess;
-		double sum;
-		while (!converged)
-		{
-			iterSuccess = true;
-			for (int i = 0; i < n; i++)
-			{
-				// Compute the upper and lower matrix product, omitting
-				// the element at index i
-				double[] A_i = A[i];
-				double yVal = 0.0;
-				double xVal = x[i];
-				sum = 0.0;
-				for (int j = 0; j < i; j++)
-				{
-					sum += (A_i[j] * x[j]);
-				}
-				for (int j = i + 1; j < n; j++)
-				{
-					sum += (A_i[j] * x[j]);
-				}
-
-				// Compute and store the y[] value.
-				yVal = (b[i] - sum) / A_i[i];
-				y[i] = yVal;
-
-				// Check for convergence.
-				if (iterSuccess && 
-					!(Math.abs((2 * (xVal - yVal)) / (xVal + yVal)) < epsilon))
-				{
-					iterSuccess = false;
-				}
-			}
-
-			// Swap the x[] and y[] vectors.
-			double[] tmp = x;
-			x = y;
-			y = tmp;
-
-			// Reset the iteration variables.
-			converged = iterSuccess;
-			iterSuccess = true;
-		}
-
-		return x;
-	}
-
+	
 	/**
 	 * Display the program usage message and terminate abnormally.
 	 * 

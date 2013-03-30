@@ -12,7 +12,6 @@ import edu.rit.pj.IntegerForLoop;
 import edu.rit.pj.IntegerSchedule;
 import edu.rit.pj.ParallelRegion;
 import edu.rit.pj.ParallelTeam;
-import edu.rit.pj.reduction.SharedBoolean;
 import edu.rit.util.Random;
 
 public class JacobiSmp
@@ -22,13 +21,15 @@ public class JacobiSmp
 	private static double[] x;
 	private static double[][] A;
 	private static double[] b;
-	private static int n;
 	
-	// TODO
-	private static SharedBoolean converged = new SharedBoolean(false);
-	private static SharedBoolean iterSuccess = new SharedBoolean(true);
-	private static SwapBarrierAction action = new JacobiSmp.SwapBarrierAction();
-//	private static CalculationForLoop loop = new JacobiSmp.CalculationForLoop(); 
+	// Dimension and seed.
+	private static int n;
+	private static long seed;
+	
+	// Shared control flow variables 
+	private static boolean converged;
+	private static boolean iterSuccess;
+	private static SwapBarrierAction action;
 
 	// The convergence cutoff delta value.
 	private static double epsilon = 0.00000001;
@@ -75,10 +76,10 @@ public class JacobiSmp
 		{
 			// Parse the command line arguments.
 			n = Integer.parseInt(args[0]);
-			final long seed = Long.parseLong(args[1]);
+			seed = Long.parseLong(args[1]);
 
-			// Generate the matrix data in parallel using multiple threads.
-			// Otherwise this becomes a significant part of the seq. fraction.
+			// The main parallel team executing both main "tasks" 
+			// in the program.
 			new ParallelTeam().execute(new ParallelRegion()
 			{
 				/**
@@ -94,16 +95,28 @@ public class JacobiSmp
 					{
 						x[i] = y[i] = 1.0;
 					}
+					
+					// Create the barrier here so we don't have to
+					// continually make one at runtime.
+					action = new JacobiSmp.SwapBarrierAction();
 				}
 				
 				/**
-				 * Run the solver program.
+				 * Run the solver.
 				 */
 				public void run() throws Exception
 				{
 					// Populate the test matrix and equation vector.
 					execute(0, n - 1, new IntegerForLoop()
 					{
+						// Use a guided schedule because some FLOPS
+						// may take longer than others (we don't 
+						// necessarily have a balanced load).
+						public IntegerSchedule schedule() 
+						{
+							return IntegerSchedule.guided();
+						}
+						
 						// Set up per-thread PRNG.
 						Random prng_thread = Random.getInstance(seed);
 
@@ -127,13 +140,14 @@ public class JacobiSmp
 					});
 					
 					// Solve the system.
-					while (converged.get() == false)
+					converged = false;
+					iterSuccess = true;
+					while (converged == false)
 					{
 						execute(0, n - 1, new IntegerForLoop() 
 						{
 							double[] A_i;
 							double xVal, yVal, sum;
-							boolean t_iterSuccess;
 							
 							// Padding to avoid cache interference.
 							long p0, p1, p2, p3, p4, p5, p6, p7;
@@ -150,7 +164,6 @@ public class JacobiSmp
 							public void run(int first, int last) 
 									throws Exception
 							{
-								t_iterSuccess = true;
 								for (int i = first; i <= last; i++)
 								{
 									// Compute the upper and lower matrix
@@ -168,34 +181,24 @@ public class JacobiSmp
 										sum += (A_i[j] * x[j]);
 									}
 
-									// Compute and store the y[] coordinate
-									// value.
+									// Compute the new y value
 									yVal = (b[i] - sum) / A_i[i];
 
 									// Check to see if the algorithm converged
 									// for this particular row in the matrix.
-									if (t_iterSuccess && 
+									if (iterSuccess && 
 										!((Math.abs((2 * (xVal - yVal))
 										/ (xVal + yVal))) < epsilon))
 									{
 										// JVM guarantees atomic set 
-										t_iterSuccess = false; 
+										iterSuccess = false; 
 									}
 									
+									// Store the y[] coordinate.
 									y[i] = yVal;
 								}
 							}
-								
-							// Perform reduction by storing the thread's
-							// iteration success flag into the shared variable
-							public void finish() 
-							{
-								if (t_iterSuccess == false) 
-								{
-									iterSuccess.set(t_iterSuccess);
-								}
-							}
-						}, action);
+						}, action); // Sequential swap barrier action.
 					}
 				}
 				
@@ -255,8 +258,8 @@ public class JacobiSmp
 			double[] tmp = x;
 			x = y;
 			y = tmp;
-			converged.set(iterSuccess.get());
-			iterSuccess.set(true); // reset
+			converged = iterSuccess;
+			iterSuccess = true; // reset
 		}
 	}
 	
