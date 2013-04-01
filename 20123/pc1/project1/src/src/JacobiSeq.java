@@ -49,13 +49,19 @@ public class JacobiSeq
 		// Verify the command-line arguments.
 		if (args.length != 2)
 		{
-			showUsage();
+			error("Usage: java -Xmx2000m JacobiSeq <n> <seed>");
+			System.exit(-1);
 		}
 
 		try
 		{
 			// Parse the command line arguments.
 			final int n = Integer.parseInt(args[0]);
+			if (n < 1)
+			{
+				error("Error: n must be at least 1.");
+				System.exit(-1);
+			}
 			final long seed = Long.parseLong(args[1]);
 
 			// Create a random matrix.
@@ -152,20 +158,19 @@ public class JacobiSeq
 		}
 		catch (NumberFormatException ex1)
 		{
-			System.err.println("Error parsing command line arguments.");
+			error("Error parsing command line argument(s).");
 			ex1.printStackTrace();
 		}
 	}
 	
 	/**
-	 * Display the program usage message and terminate abnormally.
+	 * Display an error message.
 	 * 
-	 * @param none
+	 * @param msg - message to display.
 	 * @return void
 	 */
-	public static void showUsage()
+	public static void error(String msg)
 	{
-		System.err.println("Usage: java -Xmx2000m JacobiSeq <n> <seed>");
-		System.exit(-1);
+		System.err.println(msg);
 	}
 }
