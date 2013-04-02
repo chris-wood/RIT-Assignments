@@ -39,7 +39,13 @@ public class JacobiSmp
 	private static long endTime = 0;
 
 	/**
-	 * The main entry point for the JacobiSmp program.
+	 * The main entry point for the JacobiSmp program. To avoid the overhead
+	 * of object construction and destruction, an instance of the JacobiSmp
+	 * class is not made. While keeping the code for the Jacobi algorithm
+	 * inside the main method may violate OO design, since this program
+	 * is not meant to be extensible or modifiable in any way (i.e. it serves
+	 * one very particular purpose), I feel that this is an acceptable
+	 * tradeoff for performance.
 	 * 
 	 * @param args
 	 *            - command line arguments
@@ -84,8 +90,8 @@ public class JacobiSmp
 			}
 			seed = Long.parseLong(args[1]);
 
-			// The main parallel team executing both main "tasks" 
-			// in the program.
+			// The main parallel team executing both "tasks" 
+			// (initialization and solution) in the program.
 			new ParallelTeam().execute(new ParallelRegion()
 			{
 				/**
@@ -276,7 +282,8 @@ public class JacobiSmp
 	 * Helper class that performs the sequential swap action at the 
 	 * calculation loop barrier. A single instance of this class is 
 	 * instantiated so that there's no overhead of recreating such
-	 * an object at every iteration.
+	 * an object at every iteration. It also doesn't need to be thread
+	 * safe since it's only ever used by a single thread.
 	 */
 	private static class SwapBarrierAction extends BarrierAction 
 	{

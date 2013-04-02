@@ -19,7 +19,13 @@ public class JacobiSeq
 	private static long endTime = 0;
 	
 	/**
-	 * The main entry point for the JacobiSeq program.
+	 * The main entry point for the JacobiSeq program. To avoid the overhead
+	 * of object construction and destruction, an instance of the JacobiSeq
+	 * class is not made. While keeping the code for the Jacobi algorithm
+	 * inside the main method may violate OO design, since this program
+	 * is not meant to be extensible or modifiable in any way (i.e. it serves
+	 * one very particular purpose), I feel that this is an acceptable
+	 * tradeoff for performance.
 	 * 
 	 * @param args
 	 *            - command line arguments
