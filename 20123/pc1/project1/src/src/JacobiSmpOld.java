@@ -17,16 +17,26 @@ import edu.rit.util.Random;
 public class JacobiSmp
 {
 	// The data structures to hold the calculation data structures.
-	private static double[] y; // static for anonymous classes
-	private static double[] x; // static for anonymous classes
+	private static double[] y;
+	private static double[] x;
+	private static double[][] A;
+	private static double[] b;
+	
+	// Dimension and seed.
+	private static int n;
+	private static long seed;
 	
 	// Shared control flow variables 
-	private static boolean converged; // static for anonymous classes
-	private static boolean iterSuccess; // static for anonymous classes
-	private static SwapBarrierAction action; // static for anonymous classes
+	private static boolean converged;
+	private static boolean iterSuccess;
+	private static SwapBarrierAction action;
 
 	// The convergence cutoff delta value.
 	private static double epsilon = 0.00000001;
+	
+	// Global timing variables.
+	private static long startTime = 0;
+	private static long endTime = 0;
 
 	/**
 	 * The main entry point for the JacobiSmp program.
@@ -45,12 +55,10 @@ public class JacobiSmp
 	 */
 	public static void main(String[] args)
 	{
-		// Start the clock.
-		long startTime = System.currentTimeMillis();
-		
 		// Set up the communication with the job server.
 		try
 		{
+			startTime = System.currentTimeMillis();
 			Comm.init(args);
 		}
 		catch (IOException e)
@@ -68,42 +76,19 @@ public class JacobiSmp
 		try
 		{
 			// Parse the command line arguments.
-			final int n = Integer.parseInt(args[0]);
+			n = Integer.parseInt(args[0]);
 			if (n < 1) 
 			{
 				error("Error: n must be at least 1.");
 				System.exit(-1);
 			}
-			final long seed = Long.parseLong(args[1]);
+			seed = Long.parseLong(args[1]);
 			
-			// Allocate the data structures.
-			final double[][] A = new double[n][n];
-			final double[] b = new double[n];
-			
-			// Initialize and solve the system.
+			// Initialize, solve, and print the solution.
 			JacobiSmp solver = new JacobiSmp();
-			solver.initAndSolve(A, b, n, seed);
-			
-			// Display the solution and time.
-			if (n <= 100)
-			{
-				for (int i = 0; i < n; ++i)
-				{
-					System.out.printf("%d %g%n", i, x[i]);
-				}
-			}
-			else
-			{
-				for (int i = 0; i <= 49; ++i)
-				{
-					System.out.printf("%d %g%n", i, x[i]);
-				}
-				for (int i = n - 50; i < n; ++i)
-				{
-					System.out.printf("%d %g%n", i, x[i]);
-				}
-			}
-			long endTime = System.currentTimeMillis();
+			solver.initAndSolve();
+			solver.printSolution();
+			endTime = System.currentTimeMillis();
 			System.out.printf("%d msec%n", (endTime - startTime));
 		}
 		catch (NumberFormatException ex1)
@@ -120,24 +105,20 @@ public class JacobiSmp
 	
 	/**
 	 * Initialize the test data and solve the system.
-	 * 
-	 * @param A - coefficient matrix
-	 * @param b - equation vector
-	 * @param n - data dimensions
-	 * @param seed - PRNG seed
 	 */
-	private void initAndSolve(final double[][] A, final double[] b, 
-			final int n, final long seed) throws Exception
+	private void initAndSolve() throws Exception
 	{
 		// The main parallel team executing both "tasks" 
 		// (initialization and solution) in the program.
 		new ParallelTeam().execute(new ParallelRegion()
 		{
 			/**
-			 * Initialize the x[] and y[] vectors.
+			 * Initialize the x[] and y[] vectors to 1.
 			 */
 			public void start() 
 			{
+				A = new double[n][n];
+				b = new double[n];
 				x = new double[n];
 				y = new double[n];
 				
@@ -273,6 +254,31 @@ public class JacobiSmp
 				}
 			}
 		});
+	}
+	
+	/**
+	 * Print the solution.
+	 */
+	private void printSolution()
+	{
+		if (n <= 100)
+		{
+			for (int i = 0; i < n; ++i)
+			{
+				System.out.printf("%d %g%n", i, x[i]);
+			}
+		}
+		else
+		{
+			for (int i = 0; i <= 49; ++i)
+			{
+				System.out.printf("%d %g%n", i, x[i]);
+			}
+			for (int i = n - 50; i < n; ++i)
+			{
+				System.out.printf("%d %g%n", i, x[i]);
+			}
+		}	
 	}
 	
 	/**

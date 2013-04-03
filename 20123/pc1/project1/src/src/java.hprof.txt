@@ -1,4 +1,4 @@
-JAVA PROFILE 1.0.1, created Tue Mar 26 11:57:08 2013
+JAVA PROFILE 1.0.1, created Tue Apr  2 16:38:24 2013
 
 Copyright (c) 2003, 2005, Oracle and/or its affiliates. All rights reserved.
 
@@ -101,152 +101,217 @@ THREAD START (obj=50000294, id = 200011, name="DestroyJavaVM", group="main")
 THREAD START (obj=50000298, id = 200012, name="Thread-0", group="main")
 THREAD END (id = 200012)
 THREAD END (id = 200011)
-TRACE 300146:
-	JacobiSeq.solve(JacobiSeq.java:155)
-	JacobiSeq.main(JacobiSeq.java:72)
-TRACE 300148:
-	JacobiSeq.solve(JacobiSeq.java:153)
-	JacobiSeq.main(JacobiSeq.java:72)
+TRACE 300171:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300174:
+	JacobiSeq.initAndSolve(JacobiSeq.java:133)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300173:
+	JacobiSeq.initAndSolve(JacobiSeq.java:133)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300172:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
 TRACE 300147:
-	JacobiSeq.solve(JacobiSeq.java:153)
-	JacobiSeq.main(JacobiSeq.java:72)
-TRACE 300142:
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300149:
 	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:131)
 	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
 	edu.rit.util.Random.nextDouble(Random.java:650)
-	JacobiSeq.main(JacobiSeq.java:65)
-TRACE 300143:
-	JacobiSeq.main(JacobiSeq.java:63)
-TRACE 300050:
-	java.lang.ClassLoader.defineClass1(ClassLoader.java:Unknown line)
-	java.lang.ClassLoader.defineClass(ClassLoader.java:791)
-	java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
-	java.net.URLClassLoader.defineClass(URLClassLoader.java:449)
-	java.net.URLClassLoader.access$100(URLClassLoader.java:71)
-	java.net.URLClassLoader$1.run(URLClassLoader.java:361)
-	java.net.URLClassLoader$1.run(URLClassLoader.java:355)
-	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
-	java.net.URLClassLoader.findClass(URLClassLoader.java:354)
-	java.lang.ClassLoader.loadClass(ClassLoader.java:423)
-TRACE 300144:
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300154:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:135)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300153:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:137)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300152:
 	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:132)
 	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
 	edu.rit.util.Random.nextDouble(Random.java:650)
-	JacobiSeq.main(JacobiSeq.java:65)
-TRACE 300145:
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300148:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:133)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300159:
+	JacobiSeq.initAndSolve(JacobiSeq.java:107)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300150:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:136)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300155:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:131)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300186:
+	JacobiSeq.initAndSolve(JacobiSeq.java:135)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300156:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:130)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300176:
+	JacobiSeq.initAndSolve(JacobiSeq.java:133)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300181:
+	JacobiSeq.initAndSolve(JacobiSeq.java:133)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300183:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300177:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300184:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300185:
+	JacobiSeq.initAndSolve(JacobiSeq.java:131)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300158:
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:105)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300190:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300194:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300197:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300192:
+	JacobiSeq.initAndSolve(JacobiSeq.java:135)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300189:
+	JacobiSeq.initAndSolve(JacobiSeq.java:133)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300143:
+	JacobiSeq.initAndSolve(JacobiSeq.java:97)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300160:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:130)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300191:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300180:
+	JacobiSeq.initAndSolve(JacobiSeq.java:152)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300165:
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300178:
+	JacobiSeq.initAndSolve(JacobiSeq.java:135)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300179:
+	JacobiSeq.initAndSolve(JacobiSeq.java:141)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300182:
+	JacobiSeq.initAndSolve(JacobiSeq.java:135)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300195:
+	JacobiSeq.initAndSolve(JacobiSeq.java:137)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300196:
+	JacobiSeq.initAndSolve(JacobiSeq.java:135)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300198:
+	JacobiSeq.initAndSolve(JacobiSeq.java:133)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300200:
+	JacobiSeq.initAndSolve(JacobiSeq.java:133)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300157:
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300163:
 	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:138)
 	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
 	edu.rit.util.Random.nextDouble(Random.java:650)
-	JacobiSeq.main(JacobiSeq.java:65)
-TRACE 300149:
-	JacobiSeq.solve(JacobiSeq.java:151)
-	JacobiSeq.main(JacobiSeq.java:72)
-TRACE 300187:
-	java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:64)
-	java.lang.StringBuilder.<init>(StringBuilder.java:85)
-	java.util.Formatter$FormatSpecifier.print(Formatter.java:3179)
-	java.util.Formatter$FormatSpecifier.printFloat(Formatter.java:2757)
-	java.util.Formatter$FormatSpecifier.print(Formatter.java:2708)
-	java.util.Formatter.format(Formatter.java:2488)
-	java.io.PrintStream.format(PrintStream.java:970)
-	java.io.PrintStream.printf(PrintStream.java:871)
-	JacobiSeq.printSolution(JacobiSeq.java:102)
-	JacobiSeq.main(JacobiSeq.java:73)
-TRACE 300150:
-	JacobiSeq.solve(JacobiSeq.java:155)
-	JacobiSeq.main(JacobiSeq.java:72)
-TRACE 300189:
-	java.util.Formatter$Flags.remove(Formatter.java:4176)
-	java.util.Formatter$FormatSpecifier.print(Formatter.java:3313)
-	java.util.Formatter$FormatSpecifier.print(Formatter.java:3190)
-	java.util.Formatter$FormatSpecifier.printFloat(Formatter.java:2757)
-	java.util.Formatter$FormatSpecifier.print(Formatter.java:2708)
-	java.util.Formatter.format(Formatter.java:2488)
-	java.io.PrintStream.format(PrintStream.java:970)
-	java.io.PrintStream.printf(PrintStream.java:871)
-	JacobiSeq.printSolution(JacobiSeq.java:106)
-	JacobiSeq.main(JacobiSeq.java:73)
-TRACE 300190:
-	java.util.regex.Matcher.group(Matcher.java:488)
-	java.util.Formatter$FormatSpecifier.<init>(Formatter.java:2665)
-	java.util.Formatter.parse(Formatter.java:2528)
-	java.util.Formatter.format(Formatter.java:2469)
-	java.io.PrintStream.format(PrintStream.java:970)
-	java.io.PrintStream.printf(PrintStream.java:871)
-	JacobiSeq.printSolution(JacobiSeq.java:106)
-	JacobiSeq.main(JacobiSeq.java:73)
-TRACE 300151:
-	JacobiSeq.solve(JacobiSeq.java:157)
-	JacobiSeq.main(JacobiSeq.java:72)
-TRACE 300105:
-	java.net.InetAddress$Cache.put(InetAddress.java:766)
-	java.net.InetAddress.cacheInitIfNeeded(InetAddress.java:807)
-	java.net.InetAddress.getCachedAddresses(InetAddress.java:840)
-	java.net.InetAddress.getAllByName0(InetAddress.java:1207)
-	java.net.InetAddress.getAllByName(InetAddress.java:1127)
-	java.net.InetAddress.getAllByName(InetAddress.java:1063)
-	java.net.InetAddress.getByName(InetAddress.java:1013)
-	java.net.InetSocketAddress.<init>(InetSocketAddress.java:142)
-	edu.rit.pj.cluster.JobFrontend.<init>(JobFrontend.java:332)
-	edu.rit.pj.Comm.init(Comm.java:1209)
-TRACE 300081:
-	java.lang.String.lastIndexOf(String.java:1827)
-	java.lang.String.lastIndexOf(String.java:1789)
-	java.lang.String.lastIndexOf(String.java:1769)
-	sun.misc.JarIndex.get(JarIndex.java:174)
-	sun.misc.URLClassPath$JarLoader.getResource(URLClassPath.java:847)
-	sun.misc.URLClassPath$JarLoader.getResource(URLClassPath.java:825)
-	sun.misc.URLClassPath.getResource(URLClassPath.java:195)
-	java.net.URLClassLoader$1.run(URLClassLoader.java:358)
-	java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300113:
+	java.nio.channels.spi.SelectorProvider.loadProviderAsService(SelectorProvider.java:109)
+	java.nio.channels.spi.SelectorProvider.access$200(SelectorProvider.java:69)
+	java.nio.channels.spi.SelectorProvider$1.run(SelectorProvider.java:173)
+	java.nio.channels.spi.SelectorProvider$1.run(SelectorProvider.java:169)
 	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
-TRACE 300171:
-	java.util.regex.Pattern$Start.<init>(Pattern.java:3397)
-	java.util.regex.Pattern.compile(Pattern.java:1685)
-	java.util.regex.Pattern.<init>(Pattern.java:1337)
-	java.util.regex.Pattern.compile(Pattern.java:1022)
-	java.util.Formatter.<clinit>(Formatter.java:2508)
-	java.io.PrintStream.format(PrintStream.java:969)
-	java.io.PrintStream.printf(PrintStream.java:871)
-	JacobiSeq.printSolution(JacobiSeq.java:102)
-	JacobiSeq.main(JacobiSeq.java:73)
-TRACE 300030:
-	java.util.zip.Inflater.initIDs(Inflater.java:Unknown line)
-	java.util.zip.Inflater.<clinit>(Inflater.java:86)
-	java.util.zip.ZipFile.getInflater(ZipFile.java:448)
-	java.util.zip.ZipFile.getInputStream(ZipFile.java:367)
-	java.util.jar.JarFile.getInputStream(JarFile.java:403)
-	sun.misc.JarIndex.getJarIndex(JarIndex.java:137)
-	sun.misc.URLClassPath$JarLoader$1.run(URLClassPath.java:668)
+	java.nio.channels.spi.SelectorProvider.provider(SelectorProvider.java:168)
+	java.nio.channels.SocketChannel.open(SocketChannel.java:142)
+	java.nio.channels.SocketChannel.open(SocketChannel.java:182)
+	edu.rit.mp.ChannelGroup.connect(ChannelGroup.java:650)
+	edu.rit.pj.cluster.JobFrontend.<init>(JobFrontend.java:336)
+TRACE 300070:
+	edu.rit.pj.Comm.init(Comm.java:1209)
+	JacobiSeq.main(JacobiSeq.java:52)
+TRACE 300017:
+	java.util.zip.ZipFile.open(ZipFile.java:Unknown line)
+	java.util.zip.ZipFile.<init>(ZipFile.java:214)
+	java.util.zip.ZipFile.<init>(ZipFile.java:144)
+	java.util.jar.JarFile.<init>(JarFile.java:152)
+	java.util.jar.JarFile.<init>(JarFile.java:89)
+	sun.misc.URLClassPath$JarLoader.getJarFile(URLClassPath.java:706)
+	sun.misc.URLClassPath$JarLoader.access$600(URLClassPath.java:587)
+	sun.misc.URLClassPath$JarLoader$1.run(URLClassPath.java:667)
 	sun.misc.URLClassPath$JarLoader$1.run(URLClassPath.java:660)
 	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
-	sun.misc.URLClassPath$JarLoader.ensureOpen(URLClassPath.java:659)
-TRACE 300129:
-	java.lang.ClassLoader$NativeLibrary.load(ClassLoader.java:Unknown line)
-	java.lang.ClassLoader.loadLibrary1(ClassLoader.java:1939)
-	java.lang.ClassLoader.loadLibrary0(ClassLoader.java:1864)
-	java.lang.ClassLoader.loadLibrary(ClassLoader.java:1846)
-	java.lang.Runtime.loadLibrary0(Runtime.java:845)
-	java.lang.System.loadLibrary(System.java:1084)
-	sun.security.action.LoadLibraryAction.run(LoadLibraryAction.java:67)
-	sun.security.action.LoadLibraryAction.run(LoadLibraryAction.java:47)
-	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
-	sun.nio.ch.Util.load(Util.java:487)
-TRACE 300077:
-	java.util.HashMap.hash(HashMap.java:357)
-	java.util.HashMap.getEntry(HashMap.java:443)
-	java.util.HashMap.get(HashMap.java:405)
-	sun.misc.JarIndex.get(JarIndex.java:171)
-	sun.misc.URLClassPath$JarLoader.getResource(URLClassPath.java:847)
-	sun.misc.URLClassPath$JarLoader.getResource(URLClassPath.java:825)
-	sun.misc.URLClassPath.getResource(URLClassPath.java:195)
-	java.net.URLClassLoader$1.run(URLClassLoader.java:358)
-	java.net.URLClassLoader$1.run(URLClassLoader.java:355)
-	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
-TRACE 300037:
+TRACE 300144:
+	java.lang.ref.ReferenceQueue.enqueue(ReferenceQueue.java:69)
+	java.lang.ref.Reference$ReferenceHandler.run(Reference.java:146)
+TRACE 300145:
+	java.lang.ref.Reference$ReferenceHandler.run(Reference.java:137)
+TRACE 300082:
+	java.lang.ClassLoader.findBootstrapClass(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.findBootstrapClassOrNull(ClassLoader.java:1061)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:412)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:410)
+	sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:356)
+	edu.rit.pj.cluster.FrontendFileWriter$FileHandler.<init>(FrontendFileWriter.java:80)
+	edu.rit.pj.cluster.FrontendFileWriter.<init>(FrontendFileWriter.java:408)
+	edu.rit.pj.cluster.JobFrontend.<init>(JobFrontend.java:324)
+	edu.rit.pj.Comm.init(Comm.java:1209)
+TRACE 300086:
 	java.util.Arrays.copyOf(Arrays.java:2271)
 	java.util.zip.ZipCoder.getBytes(ZipCoder.java:89)
 	java.util.zip.ZipFile.getEntry(ZipFile.java:304)
+	java.util.jar.JarFile.getEntry(JarFile.java:225)
+	java.util.jar.JarFile.getJarEntry(JarFile.java:208)
+	sun.misc.URLClassPath$JarLoader.getResource(URLClassPath.java:817)
+	sun.misc.URLClassPath.getResource(URLClassPath.java:195)
+	java.net.URLClassLoader$1.run(URLClassLoader.java:358)
+	java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+TRACE 300027:
+	java.util.zip.ZipFile.getEntry(ZipFile.java:307)
 	java.util.jar.JarFile.getEntry(JarFile.java:225)
 	java.util.jar.JarFile.getJarEntry(JarFile.java:208)
 	sun.misc.JarIndex.getJarIndex(JarIndex.java:134)
@@ -254,39 +319,227 @@ TRACE 300037:
 	sun.misc.URLClassPath$JarLoader$1.run(URLClassPath.java:660)
 	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
 	sun.misc.URLClassPath$JarLoader.ensureOpen(URLClassPath.java:659)
-TRACE 300074:
-	java.lang.Thread.currentThread(Thread.java:Unknown line)
-	java.util.concurrent.locks.ReentrantLock$Sync.nonfairTryAcquire(ReentrantLock.java:134)
-	java.util.concurrent.locks.ReentrantLock.tryLock(ReentrantLock.java:370)
-	java.util.concurrent.ConcurrentHashMap$Segment.put(ConcurrentHashMap.java:431)
-	java.util.concurrent.ConcurrentHashMap.putIfAbsent(ConcurrentHashMap.java:1149)
-	java.lang.ClassLoader.getClassLoadingLock(ClassLoader.java:462)
-	java.lang.ClassLoader.loadClass(ClassLoader.java:403)
-	sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:308)
-	java.lang.ClassLoader.loadClass(ClassLoader.java:356)
-	edu.rit.pj.cluster.JobFrontend.<init>(JobFrontend.java:224)
-CPU SAMPLES BEGIN (total = 52) Tue Mar 26 11:57:09 2013
+	sun.misc.URLClassPath$JarLoader.<init>(URLClassPath.java:632)
+	sun.misc.URLClassPath$3.run(URLClassPath.java:362)
+TRACE 300051:
+	java.lang.Class.getDeclaredMethods0(Class.java:Unknown line)
+	java.lang.Class.privateGetDeclaredMethods(Class.java:2442)
+	java.lang.Class.getMethod0(Class.java:2685)
+	java.lang.Class.getMethod(Class.java:1620)
+	sun.launcher.LauncherHelper.getMainMethod(LauncherHelper.java:494)
+	sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:486)
+TRACE 300076:
+	java.util.zip.Inflater.inflateBytes(Inflater.java:Unknown line)
+	java.util.zip.Inflater.inflate(Inflater.java:256)
+	java.util.zip.InflaterInputStream.read(InflaterInputStream.java:152)
+	sun.misc.Resource.getBytes(Resource.java:124)
+	java.net.URLClassLoader.defineClass(URLClassLoader.java:444)
+	java.net.URLClassLoader.access$100(URLClassLoader.java:71)
+	java.net.URLClassLoader$1.run(URLClassLoader.java:361)
+	java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+	java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+TRACE 300151:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:137)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300204:
+	JacobiSeq.initAndSolve(JacobiSeq.java:129)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300203:
+	JacobiSeq.initAndSolve(JacobiSeq.java:135)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300202:
+	JacobiSeq.initAndSolve(JacobiSeq.java:133)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300201:
+	JacobiSeq.initAndSolve(JacobiSeq.java:131)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300199:
+	JacobiSeq.initAndSolve(JacobiSeq.java:133)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300169:
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:105)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300193:
+	JacobiSeq.initAndSolve(JacobiSeq.java:131)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300188:
+	JacobiSeq.initAndSolve(JacobiSeq.java:131)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300187:
+	JacobiSeq.initAndSolve(JacobiSeq.java:131)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300161:
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300162:
+	JacobiSeq.initAndSolve(JacobiSeq.java:111)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300170:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:137)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300164:
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:105)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300175:
+	JacobiSeq.initAndSolve(JacobiSeq.java:141)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300237:
+	java.lang.Math.getExponent(Math.java:1310)
+	java.lang.StrictMath.floorOrCeil(StrictMath.java:355)
+	java.lang.StrictMath.floor(StrictMath.java:340)
+	java.lang.Math.floor(Math.java:424)
+	sun.misc.FormattedFloatingDecimal.dtoa(FormattedFloatingDecimal.java:697)
+	sun.misc.FormattedFloatingDecimal.<init>(FormattedFloatingDecimal.java:529)
+	java.util.Formatter$FormatSpecifier.print(Formatter.java:3279)
+	java.util.Formatter$FormatSpecifier.print(Formatter.java:3190)
+	java.util.Formatter$FormatSpecifier.printFloat(Formatter.java:2757)
+	java.util.Formatter$FormatSpecifier.print(Formatter.java:2708)
+TRACE 300166:
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300167:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:130)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300240:
+	sun.misc.FDBigInt.<init>(FloatingDecimal.java:2429)
+	sun.misc.FormattedFloatingDecimal.dtoa(FormattedFloatingDecimal.java:894)
+	sun.misc.FormattedFloatingDecimal.<init>(FormattedFloatingDecimal.java:529)
+	java.util.Formatter$FormatSpecifier.print(Formatter.java:3279)
+	java.util.Formatter$FormatSpecifier.print(Formatter.java:3190)
+	java.util.Formatter$FormatSpecifier.printFloat(Formatter.java:2757)
+	java.util.Formatter$FormatSpecifier.print(Formatter.java:2708)
+	java.util.Formatter.format(Formatter.java:2488)
+	java.io.PrintStream.format(PrintStream.java:970)
+	java.io.PrintStream.printf(PrintStream.java:871)
+TRACE 300241:
+	java.util.regex.Matcher.search(Matcher.java:1196)
+	java.util.regex.Matcher.find(Matcher.java:618)
+	java.util.Formatter.parse(Formatter.java:2517)
+	java.util.Formatter.format(Formatter.java:2469)
+	java.io.PrintStream.format(PrintStream.java:970)
+	java.io.PrintStream.printf(PrintStream.java:871)
+	JacobiSeq.printSolution(JacobiSeq.java:186)
+	JacobiSeq.main(JacobiSeq.java:80)
+TRACE 300242:
+	java.io.Writer.write(Writer.java:157)
+	java.io.PrintStream.write(PrintStream.java:525)
+	java.io.PrintStream.print(PrintStream.java:669)
+	java.io.PrintStream.append(PrintStream.java:1065)
+	java.io.PrintStream.append(PrintStream.java:57)
+	java.util.Formatter$FixedString.print(Formatter.java:2563)
+	java.util.Formatter.format(Formatter.java:2476)
+	java.io.PrintStream.format(PrintStream.java:970)
+	java.io.PrintStream.printf(PrintStream.java:871)
+	JacobiSeq.printSolution(JacobiSeq.java:186)
+TRACE 300168:
+	edu.rit.util.DefaultRandom.hash(DefaultRandom.java:131)
+	edu.rit.util.DefaultRandom.next(DefaultRandom.java:106)
+	edu.rit.util.Random.nextDouble(Random.java:650)
+	JacobiSeq.initAndSolve(JacobiSeq.java:109)
+	JacobiSeq.main(JacobiSeq.java:79)
+TRACE 300069:
+	JacobiSeq.main(JacobiSeq.java:52)
+TRACE 300141:
+	sun.nio.ch.SocketDispatcher.preClose(SocketDispatcher.java:59)
+	sun.nio.ch.SocketChannelImpl.implCloseSelectableChannel(SocketChannelImpl.java:813)
+	java.nio.channels.spi.AbstractSelectableChannel.implCloseChannel(AbstractSelectableChannel.java:228)
+	java.nio.channels.spi.AbstractInterruptibleChannel.close(AbstractInterruptibleChannel.java:115)
+	sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:641)
+	java.nio.channels.SocketChannel.open(SocketChannel.java:184)
+	edu.rit.mp.ChannelGroup.connect(ChannelGroup.java:650)
+	edu.rit.pj.cluster.JobFrontend.<init>(JobFrontend.java:336)
+	edu.rit.pj.Comm.init(Comm.java:1209)
+	JacobiSeq.main(JacobiSeq.java:52)
+CPU SAMPLES BEGIN (total = 4171) Tue Apr  2 16:39:10 2013
 rank   self  accum   count trace method
-   1 19.23% 19.23%      10 300146 JacobiSeq.solve
-   2 19.23% 38.46%      10 300148 JacobiSeq.solve
-   3 13.46% 51.92%       7 300147 JacobiSeq.solve
-   4  7.69% 59.62%       4 300142 edu.rit.util.DefaultRandom.hash
-   5  5.77% 65.38%       3 300143 JacobiSeq.main
-   6  3.85% 69.23%       2 300050 java.lang.ClassLoader.defineClass1
-   7  1.92% 71.15%       1 300144 edu.rit.util.DefaultRandom.hash
-   8  1.92% 73.08%       1 300145 edu.rit.util.DefaultRandom.hash
-   9  1.92% 75.00%       1 300149 JacobiSeq.solve
-  10  1.92% 76.92%       1 300187 java.lang.AbstractStringBuilder.<init>
-  11  1.92% 78.85%       1 300150 JacobiSeq.solve
-  12  1.92% 80.77%       1 300189 java.util.Formatter$Flags.remove
-  13  1.92% 82.69%       1 300190 java.util.regex.Matcher.group
-  14  1.92% 84.62%       1 300151 JacobiSeq.solve
-  15  1.92% 86.54%       1 300105 java.net.InetAddress$Cache.put
-  16  1.92% 88.46%       1 300081 java.lang.String.lastIndexOf
-  17  1.92% 90.38%       1 300171 java.util.regex.Pattern$Start.<init>
-  18  1.92% 92.31%       1 300030 java.util.zip.Inflater.initIDs
-  19  1.92% 94.23%       1 300129 java.lang.ClassLoader$NativeLibrary.load
-  20  1.92% 96.15%       1 300077 java.util.HashMap.hash
-  21  1.92% 98.08%       1 300037 java.util.Arrays.copyOf
-  22  1.92% 100.00%       1 300074 java.lang.Thread.currentThread
+   1 30.16% 30.16%    1258 300171 JacobiSeq.initAndSolve
+   2 24.50% 54.66%    1022 300174 JacobiSeq.initAndSolve
+   3 12.28% 66.94%     512 300173 JacobiSeq.initAndSolve
+   4 11.65% 78.59%     486 300172 JacobiSeq.initAndSolve
+   5  7.34% 85.93%     306 300147 JacobiSeq.initAndSolve
+   6  6.23% 92.16%     260 300149 edu.rit.util.DefaultRandom.hash
+   7  1.08% 93.24%      45 300154 edu.rit.util.DefaultRandom.hash
+   8  0.94% 94.17%      39 300153 edu.rit.util.DefaultRandom.hash
+   9  0.58% 94.75%      24 300152 edu.rit.util.DefaultRandom.hash
+  10  0.46% 95.20%      19 300148 edu.rit.util.DefaultRandom.hash
+  11  0.41% 95.61%      17 300159 JacobiSeq.initAndSolve
+  12  0.38% 96.00%      16 300150 edu.rit.util.DefaultRandom.hash
+  13  0.29% 96.28%      12 300155 edu.rit.util.DefaultRandom.hash
+  14  0.24% 96.52%      10 300186 JacobiSeq.initAndSolve
+  15  0.22% 96.74%       9 300156 edu.rit.util.DefaultRandom.hash
+  16  0.17% 96.91%       7 300176 JacobiSeq.initAndSolve
+  17  0.17% 97.08%       7 300181 JacobiSeq.initAndSolve
+  18  0.17% 97.24%       7 300183 JacobiSeq.initAndSolve
+  19  0.17% 97.41%       7 300177 JacobiSeq.initAndSolve
+  20  0.14% 97.55%       6 300184 JacobiSeq.initAndSolve
+  21  0.14% 97.70%       6 300185 JacobiSeq.initAndSolve
+  22  0.14% 97.84%       6 300158 edu.rit.util.DefaultRandom.next
+  23  0.12% 97.96%       5 300190 JacobiSeq.initAndSolve
+  24  0.12% 98.08%       5 300194 JacobiSeq.initAndSolve
+  25  0.12% 98.20%       5 300197 JacobiSeq.initAndSolve
+  26  0.10% 98.30%       4 300192 JacobiSeq.initAndSolve
+  27  0.10% 98.39%       4 300189 JacobiSeq.initAndSolve
+  28  0.10% 98.49%       4 300143 JacobiSeq.initAndSolve
+  29  0.07% 98.56%       3 300160 edu.rit.util.DefaultRandom.hash
+  30  0.07% 98.63%       3 300191 JacobiSeq.initAndSolve
+  31  0.07% 98.71%       3 300180 JacobiSeq.initAndSolve
+  32  0.05% 98.75%       2 300165 edu.rit.util.Random.nextDouble
+  33  0.05% 98.80%       2 300178 JacobiSeq.initAndSolve
+  34  0.05% 98.85%       2 300179 JacobiSeq.initAndSolve
+  35  0.05% 98.90%       2 300182 JacobiSeq.initAndSolve
+  36  0.05% 98.95%       2 300195 JacobiSeq.initAndSolve
+  37  0.05% 98.99%       2 300196 JacobiSeq.initAndSolve
+  38  0.05% 99.04%       2 300198 JacobiSeq.initAndSolve
+  39  0.05% 99.09%       2 300200 JacobiSeq.initAndSolve
+  40  0.05% 99.14%       2 300157 edu.rit.util.Random.nextDouble
+  41  0.05% 99.18%       2 300163 edu.rit.util.DefaultRandom.hash
+  42  0.02% 99.21%       1 300113 java.nio.channels.spi.SelectorProvider.loadProviderAsService
+  43  0.02% 99.23%       1 300070 edu.rit.pj.Comm.init
+  44  0.02% 99.26%       1 300017 java.util.zip.ZipFile.open
+  45  0.02% 99.28%       1 300144 java.lang.ref.ReferenceQueue.enqueue
+  46  0.02% 99.30%       1 300145 java.lang.ref.Reference$ReferenceHandler.run
+  47  0.02% 99.33%       1 300082 java.lang.ClassLoader.findBootstrapClass
+  48  0.02% 99.35%       1 300086 java.util.Arrays.copyOf
+  49  0.02% 99.38%       1 300027 java.util.zip.ZipFile.getEntry
+  50  0.02% 99.40%       1 300051 java.lang.Class.getDeclaredMethods0
+  51  0.02% 99.42%       1 300076 java.util.zip.Inflater.inflateBytes
+  52  0.02% 99.45%       1 300151 edu.rit.util.DefaultRandom.hash
+  53  0.02% 99.47%       1 300204 JacobiSeq.initAndSolve
+  54  0.02% 99.50%       1 300203 JacobiSeq.initAndSolve
+  55  0.02% 99.52%       1 300202 JacobiSeq.initAndSolve
+  56  0.02% 99.54%       1 300201 JacobiSeq.initAndSolve
+  57  0.02% 99.57%       1 300199 JacobiSeq.initAndSolve
+  58  0.02% 99.59%       1 300169 edu.rit.util.DefaultRandom.next
+  59  0.02% 99.62%       1 300193 JacobiSeq.initAndSolve
+  60  0.02% 99.64%       1 300188 JacobiSeq.initAndSolve
+  61  0.02% 99.66%       1 300187 JacobiSeq.initAndSolve
+  62  0.02% 99.69%       1 300161 JacobiSeq.initAndSolve
+  63  0.02% 99.71%       1 300162 JacobiSeq.initAndSolve
+  64  0.02% 99.74%       1 300170 edu.rit.util.DefaultRandom.hash
+  65  0.02% 99.76%       1 300164 edu.rit.util.DefaultRandom.next
+  66  0.02% 99.78%       1 300175 JacobiSeq.initAndSolve
+  67  0.02% 99.81%       1 300237 java.lang.Math.getExponent
+  68  0.02% 99.83%       1 300166 edu.rit.util.Random.nextDouble
+  69  0.02% 99.86%       1 300167 edu.rit.util.DefaultRandom.hash
+  70  0.02% 99.88%       1 300240 sun.misc.FDBigInt.<init>
+  71  0.02% 99.90%       1 300241 java.util.regex.Matcher.search
+  72  0.02% 99.93%       1 300242 java.io.Writer.write
+  73  0.02% 99.95%       1 300168 edu.rit.util.DefaultRandom.hash
+  74  0.02% 99.98%       1 300069 JacobiSeq.main
+  75  0.02% 100.00%       1 300141 sun.nio.ch.SocketDispatcher.preClose
 CPU SAMPLES END
