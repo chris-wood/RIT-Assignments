@@ -47,7 +47,7 @@ public class JacobiSeq
 		// Verify the command-line arguments.
 		if (args.length != 2)
 		{
-			error("Usage: java -Xmx2000m JacobiSeq <n> <seed>");
+			error("Usage: java -Xmx2000m -Dpj.nt=<NT> JacobiSmp <n> <seed>");
 			System.exit(-1);
 		}
 
@@ -66,49 +66,28 @@ public class JacobiSeq
 			final double[][] A = new double[n][n];
 			final double[] b = new double[n];
 			
-			// Initialize the data.
-			Random prng = Random.getInstance(seed);
-			double[] A_i;
-			for (int i = 0; i < n; i++)
-			{
-				A_i = A[i];
-				for (int j = 0; j < n; j++)
-				{
-					A_i[j] = (prng.nextDouble() * 9.0) + 1.0;
-				}
-				A_i[i] += 10.0 * n;
-				b[i] = (prng.nextDouble() * 9.0) + 1.0;
-			}
-			
-			 for (int i = 0; i < n; i++) {
-		        	for (int j = 0; j < n; j++) {
-		        		System.out.print(A[i][j] + " ");
-		        	}
-		        	System.out.println();
-		        }
-			
 			// Create the solver, initialize the data, solve, and then 
-//			// print the solution
-//			JacobiSeq solver = new JacobiSeq();
-//			double[] x = solver.initAndSolve(A, b, n, seed);
-//			if (n <= 100)
-//			{
-//				for (int i = 0; i < n; ++i)
-//				{
-//					System.out.printf("%d %g%n", i, x[i]);
-//				}
-//			}
-//			else
-//			{
-//				for (int i = 0; i <= 49; ++i)
-//				{
-//					System.out.printf("%d %g%n", i, x[i]);
-//				}
-//				for (int i = n - 50; i < n; ++i)
-//				{
-//					System.out.printf("%d %g%n", i, x[i]);
-//				}
-//			}	
+			// print the solution
+			JacobiSeq solver = new JacobiSeq();
+			double[] x = solver.initAndSolve(A, b, n, seed);
+			if (n <= 100)
+			{
+				for (int i = 0; i < n; ++i)
+				{
+					System.out.printf("%d %g%n", i, x[i]);
+				}
+			}
+			else
+			{
+				for (int i = 0; i <= 49; ++i)
+				{
+					System.out.printf("%d %g%n", i, x[i]);
+				}
+				for (int i = n - 50; i < n; ++i)
+				{
+					System.out.printf("%d %g%n", i, x[i]);
+				}
+			}	
 			
 			// Display the time.
 			long endTime = System.currentTimeMillis();
