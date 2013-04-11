@@ -1,0 +1,429 @@
+45.28077208775395 7.3914977001694435 7.500908739074599 6.410162775193788 
+6.162122249591681 48.28764986007309 7.698241607196785 5.247067519534971 
+7.098597610722595 45.28077208775395 7.3914977001694435 7.500908739074599 6.410162775193788 
+5.58589427063583 42.6494464311269 6.642168620039515 
+3.03551377616435 3.1341755469055235 7.414587681339296 45.049500404389505 
+rank 0 receiving input
+6.162122249591681 48.28764986007309 7.698241607196785 5.247067519534971 
+7.098597610722595 5.58589427063583 42.6494464311269 6.642168620039515 
+3.03551377616435 3.1341755469055235 7.414587681339296 45.049500404389505 
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]1.0
+(0) b[i] = 9.98622719281954
+(0) x[i]1.0
+(0) b[i] = 8.882625554872606
+(0) x[i]1.0
+(0) b[i] = 9.69723206500265
+(0) x[i]1.0
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+rank 0 receiving input
+we're in here!
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]-0.24991495285652962
+(0) b[i] = 9.98622719281954
+(0) x[i]-0.21174784548595868
+(0) b[i] = 8.882625554872606
+(0) x[i]-0.22578085396595984
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.2699999856764999
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.33072904134314246
+(0) b[i] = 9.98622719281954
+(0) x[i]0.2811786410178831
+(0) b[i] = 8.882625554872606
+(0) x[i]0.3387491625420187
+(0) b[i] = 9.69723206500265
+(0) x[i]0.10027324698691065
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.10433129356528344
+(0) b[i] = 9.98622719281954
+(0) x[i]0.07684613739851455
+(0) b[i] = 8.882625554872606
+(0) x[i]0.11988089261911809
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.06605996920295859
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.19748909422439864
+(0) b[i] = 9.98622719281954
+(0) x[i]0.15870460531730735
+(0) b[i] = 8.882625554872606
+(0) x[i]0.21022906508579123
+(0) b[i] = 9.69723206500265
+(0) x[i]-5.661153294319594E-4
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.15988866783192648
+(0) b[i] = 9.98622719281954
+(0) x[i]0.1252960113052689
+(0) b[i] = 8.882625554872606
+(0) x[i]0.17380271400424632
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.027408478318239605
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+iterSuccess = 0
+rank 0 receiving input
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17517626486436186
+(0) b[i] = 9.98622719281954
+(0) x[i]0.1388183295054665
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18861694314051117
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.016555275056727946
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+rank 0 receiving input
+we're in here!
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.16897846497563085
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13332634453588177
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18261115485736207
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.020964390130507427
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17149401416253282
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13555384027533948
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18504868756510745
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.01917620613206916
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+rank 0 receiving input
+we're in here!
+iterSuccess = 0
+size = 1
+rank 0 sending input
+NEW FOR RANK 0
+rank 0 receiving output
+(0) x[i]0.17047347523627343
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13464991226004241
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18405976859177225
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019901866718383458
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+rank 0 receiving input
+we're in here!
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17088757540349214
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13501665640590013
+(0) b[i] = 8.882625554872606
+(0) x[i]0.184461030575516
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019607449347048507
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17071955968833302
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13486784867970594
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18429822203081322
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019726909927289562
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17078773179812545
+(0) b[i] = 9.98622719281954
+(0) x[i]0.1349282262426728
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18436428097723648
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019678439649817563
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17076007137943253
+(0) b[i] = 9.98622719281954
+(0) x[i]0.1349037282721472
+(0) b[i] = 8.882625554872606
+(0) x[i]0.184337477890434
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019698106263260483
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17077129447415473
+(0) b[i] = 9.98622719281954
+(0) x[i]0.1349136681961131
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434835311289835
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019690126632938995
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17076674075971712
+(0) b[i] = 9.98622719281954
+(0) x[i]0.1349096351186823
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434394054336742
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019693364329572242
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+rank 0 receiving input
+we're in here!
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17076858840768092
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13491127152021523
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434573092199852
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.01969205064975945
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+iterSuccess = 0
+size = 1
+rank 0 receiving input
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17076783873348683
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13491060755817386
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434500448447613
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019692583668985946
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17076814291017886
+(0) b[i] = 9.98622719281954
+(0) x[i]0.1349108769575648
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434529923298607
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019692367399003933
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+NEW FOR RANK 0
+rank 0 receiving output
+(0) x[i]0.17076801949195555
+(0) b[i] = 9.98622719281954
+(0) x[i]0.1349107676500624
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434517964019959
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019692455149504108
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17076806956830395
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13491081200105381
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434522816439503
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019692419545162106
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17076804925006736
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13491079400585318
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434520847593694
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.01969243399145194
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.1707680574940938
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13491080130731894
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434521646443375
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019692428129939574
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+rank 0 receiving input
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17076805414911989
+(0) b[i] = 9.98622719281954
+(0) x[i]0.13491079834478448
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434521322313974
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.01969243050821992
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+rank 0 receiving input
+we're in here!
+iterSuccess = 0
+size = 1
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.17076805550632687
+(0) b[i] = 9.98622719281954
+(0) x[i]0.1349107995468185
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434521453827912
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.01969242954324415
+(0) b[i] = 1.4209125404905272
+rank 0 sending output
+we're in here!
+iterSuccess = 0
+size = 1
+rank 0 receiving input
+rank 0 sending input
+rank 0 receiving output
+NEW FOR RANK 0
+(0) x[i]0.1707680549556467
+(0) b[i] = 9.98622719281954
+(0) x[i]0.134910799059099
+(0) b[i] = 8.882625554872606
+(0) x[i]0.18434521400466766
+(0) b[i] = 9.69723206500265
+(0) x[i]-0.019692429934778405
+(0) b[i] = 1.4209125404905272
+we actually did something!
+0
+rank 0 sending output
+we're in here!
+iterSuccess = 2
+rank 0 receiving input
+size = 1
+AT LEAST ITS WORKING!
+count = 26

@@ -80,35 +80,28 @@ public class JacobiSeq
 				b[i] = (prng.nextDouble() * 9.0) + 1.0;
 			}
 			
-			 for (int i = 0; i < n; i++) {
-		        	for (int j = 0; j < n; j++) {
-		        		System.out.print(A[i][j] + " ");
-		        	}
-		        	System.out.println();
-		        }
-			
 			// Create the solver, initialize the data, solve, and then 
-//			// print the solution
-//			JacobiSeq solver = new JacobiSeq();
-//			double[] x = solver.initAndSolve(A, b, n, seed);
-//			if (n <= 100)
-//			{
-//				for (int i = 0; i < n; ++i)
-//				{
-//					System.out.printf("%d %g%n", i, x[i]);
-//				}
-//			}
-//			else
-//			{
-//				for (int i = 0; i <= 49; ++i)
-//				{
-//					System.out.printf("%d %g%n", i, x[i]);
-//				}
-//				for (int i = n - 50; i < n; ++i)
-//				{
-//					System.out.printf("%d %g%n", i, x[i]);
-//				}
-//			}	
+			// print the solution
+			JacobiSeq solver = new JacobiSeq();
+			double[] x = solver.initAndSolve(A, b, n, seed);
+			if (n <= 100)
+			{
+				for (int i = 0; i < n; ++i)
+				{
+					System.out.printf("%d %g%n", i, x[i]);
+				}
+			}
+			else
+			{
+				for (int i = 0; i <= 49; ++i)
+				{
+					System.out.printf("%d %g%n", i, x[i]);
+				}
+				for (int i = n - 50; i < n; ++i)
+				{
+					System.out.printf("%d %g%n", i, x[i]);
+				}
+			}	
 			
 			// Display the time.
 			long endTime = System.currentTimeMillis();
@@ -157,8 +150,24 @@ public class JacobiSeq
 		boolean iterSuccess = true;
 		double sum;
 		double tmp;
+		
+		
+		// INSERTED FOR TEST
+		int count = 0;
+		
 		while (!converged)
 		{
+			
+			// INSERTED FOR TEST
+			System.out.println("NEW RUN");
+			for (int i = 0; i < n; i++) {
+//				for (int j = 0; j < n; j++) {
+//					System.out.print(A[i][j] + " ");
+//				}
+				System.out.println("x = " + x[i]);
+				System.out.println("b = " + b[i]);
+			}
+			
 			for (int i = 0; i < n; i++)
 			{
 				// Compute the upper and lower matrix product, omitting
@@ -202,6 +211,13 @@ public class JacobiSeq
 			// Reset the iteration variables.
 			converged = iterSuccess;
 			iterSuccess = true;
+			
+			
+			// INSERTED FOR TEST
+			count++;
+			if (converged) {
+				System.out.println("COUNT = " + count);
+			}
 		}
 
 		return x;
