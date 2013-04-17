@@ -1,0 +1,429 @@
+/**
+ * This class implements a parallel version of the Jacobi 
+ * algorithm for solving a system of linear equations that
+ * targets a cluster of machines. 
+ * 
+ * @author Christopher Wood, caw4567@rit.edu
+ */
+
+import java.io.IOException;
+
+import edu.rit.mp.BooleanBuf;
+import edu.rit.mp.DoubleBuf;
+import edu.rit.pj.BarrierAction;
+import edu.rit.pj.Comm;
+import edu.rit.pj.IntegerForLoop;
+import edu.rit.pj.IntegerSchedule;
+import edu.rit.pj.ParallelRegion;
+import edu.rit.pj.ParallelTeam;
+import edu.rit.pj.WorkerIntegerForLoop;
+import edu.rit.pj.WorkerLongForLoop;
+import edu.rit.pj.WorkerRegion;
+import edu.rit.pj.WorkerTeam;
+import edu.rit.util.Arrays;
+import edu.rit.util.Random;
+import edu.rit.util.Range;
+import edu.rit.pj.reduction.BooleanOp;
+import edu.rit.pj.reduction.IntegerOp;
+import edu.rit.pj.replica.ReplicatedBoolean;
+import edu.rit.pj.replica.ReplicatedInteger;
+
+public class JacobiClu
+{
+	static Comm world;
+	static int size;
+	static int rank;
+
+//	static ReplicatedBoolean converged;
+	static BooleanBuf converged;
+	//static boolean converged;
+	static ReplicatedInteger iterSuccess;
+	static boolean masterConverged;
+
+	static Range[] ranges;
+	static Range myrange;
+	static int mylb;
+	static int myub;
+
+	static DoubleBuf[] slices;
+	static DoubleBuf myslice;
+
+	static double A[][];
+	static double b[];
+
+	static int count = 0;
+
+	// The data structures to hold the calculation data structures.
+	private static double[] y;
+	private static double[] x;
+	
+	// The convergence cutoff delta value.
+	private static double epsilon = 0.00000001;
+
+	/**
+	 * The main entry point for the JacobiSmp program.
+	 * 
+	 * @param args
+	 *            - command line arguments
+	 * 
+	 * Note: The command-line parameters must specify the the matrix
+	 * dimension and a random seed. Also, the JVM heap size must be
+	 * increased to 2000MB to support allocating such large matrices.
+	 * See the usage description below for more details.
+	 * 
+	 * Usage:
+	 * 
+	 * java -Dpj.jvmflags="-Xmx500m" -Dpj.np=<NP> JacobiClu <n> <seed>
+	 */
+	public static void main(String[] args)
+	{
+		// Start the clock.
+		long startTime = System.currentTimeMillis();
+
+		// Set up the communication with the job server and pull
+		// out the details of the cluster.
+		try
+		{
+			Comm.init(args);
+			world = Comm.world();
+			size = world.size();
+			rank = world.rank();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		// Verify the command-line arguments.
+		if (args.length != 2)
+		{
+			error("Usage: java -Dpj.jvmflags=\"-Xmx500m\" -Dpj.np=<NP> "
+					+ "JacobiClu <n> <seed>");
+			System.exit(-1);
+		}
+
+		try
+		{
+			// Parse the command line arguments.
+			final int n = Integer.parseInt(args[0]);
+			if (n < 1)
+			{
+				error("Error: n must be at least 1.");
+				System.exit(-1);
+			}
+			final long seed = Long.parseLong(args[1]);
+			
+			// Set up the ranges for each process.
+			ranges = new Range(0, n - 1).subranges(size);
+			myrange = ranges[rank];
+			mylb = myrange.lb();
+			myub = myrange.ub();
+			
+			// Only allocate the required space for A, x, y, and b in 
+			// each process.Note that each process needs ALL of A and x, 
+			// and that the master process needs all of y to perform the swap.
+			x = new double[n];
+			A = new double[n][n];
+			b = new double[myub - mylb + 1];
+			if (rank == 0)
+			{
+				y = new double[n];
+			}
+			else
+			{
+				y = new double[myub - mylb + 1];
+			}
+
+			// Set up communication buffers.
+			slices = DoubleBuf.sliceBuffers(y, ranges);
+			myslice = slices[rank];
+
+			// Set up the replicated data structures that serve as 
+			// flow control flags for each process when computing the result.
+//			converged = new ReplicatedBoolean(BooleanOp.OR);
+			iterSuccess = new ReplicatedInteger(IntegerOp.SUM, 0);
+//			converged.reduce(false);
+//			converged = false;
+			converged = BooleanBuf.buffer(false);
+			if (rank == 0) 
+			{
+//				converged.put(0, false); // MASTER SETS CONVERGED TO FALSE
+				masterConverged = false;
+			}
+
+			// Split up the work among the processes...
+			// TODO: more informational comment...
+			new WorkerTeam().execute(new WorkerRegion()
+			{
+				public void run() throws Exception
+				{
+					execute(0, n - 1, new WorkerIntegerForLoop()
+					{
+						// Set up per-thread PRNG.
+						Random prng_thread = Random.getInstance(seed);
+
+						public void run(int first, int last) throws Exception
+						{
+							// Skip the PRNG ahead to the right place in the
+							// sequence. Each iteration gets (n + 1) values.
+							prng_thread.setSeed(seed);
+							prng_thread.skip((n + 1) * first);
+							for (int i = first; i <= last; ++i)
+							{
+								for (int j = 0; j < n; ++j)
+								{
+									A[i][j] = (prng_thread.nextDouble() * 9.0) + 1.0;
+								}
+								A[i][i] += 10.0 * n;
+								b[i - first] = (prng_thread.nextDouble() * 9.0) + 1.0;
+								x[i] = 1.0;
+							}
+						}
+
+						// Send row slice to master.
+						public void sendTaskOutput(Range range, Comm comm,
+								int mRank, int tag) throws IOException
+						{
+							comm.send(mRank, tag, DoubleBuf.sliceBuffer(b, range));
+						}
+
+						// Receive row slice from worker.
+						public void receiveTaskOutput(Range range, Comm comm,
+								int wRank, int tag) throws IOException
+						{
+							comm.receive(wRank, tag, DoubleBuf.sliceBuffer(b, range));
+						}
+					});
+
+					// debug.
+					if (rank == 0)
+					{
+						for (int i = 0; i < n; i++)
+						{
+							for (int j = 0; j < n; j++)
+							{
+								System.out.print(A[i][j] + " ");
+							}
+							System.out.println();
+						}
+					}
+					
+					// Each process loops indefinitely until converged
+					// evaluates to true.
+					while (true)
+					{
+//						System.out.println("waiting at the converged barrier...");
+						if (rank == 0) // TODO: REMOVE MAGIC NUMBER
+		                {
+							System.out.println("Root is sending out MASTER CONVERGED = " + masterConverged);
+							world.broadcast(0, BooleanBuf.buffer(masterConverged));
+		                }
+						else
+		                {
+							world.broadcast(0, converged);
+							System.out.println("WORKER GOT BACK MASTER CONVERGED = " + converged.get(0));
+		                }
+						if (converged.get(0)) // break out if we're done...
+						{
+							break;
+						}
+						// if (converged.get()) break;
+						execute(0, n - 1, new WorkerIntegerForLoop()
+						{
+							// Per-thread convergence flag.
+							boolean p_iterSuccess = true;
+
+							public void run(int first, int last)
+									throws Exception
+							{
+								double[] A_i;
+								double xVal;
+								double yVal;
+								double sum;
+								p_iterSuccess = true;
+
+								// debug
+								System.out.println("NEW FOR RANK " + rank);
+								for (int i = first; i <= last; i++)
+								{
+									System.out.println("(" + rank + ") x[i]"
+											+ x[i]);
+									System.out.println("(" + rank + ") b[i] = "
+											+ b[i]);
+								}
+
+								for (int i = first; i <= last; i++)
+								{
+									// Compute the upper and lower matrix product, 
+									// omitting the element at index i.
+									A_i = A[i];
+									xVal = x[i];
+									yVal = sum = 0.0;
+									for (int j = 0; j < i; j++)
+									{
+										sum += (A_i[j] * x[j]);
+									}
+									for (int j = i + 1; j < n; j++)
+									{
+										sum += (A_i[j] * x[j]);
+									}
+
+									// Compute the new y value
+									yVal = (b[i] - sum) / A_i[i];
+
+									// Check to see if the algorithm converged
+									// for this particular row in the matrix.
+									if (p_iterSuccess && !((Math.abs((2 * (xVal - yVal)) 
+											/ (xVal + yVal))) < epsilon))
+									{
+										p_iterSuccess = false;
+									}
+
+									// Store the y[] coordinate.
+									y[i - first] = yVal;
+								}
+
+								// Reduce our convergence result with the master.
+								if (p_iterSuccess)
+								{
+									System.out.println(rank
+											+ " process converged.");
+									System.out.println(iterSuccess.get());
+									iterSuccess.reduce(1); 
+									// TODO: this sets the value to 2 with only
+									// one process?...
+								}
+							}
+
+							/**
+							 * Send the x vector from the master to the workers.
+							 */
+							public void sendTaskInput(Range range, Comm comm,
+									int mRank, int tag) throws IOException
+							{
+								System.out.println("rank " + rank
+										+ " sending input");
+								comm.send(mRank, tag,
+										DoubleBuf.sliceBuffer(x, range));
+							}
+
+							/** 
+							 * Receive the x vector from the master.
+							 */
+							public void receiveTaskInput(Range range,
+									Comm comm, int mRank, int tag)
+									throws IOException
+							{
+								System.out.println("rank " + rank
+										+ " receiving input");
+								comm.receive(mRank, tag,
+										DoubleBuf.sliceBuffer(x, range));
+							}
+
+							/**
+							 * Send the y slice to the master.
+							 */
+							public void sendTaskOutput(Range range, Comm comm,
+									int mRank, int tag) throws IOException
+							{
+								System.out.println("rank " + rank
+										+ " sending output");
+								comm.send(mRank, tag,
+										DoubleBuf.sliceBuffer(y, range));
+							}
+
+							/**
+							 * Receive the y slice from the worker.
+							 */
+							public void receiveTaskOutput(Range range,
+									Comm comm, int wRank, int tag)
+									throws IOException
+							{
+								System.out.println("rank " + rank
+										+ " receiving output");
+								comm.receive(wRank, tag, DoubleBuf.buffer(y));
+
+								// After receiving everything, perform the
+								// sequential section.
+								// TODO: Swap the x[] and y[] vectors.
+								double tmp;
+								for (int i = 0; i < n; i++)
+								{
+									tmp = x[i];
+									x[i] = y[i];
+									y[i] = tmp;
+								}
+
+								System.out.println("#iterSuccess = " + iterSuccess.get());
+
+								// Reset the iteration variables.
+//								converged.reduce(iterSuccess.get() >= size);
+								if (iterSuccess.get() >= size && rank == 0) {
+									masterConverged = true;
+								}
+								System.out.println("size = " + size);
+								count++;
+								if (iterSuccess.get() >= size)
+								{
+									System.out.println("AT LEAST ITS WORKING!");
+									System.out.println("count = " + count);
+								}
+								
+								// Reset the process count to 0
+								iterSuccess.reduce(iterSuccess.get() * -1); 
+							}
+						});
+					}
+				}
+			});
+
+			// Display the solution and time.
+			int rootId = 0;
+			if (rank == rootId)
+			{
+				if (n <= 100)
+				{
+					for (int i = 0; i < n; ++i)
+					{
+						System.out.printf("%d %g%n", i, x[i]);
+					}
+				}
+				else
+				{
+					for (int i = 0; i <= 49; ++i)
+					{
+						System.out.printf("%d %g%n", i, x[i]);
+					}
+					for (int i = n - 50; i < n; ++i)
+					{
+						System.out.printf("%d %g%n", i, x[i]);
+					}
+				}
+				long endTime = System.currentTimeMillis();
+				System.out.printf("%d msec%n", (endTime - startTime));
+			}
+		}
+		catch (NumberFormatException ex1)
+		{
+			error("Error parsing command line argument(s).");
+			ex1.printStackTrace();
+		}
+		catch (Exception ex1)
+		{
+			error("Error in the ParallelRegion run() method.");
+			ex1.printStackTrace();
+		}
+	}
+
+	/**
+	 * Display an error message.
+	 * 
+	 * @param msg
+	 *            - message to display.
+	 * @return void
+	 */
+	public static void error(String msg)
+	{
+		System.err.println(msg);
+	}
+}
