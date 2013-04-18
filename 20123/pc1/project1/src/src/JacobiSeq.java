@@ -151,23 +151,8 @@ public class JacobiSeq
 		double sum;
 		double tmp;
 		
-		
-		// INSERTED FOR TEST
-		int count = 0;
-		
 		while (!converged)
-		{
-			
-			// INSERTED FOR TEST
-			System.out.println("NEW RUN");
-			for (int i = 0; i < n; i++) {
-//				for (int j = 0; j < n; j++) {
-//					System.out.print(A[i][j] + " ");
-//				}
-				System.out.println("x = " + x[i]);
-				System.out.println("b = " + b[i]);
-			}
-			
+		{	
 			for (int i = 0; i < n; i++)
 			{
 				// Compute the upper and lower matrix product, omitting
@@ -211,13 +196,6 @@ public class JacobiSeq
 			// Reset the iteration variables.
 			converged = iterSuccess;
 			iterSuccess = true;
-			
-			
-			// INSERTED FOR TEST
-			count++;
-			if (converged) {
-				System.out.println("COUNT = " + count);
-			}
 		}
 
 		return x;

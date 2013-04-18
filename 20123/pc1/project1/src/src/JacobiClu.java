@@ -8,19 +8,8 @@
 
 import java.io.IOException;
 
-import edu.rit.mp.BooleanBuf;
 import edu.rit.mp.DoubleBuf;
-import edu.rit.pj.BarrierAction;
 import edu.rit.pj.Comm;
-import edu.rit.pj.IntegerForLoop;
-import edu.rit.pj.IntegerSchedule;
-import edu.rit.pj.ParallelRegion;
-import edu.rit.pj.ParallelTeam;
-import edu.rit.pj.WorkerIntegerForLoop;
-import edu.rit.pj.WorkerLongForLoop;
-import edu.rit.pj.WorkerRegion;
-import edu.rit.pj.WorkerTeam;
-import edu.rit.util.Arrays;
 import edu.rit.util.Random;
 import edu.rit.util.Range;
 import edu.rit.pj.reduction.BooleanOp;
@@ -34,24 +23,20 @@ public class JacobiClu
 	static int size;
 	static int rank;
 
-	// static ReplicatedBoolean converged;
 	static ReplicatedBoolean converged;
-	// static boolean converged;
 	static ReplicatedInteger iterSuccess;
 	static boolean masterConverged;
 
 	static Range[] ranges;
 	static Range myrange;
-	static int mylb;
-	static int myub;
+	static int first;
+	static int last;
 
 	static DoubleBuf[] masterY;
 	static DoubleBuf processY;
 
 	static double A[][];
 	static double b[];
-
-	static int count = 0;
 
 	// The data structures to hold the calculation data structures.
 	private static double[] y;
@@ -117,19 +102,18 @@ public class JacobiClu
 			// Set up the ranges for each process.
 			ranges = new Range(0, n - 1).subranges(size);
 			myrange = ranges[rank];
-			mylb = myrange.lb();
-			myub = myrange.ub();
+			first = myrange.lb();
+			last = myrange.ub();
 			
 			// Only allocate the required space for A, x, y, and b in 
 			// each process.Note that each process needs ALL of A and x, 
 			// and that the master process needs all of y to perform the swap.
 			x = new double[n];
-			b = new double[myub - mylb + 1];
-			A = new double[myub - mylb + 1][n];
-			double[] allY = new double[n];
+			b = new double[last - first + 1];
+			A = new double[last - first + 1][n];
 			y = new double[n];
 
-			// Set up communication buffers.
+			// Set up communication buffers for the y variable.
 			masterY = DoubleBuf.sliceBuffers(y, ranges);
 			processY = masterY[rank]; // fetch our version of Y and store a reference to it...
 
@@ -137,43 +121,29 @@ public class JacobiClu
 			// flow control flags for each process when computing the result.
 			converged = new ReplicatedBoolean(BooleanOp.OR, false);
 			iterSuccess = new ReplicatedInteger(IntegerOp.SUM, 0);
-
-			// Split up the work among the processes.
-			new WorkerTeam().execute(new WorkerRegion()
-			{
-				public void run() throws Exception
-				{
-					execute(0, n - 1, new WorkerIntegerForLoop()
-					{
-						// Set up per-thread PRNG.
-						Random prng_thread = Random.getInstance(seed);
-
-						public void run(int first, int last) throws Exception
-						{
-							// Skip the PRNG ahead to the right place in the
-							// sequence. Each iteration gets (n + 1) values.
-							prng_thread.setSeed(seed);
-							prng_thread.skip((n + 1) * first);
-							for (int i = first; i <= last; ++i)
-							{
-								for (int j = 0; j < n; ++j)
-								{
-									A[i - first][j] = 
-										(prng_thread.nextDouble() * 9.0) + 1.0;
-								}
-								A[i - first][i] += 10.0 * n;
-								b[i - first] = 
-									(prng_thread.nextDouble() * 9.0) + 1.0;
-								x[i] = 1.0;
-							}
-						}
-					});
-				}
-			});
 			
-			if (rank == 0) // master initializes x! 
+			// Set up per-process PRNG.
+			Random prng_thread = Random.getInstance(seed);
+			
+			// Skip the PRNG ahead to the right place in the
+			// sequence. Each iteration gets (n + 1) values.
+			prng_thread.setSeed(seed);
+			prng_thread.skip((n + 1) * first);
+			for (int i = first; i <= last; ++i)
 			{
-				for (int i = 0; i < n; i++) {
+				for (int j = 0; j < n; ++j)
+				{
+					A[i - first][j] = (prng_thread.nextDouble() * 9.0) + 1.0;
+				}
+				A[i - first][i] += 10.0 * n;
+				b[i - first] = (prng_thread.nextDouble() * 9.0) + 1.0;
+				x[i] = 1.0;
+			}
+			
+			if (rank == 0) // master initializes x 
+			{
+				for (int i = 0; i < n; i++) 
+				{
 					x[i] = 1.0;
 				}
 			}
@@ -196,8 +166,6 @@ public class JacobiClu
 				double yVal;
 				double sum;
 				boolean p_iterSuccess = true;
-				int first = mylb;
-				int last = myub;
 				for (int i = first; i <= last; i++)
 				{
 					// Compute the upper and lower matrix product, 
@@ -215,7 +183,7 @@ public class JacobiClu
 					}
 
 					// Compute the new y value
-					yVal = (b[i - mylb] - sum) / A_i[i];
+					yVal = (b[i - first] - sum) / A_i[i];
 
 					// Check to see if the algorithm converged
 					// for this particular row in the matrix.
@@ -248,20 +216,20 @@ public class JacobiClu
 					}
 					
 					// Reset the iteration variables.
-					if (iterSuccess.get() >= size && rank == 0) {
+					if (iterSuccess.get() >= size) 
+					{
 						masterConverged = true;
 						converged.reduce(true); // send true to all other processes
 					}
 					
-					// Reset the process count to 0
+					// Reset the process success count to 0
 					iterSuccess.reduce(iterSuccess.get() * -1); 
 				}
 
 			}
 			
-			// Display the solution and time.
-			int rootId = 0;
-			if (rank == rootId)
+			// Display the solution and time (from the root process)
+			if (rank == 0)
 			{
 				if (n <= 100)
 				{
