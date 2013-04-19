@@ -11,18 +11,9 @@ import java.io.IOException;
 import edu.rit.mp.BooleanBuf;
 import edu.rit.mp.DoubleBuf;
 import edu.rit.pj.Comm;
-import edu.rit.pj.IntegerForLoop;
-import edu.rit.pj.ParallelRegion;
-import edu.rit.pj.ParallelTeam;
-import edu.rit.pj.WorkerIntegerForLoop;
-import edu.rit.pj.WorkerRegion;
-import edu.rit.pj.WorkerTeam;
 import edu.rit.util.Random;
 import edu.rit.util.Range;
 import edu.rit.pj.reduction.BooleanOp;
-import edu.rit.pj.reduction.IntegerOp;
-import edu.rit.pj.replica.ReplicatedBoolean;
-import edu.rit.pj.replica.ReplicatedInteger;
 
 public class JacobiClu
 {
@@ -30,31 +21,27 @@ public class JacobiClu
 	static int size;
 	static int rank;
 
-//	static ReplicatedBoolean converged;
-//	static ReplicatedInteger iterSuccess;
-	static BooleanBuf iterSuccess;
-	static boolean masterConverged;
-	static boolean processConverged;
-	
-	static boolean p_iterSuccess;
+//	static BooleanBuf iterSuccess;
+//	static boolean masterConverged;
+//	static boolean p_iterSuccess;
 	
 	static int count = 0;
 
-	static Range[] ranges;
-	static Range myrange;
+//	static Range[] ranges;
+//	static Range myrange;
 	static int first;
 	static int last;
 
-	static DoubleBuf[] masterY;
-	static DoubleBuf processY;
-	static DoubleBuf xBuf;
+//	static DoubleBuf[] masterY;
+//	static DoubleBuf processY;
+//	static DoubleBuf xBuf;
 
 	static double A[][];
 	static double b[];
 
 	// The data structures to hold the calculation data structures.
-	private static double[] y;
-	private static double[] x;
+	static double[] y;
+	static double[] x;
 
 	// The convergence cutoff delta value.
 	private static double epsilon = 0.00000001;
@@ -79,6 +66,10 @@ public class JacobiClu
 	{
 		// Start the clock.
 		long startTime = System.currentTimeMillis();
+		
+//		Comm world = null;
+//		int size = 0;
+//		int rank = 0;
 
 		// Set up the communication with the job server and pull
 		// out the details of the cluster.
@@ -114,30 +105,32 @@ public class JacobiClu
 			final long seed = Long.parseLong(args[1]);
 			
 			// Set up the ranges for each process.
-			ranges = new Range(0, n - 1).subranges(size);
-			myrange = ranges[rank];
+			Range[] ranges = new Range(0, n - 1).subranges(size);
+			Range myrange = ranges[rank];
 			first = myrange.lb();
 			last = myrange.ub();
 			
 			// Only allocate the required space for A, x, y, and b in 
-			// each process.Note that each process needs ALL of A and x, 
-			// and that the master process needs all of y to perform the swap.
+			// each process. 
 			x = new double[n];
 			b = new double[last - first + 1];
-			A = new double[last - first + 1][n];
+			A = new double[last - first + 1][];
 			y = new double[last - first + 1];
+			
+			double[] A_i;
 
 			Random prng_thread = Random.getInstance(seed);
 			prng_thread.setSeed(seed);
 			prng_thread.skip((n + 1) * first);
-			for (int i = first; i <= last; ++i)
+			for (int i = first; i <= last; i++)
 			{
-				for (int j = 0; j < n; ++j)
+				A_i = A[i - first] = new double[n];
+				for (int j = 0; j < n; j++)
 				{
 //	        		System.out.println(rank + " trying " + first + " - " + last + " for A matrix index with i = " + i);
-					A[i - first][j] = (prng_thread.nextDouble() * 9.0) + 1.0;
+					A_i[j] = (prng_thread.nextDouble() * 9.0) + 1.0;
 				}
-				A[i - first][i] += 10.0 * n;
+				A_i[i] += 10.0 * n;
 				b[i - first] = (prng_thread.nextDouble() * 9.0) + 1.0;
 				y[i - first] = 1.0;
 			}
@@ -146,130 +139,120 @@ public class JacobiClu
     		boolean converged = false;
     		DoubleBuf[] xBuffers = DoubleBuf.sliceBuffers(x, ranges);
     		DoubleBuf yBuffer = DoubleBuf.buffer(y);
-    		double xVal;
-			double yVal;
+//    		double xVal;
+//			double yVal;
 			double sum;
-//			boolean p_iterSuccess;
+			boolean p_iterSuccess;
+			
+			long end1 = System.currentTimeMillis();
+			System.out.println("time = " + (end1 - startTime));
+			
     		while (!converged) 
     		{
-    			// TODO: PULL GATHER&SWAP OUT TO THE VERY END AFTER THE LOOP CLOSES 
-    			// Every process needs the -entire- x vector, so we need to do an all gather
-    			// I don't see a way around this...
+//    			long start = System.currentTimeMillis();
+    			
+    			// Every process needs the -entire- x vector, so we need 
+    			// to do an "all gather"
     			world.allGather(yBuffer, xBuffers);
-    			
-//    			p_iterSuccess = true;
-//        				System.out.println(rank + " starting its loop.");
-    			new ParallelTeam().execute(new ParallelRegion()
+    			p_iterSuccess = true;
+//    			System.out.println(first + " - " + last);
+//    			long commEnd = System.currentTimeMillis();
+    			int offset;
+    			for (int i = first; i <= last; i++)
     			{
-    			
-//    				boolean p_iterSuccess = true;
-    				double xVal;
-    				double yVal;
-    				double sum;
-    				
-    				/**
-    				 * Run the solver.
-    				 */
-    				public void run() throws Exception
+    				// Compute the upper and lower matrix product, omitting
+    				// the element at index i
+    				offset = i - first;
+    				A_i = A[offset];
+    				double yVal = 0.0;
+    				double xVal = x[i];
+    				sum = 0.0;
+//    				long sumStart = System.currentTimeMillis();
+//    				System.out.println(i);
+    				for (int index = 0; index < i; index++)
     				{
-    					// Populate the test matrix and equation vector.
-    					p_iterSuccess = true;
-    					execute(first, last, new IntegerForLoop()
-    					{
-							public void run(int arg0, int arg1)
-									throws Exception
-							{
-								for (int i = first; i <= last; i++)
-								{
-									// Compute the upper and lower matrix product, 
-									// omitting the element at index i.
-									double[] A_i = A[i - first];
-									xVal = x[i];
-//					        					xVal = xBuf.get(i);
-									yVal = sum = 0.0;
-									for (int j = 0; j < i; j++)
-									{
-//				        						System.out.println("adding: " + A_i[j]);
-//				        						System.out.println("multing: " + x[j]);
-										sum += (A_i[j] * x[j]);
-									}
-									for (int j = i + 1; j < n; j++)
-									{
-										sum += (A_i[j] * x[j]);
-									}
-//				        					System.out.println("Computed sum: " + sum);
-
-									// Compute the new y value
-									yVal = (b[i - first] - sum) / A_i[i];
-
-									// Check to see if the algorithm converged
-									// for this particular row in the matrix.
-									if (p_iterSuccess && !((Math.abs((2 * (xVal - yVal)) 
-											/ (xVal + yVal))) < epsilon))
-									{
-										p_iterSuccess = false;
-									}
-
-									// Store the y[] coordinate.
-//				        					System.out.println(rank + " Computed: " + yVal + " for index = " + i);
-									y[i - first] = yVal;
-								}
-							}
-    					});
+    					// DEBUG
+//    					System.out.println("adding: " + A_i[index]);
+//    					System.out.println("multing: " + x[index]);
+    					
+    					
+    					sum += (A_i[index] * x[index]);
+    				}
+    				for (int index = i + 1; index < n; index++)
+    				{
+    					sum += (A_i[index] * x[index]);
     				}
     				
-//    				public void finish()
-//    				{
-//    					
-//    				}
-    			});
+    				
+//    				System.out.println("Computed sum: " + sum);
+
+    				// Compute the y[] value.
+    				yVal = (b[offset] - sum) / A_i[i];
+//    				long sumEnd = System.currentTimeMillis();
+//    				System.out.println("sum = " + (sumEnd - sumStart));
+//    				System.out.println("Computed y value " + yVal);
+
+    				// Check for convergence.
+    				if (p_iterSuccess && 
+    					!(Math.abs((2 * (xVal - yVal)) 
+    							/ (xVal + yVal)) < epsilon))
+    				{
+    					p_iterSuccess = false;
+    				}
+    				
+    				// Store the y coordinate value.
+    				y[offset] = yVal;
+    			}
 //				for (int i = first; i <= last; i++)
 //				{
+////					System.out.println(i);
 //					// Compute the upper and lower matrix product, 
 //					// omitting the element at index i.
-//					double[] A_i = A[i - first];
+//					offset = i - first;
+//					A_i = A[offset];
 //					xVal = x[i];
-////	        					xVal = xBuf.get(i);
-//					yVal = sum = 0.0;
+//					yVal = 0.0;
+//					sum = b[offset];
+////					long sumStart = System.currentTimeMillis();
 //					for (int j = 0; j < i; j++)
 //					{
-////        						System.out.println("adding: " + A_i[j]);
-////        						System.out.println("multing: " + x[j]);
-//						sum += (A_i[j] * x[j]);
+//						sum -= (A_i[j] * x[j]);
 //					}
 //					for (int j = i + 1; j < n; j++)
 //					{
-//						sum += (A_i[j] * x[j]);
+//						sum -= (A_i[j] * x[j]);
 //					}
-////        					System.out.println("Computed sum: " + sum);
 //
-//					// Compute the new y value
-//					yVal = (b[i - first] - sum) / A_i[i];
+//					// Compute the new y value.
+////					yVal = (b[offset] - sum) / A_i[i];
+//					yVal = sum / A_i[i];
+////					long sumEnd = System.currentTimeMillis();
+////					System.out.println("sum = " + (sumEnd - sumStart));
 //
 //					// Check to see if the algorithm converged
 //					// for this particular row in the matrix.
-//					if (p_iterSuccess && !((Math.abs((2 * (xVal - yVal)) 
-//							/ (xVal + yVal))) < epsilon))
+//					if (p_iterSuccess && !((Math.abs((2 * (xVal - yVal)) / (xVal + yVal))) < epsilon))
 //					{
 //						p_iterSuccess = false;
 //					}
 //
-//					// Store the y[] coordinate.
-////        					System.out.println(rank + " Computed: " + yVal + " for index = " + i);
-//					y[i - first] = yVal;
+//					// Store the y coordinate.
+////					yBuffer.put(offset, yVal);
+//					y[offset] = yVal;
 //				}
+//				long compEnd = System.currentTimeMillis();
 				
 				// Make everyone report their convergence results
-//        				System.out.println(rank + " reducing...");
 				BooleanBuf bBuf = BooleanBuf.buffer(p_iterSuccess);
-//        				world.allReduce(bBuf, BooleanOp.AND);
-//        				converged = bBuf.get(0);
-				world.reduce(0, bBuf, BooleanOp.AND); // gather the result
-				if (rank == 0 && bBuf.get(0) == true) 
-				{
-					converged = true;
-				} 
-				world.broadcast(0, BooleanBuf.buffer(converged)); // send it back out
+				world.allReduce(bBuf, BooleanOp.AND);
+				converged = bBuf.get(0);
+
+//				long end = System.currentTimeMillis();
+//				System.out.println("---");
+//				System.out.println(commEnd - start);
+//				System.out.println(compEnd - commEnd);
+//				System.out.println(end - compEnd);
+//				System.out.println(end - start);
     		}
 			
 			// Display the solution and time (from the root process)

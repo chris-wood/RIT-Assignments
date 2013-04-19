@@ -65,20 +65,22 @@ public class JacobiSeq
 			// Allocate the data structures.
 			final double[][] A = new double[n][n];
 			final double[] b = new double[n];
+//			
+//			// Initialize the data.
+//			Random prng = Random.getInstance(seed);
+//			double[] A_i;
+//			for (int i = 0; i < n; i++)
+//			{
+//				A_i = A[i];
+//				for (int j = 0; j < n; j++)
+//				{
+//					A_i[j] = (prng.nextDouble() * 9.0) + 1.0;
+//				}
+//				A_i[i] += 10.0 * n;
+//				b[i] = (prng.nextDouble() * 9.0) + 1.0;
+//			}
 			
-			// Initialize the data.
-			Random prng = Random.getInstance(seed);
-			double[] A_i;
-			for (int i = 0; i < n; i++)
-			{
-				A_i = A[i];
-				for (int j = 0; j < n; j++)
-				{
-					A_i[j] = (prng.nextDouble() * 9.0) + 1.0;
-				}
-				A_i[i] += 10.0 * n;
-				b[i] = (prng.nextDouble() * 9.0) + 1.0;
-			}
+			System.out.println("time = " + (System.currentTimeMillis() - startTime));
 			
 			// Create the solver, initialize the data, solve, and then 
 			// print the solution
@@ -179,6 +181,8 @@ public class JacobiSeq
 //				}
 //				System.out.println(" - " + x[i]);
 //			}
+			System.out.println("0 - " + (n-1));
+			long start = System.currentTimeMillis();
 //			
 			for (int i = 0; i < n; i++)
 			{
@@ -188,6 +192,8 @@ public class JacobiSeq
 				double yVal = 0.0;
 				double xVal = x[i];
 				sum = 0.0;
+//				long sumStart = System.currentTimeMillis();
+//				System.out.println(i);
 				for (int index = 0; index < i; index++)
 				{
 					// DEBUG
@@ -201,10 +207,14 @@ public class JacobiSeq
 				{
 					sum += (A_i[index] * x[index]);
 				}
+				
+				
 //				System.out.println("Computed sum: " + sum);
 
 				// Compute the y[] value.
 				yVal = (b[i] - sum) / A_i[i];
+//				long sumEnd = System.currentTimeMillis();
+//				System.out.println("sum = " + (sumEnd - sumStart));
 //				System.out.println("Computed y value " + yVal);
 
 				// Check for convergence.
@@ -236,6 +246,10 @@ public class JacobiSeq
 			// Reset the iteration variables.
 			converged = iterSuccess;
 			iterSuccess = true;
+			
+			// DEBUG
+			long end = System.currentTimeMillis();
+			System.out.println(end - start);
 		}
 //		System.out.println(count);
 
