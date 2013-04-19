@@ -88,7 +88,8 @@ public class JacobiSeq
 			{
 				for (int i = 0; i < n; ++i)
 				{
-					System.out.printf("%d %g%n", i, x[i]);
+//					System.out.printf("%d %g%n", i, x[i]);
+					System.out.println(i + " " + x[i]);
 				}
 			}
 			else
@@ -151,8 +152,34 @@ public class JacobiSeq
 		double sum;
 		double tmp;
 		
+		// DBEUG
+		int count = 0;
+//		if (rank == 0) 
+//		{
+			for (int i = 0; i < n; i++)
+			{
+				for (int j = 0; j < n; j++) {
+					System.out.print(A[i][j] + " ");
+				}
+//				x[i] = 1.0;
+//				System.out.println();
+				System.out.println(b[i]);
+			}
+//		}
+		
+		
 		while (!converged)
 		{	
+			count++;
+			
+			for (int i = 0; i < n; i++)
+			{
+				for (int j = 0; j < n; j++) {
+					System.out.print(A[i][j] + " ");
+				}
+				System.out.println(" - " + x[i]);
+			}
+			
 			for (int i = 0; i < n; i++)
 			{
 				// Compute the upper and lower matrix product, omitting
@@ -163,15 +190,22 @@ public class JacobiSeq
 				sum = 0.0;
 				for (int index = 0; index < i; index++)
 				{
+					// DEBUG
+					System.out.println("adding: " + A_i[index]);
+					System.out.println("multing: " + x[index]);
+					
+					
 					sum += (A_i[index] * x[index]);
 				}
 				for (int index = i + 1; index < n; index++)
 				{
 					sum += (A_i[index] * x[index]);
 				}
+				System.out.println("Computed sum: " + sum);
 
 				// Compute the y[] value.
 				yVal = (b[i] - sum) / A_i[i];
+				System.out.println("Computed y value " + yVal);
 
 				// Check for convergence.
 				if (iterSuccess && 
@@ -183,6 +217,12 @@ public class JacobiSeq
 				
 				// Store the y coordinate value.
 				y[i] = yVal;
+			}
+			
+			// DBEUG
+			System.out.println("output y values..." + count);
+			for(int i = 0; i < n; i++) {
+				System.out.println(y[i]);
 			}
 
 			// Swap the x[] and y[] vectors.
@@ -197,6 +237,7 @@ public class JacobiSeq
 			converged = iterSuccess;
 			iterSuccess = true;
 		}
+		System.out.println(count);
 
 		return x;
 	}
