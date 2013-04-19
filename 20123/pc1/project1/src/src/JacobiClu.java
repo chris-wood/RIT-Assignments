@@ -29,12 +29,15 @@ public class JacobiClu
 
 //	static Range[] ranges;
 //	static Range myrange;
-	static int first;
-	static int last;
+//	static int first;
+//	static int last;
 
 //	static DoubleBuf[] masterY;
 //	static DoubleBuf processY;
 //	static DoubleBuf xBuf;
+	
+	static DoubleBuf[] xBuffers;
+	static DoubleBuf yBuffer;
 
 	static double A[][];
 	static double b[];
@@ -107,8 +110,8 @@ public class JacobiClu
 			// Set up the ranges for each process.
 			Range[] ranges = new Range(0, n - 1).subranges(size);
 			Range myrange = ranges[rank];
-			first = myrange.lb();
-			last = myrange.ub();
+			final int first = myrange.lb();
+			final int last = myrange.ub();
 			
 			// Only allocate the required space for A, x, y, and b in 
 			// each process. 
@@ -124,7 +127,8 @@ public class JacobiClu
 			prng_thread.skip((n + 1) * first);
 			for (int i = first; i <= last; i++)
 			{
-				A_i = A[i - first] = new double[n];
+				A[i - first] = new double[n];
+				A_i = A[i - first]; 
 				for (int j = 0; j < n; j++)
 				{
 //	        		System.out.println(rank + " trying " + first + " - " + last + " for A matrix index with i = " + i);
@@ -137,10 +141,10 @@ public class JacobiClu
     		
     		// Allocated buffers for communication and whatnot
     		boolean converged = false;
-    		DoubleBuf[] xBuffers = DoubleBuf.sliceBuffers(x, ranges);
-    		DoubleBuf yBuffer = DoubleBuf.buffer(y);
-//    		double xVal;
-//			double yVal;
+    		xBuffers = DoubleBuf.sliceBuffers(x, ranges);
+    		yBuffer = DoubleBuf.buffer(y);
+    		double xVal;
+			double yVal;
 			double sum;
 			boolean p_iterSuccess;
 			
@@ -149,33 +153,23 @@ public class JacobiClu
 			
     		while (!converged) 
     		{
-//    			long start = System.currentTimeMillis();
-    			
     			// Every process needs the -entire- x vector, so we need 
     			// to do an "all gather"
-    			world.allGather(yBuffer, xBuffers);
+    			world.allGather(yBuffer, xBuffers); // ARK does this.
     			p_iterSuccess = true;
-//    			System.out.println(first + " - " + last);
-//    			long commEnd = System.currentTimeMillis();
+    			long commEnd = System.currentTimeMillis();
     			int offset;
-    			for (int i = first; i <= last; i++)
+    			for (int i = 0; i < n; i++) // first - last ---- ACCESS TO FIRST AND LAST ARE ADDING 100MS
     			{
     				// Compute the upper and lower matrix product, omitting
     				// the element at index i
-    				offset = i - first;
-    				A_i = A[offset];
-    				double yVal = 0.0;
-    				double xVal = x[i];
-    				sum = 0.0;
-//    				long sumStart = System.currentTimeMillis();
-//    				System.out.println(i);
+//    				offset = i - first;
+//    				A_i = A[offset];
+    				A_i = A[i];
+    				yVal = sum = 0.0;
+    				xVal = x[i];
     				for (int index = 0; index < i; index++)
     				{
-    					// DEBUG
-//    					System.out.println("adding: " + A_i[index]);
-//    					System.out.println("multing: " + x[index]);
-    					
-    					
     					sum += (A_i[index] * x[index]);
     				}
     				for (int index = i + 1; index < n; index++)
@@ -183,74 +177,31 @@ public class JacobiClu
     					sum += (A_i[index] * x[index]);
     				}
     				
-    				
-//    				System.out.println("Computed sum: " + sum);
-
     				// Compute the y[] value.
-    				yVal = (b[offset] - sum) / A_i[i];
-//    				long sumEnd = System.currentTimeMillis();
-//    				System.out.println("sum = " + (sumEnd - sumStart));
-//    				System.out.println("Computed y value " + yVal);
+    				yVal = (b[i] - sum) / A_i[i]; // b[offset]
 
     				// Check for convergence.
-    				if (p_iterSuccess && 
-    					!(Math.abs((2 * (xVal - yVal)) 
+    				if (!(Math.abs((2 * (xVal - yVal)) 
     							/ (xVal + yVal)) < epsilon))
     				{
     					p_iterSuccess = false;
     				}
     				
     				// Store the y coordinate value.
-    				y[offset] = yVal;
+//    				y[offset] = yVal;
+    				y[i] = yVal;
     			}
-//				for (int i = first; i <= last; i++)
-//				{
-////					System.out.println(i);
-//					// Compute the upper and lower matrix product, 
-//					// omitting the element at index i.
-//					offset = i - first;
-//					A_i = A[offset];
-//					xVal = x[i];
-//					yVal = 0.0;
-//					sum = b[offset];
-////					long sumStart = System.currentTimeMillis();
-//					for (int j = 0; j < i; j++)
-//					{
-//						sum -= (A_i[j] * x[j]);
-//					}
-//					for (int j = i + 1; j < n; j++)
-//					{
-//						sum -= (A_i[j] * x[j]);
-//					}
-//
-//					// Compute the new y value.
-////					yVal = (b[offset] - sum) / A_i[i];
-//					yVal = sum / A_i[i];
-////					long sumEnd = System.currentTimeMillis();
-////					System.out.println("sum = " + (sumEnd - sumStart));
-//
-//					// Check to see if the algorithm converged
-//					// for this particular row in the matrix.
-//					if (p_iterSuccess && !((Math.abs((2 * (xVal - yVal)) / (xVal + yVal))) < epsilon))
-//					{
-//						p_iterSuccess = false;
-//					}
-//
-//					// Store the y coordinate.
-////					yBuffer.put(offset, yVal);
-//					y[offset] = yVal;
-//				}
-//				long compEnd = System.currentTimeMillis();
+    			long compEnd = System.currentTimeMillis();
 				
 				// Make everyone report their convergence results
 				BooleanBuf bBuf = BooleanBuf.buffer(p_iterSuccess);
-				world.allReduce(bBuf, BooleanOp.AND);
+				world.allReduce(bBuf, BooleanOp.AND); // ARK does this.
 				converged = bBuf.get(0);
 
 //				long end = System.currentTimeMillis();
 //				System.out.println("---");
 //				System.out.println(commEnd - start);
-//				System.out.println(compEnd - commEnd);
+				System.out.println(compEnd - commEnd);
 //				System.out.println(end - compEnd);
 //				System.out.println(end - start);
     		}

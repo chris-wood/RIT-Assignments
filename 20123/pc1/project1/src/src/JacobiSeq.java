@@ -218,7 +218,8 @@ public class JacobiSeq
 //				System.out.println("Computed y value " + yVal);
 
 				// Check for convergence.
-				if (iterSuccess && 
+				//if (iterSuccess &&
+				if (
 					!(Math.abs((2 * (xVal - yVal)) 
 							/ (xVal + yVal)) < epsilon))
 				{
