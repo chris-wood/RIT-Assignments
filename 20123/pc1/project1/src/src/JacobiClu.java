@@ -99,6 +99,7 @@ public class JacobiClu
 		try
 		{
 			// Parse the command line arguments.
+			int first, last;
 			final int n = Integer.parseInt(args[0]);
 			if (n < 1)
 			{
@@ -110,22 +111,22 @@ public class JacobiClu
 			// Set up the ranges for each process.
 			Range[] ranges = new Range(0, n - 1).subranges(size);
 			Range myrange = ranges[rank];
-			final int first = myrange.lb();
-			final int last = myrange.ub();
+			first = myrange.lb();
+			last = myrange.ub() + 1;
 			
 			// Only allocate the required space for A, x, y, and b in 
-			// each process. 
+			// each process.
 			x = new double[n];
-			b = new double[last - first + 1];
-			A = new double[last - first + 1][];
-			y = new double[last - first + 1];
+			b = new double[last - first];
+			A = new double[last - first][];
+			y = new double[last - first];
 			
 			double[] A_i;
 
 			Random prng_thread = Random.getInstance(seed);
 			prng_thread.setSeed(seed);
 			prng_thread.skip((n + 1) * first);
-			for (int i = first; i <= last; i++)
+			for (int i = first; i < last; i++)
 			{
 				A[i - first] = new double[n];
 				A_i = A[i - first]; 
@@ -146,6 +147,7 @@ public class JacobiClu
     		double xVal;
 			double yVal;
 			double sum;
+			int offset;
 			boolean p_iterSuccess;
 			
 			long end1 = System.currentTimeMillis();
@@ -155,17 +157,18 @@ public class JacobiClu
     		{
     			// Every process needs the -entire- x vector, so we need 
     			// to do an "all gather"
-    			world.allGather(yBuffer, xBuffers); // ARK does this.
+    			world.allGather(yBuffer, xBuffers); // good
     			p_iterSuccess = true;
     			long commEnd = System.currentTimeMillis();
-    			int offset;
-    			for (int i = 0; i < n; i++) // first - last ---- ACCESS TO FIRST AND LAST ARE ADDING 100MS
+//    			int offset;
+//    			System.out.println((n-1) + " " + first + " " + last);
+    			for (int i = first; i < last; i++) // first - last ---- ACCESS TO LAST IS ADDING 100MS
     			{
     				// Compute the upper and lower matrix product, omitting
     				// the element at index i
-//    				offset = i - first;
-//    				A_i = A[offset];
-    				A_i = A[i];
+    				offset = i - first;
+    				A_i = A[offset];
+//    				A_i = A[i];
     				yVal = sum = 0.0;
     				xVal = x[i];
     				for (int index = 0; index < i; index++)
