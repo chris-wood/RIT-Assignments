@@ -11,6 +11,9 @@ import java.io.IOException;
 import edu.rit.mp.BooleanBuf;
 import edu.rit.mp.DoubleBuf;
 import edu.rit.pj.Comm;
+import edu.rit.pj.IntegerForLoop;
+import edu.rit.pj.ParallelRegion;
+import edu.rit.pj.ParallelTeam;
 import edu.rit.pj.WorkerIntegerForLoop;
 import edu.rit.pj.WorkerRegion;
 import edu.rit.pj.WorkerTeam;
@@ -32,6 +35,8 @@ public class JacobiClu
 	static BooleanBuf iterSuccess;
 	static boolean masterConverged;
 	static boolean processConverged;
+	
+	static boolean p_iterSuccess;
 	
 	static int count = 0;
 
@@ -121,179 +126,151 @@ public class JacobiClu
 			b = new double[last - first + 1];
 			A = new double[last - first + 1][n];
 			y = new double[last - first + 1];
-			
-//			if (rank == 0) {
-////				y = new double[n];
-//			}
-//			else {
-//				y = new double[last - first + 1];
-////				y = new double[n]; // if the number of items received is greater than the buff, nothing is stored!
-//			}
-//			
 
-			// Set up communication buffers for the y variable.
-//			xBuf = DoubleBuf.buffer(x);
-//			masterY = DoubleBuf.sliceBuffers(y, ranges);
-//			processY = masterY[rank]; // fetch our version of Y and store a reference to it...
-
-			// Set up the replicated data structures that serve as 
-			// flow control flags for each process when computing the result.
-//			converged = new ReplicatedBoolean(BooleanOp.OR, false);
-//			iterSuccess = new ReplicatedInteger(IntegerOp.SUM, 0);
-			masterConverged = false;
-//			BooleanBuf iterSuccess = BooleanBuf.buffer(true);
-			
-//			int count = 0;
-			
-			// Start some work
-//	        new WorkerTeam().execute(new WorkerRegion()
-//	        {
-//	        	public void run() throws Exception
-//	        	{
-//	        		execute (0, n - 1, new WorkerIntegerForLoop()
-//	        		{
-	        			// Set up per-process PRNG.
-        				Random prng_thread = Random.getInstance(seed);
-	        			
-//	        			public void run(int first, int last) throws Exception
-//	        			{
-	        				// Skip the PRNG ahead to the right place in the
-	        				// sequence. Each iteration gets (n + 1) values.
-	        				prng_thread.setSeed(seed);
-	        				prng_thread.skip((n + 1) * first);
-	        				for (int i = first; i <= last; ++i)
-	        				{
-	        					for (int j = 0; j < n; ++j)
-	        					{
-//	        						System.out.println(rank + " trying " + first + " - " + last + " for A matrix index with i = " + i);
-	        						A[i - first][j] = (prng_thread.nextDouble() * 9.0) + 1.0;
-	        					}
-	        					A[i - first][i] += 10.0 * n;
-	        					b[i - first] = (prng_thread.nextDouble() * 9.0) + 1.0;
-//	        					x[i] = 1.0;
-	        					y[i - first] = 1.0;
-	        				}
-//	        			}
-//	        		});
-	        		
-	        		// Master initializes x 
-//	        		int count = 0;
-//	        		if (rank == 0) 
-//	    			{
-//	    				for (int i = 0; i < n; i++)
-//	    				{
-////	    					for (int j = 0; j < n; j++) {
-////	    						System.out.print(A[i][j] + " ");
-////	    					}
-//	    					x[i] = 1.0;
-//	    					y[i] = 1.0;
-////	    					System.out.println(b[i]);
-////	    					System.out.println();
-//	    				}
-//	    			}
-	        				
-//	        		System.out.println(rank + " is jumping into the main solve loop");
-	        		
-	        		// Now perform the solving.
-	        		boolean converged = false;
-	        		while (!converged) 
-	        		{
-//	        			if (rank == 0)
-//	        				count++;
-//	        			if (converged.get() == true) 
-//	        			{
-//	        				break;
-//	        			}
-//	        			
-//	        			if (root != 0) {
-//	        				
-//	        			}
-	        			
-	        			// Perform the swap
-//	        			double tmp[] = x;
-//	        			x = y;
-//	        			y = tmp;
-	        			
-	        			// Synchronize here by checking for convergence
-	        			// TODO: is this message really needed?... how can we avoid it?
-//	        			BooleanBuf tempBuf = BooleanBuf.buffer(masterConverged);
-//	        			System.out.println(rank + " is broadcasting the masterConverged");
-//	        			world.broadcast(0, tempBuf);
-//	        			System.out.println(rank + " returning from broadcast");
-	        			
-	        			// TODO: PULL GATHER&SWAP OUT TO THE VERY END AFTER THE LOOP CLOSES 
-	        			
-	        			world.allGather(DoubleBuf.buffer(y), DoubleBuf.sliceBuffers(x, ranges));
-//	        			System.out.println(rank + " returning from allgather");
-//	        			if (tempBuf.get(0) == true)
-//	        			{
-//	        				double[] tmp = x;
-//		        			x = y;
-//		        			y = tmp;
-//	        				break;
-//	        			}
-	        			
-	        			// Gather all of the x-components from the other processes
-	        			// Gather up all of the y values and put them in x...
-//	        			world.allGather(DoubleBuf.buffer(y), DoubleBuf.sliceBuffers(x, ranges));
-	        			
-	        			double xVal;
-        				double yVal;
-        				double sum;
-        				boolean p_iterSuccess = true;
+			Random prng_thread = Random.getInstance(seed);
+			prng_thread.setSeed(seed);
+			prng_thread.skip((n + 1) * first);
+			for (int i = first; i <= last; ++i)
+			{
+				for (int j = 0; j < n; ++j)
+				{
+//	        		System.out.println(rank + " trying " + first + " - " + last + " for A matrix index with i = " + i);
+					A[i - first][j] = (prng_thread.nextDouble() * 9.0) + 1.0;
+				}
+				A[i - first][i] += 10.0 * n;
+				b[i - first] = (prng_thread.nextDouble() * 9.0) + 1.0;
+				y[i - first] = 1.0;
+			}
+    		
+    		// Allocated buffers for communication and whatnot
+    		boolean converged = false;
+    		DoubleBuf[] xBuffers = DoubleBuf.sliceBuffers(x, ranges);
+    		DoubleBuf yBuffer = DoubleBuf.buffer(y);
+    		double xVal;
+			double yVal;
+			double sum;
+//			boolean p_iterSuccess;
+    		while (!converged) 
+    		{
+    			// TODO: PULL GATHER&SWAP OUT TO THE VERY END AFTER THE LOOP CLOSES 
+    			// Every process needs the -entire- x vector, so we need to do an all gather
+    			// I don't see a way around this...
+    			world.allGather(yBuffer, xBuffers);
+    			
+//    			p_iterSuccess = true;
 //        				System.out.println(rank + " starting its loop.");
-        				for (int i = first; i <= last; i++)
-        				{
-        					// Compute the upper and lower matrix product, 
-        					// omitting the element at index i.
-        					double[] A_i = A[i - first];
-        					xVal = x[i];
-//	        					xVal = xBuf.get(i);
-        					yVal = sum = 0.0;
-        					for (int j = 0; j < i; j++)
-        					{
-//        						System.out.println("adding: " + A_i[j]);
-//        						System.out.println("multing: " + x[j]);
-        						sum += (A_i[j] * x[j]);
-        					}
-        					for (int j = i + 1; j < n; j++)
-        					{
-        						sum += (A_i[j] * x[j]);
-        					}
-//        					System.out.println("Computed sum: " + sum);
+    			new ParallelTeam().execute(new ParallelRegion()
+    			{
+    			
+//    				boolean p_iterSuccess = true;
+    				double xVal;
+    				double yVal;
+    				double sum;
+    				
+    				/**
+    				 * Run the solver.
+    				 */
+    				public void run() throws Exception
+    				{
+    					// Populate the test matrix and equation vector.
+    					p_iterSuccess = true;
+    					execute(first, last, new IntegerForLoop()
+    					{
+							public void run(int arg0, int arg1)
+									throws Exception
+							{
+								for (int i = first; i <= last; i++)
+								{
+									// Compute the upper and lower matrix product, 
+									// omitting the element at index i.
+									double[] A_i = A[i - first];
+									xVal = x[i];
+//					        					xVal = xBuf.get(i);
+									yVal = sum = 0.0;
+									for (int j = 0; j < i; j++)
+									{
+//				        						System.out.println("adding: " + A_i[j]);
+//				        						System.out.println("multing: " + x[j]);
+										sum += (A_i[j] * x[j]);
+									}
+									for (int j = i + 1; j < n; j++)
+									{
+										sum += (A_i[j] * x[j]);
+									}
+//				        					System.out.println("Computed sum: " + sum);
 
-        					// Compute the new y value
-        					yVal = (b[i - first] - sum) / A_i[i];
+									// Compute the new y value
+									yVal = (b[i - first] - sum) / A_i[i];
 
-        					// Check to see if the algorithm converged
-        					// for this particular row in the matrix.
-        					if (p_iterSuccess && !((Math.abs((2 * (xVal - yVal)) 
-        							/ (xVal + yVal))) < epsilon))
-        					{
-        						p_iterSuccess = false;
-        					}
+									// Check to see if the algorithm converged
+									// for this particular row in the matrix.
+									if (p_iterSuccess && !((Math.abs((2 * (xVal - yVal)) 
+											/ (xVal + yVal))) < epsilon))
+									{
+										p_iterSuccess = false;
+									}
 
-        					// Store the y[] coordinate.
-//        					System.out.println(rank + " Computed: " + yVal + " for index = " + i);
-        					y[i - first] = yVal;
-        				}
-        				
-        				// Make everyone report their convergence results
+									// Store the y[] coordinate.
+//				        					System.out.println(rank + " Computed: " + yVal + " for index = " + i);
+									y[i - first] = yVal;
+								}
+							}
+    					});
+    				}
+    				
+//    				public void finish()
+//    				{
+//    					
+//    				}
+    			});
+//				for (int i = first; i <= last; i++)
+//				{
+//					// Compute the upper and lower matrix product, 
+//					// omitting the element at index i.
+//					double[] A_i = A[i - first];
+//					xVal = x[i];
+////	        					xVal = xBuf.get(i);
+//					yVal = sum = 0.0;
+//					for (int j = 0; j < i; j++)
+//					{
+////        						System.out.println("adding: " + A_i[j]);
+////        						System.out.println("multing: " + x[j]);
+//						sum += (A_i[j] * x[j]);
+//					}
+//					for (int j = i + 1; j < n; j++)
+//					{
+//						sum += (A_i[j] * x[j]);
+//					}
+////        					System.out.println("Computed sum: " + sum);
+//
+//					// Compute the new y value
+//					yVal = (b[i - first] - sum) / A_i[i];
+//
+//					// Check to see if the algorithm converged
+//					// for this particular row in the matrix.
+//					if (p_iterSuccess && !((Math.abs((2 * (xVal - yVal)) 
+//							/ (xVal + yVal))) < epsilon))
+//					{
+//						p_iterSuccess = false;
+//					}
+//
+//					// Store the y[] coordinate.
+////        					System.out.println(rank + " Computed: " + yVal + " for index = " + i);
+//					y[i - first] = yVal;
+//				}
+				
+				// Make everyone report their convergence results
 //        				System.out.println(rank + " reducing...");
-        				BooleanBuf bBuf = BooleanBuf.buffer(p_iterSuccess);
-        				world.allReduce(bBuf, BooleanOp.AND);
-        				converged = bBuf.get(0);
-//        				System.out.println(rank + " reduced!");
-        				
-        				// Master handles the check
-//        				if (rank == 0)
-//        				{
-//        					if (bBuf.get(0) == true) 
-//        					{
-//        						masterConverged = true;
-//        					}
-//        				}
-	        		}
+				BooleanBuf bBuf = BooleanBuf.buffer(p_iterSuccess);
+//        				world.allReduce(bBuf, BooleanOp.AND);
+//        				converged = bBuf.get(0);
+				world.reduce(0, bBuf, BooleanOp.AND); // gather the result
+				if (rank == 0 && bBuf.get(0) == true) 
+				{
+					converged = true;
+				} 
+				world.broadcast(0, BooleanBuf.buffer(converged)); // send it back out
+    		}
 			
 			// Display the solution and time (from the root process)
 			if (rank == 0)
