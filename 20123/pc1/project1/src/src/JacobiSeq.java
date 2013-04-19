@@ -153,33 +153,33 @@ public class JacobiSeq
 		double tmp;
 		
 		// DBEUG
-		int count = 0;
-//		if (rank == 0) 
-//		{
-			for (int i = 0; i < n; i++)
-			{
-				for (int j = 0; j < n; j++) {
-					System.out.print(A[i][j] + " ");
-				}
-//				x[i] = 1.0;
-//				System.out.println();
-				System.out.println(b[i]);
-			}
-//		}
+//		int count = 0;
+////		if (rank == 0) 
+////		{
+//			for (int i = 0; i < n; i++)
+//			{
+//				for (int j = 0; j < n; j++) {
+//					System.out.print(A[i][j] + " ");
+//				}
+////				x[i] = 1.0;
+////				System.out.println();
+//				System.out.println(b[i]);
+//			}
+////		}
 		
 		
 		while (!converged)
 		{	
-			count++;
+//			count++;
 			
-			for (int i = 0; i < n; i++)
-			{
-				for (int j = 0; j < n; j++) {
-					System.out.print(A[i][j] + " ");
-				}
-				System.out.println(" - " + x[i]);
-			}
-			
+//			for (int i = 0; i < n; i++)
+//			{
+//				for (int j = 0; j < n; j++) {
+//					System.out.print(A[i][j] + " ");
+//				}
+//				System.out.println(" - " + x[i]);
+//			}
+//			
 			for (int i = 0; i < n; i++)
 			{
 				// Compute the upper and lower matrix product, omitting
@@ -191,8 +191,8 @@ public class JacobiSeq
 				for (int index = 0; index < i; index++)
 				{
 					// DEBUG
-					System.out.println("adding: " + A_i[index]);
-					System.out.println("multing: " + x[index]);
+//					System.out.println("adding: " + A_i[index]);
+//					System.out.println("multing: " + x[index]);
 					
 					
 					sum += (A_i[index] * x[index]);
@@ -201,11 +201,11 @@ public class JacobiSeq
 				{
 					sum += (A_i[index] * x[index]);
 				}
-				System.out.println("Computed sum: " + sum);
+//				System.out.println("Computed sum: " + sum);
 
 				// Compute the y[] value.
 				yVal = (b[i] - sum) / A_i[i];
-				System.out.println("Computed y value " + yVal);
+//				System.out.println("Computed y value " + yVal);
 
 				// Check for convergence.
 				if (iterSuccess && 
@@ -220,10 +220,10 @@ public class JacobiSeq
 			}
 			
 			// DBEUG
-			System.out.println("output y values..." + count);
-			for(int i = 0; i < n; i++) {
-				System.out.println(y[i]);
-			}
+//			System.out.println("output y values..." + count);
+//			for(int i = 0; i < n; i++) {
+//				System.out.println(y[i]);
+//			}
 
 			// Swap the x[] and y[] vectors.
 			for (int i = 0; i < n; i++)
@@ -237,7 +237,7 @@ public class JacobiSeq
 			converged = iterSuccess;
 			iterSuccess = true;
 		}
-		System.out.println(count);
+//		System.out.println(count);
 
 		return x;
 	}
