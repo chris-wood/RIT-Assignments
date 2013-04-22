@@ -99,7 +99,6 @@ public class JacobiClu
 		try
 		{
 			// Parse the command line arguments.
-//			int first, last;
 			final int n = Integer.parseInt(args[0]);
 			if (n < 1)
 			{
@@ -110,42 +109,42 @@ public class JacobiClu
 			
 			try 
 			{
+				// Create a solver and then let it rip.
 				JacobiClu solver = new JacobiClu();
 				solver.initAndSolve(n, seed);
+				
+				// Display the solution and time (from the root process)
+				if (rank == 0)
+				{
+					if (n <= 100)
+					{
+						for (int i = 0; i < n; ++i)
+						{
+							System.out.printf("%d %g%n", i, x[i]);
+//							System.out.println(i + " " + x[i]);
+						}
+					}
+					else
+					{
+						for (int i = 0; i <= 49; ++i)
+						{
+							System.out.printf("%d %g%n", i, x[i]);
+//							System.out.println(i + " " + x[i]);
+						}
+						for (int i = n - 50; i < n; ++i)
+						{
+							System.out.printf("%d %g%n", i, x[i]);
+//							System.out.println(i + " " + x[i]);
+						}
+					}
+					long endTime = System.currentTimeMillis();
+					System.out.printf("%d msec%n", (endTime - startTime));
+				}
 			} 
 			catch (Exception e) 
 			{
 				System.err.println("An error occurred while solving the system.");
 				e.printStackTrace();
-			}
-			
-			// Display the solution and time (from the root process)
-			if (rank == 0)
-			{
-				if (n <= 100)
-				{
-					for (int i = 0; i < n; ++i)
-					{
-						System.out.printf("%d %g%n", i, x[i]);
-//						System.out.println(i + " " + x[i]);
-					}
-				}
-				else
-				{
-					for (int i = 0; i <= 49; ++i)
-					{
-						System.out.printf("%d %g%n", i, x[i]);
-//						System.out.println(i + " " + x[i]);
-					}
-					for (int i = n - 50; i < n; ++i)
-					{
-						System.out.printf("%d %g%n", i, x[i]);
-//						System.out.println(i + " " + x[i]);
-					}
-				}
-				long endTime = System.currentTimeMillis();
-				System.out.printf("%d msec%n", (endTime - startTime));
-//				System.out.println(count);
 			}
 		}
 		catch (NumberFormatException ex1)
@@ -160,6 +159,14 @@ public class JacobiClu
 		}
 	}
 	
+	/**
+	 * Initialize the internal data structures and then attempt
+	 * to solve the new system of linear equations.
+	 * 
+	 * @param n - the order of the resulting solution vector
+	 * @param seed - the seed for the PRNG
+	 * @throws IOException - if any error occurs while communicating with world
+	 */
 	public void initAndSolve(int n, long seed) throws IOException 
 	{
 		// Set up the ranges for each process.
@@ -169,13 +176,14 @@ public class JacobiClu
 		int last = myrange.ub() + 1;
 		
 		// Only allocate the required space for A, x, y, and b in 
-		// each process.
+		// each process (note that we need all of x to do a calculation).
 		x = new double[n];
 		b = new double[last - first];
 		A = new double[last - first][];
 		y = new double[last - first];
 		double[] A_i; // temporary row storage 
 
+		// Populate the A and b matrices with some data. 
 		Random prng_thread = Random.getInstance(seed);
 		prng_thread.setSeed(seed);
 		prng_thread.skip((n + 1) * first);
@@ -190,25 +198,26 @@ public class JacobiClu
 			A_i[i] += 10.0 * n;
 			b[i - first] = (prng_thread.nextDouble() * 9.0) + 1.0;
 			y[i - first] = 1.0;
+			x[i] = 1.0;
 		}
 		
-		// Allocated buffers for communication and algorithm control
+		// Initialize the x vector to all 1.0 (but don't repeat from above).
+		for (int i = 0; i < first; i++) x[i] = 1.0;
+		for (int i = last; i < n; i++) x[i] = 1.0;
+		
+		// Allocated buffers for communication and algorithm control.
 		xBuffers = DoubleBuf.sliceBuffers(x, ranges);
 		yBuffer = DoubleBuf.buffer(y);
 		boolean converged = false;
-		boolean p_iterSuccess;
 		double xVal;
 		double yVal;
 		double sum;
 		int offset;
 		
-		// Initialize the x vector to all 1.0
-		for (int i = 0; i < n; i++) x[i] = 1.0;
-		
 		// Loop until everyone converges.
 		while (!converged) 
 		{
-			p_iterSuccess = true;
+			converged = true;
 			for (int i = first; i < last; i++) 
 			{
 				// Compute the upper and lower matrix product, omitting
@@ -231,10 +240,10 @@ public class JacobiClu
 				y[offset] = yVal;
 
 				// Check for convergence.
-				if (p_iterSuccess && !(Math.abs((2 * (xVal - yVal)) 
-							/ (xVal + yVal)) < epsilon))
+				if (converged && !(Math.abs((2 * (xVal - yVal))
+					/ (xVal + yVal)) < epsilon))
 				{
-					p_iterSuccess = false;
+					converged = false;
 				}
 			}
 			
@@ -242,7 +251,7 @@ public class JacobiClu
 			world.allGather(yBuffer, xBuffers); 
 			
 			// Make everyone report their convergence results
-			BooleanBuf bBuf = BooleanBuf.buffer(p_iterSuccess);
+			BooleanBuf bBuf = BooleanBuf.buffer(converged);
 			world.allReduce(bBuf, BooleanOp.AND); // ARK does this.
 			converged = bBuf.get(0);
 		}
