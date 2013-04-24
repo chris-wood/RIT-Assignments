@@ -82,13 +82,13 @@ public class JacobiSeq
 			{
 				for (int i = 0; i <= 49; ++i)
 				{
-					System.out.printf("%d %g%n", i, x[i]);
-//					System.out.println(i + " " + x[i]);
+//					System.out.printf("%d %g%n", i, x[i]);
+					System.out.println(i + " " + x[i]);
 				}
 				for (int i = n - 50; i < n; ++i)
 				{
-					System.out.printf("%d %g%n", i, x[i]);
-//					System.out.println(i + " " + x[i]);
+//					System.out.printf("%d %g%n", i, x[i]);
+					System.out.println(i + " " + x[i]);
 				}
 			}	
 			

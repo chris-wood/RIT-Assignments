@@ -20,31 +20,16 @@ public class JacobiClu
 	static Comm world;
 	static int size;
 	static int rank;
-
-//	static BooleanBuf iterSuccess;
-//	static boolean masterConverged;
-//	static boolean p_iterSuccess;
 	
-	static int count = 0;
-
-//	static Range[] ranges;
-//	static Range myrange;
-//	static int first;
-//	static int last;
-
-//	static DoubleBuf[] masterY;
-//	static DoubleBuf processY;
-//	static DoubleBuf xBuf;
-	
+	// Communication buffers
 	static DoubleBuf[] xBuffers;
 	static DoubleBuf yBuffer;
-
-	static double A[][];
-	static double b[];
 
 	// The data structures to hold the calculation data structures.
 	static double[] y;
 	static double[] x;
+	static double A[][];
+	static double b[];
 
 	// The convergence cutoff delta value.
 	private static double epsilon = 0.00000001;
@@ -128,13 +113,13 @@ public class JacobiClu
 					{
 						for (int i = 0; i <= 49; ++i)
 						{
-							System.out.printf("%d %g%n", i, x[i]);
-//							System.out.println(i + " " + x[i]);
+//							System.out.printf("%d %g%n", i, x[i]);
+							System.out.println(i + " " + x[i]);
 						}
 						for (int i = n - 50; i < n; ++i)
 						{
-							System.out.printf("%d %g%n", i, x[i]);
-//							System.out.println(i + " " + x[i]);
+//							System.out.printf("%d %g%n", i, x[i]);
+							System.out.println(i + " " + x[i]);
 						}
 					}
 					long endTime = System.currentTimeMillis();
@@ -218,34 +203,35 @@ public class JacobiClu
 		while (!converged) 
 		{
 			converged = true;
-			for (int i = first; i < last; i++) 
-			{
-				// Compute the upper and lower matrix product, omitting
-				// the element at index i.
-				offset = i - first;
-				A_i = A[offset];
-				yVal = sum = 0.0;
-				xVal = x[i];
-				for (int index = 0; index < i; index++)
-				{
-					sum += (A_i[index] * x[index]);
-				}
-				for (int index = i + 1; index < n; index++)
-				{
-					sum += (A_i[index] * x[index]);
-				}
-				
-				// Compute and store the y coordinate value.
-				yVal = (b[offset] - sum) / A_i[i]; 
-				y[offset] = yVal;
-
-				// Check for convergence.
-				if (converged && !(Math.abs((2 * (xVal - yVal))
-					/ (xVal + yVal)) < epsilon))
-				{
-					converged = false;
-				}
-			}
+//			for (int i = first; i < last; i++) 
+//			{
+//				// Compute the upper and lower matrix product, omitting
+//				// the element at index i.
+//				offset = i - first;
+//				A_i = A[offset];
+//				yVal = sum = 0.0;
+//				xVal = x[i];
+//				for (int index = 0; index < i; index++)
+//				{
+//					sum += (A_i[index] * x[index]);
+//				}
+//				for (int index = i + 1; index < n; index++)
+//				{
+//					sum += (A_i[index] * x[index]);
+//				}
+//				
+//				// Compute and store the y coordinate value.
+//				yVal = (b[offset] - sum) / A_i[i]; 
+//				y[offset] = yVal;
+//
+//				// Check for convergence.
+//				if (converged && !(Math.abs((2 * (xVal - yVal))
+//					/ (xVal + yVal)) < epsilon))
+//				{
+//					converged = false;
+//				}
+//			}
+			converged = computeVector(first, last, n);
 			
 			// Swap the x/y vectors by distributing y partitions to each process
 			world.allGather(yBuffer, xBuffers); 
@@ -255,6 +241,43 @@ public class JacobiClu
 			world.allReduce(bBuf, BooleanOp.AND); // ARK does this.
 			converged = bBuf.get(0);
 		}
+	}
+	
+	public boolean computeVector(int first, int last, int n) 
+	{
+		boolean converged = true;
+		
+		for (int i = first; i < last; i++) 
+		{
+			// Compute the upper and lower matrix product, omitting
+			// the element at index i.
+			int offset = i - first;
+			double[] A_i = A[offset];
+			double yVal = 0.0;
+			double sum = 0.0;
+			double xVal = x[i];
+			for (int index = 0; index < i; index++)
+			{
+				sum += (A_i[index] * x[index]);
+			}
+			for (int index = i + 1; index < n; index++)
+			{
+				sum += (A_i[index] * x[index]);
+			}
+			
+			// Compute and store the y coordinate value.
+			yVal = (b[offset] - sum) / A_i[i]; 
+			y[offset] = yVal;
+
+			// Check for convergence.
+			if (converged && !(Math.abs((2 * (xVal - yVal))
+				/ (xVal + yVal)) < epsilon))
+			{
+				converged = false;
+			}
+		}
+		
+		return converged;
 	}
 
 	/**
