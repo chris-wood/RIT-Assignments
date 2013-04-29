@@ -17,11 +17,12 @@ import edu.rit.pj.reduction.BooleanOp;
 
 public class JacobiClu
 {
+	// World communication variables.
 	static Comm world;
 	static int size;
 	static int rank;
 	
-	// Communication buffers
+	// Communication buffers.
 	static DoubleBuf[] xBuffers;
 	static DoubleBuf yBuffer;
 
@@ -40,24 +41,19 @@ public class JacobiClu
 	 * @param args
 	 *            - command line arguments
 	 * 
-	 *            Note: The command-line parameters must specify the the matrix
-	 *            dimension and a random seed. Also, the JVM heap size must be
-	 *            increased to 2000MB to support allocating such large matrices.
-	 *            See the usage description below for more details.
+	 * Note: The command-line parameters must specify the the matrix
+	 * dimension and a random seed. Also, the JVM heap size must be
+	 * increased to 2000MB to support allocating such large matrices.
+	 * See the usage description below for more details.
 	 * 
-	 *            Usage:
+	 * Usage:
 	 * 
-	 *            java -Dpj.jvmflags="-Xmx500m" -Dpj.np=<NP> JacobiClu <n>
-	 *            <seed>
+	 * java -Dpj.jvmflags="-Xmx500m" -Dpj.np=<NP> JacobiClu <n> <seed>
 	 */
 	public static void main(String[] args)
 	{
 		// Start the clock.
 		long startTime = System.currentTimeMillis();
-		
-//		Comm world = null;
-//		int size = 0;
-//		int rank = 0;
 
 		// Set up the communication with the job server and pull
 		// out the details of the cluster.
@@ -106,20 +102,17 @@ public class JacobiClu
 						for (int i = 0; i < n; ++i)
 						{
 							System.out.printf("%d %g%n", i, x[i]);
-//							System.out.println(i + " " + x[i]);
 						}
 					}
 					else
 					{
 						for (int i = 0; i <= 49; ++i)
 						{
-//							System.out.printf("%d %g%n", i, x[i]);
-							System.out.println(i + " " + x[i]);
+							System.out.printf("%d %g%n", i, x[i]);
 						}
 						for (int i = n - 50; i < n; ++i)
 						{
-//							System.out.printf("%d %g%n", i, x[i]);
-							System.out.println(i + " " + x[i]);
+							System.out.printf("%d %g%n", i, x[i]);
 						}
 					}
 					long endTime = System.currentTimeMillis();
@@ -194,55 +187,31 @@ public class JacobiClu
 		xBuffers = DoubleBuf.sliceBuffers(x, ranges);
 		yBuffer = DoubleBuf.buffer(y);
 		boolean converged = false;
-		double xVal;
-		double yVal;
-		double sum;
-		int offset;
 		
 		// Loop until everyone converges.
 		while (!converged) 
 		{
-			converged = true;
-//			for (int i = first; i < last; i++) 
-//			{
-//				// Compute the upper and lower matrix product, omitting
-//				// the element at index i.
-//				offset = i - first;
-//				A_i = A[offset];
-//				yVal = sum = 0.0;
-//				xVal = x[i];
-//				for (int index = 0; index < i; index++)
-//				{
-//					sum += (A_i[index] * x[index]);
-//				}
-//				for (int index = i + 1; index < n; index++)
-//				{
-//					sum += (A_i[index] * x[index]);
-//				}
-//				
-//				// Compute and store the y coordinate value.
-//				yVal = (b[offset] - sum) / A_i[i]; 
-//				y[offset] = yVal;
-//
-//				// Check for convergence.
-//				if (converged && !(Math.abs((2 * (xVal - yVal))
-//					/ (xVal + yVal)) < epsilon))
-//				{
-//					converged = false;
-//				}
-//			}
+			// Compute the new solution vector.
 			converged = computeVector(first, last, n);
 			
-			// Swap the x/y vectors by distributing y partitions to each process
+			// Swap the x/y vectors by distributing y partitions to each process.
 			world.allGather(yBuffer, xBuffers); 
 			
-			// Make everyone report their convergence results
+			// Make everyone report their convergence results.
 			BooleanBuf bBuf = BooleanBuf.buffer(converged);
-			world.allReduce(bBuf, BooleanOp.AND); // ARK does this.
+			world.allReduce(bBuf, BooleanOp.AND); 
 			converged = bBuf.get(0);
 		}
 	}
 	
+	/**
+	 * Compute the new solution vector y.
+	 * 
+	 * @param first - index of the first row slice
+	 * @param last - index of the last row slice (exclusive)
+	 * @param n - size of the solution vector
+	 * @return true if converged, false otherwise.
+	 */
 	public boolean computeVector(int first, int last, int n) 
 	{
 		boolean converged = true;
